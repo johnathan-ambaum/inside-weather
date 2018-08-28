@@ -1,0 +1,16 @@
+{%- if settings.type_base_family contains 'Google' -%}
+  {%- assign type_base_google_parts = settings.type_base_family | split: "'" -%}
+  {%- assign type_base_google_name = type_base_google_parts[1] %}
+  {%- assign type_base_weight = type_base_google_parts[2] | split: ' ' -%}
+  {%- capture baseGoogleUrl -%}{{ type_base_google_name }}:{{ type_base_weight[0] }},700{%- endcapture -%}
+  {{ '//fonts.googleapis.com/css?family=' | append: baseGoogleUrl | stylesheet_tag }}
+{%- endif -%}
+{%- if settings.type_header_family contains 'Google' -%}
+  {%- unless settings.type_header_family contains type_base_google_name -%}
+    {%- assign type_header_google_parts = settings.type_header_family | split: "'" -%}
+    {%- assign type_header_google_name = type_header_google_parts[1] %}
+    {%- assign type_header_weight = type_header_google_parts[2] | split: ' ' -%}
+    {%- capture headerGoogleUrl -%}{{ type_header_google_name }}:{{ type_header_weight[0] }}{%- endcapture -%}
+    {{ '//fonts.googleapis.com/css?family=' | append: headerGoogleUrl | stylesheet_tag }}
+  {%- endunless -%}
+{%- endif -%}

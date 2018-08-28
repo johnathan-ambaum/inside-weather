@@ -1,0 +1,123 @@
+{% comment %}
+  ---
+  Documentation: https://meteor.heliumdev.com/help
+  Version: 3.2.0
+  The following snippet serves multiple utility functions for the Meteor Menu
+  application by Helium.
+  YOU SHOULD NOT BE EDITING THIS FILE.
+  ANY CHANGES WILL BE OVERWRITTEN UPON SAVE!
+  ---
+{% endcomment %}
+
+{% if meteor_links %}
+  {% comment %}
+    ---
+    Used for recursively fetching sub-links for link lists
+    ---
+  {% endcomment %}
+  {% capture meteor_output %}
+    {% for link in meteor_links %}
+      {% assign meteor_sub_links = link.links %}
+
+      {% assign meteor_next_level = meteor_level | plus: 1 %}
+
+      {% capture meteor_next_links %}
+        {% if meteor_next_level <= 3 %}
+          {% include 'meteor-menu', meteor_links: meteor_sub_links, meteor_level: meteor_next_level %}
+        {% endif %}
+      {% endcapture %}
+
+      {% if link.object.image %}
+        {% assign link_image = link.object.image %}
+      {% elsif link.object.featured_image %}
+        {% assign link_image = link.object.featured_image %}
+      {% else %}
+        {% assign link_image = nil %}
+      {% endif %}
+
+      {
+        "title": {{ link.title | json }},
+        "url": {{ link.url | json }},
+        "object_id": {{ link.object.id | json }},
+        {% if link_image %}
+          "images": {
+            "small": {{ link_image | img_url: '400x400' | json }},
+            "medium": {{ link_image | img_url: '800x800' | json }},
+            "large": {{ link_image | img_url: '1200x1200' | json }},
+            "alt": {{ link_image.alt | json }}
+          },
+        {% endif %}
+        "nest_level": {{ meteor_level }},
+        "links": [{{ meteor_next_links }}]
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  {% endcapture %}
+
+  {{ meteor_output | strip_newlines | strip }}
+{% elsif load == 'head' %}
+  {% comment %}
+    ---
+    Load scripts and styles in the HEAD tag
+    ---
+  {% endcomment %}
+  <script>
+    window.MeteorMenu = window.MeteorMenu || {};
+  </script>
+  <script type="text/javascript" src="https://cdn-meteor.heliumdev.com/embed/3.2.0/meteor.js?api_key=cc12a746f95205833ff93cd5d30bf29760d9a32eb1879ed25be140dab1533eb2" async></script>
+  <link rel="stylesheet" media="async" href="https://cdn-meteor.heliumdev.com/embed/3.2.0/meteor.css?api_key=cc12a746f95205833ff93cd5d30bf29760d9a32eb1879ed25be140dab1533eb2" />
+{% elsif load == 'footer' %}
+  {% comment %}
+    ---
+    Load linklist data in the footer
+    ---
+  {% endcomment %}
+  <link rel="stylesheet" href="https://cdn-meteor.heliumdev.com/embed/3.2.0/meteor.css?api_key=cc12a746f95205833ff93cd5d30bf29760d9a32eb1879ed25be140dab1533eb2" />
+  <script>
+    {% capture data %}
+      {
+        "settings": {"app_proxy":"apps/meteor","z_index":9999,"mobile_breakpoint":"","disable_at_width":"","vertical_offset":"0","mobile_vertical_offset":"0","css":".meteor-menu {\r\n  /* Your custom CSS */\r\n}\r\n\r\n.meteor-menu[data-meteor-id=\"2090\"] {\r\n    border-top: 1px solid #EDECEA !important;\r\n    border-bottom: 1px solid #EDECEA !important;\r\n    border-radius: 0px !important;\r\n}\r\n\r\n.meteor-menu[data-meteor-id=\"2090\"][data-meteor-template=\"prism\"] .m-title {\r\n  padding-bottom:5px !important;\r\n  \r\n}\r\n\r\n .meteor-menu .m-pointer {\r\n    position: absolute;\r\n    top: -1px;\r\n    left: 0;\r\n    -webkit-transform: translate(-50%,-100%);\r\n    transform: translate(-50%,-100%);\r\n    width: 0;\r\n    height: 0;\r\n    display: block;\r\n    border-left: 8px solid transparent!important;\r\n    border-right: 8px solid transparent!important;\r\n    border-bottom: 8px solid #fbd703!important;\r\n    z-index: 0;\r\n\r\n}\r\n\r\n.meteor-menu[data-meteor-template=prism] .m-title {\r\n  font-weight:600 !important;\r\n  letter-spacing:.15em !important;\r\n}\r\n\r\n\r\n.meteor-menu[data-meteor-id=\"2092\"][data-meteor-template=\"prism\"] .m-frame {\r\n background-image: url('none');\r\n display:none !important;\r\n}\r\n\r\n.meteor-menu[data-meteor-id=\"2092\"][data-meteor-template=\"prism\"] .m-container {\r\n  height:80px !important;\r\n  \r\n}\r\n\r\n.meteor-menu[data-meteor-id=\"2092\"][data-meteor-template=\"prism\"] .m-title {\r\n  padding-bottom:17px !important;\r\n  \r\n}\r\n\r\n","queries":""},
+        "theme": {
+          "name": "Motion",
+          "version": "2.2.1"
+        },
+        "linklists": {
+          "main-menu": {
+            "links": [
+              {% include 'meteor-menu', meteor_links: linklists["main-menu"].links, meteor_level: 1 %}
+            ]
+          }
+        },
+        "menus":
+        [
+          {
+            "id": 2090,
+            "title": "Shop",
+            "list_handle": "main-menu",
+            "object_path": "/collections/seating",
+            "sub_list_handle": "",
+            "template": "prism",
+            "object_id": "31415730221",
+            "settings": {"size":"full","action":"click","animation":"none","color_text":"69,65,61,1","image_fill":"fit","color_hover":"251,215,3,1","image_width":"narrow","show_titles":"yes","image_height":"short","max_inner_width":"800","color_background":"255,255,255,1","color_mobile_text":"240,240,240,1","color_mobile_background":"30,30,30,1"},
+            "handle": null,
+            "manual_attach": false
+          },
+          {
+            "id": 2092,
+            "title": "About",
+            "list_handle": "main-menu",
+            "object_path": "/",
+            "sub_list_handle": "",
+            "template": "prism",
+            "object_id": "",
+            "settings": {"size":"full","action":"click","animation":"none","color_text":"44,41,37,1","image_fill":"cover","color_hover":"251,215,3,1","image_width":"narrow","show_titles":"yes","image_height":"icon","max_inner_width":"800","color_background":"255,255,255,1","color_mobile_text":"240,240,240,1","color_mobile_background":"30,30,30,1"},
+            "handle": null,
+            "manual_attach": false
+          }
+        ]
+      }
+    {% endcapture %}
+
+    MeteorMenu.data = {{ data | strip_newlines }};
+    if (MeteorMenu.dataReady) { MeteorMenu.dataReady(); }
+  </script>
+{% endif %}

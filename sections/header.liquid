@@ -1,0 +1,269 @@
+{%- assign main_menu = linklists[section.settings.main_menu_link_list] -%}
+
+{% include 'drawer-menu' %}
+{% include 'cart-drawer' %}
+
+{%- assign template_name = template | replace: '.', ' ' | truncatewords: 2, '' | handle -%}
+
+{%- assign sticky_header = false -%}
+{% if section.settings.header_style == 'sticky' %}
+  {%- assign sticky_header = true -%}
+{% endif %}
+{%- assign overlay_header = false -%}
+{%- assign has_logo = false -%}
+{% if template_name == 'index' and section.settings.sticky_index %}
+  {%- assign overlay_header = true -%}
+{% endif %}
+{% if template_name == 'collection' and collection.image and section.settings.sticky_collection %}
+  {%- assign overlay_header = true -%}
+{% endif %}
+
+<style>
+  .site-nav__link {
+    font-size: {{ section.settings.type_navigation_size }}px;
+  }
+</style>
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <div class="header-wrapper{% if overlay_header %} header-wrapper--sticky is-light{% endif %}">
+
+    {% if section.settings.show_announcement %}
+      {% include 'announcement-bar' %}
+    {% endif %}
+
+    <header class="site-header{%if section.settings.type_navigation_style %} site-header--heading-style{% endif %}" data-sticky="{{ sticky_header }}">
+      <div class="page-width">
+        <div class="header-layout header-layout--{{ section.settings.main_menu_alignment }}">
+          {% if section.settings.main_menu_alignment == 'center' %}
+            <div class="header-item">
+              <div class="site-nav medium-up--hide">
+                <div class="site-nav__item">
+                  <button type="button" class="site-nav__link site-nav__link--icon js-drawer-open-nav" aria-controls="NavDrawer">
+                    {% include 'icon-hamburger' %}
+                    <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          <div class="header-item header-item--logo{% if section.settings.main_menu_alignment == 'center' %} text-center{%endif %}">
+            {% include 'header-logo-block' %}
+
+            {% if section.settings.main_menu_alignment == 'left' %}
+              {% include 'header-desktop-nav', compress: true %}
+            {% endif %}
+          </div>
+          <div class="header-item text-right">
+            <div class="site-nav">
+
+              {% if settings.enable_currencies %}
+                <div class="site-nav__item small--hide">
+                  {% include 'currency-picker', picker_id: 'header' %}
+                </div>
+              {% endif %}
+
+              {% if shop.customer_accounts_enabled %}
+                <a class="site-nav__link site-nav__link--icon small--hide" href="/account">
+                  {% include 'icon-user' %}
+                  <span class="icon__fallback-text">
+                    {% if customer %}
+                      {{ 'layout.customer.account' | t }}
+                    {% else %}
+                      {{ 'layout.customer.log_in' | t }}
+                    {% endif %}
+                  </span>
+                </a>
+              {% endif %}
+
+              {% if section.settings.header_search_enable %}
+                <a href="/search" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
+                  {% include 'icon-search' %}
+                  <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
+                </a>
+              {% endif %}
+
+              {% if section.settings.main_menu_alignment == 'left' %}
+                <button type="button" class="site-nav__link site-nav__link--icon site-nav--compress__menu js-drawer-open-nav" aria-controls="NavDrawer">
+                  {% include 'icon-hamburger' %}
+                  <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
+              {% endif %}
+
+              <a href="/cart" class="site-nav__link site-nav__link--icon js-drawer-open-cart js-no-transition" aria-controls="CartDrawer">
+                <span class="cart-link">
+                  {% include 'icon-cart' %}
+                  <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                </span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+        {% if section.settings.main_menu_alignment == 'center' %}
+          <div class="text-center">
+            {% include 'header-desktop-nav', compress: false %}
+          </div>
+        {% endif %}
+
+      </div>
+      <div class="site-header__search-container">
+        <div class="site-header__search">
+          <div class="page-width">
+            <form action="/search" method="get" class="site-header__search-form" role="search">
+              {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+              <button type="submit" class="text-link site-header__search-btn">
+                {% include 'icon-search' %}
+                <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+              </button>
+              <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="site-header__search-input" aria-label="{{ 'general.search.placeholder' | t }}">
+            </form>
+            <button type="button" class="js-search-header-close text-link site-header__search-btn">
+              {% include 'icon-close' %}
+              <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Header and menus",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu_link_list",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "select",
+        "id": "main_menu_alignment",
+        "label": "Logo alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "header_style",
+        "label": "Header style",
+        "default": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "sticky",
+            "label": "Sticky"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_index",
+        "label": "Overlay header over homepage",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_collection",
+        "label": "Overlay header over collection",
+        "info": "(if collection image is enabled)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "header_search_enable",
+        "label": "Show search icon"
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "range",
+        "id": "type_navigation_size",
+        "label": "Text size",
+        "default": 18,
+        "min": 12,
+        "max": 40,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "type_navigation_style",
+        "label": "Use heading font"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show an announcement"
+      },
+      {
+        "type": "richtext",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "<p>Free shipping and returns</p>",
+        "info": "When closed, the announcement will remain closed until the next visit. Change the text to see it again."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo-inverted",
+            "label": "White logo",
+            "info": "Used when on top of an image"
+          },
+          {
+            "type": "range",
+            "id": "desktop_logo_height",
+            "label": "Desktop logo height",
+            "default": 50,
+            "min": 20,
+            "max": 120,
+            "unit": "px"
+          },
+          {
+            "type": "range",
+            "id": "mobile_logo_height",
+            "label": "Mobile logo height",
+            "default": 40,
+            "min": 20,
+            "max": 120,
+            "unit": "px"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "settings": {}
+    }
+  }
+{% endschema %}

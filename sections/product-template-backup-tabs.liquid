@@ -1,0 +1,137 @@
+{% include 'product-template',
+  image_container_width: section.settings.image_size,
+  related: section.settings.related_enable,
+  section_id: section.id,
+  social: section.settings.social_enable,
+  zoom: settings.product_zoom_enable
+%}
+
+
+
+<div class="page-content">
+    <div class="page-width">
+
+<div id="awarp-product-related" data-id="{{ product.id }}" data-blocks="3" data-collection_id="{{ collection.id }}" data-collection_handle="{{ collection.handle }}"></div>
+<div id="awarp-recently-viewed-products" data-cart-products="{% for line in cart.items %}{{ line.product_id }},{% endfor %}"></div>
+
+  </div></div>
+
+{% if collection %}
+  {% unless isModal %}
+    {%- assign grid_item_width = '' -%}
+    {%- assign image_size = '1000x' -%}
+
+    {% if collection.next_product %}
+      {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {%- assign image_size = '800x' -%}
+    {% endif %}
+
+    {% if collection.image %}
+      {%- assign collection_image = collection -%}
+    {% else %}
+      {%- assign collection_image = collection.products.first -%}
+    {% endif %}
+
+    <div class="grid grid--no-gutters skrim-grid skrim-grid--pagination product-navigation">
+      {% if collection.next_product %}
+        <div class="grid__item {{ grid_item_width }} skrim__item medium-up--hide" data-aos="skrim__animation">
+          <a href="{{ collection.next_product }}" class="skrim__link skrim__item-content">
+            <div class="skrim__overlay grid__image" style="background-image: url({{ collection.next_product.featured_image | img_url: image_size }})"></div>
+            <div class="skrim__title-wrapper">
+              <span class="skrim__title skrim__title--right">
+                <div class="skrim__underline-me">{{ 'products.general.next_product' | t: title: collection.next_product.title }}</div> {% include 'icon-arrow-right' %}
+              </span>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+      <div class="grid__item {{ grid_item_width }} skrim__item" data-aos="skrim__animation">
+        <a href="{% if collection.handle == 'frontpage' %}/{% else %}{{ collection.url }}{% endif %}" class="skrim__link skrim__item-content">
+          <div class="skrim__overlay grid__image" style="background-image: url({{ collection_image | img_url: image_size }})"></div>
+          <div class="skrim__title-wrapper">
+            <span class="skrim__title">
+              {% include 'icon-arrow-left' %} <div class="skrim__underline-me">{{ 'products.general.collection_return' | t: collection: collection.title }}</div>
+            </span>
+          </div>
+        </a>
+      </div>
+      {% if collection.next_product %}
+        <div class="grid__item {{ grid_item_width }} skrim__item small--hide" data-aos="skrim__animation">
+          <a href="{{ collection.next_product }}" class="skrim__link skrim__item-content">
+            <div class="skrim__overlay grid__image" style="background-image: url({{ collection.next_product.featured_image | img_url: image_size }})"></div>
+            <div class="skrim__title-wrapper">
+              <span class="skrim__title skrim__title--right">
+                <div class="skrim__underline-me">{{ 'products.general.next_product' | t: title: collection.next_product.title }}</div> {% include 'icon-arrow-right' %}
+              </span>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  {% endunless %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Image size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "description_style",
+        "label": "Description style",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Next to images"
+          },
+          {
+            "value": "full",
+            "label": "Below images"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "social_enable",
+        "label": "Enable social sharing",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "related_enable",
+        "label": "Show related products",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "related_count",
+        "label": "Number of related products",
+        "default": 4,
+        "min": 2,
+        "max": 5,
+        "step": 1
+      }
+    ]
+  }
+{% endschema %}

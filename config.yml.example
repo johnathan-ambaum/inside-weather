@@ -1,0 +1,9 @@
+development:
+  password:
+  theme_id: 12345
+  store: loomandloft.myshopify.com
+
+production:
+  password:
+  theme_id: "live"
+  store: loomandloft.myshopify.com

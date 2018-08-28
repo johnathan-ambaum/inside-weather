@@ -1,0 +1,222 @@
+<footer class="site-footer">
+  <div class="page-width">
+
+    <div class="grid">
+      {% assign row_width = 0 %}
+      {% for block in section.blocks %}
+        {% assign row_width = row_width | plus: block.settings.container_width %}
+        <style>
+        @media only screen and (min-width: 590px) {
+          .footer__item--{{ block.id }} {
+            width: {{ block.settings.container_width }}%;
+          }
+        }
+        </style>
+
+        {% if row_width > 100 %}
+          <div class="footer__clear small--hide"></div>
+          {% assign row_width = row_width | minus: 100 %}
+        {% endif %}
+
+        {% case block.type %}
+        {% when 'logo_social' %}
+          <div class="grid__item small--hide footer__item--{{ block.id }}">
+            {% include 'footer-logo-social', block: block, first_instance: true %}
+          </div>
+        {% when 'custom' %}
+          <div class="grid__item footer__item--{{ block.id }}">
+            {% include 'footer-custom-text', block: block %}
+          </div>
+        {% when 'newsletter' %}
+          <div class="grid__item footer__item--{{ block.id }}">
+            {% include 'footer-newsletter', block: block %}
+          </div>
+        {% when 'menu' %}
+          <div class="grid__item footer__item--{{ block.id }}">
+            {% include 'footer-menu', block: block %}
+          </div>
+        {% endcase %}
+      {% endfor %}
+      {% for block in section.blocks %}
+        {% if block.type == 'logo_social' %}
+          <div class="grid__item medium-up--hide">
+            {% include 'footer-logo-social', block: block %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div style="float:left; font-size:11px; margin-top:40px; margin-bottom:20px"> 
+      info@olavier.com &nbsp;&nbsp;|&nbsp;&nbsp;  (415) 952-0370
+      
+    </div>
+    <div style="margin-top:40px; margin-bottom:20px; font-size:11px; float:right;">
+      © 2018 Olavier &nbsp;&nbsp;   | &nbsp;&nbsp;
+      
+      <a style="font-size:10px; text-decoration:underline; color:#edecea;" href="https://olavier.com/pages/terms-of-service">Terms</a>&nbsp; &nbsp;  
+      | &nbsp;&nbsp;<a style="font-size:10px; text-decoration:underline; color:#edecea;" href="https://olavier.com/pages/privacy-policy">Privacy Policy</a> 
+    </div>
+        
+
+    
+    {% if section.settings.show_payment_icons %}
+      {% unless shop.enabled_payment_types == empty %}
+        {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,stripe,visa' | split: ',' -%}
+        <ul class="inline-list payment-icons">
+          {% for type in shop.enabled_payment_types %}
+            {% if payment_icons_available contains type %}
+              <li class="payment-icon">
+                {%- assign icon_name = type | prepend: 'icon-' -%}
+                {% include icon_name %}
+                <span class="icon__fallback-text">{{ type | replace: '_', ' ' }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endunless %}
+    {% endif %}
+
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo_social",
+        "name": "Logo and social",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo image"
+          },
+          {
+            "type": "range",
+            "id": "desktop_logo_height",
+            "label": "Logo height",
+            "default": 50,
+            "min": 20,
+            "max": 120,
+            "unit": "px"
+          },
+          {
+            "type": "range",
+            "id": "container_width",
+            "label": "Column width",
+            "default": 20,
+            "min": 15,
+            "max": 95,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Choose a menu",
+            "default": "footer",
+            "info": "This menu won't show dropdown items"
+          },
+          {
+            "type": "range",
+            "id": "container_width",
+            "label": "Column width",
+            "default": 20,
+            "min": 15,
+            "max": 95,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers)."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Subscribe"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "info": "Optional",
+            "default": "Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals."
+          },
+          {
+            "type": "range",
+            "id": "container_width",
+            "label": "Column width",
+            "default": 20,
+            "min": 15,
+            "max": 95,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "type": "custom",
+        "name": "Custom text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Custom text"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Add your own custom text here.</p>"
+          },
+          {
+            "type": "range",
+            "id": "container_width",
+            "label": "Column width",
+            "default": 20,
+            "min": 15,
+            "max": 95,
+            "unit": "%"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "settings": {},
+      "blocks": [
+        {
+          "type": "menu",
+          "settings": {}
+        },
+        {
+          "type": "logo_social",
+          "settings": {}
+        }
+      ]
+    }
+  }
+{% endschema %}

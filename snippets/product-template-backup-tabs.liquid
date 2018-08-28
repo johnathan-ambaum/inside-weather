@@ -1,0 +1,190 @@
+<div id="ProductSection-{{ section_id }}"
+  class="product-section"
+  itemscope itemtype="http://schema.org/Product"
+  data-section-id="{{ section_id }}"
+  data-section-type="product-template"
+  {% if zoom %}
+    data-image-zoom="true"
+  {% endif %}
+  {% unless isModal %}
+    data-enable-history-state="true"
+  {% endunless %}
+  {% if isModal %}
+    data-lazyload-content="true"
+  {% endif %}>
+
+  {% include 'product-template-variables' %}
+
+  <div class="page-content">
+    <div class="page-width">
+
+      {% if settings.show_breadcrumbs and isModal != true %}
+        {% include 'breadcrumbs' %}
+      {% endif %}
+
+      <div class="grid">
+        <div class="grid__item {{ product_image_width }}">
+          {% include 'product-images', section_id: section_id, zoom: settings.product_zoom_enable, isModal: isModal %}
+        </div>
+
+        <div class="grid__item {{ product_description_width }}">
+
+          <div class="product-single__meta">
+            {% if settings.vendor_enable %}
+              <div class="product-single__vendor" itemprop="brand">{{ product.vendor }}</div>
+            {% endif %}
+
+            <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+
+            {% if settings.sku_enable %}
+              <p id="Sku-{{ section_id }}" class="product-single__sku">
+                {% if current_variant.sku %}
+                  {{ current_variant.sku }}
+                {% endif %}
+              </p>
+            {% endif %}
+
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              {% if product.compare_at_price_max > product.price %}
+                <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                <span class="product__price-wrap-{{ section_id }}">
+                  <span id="ComparePrice-{{ section_id }}" class="product__price product__price--compare">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      {{ current_variant.compare_at_price | money }}
+                    {% endif %}
+                  </span>
+                </span>
+                <span id="ComparePriceA11y" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+              {% else %}
+                <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+              {% endif %}
+
+              <span id="ProductPrice-{{ section_id }}"
+                class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
+                itemprop="price"
+                content="{{ current_variant.price | divided_by: 100.00 }}">
+                {{ current_variant.price | money }}
+              </span>
+
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+              <hr class="hr--medium">
+              {% include 'product-form', section_id: section_id %}
+
+            
+                <div class="product-single__description rte" itemprop="description">
+                  {{ product.description }}  
+                </div>
+
+              
+
+              
+                {% include 'product-additional-content', section_id: section_id %}
+             
+
+            </div>
+
+            {% if social %}
+              {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <br />
+      <div> <img src="{{product.metafields.valueprop.anabey}}"/> </div>
+
+   <div style="margin-top:40px;">
+      
+     {% include 'product-additional-content2', section_id: section_id %} </div>
+      
+    </div>
+    
+    
+
+   
+    <div class="page-content">
+    <div class="page-width">
+    <div id="awarp-product-related" data-id="{{ product.id }}" data-blocks="3" data-collection_id="{{ collection.id }}" data-collection_handle="{{ collection.handle }}"></div>
+    <div id="awarp-recently-viewed-products" data-cart-products="{% for line in cart.items %}{{ line.product_id }},{% endfor %}"></div>
+      </div></div>
+    
+    
+    <script type="application/json" id="ProductJson-{{ section_id }}">
+      {{ product | json }}
+    </script>
+
+    {% if related %}
+      {% unless isModal %}
+        {% for tag in product.tags %}
+          {% if tag contains '_related' %}
+            {%- assign include_collection_handle = tag | split: '_' | last -%}
+            {%- assign include_collection = collections[include_collection_handle] -%}
+            {% if include_collection.products_count > 0 %}
+              {%- assign collection = include_collection -%}
+              {% break %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        {% if collection.products_count > 0 %}
+          {%- assign number_of_products = section.settings.related_count -%}
+          {%- assign per_row = number_of_products -%}
+          {%- assign number_of_products_to_fetch = number_of_products | plus: 1 -%}
+          {%- assign current_product = product -%}
+          {%- assign current_product_found = false -%}
+          {% case per_row %}
+          {% when 1 %}
+            {%- assign grid_item_width = '' -%}
+          {% when 2 %}
+            {%- assign grid_item_width = 'medium-up--one-half' -%}
+          {% when 3 %}
+            {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+          {% when 4 %}
+            {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+          {% when 5 %}
+            {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+          {% endcase %}
+
+          <hr class="hr--large">
+          <div class="page-width">
+            <header class="section-header">
+              <h3 class="section-header__title">{{ 'products.general.related_products' | t }}</h3>
+            </header>
+          </div>
+
+          <div class="page-width page-width--flush-small">
+            <div class="grid-overflow-wrapper">
+              <div class="product-single__related grid grid--uniform" data-aos="overflow__animation">
+
+                {%- assign related_count = 0 -%}
+                {% for product in collection.products limit: number_of_products_to_fetch %}
+                  {% if product.handle == current_product.handle %}
+                    {%- assign current_product_found = true -%}
+                  {% else %}
+                    {%- assign related_count = related_count | plus: 1 -%}
+                    {% unless related_count > number_of_products %}
+                      {% if forloop.last and current_product_found %}
+                        {% include 'product-grid-item' %}
+                      {% else %}
+                        {% include 'product-grid-item' %}
+                      {% endif %}
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+
+            {% if settings.quick_shop_enable %}
+              {% for product in collection.products limit: number_of_products_to_fetch %}
+                {% if product.handle != current_product.handle %}
+                  {% include 'quick-shop-modal' %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endunless %}
+    {% endif %}
+  </div>
+</div>

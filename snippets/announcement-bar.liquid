@@ -1,0 +1,11 @@
+<div class="announcement {% if section.settings.announcement_link != blank %} announcement--has-link{% endif %}">
+
+  <div class="announcement__text" data-text="{{ section.settings.announcement_text | strip_html | handle }}">
+    {{ section.settings.announcement_text }}
+  </div>
+
+  <button type="button" class="text-link announcement__close">
+    <!-- {% include 'icon-close' %} -->
+    <span class="icon__fallback-text">{{ 'general.accessibility.close' | t | json }}</span>
+  </button>
+</div>

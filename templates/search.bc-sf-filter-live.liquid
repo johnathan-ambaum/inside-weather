@@ -1,0 +1,112 @@
+{%- assign per_row = 5 -%}
+{% assign paginate_by = per_row | times: 5 %}
+
+<div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
+
+  <div>
+    <div id="CollectionAjaxContent">
+      <div class="page-width page-content">
+
+        {% include 'breadcrumbs' %}
+        
+        <header class="section-header">
+          <h1 class="section-header__title">
+            {{ 'general.search.title' | t }}
+          </h1>
+        </header>
+
+      	{% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--page' %}
+        
+        <p class="bc-sf-search-result-number"></p>
+
+        <hr class="hr--medium">
+        
+        <div class="collection-filter">
+          <div class="grid grid--uniform">
+
+            <div class="grid__item small--one-half medium-up--one-quarter"></div>
+
+            <div id="bc-sf-filter-top-sorting" class="grid__item small--one-half medium-up--one-quarter float-right"></div>
+
+          </div>
+        </div>
+
+        <div id="bc-sf-filter-wrapper" class="grid grid--uniform">
+          {% assign grid_item_width = 'small--one-half medium-up--one-third' %}
+
+          {% case per_row %}
+          {% when 1 %}
+            {%- assign grid_item_width = '' -%}
+          {% when 2 %}
+            {%- assign grid_item_width = 'medium-up--one-half' -%}
+          {% when 3 %}
+            {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+          {% when 4 %}
+            {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+          {% when 5 %}
+            {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+          {% endcase %}
+
+          <div id="bc-sf-filter-tree-h"></div>
+          <div id="bc-sf-filter-tree-mobile"></div>
+          <div id="bc-sf-filter-tree"></div>
+
+          <div id="bc-sf-filter-products"></div>
+        </div>
+
+        <div id="bc-sf-filter-bottom-pagination" class="pagination"></div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Declare bcSfFilterConfig variable
+  var bcSfFilterConfig = {
+    label: {
+      refine: "{{ 'product_filter_search.refine' | t }}",
+      refine_mobile: "{{ 'product_filter_search.refine_mobile' | t }}",
+      clear: "{{ 'product_filter_search.clear' | t }}",
+      clear_all: "{{ 'product_filter_search.clear_all' | t }}",
+      apply: "{{ 'product_filter_search.apply' | t }}",
+      breadcrumb_home: {% if product_filter_search.breadcrumb_home != blank %} {{ 'product_filter_search.breadcrumb_home' | t }}" {% else %} "Home" {% endif %},
+      load_more: {% assign temp = 'product_filter_search.load_more' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Load more Products" {% endunless %},
+      show_limit: {% assign temp = 'product_filter_search.show_limit' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Show" {% endunless %},
+      sorting: {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Sorting" {% endunless %},
+      sorting_best_selling: {% assign temp = 'collections.sorting.best_selling' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Best Selling" {% endunless %},
+      sorting_featured: {% assign temp = 'collections.sorting.featured' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Featured" {% endunless %},
+      sorting_title_ascending: {% assign temp = 'collections.sorting.az' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Alphabetically, A-Z" {% endunless %},
+      sorting_title_descending: {% assign temp = 'collections.sorting.za' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Alphabetically, Z-A" {% endunless %},
+      sorting_price_ascending: {% assign temp = 'collections.sorting.price_ascending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Lowest Price" {% endunless %},
+      sorting_price_descending: {% assign temp = 'collections.sorting.price_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Highest Price" {% endunless %},
+      sorting_date_ascending: {% assign temp = 'collections.sorting.date_ascending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Date, Old to New" {% endunless %},
+      sorting_date_descending: {% assign temp = 'collections.sorting.date_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Date, New to Old" {% endunless %},
+      sorting_sale_descending: {% assign temp = 'collections.sorting.sale_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "% Off" {% endunless %},
+      sorting_relevance: {% assign temp = 'collections.sorting.relevance' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Relevance" {% endunless %},
+      
+      sold_out: "{{ 'products.product.sold_out' | t }}",
+      save_html: "{{ 'products.general.save_html' | t }}",
+      regular_price: "{{ 'products.general.regular_price' | t }}",
+      sale_price: "{{ 'products.general.sale_price' | t }}",
+      from_text_html: "{{ 'products.general.from_text_html' | t }}",
+      quick_shop: "{{ settings.quick_shop_text }}",
+    },
+    custom: {
+      products_per_page: {{ paginate_by }},
+      products_per_row: {{ per_row }},
+      grid_item_width: "{{ grid_item_width }}",
+      vendor_enable: {{ settings.vendor_enable }},
+      quick_shop_enable: {{ settings.quick_shop_enable }},
+      product_hover_image: {{ settings.product_hover_image }},
+      bc_filter_logo: "{{ settings.bc_filter_logo | img_url: '50x50'}}",      
+      bc_filter_info_image: "<img alt='Olavier' src='{{ settings.bc_filter_info_image | img_url: ''}}' />",
+      bc_filter_info_image_mobile: "<img alt='Olavier' src='{{ settings.bc_filter_info_image_mobile | img_url: ''}}' />",      
+      bc_filter_medium_swatch_list: [{{ settings.bc_filter_medium_swatch_list }}],
+      bc_filter_large_swatch_list: [{{ settings.bc_filter_large_swatch_list }}],
+      bc_filter_custom_swatch_list: [{{ settings.bc_filter_custom_swatch_list }}]
+    }
+  };
+</script>

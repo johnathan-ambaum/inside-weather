@@ -1,0 +1,12 @@
+<p class="footer__title small--hide">{{ block.settings.title }}</p>
+<button type="button" class="footer__title collapsible-trigger collapsible-trigger-btn medium-up--hide" aria-controls="Footer-{{ block.id }}">
+  {{ block.settings.title }}
+  {% include 'collapsible-icons' %}
+</button>
+<div id="Footer-{{ block.id }}" class="collapsible-content collapsible-content--small">
+  <div class="collapsible-content__inner">
+    <div class="footer__collapsible">
+      {{ block.settings.text }}
+    </div>
+  </div>
+</div>
