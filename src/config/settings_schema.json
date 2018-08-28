@@ -4,8 +4,8 @@
     "theme_name": "Motion",
     "theme_author": "Archetype Themes",
     "theme_version": "2.2.1",
-    "theme_documentation_url": "https:\/\/archetypethemes.co\/blogs\/motion",
-    "theme_support_url": "https:\/\/archetypethemes.co\/blogs\/motion"
+    "theme_documentation_url": "https://archetypethemes.co/blogs/motion",
+    "theme_support_url": "https://archetypethemes.co/blogs/motion"
   },
   {
     "name": "Colors",
@@ -1061,7 +1061,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Requires variant picker style above to be set to 'Buttons'. [Learn how to set up swatches](https:\/\/archetypethemes.co\/blogs\/motion\/how-do-i-set-up-color-swatches)"
+        "content": "Requires variant picker style above to be set to 'Buttons'. [Learn how to set up swatches](https://archetypethemes.co/blogs/motion/how-do-i-set-up-color-swatches)"
       },
       {
         "type": "checkbox",
@@ -1079,7 +1079,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Motion supports .MP4, YouTube and Vimeo product videos through a product image's 'alt' tag. Not all features supported by Vimeo. [Learn more](https:\/\/archetypethemes.co\/blogs\/motion\/how-do-i-add-product-videos)"
+        "content": "Motion supports .MP4, YouTube and Vimeo product videos through a product image's 'alt' tag. Not all features supported by Vimeo. [Learn more](https://archetypethemes.co/blogs/motion/how-do-i-add-product-videos)"
       },
       {
         "type": "text",
@@ -1150,7 +1150,7 @@
       },
       {
         "type": "paragraph",
-        "content": "After you've installed the Shopify [Product Reviews app](https:\/\/apps.shopify.com\/product-reviews), skip the HTML installation steps and enable the setting below."
+        "content": "After you've installed the Shopify [Product Reviews app](https://apps.shopify.com/product-reviews), skip the HTML installation steps and enable the setting below."
       },
       {
         "type": "checkbox",
@@ -1193,7 +1193,7 @@
       },
       {
         "type": "paragraph",
-        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/help-script-find-money-formats)."
+        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https://help.shopify.com/manual/using-themes/troubleshooting/help-script-find-money-formats)."
       },
       {
         "type": "checkbox",
@@ -1223,7 +1223,7 @@
         "id": "supported_currencies",
         "label": "Supported currencies",
         "default": "USD CAD INR GBP AUD EUR JPY",
-        "info": "Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
+        "info": "Use the country's ISO [currency code](http://www.xe.com/iso4217.php). Separate your currency codes with a space."
       },
       {
         "type": "text",
@@ -1245,55 +1245,55 @@
         "type": "text",
         "id": "social_facebook_link",
         "label": "Facebook",
-        "info": "https:\/\/www.facebook.com\/shopify"
+        "info": "https://www.facebook.com/shopify"
       },
       {
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter",
-        "info": "https:\/\/twitter.com\/shopify"
+        "info": "https://twitter.com/shopify"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest",
-        "info": "https:\/\/www.pinterest.com\/shopify"
+        "info": "https://www.pinterest.com/shopify"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
         "label": "Instagram",
-        "info": "https:\/\/instagram.com\/shopify"
+        "info": "https://instagram.com/shopify"
       },
       {
         "type": "text",
         "id": "social_snapchat_link",
         "label": "Snapchat",
-        "info": "https:\/\/www.snapchat.com\/add\/shopify"
+        "info": "https://www.snapchat.com/add/shopify"
       },
       {
         "type": "text",
         "id": "social_tumblr_link",
         "label": "Tumblr",
-        "info": "http:\/\/shopify.tumblr.com"
+        "info": "http://shopify.tumblr.com"
       },
       {
         "type": "text",
         "id": "social_linkedin_link",
         "label": "LinkedIn",
-        "info": "https:\/\/www.linkedin.com\/in\/shopify"
+        "info": "https://www.linkedin.com/in/shopify"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
         "label": "YouTube",
-        "info": "https:\/\/www.youtube.com\/user\/shopify"
+        "info": "https://www.youtube.com/user/shopify"
       },
       {
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo",
-        "info": "https:\/\/vimeo.com\/shopify"
+        "info": "https://vimeo.com/shopify"
       },
       {
         "type": "header",

@@ -3,7 +3,7 @@ require('log-timestamp');
 const { copyAsset, getFileHashes, hashFile } = require('./util');
 
 const log = console.log.bind(console);
-const destination = './assets';
+const destination = './src/assets';
 const widgetDir = './widgets';
 const watched = ['css', 'js'];
 
