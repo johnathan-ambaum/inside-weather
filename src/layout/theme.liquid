@@ -67,7 +67,14 @@
   <!--End_Gem_Page_Header_Script-->
 
   {% include 'shogun-head' %}
-  
+
+  <!-- Browse and product customizer widgets -->
+  {%- if template == 'product' or template == 'collection' -%}
+    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
+    <script src="{{ 'widgets.js' | asset_url }}" async></script>
+  {%- endif -%}
+  <!-- end browse and product customizer widgets -->
+
   <script type="text/javascript" async="" src="https://arp.apps1.exto.io/static/js/owl.carousel.min.js?shop=equine-riders.myshopify.com"></script>
 </head>
 

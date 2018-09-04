@@ -3,3 +3,4 @@ node_modules/
 widgets/
 config.yml
 theme.lock
+deploy.log
