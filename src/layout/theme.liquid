@@ -71,7 +71,8 @@
   <!-- Browse and product customizer widgets -->
   {%- if template == 'product' or template == 'collection' -%}
     <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
-    <script src="{{ 'widgets.js' | asset_url }}" async></script>
+    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
   {%- endif -%}
   <!-- end browse and product customizer widgets -->
 

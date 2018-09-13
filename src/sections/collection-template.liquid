@@ -4,15 +4,12 @@
   {% assign paginate_by = paginate_by | minus: 1 %}
 {% endif %}
 
-{% paginate collection.products by paginate_by %}
-
 <div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
   {% if section.settings.collection_image_enable and collection.image %}
     <div class="collection-hero loading--delayed" data-preload="{{ collection.image | img_url: '1800x' }}">
       <style>
         .collection-hero__image {
           background-image: url("{{ collection.image | img_url: '1800x' }}");
-           
         }
       </style>
 
@@ -23,7 +20,7 @@
           <header class="section-header section-header--hero">
             <h1 class="section-header__title section-header__title--medium">
               <div class="animation-cropper">
-                <div class="bc-sf-filter-collection-header animation-contents">
+                <div class="animation-contents">
                   {{ collection.title }}
                 </div>
               </div>
@@ -35,200 +32,75 @@
     </div>
   {% endif %}
 
-  <div id="CollectionAjaxResult">
-    <div id="CollectionAjaxContent">
-      <div id="bc-sf-filter-tree" class="bc-sf-filter-sticky-v-mobile"></div>
-      <div id="bc-sticky">
-        <div id="bc-sf-filter-tree-h"></div>
-        <div id="bc-sf-filter-tree-h-refine-by"></div>
-      </div>
-      <div class="page-width page-content" >
+  <div id="app" class="page-width page-content">
+    <browse-widget collection="{{ collection.title | escape }}">
+      {% include 'breadcrumbs' %}
 
-      <!--  {% include 'breadcrumbs' %} -->
+      {% unless section.settings.collection_image_enable and collection.image %}
+        <header class="section-header">
+          <h1 class="section-header__title">
+            {{ collection.title }}
+          </h1>
+        </header>
+      {% endunless %}
 
-        {% unless section.settings.collection_image_enable and collection.image %}
-          <header class="section-header">
-            <h1 class="bc-sf-filter-collection-header section-header__title">
-              {{ collection.title }}
-            </h1>
-          </header>
-        {% endunless %}
-
-        {% if section.settings.collection_tags_style == 'dropdown' or section.settings.collection_sort_enable %}
-          <div class="collection-filter">
-            <div class="grid grid--uniform">
-
-            {% if section.settings.collection_tags_style == 'dropdown' %}
-              <div class="grid__item small--one-half medium-up--one-quarter">
-                <div id="bc-sf-filter-total-products"></div>
-              </div>
+      {% if section.settings.collection_sort_enable %}
+        <div class="grid__item small--one-half medium-up--one-quarter float-right">
+          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+          <label for="SortBy" class="hidden-label">{{ 'collections.sorting.title' | t }}</label>
+          <select name="SortBy" id="SortBy">
+            {% if sort_by == collection.default_sort_by %}
+              <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}</option>
+              {% if collection.default_sort_by != 'manual' %}
+                <option value="manual"{% if sort_by == "manual" %} selected="selected"{% endif %}>{{ 'collections.sorting.featured' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'best-selling' %}
+                <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'title-ascending' %}
+                <option value="title-ascending"{% if sort_by == "title-ascending"  %}selected="selected"{% endif %}>{{ 'collections.sorting.az' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'title-descending' %}
+                <option value="title-descending"{% if sort_by == "title-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.za' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'price-ascending' %}
+                <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'price-descending' %}
+                <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'created-descending' %}
+                <option value="created-descending"{% if sort_by == "created-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'created-ascending' %}
+                <option value="created-ascending"{% if sort_by == "created-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
+              {% endif %}
+            {% else %}
+              <option value="manual"{% if sort_by == "manual" %} selected="selected"{% endif %}>{{ 'collections.sorting.featured' | t }}</option>
+              <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+              <option value="title-ascending"{% if sort_by == "title-ascending"  %}selected="selected"{% endif %}>{{ 'collections.sorting.az' | t }}</option>
+              <option value="title-descending"{% if sort_by == "title-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.za' | t }}</option>
+              <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+              <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+              <option value="created-descending"{% if sort_by == "created-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
+              <option value="created-ascending"{% if sort_by == "created-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
             {% endif %}
-
-            {% if section.settings.collection_sort_enable %}
-              <div id="bc-sf-filter-top-sorting" class="grid__item small--one-half medium-up--one-quarter float-right">
-                
-              </div>
-            {% endif %}
-
-            </div>
-          </div>
-        {% endif %}
-
-        {% if collection.description != blank %}
-          <div class="rte" class="bc-sf-filter-collection-description">
-            {{ collection.description }}
-          </div>
-          <hr class="hr--clear hr--small">
-        {% endif %}
-
-        <div id="bc-sf-filter-wrapper" class="grid grid--uniform">
-          {% assign grid_item_width = 'small--one-half medium-up--one-third' %}
-
-          {% case per_row %}
-          {% when 1 %}
-            {%- assign grid_item_width = '' -%}
-          {% when 2 %}
-            {%- assign grid_item_width = 'medium-up--one-half' -%}
-          {% when 3 %}
-            {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
-          {% when 4 %}
-            {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
-          {% when 5 %}
-            {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
-          {% endcase %}
-
-          {% if section.settings.collection_tags_style == 'inline' %}
-            {% if collection.all_tags.size > 0 %}
-              <div class="grid__item {{ grid_item_width }}">
-                <ul class="tags tags--vertical">
-                  <li{% unless current_tags %} class="tag--active"{% endunless %}>
-                    {% if collection.handle %}
-                      <a href="/collections/{{ collection.handle }}">
-                        {{ 'collections.general.all_of_collection' | t }}
-                      </a>
-                    {% elsif collection.current_type %}
-                      <a href="{{ collection.current_type | url_for_type }}">
-                        {{ 'collections.general.all_of_collection' | t }}
-                      </a>
-                    {% elsif collection.current_vendor %}
-                      <a href="{{ collection.current_vendor | url_for_vendor }}">
-                        {{ 'collections.general.all_of_collection' | t }}
-                      </a>
-                    {% endif %}
-                  </li>
-
-                  {%- assign tag_count = 0 -%}
-                  {%- assign tag_limit = 7 -%}
-                  {% for tag in collection.all_tags %}
-                    {%- assign tag_count = tag_count | plus: 1 -%}
-                    {% include 'filter-out-custom-tags' %}
-                    {%- assign tag_with_hyphens = tag | replace: ' ', '-' -%}
-                    {% if tag_count == tag_limit %}
-                      </ul>
-                      <ul id="TagList-{{ section.id }}" class="tags tags--vertical collapsible-content collapsible-content--all">
-                        <div class="collapsible-content__inner collapsible-content__inner--no-translate">
-                    {% endif %}
-                    {% if current_tags contains tag or current_tags contains tag_with_hyphens %}
-                      <li class="tag--active">
-                        {{ tag | link_to_remove_tag: tag | replace: 'title=', 'class="js-no-transition" title=' }}
-                      </li>
-                    {% else %}
-                      <li>
-                        {{ tag | link_to_tag: tag | replace: 'title=', 'class="js-no-transition" title=' }}
-                      </li>
-                    {% endif %}
-
-                    {% if tag_count == tag_limit %}
-                      </div>
-                    {% endif %}
-                  {% endfor %}
-                </ul>
-
-                {%- assign show_button_limit = tag_limit | minus: 1  -%}
-                {% if collection.all_tags.size > show_button_limit %}
-                  <p>
-                    <button type="button" class="collapsible-trigger collapsible-trigger-btn btn btn--tertiary tags-toggle" aria-controls="TagList-{{ section.id }}">
-                      <span class="collapsible-label__closed">{{ 'collections.general.see_more' | t }}</span>
-                      <span class="collapsible-label__open">{{ 'collections.general.see_less' | t }}</span>
-                    </button>
-                  </p>
-                {% endif %}
-              </div>
-            {% endif %}
-          {% endif %}
-			
-          <div id="bc-sf-filter-products">
-          {% for product in collection.products %}
-            {% include 'product-grid-item' %}
-          {% endfor %}
-          </div>
-
+          </select>
+          <input class="collection-header__default-sort" type="hidden" value="{{ collection.default_sort_by }}">
         </div>
-
-        <div id="bc-sf-filter-bottom-pagination" class="pagination"></div>
-        <div id="bc-sf-filter-load-more"></div>
-
-      </div>
-		
-      {% comment %}
-      {% if settings.quick_shop_enable %}
-        {% for product in collection.products  %}
-          {% include 'quick-shop-modal' %}
-        {% endfor %}
       {% endif %}
-      {% endcomment %}
-    </div>
-  </div>
+
+      {% if collection.description != blank %}
+        <div class="rte">
+          {{ collection.description }}
+        </div>
+        <hr class="hr--clear hr--small">
+      {% endif %}
+    </browse-widget>
+  </div> <!-- #app -->
+
 </div>
 
-{% endpaginate %}
-<script>
-  // Declare bcSfFilterConfig variable
-  var bcSfFilterConfig = {
-    label: {
-      refine: "{{ 'product_filter_search.refine' | t }}",
-      refine_mobile: "{{ 'product_filter_search.refine_mobile' | t }}",
-      clear: "{{ 'product_filter_search.clear' | t }}",
-      clear_all: "{{ 'product_filter_search.clear_all' | t }}",
-      apply: "{{ 'product_filter_search.apply' | t }}",
-      breadcrumb_home: {% if product_filter_search.breadcrumb_home != blank %} {{ 'product_filter_search.breadcrumb_home' | t }}" {% else %} "Home" {% endif %},
-      load_more: {% assign temp = 'product_filter_search.load_more' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Load more Products" {% endunless %},
-      show_limit: {% assign temp = 'product_filter_search.show_limit' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Show" {% endunless %},
-      sorting: {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Sorting" {% endunless %},
-      sorting_best_selling: {% assign temp = 'collections.sorting.best_selling' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Best Selling" {% endunless %},
-      sorting_featured: {% assign temp = 'collections.sorting.featured' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Featured" {% endunless %},
-      sorting_title_ascending: {% assign temp = 'collections.sorting.az' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Alphabetically, A-Z" {% endunless %},
-      sorting_title_descending: {% assign temp = 'collections.sorting.za' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Alphabetically, Z-A" {% endunless %},
-      sorting_price_ascending: {% assign temp = 'collections.sorting.price_ascending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Lowest Price" {% endunless %},
-      sorting_price_descending: {% assign temp = 'collections.sorting.price_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Highest Price" {% endunless %},
-      sorting_date_ascending: {% assign temp = 'collections.sorting.date_ascending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Date, Old to New" {% endunless %},
-      sorting_date_descending: {% assign temp = 'collections.sorting.date_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Date, New to Old" {% endunless %},
-      sorting_sale_descending: {% assign temp = 'collections.sorting.sale_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "% Off" {% endunless %},
-      sorting_relevance: {% assign temp = 'collections.sorting.relevance' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Relevance" {% endunless %},
-      
-      sold_out: "{{ 'products.product.sold_out' | t }}",
-      save_html: "{{ 'products.general.save_html' | t }}",
-      regular_price: "{{ 'products.general.regular_price' | t }}",
-      sale_price: "{{ 'products.general.sale_price' | t }}",
-      from_text_html: "{{ 'products.general.from_text_html' | t }}",
-      quick_shop: "{{ settings.quick_shop_text }}",
-    },
-    custom: {
-      products_per_page: {{ paginate_by }},
-      products_per_row: {{ per_row }},
-      grid_item_width: "{{ grid_item_width }}",
-      vendor_enable: {{ settings.vendor_enable }},
-      quick_shop_enable: {{ settings.quick_shop_enable }},
-      product_hover_image: {{ settings.product_hover_image }},
-      bc_filter_logo: "{{ settings.bc_filter_logo | img_url: '50x50'}}",      
-      bc_filter_info_image: "<img alt='Olavier' src='{{ settings.bc_filter_info_image | img_url: ''}}' />",
-      bc_filter_info_image_mobile: "<img alt='Olavier' src='{{ settings.bc_filter_info_image_mobile | img_url: ''}}' />",      
-      bc_filter_medium_swatch_list: [{{ settings.bc_filter_medium_swatch_list }}],
-      bc_filter_large_swatch_list: [{{ settings.bc_filter_large_swatch_list }}],
-      bc_filter_custom_swatch_list: [{{ settings.bc_filter_custom_swatch_list }}]
-    }
-  };
-</script>
 {% schema %}
   {
     "name": "Collection pages",

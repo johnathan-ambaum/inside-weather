@@ -18,340 +18,203 @@
   <div class="page-content">
     <div class="page-width">
 
-      {% if settings.show_breadcrumbs and isModal != true %}
-        {% include 'breadcrumbs' %}
-      {% endif %}
-
-      <div class="grid">
-        <div class="grid__item {{ product_image_width }}">
-          {% include 'product-images', section_id: section_id, zoom: settings.product_zoom_enable, isModal: isModal %}
-        </div>
-
-        <div class="grid__item {{ product_description_width }}">
-
-          <div class="product-single__meta">
-            {% if settings.vendor_enable %}
-              <div class="product-single__vendor" itemprop="brand">{{ product.vendor }}</div>
-            {% endif %}
-
+      <div id="app">
+        <div class="ProductDetailGrid">
+          <product-detail class="ProductDetailGrid__Main">
             <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
-
-            {% if settings.sku_enable %}
-              <p id="Sku-{{ section_id }}" class="product-single__sku">
-                {% if current_variant.sku %}
-                  {{ current_variant.sku }}
-                {% endif %}
-              </p>
-            {% endif %}
-
-            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-              {% if product.compare_at_price_max > product.price %}
-                <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-                <span class="product__price-wrap-{{ section_id }}">
-                  <span id="ComparePrice-{{ section_id }}" class="product__price product__price--compare">
-                    {% if current_variant.compare_at_price > current_variant.price %}
-                      {{ current_variant.compare_at_price | money }}
-                    {% endif %}
-                  </span>
-                </span>
-                <span id="ComparePriceA11y" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
-              {% else %}
-                <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-              {% endif %}
-
-              <span id="ProductPrice-{{ section_id }}"
-                class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
-                itemprop="price"
-                content="{{ current_variant.price | divided_by: 100.00 }}">
-                {{ current_variant.price | money }}
-              </span>
-
-              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
-
-              
-  
-             
-                       
-
-              <hr class="hr--medium">
-              
-              
-              {% include 'product-form', section_id: section_id %}
-              
-            
-
-                <div class="product-single__description rte" itemprop="description">
-                 {{ product.description }} 
-                </div>
-
-              
-			
-              
-            
-         
-                              {% include 'product-additional-content', section_id: section_id %} 
-              
-         
-
+            {% for image in product.images %}
+              <img src="{{ image | img_url: '1000x' }}" alt="{{ image.alt }}">
+            {% endfor %}
+            <div class="product-single__description rte" itemprop="description">
+              {{ product.description }}
             </div>
+            {% comment %} {% include 'product-additional-content', section_id: section_id %} {% endcomment %}
+          </product-detail>
+          <div class="ProductDetailGrid__Sidebar">
+            <div class="product-single__meta">
+              <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                {% if product.compare_at_price_max > product.price %}
+                  <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                  <span class="product__price-wrap-{{ section_id }}">
+                    <span id="ComparePrice-{{ section_id }}" class="product__price product__price--compare">
+                      {% if current_variant.compare_at_price > current_variant.price %}
+                        {{ current_variant.compare_at_price | money }}
+                      {% endif %}
+                    </span>
+                  </span>
+                  <span id="ComparePriceA11y" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                {% else %}
+                  <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                {% endif %}
 
-            {% if social %}
-              {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      
-      
-      
+                <span id="ProductPrice-{{ section_id }}"
+                  class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
+                  itemprop="price"
+                  content="{{ current_variant.price | divided_by: 100.00 }}">
+                  {{ current_variant.price | money }}
+                </span>
+
+                <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+                {% include 'product-form', section_id: section_id %}
+              </div> <!-- [itemprop="offers"] -->
+            </div> <!-- .product-single__meta -->
+            <hr>
+            <p>NOT SURE YOU FOUND THE PERFECT MATCH?</p>
+            <h3>EXPLORE MORE</h3>
+            <product-customizer></product-customizer>
+          </div> <!-- .ProductDetailGrid__Sidebar -->
+        </div> <!-- .ProductDetailGrid -->
+      </div> <!-- #app -->
+
       <!-- START CAROUSEL #1-->
-        <!--carousel banner start-->
-    {% for c in product.collections %}
-{% if c.handle == "anabey" %}
-  <div style="margin-top:60px; margin-right:auto; margin-left:auto;">
-      
-      <div class="anabey-carousel-1" >
-    
-        <picture>
-		
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_M_1X.jpg?12404650520735944401 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_M_2x_a9e72d44-58f2-4f80-adc7-ba66346446f8.jpg?12404650520735944401 2x"
-                     
-			media="(max-width: 640px)"
-            >
-												
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_1X.jpg?1497960457841449439 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439 2x" 
-            
-            media="(max-width: 1024px)">
-												
-												
-	<img srcset=" https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439 1x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439 2x" 
-     
-			
-         src="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439"
-         style="
-    width: 100%;
-">
-			
-        </picture>
-      
-      
-        </div>
-   </div>
-    {% endif %}
-{% endfor %}
-    
-   
-    
-    <!--END carousel banner-->
-      
-     
-    <div class="page-width">
-      <div id="carousel-placement1">
-        
-      </div>
-        </div>
+      <!--carousel banner start-->
+      {% for c in product.collections %}
+        {% if c.handle == "anabey" %}
+          <div style="margin-top:60px; margin-right:auto; margin-left:auto;">
+            <div class="anabey-carousel-1" >
+              <picture>
+                <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_M_1X.jpg?12404650520735944401 1x,
+                                https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_M_2x_a9e72d44-58f2-4f80-adc7-ba66346446f8.jpg?12404650520735944401 2x"
+                        media="(max-width: 640px)">
+                <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_1X.jpg?1497960457841449439 1x,
+                                https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439 2x"
+                        media="(max-width: 1024px)">
+                <img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439 1x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439 2x"
+                    src="https://cdn.shopify.com/s/files/1/2994/0144/files/RELATED_1_PDP_D_2x_be132179-ab89-42af-8fe7-2a0b315777bb.jpg?1497960457841449439"
+                    style="width: 100%;">
+              </picture>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!--END carousel banner-->
+      <div class="page-width"><div id="carousel-placement1"></div></div>
       <!---END CAROUSEL #1 -->
-  
-      
+
       <!--VALUE PROPS-->
-    <div style="margin-top:80px; margin-bottom:80px;">
-      
-      <div class="vprop-pdp" >
-       <picture>
-		
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-M.png?1960827345763949175 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-M.png?1960827345763949175 2x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-M.png?1960827345763949175 3x"
-                     
-			media="(max-width: 640px)">
-												
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-T.png?4441865388379845558 1x,
-	 				https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-T.png?4441865388379845558 2x,
-					https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-T.png?4441865388379845558 3x" 
-            
-            media="(max-width: 1024px)">
-												
-												
-	<img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175 1x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175 2x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175 3x" 
-     	
-         alt="valueprops" 
-			
-         src="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175">
-			
-        </picture>
-          
-      
-      </div>
+      <div style="margin-top:80px; margin-bottom:80px;">
+        <div class="vprop-pdp" >
+          <picture>
+            <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-M.png?1960827345763949175 1x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-M.png?1960827345763949175 2x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-M.png?1960827345763949175 3x"
+                    media="(max-width: 640px)">
+            <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-T.png?4441865388379845558 1x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-T.png?4441865388379845558 2x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-T.png?4441865388379845558 3x"
+                    media="(max-width: 1024px)">
+            <img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175 1x,
+                        https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175 2x,
+                        https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175 3x"
+                alt="valueprops"
+                src="https://cdn.shopify.com/s/files/1/2994/0144/files/VProp-PDP-D.png?1960827345763949175">
+          </picture>
         </div>
-      
+      </div>
       <!--END VALUE PROPS-->
 
-   <!--START REVIEWS-->
+      <!--START REVIEWS-->
       <!--banner-->
-  
-  <div style="margin-top:60px; margin-right:auto; margin-left:auto;">
-      
-      <div class="reviews-bnr" >
-    
-        <picture>
-		
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_M_2x_9e12f13e-bba7-42ae-b7b7-20f12abb0159.jpg?15754349681195288480 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_M_2x_9e12f13e-bba7-42ae-b7b7-20f12abb0159.jpg?15754349681195288480 2x"
-                     
-			media="(max-width: 640px)"
-            >
-												
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_T.jpg?6784249806774553904 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_T_2x_3d7fee6c-2530-44f1-831c-f21f1f14bd21.jpg?6784249806774553904 2x" 
-            
-            media="(max-width: 1024px)">
-												
-												
-	<img srcset=" https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_D_2x_1aeaa320-a859-40c3-814b-584e5dd24b3e.jpg?11400493416711608524 1x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_D_2x_1aeaa320-a859-40c3-814b-584e5dd24b3e.jpg?11400493416711608524 2x" 
-     
-			
-         src="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_D_2x_1aeaa320-a859-40c3-814b-584e5dd24b3e.jpg?11400493416711608524"
-         style="
-    width: 100%;
-">
-			
-        </picture>
-      
-      
+      <div style="margin-top:60px; margin-right:auto; margin-left:auto;">
+        <div class="reviews-bnr" >
+          <picture>
+            <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_M_2x_9e12f13e-bba7-42ae-b7b7-20f12abb0159.jpg?15754349681195288480 1x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_M_2x_9e12f13e-bba7-42ae-b7b7-20f12abb0159.jpg?15754349681195288480 2x"
+                    media="(max-width: 640px)">
+            <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_T.jpg?6784249806774553904 1x,
+                            https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_T_2x_3d7fee6c-2530-44f1-831c-f21f1f14bd21.jpg?6784249806774553904 2x"
+                    media="(max-width: 1024px)">
+            <img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_D_2x_1aeaa320-a859-40c3-814b-584e5dd24b3e.jpg?11400493416711608524 1x,
+                         https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_D_2x_1aeaa320-a859-40c3-814b-584e5dd24b3e.jpg?11400493416711608524 2x"
+                 src="https://cdn.shopify.com/s/files/1/2994/0144/files/REVIEWS_PDP_D_2x_1aeaa320-a859-40c3-814b-584e5dd24b3e.jpg?11400493416711608524"
+                 style="width: 100%;">
+          </picture>
         </div>
-    
-   </div>
- 
-		<!--end banner-->
-      
-      
-      <div style="margin-top:0px; margin-bottom:80px;">
-      
-     {% include 'product-additional-content2', section_id2: section_id2 %} </div>
-      
-    </div>
-    <!--END REVIEWS-->
-    
-    
-
-    
-     
-      <!-- START CAROUSEL #2-->
-    <div class="page-content">
-    <div class="page-width">
-      <div id="carousel-placement2">
-        
       </div>
-      </div></div>
-      <!---END CAROUSEL #2 -->
-    
- 
-  
+      <!--end banner-->
+
+      <div style="margin-top:0px; margin-bottom:80px;">
+        {% include 'product-additional-content2', section_id2: section_id2 %}
+      </div>
+      <!--END REVIEWS-->
+    </div> <!-- .page-width -->
+
+    <!-- START CAROUSEL #2-->
+    <div class="page-content"><div class="page-width"><div id="carousel-placement2"></div></div></div>
+    <!---END CAROUSEL #2 -->
+
     <div id="awarp-product-related" data-id="{{ product.id }}" data-blocks="3" data-collection_id="{{ collection.id }}" data-collection_handle="{{ collection.handle }}"></div>
-     
-    
-    
+
     <!--SWATCH BANNER-->
     {% for c in product.collections %}
-{% if c.handle == "anabey" %}
- 
-    <div class="page-width"><a href="https://olavier.com/pages/free-swatches">
-    <div class="SWATCH-BANNER"style="margin-top:40px; margin-bottom:80px;"> 
-        <picture>
-		
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_M.jpg?931613419947683256 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_M.jpg?931613419947683256 2x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_M.jpg?931613419947683256 3x"
-                     
-			media="(max-width: 640px)">
-												
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_T_1x.jpg?12571483632364201931 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_T_1x.jpg?12571483632364201931 2x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_T_1x.jpg?12571483632364201931 3x" 
-            
-            media="(max-width: 1024px)">
-												
-												
-	<img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_D_1x.jpg?12571483632364201931 1x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_D_2x_aa95f310-0075-4088-b4fb-6c4d1a684e89.jpg?12571483632364201931 2x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_3x_28c93af1-7f59-4926-bcb4-630667a485e7.jpg?12571483632364201931 3x" 
-     
-			
-         src="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_D_2x_aa95f310-0075-4088-b4fb-6c4d1a684e89.jpg?12571483632364201931">
-			
-        </picture>
-      
-      
-        </div> </a>
-   </div>
-    {% endif %}
-{% endfor %}
-    
-   
-    
+      {% if c.handle == "anabey" %}
+        <div class="page-width">
+          <a href="https://olavier.com/pages/free-swatches">
+            <div class="SWATCH-BANNER"style="margin-top:40px; margin-bottom:80px;">
+              <picture>
+                <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_M.jpg?931613419947683256 1x,
+                                https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_M.jpg?931613419947683256 2x,
+                                https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_M.jpg?931613419947683256 3x"
+                        media="(max-width: 640px)">
+                <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_T_1x.jpg?12571483632364201931 1x,
+                                https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_T_1x.jpg?12571483632364201931 2x,
+                                https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_T_1x.jpg?12571483632364201931 3x"
+                        media="(max-width: 1024px)">
+                <img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_D_1x.jpg?12571483632364201931 1x,
+                             https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_D_2x_aa95f310-0075-4088-b4fb-6c4d1a684e89.jpg?12571483632364201931 2x,
+                             https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_3x_28c93af1-7f59-4926-bcb4-630667a485e7.jpg?12571483632364201931 3x"
+                     src="https://cdn.shopify.com/s/files/1/2994/0144/files/SWATCH_PDP_D_2x_aa95f310-0075-4088-b4fb-6c4d1a684e89.jpg?12571483632364201931">
+              </picture>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
     <!--END SWATCH BANNER-->
-    
-    
-       
-      <!-- START CAROUSEL #3-->
+
+    <!-- START CAROUSEL #3-->
     <div class="page-content">
-    <div class="page-width">
-      <div id="carousel-placement3">
-        &nbsp;
+      <div class="page-width">
+        <div id="carousel-placement3">
+          &nbsp;
+        </div>
       </div>
-      </div></div>
-      
-      <!---END CAROUSEL #3 -->
-    
-     
-    
+    </div>
+    <!---END CAROUSEL #3 -->
+
     <!--DESIGN SERVICES BANNER -->
-     <div class="page-width"><a href="https://olavier.com/pages/work-with-a-designer">
-     <picture>
-		
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_M.jpg?2178648829745119871 1x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_M.jpg?2178648829745119871 2x,
-                    https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_M.jpg?2178648829745119871 3x"
-                     
-			media="(max-width: 640px)">
-												
-	<source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_T_1x.jpg?2178648829745119871 1x,
-	 				https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_T_1x.jpg?2178648829745119871 2x,
-					https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_T_1x.jpg?2178648829745119871 3x" 
-            
-            media="(max-width: 1024px)">
-												
-												
-	<img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_2x_d556bbf9-996e-4d16-aef2-4e243e073edf.jpg?2178648829745119871 1x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_2x_d556bbf9-996e-4d16-aef2-4e243e073edf.jpg?2178648829745119871 2x,
-             	https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_3x_28c93af1-7f59-4926-bcb4-630667a485e7.jpg?4615951758937940639 3x" 
-     	
-         alt="valueprops" 
-			
-         src="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_2x_d556bbf9-996e-4d16-aef2-4e243e073edf.jpg?2178648829745119871">
-			
-        </picture>
-        </div> </a>
-    <!--END DESIGN SERVICES BANNER -->
-    
-   
-    <!--RECENTLY VIEWED-->
-       <div class="page-content">
     <div class="page-width">
-      <div id="awarp-recently-viewed-products" data-cart-products="{% for line in cart.items %}{{ line.product_id }},{% endfor %}"></div>
-      </div></div>
-    
-     <!--END RECENTLY VIEWED-->
-    
-    
-    
+      <a href="https://olavier.com/pages/work-with-a-designer">
+        <picture>
+          <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_M.jpg?2178648829745119871 1x,
+                          https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_M.jpg?2178648829745119871 2x,
+                          https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_M.jpg?2178648829745119871 3x"
+                  media="(max-width: 640px)">
+          <source srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_T_1x.jpg?2178648829745119871 1x,
+                          https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_T_1x.jpg?2178648829745119871 2x,
+                          https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_T_1x.jpg?2178648829745119871 3x"
+                  media="(max-width: 1024px)">
+          <img srcset="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_2x_d556bbf9-996e-4d16-aef2-4e243e073edf.jpg?2178648829745119871 1x,
+                      https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_2x_d556bbf9-996e-4d16-aef2-4e243e073edf.jpg?2178648829745119871 2x,
+                      https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_3x_28c93af1-7f59-4926-bcb4-630667a485e7.jpg?4615951758937940639 3x"
+              alt="valueprops"
+              src="https://cdn.shopify.com/s/files/1/2994/0144/files/DESIGN_PDP_D_2x_d556bbf9-996e-4d16-aef2-4e243e073edf.jpg?2178648829745119871">
+        </picture>
+      </a>
+    </div>
+    <!--END DESIGN SERVICES BANNER -->
+
+    <!--RECENTLY VIEWED-->
+    <div class="page-content">
+      <div class="page-width">
+        <div id="awarp-recently-viewed-products" data-cart-products="{% for line in cart.items %}{{ line.product_id }},{% endfor %}"></div>
+      </div>
+    </div>
+    <!--END RECENTLY VIEWED-->
+
     <script type="application/json" id="ProductJson-{{ section_id }}">
       {{ product | json }}
     </script>
