@@ -4,10 +4,19 @@
 
 ### Clone and install dependencies
 ```
-git clone git@gitlab.com:btownweb/olavier/shopify-theme.git olavier.com
+# clone the theme repo and the widgets repo set up as a submodule
+git clone --recurse-submodules git@gitlab.com:btownweb/olavier/shopify-theme.git olavier.com
 
+# enter theme directory
 cd olavier.com
 
+# install theme Javascript dependencies
+yarn install
+
+# enter Vue widgets directory
+cd widgets
+
+# install widget Javascript dependencies
 yarn install
 ```
 
@@ -24,6 +33,14 @@ When running any `slate` commands, you can switch the environment configuration 
 Example:
 ```
 slate start -e staging
+```
+
+### Pull latest changes
+```
+# get theme changes
+git pull
+# get widget changes
+git submodule update --recursive
 ```
 
 ### Build and deploy with automatic file sync
