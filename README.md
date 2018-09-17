@@ -40,7 +40,7 @@ slate start -e staging
 # get theme changes
 git pull
 # get widget changes
-git submodule update --recursive
+git submodule update --remote --recursive --merge
 ```
 
 ### Build and deploy with automatic file sync
@@ -53,7 +53,13 @@ slate start
 slate watch
 ```
 
-### Build and push to remote
+### Build and push to Shopify
 ```
 slate deploy
+```
+
+### Push changes to remote
+```
+# the flag will ensure you didn't forget to commit any submodule changes
+git push origin branch-name --recurse-submodules=on-demand
 ```
