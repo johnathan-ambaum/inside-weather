@@ -205,6 +205,11 @@
         "label": "Font",
         "options": [
           {
+            "value": "Avalon",
+            "label": "Avalon",
+            "group": "Sans Serif"
+          },
+          {
             "value": "Google 'Abel' 400 sans",
             "label": "Abel",
             "group": "Sans Serif"
@@ -599,6 +604,11 @@
         "id": "type_base_family",
         "label": "Font",
         "options": [
+          {
+            "value": "Avalon",
+            "label": "Avalon",
+            "group": "Sans Serif"
+          },
           {
             "value": "Google 'Abel' 400 sans",
             "label": "Abel",
