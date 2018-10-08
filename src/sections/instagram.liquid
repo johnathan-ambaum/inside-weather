@@ -11,7 +11,8 @@
       </header>
     {% endif %}
 
-    <div class="instagram-feed-wrap">
+    <div class="instagram-feed-wrap instagram-feed-wrap--{{ section.settings.count }}">
+      <div class="instagram-feed-wrap__reflow-fix"></div>
       {% if section.settings.client_id != blank %}
         <div
           id="Instafeed-{{section.id}}"
@@ -22,7 +23,7 @@
       {% else %}
         <div class="grid grid--uniform grid--no-gutters">
           {% for i in (1..count) %}
-            <div class="grid__item medium-up--one-fifth">
+            <div class="grid__item small--one-half medium-up--one-fifth">
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             </div>
           {% endfor %}
@@ -43,7 +44,7 @@
       {
         "type": "text",
         "id": "title",
-        "label": "Title",
+        "label": "Heading",
         "default": "Find us on Instagram"
       },
       {

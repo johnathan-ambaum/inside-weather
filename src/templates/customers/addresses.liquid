@@ -18,7 +18,7 @@
 
     <div class="grid__item medium-up--two-thirds">
 
-      <div id="AddressNewForm" class="form-vertical hide">
+      <div id="AddressNewForm" class="form-vertical js-address-form hide">
         {% form 'customer_address', customer.new_address %}
 
           <h2 class="h3">{{ 'customer.addresses.add_new' | t }}</h2>
@@ -52,7 +52,11 @@
               <input type="text" id="AddressCityNew" class="input-full" name="address[city]" value="{{form.city}}" autocapitalize="words">
             </div>
 
-            <div class="grid__item medium-up--one-half">
+            <div
+              class="grid__item medium-up--one-half js-address-country"
+              data-country-id="AddressCountryNew"
+              data-province-container-id="AddressProvinceContainerNew"
+              data-province-id="AddressProvinceNew">
               <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
               <select id="AddressCountryNew" class="input-full" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
             </div>
@@ -100,7 +104,7 @@
           <button type="button" class="btn btn--secondary btn--small address-delete" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">{{ 'customer.addresses.delete' | t }}</button>
         </p>
 
-        <div id="EditAddress_{{ address.id }}" class="form-vertical hide">
+        <div id="EditAddress_{{ address.id }}" class="form-vertical js-address-form hide">
           {% form 'customer_address', address %}
 
             <hr class="hr--large" />
@@ -130,10 +134,16 @@
             <label for="AddressCity_{{form.id}}">{{ 'customer.addresses.city' | t }}</label>
             <input type="text" id="AddressCity_{{form.id}}" class="input-full" name="address[city]" value="{{form.city}}" autocapitalize="words">
 
-            <label for="AddressCountry_{{form.id}}">{{ 'customer.addresses.country' | t }}</label>
-            <select id="AddressCountry_{{form.id}}" class="input-full" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
+            <div
+              class="js-address-country"
+              data-country-id="AddressCountry_{{form.id}}"
+              data-province-container-id="AddressProvinceContainer_{{form.id}}"
+              data-province-id="AddressProvince_{{form.id}}">
+              <label for="AddressCountry_{{form.id}}">{{ 'customer.addresses.country' | t }}</label>
+              <select id="AddressCountry_{{form.id}}" class="input-full" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
+            </div>
 
-            <div id="AddressProvinceContainer_{{form.id}} hide">
+            <div id="AddressProvinceContainer_{{form.id}}" style="display: none;">
               <label for="AddressProvince_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
               <select id="AddressProvince_{{form.id}}" class="input-full" name="address[province]" data-default="{{form.province}}"></select>
             </div>

@@ -6,8 +6,7 @@
 	Try to edit page with the live editor.
 {% endcomment %}
 <!doctype html>
-<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<html class="no-js" lang="{{ shop.locale }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -28,34 +27,40 @@
 
   {%- include 'social-meta-tags' -%}
 
+  {% include 'font-face' %}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
-  {% include 'google-fonts' %}
 
   <script>
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 
     window.theme = window.theme || {};
     theme.strings = {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      stockLabel: {{ 'products.product.stock_label' | t: count: '[count]' | json }},
       cartSavings: {{ 'cart.general.savings_html' | t: savings: '[savings]' | json }},
-      cartEmpty: {{ 'cart.general.empty' | t | json }}
+      cartEmpty: {{ 'cart.general.empty' | t | json }},
+      cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }}
     };
     theme.settings = {
       cartType: {{ settings.cart_type | json }},
-      moneyFormat: {{ shop.money_format | json }}
+      moneyFormat: {{ shop.money_format | json }},
+      quickView: {{ settings.quick_shop_enable }},
+      themeVersion: "3.2.4"
     };
   </script>
 
   {{ content_for_header }}
   {% include 'oldIE-js' %}
 
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js' | script_tag }}
-
+  {{ '//code.jquery.com/jquery-3.1.0.min.js' | script_tag }}
+  <script>theme.jQuery = jQuery;</script>
 
   {% include 'defer-script' with 'vendor.js' %}
 
   {% if settings.enable_currencies %}
-    <!--[if (gt IE 9)|!(IE)]><!--><script src="/services/javascripts/currencies.js" defer="defer"></script><!--<![endif]-->
-    <!--[if lte IE 9]><script src="/services/javascripts/currencies.js"></script><![endif]-->
+    <script src="/services/javascripts/currencies.js" defer="defer"></script>
     {% include 'defer-script' with 'jquery.currencies.min.js' %}
   {% endif %}
 
@@ -67,9 +72,6 @@
 <!--Gem_Page_Header_Script-->
 {% include 'gem-app-header-scripts' %}
 <!--End_Gem_Page_Header_Script-->
-
-  {% include 'shogun-head' %}
-
 </head>
 
 <body>

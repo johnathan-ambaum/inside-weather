@@ -4,7 +4,7 @@
 
 {% if section.settings.divider %}<div class="section--divider">{% endif %}
 
-<div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
+<div id="CollectionSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="featured-collection">
   {% if section.settings.title != blank %}
     <div class="page-width">
       <div class="section-header">
@@ -79,8 +79,7 @@
 
             <div class="grid__item grid__item--view-all text-center {{ grid_item_width }} medium-up--hide">
               <a href="{{ collections[section.settings.home_featured_products].url }}" class="grid-product__see-all">
-                {{ 'collections.general.all_of_collection' | t }}<br>
-                {{ collection.products.size }} products
+                {{ 'collections.general.view_all_products_html' | t: count: collection.products_count }}
               </a>
             </div>
 
@@ -109,7 +108,7 @@
       {
         "type": "text",
         "id": "title",
-        "label": "Title",
+        "label": "Heading",
         "default": "Featured collection"
       },
       {

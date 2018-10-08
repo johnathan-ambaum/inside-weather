@@ -33,7 +33,7 @@
   {% endif %}
 
   <div id="app" class="page-width page-content">
-    <browse-widget collection="{{ collection.title | escape }}">
+    <browse-widget category="{{ collection.handle }}">
       {% include 'breadcrumbs' %}
 
       {% unless section.settings.collection_image_enable and collection.image %}

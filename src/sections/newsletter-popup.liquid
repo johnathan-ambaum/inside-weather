@@ -9,7 +9,7 @@
   data-delay-seconds="{{ section.settings.popup_seconds }}"
   data-test-mode="{% if section.settings.mode == 'testing' %}true{% else %}false{% endif %}">
   <div class="modal__inner">
-    <div class="modal__centered text-center">
+    <div class="modal__centered medium-up--text-center">
       <div class="modal__centered-content">
 
         <div class="newsletter">
@@ -18,9 +18,15 @@
           {% endif %}
 
           {% if section.settings.popup_image %}
-            <p>
-              {{ section.settings.popup_image | img_url: '580x', scale: 2 | img_tag: section.settings.popup_image.alt }}
-            </p>
+            <div class="image-wrap small--hide" style="height: 0; padding-bottom: {{ 100 | divided_by: section.settings.popup_image.aspect_ratio }}%;">
+              {%- assign img_url = section.settings.popup_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img class="lazyload lazypreload" role="presentation"
+                  data-src="{{ img_url }}"
+                  data-widths="[540, 720, 900, 1080]"
+                  data-aspectratio="{{ section.settings.popup_image.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ section.settings.popup_image.alt }}">
+            </div>
           {% endif %}
 
           {% if section.settings.popup_text != blank %}
@@ -31,7 +37,7 @@
 
           {% if section.settings.enable_newsletter %}
           <div class="popup-cta">
-            {% include 'newsletter-form', section_id: section.id %}
+            {% include 'newsletter-form', section_id: section.id, snippet_context: 'popup' %}
           </div>
           {% endif %}
 
@@ -87,7 +93,7 @@
         "type": "range",
         "id": "popup_seconds",
         "label": "Delay",
-        "info": "The delay is disabled in the theme editor so you can see it immediately",
+        "info": "Delay is disabled in theme editor for visibility",
         "default": 5,
         "min": 2,
         "max": 60,
@@ -112,7 +118,7 @@
       {
         "type": "text",
         "id": "popup_title",
-        "label": "Title",
+        "label": "Heading",
         "default": "Sign up and save"
       },
       {

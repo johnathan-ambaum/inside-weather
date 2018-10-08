@@ -1,5 +1,16 @@
-<ul class="site-nav site-navigation small--hide{% if compress == true %} site-nav--activate-compress{% endif %}" role="navigation" aria-label="Primary">
-  {% for link in main_menu.links %}
+{% unless limit %}
+  {%- assign limit = main_menu.links.size -%}
+{% endunless %}
+{% unless offset %}
+  {%- assign offset = 0 -%}
+{% endunless %}
+
+<ul
+  class="site-nav site-navigation medium-down--hide"
+  {% unless disable_aria %}
+    role="navigation" aria-label="Primary"
+  {% endunless %}>
+  {% for link in main_menu.links limit: limit offset: offset %}
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
     {% if link.links != blank %}
@@ -7,14 +18,14 @@
     {% endif %}
 
     <li
-      class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}"
+      class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless %}"
       {% if has_dropdown %}aria-haspopup="true"{% endif %}>
 
-      <a href="{{ link.url }}" class="site-nav__link">
+      <a href="{{ link.url }}" class="site-nav__link{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}">
         {{ link.title }}
-       <!-- {% if has_dropdown %}
-          {% include 'icon-plus' %} 
-        {% endif %} -->
+        {% if has_dropdown %}
+          {% include 'icon-chevron-down' %}
+        {% endif %}
       </a>
       {% if has_dropdown %}
         <ul class="site-nav__dropdown text-left">
@@ -28,9 +39,9 @@
             <li class="{% if childlink.active %}site-nav--active{% endif %}{% if has_sub_dropdown %} site-nav__deep-dropdown-trigger{% endif %}">
               <a href="{{ childlink.url }}" class="site-nav__dropdown-link site-nav__dropdown-link--second-level {% if has_sub_dropdown %} site-nav__dropdown-link--has-children{% endif %}">
                 {{ childlink.title | escape }}
-              <!--  {% if has_sub_dropdown %}
-                  {% include 'icon-plus' %}
-                {% endif %}-->
+                {% if has_sub_dropdown %}
+                  {% include 'icon-chevron-down' %}
+                {% endif %}
               </a>
               {% if has_sub_dropdown %}
                 <ul class="site-nav__deep-dropdown">

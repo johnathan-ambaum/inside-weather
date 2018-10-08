@@ -15,38 +15,86 @@
         {% if isEmpty %}
           {% for i in (1..5) %}
             {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-            <div class="callout-image">{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}</div>
+            {% if forloop.index == 1 %}
+              <div class="callout-image-centered">
+            {% endif %}
+              <div class="callout-image">
+                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {% if forloop.last %}
+              </div>
+            {% endif %}
           {% endfor %}
         {% else %}
           {% for product in collection.products limit: 5 %}
-            <img src="{{ product | img_url: '300x' }}" alt="{{ product.title }}" class="callout-image">
+            {% case forloop.index %}
+              {% when 1 %}
+                {%- assign callout_image_size_small = '280x' -%}
+                {%- assign callout_image_size_medium = '360x' -%}
+                {%- assign callout_image_size_large = '560x' -%}
+              {% when 2 %}
+                {%- assign callout_image_size_small = '180x' -%}
+                {%- assign callout_image_size_medium = '234x' -%}
+                {%- assign callout_image_size_large = '360x' -%}
+              {% when 3 %}
+                {%- assign callout_image_size_small = '160x' -%}
+                {%- assign callout_image_size_medium = '208x' -%}
+                {%- assign callout_image_size_large = '320x' -%}
+              {% when 4 %}
+                {%- assign callout_image_size_small = '200x' -%}
+                {%- assign callout_image_size_medium = '260x' -%}
+                {%- assign callout_image_size_large = '400x' -%}
+              {% when 5 %}
+                {%- assign callout_image_size_small = '100x' -%}
+                {%- assign callout_image_size_medium = '130x' -%}
+                {%- assign callout_image_size_large = '200x' -%}
+            {% endcase %}
+
+            {% if forloop.index == 1 %}
+              <div class="callout-image-centered">
+            {% endif %}
+
+              <img
+                class="callout-image lazyload"
+                data-srcset="
+                  {{ product | img_url: callout_image_size_small }} {{ callout_image_size_small | remove: 'x' | append: 'w' }},
+                  {{ product | img_url: callout_image_size_medium }} {{ callout_image_size_medium | remove: 'x'  | append: 'w' }},
+                  {{ product | img_url: callout_image_size_large }} {{ callout_image_size_large | remove: 'x'  | append: 'w' }}"
+                data-sizes="auto"
+                alt="{{ product.title | escape }}">
+
+            {% if forloop.last %}
+              </div>
+            {% endif %}
           {% endfor %}
         {% endif %}
       </div>
     </div>
 
     <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }} feature-row__callout-text larger-text">
-      {% if section.settings.subtitle %}
-        <p class="subtitle">{{ section.settings.subtitle }}</p>
-      {% endif %}
-      {% if section.settings.title != blank %}
-        <h2 class="h3">{{ section.settings.title }}</h3>
-      {% endif %}
-      <div class="rte">
-        {% if section.settings.text != blank %}
-          <p>{{ section.settings.text }}</p>
+      <div class="feature-row__content">
+        {% if section.settings.subtitle %}
+          <p class="subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h2 class="h3">{{ section.settings.title }}</h2>
+        {% endif %}
+        <div class="rte">
+          {% if section.settings.text != blank %}
+            <p>{{ section.settings.text }}</p>
+          {% endif %}
+        </div>
+        {% if section.settings.cta_text1 != blank %}
+          <a href="{{ section.settings.cta_link1 }}" class="btn">
+            {{ section.settings.cta_text1 }}
+          </a>
+        {% endif %}
+        {% if section.settings.cta_text2 != blank %}
+          <a href="{{ section.settings.cta_link2 }}" class="btn">
+            {{ section.settings.cta_text2 }}
+          </a>
         {% endif %}
       </div>
-      {% if section.settings.cta_text1 != blank %}
-        <a href="{{ section.settings.cta_link1 }}" class="btn">
-          {{ section.settings.cta_text1 }}
-        </a>
-      {% endif %}
-      {% if section.settings.cta_text2 != blank %}
-        <a href="{{ section.settings.cta_link2 }}" class="btn">
-          {{ section.settings.cta_text2 }}
-        </a>
-      {% endif %}
     </div>
 
   </div>
@@ -68,13 +116,13 @@
       {
         "type": "text",
         "id": "subtitle",
-        "label": "Subtitle",
+        "label": "Subheading",
         "default": "Brand new"
       },
       {
         "type": "text",
         "id": "title",
-        "label": "Title",
+        "label": "Heading",
         "default": "Collection callout"
       },
       {

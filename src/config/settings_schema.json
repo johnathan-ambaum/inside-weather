@@ -3,9 +3,9 @@
     "name": "theme_info",
     "theme_name": "Motion",
     "theme_author": "Archetype Themes",
-    "theme_version": "2.2.1",
-    "theme_documentation_url": "https://archetypethemes.co/blogs/motion",
-    "theme_support_url": "https://archetypethemes.co/blogs/motion"
+    "theme_version": "3.2.4",
+    "theme_documentation_url": "https:\/\/archetypethemes.co\/blogs\/motion",
+    "theme_support_url": "https:\/\/archetypethemes.co\/blogs\/motion"
   },
   {
     "name": "Colors",
@@ -200,331 +200,16 @@
         "content": "Headings"
       },
       {
-        "type": "select",
-        "id": "type_header_family",
+        "type": "font_picker",
+        "id": "type_header_font_family",
         "label": "Font",
-        "options": [
-          {
-            "value": "Avalon",
-            "label": "Avalon",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Abel' 400 sans",
-            "label": "Abel",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Karla' 700 sans",
-            "label": "Karla - Bold",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Lato' 900 sans",
-            "label": "Lato - Black",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Miriam Libre' 700 sans",
-            "label": "Miriam Libre - Bold",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Montserrat' 700 sans",
-            "label": "Montserrat - Bold",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Oswald' 500 sans",
-            "label": "Oswald - Medium",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Poppins' 300 sans",
-            "label": "Poppins - Light",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Poppins' 700 sans",
-            "label": "Poppins - Bold",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Quicksand' 500 sans",
-            "label": "Quicksand - Medium",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Raleway' 300 sans",
-            "label": "Raleway - Light",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Raleway' 800 sans",
-            "label": "Raleway - Extra-bold",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Raleway' 800i sans",
-            "label": "Raleway - Extra-bold italic",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Rubik' 500 sans",
-            "label": "Rubik - Medium",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Source Sans Pro' 300 sans",
-            "label": "Source Sans Pro - Light",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Syncopate' 700 sans",
-            "label": "Syncopate - Bold",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Varela Round' 400 sans",
-            "label": "Varela Round",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Abhaya Libre' 700 serif",
-            "label": "Abhaya Libre - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Abril Fatface' 400 serif",
-            "label": "Abril Fatface",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Cardo' 700 serif",
-            "label": "Cardo - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Crimson Text' 400 serif",
-            "label": "Crimson Text",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Droid Serif' 400 serif",
-            "label": "Droid Serif",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Droid Serif' 700 serif",
-            "label": "Droid Serif - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Gentium Basic' 400 serif",
-            "label": "Gentium Basic",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Merriweather' 300 serif",
-            "label": "Merriweather - Light",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Merriweather' 900 serif",
-            "label": "Merriweather - Black",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Old Standard TT' 400 serif",
-            "label": "Old Standard TT",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Playfair Display' 400 serif",
-            "label": "Playfair Display",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Playfair Display' 700 serif",
-            "label": "Playfair Display - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Source Serif Pro' 700 serif",
-            "label": "Source Serif Pro - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Suranna' 400 serif",
-            "label": "Suranna",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Prata' 400 serif",
-            "label": "Prata",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Taviraj' 500 serif",
-            "label": "Taviraj - Medium",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Unna' 700 serif",
-            "label": "Unna - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Unna' 700i serif",
-            "label": "Unna - Bold italic",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Vidaloka' 400 serif",
-            "label": "Vidaloka",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Vollkorn' 700 serif",
-            "label": "Vollkorn - Bold",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Amatica SC' 700 sans",
-            "label": "Amatica SC",
-            "group": "Handwritten"
-          },
-          {
-            "value": "Google 'Permanent Marker' 400 sans",
-            "label": "Permanent Marker",
-            "group": "Handwritten"
-          },
-          {
-            "value": "Google 'Rock Salt' 400 sans",
-            "label": "Rock Salt",
-            "group": "Handwritten"
-          },
-          {
-            "value": "Google 'Walter Turncoat' 400 sans",
-            "label": "Walter Turncoat",
-            "group": "Handwritten"
-          },
-          {
-            "value": "Google 'Aldrich' 400 sans",
-            "label": "Aldrich",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Arvo' 400 sans",
-            "label": "Arvo",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Arvo' 700 sans",
-            "label": "Arvo - Bold",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Berkshire Swash' 400 sans",
-            "label": "Berkshire Swash",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Bungee' 400 sans",
-            "label": "Bungee",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Comfortaa' 700 sans",
-            "label": "Comfortaa - Bold",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Fugaz One' 400 sans",
-            "label": "Fugaz One",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Graduate' 400 sans",
-            "label": "Graduate",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Josefin Slab' 700 sans",
-            "label": "Josefin Slab - Bold",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Inconsolata' 400 sans",
-            "label": "Inconsolata",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Inknut Antiqua' 300 sans",
-            "label": "Inknut Antiqua - Light",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Lalezar' 400 sans",
-            "label": "Lalezar",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Limelight' 400 sans",
-            "label": "Limelight",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Rubik' 900 sans",
-            "label": "Rubik - Black",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Sigmar One' 400 sans",
-            "label": "Sigmar One",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Space Mono' 700 sans",
-            "label": "Space Mono",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Special Elite' 400 sans",
-            "label": "Special Elite",
-            "group": "Decorative"
-          },
-          {
-            "value": "'Arial'",
-            "label": "Arial",
-            "group": "Fast"
-          },
-          {
-            "value": "'Courier New'",
-            "label": "Courier New",
-            "group": "Fast"
-          },
-          {
-            "value": "'Georgia'",
-            "label": "Georgia",
-            "group": "Fast"
-          },
-          {
-            "value": "'Helvetica Neue'",
-            "label": "Helvetica Neue",
-            "group": "Fast"
-          },
-          {
-            "value": "'Times New Roman'",
-            "label": "Times New Roman",
-            "group": "Fast"
-          }
-        ]
+        "default": "poppins_n7"
       },
       {
         "type": "select",
         "id": "type_header_spacing",
         "label": "Letter spacing",
+        "default": "25",
         "options": [
           {
             "value": "-75",
@@ -596,155 +281,25 @@
         "label": "Capitalize labels, footer titles"
       },
       {
+        "type": "checkbox",
+        "id": "type_headers_align_text",
+        "label": "Center page and section titles"
+      },
+      {
         "type": "header",
         "content": "Body text"
       },
       {
-        "type": "select",
-        "id": "type_base_family",
+        "type": "font_picker",
+        "id": "type_base_font_family",
         "label": "Font",
-        "options": [
-          {
-            "value": "Avalon",
-            "label": "Avalon",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Abel' 400 sans",
-            "label": "Abel",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Karla' 400 sans",
-            "label": "Karla",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Miriam Libre' 400 sans",
-            "label": "Miriam Libre",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Montserrat' 400 sans",
-            "label": "Montserrat",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Open Sans' 400 sans",
-            "label": "Open Sans",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Open Sans' 300 sans",
-            "label": "Open Sans - Light",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Poppins' 500 sans",
-            "label": "Poppins - Medium",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Raleway' 400 sans",
-            "label": "Raleway",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Rubik' 400 sans",
-            "label": "Rubik",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Source Sans Pro' 400 sans",
-            "label": "Source Sans Pro",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Source Sans Pro' 300 sans",
-            "label": "Source Sans Pro - Light",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Work Sans' 400 sans",
-            "label": "Work Sans",
-            "group": "Sans Serif"
-          },
-          {
-            "value": "Google 'Arvo' 400 sans",
-            "label": "Arvo",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Cardo' 400 sans",
-            "label": "Cardo",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Crimson Text' 400 sans",
-            "label": "Crimson Text",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Gentium Basic' 400 sans",
-            "label": "Gentium Basic",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Merriweather' 300 sans",
-            "label": "Merriweather - Light",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Source Serif Pro' 400 sans",
-            "label": "Source Serif Pro",
-            "group": "Serif"
-          },
-          {
-            "value": "Google 'Inconsolata' 400 sans",
-            "label": "Inconsolata",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Inconsolata' 700 sans",
-            "label": "Inconsolata - Bold",
-            "group": "Decorative"
-          },
-          {
-            "value": "Google 'Space Mono' 400 sans",
-            "label": "Space Mono",
-            "group": "Decorative"
-          },
-          {
-            "value": "'Arial'",
-            "label": "Arial",
-            "group": "Fast"
-          },
-          {
-            "value": "'Courier New'",
-            "label": "Courier New",
-            "group": "Fast"
-          },
-          {
-            "value": "'Georgia'",
-            "label": "Georgia",
-            "group": "Fast"
-          },
-          {
-            "value": "'Helvetica Neue'",
-            "label": "Helvetica Neue",
-            "group": "Fast"
-          },
-          {
-            "value": "'Times New Roman'",
-            "label": "Times New Roman",
-            "group": "Fast"
-          }
-        ]
+        "default": "poppins_n5"
       },
       {
         "type": "select",
         "id": "type_base_spacing",
         "label": "Letter spacing",
+        "default": "50",
         "options": [
           {
             "value": "-75",
@@ -1044,14 +599,31 @@
       },
       {
         "type": "checkbox",
+        "id": "enable_payment_button",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "inventory_enable",
+        "label": "Show inventory notice"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_save_amount",
+        "label": "Show saved amount",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "product_zoom_enable",
         "label": "Enable image zoom"
       },
       {
         "type": "checkbox",
         "id": "quick_shop_enable",
-        "label": "Enable quick shop feature",
-        "default": true
+        "label": "Enable quick shop feature"
       },
       {
         "type": "text",
@@ -1066,12 +638,36 @@
         "default": false
       },
       {
+        "type": "select",
+        "id": "product_grid_image_size",
+        "label": "Grid image size",
+        "default": "natural",
+        "options": [
+          {
+            "value": "natural",
+            "label": "Natural"
+          },
+          {
+            "value": "square",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "landscape",
+            "label": "Landscape (4:3)"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait (2:3)"
+          }
+        ]
+      },
+      {
         "type": "header",
         "content": "Color swatches"
       },
       {
         "type": "paragraph",
-        "content": "Requires variant picker style above to be set to 'Buttons'. [Learn how to set up swatches](https://archetypethemes.co/blogs/motion/how-do-i-set-up-color-swatches)"
+        "content": "Requires variant picker style above to be set to 'Buttons'. [Learn how to set up swatches](https:\/\/archetypethemes.co\/blogs\/motion\/how-do-i-set-up-color-swatches)"
       },
       {
         "type": "checkbox",
@@ -1089,7 +685,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Motion supports .MP4, YouTube and Vimeo product videos through a product image's 'alt' tag. Not all features supported by Vimeo. [Learn more](https://archetypethemes.co/blogs/motion/how-do-i-add-product-videos)"
+        "content": "Motion supports .MP4, YouTube and Vimeo product videos through a product image's 'alt' tag. Not all features supported by Vimeo. [Learn more](https:\/\/archetypethemes.co\/blogs\/motion\/how-do-i-add-product-videos)"
       },
       {
         "type": "text",
@@ -1125,7 +721,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Attach additional content to every product page. Appears as separate expandable boxes."
+        "content": "Add expandable content boxes to all product pages"
       },
       {
         "type": "page",
@@ -1141,6 +737,10 @@
         "type": "page",
         "label": "Additional content 3",
         "id": "product_content_3"
+      },
+      {
+        "type": "header",
+        "content": "Contact form"
       },
       {
         "type": "checkbox",
@@ -1160,7 +760,7 @@
       },
       {
         "type": "paragraph",
-        "content": "After you've installed the Shopify [Product Reviews app](https://apps.shopify.com/product-reviews), skip the HTML installation steps and enable the setting below."
+        "content": "Add reviews by enabling the setting below and installing the [Shopify Product Reviews app](https:\/\/apps.shopify.com\/product-reviews)."
       },
       {
         "type": "checkbox",
@@ -1179,6 +779,7 @@
       {
         "type": "select",
         "id": "cart_type",
+        "label": "Cart type",
         "default": "drawer",
         "options": [
           {
@@ -1189,8 +790,13 @@
             "value": "drawer",
             "label": "Drawer"
           }
-        ],
-        "label": "Cart style"
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_additional_buttons",
+        "label": "Enable additional checkout buttons",
+        "info": "The buttons can appear on either your cart page or your checkout page, but not both."
       },
       {
         "type": "checkbox",
@@ -1198,18 +804,27 @@
         "label": "Enable order notes"
       },
       {
+        "type": "checkbox",
+        "id": "cart_terms_conditions_enable",
+        "label": "Enable terms and conditions checkbox"
+      },
+      {
+        "type": "url",
+        "id": "cart_terms_conditions_link",
+        "label": "Terms and conditions page"
+      },
+      {
         "type": "header",
         "content": "Currency converter"
       },
       {
         "type": "paragraph",
-        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https://help.shopify.com/manual/using-themes/troubleshooting/help-script-find-money-formats)."
+        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/help-script-find-money-formats)."
       },
       {
         "type": "checkbox",
         "id": "enable_currencies",
         "label": "Enable currency conversion",
-        "info": "Even though prices are displayed in different currencies, orders will still be processed in your store's currency.",
         "default": false
       },
       {
@@ -1233,7 +848,7 @@
         "id": "supported_currencies",
         "label": "Supported currencies",
         "default": "USD CAD INR GBP AUD EUR JPY",
-        "info": "Use the country's ISO [currency code](http://www.xe.com/iso4217.php). Separate your currency codes with a space."
+        "info": "Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
       },
       {
         "type": "text",
@@ -1255,55 +870,55 @@
         "type": "text",
         "id": "social_facebook_link",
         "label": "Facebook",
-        "info": "https://www.facebook.com/shopify"
+        "info": "https:\/\/www.facebook.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter",
-        "info": "https://twitter.com/shopify"
+        "info": "https:\/\/twitter.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest",
-        "info": "https://www.pinterest.com/shopify"
+        "info": "https:\/\/www.pinterest.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
         "label": "Instagram",
-        "info": "https://instagram.com/shopify"
+        "info": "https:\/\/instagram.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_snapchat_link",
         "label": "Snapchat",
-        "info": "https://www.snapchat.com/add/shopify"
+        "info": "https:\/\/www.snapchat.com\/add\/shopify"
       },
       {
         "type": "text",
         "id": "social_tumblr_link",
         "label": "Tumblr",
-        "info": "http://shopify.tumblr.com"
+        "info": "http:\/\/shopify.tumblr.com"
       },
       {
         "type": "text",
         "id": "social_linkedin_link",
         "label": "LinkedIn",
-        "info": "https://www.linkedin.com/in/shopify"
+        "info": "https:\/\/www.linkedin.com\/in\/shopify"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
         "label": "YouTube",
-        "info": "https://www.youtube.com/user/shopify"
+        "info": "https:\/\/www.youtube.com\/user\/shopify"
       },
       {
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo",
-        "info": "https://vimeo.com/shopify"
+        "info": "https:\/\/vimeo.com\/shopify"
       },
       {
         "type": "header",
@@ -1353,41 +968,6 @@
         "type": "checkbox",
         "id": "show_breadcrumbs",
         "label": "Show breadcrumbs"
-      }
-    ]
-  },
-  {
-    "name": "Product Filter & Search",
-    "settings": [
-      {
-        "type": "image_picker",
-        "id": "bc_filter_logo",
-        "label": "Filter Logo image"
-      },
-      {
-        "type": "image_picker",
-        "id": "bc_filter_info_image",
-        "label": "Filter Information Image"
-      },
-      {
-        "type": "image_picker",
-        "id": "bc_filter_info_image_mobile",
-        "label": "Filter Information Image On Mobile"
-      },
-      {
-        "type": "textarea",
-        "id": "bc_filter_medium_swatch_list",
-        "label": "Filter Medium (70x70) Swatch List"
-      },
-      {
-        "type": "textarea",
-        "id": "bc_filter_large_swatch_list",
-        "label": "Filter Large (100x100) Swatch List"
-      },
-      {
-        "type": "textarea",
-        "id": "bc_filter_custom_swatch_list",
-        "label": "Filter Custom (210x70) Swatch List"
       }
     ]
   }

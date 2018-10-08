@@ -2,23 +2,41 @@
   {% if block.type == 'logo' %}
 
     {% assign has_logo = true %}
-    {%- assign header_logo_size = block.settings.desktop_logo_height | prepend: 'x' -%}
-    {%- assign header_logo_size_mobile = block.settings.mobile_logo_height | prepend: 'x' -%}
+    {%- assign header_logo_size = block.settings.desktop_logo_width | append: 'x' -%}
+    {%- assign header_logo_size_mobile = block.settings.mobile_logo_width | append: 'x' -%}
 
     <style>
+    .header-item--logo,
+    .header-layout--left-center .header-item--logo,
+    .header-layout--left-center .header-item--icons {
+      -webkit-box-flex: 0 1 {{ block.settings.mobile_logo_width }}px;
+      -ms-flex: 0 1 {{ block.settings.mobile_logo_width }}px;
+      flex: 0 1 {{ block.settings.mobile_logo_width }}px;
+    }
+
+    @media only screen and (min-width: 590px) {
+      .header-item--logo,
+      .header-layout--left-center .header-item--logo,
+      .header-layout--left-center .header-item--icons {
+        -webkit-box-flex: 0 0 {{ block.settings.desktop_logo_width }}px;
+        -ms-flex: 0 0 {{ block.settings.desktop_logo_width }}px;
+        flex: 0 0 {{ block.settings.desktop_logo_width }}px;
+      }
+    }
+
     .site-header__logo a {
-      height: {{ block.settings.mobile_logo_height }}px;
+      max-width: {{ block.settings.mobile_logo_width }}px;
     }
     .is-light .site-header__logo .logo--inverted {
-      height: {{ block.settings.mobile_logo_height }}px;
+      max-width: {{ block.settings.mobile_logo_width }}px;
     }
     @media only screen and (min-width: 590px) {
       .site-header__logo a {
-        height: {{ block.settings.desktop_logo_height }}px;
+        max-width: {{ block.settings.desktop_logo_width }}px;
       }
 
       .is-light .site-header__logo .logo--inverted {
-        height: {{ block.settings.desktop_logo_height }}px;
+        max-width: {{ block.settings.desktop_logo_width }}px;
       }
     }
     </style>
@@ -32,7 +50,10 @@
       {% comment %}
         .logo--has-inverted is only applied to the default logo if the inverted logo exists. That way it'll only be hidden on the slider when it has a backup.
       {% endcomment %}
-      <a href="/" itemprop="url" class="site-header__logo-link{% if block.settings.logo-inverted %} logo--has-inverted{% endif %}">
+      <a
+        href="/"
+        itemprop="url"
+        class="site-header__logo-link{% if block.settings.logo-inverted %} logo--has-inverted{% endif %}">
         <img
           class="small--hide"
           src="{{ block.settings.logo | img_url: header_logo_size }}"
@@ -46,7 +67,10 @@
           alt="{{ block.settings.logo.alt | default: shop.name }}">
       </a>
       {% if block.settings.logo-inverted %}
-        <a href="/" itemprop="url" class="site-header__logo-link logo--inverted">
+        <a
+          href="/"
+          itemprop="url"
+          class="site-header__logo-link logo--inverted">
           <img
             class="small--hide"
             src="{{ block.settings.logo-inverted | img_url: header_logo_size }}"

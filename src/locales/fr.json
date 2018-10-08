@@ -29,6 +29,10 @@
       "password_link": "Entrer avec un mot de passe",
       "powered_by_shopify_html": "Cette boutique sera propulsée par {{ shopify }}"
     },
+    "breadcrumbs": {
+      "home": "Accueil",
+      "home_link_title": "Retour à la page d'accueil"
+    },
     "social": {
       "share_on_facebook": "Partager",
       "share_on_twitter": "Tweeter",
@@ -49,7 +53,11 @@
       "results_for_html": "Votre recherche pour \"{{ terms }}\" a généré les résultats suivants:",
       "title": "Rechercher",
       "placeholder": "Rechercher dans la boutique",
-      "submit": "Recherche"
+      "submit": "Recherche",
+      "result_count": {
+        "one": "{{ count }} résultat",
+        "other": "{{ count }} résultats"
+      }
     },
     "drawers": {
       "navigation": "Navigation",
@@ -104,7 +112,10 @@
       "savings_html": "Vous économisez {{ savings }}",
       "reduce_quantity": "Réduire la quantité de l'article de un",
       "increase_quantity": "Augmenter la quantité de l'article de un",
-      "orders_processed_in_currency_html": "Les commandes seront facturées en {{ currency }}."
+      "orders_processed_in_currency_html": "Les commandes seront facturées en {{ currency }}.",
+      "terms": "Je suis d'accord avec les termes et conditions",
+      "terms_html": "Je suis d'accord avec les <a href='{{ url }}' target='_blank'>termes et conditions<\/a>",
+      "terms_confirm": "Vous devez accepter les termes et conditions de vente pour vérifier"
     },
     "label": {
       "quantity": "Quantité",
@@ -115,13 +126,12 @@
     "general": {
       "catalog_title": "Catalogue",
       "all_of_collection": "Tout",
+      "view_all_products_html": "Voir tous les<br>{{ count }} produits",
       "see_more": "Afficher plus",
       "see_less": "Voir moins",
       "no_matches": "Aucun produit ne correspond à votre recherche."
     },
     "sorting": {
-      "relevant": "Relevant",
-      "sale_descending": "% Off",
       "title": "Appliquer",
       "featured": "En vedette",
       "best_selling": "Meilleurs vendeurs",
@@ -282,10 +292,12 @@
       "related_products": "Produits connexes"
     },
     "product": {
+      "stock_label": "{{ count }} en stock",
       "sold_out": "Épuisé",
       "unavailable": "Non disponible",
       "quantity": "Quantité",
-      "add_to_cart": "Ajouter au panier"
+      "add_to_cart": "Ajouter au panier",
+      "preorder": "Pré-commander"
     }
   },
   "gift_cards": {
@@ -303,36 +315,5 @@
   },
   "date_formats": {
     "month_day_year": "%d %B, %Y"
-  },
-  "product_filter_search": {
-    "refine": "Refine By",
-    "refine_mobile": "Refine By",
-    "refine_mobile_collapse": "Hide Filter",
-    "clear": "Clear",
-    "clear_all": "Clear All",
-    "apply": "Apply",
-    "sale": "Sale",
-    "sold_out": "Sold Out",
-    "from": "from",
-    "breadcrumb_home": "Home",
-    "load_more": "Load more",
-    "show_limit": "Show",
-    "search_general_title": "Search",
-    "search_result_header": "Search Results for \"{{ terms }}\"",
-    "search_result_empty": "Your search for \"{{ terms }}\" didn't match any results",
-    "search_result_number": "Showing {{ count }} results for \"{{ terms }}\"",
-    "suggestion_popular_header": "Popular Suggestions",
-    "suggestion_product_header": "Products",
-    "suggestion_did_you_mean_header": "Did you mean",
-    "suggestion_view_all": "View all results",
-    "error_no_filter_result": "Sorry, no products matched your selection",
-    "error_no_search_result": "Sorry, no products matched the keyword",
-    "error_no_products": "No products found in this collection"
-  },
-  "socialshopwave": {
-    "add_to_cart": "Add To Cart",
-    "adding_to_cart": "Adding...",
-    "sold_out": "Sold Out",
-    "description": "Description"
   }
 }

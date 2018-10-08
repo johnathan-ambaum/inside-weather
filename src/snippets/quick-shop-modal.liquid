@@ -1,13 +1,12 @@
-<div id="QuickShopModal-{{ product.id }}" class="modal modal--square" data-product-id="{{ product.id }}">
+<div id="QuickShopModal-{{ product.id }}" class="modal modal--square modal--quick-shop" data-product-id="{{ product.id }}">
   <div class="modal__inner">
     <div class="modal__centered">
       <div class="modal__centered-content">
-        {% include 'product-template-for-modal',
+        {% include 'product-template',
           image_container_width: 'medium',
           section_id: product.id,
           social: false,
-          isModal: true,
-        
+          isModal: true
         %}
       </div>
 

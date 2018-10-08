@@ -1,10 +1,9 @@
-{% include 'shogun-products', content: page %}
 <div class="page-width page-content">
 
   {% include 'breadcrumbs' %}
 
   <div class="grid">
-    <div class="grid__item widescreen--three-quarters">
+    <div class="grid__item medium-up--three-quarters medium-up--push-one-eighth">
 
       <header class="section-header">
         <h1 class="section-header__title">{{ page.title }}</h1>
@@ -36,7 +35,7 @@
               <input type="email" id="ContactFormEmail" class="input-full" name="contact[email]" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
             </div>
           </div>
- 
+
           <!--
           <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
           <input type="tel" id="ContactFormPhone" class="input-full" name="contact[phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
@@ -54,4 +53,3 @@
   </div>
 
 </div>
-

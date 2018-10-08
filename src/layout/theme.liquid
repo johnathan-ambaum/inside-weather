@@ -1,6 +1,5 @@
 <!doctype html>
-<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<html class="no-js" lang="{{ shop.locale }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -9,7 +8,7 @@
   <link rel="canonical" href="{{ canonical_url }}">
 
   {%- if settings.favicon -%}
-  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
   {%- endif -%}
 
   {%- include 'seo-title' -%}
@@ -21,75 +20,68 @@
 
   {%- include 'social-meta-tags' -%}
 
-
+  {% include 'font-face' %}
   {% include 'font-definitions' %}
   <link href="https://fonts.googleapis.com/css?Roboto:400,400i,700,700i" rel="stylesheet">
-
-
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
-  {% include 'google-fonts' %}
+
 
   <script>
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 
     window.theme = window.theme || {};
     theme.strings = {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      stockLabel: {{ 'products.product.stock_label' | t: count: '[count]' | json }},
       cartSavings: {{ 'cart.general.savings_html' | t: savings: '[savings]' | json }},
-      cartEmpty: {{ 'cart.general.empty' | t | json }}
+      cartEmpty: {{ 'cart.general.empty' | t | json }},
+      cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }}
     };
     theme.settings = {
       cartType: {{ settings.cart_type | json }},
-      moneyFormat: {{ shop.money_format | json }}
+      moneyFormat: {{ shop.money_format | json }},
+      quickView: {{ settings.quick_shop_enable }},
+      themeVersion: "3.2.4"
     };
   </script>
 
-  {% include 'meteor-menu', load: 'head' %}
   {{ content_for_header }}
   {% include 'oldIE-js' %}
 
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js' | script_tag }}
-
+  {{ '//code.jquery.com/jquery-3.1.0.min.js' | script_tag }}
+  <script>theme.jQuery = jQuery;</script>
 
   {% include 'defer-script' with 'vendor.js' %}
 
   {% if settings.enable_currencies %}
-  <!--[if (gt IE 9)|!(IE)]><!--><script src="/services/javascripts/currencies.js" defer="defer"></script><!--<![endif]-->
-  <!--[if lte IE 9]><script src="/services/javascripts/currencies.js"></script><![endif]-->
-  {% include 'defer-script' with 'jquery.currencies.min.js' %}
+    <script src="/services/javascripts/currencies.js" defer="defer"></script>
+    {% include 'defer-script' with 'jquery.currencies.min.js' %}
   {% endif %}
 
   {% include 'defer-script' with 'theme.js' %}
 
   {%- if template contains 'customers' -%}
-  {% include 'defer-shopify-script' with 'shopify_common.js' %}
+    {% include 'defer-shopify-script' with 'shopify_common.js' %}
   {%- endif -%}
-  <!--Gem_Page_Header_Script-->
-  {% include 'gem-app-header-scripts' %}
-  <!--End_Gem_Page_Header_Script-->
+<!--Gem_Page_Header_Script-->
+{% include 'gem-app-header-scripts' %}
+<!--End_Gem_Page_Header_Script-->
 
-  {% include 'shogun-head' %}
-
-  <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' -%}
-    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
-    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
-  {%- endif -%}
-  <!-- end browse and product customizer widgets -->
-
-  <script type="text/javascript" async="" src="https://arp.apps1.exto.io/static/js/owl.carousel.min.js?shop=equine-riders.myshopify.com"></script>
+<!-- Browse and product customizer widgets -->
+{%- if template == 'product' or template == 'collection' -%}
+  <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+  <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+{%- endif -%}
+<!-- end browse and product customizer widgets -->
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
-{% capture the_snippet_content %}{% include 'socialshopwave-helper' %}{% endcapture %}
-            {% unless the_snippet_content contains 'Liquid error' %}
-              {{ the_snippet_content }}
-            {% endunless %}
 
   {% if settings.animate_page_transitions %}
-  <script type="text/javascript">
-    window.setTimeout(function() { document.body.className += " loaded"; }, 25);
-  </script>
+    <script type="text/javascript">window.setTimeout(function() { document.body.className += " loaded"; }, 25);</script>
   {% endif %}
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
@@ -97,7 +89,7 @@
   <div id="PageContainer" class="page-container">
     <div class="transition-body">
 
-      {% section 'header' %}
+    {% section 'header' %}
 
       <main class="main-content" id="MainContent">
         {{ content_for_layout }}
@@ -111,32 +103,26 @@
   {% section 'newsletter-popup' %}
 
   {% if settings.cart_type == 'drawer' %}
-  {% include 'ajax-cart-template' %}
+    {% include 'ajax-cart-template' %}
   {% endif %}
 
   {% if settings.enable_currencies %}
-  <span
-        id="CurrencyData"
-        class="hide"
-        data-shop-currency="{{ shop.currency }}"
-        data-default-currency="{{ settings.default_currency | default: shop.currency }}"
-        data-format="{{ settings.currency_format | default: 'money_with_currency_format' }}"
-        data-money-format="{{ shop.money_format | strip_html }}"
-        data-money-currency-format="{{ shop.money_with_currency_format | strip_html }}">
-  </span>
+    <span
+      id="CurrencyData"
+      class="hide"
+      data-shop-currency="{{ shop.currency }}"
+      data-default-currency="{{ settings.default_currency | default: shop.currency }}"
+      data-format="{{ settings.currency_format | default: 'money_with_currency_format' }}"
+      data-money-format="{{ shop.money_format | strip_html }}"
+      data-money-currency-format="{{ shop.money_with_currency_format | strip_html }}">
+    </span>
   {% endif %}
 
   {% include 'qty-selector-template' %}
   {% include 'video-modal' %}
-
-  {% include 'swymSnippet' %}
-
-  <!--Gem_Page_Footer_Script-->
-  {% include 'gem-app-footer-scripts' %}
-  <!--End_Gem_Page_Footer_Script-->
-  {% include 'instagram-shop' %}
-
-  {% include 'meteor-menu', load: 'footer' %}
-  </body>
-
+  {% include 'photoswipe-template' %}
+<!--Gem_Page_Footer_Script-->
+{% include 'gem-app-footer-scripts' %}
+<!--End_Gem_Page_Footer_Script-->
+</body>
 </html>

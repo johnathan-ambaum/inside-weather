@@ -14,7 +14,7 @@
       <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
     {% endif %}
     {% if section.settings.video_url.type == "vimeo" %}
-      <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?color={{ settings.color_secondary | remove: "#" }}&byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+      <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?color={{ settings.color_button | remove: "#" }}&byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
     {% endif %}
   {% endif %}
   </div>
@@ -31,12 +31,12 @@
       {
         "type": "text",
         "id": "title",
-        "label": "Title"
+        "label": "Heading"
       },
       {
         "type": "video_url",
         "id": "video_url",
-        "label": "YouTube or Vimeo link",
+        "label": "Video link",
         "accept": ["youtube", "vimeo"]
       },
       {

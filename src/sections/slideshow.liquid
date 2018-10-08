@@ -26,83 +26,148 @@
         </button>
       {% endif %}
 
-      {% if section.blocks[0].settings.image != blank %}
-        {% assign first_image = section.blocks[0].settings.image | img_url: '1400x' %}
-      {% else %}
-        {% assign first_image = '' %}
+      {%- assign natural_height = false -%}
+      {% if section.settings.section_height == 'natural' %}
+        {% comment %}
+          Get first image's aspect ratio
+        {% endcomment %}
+        {% for block in section.blocks limit: 1 %}
+          {% if block.settings.image != blank %}
+            {%- assign natural_height = true -%}
+            {%- capture natural_height_ratio -%}{{ 100 | divided_by: block.settings.image.aspect_ratio }}%{% endcapture %}
+          {% endif %}
+        {% endfor %}
       {% endif %}
 
-      <div id="Slideshow-{{ section.id }}"
-        class="hero hero--{{ section.settings.section_height }} hero--{{ section.id }}"
-        data-autoplay="{{ section.settings.autoplay }}"
-        data-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
-        data-aos="hero__animation"
-        data-preload="{{ first_image }}"
-        data-slide-count="{{ section.blocks.size }}">
-        {% for block in section.blocks %}
+      {% if natural_height %}
+        <style>
+          .hero-natural--{{ section.id }} {
+            height: 0;
+            padding-bottom: {{ natural_height_ratio }};
+          }
+        </style>
+      {% endif %}
 
-          <div
-            {{ block.shopify_attributes }}
-            class="slideshow__slide slideshow__slide--{{ block.id }}">
+      {% if natural_height %}
+        <div class="hero-natural--{{ section.id }}">
+      {% endif %}
+        <div id="Slideshow-{{ section.id }}"
+          class="hero hero--{{ section.settings.section_height }} hero--{{ section.id }} hero--mobile--{{ section.settings.mobile_height }} loading loading--delayed"
+          {% if natural_height %}
+            data-natural="true"
+          {% endif %}
+          data-autoplay="{{ section.settings.autoplay }}"
+          data-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
+          data-aos="hero__animation"
+          {% if section.settings.style == 'arrows' %}
+            data-arrows="true"
+          {% endif %}
+          {% if section.settings.style == 'dots' %}
+            data-dots="true"
+          {% endif %}
+          data-slide-count="{{ section.blocks.size }}">
+          {% for block in section.blocks %}
 
-            <style>
-            .slideshow__slide--{{ block.id }} .hero__title {
-              font-size: {{ block.settings.title_size | times: 0.5 }}px;
-            }
-            @media only screen and (min-width: 590px) {
-              .slideshow__slide--{{ block.id }} .hero__title {
-                font-size: {{ block.settings.title_size }}px;
-              }
-            }
-            </style>
+            <div
+              {{ block.shopify_attributes }}
+              class="slideshow__slide slideshow__slide--{{ block.id }}"
+              data-id="{{ block.id }}">
 
-            {% if block.settings.image != blank %}
               <style>
-                .slideshow__image--{{ block.id }} {
-                  background-position: {{ block.settings.focal_point }};
-                  background-image: url('{{ block.settings.image | img_url: '1400x' }}');
+              .slideshow__slide--{{ block.id }} .hero__title {
+                font-size: {{ block.settings.title_size | times: 0.5 }}px;
+              }
+              @media only screen and (min-width: 590px) {
+                .slideshow__slide--{{ block.id }} .hero__title {
+                  font-size: {{ block.settings.title_size }}px;
                 }
+              }
               </style>
-            {% endif %}
 
-            <div class="hero__image slideshow__image--{{ block.id }}">{% if block.settings.image == blank %}{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}{% endif %}</div>
+              {% if block.settings.image != blank %}
+                <style>
+                  .slideshow__image--{{ block.id }} {
+                    background-position: {{ block.settings.focal_point }};
+                  }
+                </style>
+              {% endif %}
 
-            <div class="hero__text-wrap">
-              <div class="page-width">
-                <div class="hero__text-content {{ block.settings.text_align }}">
+              {%- assign hero_text = false -%}
+              {%- assign link_slide = false -%}
+              {% if block.settings.title != blank or block.settings.subheading != blank or block.settings.link_text != blank %}
+                {%- assign hero_text = true -%}
+              {% endif %}
+              {% if block.settings.link_text == blank and block.settings.link != blank %}
+                {%- assign link_slide = true -%}
+              {% endif %}
 
-                  {% unless block.settings.title == blank %}
-                    <h2 class="h1 hero__title">
-                      <div class="animation-cropper"><div class="animation-contents">
-                      {{ block.settings.title | newline_to_br }}
-                      </div></div>
-                    </h2>
-                  {% endunless %}
-                  {% if block.settings.subheading or block.settings.link %}
-                    {% unless block.settings.subheading == blank %}
-                      <div class="hero__subtitle">
-                        <div class="animation-cropper"><div class="animation-contents">
-                          {{ block.settings.subheading | escape }}
-                        </div></div>
-                      </div>
-                    {% endunless %}
-                    {% if block.settings.link_text != blank %}
-                      <div class="hero__link">
-                        <div class="animation-cropper"><div class="animation-contents">
-                          <a href="{{ block.settings.link }}" class="btn btn--small btn--inverse">
-                            {{ block.settings.link_text }}
-                          </a>
-                        </div></div>
-                      </div>
-                    {% endif %}
-                  {% endif %}
-
-                </div>
+              <div
+                class="hero__image{% unless hero_text %} hero__image--no-overlay{% endunless %} slideshow__image--{{ block.id }}{% if block.settings.image != blank %} lazyload{% else %} hero__image--svg{% endif %}"
+                {% if block.settings.image != blank %}
+                  data-bgset="{% include 'bgset', image: block.settings.image %}"
+                  data-sizes="auto"
+                {% endif %}>
+                {% if block.settings.image == blank %}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
               </div>
+
+              <noscript>
+                <div
+                  class="hero__image slideshow__image--{{ block.id }}"
+                  style="background-image: url({{ block.settings.image | img_url: '1400x' }});">
+                </div>
+              </noscript>
+
+              {% if link_slide %}
+                <a href="{{ block.settings.link }}" class="hero__slide-link">
+              {% endif %}
+
+              {% if hero_text %}
+                <div class="hero__text-wrap">
+                  <div class="page-width">
+                    <div class="hero__text-content {{ block.settings.text_align }}">
+
+                      {% unless block.settings.title == blank %}
+                        <h2 class="h1 hero__title">
+                          <div class="animation-cropper"><div class="animation-contents">
+                          {{ block.settings.title | newline_to_br }}
+                          </div></div>
+                        </h2>
+                      {% endunless %}
+                      {% if block.settings.subheading or block.settings.link %}
+                        {% unless block.settings.subheading == blank %}
+                          <div class="hero__subtitle">
+                            <div class="animation-cropper"><div class="animation-contents">
+                              {{ block.settings.subheading | escape }}
+                            </div></div>
+                          </div>
+                        {% endunless %}
+                        {% if block.settings.link_text != blank %}
+                          <div class="hero__link">
+                            <div class="animation-cropper"><div class="animation-contents">
+                              <a href="{{ block.settings.link }}" class="btn btn--small btn--inverse">
+                                {{ block.settings.link_text }}
+                              </a>
+                            </div></div>
+                          </div>
+                        {% endif %}
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if link_slide %}
+                </a>
+              {% endif %}
             </div>
-          </div>
-        {% endfor %}
-      </div>
+          {% endfor %}
+        </div>
+      {% if natural_height %}
+        </div>
+      {% endif %}
     </div>
   {% endif %}
 
@@ -122,9 +187,13 @@
       {
         "type": "select",
         "id": "section_height",
-        "label": "Height",
+        "label": "Desktop height",
         "default": "650px",
         "options": [
+          {
+            "label": "Natural",
+            "value": "natural"
+          },
           {
             "label": "450px",
             "value": "450px"
@@ -144,6 +213,59 @@
           {
             "label": "Full screen",
             "value": "100vh"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "mobile_height",
+        "label": "Mobile height",
+        "default": "auto",
+        "info": "Not used if desktop height is set to natural",
+        "options": [
+          {
+            "label": "Auto",
+            "value": "auto"
+          },
+          {
+            "label": "250px",
+            "value": "250px"
+          },
+          {
+            "label": "300px",
+            "value": "300px"
+          },
+          {
+            "label": "400px",
+            "value": "400px"
+          },
+          {
+            "label": "500px",
+            "value": "500px"
+          },
+          {
+            "label": "Full screen",
+            "value": "100vh"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Slide navigation style",
+        "default": "minimal",
+        "options": [
+          {
+            "value": "minimal",
+            "label": "Minimal"
+          },
+          {
+            "value": "arrows",
+            "label": "Arrows"
+          },
+          {
+            "value": "dots",
+            "label": "Dots"
           }
         ]
       },

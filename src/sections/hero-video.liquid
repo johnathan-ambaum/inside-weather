@@ -12,7 +12,7 @@
 <div
   data-section-id="{{ section.id }}"
   data-section-type="video-section"
-  class="video-parent-section hero hero--{{ section.id }} hero--{{ section.settings.section_height }}"
+  class="video-parent-section hero hero--{{ section.id }} hero--{{ section.settings.section_height }} hero--mobile--{{ section.settings.mobile_height }}"
   data-aos="hero__animation">
 
   <div class="hero__media hero__media--{{ section.id }}">
@@ -83,7 +83,7 @@
             <div class="hero__link">
               <div class="animation-cropper">
                 <div class="animation-contents">
-                  <a href="{{ link_href }}" class="btn btn--small btn--inverse js-no-transition">
+                  <a href="{{ link_href }}" class="btn btn--small btn--inverse">
                     {{ section.settings.link_text }}
                   </a>
                 </div>
@@ -178,7 +178,7 @@
       {
         "type": "select",
         "id": "section_height",
-        "label": "Section height",
+        "label": "Desktop height",
         "default": "650px",
         "options": [
           {
@@ -196,6 +196,38 @@
           {
             "label": "750px",
             "value": "750px"
+          },
+          {
+            "label": "Full screen",
+            "value": "100vh"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "mobile_height",
+        "label": "Mobile height",
+        "default": "auto",
+        "options": [
+          {
+            "label": "Auto",
+            "value": "auto"
+          },
+          {
+            "label": "250px",
+            "value": "250px"
+          },
+          {
+            "label": "300px",
+            "value": "300px"
+          },
+          {
+            "label": "400px",
+            "value": "400px"
+          },
+          {
+            "label": "500px",
+            "value": "500px"
           },
           {
             "label": "Full screen",

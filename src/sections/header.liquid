@@ -1,5 +1,10 @@
 {%- assign main_menu = linklists[section.settings.main_menu_link_list] -%}
 
+{%- assign logo_alignment = 'left' -%}
+{% if section.settings.main_menu_alignment == 'center-left' or section.settings.main_menu_alignment == 'center-split' or section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-drawer' %}
+  {%- assign logo_alignment = 'center' -%}
+{% endif %}
+
 {% include 'drawer-menu' %}
 {% include 'cart-drawer' %}
 
@@ -21,6 +26,11 @@
 <style>
   .site-nav__link {
     font-size: {{ section.settings.type_navigation_size }}px;
+
+    {% if section.settings.type_navigation_size < 18 %}
+      padding-left: 8px;
+      padding-right: 8px;
+    {% endif %}
   }
 </style>
 
@@ -33,79 +43,71 @@
 
     <header class="site-header{%if section.settings.type_navigation_style %} site-header--heading-style{% endif %}" data-sticky="{{ sticky_header }}">
       <div class="page-width">
-        <div class="header-layout header-layout--{{ section.settings.main_menu_alignment }}">
-          {% if section.settings.main_menu_alignment == 'center' %}
-            <div class="header-item">
-              <div class="site-nav medium-up--hide">
-                <div class="site-nav__item">
-                  <button type="button" class="site-nav__link site-nav__link--icon js-drawer-open-nav" aria-controls="NavDrawer">
-                    {% include 'icon-hamburger' %}
-                    <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
-                  </button>
-                </div>
-              </div>
+        <div
+          class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
+          data-logo-align="{{ logo_alignment }}">
+
+          {% if logo_alignment == 'left' %}
+            <div class="header-item header-item--logo">
+              {% include 'header-logo-block' %}
             </div>
           {% endif %}
-          <div class="header-item header-item--logo{% if section.settings.main_menu_alignment == 'center' %} text-center{%endif %}">
-            {% include 'header-logo-block' %}
 
-            {% if section.settings.main_menu_alignment == 'left' %}
-              {% include 'header-desktop-nav', compress: true %}
-            {% endif %}
-          </div>
-          <div class="header-item text-right">
-            <div class="site-nav">
+          {% if logo_alignment == 'left' and section.settings.main_menu_alignment != 'left-drawer' %}
+            <div class="header-item header-item--navigation{% if section.settings.main_menu_alignment == 'left-center' %} text-center{% endif %}">
+              {% include 'header-desktop-nav' %}
+            </div>
+          {% endif %}
 
-              {% if settings.enable_currencies %}
-                <div class="site-nav__item small--hide">
-                  {% include 'currency-picker', picker_id: 'header' %}
-                </div>
+          {% if logo_alignment == 'center' %}
+            <div class="header-item header-item--left header-item--navigation">
+              {% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %}
+                {% if section.settings.header_search_enable %}
+                  <div class="site-nav medium-down--hide">
+                    <a href="/search" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
+                      {% include 'icon-search' %}
+                      <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
+                    </a>
+                  </div>
+                {% endif %}
               {% endif %}
 
-              {% if shop.customer_accounts_enabled %}
-                <a class="site-nav__link site-nav__link--icon small--hide" href="/account">
-                  {% include 'icon-user' %}
-                  <span class="icon__fallback-text">
-                    {% if customer %}
-                      {{ 'layout.customer.account' | t }}
-                    {% else %}
-                      {{ 'layout.customer.log_in' | t }}
-                    {% endif %}
-                  </span>
-                </a>
+              {% if section.settings.main_menu_alignment == 'center-left' %}
+                {% include 'header-desktop-nav' %}
               {% endif %}
 
-              {% if section.settings.header_search_enable %}
-                <a href="/search" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
-                  {% include 'icon-search' %}
-                  <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
-                </a>
-              {% endif %}
-
-              {% if section.settings.main_menu_alignment == 'left' %}
-                <button type="button" class="site-nav__link site-nav__link--icon site-nav--compress__menu js-drawer-open-nav" aria-controls="NavDrawer">
+              <div class="site-nav{% unless section.settings.main_menu_alignment == 'center-drawer' %} large-up--hide{% endunless %}">
+                <button
+                  type="button"
+                  class="site-nav__link site-nav__link--icon js-drawer-open-nav"
+                  aria-controls="NavDrawer">
                   {% include 'icon-hamburger' %}
                   <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
                 </button>
-              {% endif %}
-
-              <a href="/cart" class="site-nav__link site-nav__link--icon js-drawer-open-cart js-no-transition" aria-controls="CartDrawer">
-                <span class="cart-link">
-                  {% include 'icon-cart' %}
-                  <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
-                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
-                </span>
-              </a>
+              </div>
             </div>
 
+            {% if section.settings.main_menu_alignment == 'center-split' %}
+              {% include 'header-split-nav' %}
+            {% endif %}
+
+            {% if section.settings.main_menu_alignment != 'center-split' %}
+              <div class="header-item header-item--logo">
+                {% include 'header-logo-block' %}
+              </div>
+            {% endif %}
+          {% endif %}
+
+          <div class="header-item header-item--icons">
+            {% include 'header-icons' %}
           </div>
         </div>
+
         {% if section.settings.main_menu_alignment == 'center' %}
           <div class="text-center">
-            {% include 'header-desktop-nav', compress: false %}
+            {% include 'header-desktop-nav' %}
           </div>
         {% endif %}
-
       </div>
       <div class="site-header__search-container">
         <div class="site-header__search">
@@ -147,11 +149,27 @@
         "options": [
           {
             "value": "left",
-            "label": "Left"
+            "label": "Logo left, menu left"
+          },
+          {
+            "value": "left-center",
+            "label": "Logo left, menu center"
+          },
+          {
+            "value": "left-drawer",
+            "label": "Logo left, menu drawer"
+          },
+          {
+            "value": "center-left",
+            "label": "Logo center, menu left"
           },
           {
             "value": "center",
-            "label": "Center"
+            "label": "Logo center, menu below"
+          },
+          {
+            "value": "center-drawer",
+            "label": "Logo center, menu drawer"
           }
         ]
       },
@@ -217,11 +235,16 @@
         "label": "Show an announcement"
       },
       {
-        "type": "richtext",
+        "type": "text",
         "id": "announcement_text",
         "label": "Announcement text",
-        "default": "<p>Free shipping and returns</p>",
+        "default": "Free shipping and returns",
         "info": "When closed, the announcement will remain closed until the next visit. Change the text to see it again."
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement link"
       }
     ],
     "blocks": [
@@ -243,21 +266,24 @@
           },
           {
             "type": "range",
-            "id": "desktop_logo_height",
-            "label": "Desktop logo height",
-            "default": 50,
-            "min": 20,
-            "max": 120,
+            "id": "desktop_logo_width",
+            "label": "Desktop logo width",
+            "default": 200,
+            "min": 100,
+            "max": 400,
+            "step": 10,
             "unit": "px"
           },
           {
             "type": "range",
-            "id": "mobile_logo_height",
-            "label": "Mobile logo height",
-            "default": 40,
-            "min": 20,
-            "max": 120,
-            "unit": "px"
+            "id": "mobile_logo_width",
+            "label": "Mobile logo width",
+            "default": 140,
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "info": "Set as a max-width, may appear smaller"
           }
         ]
       }

@@ -12,9 +12,9 @@
         <form action="/cart" method="post" novalidate class="cart">
 
           <div class="cart__row small--hide cart__header-labels">
-            <div class="grid--full">
+            <div class="grid grid--full">
               <div class="grid__item medium-up--two-fifths medium-up--push-three-fifths">
-                <div class="grid--full">
+                <div class="grid grid--full">
                   <div class="grid__item one-third small--half text-center">
                     {{ 'cart.label.quantity' | t }}
                   </div>
@@ -28,14 +28,20 @@
 
           {% for item in cart.items %}
             <div class="cart__row">
-              <div class="grid--full cart__row--table-large">
+              <div class="grid grid--full cart__row--table-large">
 
                 <div class="grid__item medium-up--three-fifths">
                   <div class="grid">
 
                     <div class="grid__item one-quarter">
                       <a href="{{ item.url | within: collections.all }}" class="cart__image">
-                        <img src="{{ item | img_url: '300x300' }}" alt="{{ item.title | escape }}">
+                        {%- assign img_url = item | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                            data-src="{{ img_url }}"
+                            data-widths="[180, 360, 540]"
+                            data-aspectratio="{{ item.aspect_ratio }}"
+                            data-sizes="auto"
+                            alt="{{ item.title | escape }}">
                       </a>
                     </div>
 
@@ -78,7 +84,7 @@
                 </div>
 
                 <div class="grid__item medium-up--two-fifths">
-                  <div class="grid--full cart__row--table">
+                  <div class="grid grid--full cart__row--table">
 
                     <div class="grid__item one-third text-center">
 
@@ -109,7 +115,7 @@
           {% endfor %}
 
           <div class="cart__row">
-            <div class="grid--full cart__row--table-large">
+            <div class="grid grid--full cart__row--table-large">
               {% comment %}
                 Optional, add a textarea for special notes
                   - Your theme settings can turn this on or off. Default is on.
@@ -124,7 +130,7 @@
                 </div>
               {% endif %}
               <div class="grid__item medium-up--five-twelfths text-center medium-up--text-right{% unless settings.cart_notes_enable %} medium-up--push-seven-twelfths{% endunless %}">
-                <div class="grid--full cart__row--table">
+                <div class="grid grid--full cart__row--table">
                   <div class="grid__item one-half medium-up--two-thirds medium-up--text-center">
                     <p class="h4 cart__subtotal">{{ 'cart.general.subtotal' | t }}</p>
                   </div>
@@ -143,14 +149,29 @@
                   {{ 'cart.general.orders_processed_in_currency_html' | t: currency: shop.currency }}
                   {% endif %}
                 </small>
-                <button type="submit" name="update" class="btn--secondary update-cart">{{ 'cart.general.update' | t }}</button>
-                <button type="submit" name="checkout" class="btn cart__checkout">
-                  {{ 'cart.general.checkout' | t }}
-                </button>
+                {% if settings.cart_terms_conditions_enable %}
+                  <p class="ajaxcart__note ajaxcart__note--terms">
+                    <input type="checkbox" id="CartPageAgree" />
+                    <label for="CartPageAgree">
+                      {% if settings.cart_terms_conditions_link != blank %}
+                        {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_link }}
+                      {% else %}
+                        {{ 'cart.general.terms' | t }}
+                      {% endif %}
+                    </label>
+                  </p>
+                {% endif %}
 
-                {% if additional_checkout_buttons and settings.cart_type != 'drawer' %}
+                {% if additional_checkout_buttons and settings.cart_additional_buttons %}
                   <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
                 {% endif %}
+
+                <button type="submit" name="update" class="btn--secondary update-cart">
+                  {{ 'cart.general.update' | t }}
+                </button>
+                <button type="submit" name="checkout" class="btn cart__checkout{% if settings.cart_terms_conditions_enable %} cart__checkout--page{% endif %}">
+                  {{ 'cart.general.checkout' | t }}
+                </button>
               </div>
             </div>
 

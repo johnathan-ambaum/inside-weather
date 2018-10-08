@@ -6,7 +6,11 @@
   {%- if current_page != 1 -%}
     &ndash; {{ 'general.meta.page' | t: page: current_page }}
   {%- endif -%}
-  {%- unless page_title contains shop.name -%}
-    &ndash; {{ shop.name }}
-  {%- endunless -%}
+  {% if template == 'password' %}
+    {{ shop.name }}
+  {% else %}
+    {%- unless page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {% endif %}
 {% endcapture %}

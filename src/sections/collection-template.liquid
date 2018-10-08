@@ -1,19 +1,25 @@
 {%- assign per_row = section.settings.per_row -%}
-{% assign paginate_by = per_row | times: 12 %}
+{% assign paginate_by = per_row | times: 5 %}
 {% if section.settings.collection_tags_style == 'inline' and collection.all_tags.size > 0 %}
   {% assign paginate_by = paginate_by | minus: 1 %}
 {% endif %}
 
+{% paginate collection.products by paginate_by %}
+
 <div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
   {% if section.settings.collection_image_enable and collection.image %}
-    <div class="collection-hero loading--delayed" data-preload="{{ collection.image | img_url: '1800x' }}">
-      <style>
-        .collection-hero__image {
-          background-image: url("{{ collection.image | img_url: '1800x' }}");
-        }
-      </style>
-
-      <div class="collection-hero__image"></div>
+    <div class="collection-hero loading--delayed">
+      <div
+        class="collection-hero__image lazyload"
+        data-bgset="{% include 'bgset', image: collection.image %}"
+        data-sizes="auto">
+      </div>
+      <noscript>
+        <div
+          class="collection-hero__image"
+          style="background-image: url({{ collection.image | img_url: '1400x' }});";
+          ></div>
+      </noscript>
 
       <div class="collection-hero__content">
         <div class="page-width">
@@ -33,10 +39,8 @@
   {% endif %}
 
   <div id="app" class="page-width page-content">
-    <browse-widget collection="{{ collection.title | escape }}">
-      {% include 'breadcrumbs' %}
-
-      {% unless section.settings.collection_image_enable and collection.image %}
+    <browse-widget category="{{ collection.handle }}">
+      {% comment %} {% unless section.settings.collection_image_enable and collection.image %}
         <header class="section-header">
           <h1 class="section-header__title">
             {{ collection.title }}
@@ -44,62 +48,17 @@
         </header>
       {% endunless %}
 
-      {% if section.settings.collection_sort_enable %}
-        <div class="grid__item small--one-half medium-up--one-quarter float-right">
-          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-          <label for="SortBy" class="hidden-label">{{ 'collections.sorting.title' | t }}</label>
-          <select name="SortBy" id="SortBy">
-            {% if sort_by == collection.default_sort_by %}
-              <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}</option>
-              {% if collection.default_sort_by != 'manual' %}
-                <option value="manual"{% if sort_by == "manual" %} selected="selected"{% endif %}>{{ 'collections.sorting.featured' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'best-selling' %}
-                <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'title-ascending' %}
-                <option value="title-ascending"{% if sort_by == "title-ascending"  %}selected="selected"{% endif %}>{{ 'collections.sorting.az' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'title-descending' %}
-                <option value="title-descending"{% if sort_by == "title-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.za' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'price-ascending' %}
-                <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'price-descending' %}
-                <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'created-descending' %}
-                <option value="created-descending"{% if sort_by == "created-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
-              {% endif %}
-              {% if collection.default_sort_by != 'created-ascending' %}
-                <option value="created-ascending"{% if sort_by == "created-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
-              {% endif %}
-            {% else %}
-              <option value="manual"{% if sort_by == "manual" %} selected="selected"{% endif %}>{{ 'collections.sorting.featured' | t }}</option>
-              <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
-              <option value="title-ascending"{% if sort_by == "title-ascending"  %}selected="selected"{% endif %}>{{ 'collections.sorting.az' | t }}</option>
-              <option value="title-descending"{% if sort_by == "title-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.za' | t }}</option>
-              <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
-              <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
-              <option value="created-descending"{% if sort_by == "created-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
-              <option value="created-ascending"{% if sort_by == "created-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
-            {% endif %}
-          </select>
-          <input class="collection-header__default-sort" type="hidden" value="{{ collection.default_sort_by }}">
-        </div>
-      {% endif %}
-
       {% if collection.description != blank %}
         <div class="rte">
           {{ collection.description }}
         </div>
         <hr class="hr--clear hr--small">
-      {% endif %}
+      {% endif %} {% endcomment %}
     </browse-widget>
   </div> <!-- #app -->
+</div> <!-- #CollectionSection -->
 
-</div>
+{% endpaginate %}
 
 {% schema %}
   {

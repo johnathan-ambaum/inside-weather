@@ -1,11 +1,27 @@
 {% if section.settings.divider %}<div class="section--divider">{% endif %}
 
-<div data-section-id="{{ section.id }}" data-section-type="featured-content-section">
-  {% for block in section.blocks %}
-    <div class="page-width" {{ block.shopify_attributes }}>
-      <div class="grid">
-        <div class="grid__item">
+<div
+  data-section-id="{{ section.id }}"
+  data-section-type="featured-content-section"
+  class="text-{{ section.settings.align_text }}">
+
+  <div class="page-width">
+    <div class="grid">
+      <div class="grid__item{% if section.settings.narrow_column %} medium-up--three-quarters medium-up--push-one-eighth{% endif %}">
+        {% if section.settings.title != blank %}
+          <h2>{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
           <div class="rte">
+            {% if section.settings.enlarge_text %}<div class="enlarge-text">{% endif %}
+            {{ section.settings.text }}
+            {% if section.settings.enlarge_text %}</div>{% endif %}
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          <div class="rte" {{ block.shopify_attributes }}>
             {% case block.type %}
               {% when 'page' %}
                 {% if block.settings.home_page_content != blank %}
@@ -21,53 +37,70 @@
                 {% else %}
                   {{ 'home_page.onboarding.no_content' | t }}
                 {% endif %}
-              {% else %}
             {% endcase %}
           </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
-  {% endfor %}
-  {% if section.blocks.size == 0 %}
-    <div class="page-width">
-      <div class="grid">
-        <div class="grid__item">
-          <div class="rte">
-            {{ 'home_page.onboarding.no_content' | t }}
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endif %}
+  </div>
 </div>
 
 {% if section.settings.divider %}</div>{% endif %}
 
 {% schema %}
   {
-    "name": "Text",
+    "name": "Rich text",
     "class": "index-section",
     "max_blocks": 2,
     "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>A sentence or two introducing your brand, what you sell, and what makes your brand compelling to customers.</p>"
+      },
+      {
+        "type": "select",
+        "id": "align_text",
+        "label": "Text alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Centered"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "narrow_column",
+        "label": "Narrow column"
+      },
+      {
+        "type": "checkbox",
+        "id": "enlarge_text",
+        "label": "Enlarge text",
+        "default": true
+      },
       {
         "type": "checkbox",
         "id": "divider",
         "label": "Show section divider",
         "default": false
-      }    
+      }
     ],
     "presets": [{
-      "name": "Text",
-      "category": "Text",
-      "blocks": [
-        {
-          "type": "text",
-          "settings": {
-            "home_page_richtext": "<p>A sentence or two introducing your brand, what you sell, and what&nbsp;makes your brand compelling to customers.</p>",
-            "enlarge_text": true
-          }
-        }
-      ]
+      "name": "Rich text",
+      "category": "Text"
     }],
     "blocks" : [
       {

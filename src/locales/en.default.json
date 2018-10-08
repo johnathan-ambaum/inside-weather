@@ -29,6 +29,10 @@
       "password_link": "Enter using password",
       "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
     },
+    "breadcrumbs": {
+      "home": "Home",
+      "home_link_title": "Back to the frontpage"
+    },
     "social": {
       "share_on_facebook": "Share",
       "share_on_twitter": "Tweet",
@@ -49,7 +53,11 @@
       "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
       "title": "Search",
       "placeholder": "Search our store",
-      "submit": "Search"
+      "submit": "Search",
+      "result_count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      }
     },
     "drawers": {
       "navigation": "Site navigation",
@@ -100,11 +108,14 @@
       "checkout": "Check out",
       "empty": "Your cart is currently empty.",
       "continue_browsing_html": "Continue browsing <a href=\"\/collections\/all\">here<\/a>.",
-      "close_cart": "Close Cart",
+      "close_cart": "Close cart",
       "savings_html": "You're saving {{ savings }}",
       "reduce_quantity": "Reduce item quantity by one",
       "increase_quantity": "Increase item quantity by one",
-      "orders_processed_in_currency_html": "Orders will be processed in {{ currency }}."
+      "orders_processed_in_currency_html": "Orders will be processed in {{ currency }}.",
+      "terms": "I agree with the terms and conditions",
+      "terms_html": "I agree with the <a href='{{ url }}' target='_blank'>terms and conditions<\/a>",
+      "terms_confirm": "You must agree with the terms and conditions of sales to check out"
     },
     "label": {
       "quantity": "Quantity",
@@ -115,13 +126,12 @@
     "general": {
       "catalog_title": "Catalog",
       "all_of_collection": "View all",
+      "view_all_products_html": "View all<br>{{ count }} products",
       "see_more": "Show more",
       "see_less": "Show less",
       "no_matches": "Sorry, there are no products in this collection."
     },
     "sorting": {
-      "relevant": "Relevant",
-      "sale_descending": "% Off",
       "title": "Sort",
       "featured": "Featured",
       "best_selling": "Best Selling",
@@ -174,7 +184,7 @@
       "address2": "Address2",
       "city": "City",
       "country": "Country",
-      "province": "State",
+      "province": "Province",
       "zip": "Postal\/Zip code",
       "phone": "Phone",
       "set_default": "Set as default address",
@@ -282,10 +292,12 @@
       "related_products": "You may also like"
     },
     "product": {
+      "stock_label": "{{ count }} in stock",
       "sold_out": "Sold Out",
       "unavailable": "Unavailable",
       "quantity": "Quantity",
-      "add_to_cart": "Add to cart"
+      "add_to_cart": "Add to cart",
+      "preorder": "Pre-order"
     }
   },
   "gift_cards": {
@@ -303,102 +315,5 @@
   },
   "date_formats": {
     "month_day_year": "%b %d, %Y"
-  },
-  "shopify": {
-    "checkout": {
-      "contact": {
-        "province_label": "State",
-        "province_placeholder": "State"
-      }
-    },
-    "addresses": {
-      "province": "State"
-    }
-  },
-  "product_filter_search": {
-    "refine": "Refine By",
-    "refine_mobile": "Refine By",
-    "refine_mobile_collapse": "Hide Filter",
-    "clear": "Clear",
-    "clear_all": "Clear All",
-    "apply": "Apply",
-    "sale": "Sale",
-    "sold_out": "Sold Out",
-    "from": "from",
-    "breadcrumb_home": "Home",
-    "load_more": "Load more",
-    "show_limit": "Show",
-    "search_general_title": "Search",
-    "search_result_header": "Search Results for \"{{ terms }}\"",
-    "search_result_empty": "Your search for \"{{ terms }}\" didn't match any results",
-    "search_result_number": "Showing {{ count }} results for \"{{ terms }}\"",
-    "suggestion_popular_header": "Popular Suggestions",
-    "suggestion_product_header": "Products",
-    "suggestion_did_you_mean_header": "Did you mean",
-    "suggestion_view_all": "View all results",
-    "error_no_filter_result": "Sorry, no products matched your selection",
-    "error_no_search_result": "Sorry, no products matched the keyword",
-    "error_no_products": "No products found in this collection"
-  },
-  "socialshopwave": {
-    "log_in": "log_in",
-    "log_in_to_account": "log_in_to_account",
-    "cancel": "cancel",
-    "create_account": "create_account",
-    "sign_up": "sign_up",
-    "not_created_customer_on_shopify": "not_created_customer_on_shopify",
-    "create_your_account": "create_your_account",
-    "my_orders": "my_orders",
-    "logout": "logout",
-    "faved": "faved",
-    "fave": "fave",
-    "unfave": "unfave",
-    "fave_choose_variant": "fave_choose_variant",
-    "fave_edit_variant": "fave_edit_variant",
-    "add_to_cart": "Add To Cart",
-    "share": "share",
-    "sharing": "sharing",
-    "write_a_review": "write_a_review",
-    "quantity_review2": "quantity_review2",
-    "quantity_reviews2": "quantity_reviews2",
-    "quantity_review": "quantity_review",
-    "quantity_reviews": "quantity_reviews",
-    "view_cart": "view_cart",
-    "my_faves": "my_faves",
-    "close": "close",
-    "user_commented_product_html": "user_commented_product_html",
-    "user_faved_product_html": "user_faved_product_html",
-    "user_reviewed_product_html": "user_reviewed_product_html",
-    "adding_to_cart": "Adding...",
-    "sold_out": "Sold Out",
-    "ask_your_friends": "ask_your_friends",
-    "description": "Description",
-    "reviews": "reviews",
-    "comments": "comments",
-    "view_profile": "view_profile",
-    "invite_friends": "invite_friends",
-    "edit_profile": "edit_profile",
-    "sign_in_facebook": "sign_in_facebook",
-    "social_login_facebook": "social_login_facebook",
-    "sign_in_twitter": "sign_in_twitter",
-    "social_login_twitter": "social_login_twitter",
-    "sign_in_gplus": "sign_in_gplus",
-    "social_login_gplus": "social_login_gplus",
-    "sign_in_yahoo": "sign_in_yahoo",
-    "social_login_yahoo": "social_login_yahoo",
-    "sign_in_tumblr": "sign_in_tumblr",
-    "social_login_tumblr": "social_login_tumblr",
-    "sign_in_instagram": "sign_in_instagram",
-    "social_login_instagram": "social_login_instagram",
-    "sign_in_amazon": "sign_in_amazon",
-    "social_login_amazon": "social_login_amazon",
-    "social_login_simple": "social_login_simple",
-    "ask_question": "ask_question",
-    "quantity_question": "quantity_question",
-    "quantity_questions": "quantity_questions",
-    "email_address": "email_address",
-    "password": "password",
-    "forgot_password": "forgot_password",
-    "give_a_title_for_review": "give_a_title_for_review"
   }
 }

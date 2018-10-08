@@ -2,7 +2,7 @@
 
   {% unless template.name == 'index' or template.name == 'cart' %}
   <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
-    <a href="/" title="Home">Home</a>
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
 
     {% if template.name == 'product' %}
 

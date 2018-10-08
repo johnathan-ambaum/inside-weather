@@ -15,7 +15,7 @@
   <div class="page-width">
     <div class="grid">
       <div class="grid__item medium-up--one-half">
-        {% include 'product-images', section_id: section.id %}
+        {% include 'product-images', section_id: section.id, thumbnail_position: section.settings.thumbnail_position %}
       </div>
 
       <div class="grid__item medium-up--one-half">
@@ -69,7 +69,9 @@
             <meta itemprop="priceCurrency" content="{{ shop.currency }}">
             <link itemprop="availability" href="http://schema.org/{% if product_available %}InStock{% else %}OutOfStock{% endif %}">
 
-            {% include 'product-form', section_id: section.id %}
+            {% unless product.empty? %}
+              {% include 'product-form', section_id: section.id %}
+            {% endunless %}
 
             <div class="product-single__description rte" itemprop="description">
               {% if section.settings.show_description %}
@@ -109,6 +111,22 @@
         "type": "product",
         "id": "featured_product",
         "label": "Product"
+      },
+      {
+        "type": "select",
+        "id": "thumbnail_position",
+        "label": "Thumbnail position",
+        "default": "beside",
+        "options": [
+          {
+            "value": "beside",
+            "label": "Next to image"
+          },
+          {
+            "value": "below",
+            "label": "Below image"
+          }
+        ]
       },
       {
         "type": "checkbox",

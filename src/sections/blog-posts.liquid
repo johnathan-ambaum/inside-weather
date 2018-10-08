@@ -21,14 +21,24 @@
       {% for article in blog.articles limit: section.settings.post_limit %}
         <div class="grid__item medium-up--one-third" data-aos="row-of-3">
           {% if article.image %}
-            <a href="{{ article.url }}" class="article__grid-image"><div class="image-wrap">
-              {{ article.image | img_url: '450x' | img_tag: article.title }}
-            </div></a>
+            <a href="{{ article.url }}" class="article__grid-image">
+              <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: article.image.aspect_ratio }}%;">
+                {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="lazyload"
+                    data-src="{{ img_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080]"
+                    data-aspectratio="{{ article.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ article.title | escape }}">
+                <noscript>
+                  <img class="lazyloaded" src="{{ article.image | img_url: '400x' }}" alt="{{ article.title | escape }}">
+                </noscript>
+              </div>
+            </a>
           {% endif %}
 
           <div class="article__grid-meta">
-
-              {% if section.settings.blog_show_date or article.tags.size > 0 or articles.comments_count > 0 %}
+            {% if section.settings.blog_show_date or article.tags.size > 0 or articles.comments_count > 0 %}
               <div class="article__date">
                 {% if section.settings.blog_show_tags and article.tags.size > 0 %}
                   {% for tag in article.tags %}
@@ -96,7 +106,7 @@
       {
         "type": "text",
         "id": "title",
-        "label": "Title",
+        "label": "Heading",
         "default": "Blog posts"
       },
       {

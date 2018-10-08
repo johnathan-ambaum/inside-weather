@@ -5,7 +5,7 @@
   {% endif %}
 {% endfor %}
 
-{% if settings.product_content_1 != blank or settings.product_content_2 != blank or settings.product_content_3 != blank or settings.product_contact  or has_custom_tabs %}
+{% if settings.product_content_1 != blank or settings.product_content_2 != blank or settings.product_content_3 != blank or settings.product_contact or settings.enable_product_reviews or has_custom_tabs %}
   <div class="collapsibles-wrapper collapsibles-wrapper--border-bottom">
 
     {% for tag in product.tags %}
@@ -26,7 +26,17 @@
       {% endif %}
     {% endfor %}
 
-  
+    {% if settings.enable_product_reviews %}
+      <button type="button" class="label collapsible-trigger collapsible-trigger-btn collapsible-trigger-btn--borders collapsible--auto-height" aria-controls="Product-content-5-{{ section_id }}">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}">Reviews</span>
+        {% include 'collapsible-icons' %}
+      </button>
+      <div id="Product-content-5-{{ section_id }}" class="collapsible-content collapsible-content--all">
+        <div class="collapsible-content__inner">
+          <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+        </div>
+      </div>
+    {% endif %}
 
     {% if settings.product_content_1 != blank %}
       <button type="button" class="label collapsible-trigger collapsible-trigger-btn collapsible-trigger-btn--borders" aria-controls="Product-content-1-{{ section_id }}">
@@ -61,8 +71,6 @@
         </div>
       </div>
     {% endif %}
-    
-      
 
     {% if settings.product_contact %}
       {% form 'contact' %}

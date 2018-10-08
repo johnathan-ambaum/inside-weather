@@ -1,13 +1,15 @@
 {%- assign animation_row = 1 -%}
 {%- assign drawer_position = 'right' -%}
-{% if section.settings.main_menu_alignment == 'center' %}
+{% if logo_alignment == 'center' %}
   {%- assign drawer_position = 'left' -%}
 {% endif %}
 
 <div id="NavDrawer" class="drawer drawer--{{ drawer_position }}">
   <div class="drawer__fixed-header">
     <div class="drawer__header appear-animation appear-delay-{{ animation_row }}">
-      <div class="drawer__title"></div>
+      <div class="drawer__title">
+        {% include 'currency-picker', picker_id: 'drawer', currency_class: 'currency-picker--drawer' %}
+      </div>
       <div class="drawer__close">
         <button type="button" class="drawer__close-button js-drawer-close">
           {% include 'icon-close' %}
@@ -30,16 +32,25 @@
         <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %} appear-animation appear-delay-{{ animation_row }}">
           {% if has_dropdown %}
             <div class="mobile-nav__has-sublist">
-             <button type="button" style="padding-top:20px; padding-left:20px; padding-bottom:20px" class="mobile-nav__link  collapsible-trigger collapsible--auto-height" id="Label-{{ child_list_handle }}" aria-controls="Linklist-{{ child_list_handle }}">
-               <div style="float:left; font-size:20px; display: block; text-align:left;"> {{link.title}} </div>
-                <div class="mobile-nav__toggle" style="float:right;"> {% include 'collapsible-icons' %} </div>
-                 </button>
-		<!--
-             <div class="mobile-nav__toggle">
-                <button type="button" class="collapsible-trigger collapsible--auto-height" aria-controls="Linklist-{{ child_list_handle }}">
-                  {% include 'collapsible-icons' %}
-                </button> -->
-           <!--   </div> -->
+              {% if link.url == '#' %}
+                <button type="button" class="mobile-nav__link--button collapsible-trigger collapsible--auto-height" aria-controls="Linklist-{{ child_list_handle }}">
+                  <span class="mobile-nav__faux-link">{{ link.title }}</span>
+                  <div class="mobile-nav__toggle">
+                    <span>
+                      {% include 'collapsible-icons' %}
+                    </span>
+                  </div>
+                </button>
+              {% else %}
+                <a href="{{ link.url }}" class="mobile-nav__link" id="Label-{{ child_list_handle }}">
+                  {{ link.title }}
+                </a>
+                <div class="mobile-nav__toggle">
+                  <button type="button" class="collapsible-trigger collapsible--auto-height" aria-controls="Linklist-{{ child_list_handle }}">
+                    {% include 'collapsible-icons' %}
+                  </button>
+                </div>
+              {% endif %}
             </div>
           {% else %}
             <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
@@ -58,10 +69,21 @@
 
                     <li class="mobile-nav__item{% unless template == 'index' %}{% if childlink.active %} mobile-nav__item--active{% endif %}{% endunless %}">
                       <div class="mobile-nav__child-item">
-                        <a href="{{ childlink.url }}" class="mobile-nav__link" id="Sublabel-{{ grand_child_list_handle }}">
-                          {{ childlink.title | escape }}
-                        </a>
-                        {% if has_sub_dropdown %}
+                        {% if childlink.url == '#' and has_sub_dropdown %}
+                          <button type="button" class="mobile-nav__link--button mobile-nav__link--button-small collapsible-trigger" aria-controls="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}">
+                            <span class="mobile-nav__faux-link">{{ childlink.title | escape }}</span>
+                            <div class="mobile-nav__toggle">
+                              <span>
+                                {% include 'collapsible-icons-alt' %}
+                              </span>
+                            </div>
+                          </button>
+                        {% else %}
+                          <a href="{{ childlink.url }}" class="mobile-nav__link" id="Sublabel-{{ grand_child_list_handle }}">
+                            {{ childlink.title | escape }}
+                          </a>
+                        {% endif %}
+                        {% if childlink.url != '#' and has_sub_dropdown %}
                           <button type="button" class="collapsible-trigger" aria-controls="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}">
                             {% include 'collapsible-icons-alt' %}
                           </button>

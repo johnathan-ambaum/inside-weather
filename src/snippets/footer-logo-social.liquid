@@ -90,10 +90,5 @@
 
 </div>
 
-{% unless first_instance %}
-  <div class="footer__currency medium-up--hide">
-    {% include 'currency-picker', picker_id: 'footer' %}
-  </div>
-{% endunless %}
-
+<p class="footer__powered_by{% if first_instance %} small--hide{% endif %}">{{ powered_by_link }}</p>
 
