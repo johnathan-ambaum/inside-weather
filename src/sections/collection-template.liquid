@@ -39,6 +39,7 @@
   {% endif %}
 
   <div id="app" class="page-width page-content">
+    <search-results :per-row="{{ section.settings.per_row }}"></search-results>
     <browse-widget category="{{ collection.handle }}">
       {% comment %} {% unless section.settings.collection_image_enable and collection.image %}
         <header class="section-header">
