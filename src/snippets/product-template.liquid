@@ -29,7 +29,6 @@
         <div class="ProductDetailGrid">
           <product-detail class="ProductDetailGrid__Main">
             <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
-            {% include 'product-images', section_id: section_id, isModal: isModal, thumbnail_position: thumbnail_position %}
             <div class="product-single__description rte" itemprop="description">
               {{ product.description }}
             </div>
@@ -68,14 +67,14 @@
             <hr>
             <p>NOT SURE YOU FOUND THE PERFECT MATCH?</p>
             <h3>EXPLORE MORE</h3>
-            <product-customizer></product-customizer>
+            <product-customizer category="{{ product.collection.handle }}"></product-customizer>
           </div> <!-- .ProductDetailGrid__Sidebar -->
         </div> <!-- .ProductDetailGrid -->
       </div> <!-- #app -->
     </div> <!-- .page-width -->
   </div> <!-- .page-content -->
 
-  <script type="application/json" id="ProductJson-{{ section_id }}">
+  <script type="application/json" id="ProductJson-{{ section_id }}" data-product-json>
     {{ product | json }}
   </script>
 </div> <!-- .product-section -->
