@@ -1,193 +1,65 @@
 <header id="MainNav">
-    <div class="MainNav">
+    <div class="MainNav {% if template == 'index' %} MainNav--IndexTop{% endif %} ">
         <!-- LEFT HEADER -->
         <div class="MainNav__NavBlock NavBlock--Left">
-            <ul class="NavBlock__List">
-                <li class="Mobile-Item MobileNav--Toggler">
-                    <button id="MobileToggler" class="">
-                        <span><i class="fal fa-bars"></i></span>
-                    </button>
-                </li>
-                <li class="NavBlock__List__Item--Dropdown">
-                    <a href="">Shop</a>
-                    <div class="Dropdown__Content">
-                        <ul class="Dropdown__Content--Shop">
-                            <li class="Dropdown__Content__Item"><a href="">
-                                <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                                <span>Sofas</span>
-                            </a></li>
-                            <li class="Dropdown__Content__Item"><a href="">
-                                <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                                <span>Armchairs</span>
-                            </a></li>
-                            <li class="Dropdown__Content__Item"><a href="">
-                                <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                                <span>Lounge Chairs</span>
-                            </a></li>
-                            <li class="Dropdown__Content__Item"><a href="">
-                                <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                                <span>Dining Chairs</span>
-                            </a></li>
-                            <li class="Dropdown__Content__Item"><a href="">
-                                <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                                <span>Tables</span>
-                            </a></li>
-                            <li class="Dropdown__Content__Item"><a href="">
-                                <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                                <span>Storage</span>
-                            </a></li>
-                        </ul>
-                    </div>
-                </li><!-- SHOP END -->
-                <li class="NavBlock__List__Item--Dropdown">
-                    <a href="">Free Swatches</a>
-                    <div class="Dropdown__Content">
-                        <ul class="Dropdown__Content--Swatches">
-                            <li class="Dropdown__Content__Item"><img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg"></li>
-                            <li class="Dropdown__Content__Item">
-                                <h3 class="Item__Heading">Start with swatches</h3>
-                                <p class="Item__Text">Not sure which fabric to choose?<br>Choose up to five samples and we'll<br>ship them to you, free of charge.</p>
-                                <button class="Item__Cta">Order free swatches</button>
-                            </li>
-                        </ul>
-                    </div>
-                </li><!-- FREE SWATCHES END -->
-                <li><a href="">About Us</a></li>
-            </ul>
+            {%- include 'MainMenu-Left' -%}
         </div>
 
-        <!-- CENTER HEADER -->
+        <!-- CENTER LOGO -->
         <div class="MainNav__NavBlock NavBlock--Center NavBlock--Center">
-            <h1>LOGO</h1>
+            <a href=""><h1>LOGO</h1></a>
         </div>
 
         <!-- RIGHT HEADER -->
         <div class="MainNav__NavBlock NavBlock--Right">
-            <ul class="NavBlock__List">
-                <li><a href="">Sign up</a></li>
-                <li><a href="">Account</a></li>
-                <li class="NavBlock__List__Item--Dropdown">
-                    <a href="">Help</a>
-                    <div class="Dropdown__Content">
-                        <div class="Dropdown__Content--Help">
-                            <div class="Dropdown__Content__Item">
-                                <ul class="Help__Links">
-                                    <li class="Item__Heading">Need Help?</li>
-                                    <li class="Item__Text"><a href="">Shipping &amp; Returns</a></li>
-                                    <li class="Item__Text"><a href="">Financing</a></li>
-                                    <li class="Item__Text"><a href="">FAQ</a></li>
-                                </ul>
-                            </div>
-                            <div class="Dropdown__Content__Item Help__Options">
-                                <div class="Help__Options__Item">
-                                    <span class="Item__Icon"><i class="fas fa-comment"></i></span>
-                                    <h4 class="Item__Heading">Live Chat: <span class="Item__Text">Online</span></h4>
-                                    <p class="Item__Text">Mon-Sun, 10am-9pm CST</p>
-                                </div>
-                                <div class="Help__Options__Item">
-                                    <span class="Item__Icon"><i class="fas fa-mobile"></i></span>
-                                    <h4 class="Item__Heading">Call</h4>
-                                    <p class="Item__Text">000-000-0000</p>
-                                </div>
-                                <div class="Help__Options__Item">
-                                    <span class="Item__Icon"><i class="fas fa-envelope"></i></span>
-                                    <h4 class="Item__Heading">Email</h4>
-                                    <p class="Item__Text">order@xxxxxxxxx.com</p>
-                                </div>
-                            </div>
-                            <div class="Dropdown__Content__Item">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li><a href=""><i class="fal fa-search"></i></a></li>
-                <li class="Mobile-Item"><a href=""><i class="fal fa-shopping-cart"></i></a></li>
-            </ul>
+            {%- include 'MainMenu-Right' -%}
         </div>
     </div>
 </header>
 
 <!-- MOBILE NAV -->
 <div id="MainNav-Mobile" class="MainNav--Mobile">
-    <ul class="MainNav--Mobile__List">
-        <li class="Mobile__List__Item--DropDown">
-            <span class="MobileContent__Dropdown__Title">Shop<span class="MobileDropDown__Toggler"></span></span>
-            <div class="MobileContent__Dropdown">
-                <ul class="MobileContent__Dropdown--Shop">
-                    <li class="MobileDropdown__Content__Item"><a href="">
-                        <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                        <span>Sofas</span>
-                    </a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">
-                        <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                        <span>Armchairs</span>
-                    </a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">
-                        <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                        <span>Lounge Chairs</span>
-                    </a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">
-                        <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                        <span>Dining Chairs</span>
-                    </a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">
-                        <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                        <span>Tables</span>
-                    </a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">
-                        <img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg">
-                        <span>Storage</span>
-                    </a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="Mobile__List__Item--DropDown">
-            <span class="MobileContent__Dropdown__Title">Free Swatches<span class="MobileDropDown__Toggler"></span></span>
-            <div class="MobileContent__Dropdown">
-                <ul class="MobileContent__Dropdown--Swatches">
-                    <li class="MobileDropdown__Content__Item"><img src="https://images2.roomstogo.com/is/image/roomstogo/lr_sof_10136922_bellingham~Cindy-Crawford-Home-Bellingham-Hydra-Sofa.jpeg"></li>
-                    <li class="MobileDropdown__Content__Item">
-                        <h3 class="Item__Heading">Start with swatches</h3>
-                        <p class="Item__Text">Not sure which fabric to choose?<br>Choose up to five samples and we'll<br>ship them to you, free of charge.</p>
-                        <button class="Item__Cta">Order free swatches <span class="Item__Cta__Icon"><i class="fal fa-arrow-right"></i></span></button>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Sign Up</a></li>
-        <li><a href="">Account</a></li>
-        <li class="Mobile__List__Item--DropDown">
-            <span class="MobileContent__Dropdown__Title">Help<span class="MobileDropDown__Toggler"></span></span>
-            <div class="MobileContent__Dropdown">
-                <ul class="MobileContent__Dropdown--Help">
-                    <li class="MobileDropdown__Content__Item"><a href="">Shipping &amp; Returns</a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">Financing</a></li>
-                    <li class="MobileDropdown__Content__Item"><a href="">FAQ</a></li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+    {%- include 'MainMenu-Mobile' -%}
 </div>
 
+<!--=============================================================
+    HEADER SCRIPT
+=================================================================-->
 <script>
+    $(document).ready(function(){
+        trackMobileVisibility();
+    });
     $(document).on("scroll", function() {
         if($(document).scrollTop()>=100) {
+            $(".template-index .MainNav").removeClass("MainNav--IndexTop");
             $(".MainNav").addClass("MainNav--Small");
             $(".MainNav--Mobile").addClass("MainNav--Mobile--Small");
         }
         else {
+            $(".template-index .MainNav").addClass("MainNav--IndexTop");
+            trackMobileVisibility();
             $(".MainNav").removeClass("MainNav--Small");
             $(".MainNav--Mobile").removeClass("MainNav--Mobile--Small");
         }
-
     });
+    
     $(".MainNav").hover(function(){
        $(this).removeClass("MainNav--Small");
     });
-
+    
+    
+    /* MOBILE NAV SCRIPTS */
+    function trackMobileVisibility(){
+        if($('.template-index #MobileToggler').is(':visible')){
+            $('.MainNav').removeClass('MainNav--IndexTop');
+        }
+    }
+    
+    
     $("#MobileToggler").click(function(){
+        trackMobileVisibility();
         $(".MainNav--Mobile").slideToggle();
+        $('body').toggleClass("MobileNav--Active");
     });
 
     $(".Mobile__List__Item--DropDown").click(function(){
@@ -195,3 +67,102 @@
        $(this).find(".MobileDropDown__Toggler").toggleClass("MobileDropDown__Toggler--Toggled");
     });
 </script>
+
+
+{%- comment -%}=====================================================
+    SCHEMAS
+=================================================={%- endcomment -%}
+{% schema %}
+{
+    "name": "MainNav",
+    "class": "Testing test",
+    "settings":[
+        {
+            "id": "Logo",
+            "type": "text",
+            "label": "Logo Text",
+            "default": "logo"
+        },
+        {
+            "id": "FreeSwatchesImage",
+            "type": "image_picker",
+            "label": "Free Swatches Image"
+        },
+        {
+            "id": "FreeSwatchesHeading",
+            "type": "text",
+            "label": "Free Swatches Heading",
+            "default": "Start with swatches"
+        },
+        {
+            "id": "FreeSwatchesText1",
+            "type": "text",
+            "label": "Free Swatches Text 1",
+            "default": "Not sure which fabric to choose?"
+        },
+        {
+            "id": "FreeSwatchesText2",
+            "type": "text",
+            "label": "Free Swatches Text 2",
+            "default": "Choose up to five samples and we'll<br>ship them to you, free of charge"
+        },
+        {
+            "id": "FreeSwatchesCta",
+            "type": "text",
+            "label": "Free Swatches CTA",
+            "default": "Order free swatches"
+        },
+        {
+            "id": "HelpOption1Icon",
+            "type": "select",
+            "label": "Help Option 1 Icon",
+            "options": [
+                { "value": "fas", "label": "Solid icon" },
+                { "value": "far", "label": "Regular icon" },
+                { "value": "fal", "label": "Light icon" }
+            ],
+            "default": "fal"
+        },
+        {
+            "id": "HelpOption1Text",
+            "type": "text",
+            "label": "Help Option 1 Text",
+            "default": "Mon-Sun, 10am-9pm CST"
+        },
+        {
+            "id": "HelpOption2Icon",
+            "type": "select",
+            "label": "Help Option 2 Icon",
+            "options": [
+                { "value": "fas", "label": "Solid icon" },
+                { "value": "far", "label": "Regular icon" },
+                { "value": "fal", "label": "Light icon" }
+            ],
+            "default": "fal"
+        },
+        {
+            "id": "HelpOption2Text",
+            "type": "text",
+            "label": "Help Option 2 Text",
+            "default": "000-000-0000"
+        },
+        {
+            "id": "HelpOption3Icon",
+            "type": "select",
+            "label": "Help Option 3 Icon",
+            "options": [
+                { "value": "fas", "label": "Solid icon" },
+                { "value": "far", "label": "Regular icon" },
+                { "value": "fal", "label": "Light icon" }
+            ],
+            "default": "fal"
+        },
+        {
+            "id": "HelpOption3Text",
+            "type": "text",
+            "label": "Help Option 3 Text",
+            "default": "order@xxxxxxxxx.com"
+        }
+    ]
+}
+{% endschema %}
