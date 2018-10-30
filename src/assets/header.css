@@ -28,6 +28,7 @@ ul {
 }
 
 .MainNav {
+    border-bottom: 1px solid transparent;
     display:flex;
     position:fixed;
     z-index:9999999999999999;
@@ -38,9 +39,11 @@ ul {
     font-weight: bold;
     font-size:13px;
     top: 0;
+    transition: all .2s ease-out;
 }
 
 .MainNav--Small {
+    border-color: #474747;
     height:70px;
 }
 
