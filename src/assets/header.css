@@ -3,6 +3,10 @@ html body.MobileNav--Active {
     overflow: hidden !important;
 }
 
+body:not(.template-index) main {
+    margin-top: 110px;
+}
+
 #MainNav a {
     color: #000000;
     transition: color .3s ease-out .1s;
