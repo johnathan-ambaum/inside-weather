@@ -67,7 +67,7 @@
             <hr>
             <p>NOT SURE YOU FOUND THE PERFECT MATCH?</p>
             <h3>EXPLORE MORE</h3>
-            <product-customizer category="{{ product.collection.handle }}"></product-customizer>
+            <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}"></product-customizer>
           </div> <!-- .ProductDetailGrid__Sidebar -->
         </div> <!-- .ProductDetailGrid -->
       </div> <!-- #app -->
