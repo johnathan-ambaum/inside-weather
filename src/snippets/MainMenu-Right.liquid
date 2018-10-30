@@ -1,0 +1,48 @@
+<!-- MAINMENU NAV RIGHT SIDE -->
+
+<ul class="NavBlock__List">
+    {%- for parentLink in linklists.main-menu-right.links -%}
+        {%- if parentLink.links != blank -%}
+            <li class="NavBlock__List__Item--Dropdown">
+                <a href="">{{ parentLink.title }}</a>
+                <div class="Dropdown__Content">
+                    <div class="Dropdown__Content--CenterPieceColumn">
+                        <!-- HELP LINKS -->
+                        <div class="Dropdown__Content__Item">
+                            <ul class="Help__Links">
+                                <li class="Item__Heading">Need Help?</li>
+                                {%- for helpLink in parentLink.links -%}
+                                    <li class="Item__Text"><a href="{{ helpLink.url }}">{{ helpLink.title }}</a></li>
+                                {%- endfor -%}
+                            </ul>
+                        </div>
+                        <!-- HELP OPTIONS -->
+                        <div class="Dropdown__Content__Item Help__Options">
+                            <div class="Help__Options__Item">
+                                <span class="Item__Icon"><i class="{{ section.settings.HelpOption1Icon }} fa-comment"></i></span>
+                                <h4 class="Item__Heading">Live Chat: <span class="Item__Text">Online</span></h4>
+                                <p class="Item__Text">{{ section.settings.HelpOption1Text }}</p>
+                            </div>
+                            <div class="Help__Options__Item">
+                                <span class="Item__Icon"><i class="{{ section.settings.HelpOption2Icon }} fa-mobile"></i></span>
+                                <h4 class="Item__Heading">Call</h4>
+                                <p class="Item__Text">{{ section.settings.HelpOption2Text }}</p>
+                            </div>
+                            <div class="Help__Options__Item">
+                                <span class="Item__Icon"><i class="{{ section.settings.HelpOption3Icon }} fa-envelope"></i></span>
+                                <h4 class="Item__Heading">Email</h4>
+                                <p class="Item__Text">{{ section.settings.HelpOption3Text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+            <li><a href="{{ parentLink.url }}">{{ parentLink.title }}</a></li>
+        {% endif %}
+    {%- endfor -%}
+    
+    {%- comment -%}====== NAV ICONS ====={%- endcomment -%}
+    <li><a href=""><i class="fal fa-search"></i></a></li>
+    <li class="Mobile-Item"><a href=""><i class="fal fa-shopping-cart"></i></a></li>
+</ul>

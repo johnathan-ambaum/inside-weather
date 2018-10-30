@@ -1,0 +1,65 @@
+<!-- MAINMENU MOBILE NAV -->
+
+<ul class="MainNav--Mobile__List">
+    {%- comment -%}===============================================================
+        LOOP THROUGH LEFT MENU
+    ==============================================================={% endcomment %}
+    {%- for leftParentLink in linklists.main-menu.links -%}
+        {%- if leftParentLink.links != blank -%}
+            <li class="Mobile__List__Item--DropDown">
+                <span class="MobileContent__Dropdown__Title">{{ leftParentLink.title }}<span class="MobileDropDown__Toggler"></span></span>
+                <div class="MobileContent__Dropdown">
+                    {% assign currentLink = leftParentLink.title | downcase | strip %}
+                    {% comment %}===== FREE SWATCHES DROPDOWN ====={% endcomment %}
+                        {%- if currentLink contains 'swatches' -%}
+                            <ul class="MobileContent__Dropdown--SplitHalfColumn">
+                                <li class="MobileDropdown__Content__Item"><img src="{{ section.settings.FreeSwatchesImage | img_url: "400" }}"></li>
+                                <li class="MobileDropdown__Content__Item">
+                                    <h3 class="Item__Heading">{{ section.settings.FreeSwatchesHeading }}</h3>
+                                    <p class="Item__Text">{{ section.settings.FreeSwatchesText1 }}<br>{{ section.settings.FreeSwatchesText2 }}</p>
+                                    <a href="{{ leftParentLink.url }}"><button class="Item__Cta">{{ section.settings.FreeSwatchesCta }} <span class="Item__Cta__Icon"><i class="fal fa-arrow-right"></i></span></button></a>
+                                </li>
+                            </ul>
+                    {% comment %}===== OTHER PRODUCTS DROPDOWN ====={% endcomment %}
+                        {%- else -%}
+                            <ul class="MobileContent__Dropdown--MultiColumn">
+                                {%- for dropdownLink in leftParentLink.links-%}
+                                    <li class="MobileDropdown__Content__Item">
+                                        <a href="{{ dropdownLink.url }}">
+                                            <img src="{{ dropdownLink.object.image  | img_url: 'medium' }}">
+                                            <span>{{ dropdownLink.title }}</span>
+                                        </a>
+                                    </li>
+                                {%- endfor -%}
+                            </ul>
+                        {%- endif -%}
+                </div>
+            </li>
+            
+        {%- else -%}
+            <li><a href="{{ leftParentLink.url }}">{{ leftParentLink.title }}</a></li>
+        {%- endif -%}
+    {%- endfor -%}
+
+
+    {%- comment -%}===============================================================
+        LOOP THROUGH RIGHT MENU
+    ==============================================================={% endcomment %}
+    {%- for rightParentLink in linklists.main-menu-right.links -%}
+        {%- if rightParentLink.links != blank -%}
+            <li class="Mobile__List__Item--DropDown">
+                <span class="MobileContent__Dropdown__Title">{{ rightParentLink.title }}<span class="MobileDropDown__Toggler"></span></span>
+                <div class="MobileContent__Dropdown">
+                    <ul class="MobileContent__Dropdown--CenterPieceColumn">
+                        {%- for dropdownLink in  rightParentLink.links -%}
+                            <li class="MobileDropdown__Content__Item"><a href="{{ dropdownLink.url }}">{{ dropdownLink.title }}</a></li>
+                        {%- endfor -%}
+                    </ul>
+                </div>
+            </li>
+        {%- else -%}
+            <li><a href="{{ rightParentLink.url }}">{{ rightParentLink.title }}</a></li>
+        {%- endif -%}
+    {%- endfor -%}
+ 
+</ul>

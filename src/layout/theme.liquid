@@ -76,6 +76,12 @@
   <script src="{{ 'widgets.js' | asset_url }}" defer></script>
 {%- endif -%}
 <!-- end browse and product customizer widgets -->
+
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="{{ 'header.css' | asset_url }}">
+
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
@@ -89,7 +95,7 @@
   <div id="PageContainer" class="page-container">
     <div class="transition-body">
 
-    {% section 'header' %}
+      {% section 'header' %}
 
       <main class="main-content" id="MainContent">
         {{ content_for_layout }}

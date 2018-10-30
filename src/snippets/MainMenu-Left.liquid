@@ -1,0 +1,48 @@
+<!-- MAINMENU NAV LEFT SIDE -->
+
+<ul class="NavBlock__List">
+    <!-- MOBILE NAV TOGGLER -->
+    <li class="Mobile-Item MobileNav--Toggler">
+        <button id="MobileToggler" class="">
+            <span><i class="fal fa-bars"></i></span>
+        </button>
+    </li>
+    
+    {%- for parentLink in linklists.main-menu.links -%}
+        {%- if parentLink.links != blank -%}
+            <li class="NavBlock__List__Item--Dropdown">
+                <a href="">{{ parentLink.title }}</a>
+                <div class="Dropdown__Content">
+                    {% assign currentLink = parentLink.title | downcase | strip %}
+                    
+                    {% comment %}===== FREE SWATCHES DROPDOWN ====={% endcomment %}
+                    {%- if currentLink contains 'swatches' -%}
+                        <ul class="Dropdown__Content--SplitHalfColumn">
+                            <li class="Dropdown__Content__Item"><img src="{{ section.settings.FreeSwatchesImage | img_url: "400" }}"></li>
+                            <li class="Dropdown__Content__Item">
+                                <h3 class="Item__Heading">{{ section.settings.FreeSwatchesHeading }}</h3>
+                                <p class="Item__Text">{{ section.settings.FreeSwatchesText1 }}<br>{{ section.settings.FreeSwatchesText2 }}</p>
+                                <a href="{{ parentLink.url }}"><button class="Item__Cta">{{ section.settings.FreeSwatchesCta }} <span class="Item__Cta__Icon"><i class="fal fa-arrow-right"></i></span></button></a>
+                            </li>
+                        </ul>
+                    {% comment %}===== OTHER PRODUCTS DROPDOWN ====={% endcomment %}
+                    {%- else -%}
+                        <ul class="Dropdown__Content--MultiColumn">
+                            {%- for dropdownLink in parentLink.links-%}
+                                <li class="Dropdown__Content__Item">
+                                    <a href="{{ dropdownLink.url }}">
+                                        <img src="{{ dropdownLink.object.image  | img_url: 'medium' }}">
+                                        <span>{{ dropdownLink.title }}</span>
+                                    </a>
+                                </li>
+                            {%- endfor -%}
+                        </ul>
+                    {%- endif -%}
+                </div>
+            </li>
+            
+        {% else %}
+            <li><a href="{{ parentLink.url }}">{{ parentLink.title }}</a></li>
+        {% endif %}
+    {%- endfor -%}
+</ul>
