@@ -42,7 +42,7 @@ ul {
     transition: all .2s ease-out;
 }
 
-.MainNav--Small {
+.MainNav--Small .MainNav {
     border-color: #474747;
     height:70px;
 }
@@ -293,7 +293,7 @@ span.Item__Icon {
     text-decoration: none;
 }
 
-.MainNav--Mobile--Small {
+.MainNav--Small .MainNav--Mobile {
     top:70px;
 }
 
