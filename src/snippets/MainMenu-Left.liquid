@@ -4,17 +4,17 @@
     <!-- MOBILE NAV TOGGLER -->
     <li class="Mobile-Item MobileNav--Toggler">
         <button id="MobileToggler" class="">
-            <span><i class="fal fa-bars"></i></span>
+            <span><i class="fa fa-bars"></i></span>
         </button>
     </li>
-    
+
     {%- for parentLink in linklists.main-menu.links -%}
         {%- if parentLink.links != blank -%}
             <li class="NavBlock__List__Item--Dropdown">
                 <a href="">{{ parentLink.title }}</a>
                 <div class="Dropdown__Content">
                     {% assign currentLink = parentLink.title | downcase | strip %}
-                    
+
                     {% comment %}===== FREE SWATCHES DROPDOWN ====={% endcomment %}
                     {%- if currentLink contains 'swatches' -%}
                         <ul class="Dropdown__Content--SplitHalfColumn">
@@ -40,7 +40,7 @@
                     {%- endif -%}
                 </div>
             </li>
-            
+
         {% else %}
             <li><a href="{{ parentLink.url }}">{{ parentLink.title }}</a></li>
         {% endif %}

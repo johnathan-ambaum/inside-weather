@@ -65,24 +65,21 @@
   {%- if template contains 'customers' -%}
     {% include 'defer-shopify-script' with 'shopify_common.js' %}
   {%- endif -%}
-<!--Gem_Page_Header_Script-->
-{% include 'gem-app-header-scripts' %}
-<!--End_Gem_Page_Header_Script-->
 
-<!-- Browse and product customizer widgets -->
-<link rel="stylesheet" type="text/css" href="{{ 'header.css' | asset_url }}">
-{%- if template == 'product' or template == 'collection' -%}
-  <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
-  <script src="{{ 'widgets.js' | asset_url }}" defer></script>
-{%- endif -%}
-<!-- end browse and product customizer widgets -->
+  <!--Gem_Page_Header_Script-->
+  {% include 'gem-app-header-scripts' %}
+  <!--End_Gem_Page_Header_Script-->
 
+  <!-- Browse and product customizer widgets -->
+  {%- if template == 'product' or template == 'collection' -%}
+    <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+  {%- endif -%}
+  <!-- end browse and product customizer widgets -->
 
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
-
-
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
