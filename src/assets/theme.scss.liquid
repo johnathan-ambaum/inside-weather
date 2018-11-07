@@ -10828,10 +10828,12 @@ body:not(.template-index) main {
   height:110px;
   background: #ffffff;
   text-transform: uppercase;
-  font-weight: bold;
-  font-size:13px;
+  font-weight: 600;
+  font-size:14px;
   top: 0;
   transition: all .2s ease-out;
+  font-family: 'Avalon';
+  letter-spacing: .1em;
 
   @media only screen and (max-width: 860px) {
     border-bottom: 1px solid #464646;
@@ -10975,7 +10977,7 @@ body:not(.template-index) main {
 }
 
 .Dropdown__Content {
-  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+ /* box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1); */
   display: flex;
   position: absolute;
   left:0;
@@ -10984,7 +10986,7 @@ body:not(.template-index) main {
   padding: 3% 8% 5.5% 8%;
   width:100%;
   background-color:white;
-  border-top:2px solid #D5D8DC;
+  border-top:1px solid #d3d3d3;
   transition: opacity .3s linear .15s, visibility 0s linear .45s;
   -moz-transition: opacity .3s linear .15s, visibility 0s linear .45s;
   -webkit-transition: opacity .3s linear .15s, visibility 0s linear .45s;
@@ -11032,13 +11034,15 @@ body:not(.template-index) main {
 
   img {
     width:100%;
-    height:120px;
     padding-bottom:10px;
   }
 
   .Dropdown__Content__Item {
     padding:0 10px;
     width:190px;
+    font-size: 16px;
+    letter-spacing: .05em;
+
   }
 }
 
@@ -11070,9 +11074,9 @@ body:not(.template-index) main {
 }
 
 .Item__Heading {
-  flex-grow: 0;
+  font-family: 'Avalon';
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
   margin:0;
 }
 
@@ -11081,21 +11085,27 @@ body:not(.template-index) main {
   text-transform: none;
   font-weight: normal;
   margin-top:0;
+  font-size:14px;
+  letter-spacing:.025em;
+  line-height:19px;
+
 }
 
 .Item__Cta {
   background-color: #ffffff;
   text-transform: uppercase;
   font-weight: bold;
-  border: 1px solid #1C2833;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font-size:12px;
+  border: 1px solid #202020;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  font-size:14px;
   line-height:0;
-  padding:15px;
-  height:60px;
+  padding:15px 30px 15px 30px;
+  height:50px;
   width:100%;
+  font-family: 'Avalon';
+  font-weight: 600;
 }
 
 .Item__Cta__Icon i {
