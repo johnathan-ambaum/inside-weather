@@ -19,17 +19,29 @@
                         <!-- HELP OPTIONS -->
                         <div class="Dropdown__Content__Item Help__Options">
                             <div class="Help__Options__Item">
-                                <span class="Item__Icon"><i class="{{ section.settings.HelpOption1Icon }} fa-comment"></i></span>
+                                <div class="Item__Icon">
+                                    <div>
+                                        {{ section.settings.HelpOption1Icon | img_url: '50x' | img_tag }}
+                                    </div>
+                                </div>
                                 <h4 class="Item__Heading">Live Chat: <span class="Item__Text">Online</span></h4>
                                 <p class="Item__Text">{{ section.settings.HelpOption1Text }}</p>
                             </div>
                             <div class="Help__Options__Item">
-                                <span class="Item__Icon"><i class="{{ section.settings.HelpOption2Icon }} fa-mobile"></i></span>
+                                <div class="Item__Icon">
+                                    <div>
+                                        {{ section.settings.HelpOption2Icon | img_url: '50x' | img_tag }}
+                                    </div>
+                                </div>
                                 <h4 class="Item__Heading">Call</h4>
                                 <p class="Item__Text">{{ section.settings.HelpOption2Text }}</p>
                             </div>
                             <div class="Help__Options__Item">
-                                <span class="Item__Icon"><i class="{{ section.settings.HelpOption3Icon }} fa-envelope"></i></span>
+                                <div class="Item__Icon">
+                                    <div>
+                                        {{ section.settings.HelpOption3Icon | img_url: '50x' | img_tag }}
+                                    </div>
+                                </div>
                                 <h4 class="Item__Heading">Email</h4>
                                 <p class="Item__Text">{{ section.settings.HelpOption3Text }}</p>
                             </div>

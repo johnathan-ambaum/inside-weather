@@ -10821,6 +10821,7 @@ body:not(.template-index) main {
 .MainNav {
   align-items: center;
   display:flex;
+  padding: 0 $gutter;
   position:fixed;
   z-index: 1000;
   width:100%;
@@ -10832,8 +10833,9 @@ body:not(.template-index) main {
   top: 0;
   transition: all .2s ease-out;
 
-  @media only screen and (max-width: 775px) {
+  @media only screen and (max-width: 860px) {
     border-bottom: 1px solid #464646;
+    padding: 0;
   }
 
   .MainNav--Small & {
@@ -10854,6 +10856,24 @@ body:not(.template-index) main {
   a {
     color: #000000;
     transition: color .3s ease-out .1s;
+  }
+}
+
+.MainNav__Overlay {
+  opacity: 0;
+  transition: opacity .3s linear;
+
+  @media only screen and (min-width: 861px) {
+    .MainNav--Active & {
+      background: #202020;
+      height: 100vh;
+      left: 0;
+      opacity: .65;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 900;
+    }
   }
 }
 
@@ -10901,14 +10921,23 @@ body:not(.template-index) main {
 .NavBlock--Left {
   width:45%;
   justify-content: flex-start;
+
+  @media only screen and (max-width: 860px) {
+    order: 0;
+  }
 }
 
-.NavBlock--Center {
-  width: 10%;
+.NavBlock--Branding {
   justify-content: center;
+  margin-right: 20px;
 
-  @media only screen and (max-width: 775px) {
-    width: 200px;
+  @media only screen and (max-width: 860px) {
+    margin-right: 0;
+    order: 1;
+  }
+
+  img {
+    max-width: 200px;
   }
 
   h1 {
@@ -10919,6 +10948,10 @@ body:not(.template-index) main {
 .NavBlock--Right {
   width:45%;
   justify-content: flex-end;
+
+  @media only screen and (max-width: 860px) {
+    order: 2;
+  }
 }
 
 .NavBlock__List {
@@ -10947,7 +10980,7 @@ body:not(.template-index) main {
   position: absolute;
   left:0;
   top:110px;
-  height:320px;
+  min-height:320px;
   padding: 3% 8% 5.5% 8%;
   width:100%;
   background-color:white;
@@ -11012,8 +11045,8 @@ body:not(.template-index) main {
 /* FREE SWATCHES DROPDOWN */
 .Dropdown__Content--SplitHalfColumn {
   img {
-    height:180px;
-    width:220px;
+    height: auto;
+    width: 220px;
   }
 
   .Dropdown__Content__Item {
@@ -11025,17 +11058,26 @@ body:not(.template-index) main {
   }
 }
 
-span.Item__Icon {
-  font-size:2.3em;
+.Item__Icon {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+
+  img {
+    max-height: 75px;
+  }
 }
 
 .Item__Heading {
+  flex-grow: 0;
   text-transform: uppercase;
   font-weight: bold;
   margin:0;
 }
 
 .Item__Text {
+  flex-grow: 0;
   text-transform: none;
   font-weight: normal;
   margin-top:0;
@@ -11077,8 +11119,11 @@ span.Item__Icon {
   .Help__Links {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 
     li {
+      height: auto;
+      padding-bottom: 10px;
       padding-top: 0;
     }
   }
@@ -11086,7 +11131,7 @@ span.Item__Icon {
   .Help__Options {
     display: flex;
     justify-content:space-evenly;
-    align-items:baseline;
+    padding: 2rem;
     width: 60%;
     height: 100%;
     background-color:#fcf8f0;
@@ -11137,6 +11182,10 @@ span.Item__Icon {
     top:70px;
   }
 
+  @media only screen and (min-width: 861px) {
+    display: none !important;
+  }
+
   a {
     text-decoration: none;
   }
@@ -11147,7 +11196,8 @@ span.Item__Icon {
   position:relative;
   flex-direction: column;
   align-items: center;
-  height:100%;
+  height:calc(100vh - 110px);
+  overflow: auto;
   width:100%;
   list-style: none;
   padding:0 4.5%;
@@ -11173,7 +11223,10 @@ span.Item__Icon {
   display:none;
   margin-top:3%;
   width:100%;
-  background-color: #f2f2f2;
+
+  ul {
+    list-style: none;
+  }
 }
 
 .MobileDropDown__Toggler {
@@ -11197,7 +11250,6 @@ span.Item__Icon {
   flex-wrap: wrap;
 
   .MobileDropdown__Content__Item {
-    width:30%;
     padding:20px 10px;
 
     img {
@@ -11211,11 +11263,10 @@ span.Item__Icon {
   display:flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   .MobileDropdown__Content__Item {
-    width:50%;
     padding:20px 10px;
-    text-align:left;
 
     img {
       height:auto;

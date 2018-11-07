@@ -1,13 +1,18 @@
 <header id="MainNav">
     <div class="MainNav {% if template == 'index' %} MainNav--IndexTop{% endif %} ">
+        <div class="MainNav__NavBlock NavBlock--Branding">
+            <a href="/" class="MainNav__Logo">
+                {%- if section.settings.Logo -%}
+                    {{ section.settings.Logo | img_url: 'master' | img_tag }}
+                {%- else -%}
+                    <h1>LOGO</h1>
+                {%- endif -%}
+            </a>
+        </div>
+
         <!-- LEFT HEADER -->
         <div class="MainNav__NavBlock NavBlock--Left">
             {%- include 'MainMenu-Left' -%}
-        </div>
-
-        <!-- CENTER LOGO -->
-        <div class="MainNav__NavBlock NavBlock--Center NavBlock--Center">
-            <a href=""><h1>LOGO</h1></a>
         </div>
 
         <!-- RIGHT HEADER -->
@@ -21,6 +26,8 @@
 <div id="MainNav-Mobile" class="MainNav--Mobile">
     {%- include 'MainMenu-Mobile' -%}
 </div>
+
+<div class="MainNav__Overlay"></div>
 
 <!--=============================================================
     HEADER SCRIPT
@@ -53,7 +60,6 @@
         }
     }
 
-
     $("#MobileToggler").click(function(){
         trackMobileVisibility();
         $(".MainNav--Mobile").slideToggle();
@@ -64,12 +70,15 @@
        $(this).find(".MobileContent__Dropdown").slideToggle();
        $(this).find(".MobileDropDown__Toggler").toggleClass("MobileDropDown__Toggler--Toggled");
     });
+
+    var $body = $('body');
+    $('.NavBlock__List__Item--Dropdown').hover(function () {
+        $body.addClass('MainNav--Active');
+    }, function () {
+        $body.removeClass('MainNav--Active');
+    });
 </script>
 
-
-{%- comment -%}=====================================================
-    SCHEMAS
-=================================================={%- endcomment -%}
 {% schema %}
 {
     "name": "MainNav",
@@ -77,9 +86,8 @@
     "settings":[
         {
             "id": "Logo",
-            "type": "text",
-            "label": "Logo Text",
-            "default": "logo"
+            "type": "image_picker",
+            "label": "Logo"
         },
         {
             "id": "FreeSwatchesImage",
@@ -112,14 +120,8 @@
         },
         {
             "id": "HelpOption1Icon",
-            "type": "select",
-            "label": "Help Option 1 Icon",
-            "options": [
-                { "value": "fas", "label": "Solid icon" },
-                { "value": "far", "label": "Regular icon" },
-                { "value": "fal", "label": "Light icon" }
-            ],
-            "default": "fal"
+            "type": "image_picker",
+            "label": "Help Option 1 Icon"
         },
         {
             "id": "HelpOption1Text",
@@ -129,14 +131,8 @@
         },
         {
             "id": "HelpOption2Icon",
-            "type": "select",
-            "label": "Help Option 2 Icon",
-            "options": [
-                { "value": "fas", "label": "Solid icon" },
-                { "value": "far", "label": "Regular icon" },
-                { "value": "fal", "label": "Light icon" }
-            ],
-            "default": "fal"
+            "type": "image_picker",
+            "label": "Help Option 2 Icon"
         },
         {
             "id": "HelpOption2Text",
@@ -146,14 +142,8 @@
         },
         {
             "id": "HelpOption3Icon",
-            "type": "select",
-            "label": "Help Option 3 Icon",
-            "options": [
-                { "value": "fas", "label": "Solid icon" },
-                { "value": "far", "label": "Regular icon" },
-                { "value": "fal", "label": "Light icon" }
-            ],
-            "default": "fal"
+            "type": "image_picker",
+            "label": "Help Option 3 Icon"
         },
         {
             "id": "HelpOption3Text",
