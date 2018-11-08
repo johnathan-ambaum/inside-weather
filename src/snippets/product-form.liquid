@@ -10,12 +10,15 @@
     {% endfor %}
   {% endunless %}
 
-  <select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
+
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+  {% comment %} <select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
     {% for variant in product.variants %}
       {% if variant.available %}
         <option {% if variant == product.selected_or_first_available_variant %}
           selected="selected" {% endif %}
-          value="{{ variant.id }}">
+          value="{{ variant.id }}"
+          data-sku="{{ variant.sku }}">
           {{ variant.title }} - {{ variant.price | money_with_currency }}
         </option>
       {% else %}
@@ -24,48 +27,50 @@
         </option>
       {% endif %}
     {% endfor %}
-  </select>
+  </select> {% endcomment %}
 
-  {% if settings.quantity_enable %}
-    <div class="product__quantity product__quantity--{{ settings.variant_type }} js-qty">
-      <label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>
-      <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
-    </div>
-  {% endif %}
-
-  {%- assign enable_dynamic_buttons = false -%}
-  {% if settings.enable_payment_button and template != 'product.preorder' %}
-    {%- assign enable_dynamic_buttons = true -%}
-  {% endif %}
-
-  {% if enable_dynamic_buttons %}
-    <div class="payment-buttons">
-  {% endif %}
-
-    <button
-      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
-      name="add"
-      id="AddToCart-{{ section_id }}"
-      class="{% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full add-to-cart"
-      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
-      <span id="AddToCartText-{{ section_id }}">
-        {% if current_variant.available %}
-          {% if template == 'product.preorder' %}
-            {{ 'products.product.preorder' | t }}
-          {% else %}
-            {{ 'products.product.add_to_cart' | t }}
-          {% endif %}
-        {% else %}
-          {{ 'products.product.sold_out' | t }}
-        {% endif %}
-      </span>
-    </button>
-
-    {% if enable_dynamic_buttons %}
-      {{ form | payment_button }}
+  <div class="Product__AddToCartRow">
+    {% if settings.quantity_enable %}
+      <div class="product__quantity product__quantity--{{ settings.variant_type }} js-qty">
+        <label for="Quantity-{{ section_id }}" class="visually-hidden">{{ 'products.product.quantity' | t }}</label>
+        <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
+      </div>
     {% endif %}
 
-  {% if enable_dynamic_buttons %}
-    </div>
-  {% endif %}
+    {%- assign enable_dynamic_buttons = false -%}
+    {% if settings.enable_payment_button and template != 'product.preorder' %}
+      {%- assign enable_dynamic_buttons = true -%}
+    {% endif %}
+
+    {% if enable_dynamic_buttons %}
+      <div class="payment-buttons">
+    {% endif %}
+
+      <button
+        {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+        name="add"
+        id="AddToCart-{{ section_id }}"
+        class="{% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full add-to-cart"
+        {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+        <span id="AddToCartText-{{ section_id }}">
+          {% if current_variant.available %}
+            {% if template == 'product.preorder' %}
+              {{ 'products.product.preorder' | t }}
+            {% else %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% endif %}
+          {% else %}
+            {{ 'products.product.sold_out' | t }}
+          {% endif %}
+        </span>
+      </button>
+
+      {% if enable_dynamic_buttons %}
+        {{ form | payment_button }}
+      {% endif %}
+
+    {% if enable_dynamic_buttons %}
+      </div>
+    {% endif %}
+  </div> <!-- .Product__AddToCartRow -->
 {% endform %}

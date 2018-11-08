@@ -1,10 +1,161 @@
 .ProductDetailGrid {
-  display: grid;
-  grid-gap: 3rem;
-  grid-template-columns: 2.125fr 1fr;
+  margin: 0 auto;
+  max-width: 2400px;
+  padding: 0 40px;
+
+  &, p, a, h1, h2, h3 {
+    font-family: Avalon, sans-serif;
+  }
 
   img {
     max-width: 100%;
+  }
+
+  @media only screen and (min-width: 776px) {
+    @supports (grid-gap: 3rem) {
+      display: grid;
+      grid-gap: 3rem;
+      grid-template-columns: 1fr 425px;
+    }
+  }
+}
+
+.ProductDetailGrid__Main {
+  @media only screen and (max-width: 775px) {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+
+  @media only screen and (min-width: 776px) {
+    float: left;
+    margin-right: 3rem;
+    width: calc(100% - 425px - 3rem);
+
+    @supports (grid-gap: 3rem) {
+      float: none;
+      width: auto;
+    }
+  }
+}
+
+.ProductDetailGrid__Sidebar {
+  hr {
+    border-color: #212121;
+    margin: 2rem 0;
+  }
+
+  @media only screen and (max-width: 775px) {
+    margin-left: -40px;
+    margin-right: -40px;
+
+    hr {
+      display: none;
+    }
+
+    h3 {
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+  }
+
+  @media only screen and (min-width: 776px) {
+    float: left;
+    width: 425px;
+
+    @supports (grid-gap: 3rem) {
+      float: none;
+      width: auto;
+    }
+  }
+}
+
+.Product__PriceRow {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+
+  .product__price {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    margin-right: 1rem;
+  }
+}
+
+@media only screen and (max-width: 775px) {
+  .product-single__meta,
+  .Product__Explore {
+    padding: 0 20px;
+  }
+}
+
+.Product__ShippingNote {
+  color: #d69d8a;
+  font-style: italic;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.Product__JumpLinks {
+  margin: 2rem 0;
+}
+
+.Product__JumpLink {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin: .5rem 0;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.Product__AddToCartRow {
+  display: flex;
+  margin-top: 2rem;
+
+  .product__quantity {
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+
+  .js-qty__wrapper,
+  .js-qty__num {
+    height: 100%;
+  }
+
+  button {
+    font-family: Avalon;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+
+    &, &:hover {
+      padding-bottom: 15px;
+      padding-top: 15px;
+    }
+  }
+}
+
+.Product__Explore {
+  background: #f4f4f4;
+
+  @media only screen and (max-width: 775px) {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+.Product__Lead {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 5px;
+
+  @media only screen and (min-width: 776px) {
+    margin-bottom: 10px;
   }
 }
 

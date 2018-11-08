@@ -23,20 +23,19 @@
   {% include 'product-template-variables' %}
 
   <div class="page-content">
-    <div class="page-width">
-
-      <div id="app">
-        <div class="ProductDetailGrid">
-          <product-detail class="ProductDetailGrid__Main">
-            <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
-            <div class="product-single__description rte" itemprop="description">
-              {{ product.description }}
-            </div>
-            {% comment %} {% include 'product-additional-content', section_id: section_id %} {% endcomment %}
-          </product-detail>
-          <div class="ProductDetailGrid__Sidebar">
-            <div class="product-single__meta">
-              <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <div id="app">
+      <div class="ProductDetailGrid">
+        <product-detail class="ProductDetailGrid__Main">
+          <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+          <div class="product-single__description rte" itemprop="description">
+            {{ product.description }}
+          </div>
+          {% comment %} {% include 'product-additional-content', section_id: section_id %} {% endcomment %}
+        </product-detail>
+        <div class="ProductDetailGrid__Sidebar">
+          <div class="product-single__meta">
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              <div class="Product__PriceRow">
                 {% if product.compare_at_price_max > product.price %}
                   <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
                   <span class="product__price-wrap-{{ section_id }}">
@@ -58,23 +57,49 @@
                   {{ current_variant.price | money }}
                 </span>
 
-                <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-                <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+                <div class="Product__ShippingNote">Ships in 7-10 days</div>
+              </div>
 
-                {% include 'product-form', section_id: section_id %}
-              </div> <!-- [itemprop="offers"] -->
-            </div> <!-- .product-single__meta -->
-            <hr>
-            <p>NOT SURE YOU FOUND THE PERFECT MATCH?</p>
-            <h3>EXPLORE MORE</h3>
-            <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}"></product-customizer>
-          </div> <!-- .ProductDetailGrid__Sidebar -->
-        </div> <!-- .ProductDetailGrid -->
-      </div> <!-- #app -->
-    </div> <!-- .page-width -->
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+              <div class="Product__JumpLinks">
+                <a href="#details" class="Product__JumpLink">Details</a>
+                <a href="#dimensions" class="Product__JumpLink">Dimensions</a>
+              </div>
+
+              {% include 'product-form', section_id: section_id %}
+            </div> <!-- [itemprop="offers"] -->
+          </div> <!-- .product-single__meta -->
+          <hr>
+          <div class="Product__Explore">
+            <p class="Product__Lead">NOT SURE YOU FOUND THE PERFECT MATCH?</p>
+            <h3>
+              EXPLORE MORE
+              <i class="fal fa-arrow-right" data-fa-transform="rotate-45"></i>
+            </h3>
+          </div>
+          <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}"></product-customizer>
+        </div> <!-- .ProductDetailGrid__Sidebar -->
+      </div> <!-- .ProductDetailGrid -->
+      <page-builder-section></page-builder-section>
+    </div> <!-- #app -->
   </div> <!-- .page-content -->
 
   <script type="application/json" id="ProductJson-{{ section_id }}" data-product-json>
     {{ product | json }}
+  </script>
+
+  <script>
+    jQuery(function ($) {
+      var $nav = $('.MainNav');
+      $('body').on('click', '.Product__JumpLink', function (e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
+        $('html,body').animate({
+          scrollTop: $(target).offset().top - $nav.height(),
+        });
+      });
+    });
   </script>
 </div> <!-- .product-section -->
