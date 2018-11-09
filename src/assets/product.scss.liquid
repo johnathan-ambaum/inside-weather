@@ -1,7 +1,11 @@
+$gutter: 40px;
+
 .ProductDetailGrid {
   margin: 0 auto;
   max-width: 2400px;
-  padding: 0 40px;
+  min-height: 100vh;
+  padding: 0 $gutter;
+  position: relative;
 
   &, p, a, h1, h2, h3 {
     font-family: Avalon, sans-serif;
@@ -22,13 +26,14 @@
 
 .ProductDetailGrid__Main {
   @media only screen and (max-width: 775px) {
-    margin-left: -40px;
-    margin-right: -40px;
+    margin-left: -$gutter;
+    margin-right: -$gutter;
   }
 
   @media only screen and (min-width: 776px) {
     float: left;
     margin-right: 3rem;
+    margin-top: $gutter;
     width: calc(100% - 425px - 3rem);
 
     @supports (grid-gap: 3rem) {
@@ -45,8 +50,8 @@
   }
 
   @media only screen and (max-width: 775px) {
-    margin-left: -40px;
-    margin-right: -40px;
+    margin-left: -$gutter;
+    margin-right: -$gutter;
 
     hr {
       display: none;
@@ -60,11 +65,37 @@
 
   @media only screen and (min-width: 776px) {
     float: left;
+    padding-top: $gutter;
     width: 425px;
 
     @supports (grid-gap: 3rem) {
       float: none;
-      width: auto;
+    }
+
+    &.is-fixed,
+    &.hug-bottom {
+      max-height: calc(100vh - 110px);
+      overflow: auto;
+      padding-right: $gutter;
+      right: 0;
+
+      .MainNav--Small & {
+        max-height: calc(100vh - 70px);
+      }
+    }
+
+    &.is-fixed {
+      position: fixed;
+      top: 110px;
+
+      .MainNav--Small & {
+        top: 70px;
+      }
+    }
+
+    &.hug-bottom {
+      bottom: 0;
+      position: absolute;
     }
   }
 }
@@ -140,9 +171,8 @@
 }
 
 .Product__Explore {
-  background: #f4f4f4;
-
   @media only screen and (max-width: 775px) {
+    background: #f4f4f4;
     padding-bottom: 1rem;
     padding-top: 1rem;
   }

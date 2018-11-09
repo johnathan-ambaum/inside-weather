@@ -10052,10 +10052,7 @@ div[data-section-type="fading-images"] {
 /*================ Templates | Product Page ================*/
 
 .product-single__meta {
-  padding-left: 45px;
-
   @include media-query($small) {
-    padding-left: 0;
     margin-top: $gutter / 2;
   }
 
@@ -10353,6 +10350,7 @@ div[data-section-type="fading-images"] {
 
 .product__price {
   font-size: em(floor(($type_base_size + 8) * 0.85));
+  font-weight: bold;
   @include media-query($medium-up) {
     font-size: em($type_base_size + 8);
   }
