@@ -25,9 +25,10 @@ $gutter: 40px;
 }
 
 .ProductDetailGrid__Main {
-  @media only screen and (max-width: 775px) {
+  @media only screen and (max-width: 1023px) {
     margin-left: -$gutter;
     margin-right: -$gutter;
+    padding-top: $gutter / 2;
   }
 
   @media only screen and (min-width: 776px) {
@@ -49,7 +50,7 @@ $gutter: 40px;
     margin: 2rem 0;
   }
 
-  @media only screen and (max-width: 775px) {
+  @media only screen and (max-width: 1023px) {
     margin-left: -$gutter;
     margin-right: -$gutter;
 
@@ -113,7 +114,11 @@ $gutter: 40px;
   }
 }
 
-@media only screen and (max-width: 775px) {
+@media only screen and (max-width: 1023px) {
+  .Product__PriceRow {
+    display: none;
+  }
+
   .product-single__meta,
   .Product__Explore {
     padding: 0 20px;
@@ -129,6 +134,10 @@ $gutter: 40px;
 
 .Product__JumpLinks {
   margin: 2rem 0;
+
+  @media only screen and (min-width: 1024px) {
+    display: none;
+  }
 }
 
 .Product__JumpLink {
@@ -171,7 +180,7 @@ $gutter: 40px;
 }
 
 .Product__Explore {
-  @media only screen and (max-width: 775px) {
+  @media only screen and (max-width: 1023px) {
     background: #f4f4f4;
     padding-bottom: 1rem;
     padding-top: 1rem;
