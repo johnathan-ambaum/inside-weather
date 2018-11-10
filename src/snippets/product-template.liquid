@@ -25,11 +25,12 @@
   <div id="app">
     <div class="ProductDetailGrid">
       <product-detail class="ProductDetailGrid__Main">
-        <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
-        <div class="product-single__description rte" itemprop="description">
-          {{ product.description }}
+        <div class="ProductDetailGrid__Main">
+          <h1 class="ProductDetail__Title">{{ product.title | replace: ' ', '<br>' }}</h1>
+          {%- for image in product.images -%}
+            <div class="ResponsiveImage__Wrapper"></div>
+          {%- endfor -%}
         </div>
-        {% comment %} {% include 'product-additional-content', section_id: section_id %} {% endcomment %}
       </product-detail>
       <div class="ProductDetailGrid__Sidebar is-fixed">
         <div class="product-single__meta">
