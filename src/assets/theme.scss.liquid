@@ -11079,7 +11079,7 @@ html body.MobileNav--Active {
     -webkit-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
-    border-color: #000000;
+    border-color: #202020;
   }
 }
 
@@ -11092,6 +11092,8 @@ html body.MobileNav--Active {
     transition: opacity .2s linear 0s;
   }
 }
+
+
 
 /* SHOP DROPDOWN */
 .Dropdown__Content--MultiColumn {
@@ -11150,18 +11152,10 @@ html body.MobileNav--Active {
 }
 
 .Item__Icon {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  align-items: center;
   display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-grow: 1;
+  justify-content: center;
 
   img {
     max-height: 75px;
@@ -11275,6 +11269,18 @@ html body.MobileNav--Active {
   text-align: center;
 }
 
+
+.Item__Icon img { 
+  max-height:55px;
+  margin-bottom:10px;
+}
+
+.Help__Options__Item .Item__Text {
+  margin-top:5px;
+  letter-spacing: .025em;
+}
+
+
 /* MOBILE NAV */
 .Mobile-Item {
   &.MobileNav--Toggler {
@@ -11367,6 +11373,14 @@ html body.MobileNav--Active {
   }
 }
 
+.MainNav--Mobile__List li a,
+.Mobile__List__Item--DropDown .MobileContent__Dropdown__Title {
+  font-family: 'Avalon';
+  font-weight: 600;
+  letter-spacing: .05em;
+  font-size: 14px
+}
+
 .MobileDropDown__Toggler {
   position:absolute;
   font-size:18px;
@@ -11424,7 +11438,7 @@ html body.MobileNav--Active {
 
     img {
       height:auto;
-      width:100%;
+      width:150px;
     }
   }
 }
@@ -11455,4 +11469,8 @@ html body.MobileNav--Active {
   main {
     margin-top: 70px;
   }
+}
+
+.MobileDropdown__Content__Item .Item__Heading {
+  margin-bottom:5px;
 }
