@@ -11,7 +11,7 @@
     {%- for parentLink in linklists.main-menu.links -%}
         {%- if parentLink.links != blank -%}
             <li class="NavBlock__List__Item--Dropdown">
-                <a href="">{{ parentLink.title }}</a>
+                <a href="#" class="js-no-transition">{{ parentLink.title }}</a>
                 <div class="Dropdown__Content">
                     {% assign currentLink = parentLink.title | downcase | strip %}
 

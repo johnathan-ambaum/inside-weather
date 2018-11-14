@@ -10875,21 +10875,26 @@ html body.MobileNav--Active {
 }
 
 .MainNav__Overlay {
+  height: 100vh;
+  left: 0;
   opacity: 0;
-  -webkit-transition: opacity .3s linear;
-  -o-transition: opacity .3s linear;
-  transition: opacity .3s linear;
+  position: fixed;
+  top: 0;
+  -webkit-transition: opacity .3s linear, visibility 0s linear .3s;
+  -o-transition: opacity .3s linear, visibility 0s linear .3s;
+  transition: opacity .3s linear, visibility 0s linear .3s;
+  visibility: hidden;
+  z-index: 900;
 
   @media only screen and (min-width: 1024px) {
     .MainNav--Active & {
       background: #202020;
-      height: 100vh;
-      left: 0;
       opacity: .65;
-      position: fixed;
-      top: 0;
+      -webkit-transition: opacity .3s linear;
+      -o-transition: opacity .3s linear;
+      transition: opacity .3s linear;
+      visibility: visible;
       width: 100vw;
-      z-index: 900;
     }
   }
 }
@@ -10901,6 +10906,7 @@ html body.MobileNav--Active {
   transition: all .3s ease-out .1s;
 
   &:hover,
+  .MainNav--Active &,
   .MainNav--Mobile {
     -webkit-transition: all .3s ease-out;
     -o-transition: all .3s ease-out;
@@ -10915,7 +10921,8 @@ html body.MobileNav--Active {
     transition: color .3s ease-out;
   }
 
-  &:hover a {
+  &:hover a,
+  .MainNav--Active & a {
     color:#000000;
   }
 
@@ -10924,7 +10931,8 @@ html body.MobileNav--Active {
             filter: brightness(100);
   }
 
-  &:hover .MainNav__Logo {
+  &:hover .MainNav__Logo,
+  .MainNav--Active & .MainNav__Logo {
     -webkit-filter: brightness(0);
             filter: brightness(0);
   }
@@ -11048,10 +11056,10 @@ html body.MobileNav--Active {
   width:100%;
   background-color:white;
   border-top:1px solid #d3d3d3;
-  transition: opacity .3s linear .15s, visibility 0s linear .45s;
-  -moz-transition: opacity .3s linear .15s, visibility 0s linear .45s;
-  -webkit-transition: opacity .3s linear .15s, visibility 0s linear .45s;
-  -o-transition: opacity .3s linear .15s, visibility 0s linear .45s;
+  transition: opacity .3s linear, visibility 0s linear .3s;
+  -moz-transition: opacity .3s linear, visibility 0s linear .3s;
+  -webkit-transition: opacity .3s linear, visibility 0s linear .3s;
+  -o-transition: opacity .3s linear, visibility 0s linear .3s;
   visibility: hidden;
   opacity:0;
 
@@ -11069,7 +11077,8 @@ html body.MobileNav--Active {
 }
 
 .NavBlock__List__Item,
-.NavBlock__List__Item--Dropdown {
+.NavBlock__List__Item--Dropdown,
+.MainNav--Active {
   & > a {
     border-bottom: 2px solid transparent;
   }
@@ -11083,7 +11092,7 @@ html body.MobileNav--Active {
   }
 }
 
-.NavBlock__List__Item--Dropdown:hover {
+.NavBlock__List__Item--Dropdown--Active {
   .Dropdown__Content {
     visibility: visible;
     opacity: 1;
