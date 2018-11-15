@@ -1,4 +1,6 @@
-<header id="MainNav">
+{%- include 'cart-drawer' -%}
+
+<header id="MainNav" data-section-id="{{ section_id }}" data-section-type="header-section">
     <div class="MainNav {% if template == 'index' %} MainNav--IndexTop{% endif %} ">
         <div class="MainNav__NavBlock NavBlock--Branding">
             <a href="/" class="MainNav__Logo">
