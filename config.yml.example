@@ -2,8 +2,37 @@ development:
   password:
   theme_id: 12345
   store: loomandloft.myshopify.com
+  ignore_files:
+    - page.*.liquid
+    - locales/*
+    - assets/gem*
+    - snippets/icon-*
+    - templates/customers/*
+    - templates/index*
+    - templates/product.*
+    - templates/search*
+    - sections/featured-*
+    - snippets/page-block*
+    - snippets/ssw*
+    - snippets/variant*
+    - snippets/Avalon*
 
 production:
   password:
   theme_id: "live"
   store: loomandloft.myshopify.com
+  ignore_files:
+    - settings_data.json # Uncomment this line to avoid resetting theme settings
+    - page.*.liquid
+    - locales/*
+    - assets/gem*
+    - snippets/icon-*
+    - templates/customers/*
+    - templates/index*
+    - templates/product.*
+    - templates/search*
+    - sections/featured-*
+    - snippets/page-block*
+    - snippets/ssw*
+    - snippets/variant*
+    - snippets/Avalon*
