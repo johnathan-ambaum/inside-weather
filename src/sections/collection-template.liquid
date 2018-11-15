@@ -1,65 +1,10 @@
-{%- assign per_row = section.settings.per_row -%}
-{% assign paginate_by = per_row | times: 5 %}
-{% if section.settings.collection_tags_style == 'inline' and collection.all_tags.size > 0 %}
-  {% assign paginate_by = paginate_by | minus: 1 %}
-{% endif %}
-
-{% paginate collection.products by paginate_by %}
 
 <div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
-  {% if section.settings.collection_image_enable and collection.image %}
-    <div class="collection-hero loading--delayed">
-      <div
-        class="collection-hero__image lazyload"
-        data-bgset="{% include 'bgset', image: collection.image %}"
-        data-sizes="auto">
-      </div>
-      <noscript>
-        <div
-          class="collection-hero__image"
-          style="background-image: url({{ collection.image | img_url: '1400x' }});";
-          ></div>
-      </noscript>
-
-      <div class="collection-hero__content">
-        <div class="page-width">
-          <header class="section-header section-header--hero">
-            <h1 class="section-header__title section-header__title--medium">
-              <div class="animation-cropper">
-                <div class="animation-contents">
-                  {{ collection.title }}
-                </div>
-              </div>
-            </h1>
-          </header>
-        </div>
-      </div>
-
-    </div>
-  {% endif %}
-
   <div id="app" class="page-width page-content">
     <search-results :per-row="{{ section.settings.per_row }}"></search-results>
-    <browse-widget category="{{ collection.handle }}">
-      {% comment %} {% unless section.settings.collection_image_enable and collection.image %}
-        <header class="section-header">
-          <h1 class="section-header__title">
-            {{ collection.title }}
-          </h1>
-        </header>
-      {% endunless %}
-
-      {% if collection.description != blank %}
-        <div class="rte">
-          {{ collection.description }}
-        </div>
-        <hr class="hr--clear hr--small">
-      {% endif %} {% endcomment %}
-    </browse-widget>
+    <browse-widget category="{{ collection.handle }}"></browse-widget>
   </div> <!-- #app -->
 </div> <!-- #CollectionSection -->
-
-{% endpaginate %}
 
 {% schema %}
   {
