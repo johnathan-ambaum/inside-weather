@@ -47,7 +47,7 @@ $gutter: 40px;
 .ProductDetailGrid__Sidebar {
   hr {
     border-color: #212121;
-    margin: 2rem 0;
+    margin: 30px 0 32px;
   }
 
   @media only screen and (max-width: 1023px) {
@@ -135,7 +135,7 @@ $gutter: 40px;
 .Product__JumpLinks {
   margin: 2rem 0;
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (max-width: 1023px) {
     display: none;
   }
 }
@@ -155,7 +155,7 @@ $gutter: 40px;
 
 .Product__AddToCartRow {
   display: flex;
-  margin-top: 2rem;
+  margin: 2rem 0 1rem;
 
   .product__quantity {
     margin-bottom: 0;
@@ -176,6 +176,15 @@ $gutter: 40px;
       padding-bottom: 15px;
       padding-top: 15px;
     }
+  }
+}
+
+.affirm-as-low-as {
+  margin: 0;
+
+  &, a {
+    color: #8a8a8a;
+    font-weight: 500;
   }
 }
 

@@ -1,33 +1,7 @@
 {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
 {% form 'product', product, id: form_id, class: 'product-single__form' %}
-  {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
-    {% for option in product.options_with_values %}
-      {% if settings.variant_type == 'button' %}
-        {% include 'variant-button', section_id: section_id, option_drop: option %}
-      {% else %}
-        {% include 'variant-dropdown', section_id: section_id %}
-      {% endif %}
-    {% endfor %}
-  {% endunless %}
-
 
   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-  {% comment %} <select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
-    {% for variant in product.variants %}
-      {% if variant.available %}
-        <option {% if variant == product.selected_or_first_available_variant %}
-          selected="selected" {% endif %}
-          value="{{ variant.id }}"
-          data-sku="{{ variant.sku }}">
-          {{ variant.title }} - {{ variant.price | money_with_currency }}
-        </option>
-      {% else %}
-        <option disabled="disabled">
-          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
-        </option>
-      {% endif %}
-    {% endfor %}
-  </select> {% endcomment %}
 
   <div class="Product__AddToCartRow">
     {% if settings.quantity_enable %}
@@ -72,5 +46,7 @@
     {% if enable_dynamic_buttons %}
       </div>
     {% endif %}
+
   </div> <!-- .Product__AddToCartRow -->
+  <p class="affirm-as-low-as" data-page-type="product" data-amount="{{ product.selected_or_first_available_variant.price }}"></p>
 {% endform %}
