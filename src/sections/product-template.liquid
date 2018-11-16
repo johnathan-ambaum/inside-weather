@@ -1,21 +1,4 @@
-{% include 'product-template',
-  image_container_width: section.settings.image_size,
-  section_id: product.id,
-  social: section.settings.social_enable,
-  thumbnail_position: section.settings.thumbnail_position
-%}
-
-{% if section.settings.related_enable %}
-  {% unless isModal %}
-    {% include 'related-products' %}
-  {% endunless %}
-{% endif %}
-
-{% if section.settings.collection_links_enable and collection %}
-  {% unless isModal %}
-    {% include 'collection-navigation-links' %}
-  {% endunless %}
-{% endif %}
+{% include 'product-template', section_id: product.id %}
 
 {% schema %}
   {

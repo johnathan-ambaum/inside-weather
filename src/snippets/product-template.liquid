@@ -1,24 +1,14 @@
-{% unless thumbnail_position %}
-  {%- assign thumbnail_position = 'beside' -%}
-{% endunless %}
-
 <div id="ProductSection-{{ section_id }}"
   class="product-section"
   itemscope itemtype="http://schema.org/Product"
   data-section-id="{{ section_id }}"
   data-section-type="product-template"
-  {% if settings.product_zoom_enable %}
-    data-image-zoom="true"
-  {% endif %}
   {% if settings.inventory_enable %}
     data-inventory="true"
   {% endif %}
   {% unless isModal %}
     data-enable-history-state="true"
-  {% endunless %}
-  {% if isModal %}
-    data-lazyload-content="true"
-  {% endif %}>
+  {% endunless %}>
 
   {% include 'product-template-variables' %}
 
@@ -54,7 +44,7 @@
                 class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
                 itemprop="price"
                 content="{{ current_variant.price | divided_by: 100.00 }}">
-                {{ current_variant.price | money }}
+                ${{ current_variant.price | divided_by: 100 }}
               </span>
 
               <div class="Product__ShippingNote">Ships in 7-10 days</div>
