@@ -10838,7 +10838,6 @@ html body.MobileNav--Active {
   letter-spacing: .1em;
 
   @media only screen and (max-width: 1023px) {
-    border-bottom: 1px solid #464646;
     padding: 0;
   }
 
@@ -10926,15 +10925,17 @@ html body.MobileNav--Active {
     color:#000000;
   }
 
-  .MainNav__Logo {
-    -webkit-filter: brightness(100);
-            filter: brightness(100);
-  }
+  @media only screen and (min-width: 1024px) {
+    .MainNav__Logo {
+      -webkit-filter: brightness(100);
+              filter: brightness(100);
+    }
 
-  &:hover .MainNav__Logo,
-  .MainNav--Active & .MainNav__Logo {
-    -webkit-filter: brightness(0);
-            filter: brightness(0);
+    &:hover .MainNav__Logo,
+    .MainNav--Active & .MainNav__Logo {
+      -webkit-filter: brightness(0);
+              filter: brightness(0);
+    }
   }
 }
 
@@ -11300,12 +11301,14 @@ html body.MobileNav--Active {
   }
 
   &.Mobile-Item__Cart {
-    font-size: 1.25rem;
+    svg {
+      fill: currentColor;
+      height: 45px;
+    }
   }
 
   @media only screen and (max-width: 1023px) {
-    &.MobileNav--Toggler button,
-    &.Mobile-Item__Cart {
+    &.MobileNav--Toggler button {
         font-size: 1.5rem;
     }
   }
