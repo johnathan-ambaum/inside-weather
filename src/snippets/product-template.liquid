@@ -15,12 +15,10 @@
   <div id="app">
     <div class="ProductDetailGrid">
       <product-detail class="ProductDetailGrid__Main">
-        <div class="ProductDetailGrid__Main">
-          <h1 class="ProductDetail__Title">{{ product.title | replace: ' ', '<br>' }}</h1>
-          {%- for image in product.images -%}
-            <div class="ResponsiveImage__Wrapper"></div>
-          {%- endfor -%}
-        </div>
+        <h1 class="ProductDetail__Title">{{ product.title }}</h1>
+        {%- for image in product.images -%}
+          <div class="ResponsiveImage__Wrapper"></div>
+        {%- endfor -%}
       </product-detail>
       <div class="ProductDetailGrid__Sidebar is-fixed">
         <div class="product-single__meta">

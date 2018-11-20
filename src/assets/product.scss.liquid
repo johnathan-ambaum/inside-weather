@@ -1,11 +1,18 @@
 $gutter: 40px;
+$sidebar-width: 425px;
 
 .ProductDetailGrid {
   margin: 0 auto;
-  max-width: 2400px;
+  max-width: 2000px + $sidebar-width;
   min-height: 100vh;
-  padding: 0 $gutter;
+  padding: 0 0 0 $gutter;
   position: relative;
+
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
 
   &, p, a, h1, h2, h3 {
     font-family: Avalon, sans-serif;
@@ -13,14 +20,6 @@ $gutter: 40px;
 
   img {
     max-width: 100%;
-  }
-
-  @media only screen and (min-width: 776px) {
-    @supports (grid-gap: 3rem) {
-      display: grid;
-      grid-gap: 3rem;
-      grid-template-columns: 1fr 425px;
-    }
   }
 }
 
@@ -31,16 +30,11 @@ $gutter: 40px;
     padding-top: $gutter / 2;
   }
 
-  @media only screen and (min-width: 776px) {
+  @media only screen and (min-width: 1024px) {
     float: left;
-    margin-right: 3rem;
-    margin-top: $gutter;
-    width: calc(100% - 425px - 3rem);
-
-    @supports (grid-gap: 3rem) {
-      float: none;
-      width: auto;
-    }
+    margin-top: $gutter / 2;
+    position: relative;
+    width: calc(100vw - #{$sidebar-width} - #{$gutter * 2});
   }
 }
 
@@ -64,20 +58,15 @@ $gutter: 40px;
     }
   }
 
-  @media only screen and (min-width: 776px) {
-    float: left;
-    padding-top: $gutter;
-    width: 425px;
-
-    @supports (grid-gap: 3rem) {
-      float: none;
-    }
+  @media only screen and (min-width: 1024px) {
+    float: right;
+    padding-top: $gutter / 2;
+    width: $sidebar-width;
 
     &.is-fixed,
     &.hug-bottom {
       max-height: calc(100vh - 110px);
       overflow: auto;
-      padding-right: $gutter;
       right: 0;
 
       .MainNav--Small & {
@@ -110,8 +99,12 @@ $gutter: 40px;
     font-size: 32px;
     font-weight: 600;
     line-height: 1;
-    margin-right: 1rem;
+    margin-right: 25px;
   }
+}
+
+.product-single__meta {
+  padding-right: $gutter;
 }
 
 @media only screen and (max-width: 1023px) {
@@ -162,9 +155,14 @@ $gutter: 40px;
     margin-right: 1rem;
   }
 
-  .js-qty__wrapper,
-  .js-qty__num {
-    height: 100%;
+  .select-wrap {
+    select {
+      background-position: right 20px center;
+      border: 1px solid #959595;
+      height: 100%;
+      margin-right: 10px;
+      padding: 0 35px 0 20px;
+    }
   }
 
   button {
@@ -189,6 +187,11 @@ $gutter: 40px;
 }
 
 .Product__Explore {
+  h3 {
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
   @media only screen and (max-width: 1023px) {
     background: #f4f4f4;
     padding-bottom: 1rem;
@@ -202,7 +205,7 @@ $gutter: 40px;
   line-height: 1.1;
   margin-bottom: 5px;
 
-  @media only screen and (min-width: 776px) {
+  @media only screen and (min-width: 1024px) {
     margin-bottom: 10px;
   }
 }

@@ -5,9 +5,13 @@
 
   <div class="Product__AddToCartRow">
     {% if settings.quantity_enable %}
-      <div class="product__quantity product__quantity--{{ settings.variant_type }} js-qty">
+      <div class="select-wrap">
         <label for="Quantity-{{ section_id }}" class="visually-hidden">{{ 'products.product.quantity' | t }}</label>
-        <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
+        <select name="quantity" id="Quantity-{{ section_id }}">
+          {%- for i in (1..10) -%}
+            <option value="{{ i }}">{{ i }}</option>
+          {%- endfor -%}
+        </select>
       </div>
     {% endif %}
 
