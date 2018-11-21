@@ -1,6 +1,10 @@
 $gutter: 40px;
 $sidebar-width: 425px;
 
+.template-collection .page-container {
+  padding-bottom: 56px;
+}
+
 .ProductDetailGrid {
   margin: 0 auto;
   max-width: 2000px + $sidebar-width;
@@ -19,7 +23,22 @@ $sidebar-width: 425px;
   }
 
   &, p, a, h1, h2, h3 {
-    font-family: Avalon, sans-serif;
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  }
+
+  .affirm-as-low-as {
+    margin: 0;
+
+    &, a {
+      color: #8a8a8a;
+      font-family: Roboto, "HelveticaNeue", "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+
+      @media only screen and (max-width: 1023px) {
+        font-size: 11px;
+      }
+    }
   }
 
   img {
@@ -147,7 +166,7 @@ $sidebar-width: 425px;
 
 .Product__AddToCartRow {
   display: flex;
-  margin: 2rem 0 1rem;
+  margin: 30px 0 15px;
 
   .product__quantity {
     margin-bottom: 0;
@@ -165,7 +184,7 @@ $sidebar-width: 425px;
   }
 
   button {
-    font-family: Avalon;
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
     letter-spacing: .05em;
     text-transform: uppercase;
 
@@ -173,15 +192,6 @@ $sidebar-width: 425px;
       padding-bottom: 15px;
       padding-top: 15px;
     }
-  }
-}
-
-.affirm-as-low-as {
-  margin: 0;
-
-  &, a {
-    color: #8a8a8a;
-    font-weight: 500;
   }
 }
 
@@ -193,6 +203,7 @@ $sidebar-width: 425px;
 
   @media only screen and (max-width: 1023px) {
     background: #f4f4f4;
+    margin-top: 30px;
     padding-bottom: 1rem;
     padding-top: 1rem;
   }
