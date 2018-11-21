@@ -21,6 +21,7 @@
         {%- endfor -%}
       </product-detail>
       <div class="ProductDetailGrid__Sidebar is-fixed">
+        <product-detail-slider v-if="product && isMobile"></product-detail-slider>
         <div class="product-single__meta">
           <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
             <div class="Product__PriceRow">
