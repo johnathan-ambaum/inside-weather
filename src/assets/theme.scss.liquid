@@ -10812,27 +10812,54 @@ html body.MobileNav--Active {
 }
 
 .MainNav {
+  background:transparent;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   display:-webkit-box;
   display:-ms-flexbox;
   display:flex;
+  font-family: 'Avalon';
+  font-size:14px;
+  font-weight: 600;
+  height:110px;
+  letter-spacing: .1em;
   padding: 0 $gutter;
   position:fixed;
-  z-index: 999;
-  width:100%;
-  height:110px;
-  background: #ffffff;
   text-transform: uppercase;
-  font-weight: 600;
-  font-size:14px;
   top: 0;
-  -webkit-transition: all .2s ease-out;
-  -o-transition: all .2s ease-out;
-  transition: all .2s ease-out;
-  font-family: 'Avalon';
-  letter-spacing: .1em;
+  -webkit-transition: all .3s ease-out .1s;
+  -o-transition: all .3s ease-out .1s;
+  transition: all .3s ease-out .1s;
+  width:100%;
+  z-index: 999;
+
+  &:hover,
+  .MainNav--Active &,
+  .MainNav--Small &,
+  .MainNav--Mobile {
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    background: #ffffff;
+  }
+
+  a {
+    color: #000;
+  }
+
+  .template-index & a {
+    color: #ffffff;
+    -webkit-transition: color .3s ease-out;
+    -o-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+  }
+
+  .template-index &:hover a,
+  .template-index.MainNav--Small & a,
+  .template-index.MainNav--Active & a {
+    color:#000;
+  }
 
   @media only screen and (max-width: 1023px) {
     padding: 0;
@@ -10845,7 +10872,7 @@ html body.MobileNav--Active {
   .MainNav--Small & {
     -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
             box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
-    height:70px;
+    height: 70px;
   }
 
   @media only screen and (max-width: 1023px) {
@@ -10862,11 +10889,18 @@ html body.MobileNav--Active {
     }
   }
 
-  a {
-    color: #000000;
-    -webkit-transition: color .3s ease-out .1s;
-    -o-transition: color .3s ease-out .1s;
-    transition: color .3s ease-out .1s;
+  @media only screen and (min-width: 1024px) {
+    .template-index & .MainNav__Logo {
+      -webkit-filter: brightness(100);
+              filter: brightness(100);
+    }
+
+    .template-index &:hover .MainNav__Logo,
+    .template-index.MainNav--Small & .MainNav__Logo,
+    .template-index.MainNav--Active & .MainNav__Logo {
+      -webkit-filter: brightness(0);
+              filter: brightness(0);
+    }
   }
 }
 
@@ -10891,47 +10925,6 @@ html body.MobileNav--Active {
       transition: opacity .3s linear;
       visibility: visible;
       width: 100vw;
-    }
-  }
-}
-
-.MainNav--IndexTop {
-  background:transparent;
-  -webkit-transition: all .3s ease-out .1s;
-  -o-transition: all .3s ease-out .1s;
-  transition: all .3s ease-out .1s;
-
-  &:hover,
-  .MainNav--Active &,
-  .MainNav--Mobile {
-    -webkit-transition: all .3s ease-out;
-    -o-transition: all .3s ease-out;
-    transition: all .3s ease-out;
-    background: #ffffff;
-  }
-
-  a {
-    color: #ffffff;
-    -webkit-transition: color .3s ease-out;
-    -o-transition: color .3s ease-out;
-    transition: color .3s ease-out;
-  }
-
-  &:hover a,
-  .MainNav--Active & a {
-    color:#000000;
-  }
-
-  @media only screen and (min-width: 1024px) {
-    .MainNav__Logo {
-      -webkit-filter: brightness(100);
-              filter: brightness(100);
-    }
-
-    &:hover .MainNav__Logo,
-    .MainNav--Active & .MainNav__Logo {
-      -webkit-filter: brightness(0);
-              filter: brightness(0);
     }
   }
 }

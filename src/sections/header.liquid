@@ -1,7 +1,7 @@
 {%- include 'cart-drawer' -%}
 
 <header id="MainNav" data-section-id="{{ section_id }}" data-section-type="header-section">
-    <div class="MainNav {% if template == 'index' %} MainNav--IndexTop{% endif %} ">
+    <div class="MainNav">
         <div class="MainNav__NavBlock NavBlock--Branding">
             <a href="/" class="MainNav__Logo">
                 {%- if section.settings.Logo -%}
@@ -35,30 +35,14 @@
     HEADER SCRIPT
 =================================================================-->
 <script>
-    $(document).ready(function(){
-        trackMobileVisibility();
-    });
-    $(document).on("scroll", function() {
-        if($(document).scrollTop()>=100) {
-            $(".template-index .MainNav").removeClass("MainNav--IndexTop");
-            $("body").addClass("MainNav--Small");
-        }
-        else {
-            $(".template-index .MainNav").addClass("MainNav--IndexTop");
-            trackMobileVisibility();
-            $("body").removeClass("MainNav--Small");
-        }
-    });
+    var $document = $(document);
+    var $body = $('body');
 
-    /* MOBILE NAV SCRIPTS */
-    function trackMobileVisibility(){
-        if($('.template-index #MobileToggler').is(':visible')){
-            $('.MainNav').removeClass('MainNav--IndexTop');
-        }
-    }
+    $document.on("scroll", function() {
+        $body.toggleClass("MainNav--Small", $document.scrollTop() >= 100);
+    });
 
     $("#MobileToggler").click(function(){
-        trackMobileVisibility();
         $(".MainNav--Mobile").slideToggle();
         $('body').toggleClass("MobileNav--Active");
     });
@@ -68,7 +52,6 @@
        $(this).find(".MobileDropDown__Toggler").toggleClass("MobileDropDown__Toggler--Toggled");
     });
 
-    var $body = $('body');
     var activeClass = 'NavBlock__List__Item--Dropdown--Active';
     var bodyActiveClass = 'MainNav--Active';
     $body.on('click', '.NavBlock__List__Item--Dropdown > a', function (e) {
