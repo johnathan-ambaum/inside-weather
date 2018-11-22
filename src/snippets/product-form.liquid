@@ -28,17 +28,12 @@
         {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
         name="add"
         id="AddToCart-{{ section_id }}"
-        class="{% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full add-to-cart"
-        {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+        class="{% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full add-to-cart">
         <span id="AddToCartText-{{ section_id }}">
-          {% if current_variant.available %}
-            {% if template == 'product.preorder' %}
-              {{ 'products.product.preorder' | t }}
-            {% else %}
-              {{ 'products.product.add_to_cart' | t }}
-            {% endif %}
+          {% if template == 'product.preorder' %}
+            {{ 'products.product.preorder' | t }}
           {% else %}
-            {{ 'products.product.sold_out' | t }}
+            {{ 'products.product.add_to_cart' | t }}
           {% endif %}
         </span>
       </button>
