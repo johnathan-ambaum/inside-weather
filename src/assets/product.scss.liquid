@@ -47,10 +47,6 @@ $sidebar-width: 425px;
 }
 
 .ProductDetailGrid__Main {
-  @media only screen and (max-width: 1023px) {
-    border-top: 1px solid #b7b7b7;
-  }
-
   @media only screen and (min-width: 1024px) {
     float: left;
     margin-top: $gutter / 2;
@@ -60,13 +56,13 @@ $sidebar-width: 425px;
 }
 
 .ProductDetailGrid__Sidebar {
-  hr {
+  .product-single__meta + hr {
     border-color: #212121;
     margin: 30px 0 32px;
   }
 
   @media only screen and (max-width: 1023px) {
-    hr {
+    .product-single__meta + hr {
       display: none;
     }
 
