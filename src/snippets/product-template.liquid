@@ -39,14 +39,11 @@
                 <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
               {% endif %}
 
-              <span id="ProductPrice-{{ section_id }}"
-                class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
-                itemprop="price"
-                content="{{ current_variant.price | divided_by: 100.00 }}">
+              <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price">
                 ${{ current_variant.price | divided_by: 100 }}
               </span>
 
-              <div class="Product__ShippingNote">Ships in 7-10 days</div>
+              <div class="Product__ShippingNote"></div>
             </div>
 
             <meta itemprop="priceCurrency" content="{{ shop.currency }}">
