@@ -8909,8 +8909,8 @@ $quick_button_size: 65px;
 
 .logo-bar__item {
   -webkit-box-flex: 0;
-      -ms-flex: 0 1 110px;
-          flex: 0 1 110px;
+      -ms-flex: 0 1 90px;
+          flex: 0 1 90px;
   vertical-align: middle;
   margin: 0 ($gutter / 2) ($gutter / 1.5);
   @include media-query($medium-up) {
@@ -10807,7 +10807,7 @@ html body.MobileNav--Active {
 
 @media only screen and (min-width: 1024px) {
   body:not(.template-index) main {
-    margin-top: 110px;
+    margin-top: 90px;
   }
 }
 
@@ -10822,7 +10822,7 @@ html body.MobileNav--Active {
   font-family: 'Avalon';
   font-size:14px;
   font-weight: 600;
-  height:110px;
+  height:90px;
   letter-spacing: .1em;
   padding: 0 $gutter;
   position:fixed;
@@ -10852,11 +10852,13 @@ html body.MobileNav--Active {
     color: #000;
   }
 
-  .template-index & a {
-    color: #ffffff;
-    -webkit-transition: color .3s ease-out;
-    -o-transition: color .3s ease-out;
-    transition: color .3s ease-out;
+  @media only screen and (min-width: 1024px) {
+    .template-index & a {
+      color: #ffffff;
+      -webkit-transition: color .3s ease-out;
+      -o-transition: color .3s ease-out;
+      transition: color .3s ease-out;
+    }
   }
 
   .template-index &:hover a,
@@ -11048,7 +11050,7 @@ html body.MobileNav--Active {
   display: flex;
   position: absolute;
   left:0;
-  top:110px;
+  top:90px;
   min-height:320px;
   padding: 3% 8% 5.5% 8%;
   width:100%;
@@ -11310,7 +11312,7 @@ html body.MobileNav--Active {
 
 .MainNav--Mobile  {
   display: none;
-  top:110px;
+  top:90px;
   bottom:0;
   position:fixed;
   height: 100vh;
@@ -11349,7 +11351,7 @@ html body.MobileNav--Active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height:calc(100vh - 110px);
+  height:calc(100vh - 90px);
   overflow: auto;
   width:100%;
   list-style: none;
