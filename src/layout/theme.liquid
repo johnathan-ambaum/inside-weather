@@ -132,6 +132,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
+  <script>
+    if (window.location.hostname !== 'localhost') {
+      jQuery(function($) {
+        $('a[href^="http"], a[href^="//"]')
+          .not('a[href^="'+window.location.protocol+'//'+window.location.hostname+'"]')
+          .not('a[href^="/"]')
+          .attr('target', '_blank');
+      });
+    }
+  </script>
+
   {% section 'newsletter-popup' %}
 
   {% if settings.cart_type == 'drawer' %}

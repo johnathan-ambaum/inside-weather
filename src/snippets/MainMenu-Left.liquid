@@ -18,7 +18,7 @@
                     {% comment %}===== FREE SWATCHES DROPDOWN ====={% endcomment %}
                     {%- if currentLink contains 'swatches' -%}
                         <ul class="Dropdown__Content--SplitHalfColumn">
-                            <li class="Dropdown__Content__Item"><img src="{{ section.settings.FreeSwatchesImage | img_url: "400x" }}"></li>
+                          <li class="Dropdown__Content__Item"><a href="{{ parentLink.url }}"><img src="{{ section.settings.FreeSwatchesImage | img_url: "400x" }}"></a></li>
                             <li class="Dropdown__Content__Item">
                                 <h3 class="Item__Heading">{{ section.settings.FreeSwatchesHeading }}</h3>
                                 <p class="Item__Text">{{ section.settings.FreeSwatchesText1 }}<br>{{ section.settings.FreeSwatchesText2 }}</p>

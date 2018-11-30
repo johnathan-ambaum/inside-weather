@@ -4,7 +4,7 @@
     {%- for parentLink in linklists.main-menu-right.links -%}
         {%- if parentLink.links != blank -%}
             <li class="NavBlock__List__Item--Dropdown">
-                <a href="">{{ parentLink.title }}</a>
+                <a href="{{ parentLink.url }}">{{ parentLink.title }}</a>
                 <div class="Dropdown__Content">
                     <div class="Dropdown__Content--CenterPieceColumn">
                         <!-- HELP LINKS -->

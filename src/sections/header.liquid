@@ -39,7 +39,7 @@
     var $body = $('body');
 
     $document.on("scroll", function() {
-        $body.toggleClass("MainNav--Small", $document.scrollTop() >= 100);
+        $body.toggleClass("MainNav--Small", $document.scrollTop() >= 40);
     });
 
     $("#MobileToggler").click(function(){
