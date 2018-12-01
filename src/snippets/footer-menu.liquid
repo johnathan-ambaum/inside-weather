@@ -16,7 +16,9 @@
       <div class="footer__collapsible{% unless block.settings.show_footer_title %} footer_collapsible--disabled{% endunless %}">
         <ul class="no-bullets site-footer__linklist">
           {% for link in linklists[block.settings.menu].links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- unless customer and link.title contains 'Sign Up' -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endunless -%}
           {% endfor %}
         </ul>
       </div>
