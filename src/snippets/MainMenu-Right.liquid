@@ -24,7 +24,7 @@
                                         {{ section.settings.HelpOption1Icon | img_url: '50x' | img_tag }}
                                     </div>
                                 </div>
-                                <h4 class="Item__Heading">Live Chat: <span class="Item__Text">Online</span></h4>
+                                <h4 class="Item__Heading">Text <span class="Item__Text"></span></h4>
                                 <p class="Item__Text">{{ section.settings.HelpOption1Text }}</p>
                             </div>
                             <div class="Help__Options__Item">
@@ -50,7 +50,9 @@
                 </div>
             </li>
         {% else %}
-            <li class="NavBlock__List__Item"><a href="{{ parentLink.url }}">{{ parentLink.title }}</a></li>
+            {%- unless customer and parentLink.title contains 'Sign up' -%}
+                <li class="NavBlock__List__Item"><a href="{{ parentLink.url }}">{{ parentLink.title }}</a></li>
+            {%- endunless -%}
         {% endif %}
     {%- endfor -%}
 
