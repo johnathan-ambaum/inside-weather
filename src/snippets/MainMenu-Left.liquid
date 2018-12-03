@@ -31,7 +31,7 @@
                             {%- for dropdownLink in parentLink.links-%}
                                 <li class="Dropdown__Content__Item">
                                     <a href="{{ dropdownLink.url }}">
-                                        <img src="{{ dropdownLink.object.image  | img_url: 'medium' }}">
+                                        <img src="{{ dropdownLink.object.image  | img_url: '500x' }}">
                                         <span>{{ dropdownLink.title }}</span>
                                     </a>
                                 </li>
