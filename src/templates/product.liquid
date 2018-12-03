@@ -42,8 +42,10 @@
 </script>
 <script text="text/javascript">
 	var _learnq = _learnq || [];
-	document.getElementById("AddToCart-{{ section_id }}").addEventListener('click',function (){
- 		_learnq.push(['track', 'Added to Cart', item]);
-	});
+  jQuery(function ($) {
+    $('body').on('click', 'button.add-to-cart', function () {
+      _learnq.push(['track', 'Added to Cart', item]);
+    });
+  });
 </script>
 <!--END KLAVIYO TRACKING -->
