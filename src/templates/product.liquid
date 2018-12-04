@@ -15,7 +15,7 @@
 <script text="text/javascript">
   var _learnq = _learnq || [];
 
-  var item = {
+  var klaviyoItem = window.klaviyoItem || {
     Name: {{ product.title|json }},
     ProductID: {{ product.id|json }},
     Categories: {{ product.collections|map:'title'|json }},
@@ -26,25 +26,27 @@
     CompareAtPrice: {{ product.compare_at_price_max|money|json }}
   };
 
-  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['track', 'Viewed Product', klaviyoItem]);
   _learnq.push(['trackViewedItem', {
-    Title: item.Name,
-    ItemId: item.ProductID,
-    Categories: item.Categories,
-    ImageUrl: item.ImageURL,
-    Url: item.URL,
+    Title: klaviyoItem.Name,
+    ItemId: klaviyoItem.ProductID,
+    Categories: klaviyoItem.Categories,
+    ImageUrl: klaviyoItem.ImageURL,
+    Url: klaviyoItem.URL,
     Metadata: {
-      Brand: item.Brand,
-      Price: item.Price,
-      CompareAtPrice: item.CompareAtPrice
+      Brand: klaviyoItem.Brand,
+      Price: klaviyoItem.Price,
+      CompareAtPrice: klaviyoItem.CompareAtPrice
     }
   }]);
 </script>
 <script text="text/javascript">
 	var _learnq = _learnq || [];
+  window.dataLayer = window.dataLayer || [];
   jQuery(function ($) {
     $('body').on('click', 'button.add-to-cart', function () {
-      _learnq.push(['track', 'Added to Cart', item]);
+      _learnq.push(['track', 'Added to Cart', klaviyoItem]);
+      window.dataLayer.push({'event': 'AddToCart'});
     });
   });
 </script>

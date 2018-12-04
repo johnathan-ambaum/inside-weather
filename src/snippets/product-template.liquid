@@ -47,6 +47,7 @@
             </div>
 
             <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <link itemprop="itemCondition" href="http://schema.org/NewCondition">
             <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
             <div class="Product__JumpLinks">

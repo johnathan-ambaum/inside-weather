@@ -20,3 +20,7 @@
 
 <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
 <meta itemprop="image" content="{{ product.featured_image.src | img_url: product_image_size }}">
+<meta itemprop="productID" content="{{ product.sku }}">
+<meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+<meta itemprop="name" content="{{ product.title }}">
+<meta itemprop="brand" content="{{ product.vendor }}">
