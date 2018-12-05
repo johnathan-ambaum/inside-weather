@@ -39,7 +39,7 @@
                 <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
               {% endif %}
 
-              <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price">
+              <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price" content="{{ current_variant.price | divided_by: 100 }}">
                 ${{ current_variant.price | divided_by: 100 }}
               </span>
 

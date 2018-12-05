@@ -29,7 +29,7 @@
 {%- if template.name == 'product' -%}
   <script>
     dataLayer = [{
-      totalPrice: {{ product.price | money | json }},
+      totalPrice: {{ product.price | divided_by: 100 | json }},
       productName: {{ product.title | json }},
       productIds: [{{ product.selected_or_first_available_variant.sku | json }}]
     }];
@@ -125,7 +125,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-  <div id="PageContainer" class="page-container">
+  <div id="PageContainer" class="page-container" itemscope itemtype="http://schema.org/Store">
+    <meta itemprop="name" content="{{ shop.name }}">
+
     <div class="transition-body">
 
       {% section 'header' %}
