@@ -37,6 +37,7 @@
 <script>
     var $document = $(document);
     var $body = $('body');
+    var $mobileNav = $(".MainNav--Mobile");
 
     {% unless template.name == 'product' or template.name == 'collection' %}
         $document.on("scroll", function() {
@@ -45,8 +46,15 @@
     {% endunless %}
 
     $("#MobileToggler").click(function(){
-        $(".MainNav--Mobile").slideToggle();
-        $('body').toggleClass("MobileNav--Active");
+        $mobileNav.slideToggle();
+        $body.toggleClass("MobileNav--Active");
+    });
+
+    $('.js-drawer-open-cart').on('click', function () {
+        if ($body.hasClass('MobileNav--Active')) {
+            $mobileNav.slideUp();
+            $body.toggleClass('MobileNav--Active');
+        }
     });
 
     $(".Mobile__List__Item--DropDown").click(function(){
