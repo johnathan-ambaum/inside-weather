@@ -10828,19 +10828,22 @@ html body.MobileNav--Active {
   position:fixed;
   text-transform: uppercase;
   top: 0;
-  -webkit-transition: all .3s ease-out .1s;
-  -o-transition: all .3s ease-out .1s;
-  transition: all .3s ease-out .1s;
+  -webkit-transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
+  -o-transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
+  transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
   width:100%;
-  z-index: 999;
+
+  body:not(.js-drawer-open):not(.js-drawer-closing) & {
+    z-index: 999;
+  }
 
   &:hover,
   .MainNav--Active &,
   .MainNav--Small &,
   .MainNav--Mobile {
-    -webkit-transition: all .3s ease-out;
-    -o-transition: all .3s ease-out;
-    transition: all .3s ease-out;
+    -webkit-transition: background .3s ease-out, height .3s ease-out;
+    -o-transition: background .3s ease-out, height .3s ease-out;
+    transition: background .3s ease-out, height .3s ease-out;
     background: #ffffff;
   }
 
