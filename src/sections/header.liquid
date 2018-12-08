@@ -38,9 +38,11 @@
     var $document = $(document);
     var $body = $('body');
 
-    $document.on("scroll", function() {
-        $body.toggleClass("MainNav--Small", $document.scrollTop() >= 40);
-    });
+    {% unless template.name == 'product' or template.name == 'collection' %}
+        $document.on("scroll", function() {
+            $body.toggleClass("MainNav--Small", $document.scrollTop() >= 40);
+        });
+    {% endunless %}
 
     $("#MobileToggler").click(function(){
         $(".MainNav--Mobile").slideToggle();
