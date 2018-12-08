@@ -31,7 +31,9 @@
       dataLayer = [{
         totalPrice: {{ product.price | divided_by: 100 | json }},
         productName: {{ product.title | json }},
-        productIds: [{{ product.selected_or_first_available_variant.sku | json }}]
+        productIds: [{{ product.selected_or_first_available_variant.sku | json }}],
+        productCategory: {{ collection.handle | json }},
+        productHandle: {{ product.handle | json }}
       }];
     </script>
   {%- endif -%}
