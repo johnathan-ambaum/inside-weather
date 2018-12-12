@@ -58,8 +58,13 @@
 
     {%- comment -%}====== NAV ICONS ====={%- endcomment -%}
     <li class="Mobile-Item Mobile-Item__Cart">
-        <a href="/cart" class="js-drawer-open-cart js-no-transition" aria-controls="CartDrawer" aria-expanded="false">
+        <a href="/cart" class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
             {%- include 'icon-cart-black' -%}
+            <span class="MainNav__CartCount js-cart-count">
+                {%- if cart.item_count > 0 -%}
+                    {{ cart.item_count }}
+                {%- endif -%}
+            </span>
         </a>
     </li>
 </ul>
