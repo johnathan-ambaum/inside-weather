@@ -194,10 +194,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     dataLayer = window.dataLayer || [];
     jQuery(function ($) {
       $('#MainContent').on('click', 'button', function () {
-        dataLayer.push({'event', 'newsletterSignup'});
+        var emailInput = document.querySelector('input[type="email"]');
+        var emailRegex = /.+?@.+?\..+?/;
+        if (emailInput && emailRegex.test(emailInput.value)) {
+          dataLayer.push({
+            event: 'newsletterSignup',
+            eventCategory: 'signup',
+            eventAction: 'sign_me_up',
+            eventLabel: 'newsletter',
+            eventValue: emailInput.value
+          });
+        }
       });
     });
   </script>
+  {% endif %}
+  {% unless customer %}
+    {% if template.name == 'register' %}
+    <script>
+      localStorage.setItem('registrationStarted', 1);
+    </script>
+    {% endif %}
+  {% endunless %}
+  {% if customer %}
+    <script>
+      if (localStorage.getItem('registrationStarted')) {
+        dataLayer.push({
+          event: 'registrationComplete',
+          eventCategory: 'complete_registration',
+          eventAction: 'create',
+          eventLabel: 'create_account',
+          eventValue: {{ customer.email | json }}
+        });
+        localStorage.removeItem('registrationStarted');
+      }
+    </script>
   {% endif %}
 </body>
 </html>
