@@ -21,52 +21,62 @@
         {%- endfor -%}
       </product-detail>
       <div class="ProductDetailGrid__Sidebar is-fixed">
+
         <product-detail-slider v-if="product && isMobile"></product-detail-slider>
-        <div class="product-single__meta">
-          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-            <div class="Product__PriceRow">
-              {% if product.compare_at_price_max > product.price %}
-                <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-                <span class="product__price-wrap-{{ section_id }}">
-                  <span id="ComparePrice-{{ section_id }}" class="product__price product__price--compare">
-                    {% if current_variant.compare_at_price > current_variant.price %}
-                      {{ current_variant.compare_at_price | money }}
-                    {% endif %}
+
+        {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+        {% form 'product', product, id: form_id, class: 'product-single__form' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <div class="product-single__meta">
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              <div class="Product__PriceRow">
+                {% if product.compare_at_price_max > product.price %}
+                  <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                  <span class="product__price-wrap-{{ section_id }}">
+                    <span id="ComparePrice-{{ section_id }}" class="product__price product__price--compare">
+                      {% if current_variant.compare_at_price > current_variant.price %}
+                        {{ current_variant.compare_at_price | money }}
+                      {% endif %}
+                    </span>
                   </span>
+                  <span id="ComparePriceA11y" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                {% else %}
+                  <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                {% endif %}
+
+                <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price" content="{{ current_variant.price | divided_by: 100 }}">
+                  ${{ current_variant.price | divided_by: 100 }}
                 </span>
-                <span id="ComparePriceA11y" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
-              {% else %}
-                <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-              {% endif %}
 
-              <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price" content="{{ current_variant.price | divided_by: 100 }}">
-                ${{ current_variant.price | divided_by: 100 }}
-              </span>
+                <div class="Product__ShippingNote"></div>
+              </div>
 
-              <div class="Product__ShippingNote"></div>
-            </div>
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="itemCondition" href="http://schema.org/NewCondition">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
-            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-            <link itemprop="itemCondition" href="http://schema.org/NewCondition">
-            <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+              <div class="Product__JumpLinks">
+                <a href="#details" class="Product__JumpLink">Details</a>
+                <a href="#dimensions" class="Product__JumpLink">Dimensions</a>
+              </div>
 
-            <div class="Product__JumpLinks">
-              <a href="#details" class="Product__JumpLink">Details</a>
-              <a href="#dimensions" class="Product__JumpLink">Dimensions</a>
-            </div>
+              {% include 'add-to-cart-row' %}
 
-            {% include 'product-form', section_id: section_id %}
-          </div> <!-- [itemprop="offers"] -->
-        </div> <!-- .product-single__meta -->
-        <hr>
-        <div class="Product__Explore">
-          <p class="Product__Lead">NOT SURE YOU FOUND THE PERFECT MATCH?</p>
-          <h3>
-            CUSTOMIZE
-            <i class="fal fa-arrow-right" data-fa-transform="rotate-45"></i>
-          </h3>
-        </div>
-        <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}"></product-customizer>
+            </div> <!-- [itemprop="offers"] -->
+          </div> <!-- .product-single__meta -->
+          <hr>
+          <div class="Product__Explore">
+            <p class="Product__Lead">NOT SURE YOU FOUND THE PERFECT MATCH?</p>
+            <h3>
+              CUSTOMIZE
+              <i class="fal fa-arrow-right" data-fa-transform="rotate-45"></i>
+            </h3>
+          </div>
+          <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}">
+            {% include 'add-to-cart-row' %}
+          </product-customizer>
+        {% endform %}
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
     <page-builder-section></page-builder-section>
@@ -84,6 +94,13 @@
         var target = $(this).attr('href');
         $('html,body').animate({
           scrollTop: $(target).offset().top - $nav.height(),
+        });
+      });
+
+      $('body').on('change', '[name="quantity"]', function () {
+        var newQty = $(this).val();
+        $('[name="quantity"]').each(function () {
+          $(this).val(newQty);
         });
       });
     });

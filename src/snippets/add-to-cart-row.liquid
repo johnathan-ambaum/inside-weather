@@ -1,0 +1,25 @@
+<div class="Product__AddToCartRow">
+  <div class="select-wrap">
+    <label for="Quantity-{{ section_id }}" class="visually-hidden">{{ 'products.product.quantity' | t }}</label>
+    <select name="quantity" id="Quantity-{{ section_id }}">
+      {%- for i in (1..10) -%}
+        <option value="{{ i }}">{{ i }}</option>
+      {%- endfor -%}
+    </select>
+  </div>
+
+  <button
+    {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+    name="add"
+    id="AddToCart-{{ section_id }}"
+    class="{% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full add-to-cart">
+    <span id="AddToCartText-{{ section_id }}">
+      {% if template == 'product.preorder' %}
+        {{ 'products.product.preorder' | t }}
+      {% else %}
+        {{ 'products.product.add_to_cart' | t }}
+      {% endif %}
+    </span>
+  </button>
+</div> <!-- .Product__AddToCartRow -->
+<p class="affirm-as-low-as" data-page-type="product" data-amount="{{ product.selected_or_first_available_variant.price }}"></p>
