@@ -14,33 +14,28 @@
                 <a href="#" class="js-no-transition">{{ parentLink.title }}</a>
                 <div class="Dropdown__Content">
                     {% assign currentLink = parentLink.title | downcase | strip %}
-
-                    {% comment %}===== FREE SWATCHES DROPDOWN ====={% endcomment %}
-                    {%- if currentLink contains 'swatches' -%}
-                        <ul class="Dropdown__Content--SplitHalfColumn">
-                          <li class="Dropdown__Content__Item"><a href="{{ parentLink.url }}"><img src="{{ section.settings.FreeSwatchesImage | img_url: "400x" }}"></a></li>
+                    <ul class="Dropdown__Content--MultiColumn">
+                        {%- for dropdownLink in parentLink.links-%}
                             <li class="Dropdown__Content__Item">
-                                <h3 class="Item__Heading">{{ section.settings.FreeSwatchesHeading }}</h3>
-                                <p class="Item__Text">{{ section.settings.FreeSwatchesText1 }}<br>{{ section.settings.FreeSwatchesText2 }}</p>
-                                <a href="{{ parentLink.url }}"><button class="Item__Cta">{{ section.settings.FreeSwatchesCta }} <span class="Item__Cta__Icon"><i class="fal fa-arrow-right"></i></span></button></a>
+                                {%- assign hover_image = false -%}
+                                {%- for block in section.blocks -%}
+                                    {%- if block.type == 'collection_hover_image' and block.settings.collection == dropdownLink.object.handle -%}
+                                        {%- assign hover_image = block.settings.hover_image -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                                <a class="Dropdown__Content__Link {% if hover_image %}has-hover{% endif %}" href="{{ dropdownLink.url }}">
+                                    <img class="Dropdown__Content__DefaultImage" src="{{ dropdownLink.object.image  | img_url: '500x' }}">
+                                    {%- if hover_image -%}
+                                        <img class="Dropdown__Content__HoverImage" src="{{ hover_image | img_url: '500x' }}" alt="{{ hover_image.alt }}">
+                                    {%- endif -%}
+                                    <span>{{ dropdownLink.title }}</span>
+                                </a>
                             </li>
-                        </ul>
-                    {% comment %}===== OTHER PRODUCTS DROPDOWN ====={% endcomment %}
-                    {%- else -%}
-                        <ul class="Dropdown__Content--MultiColumn">
-                            {%- for dropdownLink in parentLink.links-%}
-                                <li class="Dropdown__Content__Item">
-                                    <a href="{{ dropdownLink.url }}">
-                                        <img src="{{ dropdownLink.object.image  | img_url: '500x' }}">
-                                        <span>{{ dropdownLink.title }}</span>
-                                    </a>
-                                </li>
-                            {%- endfor -%}
-                        </ul>
-                    {%- endif -%}
+                        {%- endfor -%}
+                    </ul>
                 </div>
             </li>
-
         {% else %}
             <li class="NavBlock__List__Item"><a href="{{ parentLink.url }}">{{ parentLink.title }}</a></li>
         {% endif %}

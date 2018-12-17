@@ -11132,11 +11132,24 @@ html body.MobileNav--Active {
     width: auto;
   }
 
+  .Dropdown__Content__HoverImage {
+    display: none;
+  }
+
+  .Dropdown__Content__Link.has-hover:hover {
+    .Dropdown__Content__DefaultImage {
+      display: none;
+    }
+
+    .Dropdown__Content__HoverImage {
+      display: block;
+    }
+  }
+
   .Dropdown__Content__Item {
     padding:0 10px;
     font-size: 16px;
     letter-spacing: .05em;
-
   }
 }
 
