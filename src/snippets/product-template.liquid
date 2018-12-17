@@ -23,6 +23,9 @@
       <div class="ProductDetailGrid__Sidebar is-fixed">
 
         <product-detail-slider v-if="product && isMobile"></product-detail-slider>
+        <div class="ProductDetailSlider__LoadingBar">
+          <glyph-loading class="ProductDetailSlider__Spinner"></glyph-loading>
+        </div>
 
         {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
         {% form 'product', product, id: form_id, class: 'product-single__form' %}
@@ -73,7 +76,7 @@
               <i class="fal fa-arrow-right" data-fa-transform="rotate-45"></i>
             </h3>
           </div>
-          <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}">
+          <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}" v-cloak>
             {% include 'add-to-cart-row' %}
           </product-customizer>
         {% endform %}
