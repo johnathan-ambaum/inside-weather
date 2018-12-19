@@ -106,7 +106,20 @@
   <!--End_Gem_Page_Header_Script-->
 
   <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' -%}
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' -%}
+    {%- if customer -%}
+      {%- if customer.metafields.global.favorites -%}
+        {%- assign favorites = customer.metafields.global.favorites -%}
+      {%- else -%}
+        {%- assign favorites = '' | split: ',' -%}
+      {%- endif -%}
+      <script>
+        pnwCfg = {
+          id: {{ customer.id }},
+          favoriteProducts: {{ favorites | json }}
+        };
+      </script>
+    {%- endif -%}
     <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
