@@ -1170,7 +1170,7 @@ lazySizesConfig.expFactor = 4;
       },
 
       buildCart: function(cart, openDrawer) {
-        $('.js-cart-count').text(cart.item_count ? cart.item_count : '');
+        $('.js-cart-count').text(cart.item_count);
 
         this.loading(true);
         this.emptyCart();
