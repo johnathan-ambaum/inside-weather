@@ -35,6 +35,19 @@
         productCategory: {{ collection.handle | json }},
         productHandle: {{ product.handle | json }}
       }];
+
+      dataLayer.push({
+        ecommerce: {
+          detail: {
+            products: [{
+              name: {{ product.title | json }},
+              id: {{ product.selected_or_first_available_variant.sku | json }},
+              price: {{ product.price | divided_by: 100 | json }},
+              category: {{ collection.handle | json }}
+            }]
+          }
+        }
+      });
     </script>
   {%- endif -%}
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
