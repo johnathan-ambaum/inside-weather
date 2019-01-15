@@ -11337,11 +11337,20 @@ a.Dropdown__Content__Link.has-hover span {
       svg {
         height: 22px;
         width: 22px;
+        @media only screen and (max-width: 1023px) {
+          margin-top: 3px;
+        }
       }
     }
 
     &.Mobile-Item__Cart {
       padding-left: 6px;
+
+      @media only screen and (max-width: 1023px) {
+        svg {
+          margin-top: 3px;
+        }
+      }
     }
   }
 }
