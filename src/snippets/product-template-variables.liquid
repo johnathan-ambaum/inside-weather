@@ -19,7 +19,7 @@
 {% endcase %}
 
 <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
-<meta itemprop="image" content="{{ product.featured_image.src | img_url: '1200x' }}">
+<meta itemprop="image" content="https:{{ product.featured_image.src | img_url: '1200x' }}">
 <meta itemprop="productID" content="{{ product.selected_or_first_available_variant.sku }}">
 <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 <meta itemprop="name" content="{{ product.title }}">
