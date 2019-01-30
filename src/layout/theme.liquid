@@ -256,6 +256,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
     </script>
   {% endif %}
+  <script>
+    jQuery(function ($) {
+      $('.modal img.lazyload').each(function (i, el) {
+        var src = el.dataset.src.replace('_{width}x', '');
+        el.src = src;
+        el.classList.remove('lazyload', 'lazypreload');
+        el.classList.add('lazyloaded');
+      });
+    });
+  </script>
   <style>
     .BrowseFilters--Open .zopim {
       display: none !important;
