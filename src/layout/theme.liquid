@@ -261,6 +261,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       display: none !important;
     }
   </style>
+  <script>
+    Array.prototype.slice.call(document.querySelectorAll('video[autoplay]')).forEach(function (video) {
+      video.setAttribute('playsinline', '');
+      video.play();
+    });
+  </script>
   <!--Start of Zendesk Chat Script-->
   <script type="text/javascript">
   window.$zopim||(function(d,s){var z=$zopim=function(c){
