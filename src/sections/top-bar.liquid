@@ -1,0 +1,36 @@
+<style>
+  .TopBar {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.font_color }};
+  }
+</style>
+
+<div class="TopBar">
+  {{ section.settings.text }}
+</div>
+
+{% schema %}
+  {
+    "name": "Top Bar",
+    "settings": [
+      {
+        "id": "background_color",
+        "type": "color",
+        "label": "Background Color",
+        "default": "#f5eeea"
+      },
+      {
+        "id": "font_color",
+        "type": "color",
+        "label": "Font Color",
+        "default": "#202020"
+      },
+      {
+        "id": "text",
+        "type": "richtext",
+        "label": "Text",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
+      }
+    ]
+  }
+{% endschema %}

@@ -10807,7 +10807,10 @@ html body.MobileNav--Active {
 
 @media only screen and (min-width: 1024px) {
   body:not(.template-index) main {
-    margin-top: 90px;
+    margin-top: 122px;
+  }
+  body.MainNav--Small:not(.template-index) main {
+    margin-top: 102px;
   }
 }
 
@@ -10827,7 +10830,7 @@ html body.MobileNav--Active {
   padding: 0 $gutter;
   position:fixed;
   text-transform: uppercase;
-  top: 0;
+  top: 32px;
   -webkit-transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
   -o-transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
   transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
@@ -10945,7 +10948,7 @@ html body.MobileNav--Active {
   }
 
   @media only screen and (max-width: 1023px) {
-    top: 70px;
+    top: 102px;
   }
 }
 
@@ -11359,7 +11362,7 @@ a.Dropdown__Content__Link.has-hover span {
   overflow: auto;
 
   @media only screen and (max-width: 1023px) {
-    top: 70px;
+    top: 102px;
 
     .MobileNav--Active & {
       z-index: 9999;
@@ -11367,7 +11370,7 @@ a.Dropdown__Content__Link.has-hover span {
   }
 
   .MainNav--Small & {
-    top:70px;
+    top:102px;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -11519,7 +11522,7 @@ a.Dropdown__Content__Link.has-hover span {
   }
 
   main {
-    margin-top: 70px;
+    margin-top: 102px;
   }
 }
 
@@ -11555,4 +11558,42 @@ a.Dropdown__Content__Link.has-hover span {
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+.TopBar {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 11px;
+  font-weight: bold;
+  height: 32px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  left: 0;
+  letter-spacing: .05em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  p {
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-size: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 13px;
+  }
 }
