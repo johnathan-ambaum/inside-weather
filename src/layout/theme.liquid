@@ -144,6 +144,7 @@
   <!-- end browse and product customizer widgets -->
 
   <script defer src="https://pro.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-3yBLeJ4waqGSAf4A8pjZ13UF7GuhgbdKnBQvIp/TkWoXtQbtwjlIPNjkDRJ46UCn" crossorigin="anonymous"></script>
+  {% include 'minmaxify-head' %}
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
