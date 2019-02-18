@@ -7,6 +7,12 @@
   <meta name="theme-color" content="{{ settings.color_button }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
+  <!-- preconnects -->
+  <link rel="preconnect" href="https://banksy-images.s3.amazonaws.com">
+  <link rel="preconnect" href="https://cdn.shopify.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- end preconnects -->
+
   {%- if settings.favicon -%}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
   {%- endif -%}
@@ -89,11 +95,38 @@
     };
   </script>
 
-  {{ content_for_header }}
-  {% include 'oldIE-js' %}
-
   {{ '//code.jquery.com/jquery-3.1.0.min.js' | script_tag }}
   <script>theme.jQuery = jQuery;</script>
+
+  <!-- Browse and product customizer widgets -->
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' -%}
+    {%- if customer -%}
+      {%- if customer.metafields.global.favorites -%}
+        {%- assign favorites = customer.metafields.global.favorites -%}
+      {%- else -%}
+        {%- assign favorites = '' | split: ',' -%}
+      {%- endif -%}
+      <script>
+        pnwCfg = {
+          id: {{ customer.id }},
+          favoriteProducts: {{ favorites | json }}
+        };
+      </script>
+    {%- endif -%}
+    <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+    <script src="{{ 'manifest.js' | asset_url }}" defer></script>
+    <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
+    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+    {% assign small_header = true %}
+  {%- else -%}
+    {% assign small_header = false %}
+  {%- endif -%}
+  <!-- end browse and product customizer widgets -->
+
+  {{ content_for_header }}
+  {% include 'oldIE-js' %}
 
   {% include 'defer-script' with 'vendor.js' %}
 
@@ -121,32 +154,6 @@
   {% include 'gem-app-header-scripts' %}
   <!--End_Gem_Page_Header_Script-->
 
-  <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' -%}
-    {%- if customer -%}
-      {%- if customer.metafields.global.favorites -%}
-        {%- assign favorites = customer.metafields.global.favorites -%}
-      {%- else -%}
-        {%- assign favorites = '' | split: ',' -%}
-      {%- endif -%}
-      <script>
-        pnwCfg = {
-          id: {{ customer.id }},
-          favoriteProducts: {{ favorites | json }}
-        };
-      </script>
-    {%- endif -%}
-    <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
-    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
-    {% assign small_header = true %}
-  {%- else -%}
-    {% assign small_header = false %}
-  {%- endif -%}
-  <!-- end browse and product customizer widgets -->
-
-  <script defer src="https://pro.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-3yBLeJ4waqGSAf4A8pjZ13UF7GuhgbdKnBQvIp/TkWoXtQbtwjlIPNjkDRJ46UCn" crossorigin="anonymous"></script>
   {% include 'minmaxify-head' %}
 </head>
 
