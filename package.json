@@ -10,8 +10,6 @@
     "@shopify/slate-tools": "^0.14.0"
   },
   "dependencies": {
-    "@shopify/slate": "^0.14.0",
-    "vue": "^2.5.17",
-    "vuex": "^3.0.1"
+    "@shopify/slate": "^0.14.0"
   }
 }
