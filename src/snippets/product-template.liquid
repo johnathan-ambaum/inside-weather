@@ -61,7 +61,7 @@
             <p class="Product__Lead">NOT SURE YOU FOUND THE PERFECT MATCH?</p>
             <h3>
               CUSTOMIZE
-              <i class="fal fa-arrow-right" data-fa-transform="rotate-45"></i>
+              {% include 'icon-fa-arrow-right' %}
             </h3>
           </div>
           <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}" v-cloak>
