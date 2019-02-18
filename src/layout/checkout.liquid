@@ -12,7 +12,8 @@
       dataLayer = [{
         totalPrice: {{ checkout.total_price | divided_by: 100 | json }},
         cartCount: {{ checkout.line_items.size }},
-        productIds: {{ checkout.line_items | map: 'sku' | json }}
+        productIds: {{ checkout.line_items | map: 'sku' | json }},
+        customerEmail: {{ customer.email | json }}
       }];
 
       var checkoutStep = null;
@@ -50,6 +51,8 @@
 
       if (window.location.href.indexOf('/thank_you') !== -1) {
         dataLayer.push({
+          customerId: {{ customer.id | json }},
+          orderId: {{ checkout.order_number | json }},
           ecommerce: {
             purchase: {
               actionField: {

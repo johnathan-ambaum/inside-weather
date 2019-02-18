@@ -26,17 +26,20 @@
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
   <!-- Google Tag Manager -->
+  <script>
+    dataLayer = [{
+      customerEmail: {{ customer.email | json }}{% if template.name == 'collection' %},
+      productCategory: {{ collection.handle | json }}{% endif %}
+    }];
+  </script>
   {%- if template.name == 'product' -%}
     <script>
-      dataLayer = [{
+      dataLayer.push({
         totalPrice: {{ product.price | divided_by: 100 | json }},
         productName: {{ product.title | json }},
         productIds: [{{ product.selected_or_first_available_variant.sku | json }}],
         productCategory: {{ collection.handle | json }},
-        productHandle: {{ product.handle | json }}
-      }];
-
-      dataLayer.push({
+        productHandle: {{ product.handle | json }},
         ecommerce: {
           detail: {
             products: [{
