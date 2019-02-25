@@ -17,15 +17,26 @@
                     <ul class="Dropdown__Content--MultiColumn">
                         {%- for dropdownLink in parentLink.links-%}
                             <li class="Dropdown__Content__Item">
+                                {%- assign main_image = false -%}
                                 {%- assign hover_image = false -%}
                                 {%- for block in section.blocks -%}
-                                    {%- if block.type == 'collection_hover_image' and block.settings.collection == dropdownLink.object.handle -%}
-                                        {%- assign hover_image = block.settings.hover_image -%}
-                                        {%- break -%}
+                                    {%- if block.type == 'collection_hover_image' -%}
+                                        {% comment %} Remove this conditional once migrated to new settings {% endcomment %}
+                                        {%- if block.settings.collection != blank and block.settings.collection == dropdownLink.object.handle -%}
+                                            {%- assign hover_image = block.settings.hover_image -%}
+                                        {%- endif -%}
+                                        {%- if block.settings.url == dropdownLink.url -%}
+                                            {%- assign main_image = block.settings.image -%}
+                                            {%- assign hover_image = block.settings.hover_image -%}
+                                        {%- endif -%}
                                     {%- endif -%}
                                 {%- endfor -%}
+                                {% comment %} Remove this conditional once migrated to new settings {% endcomment %}
+                                {%- unless main_image -%}
+                                    {%- assign main_image = dropdownLink.object.image -%}
+                                {%- endunless -%}
                                 <a class="Dropdown__Content__Link {% if hover_image %}has-hover{% endif %}" href="{{ dropdownLink.url }}">
-                                    <img class="Dropdown__Content__DefaultImage" src="{{ dropdownLink.object.image  | img_url: '500x' }}">
+                                    <img class="Dropdown__Content__DefaultImage" src="{{ main_image | img_url: '500x' }}">
                                     {%- if hover_image -%}
                                         <img class="Dropdown__Content__HoverImage" src="{{ hover_image | img_url: '500x' }}" alt="{{ hover_image.alt }}">
                                     {%- endif -%}
