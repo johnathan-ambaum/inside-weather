@@ -5,13 +5,13 @@
     "color_borders": "#e8e8e1",
     "color_button": "#202020",
     "color_button_text": "#fff",
-    "color_cart_dot": "#e8c5b2",
+    "color_cart_dot": "#b1c8cd",
     "color_header": "#fff",
     "color_header_text": "#202020",
     "color_announcement": "#202020",
     "color_announcement_text": "#fff",
     "color_footer": "#202020",
-    "color_footer_text": "#fff",
+    "color_footer_text": "#ffffff",
     "color_drawer_background": "#ffffff",
     "color_drawer_text": "#202020",
     "color_drawer_border": "#e8e8e1",
@@ -43,8 +43,8 @@
     "animate_sections_background_style": "zoom-fade",
     "animate_sections_text_style": "rise-up",
     "animate_images": true,
-    "animate_images_style": "zoom-fade",
-    "animate_buttons": true,
+    "animate_images_style": "fade-in",
+    "animate_buttons": false,
     "animate_underlines": true,
     "vendor_enable": false,
     "sku_enable": false,
@@ -78,10 +78,10 @@
     "currency_format": "money_format",
     "supported_currencies": "USD CAD INR GBP AUD EUR JPY",
     "default_currency": "USD",
-    "social_facebook_link": "",
+    "social_facebook_link": "https:\/\/www.facebook.com\/insideweatherdesign",
     "social_twitter_link": "",
     "social_pinterest_link": "",
-    "social_instagram_link": "",
+    "social_instagram_link": "https:\/\/www.instagram.com\/insideweather\/",
     "social_snapchat_link": "",
     "social_tumblr_link": "",
     "social_linkedin_link": "",
@@ -91,21 +91,21 @@
     "share_twitter": true,
     "share_pinterest": true,
     "homepage_social_image": "",
-    "favicon": "",
+    "favicon": "shopify:\/\/shop_images\/INSIDEWEATHER_FAVICON_1x.png",
     "show_breadcrumbs": true,
     "checkout_header_image": "",
-    "checkout_logo_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/INSIDEWEATHER_BLACK_3x_bd213851-6c60-4215-b43c-377448e01de9.png",
     "checkout_logo_position": "left",
-    "checkout_logo_size": "medium",
+    "checkout_logo_size": "small",
     "checkout_body_background_image": "",
     "checkout_body_background_color": "#fff",
     "checkout_input_background_color_mode": "white",
     "checkout_sidebar_background_image": "",
     "checkout_sidebar_background_color": "#fafafa",
-    "checkout_heading_font": "Helvetica Neue",
-    "checkout_body_font": "Helvetica Neue",
-    "checkout_accent_color": "#111111",
-    "checkout_button_color": "#111111",
+    "checkout_heading_font": "Roboto",
+    "checkout_body_font": "Roboto",
+    "checkout_accent_color": "#202020",
+    "checkout_button_color": "#202020",
     "checkout_error_color": "#ff6d6d",
     "color_image_bg": "#000000",
     "breadcrumb": true,
@@ -117,29 +117,114 @@
     "sections": {
       "header": {
         "type": "header",
+        "blocks": {
+          "1546537699439": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "sofas",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofa_hover_2x-min.jpg"
+            }
+          },
+          "1546537742693": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "sofettes",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette_hover_2x-min.jpg"
+            }
+          },
+          "1546537839761": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "armchairs",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_armchair_hover_2x-min.jpg"
+            }
+          },
+          "1546537857207": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "lounge-chairs",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_lounge_hover_2x-min.jpg"
+            }
+          },
+          "1546537880112": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "dining-chairs",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_dining_hover_2x-min.jpg"
+            }
+          },
+          "1546537908171": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "credenzas",
+              "hover_image": "shopify:\/\/shop_images\/nav_storage_credenza_hover_2x-min.jpg"
+            }
+          },
+          "1546537926514": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "sideboards",
+              "hover_image": "shopify:\/\/shop_images\/nav_storage_sideboard_hover_2x-min.jpg"
+            }
+          },
+          "1546537953655": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "coffee-tables",
+              "hover_image": "shopify:\/\/shop_images\/nav_tables_coffee_hover_2x-min.jpg"
+            }
+          },
+          "1546537970185": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "dining-tables",
+              "hover_image": "shopify:\/\/shop_images\/nav_tables_dining_hover_2x-min.jpg"
+            }
+          },
+          "1546537987645": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "side-tables",
+              "hover_image": "shopify:\/\/shop_images\/nav_tables_side_hover_2x-min.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1546537699439",
+          "1546537742693",
+          "1546537839761",
+          "1546537857207",
+          "1546537880112",
+          "1546537908171",
+          "1546537926514",
+          "1546537953655",
+          "1546537970185",
+          "1546537987645"
+        ],
         "settings": {
-          "main_menu_link_list": "main-menu",
-          "main_menu_alignment": "left",
-          "header_style": "sticky",
-          "sticky_index": true,
-          "sticky_collection": false,
-          "header_search_enable": false,
-          "type_navigation_size": 14,
-          "type_navigation_style": true,
-          "show_announcement": true,
-          "announcement_text": "Free shipping and returns",
-          "announcement_link": ""
+          "Logo": "shopify:\/\/shop_images\/logo_0061561f-e478-495d-b96b-803216dd2749.png",
+          "FreeSwatchesImage": "shopify:\/\/shop_images\/HP_B_15_Swatches.jpg",
+          "FreeSwatchesHeading": "Start with swatches",
+          "FreeSwatchesText1": "<br>Nothing beats seeing the real thing in your home.",
+          "FreeSwatchesText2": "Order your favorites and start working your imagination!",
+          "FreeSwatchesCta": "START SWATCHING",
+          "HelpOption1Icon": "shopify:\/\/shop_images\/chat-bubble.png",
+          "HelpOption1Text": "+1 415.802.0060",
+          "HelpOption2Icon": "shopify:\/\/shop_images\/phone.png",
+          "HelpOption2Text": "+1 415.802.0060",
+          "HelpOption3Icon": "shopify:\/\/shop_images\/envelope.png",
+          "HelpOption3Text": "support@insideweather.com"
         }
       },
       "footer": {
         "type": "footer",
         "blocks": {
-          "1494301487049": {
-            "type": "menu",
+          "1539295834374": {
+            "type": "logo_social",
             "settings": {
-              "show_footer_title": true,
-              "menu": "footer",
-              "container_width": 20
+              "logo": "shopify:\/\/shop_images\/INSIDEWEATHER_WHITE_3x_11bbd248-0d4d-4f7e-87c4-3b6b0d0a24d0.png",
+              "desktop_logo_height": 23,
+              "container_width": 22
             }
           },
           "1538073629251": {
@@ -147,7 +232,15 @@
             "settings": {
               "show_footer_title": true,
               "menu": "about",
-              "container_width": 20
+              "container_width": 18
+            }
+          },
+          "1494301487049": {
+            "type": "menu",
+            "settings": {
+              "show_footer_title": true,
+              "menu": "footer",
+              "container_width": 18
             }
           },
           "1538073606495": {
@@ -155,24 +248,15 @@
             "settings": {
               "show_footer_title": true,
               "menu": "design",
-              "container_width": 20
-            }
-          },
-          "1494292487693": {
-            "type": "newsletter",
-            "settings": {
-              "show_footer_title": true,
-              "title": "Sign up and save",
-              "richtext": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.<\/p>",
-              "container_width": 33
+              "container_width": 18
             }
           }
         },
         "block_order": [
-          "1494301487049",
+          "1539295834374",
           "1538073629251",
-          "1538073606495",
-          "1494292487693"
+          "1494301487049",
+          "1538073606495"
         ],
         "settings": {
           "show_payment_icons": false
@@ -627,17 +711,46 @@
       "newsletter-popup": {
         "type": "newsletter-popup",
         "settings": {
-          "mode": "disabled",
-          "popup_seconds": 5,
+          "mode": "enabled",
+          "popup_seconds": 60,
           "popup_days": 30,
-          "popup_title": "Sign up and save",
-          "popup_image": "",
-          "popup_text": "<p>Entice customers to sign up for your mailing list with discounts or exclusive offers. Include an image for extra impact.<\/p>",
-          "close_text": "No thanks",
+          "popup_title": "FEEL LIKE A <br>$500 SHOPPING SPREE?",
+          "popup_image": "shopify:\/\/shop_images\/donut-popup_donut.png",
+          "popup_text": "<p>Make it rain. Sign up for sneak peaks, product leaks, and insider treats. Oh and a chance to win $500 to deck out your home. Yes, that too.<\/p>",
+          "close_text": "BRB, I have to go ask my mom for permission",
           "enable_newsletter": true,
-          "button_label": "Optional button",
+          "button_label": "",
           "button_link": "",
           "enable_button": false
+        }
+      },
+      "password-header": {
+        "type": "password-header",
+        "settings": {
+          "logo": "",
+          "desktop_logo_height": 100,
+          "mobile_logo_height": 60
+        }
+      },
+      "password-content": {
+        "type": "password-content",
+        "settings": {
+          "title": "",
+          "newsletter_enable": false,
+          "newsletter_heading": "<p>Get notified when we launch<\/p>",
+          "newsletter_placeholder": "Email address",
+          "newsletter_button_text": "Submit",
+          "show_share_buttons": true,
+          "show_image": true,
+          "image": "shopify:\/\/shop_images\/HP_B_08_Shell_Chair.jpg"
+        }
+      },
+      "top-bar": {
+        "type": "top-bar",
+        "settings": {
+          "background_color": "#f5eeea",
+          "font_color": "#202020",
+          "text": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>"
         }
       }
     },
@@ -724,13 +837,7 @@
       "sections": {
         "header": {
           "type": "header",
-          "settings": {
-            "main_menu_link_list": "main-menu",
-            "sticky_index": true,
-            "sticky_collection": false,
-            "header_search_enable": false,
-            "show_announcement": true
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",
@@ -1166,13 +1273,7 @@
       "sections": {
         "header": {
           "type": "header",
-          "settings": {
-            "main_menu_link_list": "main-menu",
-            "sticky_index": true,
-            "sticky_collection": false,
-            "header_search_enable": false,
-            "show_announcement": true
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",
@@ -1536,13 +1637,7 @@
       "sections": {
         "header": {
           "type": "header",
-          "settings": {
-            "main_menu_link_list": "main-menu",
-            "sticky_index": false,
-            "sticky_collection": false,
-            "header_search_enable": false,
-            "show_announcement": true
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",

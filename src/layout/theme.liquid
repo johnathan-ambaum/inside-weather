@@ -155,6 +155,8 @@
   <!--End_Gem_Page_Header_Script-->
 
   {% include 'minmaxify-head' %}
+
+{% include 'pagefly-header' %}
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
