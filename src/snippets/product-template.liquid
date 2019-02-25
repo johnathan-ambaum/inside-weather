@@ -14,11 +14,9 @@
 
   <div id="app">
     <div class="ProductDetailGrid">
-      <product-detail class="ProductDetailGrid__Main">
+      <product-detail class="ProductDetailGrid__Main ProductDetail">
         <h1 class="ProductDetail__Title">{{ product.title }}</h1>
-        {%- for image in product.images -%}
-          <div class="ResponsiveImage__Wrapper"></div>
-        {%- endfor -%}
+        <div class="ResponsiveImage__Wrapper"></div>
       </product-detail>
       <div class="ProductDetailGrid__Sidebar is-fixed">
 
