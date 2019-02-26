@@ -24,9 +24,21 @@
                         {%- else -%}
                             <ul class="MobileContent__Dropdown--MultiColumn">
                                 {%- for dropdownLink in leftParentLink.links-%}
+                                    {%- assign link_image = false -%}
+                                    {%- for block in section.blocks -%}
+                                        {%- if block.type == 'collection_hover_image' -%}
+                                            {%- if block.settings.url == dropdownLink.url -%}
+                                                {%- assign link_image = block.settings.image -%}
+                                            {%- endif -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                    {% comment %} Remove this conditional once migrated to new settings {% endcomment %}
+                                    {%- unless link_image -%}
+                                        {%- assign link_image = dropdownLink.object.image -%}
+                                    {%- endunless -%}
                                     <li class="MobileDropdown__Content__Item">
                                         <a href="{{ dropdownLink.url }}">
-                                            <img src="{{ dropdownLink.object.image  | img_url: '400x' }}">
+                                            <img src="{{ link_image | img_url: '400x' }}">
                                             <span>{{ dropdownLink.title }}</span>
                                         </a>
                                     </li>
