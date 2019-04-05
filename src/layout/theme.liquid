@@ -279,19 +279,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     });
   </script>
-  <style>
-    .BrowseFilters--Open .zopim {
-      display: none !important;
-    }
-  </style>
   <script>
     Array.prototype.slice.call(document.querySelectorAll('video[autoplay]')).forEach(function (video) {
       video.setAttribute('playsinline', '');
       video.play();
     });
   </script>
+  <!--NEW-->
+
+  <!-- Start of insideweatherhelp Zendesk Widget script -->
+  <style>
+    /* force hide Zendesk when filters open */
+    .BrowseFilters--Open .zEWidget-launcher {
+      display: none !important;
+    }
+  </style>
+  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=3aebd5a7-95db-462f-a80a-b30633da7997"> </script>
+  <!-- End of insideweatherhelp Zendesk Widget script -->
+
+  {% comment %} <!--OLD ZENDESK-->
   <!--Start of Zendesk Chat Script-->
-  <script type="text/javascript">
+   <script type="text/javascript">
   window.$zopim||(function(d,s){var z=$zopim=function(c){
   z._.push(c)},$=z.s=
   d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
@@ -299,6 +307,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   $.src='https://v2.zopim.com/?AJiZPSJSeobpdaCOBCILNjBFOfWzOEnD';z.t=+new Date;$.
   type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
   </script>
-  <!--End of Zendesk Chat Script-->
+  <!--End of Zendesk Chat Script--> {% endcomment %}
+
 </body>
 </html>
