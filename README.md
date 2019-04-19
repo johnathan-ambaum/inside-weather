@@ -2,64 +2,38 @@
 
 ## Setup
 
-### Clone and install dependencies
-```
-# clone the theme repo and the widgets repo set up as a submodule
-git clone --recurse-submodules git@gitlab.com:btownweb/olavier/shopify-theme.git olavier.com
-
-# enter theme directory
-cd olavier.com
-
-# install theme Javascript dependencies
-yarn install
-
-# enter Vue widgets directory
-cd widgets
-
-# install widget Javascript dependencies
-yarn install
-```
-
 ### Configuration
 
-Copy `config.yml.example` to `config.yml` and set the appropriate theme_id and password.  The theme ID can be looked up [here](https://loomandloft.myshopify.com/admin/themes.xml) and the password will be in the ThemeKit private app [here](https://loomandloft.myshopify.com/admin/apps/private).
+In the `src/` directory, copy `config.yml.example` to `config.yml` and set the appropriate theme_id and password.  The theme ID can be looked up [here](https://loomandloft.myshopify.com/admin/themes.xml) and the password will be in the ThemeKit private app [here](https://loomandloft.myshopify.com/admin/apps/private).
 
 ## Development
 
-This theme is using [Shopify Slate](https://shopify.github.io/slate/).
+Theme files are synced with Shopify using [ThemeKit](https://shopify.github.io/themekit/).
 
-When running any `slate` commands, you can switch the environment configuration that is used with the `-e` flag.
+The `theme` command should be run from the `src/` directory.  When uploading or downloading files, you can define exclusions in your `config.yml`.  See ThemeKit docs for more info.
+
+When running any `theme` commands, you can switch the environment configuration that is used with the `-e` flag.  The environment name will correspond to a key in `config.yml`
 
 Example:
 ```
-slate start -e staging
+theme watch -e staging
 ```
 
-### Pull latest changes
+### Download theme files
 ```
-# get theme changes
-git pull
-# get widget changes
-git submodule update --remote --recursive --merge
+# entire theme
+theme download
+
+# specific files
+theme download layouts/theme.liquid assets/style.css.liquid
 ```
 
-### Build and deploy with automatic file sync
+### Watch for changes and auto-upload
 ```
-slate start
-```
-
-### Automatic file sync
-```
-slate watch
+theme watch
 ```
 
-### Build and push to Shopify
+### Upload full theme
 ```
-slate deploy
-```
-
-### Push changes to remote
-```
-# the flag will ensure you didn't forget to commit any submodule changes
-git push origin branch-name --recurse-submodules=on-demand
+theme deploy
 ```
