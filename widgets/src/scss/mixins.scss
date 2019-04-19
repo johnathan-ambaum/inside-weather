@@ -1,0 +1,19 @@
+@mixin at-query($size) {
+  @media only screen and ($size) {
+    @content
+  }
+}
+
+@mixin supports-grid() {
+  @supports (grid-gap: 3rem) {
+    @content
+  }
+}
+
+@mixin clearfix() {
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

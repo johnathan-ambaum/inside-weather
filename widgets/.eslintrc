@@ -1,0 +1,41 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:vue/recommended"
+  ],
+  "rules": {
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "only-multiline",
+        "functions": "never"
+      }
+    ],
+    "max-len": [
+      1,
+      {
+        "code": 110,
+        "tabWidth": 2,
+        "ignoreTrailingComments": true
+      }
+    ],
+    "no-console": 0,
+    "no-multi-assign": 0,
+    "no-unused-vars": [
+      1,
+      {
+        "argsIgnorePattern": "res|next|^err"
+      }
+    ]
+  },
+  "plugins": [
+    "vue"
+  ]
+}
