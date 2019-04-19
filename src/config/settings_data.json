@@ -121,70 +121,90 @@
           "1546537699439": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "sofas",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-sofas",
+              "image": "shopify:\/\/shop_images\/nav_seating_sofa_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_sofa_hover_2x-min.jpg"
             }
           },
           "1546537742693": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "sofettes",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-sofettes",
+              "image": "shopify:\/\/shop_images\/nav_seating_sofette_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette_hover_2x-min.jpg"
             }
           },
           "1546537839761": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "armchairs",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-armchairs",
+              "image": "shopify:\/\/shop_images\/nav_seating_armchair_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_armchair_hover_2x-min.jpg"
             }
           },
           "1546537857207": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "lounge-chairs",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-lounge-chairs",
+              "image": "shopify:\/\/shop_images\/nav_seating_lounge_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_lounge_hover_2x-min.jpg"
             }
           },
           "1546537880112": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "dining-chairs",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-dining-chairs",
+              "image": "shopify:\/\/shop_images\/nav_seating_dining_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_dining_hover_2x-min.jpg"
             }
           },
           "1546537908171": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "credenzas",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-credenzas",
+              "image": "shopify:\/\/shop_images\/nav_storage_credenza-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_storage_credenza_hover_2x-min.jpg"
             }
           },
           "1546537926514": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "sideboards",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-sideboards",
+              "image": "shopify:\/\/shop_images\/nav_storage_sideboard-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_storage_sideboard_hover_2x-min.jpg"
             }
           },
           "1546537953655": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "coffee-tables",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-coffee-tables",
+              "image": "shopify:\/\/shop_images\/nav_tables_coffee-min.png",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_coffee_hover_2x-min.jpg"
             }
           },
           "1546537970185": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "dining-tables",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-dining-tables",
+              "image": "shopify:\/\/shop_images\/nav_tables_dining-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_dining_hover_2x-min.jpg"
             }
           },
           "1546537987645": {
             "type": "collection_hover_image",
             "settings": {
-              "collection": "side-tables",
+              "collection": "",
+              "url": "shopify:\/\/pages\/category-side-tables",
+              "image": "shopify:\/\/shop_images\/nav_tables_side-min.png",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_side_hover_2x-min.jpg"
             }
           }
@@ -209,9 +229,9 @@
           "FreeSwatchesText2": "Order your favorites and start working your imagination!",
           "FreeSwatchesCta": "START SWATCHING",
           "HelpOption1Icon": "shopify:\/\/shop_images\/chat-bubble.png",
-          "HelpOption1Text": "+1 415.802.0060",
+          "HelpOption1Text": "415.802.0060",
           "HelpOption2Icon": "shopify:\/\/shop_images\/phone.png",
-          "HelpOption2Text": "+1 415.802.0060",
+          "HelpOption2Text": "888.908.3585",
           "HelpOption3Icon": "shopify:\/\/shop_images\/envelope.png",
           "HelpOption3Text": "support@insideweather.com"
         }
