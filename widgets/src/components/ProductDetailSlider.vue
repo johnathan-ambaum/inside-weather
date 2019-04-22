@@ -12,7 +12,9 @@
             <small class="ProductDetailSlider__Model">{{ product.model_number }}</small>
           </h1>
           <div>
-            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote">SHIPS FREE in {{ product.min_fulfillment_time }}-{{ product.max_fulfillment_time }} days</div>
+            <!-- <div class="ProductDetailSlider__ShippingNote Product__ShippingNote">SHIPS FREE in {{ product.min_fulfillment_time }}-{{ product.max_fulfillment_time }} days</div> -->
+            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote ProductDetailSlider__Desktop">+ FREE SHIPPING</div>
+            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote ProductDetailSlider__Mobile">FREE SHIPPING</div>
             <div class="ProductDetailSlider__Price">${{ dollarPrice }}</div>
             <div class="ProductDetailSlider__Favorite">
               <span
@@ -484,6 +486,24 @@ body.popup-active {
     text-align: right;
   }
 
+  &__Desktop {
+    display: block;
+  }
+
+  &__Mobile {
+    display: none;
+  }
+
+  @include at-query($breakpoint-small) {
+    &__Desktop {
+      display: none;
+    }
+
+    &__Mobile {
+      display: block;
+    }
+  }
+
   &__Title {
     margin: 0;
     transition: font-size $fixed-duration-easing;
@@ -722,9 +742,9 @@ body.popup-active {
       }
     }
 
-    &--Fixed &__ShippingNote {
-      display: none;
-    }
+    // &--Fixed &__ShippingNote {
+    //   display: none;
+    // }
 
     &--Fixed &__Title {
       display: none;

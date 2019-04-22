@@ -123,7 +123,7 @@ $sidebar-width: 425px;
 }
 
 .Product__PriceRow {
-  align-items: flex-end;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
 
@@ -131,7 +131,7 @@ $sidebar-width: 425px;
     font-size: 32px;
     font-weight: 600;
     line-height: 1;
-    margin-right: 25px;
+    margin-right: 10px;
   }
 }
 
@@ -155,6 +155,7 @@ $sidebar-width: 425px;
   font-style: italic;
   font-weight: 600;
   white-space: nowrap;
+  letter-spacing: .035em;
 }
 
 .Product__JumpLinks {
@@ -178,9 +179,21 @@ $sidebar-width: 425px;
   }
 }
 
+.Product__ShippingDays {
+  margin: 20px 0;
+  font-size: 12px;
+  letter-spacing: .035em;
+  font-weight: 500;
+
+  @media only screen and (max-width: 1023px) {
+    margin: 8px 0 12px;
+    text-align: right;
+  }
+}
+
 .Product__AddToCartRow {
   display: flex;
-  margin: 30px 0 15px;
+  margin: 0 0 15px;
 
   .product__quantity {
     margin-bottom: 0;
