@@ -145,7 +145,7 @@
             {{ content_for_logo }}
           </div>
           <div class="sidebar__content">
-            {{ content_for_order_summary }}
+            {{ content_for_order_summary | replace: 'Calculated at next step', 'Free' | remove: 'Shipping costs' }}
           </div>
         </div>
       </div>
