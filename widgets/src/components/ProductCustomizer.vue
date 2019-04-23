@@ -84,7 +84,7 @@ export default {
           priceEl.innerHTML = `$${parseInt(newProduct.price, 10)}`;
           priceEl.content = newProduct.price;
           const fulfillmentTime = `${newProduct.min_fulfillment_time}-${newProduct.max_fulfillment_time} days`;
-          document.querySelector('.Product__ShippingNote').innerHTML = '+ FREE SHIPPING';
+          document.querySelector('.Product__ShippingNote').innerHTML = '+ FREE Shipping';
           document.querySelector('.Product__ShippingDays').innerHTML = `Custom made in ${fulfillmentTime}`;
           document.querySelector('.affirm-as-low-as').setAttribute('data-amount', newProduct.price * 100);
           window.affirm.ui.refresh();

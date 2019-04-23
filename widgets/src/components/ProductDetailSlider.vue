@@ -13,8 +13,8 @@
           </h1>
           <div>
             <!-- <div class="ProductDetailSlider__ShippingNote Product__ShippingNote">SHIPS FREE in {{ product.min_fulfillment_time }}-{{ product.max_fulfillment_time }} days</div> -->
-            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote ProductDetailSlider__Desktop">+ FREE SHIPPING</div>
-            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote ProductDetailSlider__Mobile">FREE SHIPPING</div>
+            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote ProductDetailSlider__Desktop">+ FREE Shipping</div>
+            <div class="ProductDetailSlider__ShippingNote Product__ShippingNote ProductDetailSlider__Mobile">FREE Shipping</div>
             <div class="ProductDetailSlider__Price">${{ dollarPrice }}</div>
             <div class="ProductDetailSlider__Favorite">
               <span
@@ -742,9 +742,9 @@ body.popup-active {
       }
     }
 
-    // &--Fixed &__ShippingNote {
-    //   display: none;
-    // }
+    &--Fixed &__ShippingNote {
+      display: none;
+    }
 
     &--Fixed &__Title {
       display: none;
