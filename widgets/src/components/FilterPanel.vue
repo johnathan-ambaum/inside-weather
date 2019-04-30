@@ -586,10 +586,12 @@ $options-footer-height: 105px;
     }
   }
 
+  &__OptionsHeader {
+    margin-top: 24px;
+    margin-bottom: 24px !important;
+  }
+
   &__Options {
-    &--Standalone {
-      padding-top: 10px;
-    }
 
     @include at-query($breakpoint-large) {
       .FilterPanel--Full & {

@@ -8,6 +8,7 @@
         <div
           v-for="(image, index) in product.dimensions_images"
           :key="index"
+          class="ProductDimensions__Images--Items"
         >
           <img :src="image">
         </div>
@@ -111,6 +112,13 @@ export default {
       & > div + div {
         margin-top: 70px;
       }
+    }
+
+    &--Items {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
     }
   }
 }

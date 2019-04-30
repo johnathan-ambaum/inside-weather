@@ -199,9 +199,9 @@ export default {
 
     @include at-query($breakpoint-small) {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       margin: 16px auto 5px;
-      max-width: 34ch;
+      max-width: 36ch;
       text-align: center;
 
       br {
@@ -228,6 +228,7 @@ export default {
 
   &__Model {
     display: inline;
+    font-size: 12px;
 
     @include at-query($breakpoint-large) {
       display: block;

@@ -142,6 +142,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../scss/variables';
+@import '../scss/mixins';
+
 .ResponsiveImage {
   bottom: 0;
   left: 0;
@@ -149,7 +152,15 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  width: 100%;
+  width: 90% !important;
+
+  @include at-query($breakpoint-mlarge) {
+    width: 100% !important;
+  }
+
+  @include at-query($breakpoint-xsmall) {
+    width: 85% !important;
+  }
 
   &--Loading {
     opacity: .6;

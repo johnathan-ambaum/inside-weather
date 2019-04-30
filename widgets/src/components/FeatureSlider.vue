@@ -202,6 +202,7 @@ $tile-size: 100vw;
     position: absolute;
     text-align: center;
     width: $tile-size;
+    padding-left: 10px;
   }
 
   &__Bullet {

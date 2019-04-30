@@ -280,7 +280,6 @@ $swatch-margin: 5px;
     font-size: 12px;
     font-weight: 400;
     line-height: 14px;
-    margin-bottom: 20px;
     text-align: center;
 
     .SwatchPanel.is-active & {

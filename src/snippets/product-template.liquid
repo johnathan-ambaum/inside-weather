@@ -45,10 +45,11 @@
               <link itemprop="itemCondition" href="http://schema.org/NewCondition">
               <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
-              <div class="Product__JumpLinks">
+              {% comment %} <div class="Product__JumpLinks">
                 <a href="#details" class="Product__JumpLink">Details</a>
                 <a href="#dimensions" class="Product__JumpLink">Dimensions</a>
-              </div>
+              </div> {% endcomment %}
+              <div class="Product__ShippingDays"></div>
 
               {% include 'add-to-cart-row' %}
 
