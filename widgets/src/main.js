@@ -10,6 +10,7 @@ import SearchResults from './components/SearchResults.vue';
 import ProductGrid from './components/ProductGrid.vue';
 import ProductCustomizer from './components/ProductCustomizer.vue';
 import ProductDetail from './components/ProductDetail.vue';
+import ProductFamily from './components/ProductFamily.vue';
 import ProductDetailSlider from './components/ProductDetailSlider.vue';
 import PageBuilderSection from './components/PageBuilderSection.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
@@ -34,6 +35,7 @@ const app = new Vue({
     ProductGrid,
     ProductCustomizer,
     ProductDetail,
+    ProductFamily,
     ProductDetailSlider,
     PageBuilderSection,
     GlyphLoading,
