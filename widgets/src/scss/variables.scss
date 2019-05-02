@@ -1,6 +1,7 @@
 $breakpoint-small: "max-width: 1023px";
 $breakpoint-large: "min-width: 1024px";
-$breakpoint-mlarge: "min-width: 767px";
+$breakpoint-msmall: "max-width: 767px";
+$breakpoint-mlarge: "min-width: 768px";
 $breakpoint-xsmall: "max-width: 360px";
 $gutter: 40px;
 $customizer-width: 475px;
@@ -9,5 +10,6 @@ $header-height-large: 90px;
 $header-height-small: 70px;
 $browse-bar-height: 40px;
 $filter-panel-toggle-size: 86px;
+$normal-text-spacing: .025em;
 $font-stack-avalon: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
 $font-stack-roboto: Roboto, "HelveticaNeue", "Helvetica Neue", sans-serif;
