@@ -63,6 +63,7 @@
             {% include 'add-to-cart-row' %}
           </product-customizer>
         {% endform %}
+        <product-family v-if="product && isMobile"></product-family>
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
     <page-builder-section></page-builder-section>
