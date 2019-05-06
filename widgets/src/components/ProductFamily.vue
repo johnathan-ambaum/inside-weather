@@ -10,7 +10,9 @@
           :key="index"
           class="ProductFamily__Images--Items"
         >
-          <img :src="item.images.medium">
+          <a :href="'/collections/' + item.primary_category + '/products/' + item.handle" :title="item.short_display_name" target="blank">
+            <img :src="item.images.medium">
+          </a>
         </div>
       </div>
     </div>
@@ -93,6 +95,7 @@ export default {
   &__Images {
     display: flex;
     justify-content: center;
+    margin-bottom: 40px;
 
     img {
       max-width: 100%;
