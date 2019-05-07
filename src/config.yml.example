@@ -6,6 +6,7 @@ development:
     - page.*.liquid
     - locales/*
     - assets/gem*
+    - assets/pagefly*
     - snippets/icon-*
     - templates/customers/*
     - templates/index*
@@ -26,6 +27,7 @@ production:
     - page.*.liquid
     - locales/*
     - assets/gem*
+    - assets/pagefly*
     - snippets/icon-*
     - templates/customers/*
     - templates/index*

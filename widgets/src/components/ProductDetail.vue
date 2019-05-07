@@ -45,6 +45,11 @@
           id="dimensions"
           class="ProductDetail__Dimensions"
         />
+        <product-family
+          v-if="'related_items' in product && product.related_items !== []"
+          id="families"
+          class="ProductDetail__Family"
+        />
       </template>
     </template>
     <transition name="fade">
@@ -66,6 +71,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ZoomGallery from './ZoomGallery.vue';
 import ProductDescription from './ProductDescription.vue';
 import ProductDimensions from './ProductDimensions.vue';
+import ProductFamily from './ProductFamily.vue';
 import ResponsiveImage from './ResponsiveImage.vue';
 import productHandler from '../mixins/productHandler';
 import screenMonitor from '../mixins/screenMonitor';
@@ -77,6 +83,7 @@ export default {
     ResponsiveImage,
     ProductDescription,
     ProductDimensions,
+    ProductFamily,
     FontAwesomeIcon,
     ZoomGallery,
   },
@@ -157,6 +164,8 @@ export default {
     display: block;
     font-size: 18px;
     font-weight: 700;
+    padding-top: 10px;
+    letter-spacing: $normal-text-spacing;
   }
 
   &__Gallery {
@@ -192,10 +201,10 @@ export default {
   }
 
   &__GalleryThumb img {
-    border: none;
+    border: 1px solid #d4d0ca;
 
     .ProductDetail__GalleryItem--Active & {
-      border: 1px solid #202020;
+      border: 2px solid #202020;
     }
   }
 
@@ -219,6 +228,7 @@ export default {
     font-family: $font-stack-roboto;
     font-size: 10px;
     margin-left: 8px;
+    letter-spacing: $normal-text-spacing;
 
     @include at-query($breakpoint-small) {
       display: none;

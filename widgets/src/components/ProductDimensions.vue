@@ -37,7 +37,7 @@ export default {
   z-index: 10;
 
   @include at-query($breakpoint-large) {
-    margin-bottom: 150px;
+    margin-bottom: 100px;
   }
 
   &, p {

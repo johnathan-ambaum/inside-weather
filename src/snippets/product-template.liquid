@@ -45,10 +45,6 @@
               <link itemprop="itemCondition" href="http://schema.org/NewCondition">
               <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
-              {% comment %} <div class="Product__JumpLinks">
-                <a href="#details" class="Product__JumpLink">Details</a>
-                <a href="#dimensions" class="Product__JumpLink">Dimensions</a>
-              </div> {% endcomment %}
               <div class="Product__ShippingDays"></div>
 
               {% include 'add-to-cart-row' %}
@@ -67,6 +63,7 @@
             {% include 'add-to-cart-row' %}
           </product-customizer>
         {% endform %}
+        <product-family v-if="product && isMobile"></product-family>
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
     <page-builder-section></page-builder-section>

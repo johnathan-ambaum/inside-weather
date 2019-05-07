@@ -375,7 +375,7 @@ export default {
   }
 
   &__Footer {
-    margin-bottom: $gutter * 2;
+    margin-bottom: 55px;
     padding: 0 15px;
   }
 }
