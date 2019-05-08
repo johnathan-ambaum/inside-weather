@@ -586,11 +586,6 @@ $options-footer-height: 105px;
     }
   }
 
-  &__OptionsHeader {
-    margin-top: 24px;
-    margin-bottom: 24px !important;
-  }
-
   &__Options {
 
     @include at-query($breakpoint-large) {
@@ -612,7 +607,8 @@ $options-footer-height: 105px;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: .025em;
-    margin-bottom: 17px;
+    margin-bottom: 24px;
+    margin-top: 24px;
     text-transform: uppercase;
 
     @include at-query($breakpoint-large) {
@@ -621,6 +617,7 @@ $options-footer-height: 105px;
           font-size: 18px;
           height: $options-header-height;
           margin-bottom: 0;
+          margin-top: 0;
           text-align: center;
         }
       }
