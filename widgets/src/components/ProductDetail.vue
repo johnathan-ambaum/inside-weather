@@ -46,7 +46,7 @@
           class="ProductDetail__Dimensions"
         />
         <product-family
-          v-if="'related_items' in product && product.related_items !== []"
+          v-if="'related_items' in product && product.related_items.length"
           id="families"
           class="ProductDetail__Family"
         />
