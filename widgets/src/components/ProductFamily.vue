@@ -2,7 +2,7 @@
   <div class="ProductFamily">
     <div class="ProductFamily__Body">
       <div class="ProductFamily__LabelWrap">
-        <h2 class="ProductFamily__Label" v-if="product.related_items">MEET THE REST OF THE FAMILY</h2>
+        <h2 class="ProductFamily__Label" v-if="'related_items' in product && product.related_items.length">MEET THE REST OF THE FAMILY</h2>
       </div>
       <div class="ProductFamily__Images">
         <div
