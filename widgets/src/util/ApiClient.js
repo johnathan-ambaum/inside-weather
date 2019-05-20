@@ -151,4 +151,26 @@ export default class ApiClient {
   removeFavorites(customerId, skus) {
     return this.sendFavoriteRequest({ method: 'DELETE', customerId, skus });
   }
+
+  getReviews(category, from, size) {
+    this.options.primary_category = category;
+    this.options.from = from;
+    this.options.size = size;
+
+    // eslint-disable-next-line max-len
+    let url = `http://iw-reviews.herokuapp.com/api/v1/reviews/search?primary_category=${category}`;
+
+    if (this.options.size) {
+      url += `&from=${this.options.from}&size=${this.options.size}`;
+    }
+
+    console.log('--url--', url);
+
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => resolve(response))
+        .catch(err => reject(err));
+    });
+  }
 }
