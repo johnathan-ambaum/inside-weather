@@ -99,7 +99,7 @@
   <script>theme.jQuery = jQuery;</script>
 
   <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' -%}
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'full-reviews'  -%}
     {%- if customer -%}
       {%- if customer.metafields.global.favorites -%}
         {%- assign favorites = customer.metafields.global.favorites -%}
