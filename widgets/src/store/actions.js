@@ -233,6 +233,17 @@ export function loadFavorites({ state, dispatch }) {
   }
 }
 
+export function getReviews({ commit }, { category = 'sofa', from = 0, size = 20 }) {
+  apiClient
+    .getReviews(category, from, size)
+    .then((results) => {
+      console.log('--results--', results);
+      commit('setReviews', {
+        reviews: results,
+      });
+    });
+}
+
 export default {
   loadProduct,
   loadFeatured,
@@ -245,4 +256,5 @@ export default {
   clearSelections,
   populateSelectedFromActive,
   flashMessage,
+  getReviews,
 };

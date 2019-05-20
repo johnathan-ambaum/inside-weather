@@ -420,6 +420,10 @@ export function setFavorites(state, { skus }) {
   Vue.set(state, 'favorites', skus);
 }
 
+export function setReviews(state, { reviews }) {
+  Vue.set(state, 'reviews', reviews);
+}
+
 export default {
   setLoading,
   saveProducts,
@@ -439,4 +443,5 @@ export default {
   setNotification,
   toggleFavorite,
   setFavorites,
+  setReviews,
 };

@@ -22,6 +22,7 @@ export default new Vuex.Store({
     selectedFilters: [],
     selectedOptions: [],
     totalResults: null,
+    reviews: [],
   },
   mutations,
   actions,
