@@ -2,13 +2,15 @@
   <div class="ReviewItem">
     <div class="ReviewItem__Left">
       <div class="ReviewItem__Left--Content">
-        <div class="ReviewItem__Left--Product">
-          <div class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ productName }}</div>
-          <div class="ReviewItem__Left--Checkbox">
-            <selected-checkbox />
+        <div class="ReviewItem__Mobile--Right">
+          <div class="ReviewItem__Left--Product">
+            <div class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ productName }}</div>
+            <div class="ReviewItem__Left--Checkbox">
+              <selected-checkbox />
+            </div>
           </div>
+          <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ productCity }}, {{ productState }}</div>
         </div>
-        <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ productCity }}, {{ productState }}</div>
         <div class="ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
       </div>
     </div>
@@ -170,6 +172,7 @@ export default {
 
     &--Images {
       display: flex;
+      flex-flow: wrap;
     }
 
     &--Image {
@@ -179,6 +182,77 @@ export default {
       height: 80px;
       border: 1px solid #d4d0ca;
       margin-right: 18px;
+    }
+  }
+
+
+  @include at-query($breakpoint-small) {
+    flex-direction: column;
+
+    &__Left {
+      width: 100%;
+
+      &--Content {
+        padding: 24px 24px 18px;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+
+      &--Title {
+        letter-spacing: 0.05em;
+      }
+
+      &--Address {
+        margin-bottom: 0;
+        padding-left: 20px;
+      }
+
+      &--Product {
+        padding-left: 20px;
+      }
+
+      &--Image {
+        min-width: 85px;
+      }
+    }
+
+    &__Right {
+      margin: 0;
+      padding: 0 24px 24px;
+
+      &--Rectangle {
+        border-left: 0;
+        min-height: 167px;
+        padding-left: 0;
+      }
+
+      &--Top {
+        flex-flow: column-reverse;
+        align-items: end;
+        margin-bottom: 18px;
+      }
+
+      &--Date {
+        padding-bottom: 18px;
+      }
+
+      &--Title {
+        margin-bottom: 18px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+      }
+
+      &--Content {
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      &--Image {
+        margin-top: 18px;
+      }
     }
   }
 
