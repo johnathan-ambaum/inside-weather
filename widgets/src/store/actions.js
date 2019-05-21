@@ -237,10 +237,8 @@ export function getReviews({ commit }, { category = 'sofa', from = 0, size = 20 
   apiClient
     .getReviews(category, from, size)
     .then((results) => {
-      console.log('--results--', results);
-      commit('setReviews', {
-        reviews: results,
-      });
+      commit('setReviews', { reviews: results });
+      commit('updateCategory', category);
     });
 }
 
