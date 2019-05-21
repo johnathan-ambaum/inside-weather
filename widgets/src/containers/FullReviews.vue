@@ -19,17 +19,21 @@
 
     <div class="FullReviews__Write">
       <div class="FullReviews__Write--Left">
-        <div class="FullReviews__Write--Title">{{ weatherTitle }}</div>
-        <div class="FullReviews__Write--Star">
-          <star :star-count="starCount" />
-          <div class="FullReviews__Write--Number">{{ reviewNumbers }} reviews</div>
+        <div class="FullReviews__Write--Mobileleft">
+          <div class="FullReviews__Write--Title">{{ weatherTitle }}</div>
+          <div class="FullReviews__Write--Star">
+            <star :star-count="starCount" />
+            <div class="FullReviews__Write--Number">{{ reviewNumbers }} reviews</div>
+          </div>
         </div>
-        <div class="FullReviews__Write--Label">Shop</div>
+        <div class="FullReviews__Write--Shop">
+          <span class="FullReviews__Write--Label">Shop</span>
+        </div>
       </div>
       <div class="FullReviews__Write--Right">
         <div class="FullReviews__Write--Button">
           <a class="FullReviews__Write--Link" href="https://insideweather.com/pages/write-a-review">
-            <span class="FullReviews__Write--BtnLabel">Write Review</span>
+            <span class="FullReviews__Write--BtnLabel">Write a Review</span>
           </a>
         </div>
       </div>
@@ -51,7 +55,7 @@
       />
 
       <infinite-loading @infinite="infiniteHandler">
-        <div slot="no-more">End</div>
+        <div slot="no-more" style="padding-bottom: 20px;"></div>
       </infinite-loading>
     </div>
 
@@ -178,6 +182,10 @@ export default {
   margin: 0 auto;
   font-family: $font-stack-avalon;
 
+  @include at-query("max-width: 1392px") {
+    margin: 0 $gutter;
+  }
+
   &__Title {
     font-size: 44px;
     font-weight: 700;
@@ -228,12 +236,17 @@ export default {
       margin-left: 4px;
     }
 
+    &--Label {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid #202020;
+      text-transform: uppercase;
+    }
+
     &--Button {
       width: 240px;
       height: 48px;
       border: 1px solid #202020;
-      font-size: 14px;
-      letter-spacing: 0.08em;
       text-align: center;
     }
 
@@ -252,6 +265,62 @@ export default {
       font-size: 14px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+  }
+
+   @include at-query($breakpoint-small) {
+    margin: 0 16px;
+
+    &__Title {
+      font-size: 24px;
+      padding: 30px 0 18px 0;
+    }
+
+    &__Subtitle {
+      font-size: 12px;
+      padding-bottom: 40px;
+    }
+
+    &__Write {
+      flex-direction: column;
+
+      &--Left {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &--Title {
+        font-size: 18px;
+      }
+
+      &--Number {
+        font-size: 13px;
+      }
+
+      &--Label {
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+
+      &--Button {
+        width: auto;
+        height: auto;
+        border: 0;
+        text-align: left;
+      }
+
+      &--Link {
+        padding: 0;
+      }
+
+      &--BtnLabel {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-bottom: 1px solid #202020;
+      }
     }
   }
 }
