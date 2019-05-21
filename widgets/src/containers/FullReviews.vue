@@ -246,6 +246,17 @@ export default {
       display: inline-block;
       width: 100%;
       padding: 14px;
+
+      &:hover {
+        background: #202020;
+        color: #fff;
+      }
+    }
+
+    &--BtnLabel {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
   }
 }
