@@ -69,6 +69,12 @@ export default {
     };
   },
 
+  methods: {
+    convertDate(isoDate) {
+      const date = new Date(isoDate);
+      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    }
+  }
 };
 </script>
 
