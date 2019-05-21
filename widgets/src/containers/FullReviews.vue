@@ -81,19 +81,8 @@ export default {
       currentCategory: 'sofa',
       from: 0,
       //temp
-      weatherTitle: 'Lounge Chairs',
       starCount: 4,
       reviewNumbers: 1421,
-      productName: 'Sohpie',
-      productAddr: 'abcd, CA',
-      prouductImage: 'https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_sofette-min.png',
-      reviewDate: '02/02/2019',
-      reviewTitle: 'I call it my soba school',
-      reviewContent: 'Love my custom dining table! Assembly was easy. I had it set up in like 3 seconds! The packaging was kinda banged up when it arrived, but no damage to the table thankfully.',
-      reviewImages: [
-        'https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_sofette-min.png',
-        'https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_sofette-min.png',
-      ],
       //...
       swiperOption: {
         slidesPerView: 6,
@@ -128,6 +117,12 @@ export default {
     this.$bus.$on('switch:reviewpage', (payload) => {
       console.log('-----------called---------------------------------------');
       this.currentCategory = payload.primaryCategory;
+      this.categoryItemData.forEach(item => {
+        if (item.key === this.currentCategory) {
+          this.weatherTitle = item.text;
+        }
+      });
+
       this.from = payload.from;
       this.getReviews({ category: this.currentCategory, from: this.from, size: 20 })
     });
