@@ -1,19 +1,31 @@
 <template>
   <div class="CategoryItem" @click="switchPage(categoryLink)">
-    <div class="CategoryItem__Image" :style="styleImageObject" @mouseenter="updateHoverState(true)" @mouseleave="updateHoverState(false)" />
-    <div class="CategoryItem__Label" :style="styleLabelObject" @mouseenter="updateHoverState(true)" @mouseleave="updateHoverState(false)">
+    <div
+      class="CategoryItem__Image"
+      :style="styleImageObject"
+      @mouseenter="updateHoverState(true)"
+      @mouseleave="updateHoverState(false)"
+    />
+    <div
+      class="CategoryItem__Label"
+      :style="styleLabelObject"
+      @mouseenter="updateHoverState(true)"
+      @mouseleave="updateHoverState(false)"
+    >
       {{ this.categoryLabel }}
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: {
     categoryImage: { type: String, default: '' },
     categoryLabel: { type: String, default: '' },
     categoryColor: { type: String, default: '' },
-    categoryLink: { type: String, default: '' }
+    categoryLink: { type: String, default: '' },
   },
 
   data() {
@@ -25,14 +37,19 @@ export default {
         opacityHover: 1,
         borderBottomHover: '2px solid #202020',
       },
-      hoverState: false,
+      hoverState: this.isSelected ? true : false,
     };
   },
 
   computed: {
+    ...mapState({
+      category: state => state.category,
+    }),
+
     styleImageObject() {
+      const isSelected = this.category === this.categoryLink;
       let modifier = '';
-      if (this.hoverState) {
+      if (this.hoverState || isSelected) {
         modifier = 'Hover';
       }
 
@@ -45,8 +62,9 @@ export default {
       }
     },
     styleLabelObject() {
+      const isSelected = this.category === this.categoryLink;
       let modifier = '';
-      if (this.hoverState) {
+      if (this.hoverState || isSelected) {
         modifier = 'Hover';
       }
 
