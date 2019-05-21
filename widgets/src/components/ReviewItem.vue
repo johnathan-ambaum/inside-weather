@@ -2,7 +2,12 @@
   <div class="ReviewItem">
     <div class="ReviewItem__Left">
       <div class="ReviewItem__Left--Content">
-        <div class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ productName }}</div>
+        <div class="ReviewItem__Left--Product">
+          <div class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ productName }}</div>
+          <div class="ReviewItem__Left--Checkbox">
+            <selected-checkbox />
+          </div>
+        </div>
         <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ productCity }}, {{ productState }}</div>
         <div class="ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
       </div>
@@ -11,7 +16,7 @@
       <div class="ReviewItem__Right--Rectangle">
         <div class="ReviewItem__Right--Top">
           <star :star-count="starRating" />
-          <div class="ReviewItem__Right--Date">{{ reviewDate }}</div>
+          <div class="ReviewItem__Right--Date">{{ convertedReviewDate }}</div>
         </div>
         <div class="ReviewItem__Right--Title">{{ reviewTitle }}</div>
         <div class="ReviewItem__Right--Content">{{ reviewContent }}</div>
@@ -32,14 +37,15 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faArrowLeft } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
-import Star from './Star.vue'
+import SelectedCheckbox from './SelectedCheckbox.vue';
+import Star from './Star.vue';
 
 library.add(faStar);
 
 export default {
   components: {
     FontAwesomeIcon,
+    SelectedCheckbox,
     Star,
   },
 
@@ -59,8 +65,10 @@ export default {
     return {
       hoverState: false,
       starRating: parseInt(this.starCount),
+      convertedReviewDate: this.convertDate(this.reviewDate),
     };
   },
+
 };
 </script>
 
@@ -81,6 +89,12 @@ export default {
       padding: 46px 68px 0 84px;
     }
 
+    &--Product {
+      display: flex;
+      align-items: center;
+      margin-bottom:18px;
+    }
+
     &--Text {
       font-size: 18px;
       letter-spacing: 0.05em;
@@ -88,7 +102,7 @@ export default {
 
     &--Title {
       font-weight: 600;
-      margin-bottom: 0 16px 18px 0;
+      padding-right: 16px;
     }
 
     &--Address {
