@@ -161,10 +161,8 @@ export default class ApiClient {
     let url = `http://iw-reviews.herokuapp.com/api/v1/reviews/search?primary_category=${category}`;
 
     if (this.options.size) {
-      url += `&from=${this.options.from}&size=${this.options.size}`;
+      url += `&page=${this.options.from}&size=${this.options.size}`;
     }
-
-    console.log('--url--', url);
 
     return new Promise((resolve, reject) => {
       fetch(url)
