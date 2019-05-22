@@ -39,10 +39,10 @@
       </div>
     </div>
 
-    <div class="FullReviews__Reviewdata" v-if="reviewsData.length">
+    <div class="FullReviews__Reviewdata" v-if="reviewData.length">
       <review-item
-        v-for="item in reviewData"
-        :key=item.sku
+        v-for="(item, index) in reviewData"
+        :key=index
         :product-name=item.item_data.short_display_name
         :product-city=item.city
         :product-state=item.state
@@ -52,10 +52,11 @@
         :review-content=item.body
         :review-images=item.images
         :star-count=item.rating
+        :temp-number=index
       />
 
       <infinite-loading @infinite="infiniteHandler">
-        <div slot="no-more" style="padding-bottom: 20px;"></div>
+        <div slot="no-more" style="padding-bottom: 20px;">No more Data</div>
       </infinite-loading>
     </div>
 
@@ -65,10 +66,14 @@
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
+import ApiClient from '../util/ApiClient';
 import CategoryItem from '../components/CategoryItem.vue';
 import ReviewItem from '../components/ReviewItem.vue';
 import Star from '../components/Star.vue'
 import DATA from '../static/CATEGORYDATA';
+
+const apiClient = new ApiClient();
+const REVIEW_LOAD_SIZE = 20;
 
 export default {
   components: {
@@ -82,10 +87,10 @@ export default {
     return {
       categoryItemData: DATA,
       weatherTitle: DATA[0].text,
-      reviewData: this.reviewsData ? this.reviewsData : [],
-      currentCategory: DATA[0].key,
-      from: 0,
+      from: 1,
       starCount: 5,
+      currentCategory: DATA[0].key,
+      reviewData: [],
 
       swiperOption: {
         slidesPerView: 6,
@@ -112,35 +117,42 @@ export default {
   },
 
   mounted() {
-    this.$bus.$emit('switch:reviewpage', {
-      primaryCategory: this.currentCategory,
-      from: this.from,
-    });
+    this.loadMore(this.currentCategory, this.from);
   },
 
   created() {
     this.$bus.$on('switch:reviewpage', (payload) => {
-      console.log('-----------called---------------------------------------');
-      if (this.from === 0) {
+      this.from = payload.from;
+      this.setCurrentCategory(payload.primaryCategory);
+
+      if (this.from === 1) {
         this.reviewData = [];
       }
-      this.currentCategory = payload.primaryCategory;
+
+      // Get current selected category title.
       this.categoryItemData.forEach(item => {
         if (item.key === this.currentCategory) {
           this.weatherTitle = item.text;
         }
       });
 
-      this.from = payload.from;
-      this.getReviews({ category: this.currentCategory, from: this.from, size: 20 })
+      // Call api to get review data.
+      this.getReviews({ category: this.currentCategory, from: this.from, size: REVIEW_LOAD_SIZE });
     });
   },
 
   computed: {
     ...mapState({
-      reviewsData: state => state.reviews,
+      propReviews: state => state.reviews,
       totalReviews: state => state.totalReviews,
     }),
+  },
+
+  watch: {
+    propReviews(newPropReviews) {
+      this.reviewData.push(...newPropReviews);
+      this.from += 1;
+    }
   },
 
   methods: {
@@ -153,25 +165,31 @@ export default {
       'selectPanel',
     ]),
 
-    infiniteHandler($state) {
-      if (!this.reviewsData.length || !this.from) {
-        $state.complete();
-      }
-
-      console.log('--infinite--------------', this.from);
-
+    loadMore(category, from) {
       this.$bus.$emit('switch:reviewpage', {
-        primaryCategory: this.currentCategory,
-        from: this.from,
+        primaryCategory: category,
+        from: from,
       });
+    },
 
-      if (this.reviewsData.length) {
-        this.from += 20;
-        this.reviewData.push(...this.reviewsData);
-        $state.loaded();
-      } else {
-        $state.complete();
-      }
+    setCurrentCategory(category) {
+      this.currentCategory = category;
+    },
+
+    infiniteHandler($state) {
+      if (this.from === 1) return;
+
+      apiClient
+        .getReviews(this.currentCategory, this.from, REVIEW_LOAD_SIZE)
+        .then((results) => {
+          if (results.reviews.length) {
+            this.from += 1;
+            this.reviewData.push(...results.reviews);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
     },
   },
 };
@@ -258,7 +276,7 @@ export default {
     &--Link {
       display: inline-block;
       width: 100%;
-      padding: 14px;
+      padding: 12px;
 
       &:hover {
         background: #202020;
