@@ -84,7 +84,7 @@ export default {
     switchPage(categoryLink) {
       this.$bus.$emit('switch:reviewpage', {
         primaryCategory: categoryLink,
-        from: 0,
+        from: 1,
       });
     },
   },
