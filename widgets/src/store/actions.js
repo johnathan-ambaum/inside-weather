@@ -204,7 +204,7 @@ export function flashMessage({ commit }, message) {
 /**
  * Load products from API for specific batch of SKUs
  */
-export function loadSKUs({ state, commit }, skus) {
+export function loadSKUs({ commit }, skus) {
   apiClient
     .applyFilters({
       category: null,
