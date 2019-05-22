@@ -424,6 +424,10 @@ export function setReviews(state, { reviews }) {
   Vue.set(state, 'reviews', reviews);
 }
 
+export function setTotalReviews(state, { totalReviews }) {
+  Vue.set(state, 'totalReviews', totalReviews);
+}
+
 export default {
   setLoading,
   saveProducts,
@@ -444,4 +448,5 @@ export default {
   toggleFavorite,
   setFavorites,
   setReviews,
+  setTotalReviews,
 };

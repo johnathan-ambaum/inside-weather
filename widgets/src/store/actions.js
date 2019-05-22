@@ -80,6 +80,7 @@ export function loadFeatured({ commit, state }) {
     try {
       commit('saveProducts', JSON.parse(featuredCache));
       return;
+    // eslint-disable-next-line no-empty
     } catch (err) {}
   }
 
@@ -233,11 +234,12 @@ export function loadFavorites({ state, dispatch }) {
   }
 }
 
-export function getReviews({ commit }, { category = 'sofa', from = 0, size = 20 }) {
+export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20 }) {
   apiClient
     .getReviews(category, from, size)
     .then((results) => {
-      commit('setReviews', { reviews: results });
+      commit('setReviews', { reviews: results.reviews });
+      commit('setTotalReviews', { totalReviews: results.total });
       commit('updateCategory', category);
     });
 }
