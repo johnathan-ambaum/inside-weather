@@ -23,7 +23,7 @@
           <div class="FullReviews__Write--Title">{{ weatherTitle }}</div>
           <div class="FullReviews__Write--Star">
             <star :star-count="starCount" />
-            <div class="FullReviews__Write--Number">{{ reviewNumbers }} reviews</div>
+            <div class="FullReviews__Write--Number">{{ totalReviews }} reviews</div>
           </div>
         </div>
         <div class="FullReviews__Write--Shop">
@@ -81,15 +81,16 @@ export default {
   data() {
     return {
       categoryItemData: DATA,
+      weatherTitle: DATA[0].text,
       reviewData: this.reviewsData ? this.reviewsData : [],
-      currentCategory: 'sofa',
+      currentCategory: DATA[0].key,
       from: 0,
-      //temp
-      starCount: 4,
-      reviewNumbers: 1421,
-      //...
+      starCount: 5,
+
       swiperOption: {
         slidesPerView: 6,
+        centeredSlides: true,
+        centerInsufficientSlides: true,
         pagination: {
           el: '.swiper-scrollbar',
           clickable: true,
@@ -99,27 +100,30 @@ export default {
         breakpoints: {
           // when window width is <= 320px
           320: {
-            slidesPerView: 1,
-            spaceBetween: 10
-          },
-          // when window width is <= 480px
-          480: {
-            slidesPerView: 3,
-            spaceBetween: 20
+            slidesPerView: 2,
           },
           // when window width is <= 640px
           640: {
             slidesPerView: 4,
-            spaceBetween: 30
           }
         }
       }
     };
   },
 
+  mounted() {
+    this.$bus.$emit('switch:reviewpage', {
+      primaryCategory: this.currentCategory,
+      from: this.from,
+    });
+  },
+
   created() {
     this.$bus.$on('switch:reviewpage', (payload) => {
       console.log('-----------called---------------------------------------');
+      if (this.from === 0) {
+        this.reviewData = [];
+      }
       this.currentCategory = payload.primaryCategory;
       this.categoryItemData.forEach(item => {
         if (item.key === this.currentCategory) {
@@ -135,6 +139,7 @@ export default {
   computed: {
     ...mapState({
       reviewsData: state => state.reviews,
+      totalReviews: state => state.totalReviews,
     }),
   },
 
@@ -208,7 +213,7 @@ export default {
 
   &__Category {
     border-bottom: 1px solid #d4d0ca;
-    height: 162px;
+    height: 164px;
   }
 
   &__Write {
@@ -264,6 +269,7 @@ export default {
     &--BtnLabel {
       font-size: 14px;
       letter-spacing: 0.08em;
+      font-weight: 500;
       text-transform: uppercase;
     }
   }
@@ -279,6 +285,10 @@ export default {
     &__Subtitle {
       font-size: 12px;
       padding-bottom: 40px;
+    }
+
+    &__Category {
+      height: auto;
     }
 
     &__Write {
