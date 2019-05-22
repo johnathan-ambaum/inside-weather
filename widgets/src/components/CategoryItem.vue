@@ -33,7 +33,7 @@ export default {
       catItem: {
         backgroundImage: 'url(' + this.categoryImage + ')',
         colorBgHover: this.categoryColor,
-        fontWeightHover: 'bold',
+        fontWeightHover: '600',
         opacityHover: 1,
         borderBottomHover: '2px solid #202020',
       },
@@ -95,15 +95,18 @@ export default {
 @import '../scss/variables';
 @import '../scss/mixins';
 
+.swiper-slide-active {
+  margin: 0 auto;
+}
+
 .CategoryItem {
-  padding: 0 15px;
+  padding: 0 25px;
 
   &__Image {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 120px;
-    height: 120px;
+    height: 115px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -113,9 +116,27 @@ export default {
   &__Label {
     letter-spacing: 0.075em;
     color: rgb(32, 32, 32);
-    padding: 5px 0 13px 0;
-    font-size: 14px;
+    padding: 14px 0;
+    font-size: 13px;
     text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @include at-query($breakpoint-small) {
+    padding: 0 8px;
+
+    &__Image {
+      @include at-query($breakpoint-msmall) {
+        height: 66px;
+      }
+    }
+
+    &__Label {
+      min-height: 49px;
+      font-size: 11px;
+      padding: 7px 0;
+    }
   }
 }
 </style>

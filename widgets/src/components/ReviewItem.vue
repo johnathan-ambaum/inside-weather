@@ -248,6 +248,7 @@ export default {
       &--Content {
         font-size: 13px;
         line-height: 21px;
+        margin-bottom: 0;
       }
 
       &--Image {
