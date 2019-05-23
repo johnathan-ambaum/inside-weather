@@ -46,7 +46,7 @@
         :product-name=item.item_data.short_display_name
         :product-city=item.city
         :product-state=item.state
-        :product-image=item.item_data.thumbnail_image
+        :product-image=item.item_data.medium_image
         :review-date=item.updated_at
         :review-title=item.title
         :review-content=item.body
@@ -66,10 +66,11 @@
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
-import ApiClient from '../util/ApiClient';
+
 import CategoryItem from '../components/CategoryItem.vue';
 import ReviewItem from '../components/ReviewItem.vue';
-import Star from '../components/Star.vue'
+import ApiClient from '../util/ApiClient';
+import Star from '../components/Star.vue';
 import DATA from '../static/CATEGORYDATA';
 
 const apiClient = new ApiClient();
@@ -94,8 +95,8 @@ export default {
 
       swiperOption: {
         slidesPerView: 6,
-        centeredSlides: true,
-        centerInsufficientSlides: true,
+        // centeredSlides: true,
+        // centerInsufficientSlides: true,
         pagination: {
           el: '.swiper-scrollbar',
           clickable: true,
@@ -277,6 +278,7 @@ export default {
       display: inline-block;
       width: 100%;
       padding: 12px;
+      color: #202020;
 
       &:hover {
         background: #202020;
