@@ -1,6 +1,6 @@
 <template>
   <div class="SelectedCheckbox">
-    <span />
+    <img src='https://cdn.shopify.com/s/files/1/2994/0144/files/checkmark.png?254334' />
 	</div>
 </template>
 
@@ -9,18 +9,6 @@
 @import '../scss/mixins';
 
 .SelectedCheckbox {
-  & span {
-    width: 22px;
-    height: 22px;
-    display: block;
-    background: #B1C8CD;
-    border-radius: 50%;
-
-    &::after {
-      content: '\2714';
-      padding: 0 5px;
-      color: white;
-    }
-  }
+  display: flex;
 }
 </style>
