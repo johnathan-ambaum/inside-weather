@@ -4,6 +4,9 @@ import { mapState, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as emptyHeart } from '@fortawesome/pro-light-svg-icons';
 import { faHeart as filledHeart } from '@fortawesome/pro-solid-svg-icons';
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import '../node_modules/swiper/dist/css/swiper.css';
@@ -50,6 +53,7 @@ const app = new Vue({
     CategoryItem,
     FullReviews,
     FontAwesomeIcon,
+    BootstrapVue,
   },
 
   store,
