@@ -1,26 +1,16 @@
 <template>
-  <div class="ReviewItem__Right--Star">
-    <font-awesome-icon
+  <div class="ReviewItemStar">
+    <img
       v-for="i in starCount"
       :key="i"
-      :icon="['fal', 'star']"
-      :style="{ color: 'black' }"
+      class="ReviewItemStar__Image"
+      src="https://cdn.shopify.com/s/files/1/2994/0144/files/star.png?254334"
     />
   </div>
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar, faArrowLeft } from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
-library.add(faStar);
-
 export default {
-  components: {
-    FontAwesomeIcon,
-  },
-
   props: {
     starCount: { type: Number, default: 0 },
   },
@@ -28,10 +18,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../scss/variables';
-@import '../scss/mixins';
+.ReviewItemStar {
+  display: flex;
 
-.fa-star {
-  margin-right: 12px;
+  &__Image {
+    margin-right: 12px;
+  }
 }
 </style>
