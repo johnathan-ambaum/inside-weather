@@ -52,7 +52,6 @@
         :review-content=item.body
         :review-images=item.images
         :star-count=item.rating
-        :temp-number=index
       />
 
       <infinite-loading @infinite="infiniteHandler">
@@ -283,6 +282,7 @@ export default {
       &:hover {
         background: #202020;
         color: #fff;
+        text-decoration: none;
       }
     }
 
