@@ -3,7 +3,22 @@
     <div class="FullReviews__Title">Check the Weather</div>
     <div class="FullReviews__Subtitle">We’ve got high standards and we do everything we can to uphold them. But we’re obviously biased. So don’t take our word for it; read reviews from real people who have customized and purchased their own Inside Weather.</div>
 
-    <div class="FullReviews__Category">
+    <!-- Category Swiper section -->
+    <div v-if="isMobile" class="FullReviews__Category">
+      <swiper :options="swiperOption" ref="mySwiper">
+        <swiper-slide v-for="(item, index) in categoryItemData" :key="item.key">
+          <category-item
+            :category-image="item.image"
+            :category-label="item.text"
+            :category-color="item.hoverColor"
+            :category-link="item.key"
+            :is-active="activeIndex === index"
+          />
+        </swiper-slide>
+        <!-- <div class="swiper-pagination"></div> -->
+      </swiper>
+    </div>
+    <div v-else class="FullReviews__Category">
       <swiper :options="swiperOption">
         <swiper-slide v-for="item in categoryItemData" :key="item.key">
           <category-item
@@ -13,10 +28,10 @@
             :category-link="item.key"
           />
         </swiper-slide>
-        <!-- <div class="swiper-scrollbar" slot="scrollbar"></div> -->
       </swiper>
     </div>
 
+    <!-- Review Write section -->
     <div class="FullReviews__Write">
       <div class="FullReviews__Write--Left">
         <div class="FullReviews__Write--Mobileleft">
@@ -39,6 +54,7 @@
       </div>
     </div>
 
+    <!-- Review Items section -->
     <div class="FullReviews__Reviewdata" v-if="reviewData.length">
       <review-item
         v-for="(item, index) in reviewData"
@@ -53,7 +69,6 @@
         :review-images=item.images
         :star-count=item.rating
       />
-
       <infinite-loading @infinite="infiniteHandler">
         <div slot="no-more" style="padding-bottom: 20px;">No more Data</div>
       </infinite-loading>
@@ -66,6 +81,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
 
+import screenMonitor from '../mixins/screenMonitor';
 import CategoryItem from '../components/CategoryItem.vue';
 import ReviewItem from '../components/ReviewItem.vue';
 import ApiClient from '../util/ApiClient';
@@ -76,6 +92,10 @@ const apiClient = new ApiClient();
 const REVIEW_LOAD_SIZE = 20;
 
 export default {
+  mixins: [
+    screenMonitor,
+  ],
+
   components: {
     InfiniteLoading,
     CategoryItem,
@@ -87,28 +107,29 @@ export default {
     return {
       categoryItemData: DATA,
       weatherTitle: DATA[0].text,
+      currentCategory: DATA[0].key,
       from: 1,
       starCount: 5,
-      currentCategory: DATA[0].key,
+      activeIndex: 0,
       reviewData: [],
 
       swiperOption: {
         slidesPerView: 6,
-        // centeredSlides: true,
-        // centerInsufficientSlides: true,
+        centeredSlides: false,// this.isMobile ? true : false,
         pagination: {
-          el: '.swiper-scrollbar',
+          el: '.swiper-pagination',
           clickable: true,
           hide: false,
         },
-        // Responsive breakpoints
+        onSlideChangeEnd:function(){
+          this.onSwipe()
+        },
+
         breakpoints: {
-          // when window width is <= 320px
-          320: {
+          320: { // when window width is <= 320px
             slidesPerView: 2,
           },
-          // when window width is <= 640px
-          640: {
+          640: { // when window width is <= 640px
             slidesPerView: 4,
           }
         }
@@ -118,9 +139,19 @@ export default {
 
   mounted() {
     this.loadMore(this.currentCategory, this.from);
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+      this.swiper.on('slideChange',()=>{
+        this.onSwipe(this)
+      });
+    }
   },
 
   created() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+    }
+
     this.$bus.$on('switch:reviewpage', (payload) => {
       this.from = payload.from;
       this.setCurrentCategory(payload.primaryCategory);
@@ -146,6 +177,10 @@ export default {
       propReviews: state => state.reviews,
       totalReviews: state => state.totalReviews,
     }),
+
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
   },
 
   watch: {
@@ -164,6 +199,14 @@ export default {
       'updateCategory',
       'selectPanel',
     ]),
+
+    onSwipe(varuable) {
+      this.activeIndex = varuable.swiper.activeIndex;
+      this.$bus.$emit('switch:reviewpage', {
+        primaryCategory: this.categoryItemData[this.activeIndex].key,
+        from: 1,
+      });
+    },
 
     loadMore(category, from) {
       this.$bus.$emit('switch:reviewpage', {

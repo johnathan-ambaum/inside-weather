@@ -1,31 +1,52 @@
 <template>
   <div class="CategoryItem" @click="switchPage(categoryLink)">
-    <div
-      class="CategoryItem__Image"
-      :style="styleImageObject"
-      @mouseenter="updateHoverState(true)"
-      @mouseleave="updateHoverState(false)"
-    />
-    <div
-      class="CategoryItem__Label"
-      :style="styleLabelObject"
-      @mouseenter="updateHoverState(true)"
-      @mouseleave="updateHoverState(false)"
-    >
-      {{ this.categoryLabel }}
+    <div v-if="isMobile">
+      <div
+        class="CategoryItem__Image"
+        :style="styleImageObject"
+      />
+      <div
+        v-if="isMobile"
+        class="CategoryItem__Label"
+        :style="styleLabelObject"
+      >
+        {{ this.categoryLabel }}
+      </div>
+    </div>
+    <div v-else>
+      <div
+        class="CategoryItem__Image"
+        :style="styleImageObject"
+        @mouseenter="updateHoverState(true)"
+        @mouseleave="updateHoverState(false)"
+      />
+      <div
+        class="CategoryItem__Label"
+        :style="styleLabelObject"
+        @mouseenter="updateHoverState(true)"
+        @mouseleave="updateHoverState(false)"
+      >
+        {{ this.categoryLabel }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import screenMonitor from '../mixins/screenMonitor';
 
 export default {
+  mixins: [
+    screenMonitor,
+  ],
+
   props: {
     categoryImage: { type: String, default: '' },
     categoryLabel: { type: String, default: '' },
     categoryColor: { type: String, default: '' },
     categoryLink: { type: String, default: '' },
+    isActive: { type: Boolean, default: false },
   },
 
   data() {
@@ -53,6 +74,8 @@ export default {
         modifier = 'Hover';
       }
 
+      if (this.isActive) modifier = 'Hover';
+
       return {
         backgroundImage: this.catItem['backgroundImage'],
         backgroundColor: this.catItem['colorBg' + modifier],
@@ -68,6 +91,8 @@ export default {
         modifier = 'Hover';
       }
 
+      if (this.isActive) modifier = 'Hover';
+
       return {
         fontWeight: this.catItem['fontWeight' + modifier],
         cursor: modifier == 'Hover' ? 'pointer' : 'normal',
@@ -82,10 +107,12 @@ export default {
     },
 
     switchPage(categoryLink) {
-      this.$bus.$emit('switch:reviewpage', {
-        primaryCategory: categoryLink,
-        from: 1,
-      });
+      if (!this.isMobile) {
+        this.$bus.$emit('switch:reviewpage', {
+          primaryCategory: categoryLink,
+          from: 1,
+        });
+      }
     },
   },
 };
