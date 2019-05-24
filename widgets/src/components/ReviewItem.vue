@@ -337,6 +337,10 @@ export default {
   padding: 0;
 }
 
+.modal-dialog .modal-content {
+  border-radius: 0;
+}
+
 .modal-dialog .container-fluid {
   padding: 0;
 }
