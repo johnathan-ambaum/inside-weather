@@ -177,6 +177,8 @@ export default {
   margin-bottom: 24px;
 
   &__Left {
+    width: 28%;
+
     &--Content {
       padding: 46px 68px 46px 84px;
     }
@@ -213,7 +215,7 @@ export default {
 
   &__Right {
     margin: 46px 84px 46px 0;
-    width: 65%;
+    width: 72%;
     border-left: 1px solid #d4d0ca;
 
     &--Top {
