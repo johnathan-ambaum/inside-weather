@@ -10,7 +10,7 @@
                 <selected-checkbox />
               </div>
             </div>
-            <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ productCity }}, {{ productState }}</div>
+            <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
           </div>
           <div class="ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
         </div>
@@ -53,12 +53,12 @@
                         <selected-checkbox />
                       </div>
                     </div>
-                    <div class="ReviewItem__Left--Text ReviewItem__Left--Address ReviewModal__Left--Address">{{ productCity }}, {{ productState }}</div>
+                    <div class="ReviewItem__Left--Text ReviewItem__Left--Address ReviewModal__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
                   </div>
                   <div class="ReviewItem__Left--Image ReviewModal__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
                 </div>
               </div>
-              <div class="ReviewItem__Right ReviewModal__Right">
+              <div class="ReviewModal__Right">
                 <div class="ReviewItem__Right--Rectangle ReviewModal__Right--Rectangle">
                   <div class="ReviewItem__Right--Top ReviewModal__Right--Top">
                     <star :star-count="starRating" />
@@ -97,6 +97,7 @@ import {
 
 import SelectedCheckbox from './SelectedCheckbox.vue';
 import Star from './Star.vue';
+import STATE from '../static/STATE';
 
 library.add(faStar);
 
@@ -128,15 +129,33 @@ export default {
       modalShow: false,
       modalImage: '',
       hoverState: false,
+      stateData: STATE,
       starRating: parseInt(this.starCount),
-      convertedReviewDate: this.convertDate(this.reviewDate),
+      convertedReviewDate: '',
+      productStateAbbr: '',
     };
+  },
+
+  mounted() {
+    this.convertedReviewDate = this.convertDate(this.reviewDate);
+    this.productStateAbbr = this.getAbbrState(this.productState);
   },
 
   methods: {
     convertDate(isoDate) {
       const date = new Date(isoDate);
       return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    },
+
+    getAbbrState(us_state) {
+      let state_abbreviation = '';
+      this.stateData.forEach(item => {
+        if (item.name === us_state) {
+          state_abbreviation = item.abbreviation;
+          return;
+        }
+      });
+      return state_abbreviation;
     },
 
     handleModal(image) {
@@ -158,10 +177,8 @@ export default {
   margin-bottom: 24px;
 
   &__Left {
-    width: 40%;
-
     &--Content {
-      padding: 46px 68px 0 84px;
+      padding: 46px 68px 46px 84px;
     }
 
     &--Product {
@@ -196,7 +213,8 @@ export default {
 
   &__Right {
     margin: 46px 84px 46px 0;
-    width: 100%;
+    width: 65%;
+    border-left: 1px solid #d4d0ca;
 
     &--Top {
       display: flex;
@@ -207,7 +225,6 @@ export default {
 
     &--Rectangle {
       padding-left: 68px;
-      border-left: 1px solid #d4d0ca;
       min-height: 167px;
     }
 
@@ -292,9 +309,10 @@ export default {
     &__Right {
       margin: 0;
       padding: 0 24px 24px;
+      border-left: 0;
+      width: 100%;
 
       &--Rectangle {
-        border-left: 0;
         min-height: 167px;
         padding-left: 0;
       }
@@ -378,7 +396,7 @@ export default {
     width: 100%;
 
     &--Content {
-      padding: 24px 24px 18px;
+      padding: 42px 24px 18px;
       display: flex;
       align-items: center;
       flex-direction: row-reverse;
@@ -406,6 +424,7 @@ export default {
   &__Right {
     margin: 0;
     padding: 0 24px 24px;
+    width: 100%;
 
     &--Rectangle {
       border-left: 0;
