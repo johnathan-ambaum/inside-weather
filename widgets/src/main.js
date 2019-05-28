@@ -23,6 +23,7 @@ import GlyphLoading from './components/GlyphLoading.vue';
 import SwatchBrowser from './components/SwatchBrowser.vue';
 import CategoryItem from './components/CategoryItem.vue';
 import FullReviews from './containers/FullReviews.vue';
+import ReviewCarousel from './components/ReviewCarousel.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
@@ -52,6 +53,7 @@ const app = new Vue({
     SwatchBrowser,
     CategoryItem,
     FullReviews,
+    ReviewCarousel,
     FontAwesomeIcon,
     BootstrapVue,
   },
