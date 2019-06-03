@@ -4,15 +4,17 @@
       <div class="ReviewItem__Left">
         <div class="ReviewItem__Left--Content">
           <div class="ReviewItem__Mobile--Right">
-            <div class="ReviewItem__Left--Product">
-              <div class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ productName }}</div>
-              <div class="ReviewItem__Left--Checkbox">
+            <div class="ReviewItem__Left--Product" :style="styleReviewItem">
+              <div class="ReviewItem__Left--Text ReviewItem__Left--Title" :id="elementId">{{ firstName }} {{ lastName }}</div>
+              <div class="ReviewItem__Left--Checkbox" :style="styleCheckmark">
                 <selected-checkbox />
               </div>
             </div>
             <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
           </div>
-          <div class="ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
+          <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="ReviewItem__Left--Link">
+            <div class="ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}" />
+          </a>
         </div>
       </div>
       <div class="ReviewItem__Right">
@@ -48,7 +50,7 @@
                 <div class="ReviewItem__Left--Content ReviewModal__Left--Content">
                   <div class="ReviewItem__Mobile--Right ReviewModal__Mobile--Right">
                     <div class="ReviewItem__Left--Product ReviewModal__Left--Product">
-                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title">{{ productName }}</div>
+                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title">{{ firstName }} {{ lastName }}</div>
                       <div class="ReviewItem__Left--Checkbox">
                         <selected-checkbox />
                       </div>
@@ -72,6 +74,7 @@
                       v-for="(image, index) in reviewImages"
                       :key="index"
                       :style="{ 'background-image': 'url(' + image.url + ')'}"
+                      @click="handlePopupImage(image.url)"
                     />
                   </div>
                 </div>
@@ -113,7 +116,9 @@ export default {
   },
 
   props: {
-    productName: { type: String, default: '' },
+    elementId: { type: String, default: '' },
+    firstName: { type: String, default: '' },
+    lastName: { type: String, default: '' },
     productCity: { type: String, default: '' },
     productState: { type: String, default: '' },
     productImage: { type: String, default: '' },
@@ -122,6 +127,8 @@ export default {
     reviewContent: { type: String, default: '' },
     reviewImages: { type: Array, default: [] },
     starCount: { type: String, default: '' },
+    productCategory: { type: String, default: '' },
+    productHandle: { type: String, default: '' },
   },
 
   data() {
@@ -133,12 +140,51 @@ export default {
       starRating: parseInt(this.starCount),
       convertedReviewDate: '',
       productStateAbbr: '',
+      elementHeight: 0,
     };
+  },
+
+  created() {
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize);
   },
 
   mounted() {
     this.convertedReviewDate = this.convertDate(this.reviewDate);
     this.productStateAbbr = this.getAbbrState(this.productState);
+
+    const id = this.elementId;
+    this.getElementSize(id);
+  },
+
+  computed: {
+    styleReviewItem() {
+      if (this.elementHeight > 30) {
+        return {
+          display: 'flex',
+          alignItems: 'flex-start',
+        }
+      } else {
+        return {
+          display: 'flex',
+          alignItems: 'center',
+        }
+      }
+    },
+    styleCheckmark() {
+      if (this.elementHeight > 30) {
+        return {
+          paddingTop: '7px',
+        }
+      } else {
+        return {
+          paddingTop: '0',
+        }
+      }
+    }
   },
 
   methods: {
@@ -158,10 +204,25 @@ export default {
       return state_abbreviation;
     },
 
+    getElementSize(id) {
+      if (id) {
+        this.elementHeight = document.getElementById(id).clientHeight;
+      }
+    },
+
+    handleResize() {
+      const id = this.elementId;
+      this.getElementSize(id);
+    },
+
     handleModal(image) {
       this.modalShow = !this.modalShow;
       this.modalImage = image;
-    }
+    },
+
+    handlePopupImage(image) {
+      this.modalImage = image;
+    },
   }
 };
 </script>
@@ -185,12 +246,15 @@ export default {
 
     &--Product {
       display: flex;
-      align-items: center;
-      margin-bottom:18px;
+      margin-bottom: 18px;
+    }
+
+    &--Checkbox {
+      padding-top: 0;
     }
 
     &--Text {
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: 0.05em;
     }
 
@@ -202,6 +266,11 @@ export default {
     &--Address {
       font-weight: 400;
       margin-bottom: 32px;
+    }
+
+    &--Link {
+      display: inline-block;
+      width: 85px;
     }
 
     &--Image {
@@ -242,6 +311,7 @@ export default {
 
     &--Title {
       font-size: 18px;
+      font-weight: 600;
       letter-spacing: 0.05em;
       line-height: 24px;
       text-align: left;
@@ -382,6 +452,7 @@ export default {
 
 .ReviewModal {
   flex-direction: column;
+  font-family: $font-stack-avalon;
   border: 0;
 
   &__Image {
