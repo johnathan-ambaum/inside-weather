@@ -41,9 +41,6 @@
             <div class="FullReviews__Write--Number">{{ totalReviews }} reviews</div>
           </div>
         </div>
-        <div class="FullReviews__Write--Shop">
-          <span class="FullReviews__Write--Label">Shop</span>
-        </div>
       </div>
       <div class="FullReviews__Write--Right">
         <div class="FullReviews__Write--Button">
@@ -59,7 +56,9 @@
       <review-item
         v-for="(item, index) in reviewData"
         :key=index
-        :product-name=item.item_data.short_display_name
+        :element-id=item.updated_at
+        :first-name=item.first_name
+        :last-name=item.last_name
         :product-city=item.city
         :product-state=item.state
         :product-image=item.item_data.medium_image
@@ -68,6 +67,8 @@
         :review-content=item.body
         :review-images=item.images
         :star-count=item.rating
+        :product-category=item.item_data.primary_category
+        :product-handle=item.item_data.handle
       />
       <infinite-loading @infinite="infiniteHandler">
         <div slot="no-more" style="padding-bottom: 20px;">No more Data</div>
@@ -243,6 +244,19 @@ export default {
 @import '../scss/variables';
 @import '../scss/mixins';
 
+.swiper-container {
+  .swiper-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swiper-slide {
+    width: 115px !important;
+    margin: 0 25px;
+  }
+}
+
 .FullReviews {
   max-width: 1312px;
   margin: 0 auto;
@@ -274,7 +288,7 @@ export default {
 
   &__Category {
     border-bottom: 1px solid #d4d0ca;
-    height: 164px;
+    height: 158px;
   }
 
   &__Write {
