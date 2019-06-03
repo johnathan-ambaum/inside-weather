@@ -123,20 +123,17 @@ export default {
 @import '../scss/mixins';
 
 .swiper-slide-active {
-  margin: 0 auto;
+  // margin: 0 auto;
 }
 
 .CategoryItem {
-  padding: 0 25px;
-
   &__Image {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
+    width: 115px;
     height: 115px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
     opacity: 0.4;
   }
 
@@ -144,7 +141,9 @@ export default {
     letter-spacing: 0.075em;
     color: rgb(32, 32, 32);
     padding: 14px 0;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 13px;
     text-align: center;
     letter-spacing: 0.1em;
     text-transform: uppercase;
