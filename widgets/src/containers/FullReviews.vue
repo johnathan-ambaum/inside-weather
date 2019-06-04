@@ -370,6 +370,7 @@ export default {
 
     &__Write {
       flex-direction: column;
+      padding: 40px 0 36px;
 
       &--Left {
         display: flex;
