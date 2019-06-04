@@ -1,6 +1,14 @@
 <template>
-  <div class="SelectedCheckbox" />
+  <div :class="'SelectedCheckbox ' + this.className" />
 </template>
+
+<script>
+export default {
+  props: {
+    className: { type: String, default: '' },
+  }
+}
+</script>
 
 <style lang="scss">
 @import '../scss/variables';
