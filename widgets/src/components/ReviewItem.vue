@@ -38,32 +38,44 @@
       </div>
     </div>
 
-    <b-modal v-model="modalShow" hide-footer size="xl" >
+    <b-modal v-model="modalShow" hide-footer size="xl">
+      <template slot="modal-header" slot-scope="{ close }">
+        <h5></h5>
+        <!-- Emulate built in modal header close button action -->
+        <b-button size="sm" variant="outline-danger" @click="close()">
+          <img v-if="isMobile" src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245" class="ReviewModal__Close" />
+          <img v-else src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
+        </b-button>
+      </template>
       <b-container fluid>
-        <b-row>
-          <b-col sm="8">
+        <b-row class="ReviewModalWrap">
+          <b-col sm="12" lg="8" class="ReviewModal__ImageBox">
             <img :src="modalImage" class="ReviewModal__Image" />
           </b-col>
-          <b-col sm="4">
+          <b-col sm="12" lg="4" class="ReviewModal__ContentBox">
             <div class="ReviewItem ReviewModal">
               <div class="ReviewItem__Left ReviewModal__Left">
                 <div class="ReviewItem__Left--Content ReviewModal__Left--Content">
                   <div class="ReviewItem__Mobile--Right ReviewModal__Mobile--Right">
-                    <div class="ReviewItem__Left--Product ReviewModal__Left--Product">
-                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title">{{ firstName }} {{ lastName }}</div>
-                      <div class="ReviewItem__Left--Checkbox">
-                        <selected-checkbox />
+                    <div class="ReviewItem__Left--Product ReviewModal__Left--Product" :style="styleReviewItem">
+                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title" :id="elementId">{{ firstName }} {{ lastName }}</div>
+                      <div class="ReviewItem__Left--Checkbox" :style="styleCheckmark">
+                        <selected-checkbox
+                          class-name="ReviewModal__Left--Checkbox"
+                        />
                       </div>
                     </div>
                     <div class="ReviewItem__Left--Text ReviewItem__Left--Address ReviewModal__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
                   </div>
-                  <div class="ReviewItem__Left--Image ReviewModal__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
+                  <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="ReviewItem__Left--Link ReviewModal__Left--Link">
+                    <div class="ReviewItem__Left--Image ReviewModal__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
+                  </a>
                 </div>
               </div>
               <div class="ReviewModal__Right">
                 <div class="ReviewItem__Right--Rectangle ReviewModal__Right--Rectangle">
                   <div class="ReviewItem__Right--Top ReviewModal__Right--Top">
-                    <star :star-count="starRating" />
+                    <star :star-count="starRating" class-name="ReviewModal__Right--Star" />
                     <div class="ReviewItem__Right--Date ReviewModal__Right--Date">{{ convertedReviewDate }}</div>
                   </div>
                   <div class="ReviewItem__Right--Title ReviewModal__Right--Title">{{ reviewTitle }}</div>
@@ -98,6 +110,7 @@ import {
   BCol,
 } from 'bootstrap-vue/es/components';
 
+import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';
 import Star from './Star.vue';
 import STATE from '../static/STATE';
@@ -105,6 +118,10 @@ import STATE from '../static/STATE';
 library.add(faStar);
 
 export default {
+  mixins: [
+    screenMonitor,
+  ],
+
   components: {
     FontAwesomeIcon,
     SelectedCheckbox,
@@ -246,7 +263,7 @@ export default {
 
     &--Product {
       display: flex;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
     &--Checkbox {
@@ -373,8 +390,13 @@ export default {
         padding-left: 20px;
       }
 
+      &--Link {
+        width: 66px;
+      }
+
       &--Image {
-        min-width: 85px;
+        max-width: 66px;
+        height: 66px;
       }
     }
 
@@ -423,12 +445,29 @@ export default {
   }
 }
 
+.modal-dialog.modal-xl {
+  @include at-query($breakpoint-large) {
+    max-width: 1000px;
+  }
+
+  @include at-query($breakpoint-small) {
+    margin: 50px 24px 24px;
+  }
+}
+
 .modal-dialog .modal-body {
   padding: 0;
 }
 
 .modal-dialog .modal-content {
+  max-width: 1000px;
+  height: 630px;
+  border: none;
   border-radius: 0;
+
+  @include at-query($breakpoint-small) {
+    height: 100%;
+  }
 }
 
 .modal-dialog .container-fluid {
@@ -438,6 +477,7 @@ export default {
 .modal-dialog .modal-header {
   border-bottom: 0;
   z-index: 1000;
+  padding: 0.5rem 1rem;
 }
 
 .modal-header .close {
@@ -447,7 +487,12 @@ export default {
 }
 
 .modal-dialog .container-fluid {
-  margin-top: -57px;
+  margin-top: -40px;
+}
+
+.ReviewModalWrap {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
 .ReviewModal {
@@ -455,21 +500,37 @@ export default {
   font-family: $font-stack-avalon;
   border: 0;
 
-  &__Image {
-    border-top: 80px solid #202020;
-    border-bottom: 80px solid #202020;
+  &__Close {
+    width: 16px;
+    height: 16px;
 
-    @include at-query($breakpoint-small) {
-      border-top: 60px solid #202020;
-      border-bottom: 60px solid #202020;
+    &:hover {
+      cursor: pointer;
     }
+  }
+
+  &__ImageBox {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  &__ContentBox {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  &__Image {
+    width: 650px;
+    height: 630px;
+    border-top: 90px solid #202020;
+    border-bottom: 90px solid #202020;
   }
 
   &__Left {
     width: 100%;
 
     &--Content {
-      padding: 42px 24px 18px;
+      padding: 42px 42px 18px 25px;
       display: flex;
       align-items: center;
       flex-direction: row-reverse;
@@ -477,26 +538,41 @@ export default {
     }
 
     &--Title {
+      font-size: 18px;
       letter-spacing: 0.05em;
+    }
+
+    &--Checkbox {
+      width: 18px;
+      height: 18px;
     }
 
     &--Address {
       margin-bottom: 0;
-      padding-left: 20px;
+      padding-left: 18px;
+      font-weight: 400;
+      font-size: 18px;
     }
 
     &--Product {
-      padding-left: 20px;
+      padding-left: 18px;
+      margin-bottom: 6px;
+    }
+
+    &--Link {
+      width: 66px;
     }
 
     &--Image {
-      min-width: 85px;
+      min-width: 66px;
+      width: 66px;
+      height: 66px;
     }
   }
 
   &__Right {
     margin: 0;
-    padding: 0 24px 24px;
+    padding: 0 42px 42px 25px;
     width: 100%;
 
     &--Rectangle {
@@ -511,25 +587,87 @@ export default {
       margin-bottom: 18px;
     }
 
+    &--Star {
+      width: 15px;
+      height: 15px;
+    }
+
     &--Date {
       padding-bottom: 18px;
+      font-size: 16px;
     }
 
     &--Title {
       margin-bottom: 18px;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 22px;
+      font-size: 18px;
+      font-weight: normal;
     }
 
     &--Content {
-      font-size: 13px;
-      line-height: 21px;
+      font-size: 14px;
+      line-height: 22px;
       margin-bottom: 0;
     }
 
     &--Image {
       margin-top: 18px;
+      width: 80px;
+      height: 50px;
+      margin-right: 5px;
+    }
+  }
+
+  // Review Modal Mobile Layout
+  @include at-query($breakpoint-small) {
+    &__Close {
+      width: 14px;
+      height: 14px;
+    }
+
+    &__Image {
+      width: 100%;
+      height: 100%;
+      border-top: 45px solid #202020;
+      border-bottom: 45px solid #202020;
+    }
+
+    &__Left {
+      &--Content {
+        padding: 24px 24px 18px;
+      }
+
+      &--Title {
+        font-size: 16px;
+      }
+
+      &--Address {
+        padding-left: 20px;
+        font-size: 16px;
+      }
+
+       &--Product {
+        padding-left: 20px;
+      }
+    }
+
+    &__Right {
+      padding: 0 24px;
+
+      &--Date {
+        font-size: 14px;
+      }
+
+      &--Title {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+      }
+
+      &--Content {
+        font-size: 13px;
+        line-height: 21px;
+        margin-bottom: 0;
+      }
     }
   }
 }
