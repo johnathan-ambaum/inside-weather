@@ -5,7 +5,7 @@
 
     <!-- Category Swiper section -->
     <div v-if="isMobile" class="FullReviews__Category">
-      <swiper :options="swiperOption" ref="mySwiper">
+      <swiper :options="swiperOption" ref="mySwiper" @click.native="sliderClicked">
         <swiper-slide v-for="(item, index) in categoryItemData" :key="item.key">
           <category-item
             :category-image="item.image"
@@ -116,16 +116,12 @@ export default {
 
       swiperOption: {
         slidesPerView: 6,
-        centeredSlides: false,// this.isMobile ? true : false,
+        centeredSlides: false, //this.isMobile ? true : false,
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
           hide: false,
         },
-        onSlideChangeEnd:function(){
-          this.onSwipe()
-        },
-
         breakpoints: {
           320: { // when window width is <= 320px
             slidesPerView: 2,
@@ -140,19 +136,12 @@ export default {
 
   mounted() {
     this.loadMore(this.currentCategory, this.from);
-    if (this.isMobile) {
-      this.swiperOption.centeredSlides = true;
-      this.swiper.on('slideChange',()=>{
-        this.onSwipe(this)
-      });
-    }
   },
 
   created() {
     if (this.isMobile) {
       this.swiperOption.centeredSlides = true;
     }
-
     this.$bus.$on('switch:reviewpage', (payload) => {
       this.from = payload.from;
       this.setCurrentCategory(payload.primaryCategory);
@@ -201,12 +190,21 @@ export default {
       'selectPanel',
     ]),
 
-    onSwipe(varuable) {
-      this.activeIndex = varuable.swiper.activeIndex;
-      this.$bus.$emit('switch:reviewpage', {
-        primaryCategory: this.categoryItemData[this.activeIndex].key,
-        from: 1,
-      });
+    sliderClicked(e) {
+      this.activeIndex = this.swiper.clickedIndex;
+
+      if (this.activeIndex > 0 && this.activeIndex < 5) {
+        // this.swiper.destroy(false, true);
+
+        // this.swiperOption.centeredSlides = true;
+        // this.swiper.activeIndex = this.activeIndex;
+
+        // this.swiper.init();
+        // this.swiper.observer = true;
+
+        this.swiper.slideTo(this.activeIndex, 300);
+      }
+
     },
 
     loadMore(category, from) {
@@ -249,11 +247,30 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include at-query($breakpoint-small) {
+      justify-content: flex-start;
+    }
   }
 
   .swiper-slide {
-    width: 115px !important;
-    margin: 0 25px;
+    @include at-query($breakpoint-large) {
+      width: 115px !important;
+      margin: 0 25px;
+    }
+
+    @include at-query($breakpoint-small) {
+      // width: 66px !important;
+      // margin: 0 8px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 }
 
@@ -366,6 +383,16 @@ export default {
 
     &__Category {
       height: auto;
+      margin: 0 -14px;
+
+      &::after {
+        left: 0;
+        width: 100%;
+        content: " ";
+        display: block;
+        position:absolute;
+        border-bottom: 1px solid #d4d0ca;
+      }
     }
 
     &__Write {
