@@ -44,7 +44,7 @@ export function defineFilter(state, { filter }) {
  * so that the URL is shareable to see the same results
  */
 export function applyQueryString(state) {
-  const queryString = window.location.search.substring(1);
+  const queryString = decodeURIComponent(window.location.search.substring(1));
 
   if (!queryString.length) {
     return;
