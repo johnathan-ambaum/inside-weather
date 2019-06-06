@@ -234,7 +234,7 @@ export function loadFavorites({ state, dispatch }) {
   }
 }
 
-export function getReviews({ commit }, { category = 'armchairs', from = 0, size = 20 }) {
+export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20 }) {
   apiClient
     .getReviews(category, from, size)
     .then((results) => {
