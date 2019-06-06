@@ -6,7 +6,6 @@
         :style="styleImageObject"
       />
       <div
-        v-if="isMobile"
         class="CategoryItem__Label"
         :style="styleLabelObject"
       >
@@ -107,12 +106,12 @@ export default {
     },
 
     switchPage(categoryLink) {
-      if (!this.isMobile) {
+      // if (!this.isMobile) {
         this.$bus.$emit('switch:reviewpage', {
           primaryCategory: categoryLink,
           from: 1,
         });
-      }
+      // }
     },
   },
 };
@@ -121,10 +120,6 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/mixins';
-
-.swiper-slide-active {
-  // margin: 0 auto;
-}
 
 .CategoryItem {
   &__Image {
@@ -150,18 +145,18 @@ export default {
   }
 
   @include at-query($breakpoint-small) {
-    padding: 0 8px;
-
     &__Image {
       @include at-query($breakpoint-msmall) {
+        width: 66px;
         height: 66px;
+        margin: 0 auto;
       }
     }
 
     &__Label {
-      min-height: 49px;
+      min-height: 42px;
       font-size: 11px;
-      padding: 7px 0;
+      padding: 7px 4px;
     }
   }
 }
