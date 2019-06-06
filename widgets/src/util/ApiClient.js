@@ -158,7 +158,7 @@ export default class ApiClient {
     this.options.size = size;
 
     // eslint-disable-next-line max-len
-    let url = `http://iw-reviews.herokuapp.com/api/v1/reviews/search?primary_category=${category}`;
+    let url = `https://iw-reviews.herokuapp.com/api/v1/reviews/search?primary_category=${category}`;
 
     if (this.options.size) {
       url += `&page=${this.options.from}&size=${this.options.size}`;
