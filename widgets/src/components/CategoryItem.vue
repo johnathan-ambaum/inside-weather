@@ -130,6 +130,7 @@ export default {
     height: 115px;
     text-align: center;
     opacity: 0.4;
+    margin: 0 auto;
   }
 
   &__Label {
@@ -146,7 +147,7 @@ export default {
 
   @include at-query($breakpoint-small) {
     &__Image {
-      @include at-query($breakpoint-msmall) {
+      @include at-query("max-width: 640px") {
         width: 66px;
         height: 66px;
         margin: 0 auto;
