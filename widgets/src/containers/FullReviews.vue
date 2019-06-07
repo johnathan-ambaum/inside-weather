@@ -236,39 +236,39 @@ export default {
 @import '../scss/variables';
 @import '../scss/mixins';
 
-.swiper-container {
-  .swiper-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @include at-query($breakpoint-small) {
-      justify-content: flex-start;
-    }
-  }
-
-  .swiper-slide {
-    @include at-query($breakpoint-large) {
-      width: 115px !important;
-      margin: 0 25px;
-    }
-
-    @include at-query($breakpoint-small) {
-      &:first-child {
-        margin-left: 0;
-      }
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-}
-
 .FullReviews {
   max-width: 1312px;
   margin: 0 auto;
   font-family: $font-stack-avalon;
+
+  .swiper-container {
+    .swiper-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include at-query($breakpoint-small) {
+        justify-content: flex-start;
+      }
+    }
+
+    .swiper-slide {
+      @include at-query($breakpoint-large) {
+        width: 115px !important;
+        margin: 0 25px;
+      }
+
+      @include at-query($breakpoint-small) {
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
 
   @include at-query("max-width: 1392px") {
     margin: 0 $gutter;
@@ -374,7 +374,7 @@ export default {
 
     &__Category {
       height: auto;
-      margin: 0 -14px;
+      margin: 0 4px;
 
       &::after {
         left: 0;
