@@ -24,6 +24,7 @@ export default new Vuex.Store({
     totalResults: null,
     reviews: [],
     totalReviews: 0,
+    productReviews: [],
   },
   mutations,
   actions,

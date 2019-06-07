@@ -244,6 +244,21 @@ export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20
     });
 }
 
+export function getProductReviews({
+  commit,
+}, {
+  primaryCategory = 'coffee-tables',
+  productFamily = 'kloss',
+}) {
+  apiClient
+    .getProductReviews(primaryCategory, productFamily)
+    .then((results) => {
+      commit('setProductReviews', {
+        reviews: results.reviews,
+      });
+    });
+}
+
 export default {
   loadProduct,
   loadFeatured,
@@ -257,4 +272,5 @@ export default {
   populateSelectedFromActive,
   flashMessage,
   getReviews,
+  getProductReviews,
 };

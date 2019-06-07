@@ -171,4 +171,20 @@ export default class ApiClient {
         .catch(err => reject(err));
     });
   }
+
+  getProductReviews(primaryCategory, productFamily) {
+    // eslint-disable-next-line max-len
+    let url = `http://iw-reviews.herokuapp.com/api/v1/reviews/for_product?primary_category=${primaryCategory}&product_family=${productFamily}`;
+
+    if (this.options.size) {
+      url += `&page=${this.options.from}&size=${this.options.size}`;
+    }
+
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => resolve(response))
+        .catch(err => reject(err));
+    });
+  }
 }
