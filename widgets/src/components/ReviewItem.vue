@@ -31,7 +31,7 @@
               v-for="(image, index) in reviewImages"
               :key="index"
               :style="{ 'background-image': 'url(' + image.url + ')'}"
-               @click="handleModal(image.url)"
+              @click="handleModal(image.url)"
             />
           </div>
         </div>
@@ -633,7 +633,7 @@ export default {
     &--Title {
       margin-bottom: 18px;
       font-size: 18px;
-      font-weight: normal;
+      font-weight: 600;
     }
 
     &--Content {
