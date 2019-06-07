@@ -57,9 +57,9 @@
               <div class="ReviewItem__Left ReviewModal__Left">
                 <div class="ReviewItem__Left--Content ReviewModal__Left--Content">
                   <div class="ReviewItem__Mobile--Right ReviewModal__Mobile--Right">
-                    <div class="ReviewItem__Left--Product ReviewModal__Left--Product" :style="styleReviewItem">
-                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title" :id="elementId">{{ firstName }} {{ lastName }}</div>
-                      <div class="ReviewItem__Left--Checkbox" :style="styleCheckmark">
+                    <div class="ReviewItem__Left--Product ReviewModal__Left--Product" :style="styleModalReviewItem">
+                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title" id="modalTitleId">{{ firstName }} {{ lastName }}</div>
+                      <div class="ReviewItem__Left--Checkbox" :style="styleModalCheckmark">
                         <selected-checkbox
                           class-name="ReviewModal__Left--Checkbox"
                         />
@@ -158,6 +158,7 @@ export default {
       convertedReviewDate: '',
       productStateAbbr: '',
       elementHeight: 0,
+      modalTitleElementHeight: 0,
     };
   },
 
@@ -201,7 +202,32 @@ export default {
           paddingTop: '0',
         }
       }
-    }
+    },
+    // Modal style
+    styleModalReviewItem() {
+      if (this.modalTitleElementHeight > 30) {
+        return {
+          display: 'flex',
+          alignItems: 'flex-start',
+        }
+      } else {
+        return {
+          display: 'flex',
+          alignItems: 'center',
+        }
+      }
+    },
+    styleModalCheckmark() {
+      if (this.modalTitleElementHeight > 30) {
+        return {
+          paddingTop: '7px',
+        }
+      } else {
+        return {
+          paddingTop: '0',
+        }
+      }
+    },
   },
 
   methods: {
@@ -227,9 +253,16 @@ export default {
       }
     },
 
+    getModalTitleElementSize(id) {
+      if (id) {
+        this.modalTitleElementHeight = document.getElementById(id).clientHeight;
+      }
+    },
+
     handleResize() {
       const id = this.elementId;
       this.getElementSize(id);
+      this.getModalTitleElementSize('modalTitleId')
     },
 
     handleModal(image) {
