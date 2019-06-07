@@ -126,8 +126,14 @@ export default {
           320: { // when window width is <= 320px
             slidesPerView: 2,
           },
-          640: { // when window width is <= 640px
+          400: { // when window width is <= 640px
             slidesPerView: 4,
+          },
+          825: {
+            slidesPerView: 4,
+          },
+          960: {
+            slidesPerView: 5,
           }
         }
       }
@@ -192,19 +198,7 @@ export default {
 
     sliderClicked(e) {
       this.activeIndex = this.swiper.clickedIndex;
-
-      if (this.activeIndex > 0 && this.activeIndex < 5) {
-        // this.swiper.destroy(false, true);
-
-        // this.swiperOption.centeredSlides = true;
-        // this.swiper.activeIndex = this.activeIndex;
-
-        // this.swiper.init();
-        // this.swiper.observer = true;
-
-        this.swiper.slideTo(this.activeIndex, 300);
-      }
-
+      this.swiper.slideTo(this.activeIndex, 300);
     },
 
     loadMore(category, from) {
@@ -260,9 +254,6 @@ export default {
     }
 
     @include at-query($breakpoint-small) {
-      // width: 66px !important;
-      // margin: 0 8px;
-
       &:first-child {
         margin-left: 0;
       }
@@ -368,7 +359,7 @@ export default {
     }
   }
 
-   @include at-query($breakpoint-small) {
+  @include at-query($breakpoint-small) {
     margin: 0 16px;
 
     &__Title {
