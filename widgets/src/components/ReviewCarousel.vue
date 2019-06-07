@@ -15,7 +15,9 @@
         <swiper-slide v-for="(item, index) in reviewData" :key="index">
           <carousel-item
             :key=index
-            :product-name=item.item_data.short_display_name
+            :element-id=item.updated_at
+            :first-name=item.first_name
+            :last-name=item.last_name
             :product-city=item.city
             :product-state=item.state
             :product-image=item.item_data.medium_image
@@ -26,7 +28,13 @@
             :star-count=item.rating
           />
         </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
+      <div class="ReviewCarousel__Read">
+        <a class="ReviewCarousel__Read--Link" href="https://insideweather.com/pages/reviews">
+          <span class="ReviewCarousel__Read--BtnLabel">Read All Reviews</span>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -38,7 +46,6 @@ import screenMonitor from '../mixins/screenMonitor';
 import CarouselItem from './CarouselItem.vue';
 import Star from './Star.vue';
 
-
 export default {
   mixins: [
     screenMonitor,
@@ -49,89 +56,92 @@ export default {
     Star,
   },
 
+  props: {
+    primaryCategory: { type: String, default: '' },
+    productFamily: { type: String, default: '' },
+  },
+
   data() {
     return {
       reviewData: [],
 
       swiperOption: {
-        currentCategory: 'armchairs',
         slidesPerView: 3,
-        centeredSlides: false,// this.isMobile ? true : false,
+        spaceBetween: 18,
+        slidesPerGroup: 3,
+        // centeredSlides: true,
+        loop: true,
+        loopFillGroupWithBlank: true,
         pagination: {
           el: '.swiper-pagination',
-          clickable: true,
-          hide: false,
+          clickable: true
         },
+
         onSlideChangeEnd: function() {
           this.onSwipe();
         },
 
         breakpoints: {
-          320: { // when window width is <= 320px
+          368: { // when window width is <= 320px
             slidesPerView: 1,
           },
-          640: { // when window width is <= 640px
-            slidesPerView: 1,
-          }
+          736: {
+            slidesPerView: 1.2,
+          },
+          // 1154: {
+          //   slidesPerView: 2,
+          // },
+          // 1512: {
+          //   slidesPerView: 3,
+          // },
+          // 1840: {
+          //   slidesPerView: 4,
+          // },
         }
       }
     };
   },
 
   mounted() {
-    this.loadMore(this.currentCategory, this.from);
     if (this.isMobile) {
       this.swiperOption.centeredSlides = true;
-      this.swiper.on('slideChange',()=>{
-        this.onSwipe(this)
-      });
     }
   },
 
   created() {
     if (this.isMobile) {
-      // this.swiperOption.centeredSlides = true;
+      this.swiperOption.centeredSlides = true;
     }
-
-    this.getReviews({ category: this.currentCategory, from: this.from, size: 20 });
   },
 
   computed: {
     ...mapState({
-      propReviews: state => state.reviews,
+      product: state => state.activeProduct,
+      propReviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
     }),
-
-    swiper() {
-      // return this.$refs.mySwiper.swiper
-    },
   },
 
   watch: {
+    primaryCategory(newCategory) {
+      console.log('--watch--', newCategory, this.product.product_family);
+      this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
+    },
     propReviews(newPropReviews) {
+      console.log('--popreviews--', newPropReviews);
       this.reviewData.push(...newPropReviews);
     }
   },
 
   methods: {
     ...mapActions([
-      'getReviews',
+      'getProductReviews',
     ]),
 
     ...mapMutations([
       'updateCategory',
       'selectPanel',
     ]),
-
-    onSwipe(varuable) {
-    },
-
-    loadMore(category, from) {
-      this.$bus.$emit('switch:reviewpage', {
-        primaryCategory: category,
-        from: from,
-      });
-    },
   },
 };
 
@@ -142,13 +152,28 @@ export default {
 @import '../scss/mixins';
 
 .ReviewCarousel {
-  max-width: 1312px;
-  margin: 60px;
+  margin: 60px auto;
   font-family: $font-stack-avalon;
 
-  // @include at-query("max-width: 1392px") {
-  //   margin: 0 $gutter;
-  // }
+  .swiper-container {
+    padding-bottom: 45px;
+  }
+
+  .swiper-slide {
+    width: 28%;
+  }
+
+  .swiper-pagination-bullets .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border: 2px solid #202020;
+    opacity: 1;
+
+    &.swiper-pagination-bullet-active {
+      background: #202020;
+    }
+  }
 
   &__Title {
     font-size: 34px;
@@ -172,16 +197,39 @@ export default {
     }
 
     &--BtnLabel {
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: normal;
       font-family: $font-stack-roboto;
       letter-spacing: 0.05em;
       border-bottom: 1px solid #202020;
     }
   }
 
-  &__Category {
-    // height: 164px;
+  &__Read {
+    width: 240px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px auto 0;
+    text-align: center;
+    border: 1px solid #202020;
+
+    &--Link {
+      font-weight: 600;
+
+      &:hover {
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+
+    &--BtnLabel {
+      font-size: 14px;
+      color: #202020;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
   }
 
    @include at-query($breakpoint-small) {
