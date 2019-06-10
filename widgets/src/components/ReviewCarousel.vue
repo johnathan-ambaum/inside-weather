@@ -10,26 +10,48 @@
     </div>
 
     <!-- Review Items section -->
-    <div class="ReviewCarousel__Category">
-      <swiper :options="swiperOption">
-        <swiper-slide v-for="(item, index) in reviewData" :key="index">
-          <carousel-item
-            :key=index
-            :element-id=item.updated_at
-            :first-name=item.first_name
-            :last-name=item.last_name
-            :product-city=item.city
-            :product-state=item.state
-            :product-image=item.item_data.medium_image
-            :review-date=item.updated_at
-            :review-title=item.title
-            :review-content=item.body
-            :review-images=item.images
-            :star-count=item.rating
-          />
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
+    <div
+      class="ReviewCarousel__Category"
+    >
+      <div
+        @mouseenter="updateHoverState(true)"
+        @mouseleave="updateHoverState(false)"
+      >
+        <swiper :options="swiperOption">
+          <swiper-slide
+            v-for="(item, index) in reviewData"
+            :key="index"
+          >
+            <carousel-item
+              :key=index
+              :element-id=item.updated_at
+              :first-name=item.first_name
+              :last-name=item.last_name
+              :product-city=item.city
+              :product-state=item.state
+              :product-image=item.item_data.medium_image
+              :review-date=item.updated_at
+              :review-title=item.title
+              :review-content=item.body
+              :review-images=item.images
+              :star-count=item.rating
+            />
+          </swiper-slide>
+          <div
+            class="swiper-button-next swiper-button" slot="button-next"
+            :style="styleSliderButton"
+          >
+            <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-next.png?342072" alt="Pre" width="18px" height="20px" />
+          </div>
+          <div
+            class="swiper-button-prev swiper-button" slot="button-prev"
+            :style="styleSliderButton"
+          >
+            <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-prev.png?342072" alt="Pre" width="18px" height="20px" />
+          </div>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </div>
       <div class="ReviewCarousel__Read">
         <a class="ReviewCarousel__Read--Link" href="https://insideweather.com/pages/reviews">
           <span class="ReviewCarousel__Read--BtnLabel">Read All Reviews</span>
@@ -64,23 +86,21 @@ export default {
   data() {
     return {
       reviewData: [],
+      isShowSliderButton: false,
 
       swiperOption: {
         slidesPerView: 3,
         spaceBetween: 18,
-        slidesPerGroup: 3,
         // centeredSlides: true,
-        loop: true,
-        loopFillGroupWithBlank: true,
+        grabCursor: true,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
         },
-
-        onSlideChangeEnd: function() {
-          this.onSwipe();
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
-
         breakpoints: {
           368: { // when window width is <= 320px
             slidesPerView: 1,
@@ -88,9 +108,9 @@ export default {
           736: {
             slidesPerView: 1.2,
           },
-          // 1154: {
-          //   slidesPerView: 2,
-          // },
+          1260: {
+            slidesPerView: 2,
+          },
           // 1512: {
           //   slidesPerView: 3,
           // },
@@ -120,15 +140,21 @@ export default {
       propReviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
     }),
+
+    styleSliderButton() {
+      const showItem = {
+        visibility: this.isShowSliderButton ? 'visible' : 'hidden',
+      };
+
+      return showItem;
+    }
   },
 
   watch: {
     primaryCategory(newCategory) {
-      console.log('--watch--', newCategory, this.product.product_family);
       this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
     },
     propReviews(newPropReviews) {
-      console.log('--popreviews--', newPropReviews);
       this.reviewData.push(...newPropReviews);
     }
   },
@@ -142,6 +168,10 @@ export default {
       'updateCategory',
       'selectPanel',
     ]),
+
+    updateHoverState(isHover) {
+      this.isShowSliderButton = isHover;
+    },
   },
 };
 
@@ -152,15 +182,35 @@ export default {
 @import '../scss/mixins';
 
 .ReviewCarousel {
-  margin: 60px auto;
+  margin: 60px auto 0;
+  padding: 60px 0;
+  background: #f2f0ed;
   font-family: $font-stack-avalon;
 
   .swiper-container {
-    padding-bottom: 45px;
+    padding: 45px 0;
   }
 
   .swiper-slide {
     width: 28%;
+  }
+
+  .swiper-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #e8e6e2;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include at-query($breakpoint-msmall) {
+      display: none;
+    }
+    @include at-query($breakpoint-mlarge) {
+      display: flex;
+    }
   }
 
   .swiper-pagination-bullets .swiper-pagination-bullet {
@@ -175,6 +225,10 @@ export default {
     }
   }
 
+  &__Category {
+    margin: 0 5px;
+  }
+
   &__Title {
     font-size: 34px;
     font-weight: 600;
@@ -183,7 +237,7 @@ export default {
   }
 
   &__Write {
-    padding: 18px 0 42px;
+    padding: 4px 0 -3px;
     text-align: center;
 
     &--Link {
@@ -233,11 +287,17 @@ export default {
   }
 
    @include at-query($breakpoint-small) {
-    margin: 0 16px;
+    margin: 0;
+    padding: 0;
 
     &__Title {
       font-size: 24px;
-      padding: 30px 0 18px 0;
+      padding: 24px 0;
+      line-height: 19px;
+    }
+
+    .swiper-container {
+      padding: 24px 0;
     }
 
     &__Category {
@@ -246,6 +306,7 @@ export default {
 
     &__Write {
       flex-direction: column;
+      line-height: 9px;
 
       &--Title {
         font-size: 18px;
