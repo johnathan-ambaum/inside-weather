@@ -49,8 +49,15 @@
       </template>
       <b-container fluid>
         <b-row class="ReviewModalWrap">
-          <b-col sm="12" lg="8" class="ReviewModal__ImageBox">
-            <img :src="modalImage" class="ReviewModal__Image" />
+          <b-col
+            sm="12"
+            lg="8"
+            class="ReviewModal__ImageWrap"
+          >
+            <div class="ReviewModal__ImageBox">
+              <!-- <img :src="modalImage" class="ReviewModal__Image" /> -->
+              <div :style="{ 'background-image': 'url(' + modalImage + ')'}" class="ReviewModal__Image" />
+            </div>
           </b-col>
           <b-col sm="12" lg="4" class="ReviewModal__ContentBox">
             <div class="ReviewItem ReviewModal">
@@ -384,6 +391,7 @@ export default {
     &--Image {
       background-repeat: no-repeat;
       background-size: cover;
+      background-position: top center;
       width: 100px;
       height: 80px;
       border: 1px solid #d4d0ca;
@@ -430,6 +438,10 @@ export default {
       &--Image {
         max-width: 66px;
         height: 66px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
@@ -469,6 +481,9 @@ export default {
 
       &--Image {
         margin-top: 18px;
+        width: 75px;
+        height: 50px;
+        margin-right: 5px;
       }
     }
   }
@@ -484,7 +499,21 @@ export default {
   }
 
   @include at-query($breakpoint-small) {
-    margin: 50px 24px 24px;
+    margin: 50px auto;
+  }
+
+  @include at-query("max-width: 576px") {
+    margin: 50px 24px;
+  }
+}
+
+.modal-dialog.modal-sm {
+  @include at-query($breakpoint-small) {
+    margin: 50px auto;
+  }
+
+  @include at-query("max-width: 576px") {
+    margin: 50px 24px;
   }
 }
 
@@ -505,22 +534,28 @@ export default {
 
 .modal-dialog .container-fluid {
   padding: 0;
+  margin-top: -40px;
+
+  @include at-query($breakpoint-small) {
+    margin-top: -40px;
+    margin-top: 0;
+  }
 }
 
 .modal-dialog .modal-header {
   border-bottom: 0;
   z-index: 1000;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.7rem;
+
+  @include at-query($breakpoint-small) {
+    margin-top: -40px;
+  }
 }
 
 .modal-header .close {
   @include at-query($breakpoint-small) {
     color: white;
   }
-}
-
-.modal-dialog .container-fluid {
-  margin-top: -40px;
 }
 
 .ReviewModalWrap {
@@ -542,8 +577,8 @@ export default {
     }
   }
 
-  &__ImageBox {
-    padding-right: 0 !important;
+  &__ImageWrap {
+    padding-right: 16px !important;
     padding-left: 0 !important;
   }
 
@@ -552,11 +587,16 @@ export default {
     padding-left: 0 !important;
   }
 
+  &__ImageBox {
+    background: #202020;
+  }
+
   &__Image {
     width: 650px;
     height: 630px;
-    border-top: 90px solid #202020;
-    border-bottom: 90px solid #202020;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
   }
 
   &__Left {
@@ -608,6 +648,10 @@ export default {
     padding: 0 42px 42px 25px;
     width: 100%;
 
+    &--Small {
+      padding: 0 42px 42px;
+    }
+
     &--Rectangle {
       border-left: 0;
       min-height: 167px;
@@ -657,11 +701,28 @@ export default {
       height: 14px;
     }
 
+    &__ImageWrap {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+
+    // &__ImageBox {
+    //   position: relative;
+    //   width: 100%;
+    //   padding-top: 100%;
+    // }
+
     &__Image {
       width: 100%;
-      height: 100%;
-      border-top: 45px solid #202020;
-      border-bottom: 45px solid #202020;
+      padding-bottom: 100%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      // display: block;
+      // max-width:315px;
+      // max-height:315px;
+      // width: auto;
+      // height: auto;
     }
 
     &__Left {
@@ -701,6 +762,13 @@ export default {
         line-height: 21px;
         margin-bottom: 0;
       }
+    }
+  }
+
+
+  @include at-query("max-width: 991px") {
+    &__Image {
+      height: 315px;
     }
   }
 }
