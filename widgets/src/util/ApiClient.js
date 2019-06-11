@@ -174,7 +174,7 @@ export default class ApiClient {
 
   getProductReviews(primaryCategory, productFamily) {
     // eslint-disable-next-line max-len
-    let url = `http://iw-reviews.herokuapp.com/api/v1/reviews/for_product?primary_category=${primaryCategory}&product_family=${productFamily}`;
+    let url = `https://iw-reviews.herokuapp.com/api/v1/reviews/for_product?primary_category=${primaryCategory}&product_family=${productFamily}`;
 
     if (this.options.size) {
       url += `&page=${this.options.from}&size=${this.options.size}`;
