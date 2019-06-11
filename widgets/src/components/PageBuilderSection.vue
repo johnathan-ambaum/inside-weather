@@ -49,7 +49,6 @@ export default {
 
         let handle = newProduct.primary_category;
         this.current_category = handle;
-        console.log('--pagebuilder--', this.current_category, newProduct.short_name);
 
         if (handle === 'dining-chairs' || handle === 'lounge-chairs') {
           // the word at the beginning of short names is the family, which is the page handle for these categories
