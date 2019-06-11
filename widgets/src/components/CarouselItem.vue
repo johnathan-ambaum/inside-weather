@@ -22,13 +22,10 @@
             <div class="CarouselItem__Right--Date">{{ convertedReviewDate }}</div>
           </div>
           <div class="CarouselItem__Right--Title">{{ reviewTitle }}</div>
-          <div class="CarouselItem__Right--ContentWrap" id="contentwrap">
-            <span class="CarouselItem__Right--Content">
-              {{ reviewContent }}
-              <div class="CarouselItem__Right--Ellipse">...</div>
-            </span>
+          <div class="CarouselItem__Right--ContentWrap" :id="elementId + 'review'">
+            {{ reviewContent }}
           </div>
-          <div v-if="reviewContent.length > 290" class="CarouselItem__Right--Readmore">
+          <div v-if="reviewContentHeight > 156" class="CarouselItem__Right--Readmore">
             <span
               class="CarouselItem__Right--Readmore__Text"
               @click="handleModal(firstReviewImage)"
@@ -36,7 +33,7 @@
               Continue Reading
             </span>
           </div>
-          <!-- <div v-if="reviewImages.length > 0" class="CarouselItem__Right--Images">
+          <div v-if="reviewImages.length > 0" class="CarouselItem__Right--Images">
             <div
               class="CarouselItem__Right--Image"
               v-for="(image, index) in reviewImages"
@@ -44,8 +41,8 @@
               :style="{ 'background-image': 'url(' + image.url + ')'}"
                @click="handleModal(image.url)"
             />
-          </div> -->
-          <div class="CarouselItem__Right--Images">
+          </div>
+          <!-- <div class="CarouselItem__Right--Images">
             <div
               v-for="index in 3"
               :key="index"
@@ -53,7 +50,7 @@
               style="{ 'background-image': 'url(https://banksy-images.s3.amazonaws.com/items/48SF9D19BC8/48SF9D19BC8-0_thumb.jpg)'}"
               @click="handleModal('https://banksy-images.s3.amazonaws.com/items/48SF9D19BC8/48SF9D19BC8-0_thumb.jpg')"
             />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -241,7 +238,7 @@ export default {
       convertedReviewDate: '',
       productStateAbbr: '',
       elementHeight: 0,
-      contentWrapHeight: 0,
+      reviewContentHeight: 0,
     };
   },
 
@@ -332,6 +329,7 @@ export default {
     },
 
     getElementSize(id) {
+      this.reviewContentHeight = document.getElementById(id + 'review').offsetHeight;
       if (id) {
         this.elementHeight = document.getElementById(id).clientHeight;
       }
@@ -354,33 +352,6 @@ export default {
       this.modalImage = image;
     },
   },
-
-  computed: {
-    styleReviewItem() {
-      if (this.elementHeight > 30) {
-        return {
-          display: 'flex',
-          alignItems: 'flex-start',
-        }
-      } else {
-        return {
-          display: 'flex',
-          alignItems: 'center',
-        }
-      }
-    },
-    styleCheckmark() {
-      if (this.elementHeight > 30) {
-        return {
-          paddingTop: '7px',
-        }
-      } else {
-        return {
-          paddingTop: '0',
-        }
-      }
-    },
-  }
 };
 </script>
 
@@ -432,6 +403,7 @@ export default {
     &--Title {
       font-weight: 600;
       padding-right: 16px;
+      font-size: 18px;
       letter-spacing: 0.05em;
     }
 
@@ -475,25 +447,17 @@ export default {
 
     &--Title {
       font-size: 18px;
+      font-weight: 600;
       letter-spacing: 0.05em;
-      line-height: 24px;
       text-align: left;
       margin-bottom: 18px;
     }
 
     &--ContentWrap {
-      position: relative;
-      display: block;
-      overflow: hidden;
-      white-space: normal;
-    }
-
-    &--Ellipse {
-      position: absolute;
-      right: 0;
-      top: calc(16em + 12px - 100%);
-      text-align: left;
-      background: white;
+      font-family: $font-stack-roboto;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      @include multiLineEllipsis($lineHeight: 1.6em, $lineCount: 7, $bgColor: white);
     }
 
     &--Content {
@@ -529,8 +493,6 @@ export default {
     &--Images {
       display: flex;
       flex-flow: wrap;
-      position: absolute;
-      bottom: 42px;
     }
 
     &--Image {
@@ -548,5 +510,61 @@ export default {
       }
     }
   }
+
+  @include at-query($breakpoint-small) {
+    padding: 24px;
+    min-height: 490px;
+
+    &__Left {
+      &--Image {
+        min-width: 66px;
+        height: 66px;
+      }
+
+      &--Title {
+        padding-right: 16px;
+      }
+
+      &--Text {
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      &--Product {
+        padding-bottom: 4px;
+      }
+    }
+
+    &__Right {
+      &--Date {
+        font-weight: 400;
+        line-height: 12px;
+      }
+
+      &--Title {
+        font-size: 16px;
+      }
+
+      &--Readmore {
+        margin-top: 9px;
+      }
+
+      &--Images {
+        bottom: 24px;
+      }
+
+      &--Image {
+        width: 75px;
+        height: 50px;
+        max-height: 50px;
+        margin-right: 8px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
 }
 </style>
