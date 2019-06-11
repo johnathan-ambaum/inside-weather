@@ -24,13 +24,13 @@
           >
             <carousel-item
               :key=index
-              :element-id=item.updated_at
+              :element-id=item.submitted_at
               :first-name=item.first_name
               :last-name=item.last_name
               :product-city=item.city
               :product-state=item.state
               :product-image=item.item_data.medium_image
-              :review-date=item.updated_at
+              :review-date=item.submitted_at
               :review-title=item.title
               :review-content=item.body
               :review-images=item.images
@@ -252,7 +252,7 @@ export default {
 
     &--BtnLabel {
       font-size: 13px;
-      font-weight: normal;
+      font-weight: 600;
       font-family: $font-stack-roboto;
       letter-spacing: 0.05em;
       border-bottom: 1px solid #202020;
@@ -268,6 +268,7 @@ export default {
     margin: 25px auto 0;
     text-align: center;
     border: 1px solid #202020;
+    background: white;
 
     &--Link {
       font-weight: 600;
@@ -288,16 +289,25 @@ export default {
 
    @include at-query($breakpoint-small) {
     margin: 0;
-    padding: 0;
-
-    &__Title {
-      font-size: 24px;
-      padding: 24px 0;
-      line-height: 19px;
-    }
+    padding: 0 0 24px;
 
     .swiper-container {
+      padding: 26px 0 50px;
+    }
+
+    .swiper-pagination-bullets .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+    }
+
+    &__Read {
+      margin: 6px auto 0;
+    }
+
+    &__Title {
+      font-size: 28px;
       padding: 24px 0;
+      line-height: 19px;
     }
 
     &__Category {
@@ -325,7 +335,7 @@ export default {
 
       &--BtnLabel {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 400;
         letter-spacing: 0.05em;
         text-transform: uppercase;
         border-bottom: 1px solid #202020;
