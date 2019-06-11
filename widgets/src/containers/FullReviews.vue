@@ -56,13 +56,13 @@
       <review-item
         v-for="(item, index) in reviewData"
         :key=index
-        :element-id=item.updated_at
+        :element-id=item.submitted_at
         :first-name=item.first_name
         :last-name=item.last_name
         :product-city=item.city
         :product-state=item.state
         :product-image=item.item_data.medium_image
-        :review-date=item.updated_at
+        :review-date=item.submitted_at
         :review-title=item.title
         :review-content=item.body
         :review-images=item.images
@@ -71,7 +71,8 @@
         :product-handle=item.item_data.handle
       />
       <infinite-loading @infinite="infiniteHandler">
-        <div slot="no-more" style="padding-bottom: 20px;">No more Data</div>
+        <div slot="no-more" style="padding-bottom: 20px;"></div>
+        <div slot="no-results" style="padding-bottom: 20px;"></div>
       </infinite-loading>
     </div>
 
@@ -117,6 +118,8 @@ export default {
       swiperOption: {
         slidesPerView: 6,
         centeredSlides: false, //this.isMobile ? true : false,
+        allowSlidePrev: false,
+        allowSlideNext: false,
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
@@ -146,7 +149,8 @@ export default {
 
   created() {
     if (this.isMobile) {
-      this.swiperOption.centeredSlides = true;
+      this.swiperOption.allowSlidePrev = true;
+      this.swiperOption.allowSlideNext = true;
     }
     this.$bus.$on('switch:reviewpage', (payload) => {
       this.from = payload.from;
