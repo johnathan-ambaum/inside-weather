@@ -34,6 +34,8 @@
               :review-title=item.title
               :review-content=item.body
               :review-images=item.images
+              :product-category=item.item_data.primary_category
+              :product-handle=item.item_data.handle
               :star-count=item.rating
             />
           </swiper-slide>
@@ -91,15 +93,25 @@ export default {
       swiperOption: {
         slidesPerView: 3,
         spaceBetween: 18,
-        // centeredSlides: true,
-        grabCursor: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
+        centeredSlides: true,
+        loop: {
+          loopedSlides: 1
+        },
+        // grabCursor: true,
+        watchSlidesVisibility: true,
+        // preloadImages: false,
+        keyboard: { enabled: true },
+        lazy: {
+          loadPrevNext: true,
+          loadOnTransitionStart: true
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
         },
         breakpoints: {
           368: { // when window width is <= 320px
@@ -252,7 +264,7 @@ export default {
 
     &--BtnLabel {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 400;
       font-family: $font-stack-roboto;
       letter-spacing: 0.05em;
       border-bottom: 1px solid #202020;
@@ -274,7 +286,6 @@ export default {
       font-weight: 600;
 
       &:hover {
-        font-weight: 700;
         text-decoration: none;
       }
     }
@@ -284,6 +295,11 @@ export default {
       color: #202020;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+
+      &:hover {
+        background: #202020;
+        color: #fff;
+      }
     }
   }
 
@@ -337,7 +353,6 @@ export default {
         font-size: 12px;
         font-weight: 400;
         letter-spacing: 0.05em;
-        text-transform: uppercase;
         border-bottom: 1px solid #202020;
       }
     }
