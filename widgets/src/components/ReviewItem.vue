@@ -42,10 +42,10 @@
       <template slot="modal-header" slot-scope="{ close }">
         <h5></h5>
         <!-- Emulate built in modal header close button action -->
-        <b-button size="sm" variant="outline-danger" @click="close()">
+        <div size="sm" variant="outline-danger" @click="close()">
           <img v-if="isMobile" src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245" class="ReviewModal__Close" />
           <img v-else src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
-        </b-button>
+        </div>
       </template>
       <b-container fluid>
         <b-row class="ReviewModalWrap">
@@ -380,22 +380,22 @@ export default {
       font-size: 14px;
       letter-spacing: 0.03em;
       line-height: 22px;
-      margin-bottom: 24px;
     }
 
     &--Images {
       display: flex;
       flex-flow: wrap;
+      margin-top: 10px;
     }
 
     &--Image {
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: top center;
       width: 100px;
-      height: 80px;
+      height: 75px;
+      margin: 8px 8px 0 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       border: 1px solid #d4d0ca;
-      margin-right: 18px;
 
       &:hover {
         cursor: pointer;
@@ -480,10 +480,8 @@ export default {
       }
 
       &--Image {
-        margin-top: 18px;
         width: 75px;
         height: 50px;
-        margin-right: 5px;
       }
     }
   }
@@ -549,6 +547,10 @@ export default {
 
   @include at-query($breakpoint-small) {
     margin-top: -40px;
+
+    // & > div {
+    //   margin: -8px -20px 0 0;
+    // }
   }
 }
 
@@ -578,7 +580,7 @@ export default {
   }
 
   &__ImageWrap {
-    padding-right: 16px !important;
+    padding-right: 17px !important;
     padding-left: 0 !important;
   }
 
@@ -592,7 +594,7 @@ export default {
   }
 
   &__Image {
-    width: 650px;
+    width: 100%;
     height: 630px;
     background-repeat: no-repeat;
     background-size: contain;
@@ -683,14 +685,18 @@ export default {
     &--Content {
       font-size: 14px;
       line-height: 22px;
-      margin-bottom: 0;
+      overflow-y: auto;
+      max-height: 272px;
+    }
+
+    &__Images {
+      margin-top: 10px;
     }
 
     &--Image {
-      margin-top: 18px;
-      width: 80px;
+      width: 75px;
       height: 50px;
-      margin-right: 5px;
+      margin: 8px 8px 0 0;
     }
   }
 
@@ -718,11 +724,6 @@ export default {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
-      // display: block;
-      // max-width:315px;
-      // max-height:315px;
-      // width: auto;
-      // height: auto;
     }
 
     &__Left {
@@ -760,7 +761,7 @@ export default {
       &--Content {
         font-size: 13px;
         line-height: 21px;
-        margin-bottom: 0;
+        max-height: 147px;
       }
     }
   }
