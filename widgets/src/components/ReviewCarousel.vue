@@ -91,7 +91,7 @@ export default {
       isShowSliderButton: false,
 
       swiperOption: {
-        slidesPerView: 3,
+        slidesPerView: 5,
         spaceBetween: 18,
         centeredSlides: true,
         loop: {
@@ -114,7 +114,7 @@ export default {
           clickable: true
         },
         breakpoints: {
-          368: { // when window width is <= 320px
+          368: { // when window width is <= 368px
             slidesPerView: 1,
           },
           736: {
