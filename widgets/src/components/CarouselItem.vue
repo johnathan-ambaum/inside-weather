@@ -12,7 +12,9 @@
             </div>
             <div class="CarouselItem__Left--Text CarouselItem__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
           </div>
-          <div class="CarouselItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}"></div>
+          <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="ReviewItem__Left--Link ReviewModal__Left--Link">
+            <div class="CarouselItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}" />
+          </a>
         </div>
       </div>
       <div class="CarouselItem__Right">
@@ -22,10 +24,13 @@
             <div class="CarouselItem__Right--Date">{{ convertedReviewDate }}</div>
           </div>
           <div class="CarouselItem__Right--Title">{{ reviewTitle }}</div>
-          <div class="CarouselItem__Right--ContentWrap" :id="elementId + 'review'">
+          <div v-if="reviewImages.length > 0" class="CarouselItem__Right--ContentWrap" :id="elementId + 'review'">
             {{ reviewContent }}
           </div>
-          <div v-if="reviewContentHeight > 156" class="CarouselItem__Right--Readmore">
+          <div v-else class="CarouselItem__Right--ContentWrapOnlyText" :id="elementId + 'reviewtext'">
+            {{ reviewContent }}
+          </div>
+          <div v-if="reviewContentHeight > 139 || reviewContentOnlyTextHeight > 199" class="CarouselItem__Right--Readmore">
             <span
               class="CarouselItem__Right--Readmore__Text"
               @click="handleModal(firstReviewImage)"
@@ -42,15 +47,6 @@
                @click="handleModal(image.url)"
             />
           </div>
-          <!-- <div class="CarouselItem__Right--Images">
-            <div
-              v-for="index in 3"
-              :key="index"
-              class="CarouselItem__Right--Image"
-              style="{ 'background-image': 'url(https://banksy-images.s3.amazonaws.com/items/48SF9D19BC8/48SF9D19BC8-0_thumb.jpg)'}"
-              @click="handleModal('https://banksy-images.s3.amazonaws.com/items/48SF9D19BC8/48SF9D19BC8-0_thumb.jpg')"
-            />
-          </div> -->
         </div>
       </div>
     </div>
@@ -59,10 +55,10 @@
       <template slot="modal-header" slot-scope="{ close }">
         <h5></h5>
         <!-- Emulate built in modal header close button action -->
-        <b-button size="sm" variant="outline-danger" @click="close()">
+        <div size="sm" variant="outline-danger" @click="close()">
           <img v-if="isMobile" src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245" class="ReviewModal__Close" />
           <img v-else src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
-        </b-button>
+        </div>
       </template>
       <b-container fluid>
         <b-row class="ReviewModalWrap">
@@ -72,7 +68,7 @@
             class="ReviewModal__ImageWrap"
           >
             <div class="ReviewModal__ImageBox">
-              <img :src="modalImage" class="ReviewModal__Image" />
+            <div :style="{ 'background-image': 'url(' + modalImage + ')'}" class="ReviewModal__Image" />
             </div>
           </b-col>
           <b-col sm="12" lg="4" class="ReviewModal__ContentBox">
@@ -81,7 +77,7 @@
                 <div class="ReviewItem__Left--Content ReviewModal__Left--Content">
                   <div class="ReviewItem__Mobile--Right ReviewModal__Mobile--Right">
                     <div class="ReviewItem__Left--Product ReviewModal__Left--Product" :style="styleModalReviewItem">
-                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title" id="modalTitleId">{{ firstName }} {{ lastName }}</div>
+                      <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title" id="imageModalTitleId">{{ firstName }} {{ lastName }}</div>
                       <div class="ReviewItem__Left--Checkbox" :style="styleModalCheckmark">
                         <selected-checkbox
                           class-name="ReviewModal__Left--Checkbox"
@@ -125,9 +121,10 @@
       <template slot="modal-header" slot-scope="{ close }">
         <h5></h5>
         <!-- Emulate built in modal header close button action -->
-        <b-button size="sm" variant="outline-danger" @click="close()">
-          <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
-        </b-button>
+        <div size="sm" variant="outline-danger" @click="close()">
+          <img v-if="isMobile" src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245" class="ReviewModal__Close" />
+          <img v-else src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
+        </div>
       </template>
       <b-container fluid>
         <b-row class="ReviewModalWrap">
@@ -239,6 +236,7 @@ export default {
       productStateAbbr: '',
       elementHeight: 0,
       reviewContentHeight: 0,
+      reviewContentOnlyTextHeight: 0,
     };
   },
 
@@ -253,7 +251,7 @@ export default {
   mounted() {
     this.convertedReviewDate = this.convertDate(this.reviewDate);
     this.productStateAbbr = this.getAbbrState(this.productState);
-    this.firstReviewImage = this.reviewImages.length ? this.reviewImages[0] : '';
+    this.firstReviewImage = this.reviewImages.length ? this.reviewImages[0].url : '';
 
     const id = this.elementId;
     this.getElementSize(id);
@@ -329,7 +327,11 @@ export default {
     },
 
     getElementSize(id) {
-      this.reviewContentHeight = document.getElementById(id + 'review').offsetHeight;
+      if (this.reviewImages.length > 0) {
+        this.reviewContentHeight = document.getElementById(id + 'review').offsetHeight;
+      } else {
+        this.reviewContentOnlyTextHeight = document.getElementById(id + 'reviewtext').offsetHeight;
+      }
       if (id) {
         this.elementHeight = document.getElementById(id).clientHeight;
       }
@@ -344,11 +346,19 @@ export default {
     handleResize() {
       const id = this.elementId;
       this.getElementSize(id);
-      this.getModalTitleElementSize('modalTitleId')
+      if (this.modalImage) {
+        this.getModalTitleElementSize('imageModalTitleId');
+      } else {
+        this.getModalTitleElementSize('modalTitleId');
+      }
     },
 
     handleModal(image) {
       this.modalShow = !this.modalShow;
+      this.modalImage = image;
+    },
+
+    handlePopupImage(image) {
       this.modalImage = image;
     },
   },
@@ -366,7 +376,7 @@ export default {
   background: white;
   border: 1px solid #d4d0ca;
   padding: 42px;
-  min-height: 570px;
+  min-height: 560px;
   position: relative;
 
   &__Left {
@@ -403,8 +413,12 @@ export default {
     &--Title {
       font-weight: 600;
       padding-right: 16px;
-      font-size: 18px;
       letter-spacing: 0.05em;
+    }
+
+    &--Link {
+      display: inline-block;
+      width: 75px;
     }
 
     &--Image {
@@ -439,7 +453,7 @@ export default {
     }
 
     &--Date {
-      font-weight: 300;
+      font-weight: 400;
       font-size: 14px;
       letter-spacing: 0.05em;
       padding-bottom: 18px;
@@ -457,7 +471,14 @@ export default {
       font-family: $font-stack-roboto;
       font-size: 14px;
       letter-spacing: 0.03em;
-      @include multiLineEllipsis($lineHeight: 1.6em, $lineCount: 7, $bgColor: white);
+      @include multiLineEllipsis($lineHeight: 20px, $lineCount: 7, $bgColor: white);
+    }
+
+    &--ContentWrapOnlyText {
+      font-family: $font-stack-roboto;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      @include multiLineEllipsis($lineHeight: 20px, $lineCount: 10, $bgColor: white);
     }
 
     &--Content {
@@ -473,7 +494,7 @@ export default {
     }
 
     &--Readmore {
-      margin-top: 18px;
+      margin-top: 10px;
       line-height: 12px;
 
       &:hover {
@@ -493,17 +514,17 @@ export default {
     &--Images {
       display: flex;
       flex-flow: wrap;
+      margin-top: 10px;
     }
 
     &--Image {
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 90px;
+      width: 100px;
       height: 75px;
-      max-height: 75px;
+      margin: 8px 8px 0 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       border: 1px solid #d4d0ca;
-      margin-right: 18px;
-      margin-top: 18px;
 
       &:hover {
         cursor: pointer;
@@ -513,7 +534,7 @@ export default {
 
   @include at-query($breakpoint-small) {
     padding: 24px;
-    min-height: 490px;
+    min-height: 478px;
 
     &__Left {
       &--Image {
@@ -521,13 +542,14 @@ export default {
         height: 66px;
       }
 
-      &--Title {
-        padding-right: 16px;
-      }
-
       &--Text {
         font-size: 16px;
         font-weight: 400;
+      }
+
+       &--Title {
+        padding-right: 16px;
+        font-weight: 600;
       }
 
       &--Product {
@@ -545,8 +567,12 @@ export default {
         font-size: 16px;
       }
 
+      &--ContentWrap {
+        font-size: 13px;
+      }
+
       &--Readmore {
-        margin-top: 9px;
+        margin-top: 12px;
       }
 
       &--Images {
@@ -556,8 +582,6 @@ export default {
       &--Image {
         width: 75px;
         height: 50px;
-        max-height: 50px;
-        margin-right: 8px;
 
         &:hover {
           cursor: pointer;
@@ -565,6 +589,5 @@ export default {
       }
     }
   }
-
 }
 </style>
