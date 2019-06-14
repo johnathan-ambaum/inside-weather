@@ -12,7 +12,7 @@
             </div>
             <div class="CarouselItem__Left--Text CarouselItem__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
           </div>
-          <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="ReviewItem__Left--Link ReviewModal__Left--Link">
+          <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="CarouselItem__Left--Link">
             <div class="CarouselItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}" />
           </a>
         </div>
@@ -21,7 +21,7 @@
         <div class="CarouselItem__Right--Rectangle">
           <div class="CarouselItem__Right--Top">
             <star :star-count="starRating" class-name="CarouselItem__Right--Star" />
-            <div class="CarouselItem__Right--Date">{{ convertedReviewDate }}</div>
+            <div class="CarouselItem__Right--Date">{{ reviewDate }}</div>
           </div>
           <div class="CarouselItem__Right--Title">{{ reviewTitle }}</div>
           <div v-if="reviewImages.length > 0" class="CarouselItem__Right--ContentWrap" :id="elementId + 'review'">
@@ -30,14 +30,59 @@
           <div v-else class="CarouselItem__Right--ContentWrapOnlyText" :id="elementId + 'reviewtext'">
             {{ reviewContent }}
           </div>
-          <div v-if="reviewContentHeight > 139 || reviewContentOnlyTextHeight > 199" class="CarouselItem__Right--Readmore">
+          <!-- <div v-if="reviewContentHeight > 139 || reviewContentOnlyTextHeight > 199" class="CarouselItem__Right--Readmore">
             <span
               class="CarouselItem__Right--Readmore__Text"
               @click="handleModal(firstReviewImage)"
             >
               Continue Reading
             </span>
+          </div> -->
+          <div v-if="reviewImages.length > 0">
+            <div v-if="isMobile">
+              <div v-if="reviewContent.length > 260" class="CarouselItem__Right--Readmore">
+                <span
+                  class="CarouselItem__Right--Readmore__Text"
+                  @click="handleModal(firstReviewImage)"
+                >
+                  Continue Reading
+                </span>
+              </div>
+            </div>
+            <div v-else>
+              <div v-if="reviewContent.length > 230" class="CarouselItem__Right--Readmore">
+                <span
+                  class="CarouselItem__Right--Readmore__Text"
+                  @click="handleModal(firstReviewImage)"
+                >
+                  Continue Reading
+                </span>
+              </div>
+            </div>
           </div>
+          <div v-else>
+            <div v-if="isMobile">
+              <div v-if="reviewContent.length > 340" class="CarouselItem__Right--Readmore">
+                <span
+                  class="CarouselItem__Right--Readmore__Text"
+                  @click="handleModal(firstReviewImage)"
+                >
+                  Continue Reading
+                </span>
+              </div>
+            </div>
+            <div v-else>
+              <div v-if="reviewContent.length > 310" class="CarouselItem__Right--Readmore">
+                <span
+                  class="CarouselItem__Right--Readmore__Text"
+                  @click="handleModal(firstReviewImage)"
+                >
+                  Continue Reading
+                </span>
+              </div>
+            </div>
+          </div>
+
           <div v-if="reviewImages.length > 0" class="CarouselItem__Right--Images">
             <div
               class="CarouselItem__Right--Image"
@@ -95,7 +140,7 @@
                 <div class="ReviewItem__Right--Rectangle ReviewModal__Right--Rectangle">
                   <div class="ReviewItem__Right--Top ReviewModal__Right--Top">
                     <star :star-count="starRating" class-name="ReviewModal__Right--Star" />
-                    <div class="ReviewItem__Right--Date ReviewModal__Right--Date">{{ convertedReviewDate }}</div>
+                    <div class="ReviewItem__Right--Date ReviewModal__Right--Date">{{ reviewDate }}</div>
                   </div>
                   <div class="ReviewItem__Right--Title ReviewModal__Right--Title">{{ reviewTitle }}</div>
                   <div class="ReviewItem__Right--Content ReviewModal__Right--Content">{{ reviewContent }}</div>
@@ -152,7 +197,7 @@
                 <div class="ReviewItem__Right--Rectangle ReviewModal__Right--Rectangle">
                   <div class="ReviewItem__Right--Top ReviewModal__Right--Top">
                     <star :star-count="starRating" class-name="ReviewModal__Right--Star" />
-                    <div class="ReviewItem__Right--Date ReviewModal__Right--Date">{{ convertedReviewDate }}</div>
+                    <div class="ReviewItem__Right--Date ReviewModal__Right--Date">{{ reviewDate }}</div>
                   </div>
                   <div class="ReviewItem__Right--Title ReviewModal__Right--Title">{{ reviewTitle }}</div>
                   <div class="ReviewItem__Right--Content ReviewModal__Right--Content">{{ reviewContent }}</div>
@@ -232,7 +277,6 @@ export default {
       hoverState: false,
       stateData: STATE,
       starRating: parseInt(this.starCount),
-      convertedReviewDate: '',
       productStateAbbr: '',
       elementHeight: 0,
       reviewContentHeight: 0,
@@ -249,7 +293,6 @@ export default {
   },
 
   mounted() {
-    this.convertedReviewDate = this.convertDate(this.reviewDate);
     this.productStateAbbr = this.getAbbrState(this.productState);
     this.firstReviewImage = this.reviewImages.length ? this.reviewImages[0].url : '';
 
@@ -310,11 +353,6 @@ export default {
   },
 
   methods: {
-    convertDate(isoDate) {
-      const date = new Date(isoDate);
-      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-    },
-
     getAbbrState(us_state) {
       let state_abbreviation = '';
       this.stateData.forEach(item => {
@@ -328,9 +366,11 @@ export default {
 
     getElementSize(id) {
       if (this.reviewImages.length > 0) {
-        this.reviewContentHeight = document.getElementById(id + 'review').offsetHeight;
+        const elId = id + 'review';
+        this.reviewContentHeight = document.getElementById(elId).clientHeight;
       } else {
-        this.reviewContentOnlyTextHeight = document.getElementById(id + 'reviewtext').offsetHeight;
+        const elId = id + 'reviewtext';
+        this.reviewContentOnlyTextHeight = document.getElementById(elId).clientHeight;
       }
       if (id) {
         this.elementHeight = document.getElementById(id).clientHeight;
@@ -346,9 +386,10 @@ export default {
     handleResize() {
       const id = this.elementId;
       this.getElementSize(id);
-      if (this.modalImage) {
+      if (this.modalImage && this.modalShow) {
         this.getModalTitleElementSize('imageModalTitleId');
-      } else {
+      }
+      if (!this.modalImage && this.modalShow) {
         this.getModalTitleElementSize('modalTitleId');
       }
     },
@@ -376,7 +417,7 @@ export default {
   background: white;
   border: 1px solid #d4d0ca;
   padding: 42px;
-  min-height: 560px;
+  min-height: 570px;
   position: relative;
 
   &__Left {
@@ -550,6 +591,10 @@ export default {
        &--Title {
         padding-right: 16px;
         font-weight: 600;
+      }
+
+      &--Link {
+        width: 66px;
       }
 
       &--Product {
