@@ -129,9 +129,6 @@ export default {
           320: { // when window width is <= 320px
             slidesPerView: 2,
           },
-          400: { // when window width is <= 640px
-            slidesPerView: 4,
-          },
           825: {
             slidesPerView: 4,
           },
