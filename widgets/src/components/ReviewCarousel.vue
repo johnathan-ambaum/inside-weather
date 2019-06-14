@@ -12,6 +12,7 @@
     <!-- Review Items section -->
     <div
       class="ReviewCarousel__Category"
+      v-if="reviewData.length > 0"
     >
       <div
         @mouseenter="updateHoverState(true)"
@@ -23,14 +24,14 @@
             :key="index"
           >
             <carousel-item
-              :key=index
-              :element-id=item.submitted_at
+              :key=item.id
+              :element-id="item.id + item.first_name"
               :first-name=item.first_name
               :last-name=item.last_name
               :product-city=item.city
               :product-state=item.state
               :product-image=item.item_data.medium_image
-              :review-date=item.submitted_at
+              :review-date="convertDate(item.submitted_at)"
               :review-title=item.title
               :review-content=item.body
               :review-images=item.images
@@ -91,20 +92,14 @@ export default {
       isShowSliderButton: false,
 
       swiperOption: {
-        slidesPerView: 5,
+        slidesPerView: 4.25,
         spaceBetween: 18,
         centeredSlides: true,
+        allowTouchMove: false,
         loop: {
           loopedSlides: 1
         },
-        // grabCursor: true,
         watchSlidesVisibility: true,
-        // preloadImages: false,
-        keyboard: { enabled: true },
-        lazy: {
-          loadPrevNext: true,
-          loadOnTransitionStart: true
-        },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -114,18 +109,21 @@ export default {
           clickable: true
         },
         breakpoints: {
-          368: { // when window width is <= 368px
-            slidesPerView: 1,
-          },
-          736: {
+          450: { // when window width is <= 368px
             slidesPerView: 1.2,
           },
-          1260: {
-            slidesPerView: 2,
+          768: {
+            slidesPerView: 2.5,
           },
-          // 1512: {
-          //   slidesPerView: 3,
-          // },
+          1150: {
+            slidesPerView: 2.75,
+          },
+          1300: {
+            slidesPerView: 3.25,
+          },
+          1440: {
+            slidesPerView: 3.75,
+          },
           // 1840: {
           //   slidesPerView: 4,
           // },
@@ -137,6 +135,7 @@ export default {
   mounted() {
     if (this.isMobile) {
       this.swiperOption.centeredSlides = true;
+      this.swiperOption.allowTouchMove = true;
     }
   },
 
@@ -180,6 +179,11 @@ export default {
       'updateCategory',
       'selectPanel',
     ]),
+
+    convertDate(isoDate) {
+      const date = new Date(isoDate);
+      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    },
 
     updateHoverState(isHover) {
       this.isShowSliderButton = isHover;
@@ -274,32 +278,30 @@ export default {
   &__Read {
     width: 240px;
     height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 25px auto 0;
     text-align: center;
-    border: 1px solid #202020;
     background: white;
+    border: 1px solid #202020;
 
     &--Link {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      color: #202020;
       font-weight: 600;
 
       &:hover {
+        background: #202020;
+        color: #fff;
         text-decoration: none;
       }
     }
 
     &--BtnLabel {
       font-size: 14px;
-      color: #202020;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-
-      &:hover {
-        background: #202020;
-        color: #fff;
-      }
     }
   }
 
