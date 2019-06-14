@@ -3,7 +3,7 @@ export default [
     image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_sofa-min_edc49ec0-ade1-46ba-b065-84aa697f09d9.png?286687',
     text: 'Sofas & Sofettes',
     hoverColor: '#EEC4AF',
-    key: 'sofas',
+    key: 'sofas,sofettes',
   },
   {
     image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_armchair-min.png',
