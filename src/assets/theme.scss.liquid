@@ -568,6 +568,26 @@ $btnBackgroundPosition: 150% 35%;
 html, body {
   padding: 0;
   margin: 0;
+
+  a {
+    color: #202020;
+
+    &:hover {
+      color: #202020;
+    }
+  }
+
+  .btn {
+    color: #fff;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color: #202020;
+  }
+
+  .input-group {
+    display: table;
+  }
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
@@ -2326,6 +2346,15 @@ label.error {
   white-space: nowrap;
   width: 1%;
   padding: 0;
+
+  .subscribe-btn {
+    color: #fff;
+    background: #202020;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 
   .icon {
     vertical-align: initial;
@@ -11112,6 +11141,7 @@ html body.MobileNav--Active {
     -o-transition: all .3s;
     transition: all .3s;
     border-color: #202020;
+    color: #202020;
   }
 }
 
@@ -11158,6 +11188,8 @@ html body.MobileNav--Active {
   }
 
   .Dropdown__Content__Link.has-hover:hover {
+    color: #202020;
+
     .Dropdown__Content__DefaultImage {
       display: none;
     }
