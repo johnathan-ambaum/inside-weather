@@ -9,7 +9,7 @@
         <div class="ProductDetailSlider__HeaderRow">
           <h1 class="ProductDetailSlider__Title ProductDetail__Title">
             {{ product.long_display_name }}
-            <small class="ProductDetailSlider__Model">{{ product.model_number }}</small>
+            <span class="ProductDetailSlider__Model">{{ product.model_number }}</span>
           </h1>
           <div>
             <!-- <div class="ProductDetailSlider__ShippingNote Product__ShippingNote">SHIPS FREE in {{ product.min_fulfillment_time }}-{{ product.max_fulfillment_time }} days</div> -->
