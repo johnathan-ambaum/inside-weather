@@ -66,7 +66,7 @@ export default class ApiClient {
    */
   getQueryString() {
     const params = Object.entries(this.options)
-      .filter(([value]) => value !== null)
+      .filter(([option, value]) => value !== null)
       .map(([option, value]) => `${option}=${value}`);
 
     this.filters.forEach((filter) => {
