@@ -190,7 +190,7 @@ export default {
   }
 
   &__Link {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   &__Title {
