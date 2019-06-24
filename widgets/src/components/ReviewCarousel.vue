@@ -18,10 +18,14 @@
         @mouseenter="updateHoverState(true)"
         @mouseleave="updateHoverState(false)"
       >
-        <swiper :options="swiperOption">
+        <swiper
+          :options="swiperOption"
+          ref="swiper"
+          @click.native="sliderClicked"
+        >
           <swiper-slide
             v-for="(item, index) in reviewData"
-            :key="index"
+            :key="`${index}`"
           >
             <carousel-item
               :key=item.id
@@ -38,6 +42,7 @@
               :product-category=item.item_data.primary_category
               :product-handle=item.item_data.handle
               :star-count=item.rating
+              :set-modal-image="setModalImage"
             />
           </swiper-slide>
           <div
@@ -61,6 +66,13 @@
         </a>
       </div>
     </div>
+    <review-modal
+      v-if="modalShow"
+      :show="modalShow"
+      :modal-data="modalData"
+      :modal-default-image="modalImage"
+      :close-modal="closeModal"
+    />
   </div>
 </template>
 
@@ -69,6 +81,7 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 
 import screenMonitor from '../mixins/screenMonitor';
 import CarouselItem from './CarouselItem.vue';
+import ReviewModal from './ReviewModal.vue';
 import Star from './Star.vue';
 
 export default {
@@ -78,6 +91,7 @@ export default {
 
   components: {
     CarouselItem,
+    ReviewModal,
     Star,
   },
 
@@ -90,15 +104,16 @@ export default {
     return {
       reviewData: [],
       isShowSliderButton: false,
+      modalShow: false,
+      modalImage: '',
+      modalData: {},
 
       swiperOption: {
         slidesPerView: 4.25,
         spaceBetween: 18,
         centeredSlides: true,
         allowTouchMove: false,
-        loop: {
-          loopedSlides: 1
-        },
+        loop: true,
         watchSlidesVisibility: true,
         navigation: {
           nextEl: '.swiper-button-next',
@@ -109,11 +124,14 @@ export default {
           clickable: true
         },
         breakpoints: {
-          450: { // when window width is <= 368px
+          450: { // when window width is <= 450px
             slidesPerView: 1.2,
           },
+          690: {
+            slidesPerView: 1.5,
+          },
           768: {
-            slidesPerView: 2.5,
+            slidesPerView: 2.2,
           },
           1150: {
             slidesPerView: 2.75,
@@ -158,6 +176,10 @@ export default {
       };
 
       return showItem;
+    },
+
+    swiper() {
+      return this.$refs.swiper.swiper
     }
   },
 
@@ -187,6 +209,42 @@ export default {
 
     updateHoverState(isHover) {
       this.isShowSliderButton = isHover;
+    },
+
+    setModalImage(image) {
+      this.modalImage = image;
+    },
+
+    sliderClicked: function (event) {
+      if (event.target.classList.contains('CarouselItem__Right--Image') ||
+          event.target.classList.contains('CarouselItem__Right--Readmore__Text')
+      ) {
+        const clickedIndex = this.swiper.clickedIndex;
+        const loopedSlides = this.swiper.loopedSlides;
+        const realIndex = (clickedIndex - loopedSlides + 5) % 5;
+        // console.log('this.swiper', this.swiper);
+        // console.log('activeIndex', activeIndex);
+        // console.log('realIndex', this.swiper.realIndex);
+        // console.log('previousIndex', this.swiper.previousIndex);
+        // console.log('snapIndex', this.swiper.snapIndex);
+        // console.log('loopedSlides', loopedSlides);
+        // console.log('realindex', realIndex);
+        const item = this.reviewData[realIndex];
+        this.openModal(item);
+      }
+    },
+
+    openModal(item) {
+      console.log('openmodal', item);
+      if (!item) return;
+      this.modalShow = true;
+      this.modalData = item;
+    },
+
+    closeModal() {
+      console.log('close modal');
+      this.modalShow = false;
+      this.modalImage = '';
     },
   },
 };
