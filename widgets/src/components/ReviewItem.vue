@@ -693,6 +693,10 @@ export default {
       margin-top: 10px;
     }
 
+    &--NoImage {
+      padding: 0 24px;
+    }
+
     &--Image {
       width: 75px;
       height: 50px;
@@ -762,6 +766,10 @@ export default {
         font-size: 13px;
         line-height: 21px;
         max-height: 147px;
+      }
+
+      &--ContentTextOnly {
+        max-height: 272px;
       }
     }
   }
