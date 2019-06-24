@@ -95,14 +95,14 @@
                 </a>
               </div>
             </div>
-            <div class="ReviewModal__Right ReviewModal__Right--Small">
+            <div class="ReviewModal__Right--NoImage">
               <div class="ReviewItem__Right--Rectangle ReviewModal__Right--Rectangle">
                 <div class="ReviewItem__Right--Top ReviewModal__Right--Top">
                   <star :star-count="starRating" class-name="ReviewModal__Right--Star" />
                   <div class="ReviewItem__Right--Date ReviewModal__Right--Date">{{ convertedReviewDate }}</div>
                 </div>
                 <div class="ReviewItem__Right--Title ReviewModal__Right--Title">{{ modalData.title }}</div>
-                <div class="ReviewItem__Right--Content ReviewModal__Right--Content">{{ modalData.body }}</div>
+                <div class="ReviewItem__Right--Content ReviewModal__Right--Content ReviewModal__Right--ContentTextOnly">{{ modalData.body }}</div>
               </div>
             </div>
           </div>
