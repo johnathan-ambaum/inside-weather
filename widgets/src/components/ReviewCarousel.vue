@@ -34,10 +34,11 @@
               :last-name=item.last_name
               :product-city=item.city
               :product-state=item.state
-              :product-image=item.item_data.medium_image
+              :product-image=item.item_data.thumbnail_image
               :review-date="convertDate(item.submitted_at)"
               :review-title=item.title
-              :review-content=item.body
+              :review-content="cutoffReviewContent(item.images, item.body)"
+              :is-ellipsis="getEllipsisStatus(item.images, item.body)"
               :review-images=item.images
               :product-category=item.item_data.primary_category
               :product-handle=item.item_data.handle
@@ -107,6 +108,7 @@ export default {
       modalShow: false,
       modalImage: '',
       modalData: {},
+      silderWidth: 0,
 
       swiperOption: {
         slidesPerView: 4.25,
@@ -123,6 +125,22 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         },
+        on: {
+          slideChange: function () {
+            // this.cutoffReviewContent(this.reviewImages, this.reviewContent);
+            // let lastVisibleItem = this.realIndex + this.params.slidesPerView
+            // let slidesLength = this.slides.length - 2
+            // let lastVisibleIndex = this.realIndex + this.params.slidesPerView
+            // // if swiper reaches the end of displayed items, goToNext redirects swiper to the start
+            // if (lastVisibleItem > slidesLength) {
+            // this.slideTo(1)
+            // }
+            // // if swiper wants to go before the first item, then forward swiper to the last item
+            // if (lastVisibleIndex >= this.slides.length) {
+            // this.slideTo((slidesLength - this.params.slidesPerView) + 1)
+            // }
+          }
+        },
         breakpoints: {
           450: { // when window width is <= 450px
             slidesPerView: 1.2,
@@ -130,7 +148,7 @@ export default {
           690: {
             slidesPerView: 1.5,
           },
-          768: {
+          800: {
             slidesPerView: 2.2,
           },
           1150: {
@@ -142,9 +160,6 @@ export default {
           1440: {
             slidesPerView: 3.75,
           },
-          // 1840: {
-          //   slidesPerView: 4,
-          // },
         }
       }
     };
@@ -215,34 +230,163 @@ export default {
       this.modalImage = image;
     },
 
+    getSliderWidth() {
+      const screenW = this.screenWidth;
+      let sliderW = 0;
+      if (screenW > 1440) {
+        sliderW = screenW / 4.25;
+      } else if (screenW <= 1440 && screenW > 1300) {
+        sliderW = screenW / 3.75;
+      } else if (screenW <= 1300 && screenW > 1150) {
+        sliderW = screenW / 3.25;
+      } else if (screenW <= 1150 && screenW > 800) {
+        sliderW = screenW / 2.75;
+      } else if (screenW <= 800 && screenW > 690) {
+        sliderW = screenW / 2.2;
+      } else if (screenW <= 690 && screenW > 450) {
+        sliderW = screenW / 1.5;
+      } else if (screenW <= 450) {
+        sliderW = screenW / 1.2;
+      }
+
+      this.silderWidth = sliderW - 20;
+    },
+
+    cutoffReviewContent(reviewImages, reviewContent) {
+      let ellipsisReviewContent = reviewContent;
+      this.getSliderWidth();
+
+      const imgCount = reviewImages.length;
+      const itemClientW = this.isMobile ? this.silderWidth - 48 : this.silderWidth - 84;
+      const imageW = 85 + 8;
+      const allImageW = imageW * imgCount;
+
+      let imageLine = 0;
+      if (allImageW === 0 ) {
+        imageLine = 0;
+      } else if (allImageW > 0 && itemClientW > allImageW) {
+        imageLine = 1
+      } else {
+        imageLine = 2
+      }
+
+      console.log('itemClientW', itemClientW)
+      console.log('allImageW', allImageW)
+      console.log('imageLine', imageLine)
+
+      if (itemClientW > 340) {
+        if (imageLine === 0) {
+          ellipsisReviewContent = reviewContent.substring(0, 500);
+        } else if (imageLine === 1) {
+          ellipsisReviewContent = reviewContent.substring(0, 380);
+        } else {
+          ellipsisReviewContent = reviewContent.substring(0, 230);
+        }
+      } else if (itemClientW <= 340 && itemClientW > 300) {
+        if (imageLine === 0) {
+          ellipsisReviewContent = reviewContent.substring(0, 450);
+        } else if (imageLine === 1) {
+          ellipsisReviewContent = reviewContent.substring(0, 320);
+        } else {
+          ellipsisReviewContent = reviewContent.substring(0, 190);
+        }
+      } else if (itemClientW <= 300 && itemClientW >= 230) {
+        if (imageLine === 0) {
+          ellipsisReviewContent = reviewContent.substring(0, 425);
+        } else if (imageLine === 1) {
+          ellipsisReviewContent = reviewContent.substring(0, 300);
+        } else {
+          ellipsisReviewContent = reviewContent.substring(0, 160);
+        }
+      } else {
+        if (imageLine === 0) {
+          ellipsisReviewContent = reviewContent.substring(0, 360);
+        } else if (imageLine === 1) {
+          ellipsisReviewContent = reviewContent.substring(0, 250);
+        } else {
+          ellipsisReviewContent = reviewContent.substring(0, 160);
+        }
+      }
+
+      return ellipsisReviewContent;
+    },
+
+    getEllipsisStatus(reviewImages, reviewContent) {
+      let isEllipsis = false;
+
+      const imgCount = reviewImages.length;
+      const itemClientW = this.isMobile ? this.silderWidth - 48 : this.silderWidth - 84;
+      const imageW = 85 + 8;
+      const allImageW = imageW * imgCount;
+
+     let imageLine = 0;
+      if (allImageW === 0 ) {
+        imageLine = 0;
+      } else if (allImageW > 0 && itemClientW > allImageW) {
+        imageLine = 1
+      } else {
+        imageLine = 2
+      }
+
+      if (itemClientW > 340) {
+        if (imageLine === 0) {
+          if (reviewContent.length > 500) isEllipsis = true;
+        } else if (imageLine === 1) {
+          if (reviewContent.length > 380) isEllipsis = true;
+        } else {
+          if (reviewContent.length > 230) isEllipsis = true;
+        }
+      } else if (itemClientW <= 340 && itemClientW > 300) {
+        if (imageLine === 0) {
+          if (reviewContent.length > 450) isEllipsis = true;
+        } else if (imageLine === 1) {
+          if (reviewContent.length > 320) isEllipsis = true;
+        } else {
+          if (reviewContent.length > 190) isEllipsis = true;
+        }
+      } else if (itemClientW <= 300 && itemClientW >= 230) {
+        if (imageLine === 0) {
+          if (reviewContent.length > 425) isEllipsis = true;
+        } else if (imageLine === 1) {
+          if (reviewContent.length > 300) isEllipsis = true;
+        } else {
+          if (reviewContent.length > 160) isEllipsis = true;
+        }
+      } else {
+        if (imageLine === 0) {
+          if (reviewContent.length > 360) isEllipsis = true;
+        } else if (imageLine === 1) {
+          if (reviewContent.length > 250) isEllipsis = true;
+        } else {
+          if (reviewContent.length > 160) isEllipsis = true;
+        }
+      }
+
+      return isEllipsis;
+    },
+
     sliderClicked: function (event) {
       if (event.target.classList.contains('CarouselItem__Right--Image') ||
           event.target.classList.contains('CarouselItem__Right--Readmore__Text')
       ) {
         const clickedIndex = this.swiper.clickedIndex;
         const loopedSlides = this.swiper.loopedSlides;
-        const realIndex = (clickedIndex - loopedSlides + 5) % 5;
-        // console.log('this.swiper', this.swiper);
-        // console.log('activeIndex', activeIndex);
-        // console.log('realIndex', this.swiper.realIndex);
-        // console.log('previousIndex', this.swiper.previousIndex);
-        // console.log('snapIndex', this.swiper.snapIndex);
-        // console.log('loopedSlides', loopedSlides);
-        // console.log('realindex', realIndex);
+        const realIndex = (clickedIndex - loopedSlides + this.reviewData.length) % this.reviewData.length;
+        console.log('clickedIndex', clickedIndex);
+        console.log('loopedSlides', loopedSlides);
+        console.log('previousIndex', this.swiper.previousIndex);
         const item = this.reviewData[realIndex];
         this.openModal(item);
       }
     },
 
     openModal(item) {
-      console.log('openmodal', item);
       if (!item) return;
       this.modalShow = true;
       this.modalData = item;
     },
 
     closeModal() {
-      console.log('close modal');
       this.modalShow = false;
       this.modalImage = '';
     },

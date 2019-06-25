@@ -547,10 +547,6 @@ export default {
 
   @include at-query($breakpoint-small) {
     margin-top: -40px;
-
-    // & > div {
-    //   margin: -8px -20px 0 0;
-    // }
   }
 }
 
@@ -686,7 +682,23 @@ export default {
       font-size: 14px;
       line-height: 22px;
       overflow-y: auto;
-      max-height: 272px;
+      max-height: 252px;
+
+      :-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
     }
 
     &__Images {
@@ -769,7 +781,7 @@ export default {
       }
 
       &--ContentTextOnly {
-        max-height: 272px;
+        max-height: 252px;
       }
     }
   }

@@ -52,8 +52,8 @@
                     class="ReviewItem__Right--Image ReviewModal__Right--Image"
                     v-for="(image, index) in modalData.images"
                     :key="index"
-                    :style="{ 'background-image': 'url(' + image.url + ')'}"
-                    @click="handlePopupImage(image.url)"
+                    :style="{ 'background-image': 'url(' + image.thumb.url + ')'}"
+                    @click="handlePopupImage(image.medium.url)"
                   />
                 </div>
               </div>
@@ -175,13 +175,12 @@ export default {
   mounted() {
     this.convertedReviewDate = this.convertDate(this.modalData.submitted_at);
     this.productStateAbbr = this.getAbbrState(this.modalData.state);
-    console.log('--modaldefaultimage', this.modalDefaultImage);
 
     if (this.modalDefaultImage) {
       this.modalImage = this.modalDefaultImage;
     } else {
       if (this.modalData.images.length > 0)
-        this.modalImage = this.modalData.images[0].url;
+        this.modalImage = this.modalData.images[0].medium.url;
       else this.modalImage = null;
     }
   },
@@ -220,7 +219,6 @@ export default {
     },
 
     onHideModal(modalShow) {
-      console.log('onhide modal');
       this.closeModal(false);
     },
 
