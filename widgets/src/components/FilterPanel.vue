@@ -751,12 +751,12 @@ $options-footer-height: 105px;
 .ss-scroll {
   position: relative;
   background: #bebebe;
-  width: 3px;
-  border-radius: 4px;
+  width: 10px;
+  border-radius: 2px;
   top: 0;
   z-index: 2;
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.25s linear;
 
   @include at-query($breakpoint-small) {
