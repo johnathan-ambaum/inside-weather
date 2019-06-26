@@ -382,6 +382,22 @@ export default {
       line-height: 22px;
     }
 
+    &--Content::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &--Content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &--Content::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    &--Content::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
     &--Images {
       display: flex;
       flex-flow: wrap;
@@ -683,22 +699,6 @@ export default {
       line-height: 22px;
       overflow-y: auto;
       max-height: 252px;
-
-      :-webkit-scrollbar {
-        width: 10px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #888;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
     }
 
     &__Images {
