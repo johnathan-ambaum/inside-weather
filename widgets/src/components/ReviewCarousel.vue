@@ -29,7 +29,7 @@
           >
             <carousel-item
               :key=item.id
-              :element-id="item.id + item.first_name"
+              :element-id="item.id.toString()"
               :first-name=item.first_name
               :last-name=item.last_name
               :product-city=item.city
@@ -127,28 +127,16 @@ export default {
         },
         on: {
           slideChange: function () {
-            // this.cutoffReviewContent(this.reviewImages, this.reviewContent);
-            // let lastVisibleItem = this.realIndex + this.params.slidesPerView
-            // let slidesLength = this.slides.length - 2
-            // let lastVisibleIndex = this.realIndex + this.params.slidesPerView
-            // // if swiper reaches the end of displayed items, goToNext redirects swiper to the start
-            // if (lastVisibleItem > slidesLength) {
-            // this.slideTo(1)
-            // }
-            // // if swiper wants to go before the first item, then forward swiper to the last item
-            // if (lastVisibleIndex >= this.slides.length) {
-            // this.slideTo((slidesLength - this.params.slidesPerView) + 1)
-            // }
           }
         },
         breakpoints: {
           450: { // when window width is <= 450px
             slidesPerView: 1.2,
           },
-          690: {
+          720: {
             slidesPerView: 1.5,
           },
-          800: {
+          900: {
             slidesPerView: 2.2,
           },
           1150: {
@@ -270,9 +258,7 @@ export default {
         imageLine = 2
       }
 
-      console.log('itemClientW', itemClientW)
-      console.log('allImageW', allImageW)
-      console.log('imageLine', imageLine)
+      console.log('itemClientW', itemClientW);
 
       if (itemClientW > 340) {
         if (imageLine === 0) {
@@ -290,11 +276,19 @@ export default {
         } else {
           ellipsisReviewContent = reviewContent.substring(0, 190);
         }
-      } else if (itemClientW <= 300 && itemClientW >= 230) {
+      } else if (itemClientW <= 300 && itemClientW > 250) {
         if (imageLine === 0) {
           ellipsisReviewContent = reviewContent.substring(0, 425);
         } else if (imageLine === 1) {
-          ellipsisReviewContent = reviewContent.substring(0, 300);
+          ellipsisReviewContent = reviewContent.substring(0, 280);
+        } else {
+          ellipsisReviewContent = reviewContent.substring(0, 160);
+        }
+      } else if (itemClientW <= 250 && itemClientW > 230) {
+        if (imageLine === 0) {
+          ellipsisReviewContent = reviewContent.substring(0, 370);
+        } else if (imageLine === 1) {
+          ellipsisReviewContent = reviewContent.substring(0, 250);
         } else {
           ellipsisReviewContent = reviewContent.substring(0, 160);
         }
@@ -344,15 +338,23 @@ export default {
         } else {
           if (reviewContent.length > 190) isEllipsis = true;
         }
-      } else if (itemClientW <= 300 && itemClientW >= 230) {
+      } else if (itemClientW <= 300 && itemClientW > 250) {
         if (imageLine === 0) {
           if (reviewContent.length > 425) isEllipsis = true;
         } else if (imageLine === 1) {
-          if (reviewContent.length > 300) isEllipsis = true;
+          if (reviewContent.length > 280) isEllipsis = true;
         } else {
           if (reviewContent.length > 160) isEllipsis = true;
         }
-      } else {
+      } else if (itemClientW <= 250 && itemClientW > 230) {
+        if (imageLine === 0) {
+          if (reviewContent.length > 370) isEllipsis = true;
+        } else if (imageLine === 1) {
+          if (reviewContent.length > 250) isEllipsis = true;
+        } else {
+          if (reviewContent.length > 160) isEllipsis = true;
+        }
+      }  else {
         if (imageLine === 0) {
           if (reviewContent.length > 360) isEllipsis = true;
         } else if (imageLine === 1) {
@@ -366,18 +368,31 @@ export default {
     },
 
     sliderClicked: function (event) {
-      if (event.target.classList.contains('CarouselItem__Right--Image') ||
-          event.target.classList.contains('CarouselItem__Right--Readmore__Text')
-      ) {
-        const clickedIndex = this.swiper.clickedIndex;
-        const loopedSlides = this.swiper.loopedSlides;
-        const realIndex = (clickedIndex - loopedSlides + this.reviewData.length) % this.reviewData.length;
-        console.log('clickedIndex', clickedIndex);
-        console.log('loopedSlides', loopedSlides);
-        console.log('previousIndex', this.swiper.previousIndex);
-        const item = this.reviewData[realIndex];
-        this.openModal(item);
+      let selectedItem;
+
+      if (event.target.classList.contains('CarouselItem__Right--Image')) {
+        console.log('image clicked');
+        this.reviewData.forEach((item, index) => {
+          item.images.forEach(img => {
+            if(img.medium.url === this.modalImage) {
+              selectedItem = item;
+              return;
+            }
+          })
+        })
       }
+
+      if (event.target.classList.contains('CarouselItem__Right--Readmore__Text')) {
+
+        this.reviewData.forEach((item, index) => {
+          if(event.target.classList.contains(item.id)) {
+            selectedItem = item;
+            return;
+          }
+        })
+      }
+
+      this.openModal(selectedItem);
     },
 
     openModal(item) {
