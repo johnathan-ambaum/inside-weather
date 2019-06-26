@@ -302,7 +302,6 @@ export default {
       font-size: 14px;
       letter-spacing: 0.03em;
       line-height: 22px;
-      word-break: break-all;
     }
 
     &--Readmore {
