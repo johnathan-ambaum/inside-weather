@@ -32,6 +32,7 @@
           <div v-if="isEllipsis" class="CarouselItem__Right--Readmore">
             <span
               class="CarouselItem__Right--Readmore__Text"
+              :class="elementId"
             >
               Continue Reading
             </span>
@@ -196,7 +197,7 @@ export default {
   background: white;
   border: 1px solid #d4d0ca;
   padding: 42px;
-  min-height: 590px;
+  min-height: 600px;
   position: relative;
 
   &__Left {
@@ -345,7 +346,7 @@ export default {
 
   @include at-query($breakpoint-small) {
     padding: 24px;
-    min-height: 542px;
+    min-height: 545px;
 
     &__Left {
       &--Image {

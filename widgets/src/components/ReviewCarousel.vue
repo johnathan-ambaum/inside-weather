@@ -111,7 +111,7 @@ export default {
       silderWidth: 0,
 
       swiperOption: {
-        slidesPerView: 4.25,
+        slidesPerView: 4.75,
         spaceBetween: 18,
         centeredSlides: true,
         allowTouchMove: false,
@@ -130,23 +130,125 @@ export default {
           }
         },
         breakpoints: {
-          450: { // when window width is <= 450px
-            slidesPerView: 1.2,
+          405: { // when window width is <= 375px
+            slidesPerView: 1.2, //300-330
           },
-          720: {
+          440: {
+            slidesPerView: 1.3,
+          },
+          475: {
+            slidesPerView: 1.4,
+          },
+          510: {
             slidesPerView: 1.5,
           },
-          900: {
+          545: {
+            slidesPerView: 1.6,
+          },
+          580: {
+            slidesPerView: 1.7,
+          },
+          615: {
+            slidesPerView: 1.8,
+          },
+          650: {
+            slidesPerView: 1.9,
+          },
+          685: {
+            slidesPerView: 2,
+          },
+          720: {
+            slidesPerView: 2.1,
+          },
+          755: {
             slidesPerView: 2.2,
           },
-          1150: {
-            slidesPerView: 2.75,
+          790: {
+            slidesPerView: 2.3,
           },
-          1300: {
-            slidesPerView: 3.25,
+          825: {
+            slidesPerView: 2.4,
           },
-          1440: {
-            slidesPerView: 3.75,
+          860: {
+            slidesPerView: 2.5,
+          },
+          895: {
+            slidesPerView: 2.6,
+          },
+          930: {
+            slidesPerView: 2.7,
+          },
+          965: {
+            slidesPerView: 2.8,
+          },
+          1023: {
+            slidesPerView: 2.9,
+          },
+          1078: {
+            slidesPerView: 2.7,
+          },
+          1118: {
+            slidesPerView: 2.8,
+          },
+          1175: {
+            slidesPerView: 2.9,
+          },
+          1194: {
+            slidesPerView: 3.05,
+          },
+          1234: {
+            slidesPerView: 3.1, //
+          },
+          1272: {
+            slidesPerView: 3.2, //
+          },
+          1310: {
+            slidesPerView: 3.3, //
+          },
+          1349: {
+            slidesPerView: 3.4, //
+          },
+          1388: {
+            slidesPerView: 3.5, //
+          },
+          1427: {
+            slidesPerView: 3.6, //
+          },
+          1466: {
+            slidesPerView: 3.7, //
+          },
+          1500: {
+            slidesPerView: 3.8, //
+          },
+          1524: {
+            slidesPerView: 3.85, //
+          },
+          1563: {
+            slidesPerView: 3.95, // 370-379
+          },
+          1582: {
+            slidesPerView: 4.05, // 370-374
+          },
+          1621: {
+            slidesPerView: 4.1, //370-378
+          },
+          1660: {
+            slidesPerView: 4.2, //370-378
+          },
+          1699: {
+            slidesPerView: 4.3, //370-378
+          },
+          1737: {
+            slidesPerView: 4.4, // 370-378
+          },
+          1776: {
+            slidesPerView: 4.5, // 370-378
+          },
+          1834: {
+            slidesPerView: 4.6, // 370 - 382
+          },
+          1900: {
+            slidesPerView: 4.75, // 370
           },
         }
       }
@@ -242,63 +344,50 @@ export default {
 
     cutoffReviewContent(reviewImages, reviewContent) {
       let ellipsisReviewContent = reviewContent;
-      this.getSliderWidth();
-
       const imgCount = reviewImages.length;
-      const itemClientW = this.isMobile ? this.silderWidth - 48 : this.silderWidth - 84;
-      const imageW = 85 + 8;
-      const allImageW = imageW * imgCount;
+      // this.getSliderWidth();
 
-      let imageLine = 0;
-      if (allImageW === 0 ) {
-        imageLine = 0;
-      } else if (allImageW > 0 && itemClientW > allImageW) {
-        imageLine = 1
-      } else {
-        imageLine = 2
-      }
+      // const imageW = 85 + 8;
 
-      console.log('itemClientW', itemClientW);
+      // const allImageW = imageW * imgCount;
+      // const itemClientW = this.isMobile ? this.silderWidth - 48 : this.silderWidth - 84;
 
-      if (itemClientW > 340) {
-        if (imageLine === 0) {
-          ellipsisReviewContent = reviewContent.substring(0, 500);
-        } else if (imageLine === 1) {
-          ellipsisReviewContent = reviewContent.substring(0, 380);
+      // let imageLine = 0;
+      // if (allImageW === 0 ) {
+      //   imageLine = 0;
+      // } else if (allImageW > 0 && itemClientW > allImageW) {
+      //   imageLine = 1
+      // } else {
+      //   imageLine = 2
+      // }
+
+      if (this.isMobile) {
+        if (imgCount === 0) {
+          if (reviewContent.length > 370) {
+            ellipsisReviewContent = reviewContent.substring(0, 350);
+          }
+        } else if (imgCount < 3 && imgCount > 0) {
+          if (reviewContent.length > 250) {
+            ellipsisReviewContent = reviewContent.substring(0, 220);
+          }
         } else {
-          ellipsisReviewContent = reviewContent.substring(0, 230);
-        }
-      } else if (itemClientW <= 340 && itemClientW > 300) {
-        if (imageLine === 0) {
-          ellipsisReviewContent = reviewContent.substring(0, 450);
-        } else if (imageLine === 1) {
-          ellipsisReviewContent = reviewContent.substring(0, 320);
-        } else {
-          ellipsisReviewContent = reviewContent.substring(0, 190);
-        }
-      } else if (itemClientW <= 300 && itemClientW > 250) {
-        if (imageLine === 0) {
-          ellipsisReviewContent = reviewContent.substring(0, 425);
-        } else if (imageLine === 1) {
-          ellipsisReviewContent = reviewContent.substring(0, 280);
-        } else {
-          ellipsisReviewContent = reviewContent.substring(0, 160);
-        }
-      } else if (itemClientW <= 250 && itemClientW > 230) {
-        if (imageLine === 0) {
-          ellipsisReviewContent = reviewContent.substring(0, 370);
-        } else if (imageLine === 1) {
-          ellipsisReviewContent = reviewContent.substring(0, 250);
-        } else {
-          ellipsisReviewContent = reviewContent.substring(0, 160);
+          if (reviewContent.length > 150) {
+            ellipsisReviewContent = reviewContent.substring(0, 120);
+          }
         }
       } else {
-        if (imageLine === 0) {
-          ellipsisReviewContent = reviewContent.substring(0, 360);
-        } else if (imageLine === 1) {
-          ellipsisReviewContent = reviewContent.substring(0, 250);
+        if (imgCount === 0) {
+          if (reviewContent.length > 420) {
+            ellipsisReviewContent = reviewContent.substring(0, 390);
+          }
+        } else if (imgCount < 4 && imgCount > 0) {
+          if (reviewContent.length > 270) {
+            ellipsisReviewContent = reviewContent.substring(0, 240);
+          }
         } else {
-          ellipsisReviewContent = reviewContent.substring(0, 160);
+          if (reviewContent.length > 150) {
+            ellipsisReviewContent = reviewContent.substring(0, 110);
+          }
         }
       }
 
@@ -307,60 +396,35 @@ export default {
 
     getEllipsisStatus(reviewImages, reviewContent) {
       let isEllipsis = false;
-
       const imgCount = reviewImages.length;
-      const itemClientW = this.isMobile ? this.silderWidth - 48 : this.silderWidth - 84;
-      const imageW = 85 + 8;
-      const allImageW = imageW * imgCount;
 
-     let imageLine = 0;
-      if (allImageW === 0 ) {
-        imageLine = 0;
-      } else if (allImageW > 0 && itemClientW > allImageW) {
-        imageLine = 1
+      if (this.isMobile) {
+        if (imgCount === 0) {
+          if (reviewContent.length > 370) {
+            isEllipsis = true;
+          }
+        } else if (imgCount < 3 && imgCount > 0) {
+          if (reviewContent.length > 250) {
+            isEllipsis = true;
+          }
+        } else {
+          if (reviewContent.length > 150) {
+            isEllipsis = true;
+          }
+        }
       } else {
-        imageLine = 2
-      }
-
-      if (itemClientW > 340) {
-        if (imageLine === 0) {
-          if (reviewContent.length > 500) isEllipsis = true;
-        } else if (imageLine === 1) {
-          if (reviewContent.length > 380) isEllipsis = true;
+        if (imgCount === 0) {
+          if (reviewContent.length > 420) {
+            isEllipsis = true;
+          }
+        } else if (imgCount < 4 && imgCount > 0) {
+          if (reviewContent.length > 270) {
+            isEllipsis = true;
+          }
         } else {
-          if (reviewContent.length > 230) isEllipsis = true;
-        }
-      } else if (itemClientW <= 340 && itemClientW > 300) {
-        if (imageLine === 0) {
-          if (reviewContent.length > 450) isEllipsis = true;
-        } else if (imageLine === 1) {
-          if (reviewContent.length > 320) isEllipsis = true;
-        } else {
-          if (reviewContent.length > 190) isEllipsis = true;
-        }
-      } else if (itemClientW <= 300 && itemClientW > 250) {
-        if (imageLine === 0) {
-          if (reviewContent.length > 425) isEllipsis = true;
-        } else if (imageLine === 1) {
-          if (reviewContent.length > 280) isEllipsis = true;
-        } else {
-          if (reviewContent.length > 160) isEllipsis = true;
-        }
-      } else if (itemClientW <= 250 && itemClientW > 230) {
-        if (imageLine === 0) {
-          if (reviewContent.length > 370) isEllipsis = true;
-        } else if (imageLine === 1) {
-          if (reviewContent.length > 250) isEllipsis = true;
-        } else {
-          if (reviewContent.length > 160) isEllipsis = true;
-        }
-      }  else {
-        if (imageLine === 0) {
-          if (reviewContent.length > 360) isEllipsis = true;
-        } else if (imageLine === 1) {
-          if (reviewContent.length > 250) isEllipsis = true;
-        } else {
-          if (reviewContent.length > 160) isEllipsis = true;
+          if (reviewContent.length > 150) {
+            isEllipsis = true;
+          }
         }
       }
 
@@ -371,7 +435,6 @@ export default {
       let selectedItem;
 
       if (event.target.classList.contains('CarouselItem__Right--Image')) {
-        console.log('image clicked');
         this.reviewData.forEach((item, index) => {
           item.images.forEach(img => {
             if(img.medium.url === this.modalImage) {
