@@ -67,6 +67,8 @@
         </a>
       </div>
     </div>
+
+    <!-- Review Modal section -->
     <review-modal
       v-if="modalShow"
       :show="modalShow"
@@ -434,25 +436,26 @@ export default {
     sliderClicked: function (event) {
       let selectedItem;
 
-      if (event.target.classList.contains('CarouselItem__Right--Image')) {
-        this.reviewData.forEach((item, index) => {
-          item.images.forEach(img => {
-            if(img.medium.url === this.modalImage) {
+      if (this.modalImage !== '') {
+        if (event.target.classList.contains('CarouselItem__Right--Image')) {
+          this.reviewData.forEach((item, index) => {
+            item.images.forEach(img => {
+              if(img.medium.url === this.modalImage) {
+                selectedItem = item;
+                return;
+              }
+            })
+          })
+        }
+      } else {
+        if (event.target.classList.contains('CarouselItem__Right--Readmore__Text') || event.target.classList.contains('CarouselItem__Right--Image')) {
+          this.reviewData.forEach((item, index) => {
+            if(event.target.classList.contains(item.id)) {
               selectedItem = item;
               return;
             }
           })
-        })
-      }
-
-      if (event.target.classList.contains('CarouselItem__Right--Readmore__Text')) {
-
-        this.reviewData.forEach((item, index) => {
-          if(event.target.classList.contains(item.id)) {
-            selectedItem = item;
-            return;
-          }
-        })
+        }
       }
 
       this.openModal(selectedItem);
