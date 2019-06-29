@@ -56,19 +56,7 @@
       <review-item
         v-for="(item, index) in reviewData"
         :key=index
-        :element-id=item.submitted_at
-        :first-name=item.first_name
-        :last-name=item.last_name
-        :product-city=item.city
-        :product-state=item.state
-        :product-image=item.item_data.medium_image
-        :review-date=item.submitted_at
-        :review-title=item.title
-        :review-content=item.body
-        :review-images=item.images
-        :star-count=item.rating
-        :product-category=item.item_data.primary_category
-        :product-handle=item.item_data.handle
+        :review-data=item
       />
       <infinite-loading @infinite="infiniteHandler">
         <div slot="no-more" style="padding-bottom: 20px;"></div>
