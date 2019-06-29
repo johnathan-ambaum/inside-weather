@@ -43,6 +43,7 @@
               class="CarouselItem__Right--Image"
               v-for="(image, index) in reviewImages"
               :key="index"
+              :class="elementId"
               :style="{ 'background-image': 'url(' + image.thumb.url + ')' }"
               @click="setModalImage(image.medium.url)"
             />
