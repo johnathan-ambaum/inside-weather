@@ -455,6 +455,13 @@ export default {
               return;
             }
           })
+        } else if (event.target.classList.contains('CarouselItem__Left--Image')) {
+          this.reviewData.forEach((item, index) => {
+            if (event.target.classList.contains(item.id)) {
+              window.open(`https://insideweather.com/collections/${item.item_data.primary_category}/products/${item.item_data.handle}`, "_blank");
+            }
+            return;
+          })
         }
       }
 

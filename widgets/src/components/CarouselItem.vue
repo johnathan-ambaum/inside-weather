@@ -12,9 +12,9 @@
             </div>
             <div class="CarouselItem__Left--Text CarouselItem__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
           </div>
-          <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="CarouselItem__Left--Link">
-            <div class="CarouselItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}" />
-          </a>
+          <!-- <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="CarouselItem__Left--Link"> -->
+          <div class="CarouselItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}" :class="elementId" />
+          <!-- </a> -->
         </div>
       </div>
       <div class="CarouselItem__Right">
@@ -249,6 +249,10 @@ export default {
       min-width: 75px;
       height: 75px;
       border: 1px solid #d4d0ca;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
