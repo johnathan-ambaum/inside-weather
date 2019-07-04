@@ -15,6 +15,7 @@ import PageBuilderSection from './components/PageBuilderSection.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
 import SwatchBrowser from './components/SwatchBrowser.vue';
 import BannerCarousel from './components/BannerCarousel.vue';
+import MainHome from './components/MainHome.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
@@ -41,6 +42,7 @@ const app = new Vue({
     SwatchBrowser,
     FontAwesomeIcon,
     BannerCarousel,
+    MainHome
   },
 
   store,
