@@ -17,3 +17,94 @@
     display: table;
   }
 }
+
+@mixin appearance-none() {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}
+
+@mixin delay($t) {
+  -webkit-transition-delay: $t;
+  -moz-transition-delay: $t;
+  -ms-transition-delay: $t;
+  -o-transition-delay: $t;
+  transition-delay: $t;
+}
+
+@mixin Scale($x:1) {
+  -webkit-transform: scale($x);
+  -moz-transform: scale($x);
+  -ms-transform: scale($x);
+  -o-transform: scale($x);
+  transform: scale($x);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+@mixin Rotate($x) {
+  -webkit-transform: rotate($x);
+  -moz-transform: rotate($x);
+  -ms-transform: rotate($x);
+  -o-transform: rotate($x);
+  transform: rotate($x);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+@mixin translate($x,$y) {
+  -webkit-transform: translate($x,$y);
+  -moz-transform: translate($x,$y);
+  -ms-transform: translate($x,$y);
+  -o-transform: translate($x,$y);
+  transform: translate($x,$y);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+@mixin transition ($prop: all, $time: 0.3s, $ease: ease-in-out) {
+  -webkit-transition: $prop $time $ease;
+  -moz-transition: $prop $time $ease;
+  -o-transition: $prop $time $ease;
+  -ms-transition: $prop $time $ease;
+  transition: $prop $time $ease;
+}
+
+@mixin text-overflow-v($line:2){
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: $line;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+@mixin block($h:auto){
+  width: 100%;
+  height: $h;
+  display: block;
+}
+
+@mixin fonts($size,$color,$lineHeight,$ls){
+  font-size: $size;
+  color:$color;
+  line-height:$lineHeight;
+  letter-spacing: $ls;
+}
+
+@mixin font-inherit() {
+  @include fonts(inherit, inherit, inherit, inherit);
+}
+
+@mixin text-overflow($display:block){
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: $display;
+}
