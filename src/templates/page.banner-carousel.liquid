@@ -1,3 +1,72 @@
 <div id="app">
-  <banner-carousel></banner-carousel>  
+  <banner-carousel></banner-carousel>
+  <div class="--custom-container">
+    <category-list class="--pd-t-130 --pd-b-130"></category-list>
+  </div>
+  <div class="ValuePropsWrapper">
+    <div class="--custom-container">
+      <value-props></value-props>
+    </div>
+  </div>
+  <div class="PressContainer">
+    <div class="press--container">
+      <press></press>
+    </div>
+  </div>
+  <div class="ReviewCarouselWrapper">
+    <div class="--custom-container">
+      <review-carousel></review-carousel>
+    </div>
+  </div>
+  <banner>
+    <h2>Get professional help</h2>
+    <p>First Class Service. I’m able to purchase exactly what I want without falling short of my dreams.</p>
+    <link-button btnText="Send an sos" linkTo="./" stroke="white" />
+  </banner>
+  <recently-sold-products><recently-sold-products/>
 </div>
+
+<script>
+  jQuery(function ($) {
+    var count = 0;
+    jQuery('.point h3').on('click', (e) => {
+      e.stopPropagation();
+      const $ = jQuery;
+      const targetParent = $('.descriptions .point');
+      const allDescription = $('.descriptions .point p');
+      var targetAttribute = e.target.attributes[0].value;
+      if (e.target.parentElement.classList.contains('show-details')) {
+        count ++;
+        $('.descriptions h2').slideToggle();
+        toggleSlide(e.target.parentElement.children[1]);
+        e.target.parentElement.classList.remove('show-details');
+      }else {
+        $(allDescription).slideUp();
+        $('.descriptions h2').slideUp();
+        downSlide(e.target.parentElement.children[1]);
+        $(targetParent).removeClass('show-details');
+        e.target.parentElement.classList.add('show-details');
+      }
+      $('.image_wrapper figure').each(function(){
+        var recieverAttribute = this.getAttribute('data-src');
+        if(recieverAttribute === targetAttribute) {
+          $('.image_wrapper figure').removeClass('slide_up');
+          if(count === 0) {
+            $(this).addClass('slide_up');
+          }else {
+            $('.image_wrapper figure').removeClass('slide_up');
+          } 
+        }
+      }); 
+      if(count === 1) {
+        count = 0;
+      }
+    });
+  });
+  function toggleSlide(item) {
+    jQuery(item).slideToggle();
+  }
+  function downSlide(item) {
+    jQuery(item).slideDown();
+  }
+</script>

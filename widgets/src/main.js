@@ -15,8 +15,16 @@ import PageBuilderSection from './components/PageBuilderSection.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
 import SwatchBrowser from './components/SwatchBrowser.vue';
 import BannerCarousel from './components/BannerCarousel.vue';
+import CategoryList from './components/CategoryList.vue';
+import ValueProps from './components/ValueProps.vue';
+import Press from './components/Press.vue';
+import ReviewCarousel from './components/ReviewCarousel.vue';
+import Banner from './components/Banner.vue';
+import LinkButton from './components/LinkButton.vue';
+import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
+
 
 Vue.config.productionTip = false;
 
@@ -41,6 +49,13 @@ const app = new Vue({
     SwatchBrowser,
     FontAwesomeIcon,
     BannerCarousel,
+    CategoryList,
+    ValueProps,
+    Press,
+    ReviewCarousel,
+    Banner,
+    LinkButton,
+    RecentlySoldProducts,
   },
 
   store,
