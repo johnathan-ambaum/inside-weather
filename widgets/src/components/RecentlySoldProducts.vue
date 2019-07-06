@@ -40,6 +40,9 @@
 import HeadingWithDescription from './HeadingWithDescription.vue'
 
 export default {
+  components: {
+    HeadingWithDescription,
+  },
   data() {
     return {
       imageGridRow: [
