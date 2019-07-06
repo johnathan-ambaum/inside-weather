@@ -3,6 +3,13 @@
     class="Banner" 
     ref="Banner"
   >
+    <div class="heading">
+      <heading-with-description>
+        <h2>Get professional help</h2>
+        <p>First Class Service. I’m able to purchase exactly what I want without falling short of my dreams.</p>
+      </heading-with-description>
+    </div>
+    <link-button btnText="Send an sos" linkTo="./" stroke="white" />
     <div
       :class="bannerClass"
       class="Banner__wrapper"
@@ -16,7 +23,14 @@
 </template>
 
 <script>
+import HeadingWithDescription from './HeadingWithDescription.vue'
+import LinkButton from './LinkButton.vue'
+
 export default {
+  components: {
+    HeadingWithDescription,
+    LinkButton,
+  },
   props: {
     hasOverlay: {type: Boolean, default: true},
     fillColor: {type: String, default: 'white'},
