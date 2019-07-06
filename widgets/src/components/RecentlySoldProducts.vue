@@ -1,5 +1,5 @@
 <template>
-  <div class="SoldProducts" ref="SoldProducts">
+  <div class="SoldProducts --pd-t-130" ref="SoldProducts">
     <div class="heading">
       <heading-with-description>
         <h2>Recently Sold</h2>

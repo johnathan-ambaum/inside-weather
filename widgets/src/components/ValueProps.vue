@@ -83,8 +83,9 @@
         @include transition();
         @include translate(0,100%);
         img {
-          height: auto;
+          height: 100%;
           display: block;
+          object-fit: cover;
         }
         &.default {
           @include translate(0,0);
