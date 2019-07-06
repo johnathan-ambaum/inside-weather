@@ -1,0 +1,90 @@
+@import './mixins';
+
+a {
+  text-decoration: none;
+  &:focus, &:hover, &:active {
+    outline: none;
+    text-decoration: none;
+  }
+}
+ul, ol, figure {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+
+//****Custom container**//
+.--custom-container {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 738px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 962px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1170px;
+  }
+
+  @media (min-width: 1275px) {
+    max-width: 1245px;
+  }
+}
+
+.--pd-t-130 {
+  padding-top: 130px;
+}
+
+.--pd-b-130 {
+  padding-bottom: 130px;
+}
+
+.--pd-t-100 {
+  padding-top: 100px;
+}
+
+.--pd-b-100 {
+  padding-bottom: 100px;
+}
+
+.--clearfix {
+  @include clearfix();
+}
+
+.--caps {
+  text-transform: uppercase;
+}
+
+:root {
+  --cells: 40;
+  --cellSize: calc(100vw / var(--cells));
+}
+
+.grid--container {
+  display: grid;
+  grid-template-columns: repeat(var(--cells),1fr);
+  grid-auto-rows: minmax(max-content, var(--cellSize));
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+  
+  .column {
+    display: initial;
+    position: initial;
+    top: initial;
+    width: initial;
+    padding-left: initial;
+    margin: initial;
+    grid-row: auto / auto;
+  }
+}

@@ -276,7 +276,7 @@ export default {
         @include translate(-32px,0);
   
         span {
-          // background-image: url('./assets/arrow-prev.svg');
+          background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/left-arrow.png?738766');
         }
   
         &:hover {
@@ -304,7 +304,7 @@ export default {
         @include translate(32px,0);
   
         span {
-          // background-image: url('./assets/arrow-next.svg');
+          background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/right-arrow.png?738361');
         }
   
         &:hover {
