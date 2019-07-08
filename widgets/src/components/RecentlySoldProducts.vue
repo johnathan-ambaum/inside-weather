@@ -112,10 +112,12 @@ export default {
 .RecentlySoldProducts {
   padding: 100px 0 0;
   .RecentlySoldProducts--column {
-    border: 0.001em solid rgba(32, 32, 32, 0.30);
+    background: rgba(32, 32, 32, 0.3);
+    padding: 1.2px 0 0px 1px;
     position: relative;
     figure {
       align-items: center;
+      background: #FFFFFF;
       display: flex;
       height: 100%;
       justify-content: center;
