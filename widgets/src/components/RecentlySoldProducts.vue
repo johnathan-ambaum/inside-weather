@@ -1,6 +1,6 @@
 <template>
-  <div class="SoldProducts --pd-t-130" ref="SoldProducts">
-    <div class="heading">
+  <div class="SoldProducts" ref="SoldProducts">
+    <div class="heading --pd-t-130">
       <heading-with-description>
         <h2>Recently Sold</h2>
         <p>Made-to-order furniture, shipped in days, because life is too short to wait.</p>
@@ -112,10 +112,12 @@ export default {
 .RecentlySoldProducts {
   padding: 100px 0 0;
   .RecentlySoldProducts--column {
-    border: 0.001em solid rgba(32, 32, 32, 0.30);
+    background: rgba(32, 32, 32, 0.3);
+    padding: 1.2px 0 0px 1px;
     position: relative;
     figure {
       align-items: center;
+      background: #FFFFFF;
       display: flex;
       height: 100%;
       justify-content: center;

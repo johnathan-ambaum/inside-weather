@@ -16,6 +16,9 @@
       v-bind:style="{ backgroundImage: 'url(https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635)' }"
     >
       <div class="Banner__content">
+        <h2>Get professional help</h2>
+        <p>First Class Service. I’m able to purchase exactly what I want without falling short of my dreams.</p>
+        <LinkButton btnText="Send an sos" linkTo="./" stroke="white" />
         <slot></slot>
       </div>
     </div>

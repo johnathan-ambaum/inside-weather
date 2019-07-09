@@ -82,11 +82,13 @@
         @include block(100%);
         @include transition();
         @include translate(0,100%);
+
         img {
-          height: 100%;
           display: block;
+          height: 100%;
           object-fit: cover;
         }
+        
         &.default {
           @include translate(0,0);
           top: auto;
