@@ -8,7 +8,7 @@
       <template v-if="screenWidth >= 1024">
         <h1 class="ProductDetail__Title">
           {{ product.long_display_name }}
-          <small class="ProductDetail__Model">{{ product.model_number }}</small>
+          <span class="ProductDetail__Model">{{ product.model_number }}</span>
         </h1>
         <div class="ProductDetail__Gallery">
           <div

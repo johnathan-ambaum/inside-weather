@@ -1,18 +1,35 @@
 <template>
   <div
-    ref="pageBuilderSection"
     class="PageBuilderSection"
-  />
+  >
+    <review-carousel
+      :primary-category=current_category
+      :product-family=product_family
+    />
+    <div ref="pageBuilderSection"></div>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import productHandler from '../mixins/productHandler';
+import ReviewCarousel from './ReviewCarousel.vue';
 
 export default {
   mixins: [
     productHandler,
   ],
+
+  components: {
+    ReviewCarousel,
+  },
+
+  data() {
+    return {
+      current_category: '',
+      product_family: '',
+    }
+  },
 
   computed: {
     ...mapState({
@@ -31,6 +48,7 @@ export default {
         }
 
         let handle = newProduct.primary_category;
+        this.current_category = handle;
 
         if (handle === 'dining-chairs' || handle === 'lounge-chairs') {
           // the word at the beginning of short names is the family, which is the page handle for these categories

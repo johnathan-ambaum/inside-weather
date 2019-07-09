@@ -4,7 +4,13 @@ import { mapState, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as emptyHeart } from '@fortawesome/pro-light-svg-icons';
 import { faHeart as filledHeart } from '@fortawesome/pro-solid-svg-icons';
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import '../node_modules/swiper/dist/css/swiper.css';
+
 import BrowseWidget from './components/BrowseWidget.vue';
 import SearchResults from './components/SearchResults.vue';
 import ProductGrid from './components/ProductGrid.vue';
@@ -15,6 +21,9 @@ import ProductDetailSlider from './components/ProductDetailSlider.vue';
 import PageBuilderSection from './components/PageBuilderSection.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
 import SwatchBrowser from './components/SwatchBrowser.vue';
+import CategoryItem from './components/CategoryItem.vue';
+import FullReviews from './containers/FullReviews.vue';
+import ReviewCarousel from './components/ReviewCarousel.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
@@ -25,6 +34,8 @@ const bus = new Vue();
 Object.defineProperty(Vue.prototype, '$bus', { get() { return bus; } });
 
 library.add(emptyHeart, filledHeart);
+
+Vue.use(VueAwesomeSwiper);
 
 const app = new Vue({
   el: '#app',
@@ -40,7 +51,11 @@ const app = new Vue({
     PageBuilderSection,
     GlyphLoading,
     SwatchBrowser,
+    CategoryItem,
+    FullReviews,
+    ReviewCarousel,
     FontAwesomeIcon,
+    BootstrapVue,
   },
 
   store,

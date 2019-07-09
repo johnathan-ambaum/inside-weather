@@ -169,7 +169,7 @@ export default {
         [`SwatchPanel__Body--${this.type}`]: true,
         'single-row': this.sanitizedOptions.length === perRow,
         [`${this.group.optionImageSize}-swatches`]: true,
-        [`col-${this.group.mobileColumns}`]: true,
+        // [`col-${this.group.mobileColumns}`]: true,
       };
     },
   },
@@ -335,7 +335,7 @@ $swatch-margin: 5px;
     }
 
     &--hybrid {
-      max-width: 375px;
+      max-width: 375px !important;
 
       & > .SwatchPanelItem {
         align-items: flex-start;
@@ -351,7 +351,7 @@ $swatch-margin: 5px;
     }
 
     &--Finish {
-      max-width: 300px;
+      max-width: 300px !important;
 
       & > * {
         flex: 0 1 calc(#{percentage(1 / 3)} - #{$swatch-margin * 2 / 3});
@@ -378,7 +378,7 @@ $swatch-margin: 5px;
     &--checkbox {
       align-items: center;
       justify-content: flex-start;
-      max-width: 340px;
+      max-width: 340px !important;
     }
 
     &--Wide {

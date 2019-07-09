@@ -6,7 +6,7 @@
     <img
       v-if="showPlaceholder"
       :src="placeholderSrc"
-      :class="{ 'ResponsiveImage--Loading': showSpinner }"
+      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
       class="ResponsiveImage ResponsiveImage__Placeholder">
     <img
       v-if="src.length"
@@ -14,12 +14,12 @@
       :src="src"
       :srcset="srcset"
       :style="imageStyles"
-      :class="{ 'ResponsiveImage--Loading': showSpinner }"
+      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
       class="ResponsiveImage"
       @load="finishLoading">
     <transition name="fade">
       <glyph-loading
-        v-if="showSpinner"
+        v-if="showSpinner && sizes.length < 10"
         class="ResponsiveImage__Spinner"
       />
     </transition>
