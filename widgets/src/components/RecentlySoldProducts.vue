@@ -1,6 +1,6 @@
 <template>
-  <div class="SoldProducts --pd-t-130" ref="SoldProducts">
-    <div class="heading">
+  <div class="SoldProducts" ref="SoldProducts">
+    <div class="heading --pd-t-130">
       <heading-with-description>
         <h2>Recently Sold</h2>
         <p>Made-to-order furniture, shipped in days, because life is too short to wait.</p>

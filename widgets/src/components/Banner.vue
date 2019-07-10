@@ -61,6 +61,7 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .Banner {
   display: block;
   height: auto;

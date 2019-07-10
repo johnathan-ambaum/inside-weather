@@ -1,5 +1,6 @@
 <div id="app">
-  <banner-carousel></banner-carousel>
+  {% assign bannerContent = "{'items':[{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Sofas','url':'/pages/category-sofa'},{'image':' ','heading':'Create your custom climate.','description':'The Weather is now entirely up to you.','linkText':'Shop Armchair','url':'/pages/category-armchair'},{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Table','url':'/pages/category-table'}]}"%}
+  <banner-carousel :bannerContent="{{bannerContent}}"></banner-carousel>
   <div class="--custom-container">
     <category-list class="--pd-t-130 --pd-b-130"></category-list>
   </div>
