@@ -3,33 +3,32 @@
     class="Banner" 
     ref="Banner"
   >
-    <div class="heading">
-      <heading-with-description>
-        <h2>Get professional help</h2>
-        <p>First Class Service. I’m able to purchase exactly what I want without falling short of my dreams.</p>
-      </heading-with-description>
-    </div>
-    <link-button btnText="Send an sos" linkTo="./" stroke="white" />
     <div
       :class="bannerClass"
       class="Banner__wrapper"
       v-bind:style="{ backgroundImage: 'url(https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635)' }"
     >
       <div class="Banner__content">
-        <slot></slot>
+        <h2>Get professional help</h2>
+        <p>First Class Service. I’m able to purchase exactly what I want without falling short of my dreams.</p>
+        <link-button btnText="Send an sos" linkTo="./" stroke="white" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HeadingWithDescription from './HeadingWithDescription.vue'
 import LinkButton from './LinkButton.vue'
+import * as ScrollMagic from "scrollmagic"
+import { TimelineLite, TimelineMax, TweenMax} from "gsap"
+import $ from 'jquery'
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import gsap from 'scrollmagic'
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export default {
   components: {
-    HeadingWithDescription,
-    LinkButton,
+    LinkButton
   },
   props: {
     hasOverlay: {type: Boolean, default: true},
@@ -43,6 +42,18 @@ export default {
         'Banner--darkColor': this.fillColor === 'black'
       }
     }
+  },
+  mounted() {
+    const controller = new ScrollMagic.Controller();
+    const bannerTimeline = new TimelineLite()
+    bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
+      .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+    const bannerScene = new ScrollMagic.Scene({
+      triggerElement: '.ReviewCarouselWrapper .owl-item.active .Review__content',
+      reverse: false
+    }).setTween(bannerTimeline).addTo(controller);
   }
 }
 </script>

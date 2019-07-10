@@ -13,6 +13,13 @@
 </template>
 
 <script>
+import * as ScrollMagic from "scrollmagic"
+import { TimelineLite, TimelineMax, TweenMax} from "gsap"
+import $ from 'jquery'
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import gsap from 'scrollmagic'
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
+
 export default {
   data() {
     return {
@@ -34,6 +41,15 @@ export default {
         }
       ]   
     }
+  },
+  mounted() {
+    const controller = new ScrollMagic.Controller();
+    const pressTimeline = new TimelineLite()
+    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0})
+    const pressTimelineScene = new ScrollMagic.Scene({
+      triggerElement: '.Press',
+      reverse: false
+    }).setTween(pressTimeline).addTo(controller);
   }
 }
 </script>
@@ -66,6 +82,7 @@ export default {
           display: block;
           height: auto;
           margin: auto;
+          max-height: 25px;
           width: auto;
         }
       }

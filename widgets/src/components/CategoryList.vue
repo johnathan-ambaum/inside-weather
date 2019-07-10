@@ -23,6 +23,12 @@
 
 <script>
 import LinkButton from './LinkButton.vue'
+import * as ScrollMagic from "scrollmagic"
+import { TimelineLite, TimelineMax, TweenMax} from "gsap"
+import $ from 'jquery'
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import gsap from 'scrollmagic'
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export default {
   components: {
@@ -48,6 +54,15 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    // const controller = new ScrollMagic.Controller();
+    // const catTimeline = new TimelineLite()
+    // catTimeline.fromTo($('._category-lists'), 0.7, {opacity:0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut})
+    // const catTimelineSet = new ScrollMagic.Scene({
+    //   triggerElement: '.CategoryList',
+    //   reverse: false
+    // }).setTween(catTimeline).addTo(controller);
   }
 }
 </script>
