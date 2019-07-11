@@ -15,7 +15,7 @@
     >
       <div 
         class="CarouselBanner__items" 
-        v-for="items in bannerContents.items" 
+        v-for="items in bannerContentItems" 
         :key="items.$id"
       >
         <div 
@@ -52,20 +52,22 @@ import slider from './Slider.vue'
 import * as ScrollMagic from "scrollmagic"
 import { TimelineLite, TimelineMax, TweenMax} from "gsap"
 import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap"
 import gsap from 'scrollmagic'
 ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
+
 export default {
-  name: "banner",
   components: {
     slider
   },
   props: {
     bannerImage: String,
-    hasImage: {type: Boolean, default: false}
+    hasImage: {type: Boolean, default: false},
+    bannerContent: Object
   },
   data() {
     return {
+      bannerContentItems: this.$attrs.bannercontent.items,
       sliderProps: {
         items: 1,
         margin: 0,
@@ -75,31 +77,6 @@ export default {
         dots: true,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>']
-      },
-      bannerContents: {
-        items: [
-          {
-            image: '',
-            heading: 'Create your custom climate',
-            description: 'The Weather is now entirely up to you.',
-            linkText: 'Shop Sofas',
-            url:'/pages/category-sofa'
-          },
-          {
-            image: '',
-            heading: 'Create your custom climate.',
-            description: 'The Weather is now entirely up to you.',
-            linkText: 'Shop Armchair',
-            url:'/pages/category-armchair'
-          },
-          {
-            image: '',
-            heading: 'Create your custom climate',
-            description: 'The Weather is now entirely up to you.',
-            linkText: 'Shop Table',
-            url:'/pages/category-table'
-          }
-        ]
       }
     }
   },

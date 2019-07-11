@@ -4,7 +4,7 @@
       <ul class="_category-lists --clearfix">
         <li 
           class="category-list"
-          v-for="item in listItems"
+          v-for="item in categoryListItems"
           :key="item.id"
         >
           <img :src="item.image "/>
@@ -33,25 +33,12 @@ export default {
   components: {
     LinkButton
   },
+  props: {
+    listItems: Array
+  },
   data() {
     return {
-      listItems: [
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_1_livingrm.png?742906',
-          buttonText: 'Shop Living',
-          link: 'pages/category-sofa'
-        },
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_2_diningrm.png?742909',
-          buttonText: 'Shop Dining',
-          link: 'pages/category-dining-tables'
-        },
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_3_office.png?737551',
-          buttonText: 'Shop Office',
-          link: 'pages/category-lounge-chairs'
-        }
-      ]
+      categoryListItems: this.$attrs.listitems
     }
   },
   mounted() {
@@ -70,6 +57,7 @@ export default {
 @import '../scss/mixins';
 @import '../scss/variables';
 @import '../scss/base-layout';
+
 ._category-list-wrapper {
   ul {
     display: flex;
