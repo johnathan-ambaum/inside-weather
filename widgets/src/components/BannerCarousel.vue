@@ -49,12 +49,6 @@
 
 <script>
 import slider from './Slider.vue'
-import * as ScrollMagic from "scrollmagic"
-import { TimelineLite, TimelineMax, TweenMax} from "gsap"
-import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-import gsap from 'scrollmagic'
-ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export default {
   name: "banner",
@@ -66,42 +60,21 @@ export default {
     hasImage: {type: Boolean, default: false},
     bannerContent: Object
   },
-  data() {
+  data() {  
     return {
       bannerContentItems: this.$attrs.bannercontent.items,
       sliderProps: {
         items: 1,
         margin: 0,
-        loop: false,
+        loop: true,
         nav: true,
-        autoplay: false,
+        autoplay: true,
         dots: true,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>']
       }
     }
-  },
-  mounted() {
-    const controller = new ScrollMagic.Controller();
-
-    const bannerCarouselTimeline = new TimelineLite();
-    bannerCarouselTimeline.fromTo($('.CarouselBanner__image'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
-      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
-      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
-      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.75)
-      .call(function(){
-        $('.CarouselBanner .owl-dots button').each(function(i){
-          var row = $(this);
-          setTimeout(function() {
-            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 1)
-          }, 200 * i);
-        });
-      });
-    const bannerCarouselTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner',
-      reverse: false
-    }).setTween(bannerCarouselTimeline).addTo(controller);
-  }
+  } 
 }
 </script>
 
@@ -212,7 +185,6 @@ export default {
       .owl-dot {
         outline: none;
         box-shadow: none;
-        opacity: 0;
         span {
           background: transparent;
           border: 1px solid #ffffff;

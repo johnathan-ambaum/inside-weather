@@ -38,12 +38,6 @@
 
 <script>
 import HeadingWithDescription from './HeadingWithDescription.vue'
-import * as ScrollMagic from "scrollmagic"
-import { TimelineLite, TimelineMax, TweenMax} from "gsap"
-import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-import gsap from 'scrollmagic'
-ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export default {
   components: {
@@ -108,27 +102,6 @@ export default {
         }
       ]
     }
-  },
-  mounted() {
-    const controller = new ScrollMagic.Controller();
-    const productTimeline = new TimelineLite()
-      productTimeline.fromTo($('.SoldProducts .heading h2'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0})
-        .fromTo($('.SoldProducts .heading  p'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
-        .call(function(){
-          $('.RecentlySoldProducts .RecentlySoldProducts--column').each(function (i) {
-            var row = $(this).find('img');
-            setTimeout(function () {
-              TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0});
-              if($('.RecentlySoldProducts .RecentlySoldProducts--column').length === (i + 1)) {
-                $('.RecentlySoldProducts .RecentlySoldProducts--column').addClass('--animLoaded');
-              }
-            }, 200 * i)
-          });
-        })
-      const productScene = new ScrollMagic.Scene({
-        triggerElement: '.SoldProducts',
-        reverse: false
-      }).setTween(productTimeline).addTo(controller);
   }
 }
 </script>
@@ -136,41 +109,13 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 
-.grid--container {
-  display: grid;
-  grid-template-columns: repeat(var(--cells),1fr);
-  grid-auto-rows: minmax(max-content, var(--cellSize));
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 100%;
-  margin: auto;
-  
-  .column {
-    display: initial;
-    position: initial;
-    top: initial;
-    width: initial;
-    padding-left: initial;
-    margin: initial;
-    grid-row: auto / auto;
-  }
-}
 .RecentlySoldProducts {
   padding: 100px 0 0;
   .RecentlySoldProducts--column {
-    padding: 1.2px 0 0px 1px;
+    border: 0.001em solid rgba(32, 32, 32, 0.30);
     position: relative;
-    background: #FFFFFF;
-    pointer-events: none;
-    transition: all 0.3s ease-in-out;
-
-    &.--animLoaded {
-      background: rgba(32, 32, 32, 0.3);
-      pointer-events: all;
-    }
     figure {
       align-items: center;
-      background: #FFFFFF;
       display: flex;
       height: 100%;
       justify-content: center;
@@ -178,7 +123,6 @@ export default {
       img {
         display: block;
         margin: 0;
-        opacity: 0;
       }
     }
     .RecentlySoldProducts--overlayWrapper {
