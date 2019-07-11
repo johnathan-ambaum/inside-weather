@@ -15,7 +15,7 @@
     >
       <div 
         class="CarouselBanner__items" 
-        v-for="items in bannerContentItems" 
+        v-for="items in bannerContents.items" 
         :key="items.$id"
       >
         <div 
@@ -49,7 +49,12 @@
 
 <script>
 import slider from './Slider.vue'
-
+import * as ScrollMagic from "scrollmagic"
+import { TimelineLite, TimelineMax, TweenMax} from "gsap"
+import $ from 'jquery'
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import gsap from 'scrollmagic'
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 export default {
   name: "banner",
   components: {
@@ -57,31 +62,73 @@ export default {
   },
   props: {
     bannerImage: String,
-    hasImage: {type: Boolean, default: false},
-    bannerContent: Object
+    hasImage: {type: Boolean, default: false}
   },
-  data() {  
+  data() {
     return {
-      bannerContentItems: this.$attrs.bannercontent.items,
       sliderProps: {
         items: 1,
         margin: 0,
-        loop: true,
+        loop: false,
         nav: true,
-        autoplay: true,
+        autoplay: false,
         dots: true,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>']
+      },
+      bannerContents: {
+        items: [
+          {
+            image: '',
+            heading: 'Create your custom climate',
+            description: 'The Weather is now entirely up to you.',
+            linkText: 'Shop Sofas',
+            url:'/pages/category-sofa'
+          },
+          {
+            image: '',
+            heading: 'Create your custom climate.',
+            description: 'The Weather is now entirely up to you.',
+            linkText: 'Shop Armchair',
+            url:'/pages/category-armchair'
+          },
+          {
+            image: '',
+            heading: 'Create your custom climate',
+            description: 'The Weather is now entirely up to you.',
+            linkText: 'Shop Table',
+            url:'/pages/category-table'
+          }
+        ]
       }
     }
-  } 
+  },
+  mounted() {
+    const controller = new ScrollMagic.Controller();
+    const bannerCarouselTimeline = new TimelineLite();
+    bannerCarouselTimeline.fromTo($('.CarouselBanner__image'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
+      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
+      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
+      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.75)
+      .call(function(){
+        $('.CarouselBanner .owl-dots button').each(function(i){
+          var row = $(this);
+          setTimeout(function() {
+            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.8)
+          }, 200 * i);
+        });
+      });
+    const bannerCarouselTimelineSet = new ScrollMagic.Scene({
+      triggerElement: '.CarouselBanner',
+      reverse: false
+    }).setTween(bannerCarouselTimeline).addTo(controller);
+  }
 }
 </script>
 
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .CarouselBanner {
   position: relative;
   .CarouselBanner__items {
@@ -185,6 +232,7 @@ export default {
       .owl-dot {
         outline: none;
         box-shadow: none;
+        opacity: 0;
         span {
           background: transparent;
           border: 1px solid #ffffff;
@@ -204,7 +252,6 @@ export default {
     }
   }
 }
-
 .owl-theme.owl-carousel {
   .owl-nav {
     div {
@@ -309,5 +356,3 @@ export default {
   }
 }
 </style>
-
-

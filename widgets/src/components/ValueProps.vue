@@ -36,10 +36,39 @@
   </div>
 </template>
 
+<script>
+import * as ScrollMagic from "scrollmagic"
+import { TimelineLite, TimelineMax, TweenMax} from "gsap"
+import $ from 'jquery'
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import gsap from 'scrollmagic'
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax) 
+export default {
+  mounted() {
+    const controller = new ScrollMagic.Controller();
+    const valuePropsTimeline = new TimelineLite()
+    valuePropsTimeline.fromTo($('.ValueProps .image_wrapper'), 0.7, {opacity: 0, y: 20, ease: Power2.easeInOut}, {opacity: 1, y: 0})
+      .fromTo($('.ValueProps .descriptions h2'), 0.9, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
+      .call(function () {
+        $('.ValueProps .descriptions .details .point').each(function (i){
+          var row = $(this);
+          setTimeout(function() {
+            TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 1);
+          }, 200 * i);
+        });
+      })
+    const valuePropsTimelineScene = new ScrollMagic.Scene({
+      triggerElement: '.CategoryList ._button-wrapper',
+      reverse: false
+    }).setTween(valuePropsTimeline).addTo(controller);
+  }
+}
+</script>
+
+
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .ValuePropsWrapper {
   background: transparent;
   margin: 45px 0 0;
@@ -64,14 +93,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-end;
-
     .image_wrapper {
       flex-basis: 55%;
       overflow: hidden;
       position: relative;
       height: 0;
       padding-bottom: 39%;
-
       figure {
         position: absolute;
         left: 0;
@@ -82,13 +109,11 @@
         @include block(100%);
         @include transition();
         @include translate(0,100%);
-
         img {
-          display: block;
           height: 100%;
+          display: block;
           object-fit: cover;
         }
-        
         &.default {
           @include translate(0,0);
           top: auto;
@@ -119,6 +144,7 @@
       }
       .details {
         .point {
+          opacity: 0;
           &:not(:last-child) {
             margin: 0 0 30px;
           }
@@ -167,12 +193,10 @@
             margin: 0;
             padding: 0px 0 0px 52px;
             @include fonts(14px,#202020,2,0.022em);
-
           }
         }
       }
     }
-
   }
 }
 </style>
