@@ -10,6 +10,7 @@
         :dots="dots"
         :smartSpeed="smartSpeed"
         :navText="navText"
+        @changed="animateDots($event)"
       >
         <slot></slot>
       </carousel>
@@ -33,6 +34,32 @@ export default {
     dots: {type: Boolean, default: true},
     smartSpeed: {type: Number, default: 800},
     navText: Array
-  }
+  },
+  methods: {
+    animateDots(e) {
+      var home_totitems,
+          currentpos = 1,
+          banner_index,
+          homecurrent = 1,
+          target_index = e.property.value - 1,
+          currentEventTarget = e.currentTarget;
+
+      banner_index = target_index;
+
+      if (banner_index > home_totitems) {
+        banner_index = 1;
+      }
+
+      $(currentEventTarget).find('.owl-dots').attr('class', 'owl-dots').addClass("indi_" + banner_index);
+
+      if (banner_index > currentpos) {
+        $(currentEventTarget).find('.owl-dots').attr('data-dir','navleft');
+      }
+      else {
+        $(currentEventTarget).find('.owl-dots').attr('data-dir','navright');
+      }
+      currentpos = banner_index;
+    }
+  },
 }
 </script>
