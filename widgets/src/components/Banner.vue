@@ -6,7 +6,7 @@
     <div
       :class="bannerClass"
       class="Banner__wrapper"
-      v-bind:style="{ backgroundImage: 'url(https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635)' }"
+      v-bind:style="{ backgroundImage: 'url(' + bannerImageUrl + ')' }"
     >
       <div class="Banner__content">
         <h2>Get professional help</h2>
@@ -25,6 +25,7 @@ import $ from 'jquery'
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 import gsap from 'scrollmagic'
 ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
+
 export default {
   components: {
     LinkButton
@@ -34,7 +35,12 @@ export default {
     fillColor: {type: String, default: 'white'},
     bannerImage: String
   },
-  computed: {
+  data() {
+    return {
+      bannerImageUrl: this.$attrs.bannerimage
+    }
+  },
+  methods: {
     bannerClass() {
       return {
         'Banner--hideOverlay': !this.hasOverlay,
@@ -44,7 +50,7 @@ export default {
   },
   mounted() {
     const controller = new ScrollMagic.Controller();
-    const bannerTimeline = new TimelineLite()
+    const bannerTimeline = new TimelineLite();
     bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
       .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
       .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
@@ -60,6 +66,7 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .Banner {
   display: block;
   height: auto;
