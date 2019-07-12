@@ -175,22 +175,27 @@ export default {
     background: #FFFFFF;
     pointer-events: none;
     transition: all 0.3s ease-in-out;
-    &.--animLoaded {
-      background: rgba(32, 32, 32, 0.3);
-      pointer-events: all;
-    }
     .more-info {
       background-size: cover;
       background-repeat: no-repeat;
       background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/gray_plus.png?1098232');
-      height: 25px;
+      height: 30px;
       position: absolute;
       right: 12.5px;
       top: 11px;
-      width: 25px;
+      opacity: 0;
+      width: 30px;
       z-index: 9;
       &.close {
         background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/icon-cross_2bbf5dcb-d61e-44c4-8951-b50402a548a0.png?1103187');
+        transform: scale(1.5);
+      }
+    }
+    &.--animLoaded {
+      background: rgba(32, 32, 32, 0.3);
+      pointer-events: all;
+      .more-info {
+        opacity: 1;
       }
     }
     figure {
@@ -223,7 +228,7 @@ export default {
       @include at-query('max-width: 1024px') {
         display: none;
         &.show {
-          display: bloc
+          display: block;
         }
       }
       >div {
@@ -235,6 +240,7 @@ export default {
         top: 50%;
         left: 0;
         right: 0;
+        padding: 5px;
         transform: translate(0,-50%);
         z-index: 3;
         span {

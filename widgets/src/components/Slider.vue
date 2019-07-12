@@ -50,9 +50,11 @@ export default {
           currentpos = 1,
           banner_index,
           homecurrent = 1,
-          target_index = e.property.value + 1
+          target_index = e.page.index + 1
 
       banner_index = target_index;
+      console.log(e);
+      home_totitems = $(currentEventTarget).find('.owl-dots .owl-dot').length;
       if (banner_index > home_totitems) {
         banner_index = 1;
       }

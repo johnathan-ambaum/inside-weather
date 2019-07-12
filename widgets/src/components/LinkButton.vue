@@ -107,6 +107,19 @@ export default {
     line-height: 38px;
     width: 200px;
   }
+  @include at-query('max-width: 1024px') {
+    &::after {
+      display: none;
+    }
+    &:hover {
+      color: #202020;
+    }
+    &.linkButton--white {
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
 }
 
 ._button-disabled {

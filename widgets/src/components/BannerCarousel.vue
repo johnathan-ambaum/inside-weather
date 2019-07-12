@@ -47,10 +47,10 @@
               {{items.linkText}}
             </a>
           </div>
-          <span class="down-arrow-xs"></span>
         </div>
       </div>
     </slider>
+    <span class="down-arrow-xs"></span>
   </div>
 </template>
 
@@ -253,6 +253,7 @@ export default {
     -ms-animation: mouseWheel 0.9s infinite linear;
     -o-animation: mouseWheel 0.9s infinite linear;
     animation: mouseWheel 0.9s infinite linear;
+    z-index: 8;
 
     @include at-query('min-width: 768px') {
       display: none;

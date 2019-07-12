@@ -197,6 +197,7 @@ export default {
     border-bottom: 1px solid #212121;
     display: inline-block;
     font-weight: 400;
+    font-family: $font-stack-avalon;
     margin: 30px 0 0 15px;
     position: relative;
     @include fonts(18px,#212121,1.6,0.05em);
@@ -317,9 +318,11 @@ export default {
     }
     .owl-dots {
       position: absolute;
-      right: 0;
+      right: calc(48% / 2);
       bottom: -40px;
-      width: 565px;
+      &::after {
+        background-color: #000000;
+      }
       .owl-dot {
         outline: none;
         box-shadow: none;

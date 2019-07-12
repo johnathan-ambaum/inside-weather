@@ -104,6 +104,7 @@ export default {
       h2 {
         color: #ffffff;
         display: block;
+        font-family: $font-stack-avalon;
         font-size: 34px;
         font-weight: 400;
         line-height: 1.2;
@@ -113,6 +114,7 @@ export default {
       p {
         color: #ffffff;
         display: block;
+        font-family: $font-stack-avalon;
         font-size: 14px;
         letter-spacing: 0.035em;
         line-height: 1.57;
@@ -138,6 +140,30 @@ export default {
         p {
           font-size: 13px;
           margin: 0 0 30px
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 992px') {
+    .Banner__wrapper {
+      .Banner__content {
+        padding: 48px 15px 35px;
+        h2 {
+          font-size: 24px;
+          margin: 0 0 6px;
+        }
+        p {
+          font-size: 13px;
+          margin: 0 0 37px
+        }
+        a {
+          height: auto;
+          border: none;
+          border-bottom: 1px solid #ffffff;
+          font-size: 15px;
+          letter-spacing: 0.12em;
+          line-height: 1.2;
+          width: auto;
         }
       }
     }

@@ -104,9 +104,12 @@ export default {
   .owl-theme {
     .owl-dots {
       position: absolute;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: -50px;
+      &::after {
+        background: #000000;
+      }
       .owl-dot {
         outline: none;
         box-shadow: none;
