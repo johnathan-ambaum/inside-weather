@@ -56,12 +56,6 @@
 
 <script>
 import slider from './Slider.vue'
-import * as ScrollMagic from "scrollmagic"
-import { TimelineLite, TimelineMax, TweenMax} from "gsap"
-import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap"
-import gsap from 'scrollmagic'
-ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export default {
   components: {
@@ -78,7 +72,7 @@ export default {
       sliderProps: {
         items: 1,
         margin: 0,
-        loop: false,
+        loop: true,
         nav: true,
         autoplay: false,
         dots: true,
@@ -87,26 +81,6 @@ export default {
         responsive: {0:{nav:false},1025:{nav:true}}
       }
     }
-  },
-  mounted() {
-    const controller = new ScrollMagic.Controller();
-    const bannerCarouselTimeline = new TimelineLite();
-    bannerCarouselTimeline.fromTo($('.CarouselBanner__image'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
-      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
-      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
-      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.75)
-      .call(function(){
-        $('.CarouselBanner .owl-dots button').each(function(i){
-          var row = $(this);
-          setTimeout(function() {
-            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.8)
-          }, 200 * i);
-        });
-      });
-    const bannerCarouselTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner',
-      reverse: false
-    }).setTween(bannerCarouselTimeline).addTo(controller);
   }
 }
 </script>
@@ -343,7 +317,22 @@ export default {
       }
     }
   }
-
+  .owl-theme.owl-carousel {
+    .owl-dots {
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+  &.--animLoaded {
+    .owl-theme.owl-carousel {
+    .owl-dots {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+  }
 }
 .owl-theme.owl-carousel {
   .owl-nav {

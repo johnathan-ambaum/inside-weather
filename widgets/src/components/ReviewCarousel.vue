@@ -58,12 +58,6 @@
 
 <script>
 import Slider from './Slider.vue' 
-import * as ScrollMagic from "scrollmagic"
-import { TimelineLite, TimelineMax, TweenMax} from "gsap"
-import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-import gsap from 'scrollmagic'
-ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax) 
 export default {
   components: {
     Slider
@@ -107,16 +101,6 @@ export default {
         responsive: {0:{nav:false, dots: false},1025:{nav:true, dots: true}}
       }
     }
-  },
-  mounted() {
-    const controller = new ScrollMagic.Controller();
-    const ReviewCarouselTimeline = new TimelineLite()
-    ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.7,{opacity: 0, y: 20}, {opacity: 1, y: 0})
-      .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
-    const ReviewCarouselTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.ReviewCarousel',
-      reverse: false
-    }).setTween(ReviewCarouselTimeline).addTo(controller);
   }
 }
 </script>

@@ -75,6 +75,99 @@
         count = 0;
       }
     });
+
+    const controller = new ScrollMagic.Controller();
+
+    const bannerCarouselTimeline = new TimelineLite();
+    bannerCarouselTimeline.fromTo($('.CarouselBanner__image'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
+      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
+      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
+      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.75)
+      .call(function(){
+        $('.CarouselBanner .owl-dots button').each(function(i){
+          var row = $(this);
+          setTimeout(function() {
+            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.8)
+            if($('.CarouselBanner .owl-dots button').length === (i + 1)) {
+              $('.CarouselBanner').addClass('--animLoaded');
+            }
+          }, 200 * i);
+        });
+      });
+    const bannerCarouselTimelineSet = new ScrollMagic.Scene({
+      triggerElement: '.CarouselBanner',
+      reverse: false
+    }).setTween(bannerCarouselTimeline).addTo(controller);
+
+    const catTimeline = new TimelineLite()
+    catTimeline.fromTo($('._category-lists'), 0.7, {opacity:0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut})
+    const catTimelineSet = new ScrollMagic.Scene({
+      triggerElement: '.CategoryList',  
+      reverse: false
+    }).setTween(catTimeline).addTo(controller);
+
+    const valuePropsTimeline = new TimelineLite()
+    valuePropsTimeline.fromTo($('.ValueProps .image_wrapper'), 0.7, {opacity: 0, y: 20, ease: Power2.easeInOut}, {opacity: 1, y: 0})
+      .fromTo($('.ValueProps .descriptions h2'), 0.9, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 0.5)
+      .call(function () {
+        $('.ValueProps .descriptions .details .point').each(function (i){
+          var row = $(this);
+          setTimeout(function() {
+            TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power2.easeInOut}, 1);
+          }, 200 * i);
+        });
+      })
+    const valuePropsTimelineScene = new ScrollMagic.Scene({
+      triggerElement: '.CategoryList ._button-wrapper',
+      reverse: false
+    }).setTween(valuePropsTimeline).addTo(controller);
+
+    const pressTimeline = new TimelineLite()
+    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0})
+    const pressTimelineScene = new ScrollMagic.Scene({
+      triggerElement: '.Press',
+      reverse: false
+    }).setTween(pressTimeline).addTo(controller);
+
+    const ReviewCarouselTimeline = new TimelineLite()
+    ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.7,{opacity: 0, y: 20}, {opacity: 1, y: 0})
+      .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+    const ReviewCarouselTimelineScene = new ScrollMagic.Scene({
+      triggerElement: '.ReviewCarousel',
+      reverse: false
+    }).setTween(ReviewCarouselTimeline).addTo(controller);
+
+    const bannerTimeline = new TimelineLite();
+    bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1})
+      .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+    const bannerScene = new ScrollMagic.Scene({
+      triggerElement: '.ReviewCarouselWrapper .owl-item.active .Review__content',
+      reverse: false
+    }).setTween(bannerTimeline).addTo(controller);
+
+    const productTimeline = new TimelineLite()
+    productTimeline.fromTo($('.SoldProducts .heading h2'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0})
+      .fromTo($('.SoldProducts .heading  p'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
+      .call(function(){
+        $('.RecentlySoldProducts .RecentlySoldProducts--column').each(function (i) {
+          var row = $(this).find('img');
+          setTimeout(function () {
+            TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0});
+            if($('.RecentlySoldProducts .RecentlySoldProducts--column').length === (i + 1)) {
+              $('.RecentlySoldProducts .RecentlySoldProducts--column').addClass('--animLoaded');
+            }
+          }, 200 * i)
+        });
+      })
+    const productScene = new ScrollMagic.Scene({
+      triggerElement: '.SoldProducts',
+      reverse: false
+    }).setTween(productTimeline).addTo(controller);
+
+
+
   });
   function toggleSlide(item) {
     jQuery(item).slideToggle();

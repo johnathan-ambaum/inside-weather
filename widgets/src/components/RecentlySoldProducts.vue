@@ -42,12 +42,6 @@
 
 <script>
 import HeadingWithDescription from './HeadingWithDescription.vue'
-import * as ScrollMagic from "scrollmagic"
-import { TimelineLite, TimelineMax, TweenMax} from "gsap"
-import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap"
-import gsap from 'scrollmagic'
-ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export default {
   components: {
@@ -119,27 +113,6 @@ export default {
       $(e.target).toggleClass('close')
       $(targetElement).find('.RecentlySoldProducts--overlayWrapper').toggleClass('show')
     }
-  },
-  mounted() {
-    const controller = new ScrollMagic.Controller();
-    const productTimeline = new TimelineLite()
-      productTimeline.fromTo($('.SoldProducts .heading h2'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0})
-        .fromTo($('.SoldProducts .heading  p'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.5)
-        .call(function(){
-          $('.RecentlySoldProducts .RecentlySoldProducts--column').each(function (i) {
-            var row = $(this).find('img');
-            setTimeout(function () {
-              TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0});
-              if($('.RecentlySoldProducts .RecentlySoldProducts--column').length === (i + 1)) {
-                $('.RecentlySoldProducts .RecentlySoldProducts--column').addClass('--animLoaded');
-              }
-            }, 200 * i)
-          });
-        })
-      const productScene = new ScrollMagic.Scene({
-        triggerElement: '.SoldProducts',
-        reverse: false
-      }).setTween(productTimeline).addTo(controller);
   }
 }
 </script>
@@ -170,7 +143,7 @@ export default {
 .RecentlySoldProducts {
   padding: 100px 0 0;
   .RecentlySoldProducts--column {
-    padding: 1.2px 0 0px 1px;
+    padding: 1.3px 0 0px 1.3px;
     position: relative;
     background: #FFFFFF;
     pointer-events: none;
@@ -229,6 +202,9 @@ export default {
         display: none;
         &.show {
           display: block;
+          opacity: 1;
+          visibility: visible;
+          pointer-events: all;
         }
       }
       >div {
@@ -358,6 +334,14 @@ export default {
     }
   }
   @include at-query('max-width: 767px') {
+    .RecentlySoldProducts--column figure {
+      min-height: 270px;
+    }
+  }
+  @include at-query('max-width: 767px') {
+    .RecentlySoldProducts--column figure {
+      min-height: 225px;
+    }
     .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-6, .RecentlySoldProducts--column-7{
       grid-column-end: span 21;
     }
