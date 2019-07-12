@@ -267,5 +267,17 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 640px') {
+    .content {
+      .descriptions {
+        h2 {
+          font-size: 25px;
+        }
+        p {
+          padding: 14px 0 0 52px;
+        }
+      }
+    }
+  }
 }
 </style>

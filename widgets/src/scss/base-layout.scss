@@ -52,7 +52,7 @@ html, body {
 .--pd-t-130 {
 
   @include at-query('max-width: 767px') {  
-    padding-top: 40px;
+    padding-top: 50px;
   }
   @include at-query('min-width: 768px') {  
     padding-top: 70px;
@@ -68,7 +68,7 @@ html, body {
 .--pd-b-130 {
 
   @include at-query('max-width: 767px') {  
-    padding-bottom: 40px;
+    padding-bottom: 50px;
   }
   @include at-query('min-width: 768px') {  
     padding-bottom: 70px;

@@ -101,7 +101,7 @@ export default {
         margin: 10,
         loop: true,
         nav: true,
-        autoplay: true,
+        autoplay: false,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
         responsive: {0:{nav:false, dots: false},1025:{nav:true, dots: true}}
@@ -277,7 +277,20 @@ export default {
       overflow: hidden;
       .owl-stage-outer {
         overflow: visible;
+        .owl-item{
+          transition: opacity 0.3 ease-in-out;
+          &:not(.active) {
+            opacity: 0.5;
+          }
+        }
       }
+    }
+  }
+  @include at-query('max-width: 767px') {
+    width: auto;
+    margin-right: -15px;
+    .owl-carousel {
+      padding: 0 55px 0 0;
     }
   }
 }

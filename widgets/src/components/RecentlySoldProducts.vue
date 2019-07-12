@@ -319,5 +319,39 @@ export default {
       grid-row: 4/span 1;
     }
   }
+  @include at-query('max-width: 767px') {
+    .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-6, .RecentlySoldProducts--column-7{
+      grid-column-end: span 21;
+    }
+    .RecentlySoldProducts--column-1 {
+      grid-column-start: 1;
+      grid-row: 1 / auto;
+    }
+    .RecentlySoldProducts--column-2 {
+      grid-column-start: 22;
+      grid-row: 1 / auto;
+    }
+    .RecentlySoldProducts--column-3, .RecentlySoldProducts--column-8, .RecentlySoldProducts--column-9{
+      display: none;
+    }
+    .RecentlySoldProducts--column-4 {
+      grid-column-start: 1;
+      grid-column-end: -1;
+      grid-row: 2/span 2;
+    }
+    .RecentlySoldProducts--column-5 {
+      grid-column-start: 1;
+      grid-column-end: -1;
+      grid-row: 5/span 2;
+    }
+    .RecentlySoldProducts--column-6 {
+      grid-column-start: 1;
+      grid-row: 4/span 1;
+    }
+    .RecentlySoldProducts--column-7 {
+      grid-column-start: 22;
+      grid-column-end: -1;
+    }
+  }
 }
 </style>

@@ -11,6 +11,10 @@
         :smartSpeed="smartSpeed"
         :navText="navText"
         :responsive="responsive"
+        :mouseDrag="mouseDrag"
+        :touchDrag="touchDrag"
+        :pullDrag="pullDrag"
+
         @changed="animateDots($event)"
       >
         <slot></slot>
@@ -35,7 +39,10 @@ export default {
     dots: {type: Boolean, default: true},
     smartSpeed: {type: Number, default: 800},
     navText: Array,
-    responsive: Object
+    responsive: Object,
+    mouseDrag: {type: Boolean, default: true},
+    touchDrag: {type: Boolean, default: true},
+    pullDrag: {type: Boolean, default: true}
   },
   methods: {
     animateDots(e) {

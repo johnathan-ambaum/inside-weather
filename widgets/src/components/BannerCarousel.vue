@@ -2,6 +2,7 @@
   <div 
     class="CarouselBanner"
     ref="CarouselBanner"
+    :class="[hasImage ? 'imageContain' : ' ']"
   >
     <slider 
       :items="sliderProps.items"
@@ -36,12 +37,17 @@
           <p>
             {{items.description}}
           </p>
-          <a 
-            :href="items.url" 
-            class="--caps"
+          <div
+            class="CarouselBannerAction"
           >
-            {{items.linkText}}
-          </a>
+            <a 
+              :href="items.url" 
+              class="--caps"
+            >
+              {{items.linkText}}
+            </a>
+          </div>
+          <span class="down-arrow-xs"></span>
         </div>
       </div>
     </slider>
@@ -230,6 +236,45 @@ export default {
       }
     }
   }
+  .down-arrow-xs {
+    border-bottom: 3px solid #ffffff;
+    border-left: 3px solid #ffffff;
+    display: block;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 45px;
+    margin: 0 auto;
+    transform: rotate(-45deg);
+    width: 20px;
+    -webkit-animation: mouseWheel 0.9s infinite linear;
+    -moz-animation: mouseWheel 0.9s infinite linear;
+    -ms-animation: mouseWheel 0.9s infinite linear;
+    -o-animation: mouseWheel 0.9s infinite linear;
+    animation: mouseWheel 0.9s infinite linear;
+
+    @include at-query('min-width: 768px') {
+      display: none;
+    }
+  }
+  @keyframes mouseWheel {
+    0% {
+      transform: translateY(0) rotate(-45deg);
+    }
+    50% {
+      transform: translateY(10px) rotate(-45deg);
+    }
+    100% {
+      transform: translateY(25px) rotate(-45deg);
+    }
+  }
+  &.imageContain {
+    .down-arrow-xs {
+      display: none;
+    }
+  }
+
   @include at-query('max-width: 1280px') {
     .CarouselBanner__items {
       .CarouselBanner__content h2 {
@@ -254,6 +299,47 @@ export default {
   @include at-query('max-width: 991px') {
     .CarouselBanner__items .CarouselBanner__image {
       height: calc(100vh - 102px);
+    }
+  }
+  @include at-query('max-width: 767px') {
+    .owl-theme .owl-dots {
+      bottom: 27px;
+    }
+    .CarouselBanner__items {
+      .CarouselBanner__content {
+        height: 100%;
+        transform: none;
+        top: 0;
+        padding: 45px 15px 0;
+        h2 {
+          font-size: 34px;
+        }
+        a {
+          font-weight: 400;
+        }
+      }
+    }
+    &:not(.imageContain) {
+      .CarouselBanner__items {
+        .CarouselBanner__content {
+          .CarouselBannerAction {
+            position: absolute;
+            bottom: 180px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            text-align: center;
+          }
+        }
+      }
+      .owl-theme .owl-dots {
+        bottom: 95px;
+        .owl-dot {
+          span {
+            border: 2px solid #ffffff;
+          }
+        }
+      }
     }
   }
 
@@ -370,6 +456,11 @@ export default {
         height: 17px;
         width: 17px;
       }
+    }
+  }
+  @include at-query('max-width: 1204px') {
+    .owl-nav {
+      display: none;
     }
   }
 }
