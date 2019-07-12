@@ -14,6 +14,14 @@ ul, ol, figure {
 li {
   list-style: none;
 }
+html, body {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  min-width: 320px;
+  overflow: hidden;
+  overflow-y: auto;
+}
 
 //****Custom container**//
 .--custom-container {
@@ -40,20 +48,68 @@ li {
   }
 }
 
+
 .--pd-t-130 {
-  padding-top: 130px;
+
+  @include at-query('max-width: 767px') {  
+    padding-top: 40px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-top: 70px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-top: 100px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-top: 130px;
+  }
 }
 
 .--pd-b-130 {
-  padding-bottom: 130px;
+
+  @include at-query('max-width: 767px') {  
+    padding-bottom: 40px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-bottom: 70px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-bottom: 100px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-bottom: 130px;
+  }
 }
 
 .--pd-t-100 {
-  padding-top: 100px;
+  
+  @include at-query('max-width: 767px') {  
+    padding-top: 15px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-top: 40px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-top: 70px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-top: 100px;
+  }
 }
 
 .--pd-b-100 {
-  padding-bottom: 100px;
+  @include at-query('max-width: 767px') {  
+    padding-bottom: 15px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-bottom: 40px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-bottom: 70px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-bottom: 100px;
+  }
 }
 
 .--clearfix {

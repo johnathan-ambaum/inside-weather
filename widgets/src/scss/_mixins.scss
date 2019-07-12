@@ -1,12 +1,12 @@
 @mixin at-query($size) {
   @media only screen and ($size) {
-    @content
+    @content;
   }
 }
 
 @mixin supports-grid() {
   @supports (grid-gap: 3rem) {
-    @content
+    @content;
   }
 }
 

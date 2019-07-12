@@ -127,5 +127,20 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 1024px') {
+    .Banner__wrapper {
+      .Banner__content {
+        padding: 80px 0;
+        h2 {
+          font-size: 25px;
+          margin: 0 0 13px;
+        }
+        p {
+          font-size: 13px;
+          margin: 0 0 30px
+        }
+      }
+    }
+  }
 }
 </style>

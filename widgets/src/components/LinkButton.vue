@@ -101,6 +101,12 @@ export default {
       display: none;
     }
   }
+  @include at-query('max-width: 1199px') {
+    font-size: 13px;
+    height: 40px;
+    line-height: 38px;
+    width: 200px;
+  }
 }
 
 ._button-disabled {

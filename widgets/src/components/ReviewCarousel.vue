@@ -11,6 +11,7 @@
       :autoplay="sliderProps.autoplay"
       :dots="sliderProps.dots"
       :navText="sliderProps.navText"
+      :responsive="sliderProps.responsive"
     >
       <div 
         class="Review__items"
@@ -45,7 +46,13 @@
           </figure>
         </div>
       </div>
-    </slider>  
+    </slider>
+    <a 
+      href="./" 
+      class="--caps read-all-review-sm"
+    >
+      Read All Reviews
+    </a>  
   </div>
 </template>
 
@@ -94,9 +101,10 @@ export default {
         margin: 10,
         loop: true,
         nav: true,
-        autoplay: false,
+        autoplay: true,
         dots: true,
-        navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>']
+        navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
+        responsive: {0:{nav:false, dots: false},1025:{nav:true, dots: true}}
       }
     }
   },
@@ -185,6 +193,93 @@ export default {
       }
     }
   }
+  .read-all-review-sm {
+    border-bottom: 1px solid #212121;
+    display: inline-block;
+    font-weight: 400;
+    margin: 30px 0 0 15px;
+    position: relative;
+    @include fonts(18px,#212121,1.6,0.05em);
+    @include at-query('min-width: 992px') {
+      display: none;
+    }
+  }
+
+  @include at-query('max-width: 1280px') {
+    .Review__items {
+      justify-content: center;
+      .Review__content {
+        flex-basis: 45%;
+        padding-right: 25px;
+        h5 {
+          font-size: 20px;
+          margin: 0 0 20px;
+        }
+        p {
+          font-size: 15px;
+          margin: 0 0 20px;
+        }
+        .Review__author {
+          margin: 0 0 20px;
+          span {
+            font-size: 15px;
+          }
+        }
+        a {
+          font-size: 17px;
+        }
+      }
+      .Review__image {
+        flex-basis: 45%;
+      }
+    }
+    .Review__rating {
+      margin: 0 0 20px;
+      figure {
+        margin-right: 8px;
+      }
+    }
+  }
+  @include at-query('max-width: 1199px') {
+    .Review__items {
+      .Review__content {
+        flex-basis: 40%;
+      }
+      .Review__image {
+        flex-basis: 52%;
+      }
+    }
+  }
+  @include at-query('max-width: 991px') {
+    .Review__items {
+      flex-direction: column-reverse;
+      flex-wrap: wrap;
+      .Review__image {
+        flex-basis: 100%;
+        width: 100%;
+        figure {
+          img {
+            margin: 0 auto 0 0;
+          }
+        }
+      }
+      .Review__content {
+        flex-basis: 100%;
+        padding: 25px 35px 0 15px;
+        width: 100%;
+        a {
+          display: none;
+        }
+      }
+    }
+    .owl-carousel {
+      padding: 0 100px 0 0;
+      overflow: hidden;
+      .owl-stage-outer {
+        overflow: visible;
+      }
+    }
+  }
 }
 .ReviewCarouselWrapper {
   padding: 0 0 117px;
@@ -246,6 +341,16 @@ export default {
           }
         }
       }
+    }
+  }
+  @include at-query('max-width: 1274px') {
+    .owl-theme .owl-nav {
+      left: calc((1140px - 100vw) / 2);
+    }
+  }
+  @include at-query('max-width: 1199px') {
+    .owl-theme .owl-nav {
+      left: calc((932px - 100vw) / 2);
     }
   }
 }

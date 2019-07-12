@@ -75,5 +75,13 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 1199px') {
+    ul {
+      margin: 0 -15px;
+      li {
+        padding: 0 15px;
+      }
+    }
+  }
 }
 </style>

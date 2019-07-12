@@ -10,6 +10,7 @@
         :dots="dots"
         :smartSpeed="smartSpeed"
         :navText="navText"
+        :responsive="responsive"
       >
         <slot></slot>
       </carousel>
@@ -32,7 +33,8 @@ export default {
     autoplay: {type: Boolean, default: false},
     dots: {type: Boolean, default: true},
     smartSpeed: {type: Number, default: 800},
-    navText: Array
+    navText: Array,
+    responsive: Object
   }
 }
 </script>

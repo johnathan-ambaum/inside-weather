@@ -198,5 +198,74 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 1280px') {
+    .content {
+      .image_wrapper {
+        flex-basis: 50%;
+      }
+      .descriptions {
+        flex-basis: 50%;
+        padding-left: 100px;
+
+        h2 {
+          font-size: 34px;
+        }
+        .details {
+          .point {
+            h3 {
+              font-size: 16px;
+            }
+            p {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+      
+    }
+  }
+  @include at-query('max-width: 1199px') {
+    .content {
+      .image_wrapper {
+        padding-bottom: 42.5%;
+      }
+
+      .descriptions {
+        padding-left: 75px;
+        h2 {
+          font-size: 28px;
+        }
+      }
+    }
+    .content .descriptions .details .point:not(:last-child) {
+      margin: 0 0 15px;
+    }
+  }
+  @include at-query('max-width: 991px') {
+    .content {
+      flex-wrap: wrap;
+      .image_wrapper {
+        flex-basis: 100%;
+        padding-bottom: 64%;
+        figure {
+          img {
+            margin: 0 auto;
+          }
+        }
+      }
+      .descriptions {
+        flex-basis: 100%;
+        padding: 15px 0 0;
+
+        h2 {
+          font-size: 35px;
+          font-weight: 400;
+          padding: 35px 0;
+          position: static;
+
+        }
+      }
+    }
+  }
 }
 </style>

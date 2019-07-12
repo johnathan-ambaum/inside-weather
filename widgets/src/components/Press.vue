@@ -24,12 +24,12 @@ export default {
     return {
       PressList: [
         {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_domino_2x_788a469b-7ccf-4ec6-a2eb-6b46463c92bb.png?751631',
-          description: 'A welcome addition to the new design world of ultra simplicity.'
-        },
-        {
           image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_housemethod.png?751632',
           description: 'Inside Weather is out to prove that ease and customization are not mutually exclusive.'
+        },
+        {
+          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_domino_2x_788a469b-7ccf-4ec6-a2eb-6b46463c92bb.png?751631',
+          description: 'A welcome addition to the new design world of ultra simplicity.'
         },
         {
           image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_realsimple.png?751634',description: 'Inside Weather is out to prove that ease and customization are not mutually exclusive.'
@@ -65,7 +65,7 @@ export default {
     @include block();
   }
   ul {
-    align-items: center;
+    align-items: baseline;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -86,9 +86,51 @@ export default {
       }
       span {
         font-family: $font-stack-avalon;
-        font-weight: 600;
+        font-weight: 500;
         display: inline-block;
         @include fonts(16px,#98958F,1.18, 0.035em);
+      }
+    }
+  }
+  @include at-query('max-width: 1280px'){
+    padding: 150px 0;
+    .press--container {
+      max-width: 100%;
+      padding: 0 15px;
+    }
+    ul li span {
+      font-size: 15px;
+    }
+  }
+  @include at-query('max-width: 1280px') {
+    padding: 100px 0;
+  }
+  @include at-query('max-width: 1119px') {
+    ul {
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 -20px;
+
+      li {
+        flex-basis: 45%;
+        margin: 0 0 50px;
+        span {
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 991px') {
+    ul {
+      flex-direction: column;
+      li {
+        flex-basis: unset;
+        max-width: 500px;
+        max-resolution: 0 0 80px;
+        &:last-child {
+          display: none;
+        }
       }
     }
   }

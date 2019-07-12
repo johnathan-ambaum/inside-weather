@@ -12,6 +12,7 @@
       :dots="sliderProps.dots"
       :smartSpeed="sliderProps.smartSpeed"
       :navText="sliderProps.navText"
+      :responsive="sliderProps.responsive"
     >
       <div 
         class="CarouselBanner__items" 
@@ -76,7 +77,8 @@ export default {
         autoplay: false,
         dots: true,
         smartSpeed: 1200,
-        navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>']
+        navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
+        responsive: {0:{nav:false},1025:{nav:true}}
       }
     }
   },
@@ -228,14 +230,44 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 1280px') {
+    .CarouselBanner__items {
+      .CarouselBanner__content h2 {
+        font-size: 40px;
+      }
+      .CarouselBanner__image {
+        height: 500px;
+      }
+    }
+  }
+
+  @include at-query('max-width: 1199px') {
+    .CarouselBanner__items {
+      .CarouselBanner__content h2 {
+        font-size: 35px;
+      }
+      .CarouselBanner__image {
+        height: 450px;
+      }
+    }
+  }
+  @include at-query('max-width: 991px') {
+    .CarouselBanner__items .CarouselBanner__image {
+      height: calc(100vh - 102px);
+    }
+  }
+
 }
 .owl-theme.owl-carousel {
   .owl-nav {
     div {
+      align-items: center;
       background: #ffffff;
       border: none;
       border-radius: 50%;
       box-shadow: none;
+      display: flex;
+      justify-content: center;
       height: 70px;
       margin: 0 33px;
       outline: none;
@@ -254,11 +286,7 @@ export default {
         display: block;
         font-size: 0;
         height: 21px;
-        margin: 0 auto;
         position: absolute;
-        left: 0;
-        top: 24px;
-        right: 0;
         width: 21px;
   
         &.next-hidden {
@@ -328,6 +356,19 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+  @include at-query('max-width: 1280px') {
+    .owl-nav div {
+      height: 50px;
+      width: 50px;
+      margin: 0 15px;
+
+      span {
+        background-size: cover;
+        height: 17px;
+        width: 17px;
       }
     }
   }
