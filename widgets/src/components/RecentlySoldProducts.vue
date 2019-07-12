@@ -10,14 +10,18 @@
       class="RecentlySoldProducts" 
       ref="RecentlySoldProducts"
       >
-      <div 
+      <div
         class="RecentlySoldProducts--container grid--container"
         >
-        <div 
+        <div
           v-for="(items, index) in imageGridRow" 
           :key="items.$id" 
           v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1)]"
           >
+          <div 
+            class="--lg-hidden more-info"
+            @click="displayMoreInfo($event)"
+          ></div>
           <figure>
             <img :src="items.picture">
           </figure>
@@ -41,9 +45,10 @@ import HeadingWithDescription from './HeadingWithDescription.vue'
 import * as ScrollMagic from "scrollmagic"
 import { TimelineLite, TimelineMax, TweenMax} from "gsap"
 import $ from 'jquery'
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap"
 import gsap from 'scrollmagic'
 ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
+
 export default {
   components: {
     HeadingWithDescription,
@@ -108,6 +113,13 @@ export default {
       ]
     }
   },
+  methods: {
+    displayMoreInfo(e) {
+      const targetElement = e.target.parentElement
+      $(e.target).toggleClass('close')
+      $(targetElement).find('.RecentlySoldProducts--overlayWrapper').toggleClass('show')
+    }
+  },
   mounted() {
     const controller = new ScrollMagic.Controller();
     const productTimeline = new TimelineLite()
@@ -167,6 +179,20 @@ export default {
       background: rgba(32, 32, 32, 0.3);
       pointer-events: all;
     }
+    .more-info {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/gray_plus.png?1098232');
+      height: 25px;
+      position: absolute;
+      right: 12.5px;
+      top: 11px;
+      width: 25px;
+      z-index: 9;
+      &.close {
+        background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/icon-cross_2bbf5dcb-d61e-44c4-8951-b50402a548a0.png?1103187');
+      }
+    }
     figure {
       align-items: center;
       background: #FFFFFF;
@@ -194,6 +220,12 @@ export default {
       transition: all 0.3s ease-in-out;
       visibility: hidden;
       z-index: 2;
+      @include at-query('max-width: 1024px') {
+        display: none;
+        &.show {
+          display: bloc
+        }
+      }
       >div {
         color: #FFFFFF;
         font-family: $font-stack-avalon;
@@ -273,7 +305,7 @@ export default {
 
   @include at-query('max-width: 1024px') {
     padding: 75px 0 0;
-    .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-3{
+    .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-3 {
       grid-column-end: span 14;
     }
     .RecentlySoldProducts--column-1 {
@@ -331,7 +363,7 @@ export default {
       grid-column-start: 22;
       grid-row: 1 / auto;
     }
-    .RecentlySoldProducts--column-3, .RecentlySoldProducts--column-8, .RecentlySoldProducts--column-9{
+    .RecentlySoldProducts--column-3, .RecentlySoldProducts--column-8, .RecentlySoldProducts--column-9 {
       display: none;
     }
     .RecentlySoldProducts--column-4 {

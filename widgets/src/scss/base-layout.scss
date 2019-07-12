@@ -48,7 +48,12 @@ html, body {
   }
 }
 
-
+.--lg-hidden {
+  
+  @include at-query('min-width: 1025px') {
+    display: none;
+  }
+}
 .--pd-t-130 {
 
   @include at-query('max-width: 767px') {  
