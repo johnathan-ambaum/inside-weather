@@ -211,9 +211,9 @@ export default {
     }
     .owl-dots {
       position: absolute;
-      left: 0;
-      right: 0;
+      left: 50%;
       bottom: 41px;
+      transform: translate(-50%,0);
       .owl-dot {
         outline: none;
         box-shadow: none;
@@ -442,6 +442,48 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+  .owl-dots {
+    &::after {
+      content: "";
+      height: 10px;
+      width: auto;
+      position: absolute;
+      top: 5px;
+      background: #ffffff;
+      border-radius: 15px;
+      transition: left .3s cubic-bezier(0.51,0.92,0.24,1.15),right .3s .1s cubic-bezier(0.51,0.92,0.24,1.15);
+      left: 7px;
+      right: calc(100% - 17px);
+    }
+    &[data-dir='navleft'] {
+      &::after {
+        transition: left .3s .1s cubic-bezier(0.51,0.92,0.24,1.15),right .3s cubic-bezier(0.51,0.92,0.24,1.15);
+      }
+    }
+    &[data-dir='navright'] {
+      &::after {
+        transition: left .3s cubic-bezier(0.51,0.92,0.24,1.15),right .3s .1s cubic-bezier(0.51,0.92,0.24,1.15);
+      }
+    }
+    &.indi_1 {
+      &::after {
+        left: 7px;
+        right: calc(100% - 17px);
+      }
+    }
+    &.indi_2 {
+      &::after {
+        left: 31px;
+        right: calc(100% - 41px);
+      }
+    }
+    &.indi_3 {
+      &::after {
+        left: 55px;
+        right: calc(100% - 65px);
       }
     }
   }

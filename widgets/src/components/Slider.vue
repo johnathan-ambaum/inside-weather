@@ -14,7 +14,6 @@
         :mouseDrag="mouseDrag"
         :touchDrag="touchDrag"
         :pullDrag="pullDrag"
-
         @changed="animateDots($event)"
       >
         <slot></slot>
@@ -46,15 +45,14 @@ export default {
   },
   methods: {
     animateDots(e) {
-      var home_totitems,
+      var currentEventTarget = e.currentTarget,
+          home_totitems,
           currentpos = 1,
           banner_index,
           homecurrent = 1,
-          target_index = e.property.value - 1,
-          currentEventTarget = e.currentTarget;
+          target_index = e.property.value + 1
 
       banner_index = target_index;
-
       if (banner_index > home_totitems) {
         banner_index = 1;
       }
@@ -68,7 +66,7 @@ export default {
         $(currentEventTarget).find('.owl-dots').attr('data-dir','navright');
       }
       currentpos = banner_index;
-    }
+    } 
   },
 }
 </script>
