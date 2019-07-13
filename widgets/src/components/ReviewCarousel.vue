@@ -95,10 +95,10 @@ export default {
         margin: 10,
         loop: true,
         nav: true,
-        autoplay: false,
+        autoplay: true,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, dots: false},1025:{nav:true, dots: true}}
+        responsive: {0:{nav:false, dots: false, autoplay: true},1025:{nav:true, dots: true, autoplay: true}}
       }
     }
   }

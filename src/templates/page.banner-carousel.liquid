@@ -100,7 +100,7 @@
     }).setTween(bannerCarouselTimeline).addTo(controller);
 
     const catTimeline = new TimelineLite()
-    catTimeline.fromTo($('._category-lists'), 0.7, {opacity:0, y: 50}, {opacity: 1, y: 0, ease: Power0.easeInOut})
+    catTimeline.fromTo($('._category-lists'), 0.7, {opacity:0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
     const catTimelineSet = new ScrollMagic.Scene({
       triggerElement: '.CategoryList',  
       reverse: false
@@ -123,7 +123,7 @@
     }).setTween(valuePropsTimeline).addTo(controller);
 
     const pressTimeline = new TimelineLite()
-    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Power0.easeInOut})
+    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
     const pressTimelineScene = new ScrollMagic.Scene({
       triggerElement: '.Press',
       reverse: false
@@ -139,9 +139,9 @@
 
     const bannerTimeline = new TimelineLite();
     bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: ExpoScaleEase.config(1.05, 1)})
-      .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.5)
-      .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.75)
-      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.8)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.75)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 1)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 1.5)
     const bannerScene = new ScrollMagic.Scene({
       triggerElement: '.ReviewCarouselWrapper .owl-item.active .Review__author',
       reverse: false
