@@ -167,7 +167,17 @@ export default {
       display: none;
     }
   }
-
+  @include at-query('max-width: 1500px') {
+    .Review__items {
+      justify-content: center;
+      .Review__content {
+        flex-basis: 42%
+      }
+      .Review__image {
+        flex-basis: 45%;
+      }
+    }
+  }
   @include at-query('max-width: 1280px') {
     .Review__items {
       justify-content: center;
