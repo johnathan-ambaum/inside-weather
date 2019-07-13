@@ -15,7 +15,7 @@
     >
       <div 
         class="Review__items"
-        v-for="review in reviewRow"
+        v-for="review in reviewContentItems"
         :key="review.$id"
       >
         <div class="Review__content">
@@ -62,34 +62,12 @@ export default {
   components: {
     Slider
   },
+  props: {
+    reviewContent: Array
+  },
   data() {
     return {
-      reviewRow: [
-        {
-          headContent: 'Love It!',
-          starCount: 5,
-          reviewDetail: 'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping',
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978',
-          authorName: 'Sophia',
-          authorAddress: 'Santa Ana, CA'
-        },
-        {
-          headContent: 'Exactly what I wanted!',
-          starCount: 4,
-          reviewDetail: 'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping',
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img2.png?753979',
-          authorName: 'Ashley',
-          authorAddress: 'Miami, FL'
-        },
-        {
-          headContent: 'Love It!',
-          starCount: 5,
-          reviewDetail: 'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping',
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978',
-          authorName: 'Sophia',
-          authorAddress: 'Santa Ana, CA'
-        }
-      ],
+      reviewContentItems: this.$attrs.reviewcontent,
       sliderProps: {
         items: 1,
         margin: 10,

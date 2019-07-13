@@ -25,9 +25,11 @@
     </div>
   </div>
 
+  {% assign reviewContent = "[{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'},{'headContent':'Exactly what I wanted!','starCount':4,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img2.png?753979','authorName':'Ashley','authorAddress':'Miami, FL'},{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'}]"%}
+
   <div class="ReviewCarouselWrapper">
     <div class="--custom-container">
-      <review-carousel></review-carousel>
+      <review-carousel :reviewContent="{{reviewContent}}"></review-carousel>
     </div>
   </div>
 
