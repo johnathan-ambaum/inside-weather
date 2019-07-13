@@ -339,6 +339,7 @@ export default {
     }
   }
   @include at-query('max-width: 767px') {
+    padding: 42px 0 0;
     .RecentlySoldProducts--column figure {
       min-height: 225px;
     }

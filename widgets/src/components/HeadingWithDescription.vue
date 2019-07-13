@@ -10,6 +10,7 @@
 @import '../scss/variables';
 
 .HeadingWithDescription {
+  padding: 0 15px;
   h2 {
     display: block;
     font-family: $font-stack-avalon;
@@ -24,11 +25,22 @@
   p {
     color: #202020;
     display: block;
+    font-family: $font-stack-avalon;
+    font-weight: 400;
     font-size: 14px;
     letter-spacing: 0.035em;
     line-height: 1.2;
     text-align: center;
     margin: 0;
+  }
+  @media only screen and (max-width: 767px) {
+    h2 {
+      font-weight: 400;
+    }
+    p {
+      line-height: 1.538;
+      padding: 0 15px;
+    }
   }
 }
 </style>

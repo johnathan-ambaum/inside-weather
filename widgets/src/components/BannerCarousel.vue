@@ -224,30 +224,31 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 45px;
+    bottom: 25px;
     margin: 0 auto;
+    opacity: 0;
     transform: rotate(-45deg);
     width: 20px;
-    -webkit-animation: mouseWheel 0.9s infinite linear;
-    -moz-animation: mouseWheel 0.9s infinite linear;
-    -ms-animation: mouseWheel 0.9s infinite linear;
-    -o-animation: mouseWheel 0.9s infinite linear;
-    animation: mouseWheel 0.9s infinite linear;
+    -webkit-animation: bounce 2s infinite;
+    -moz-animation: bounce 2s infinite;
+    -ms-animation: bounce 2s infinite;
+    -o-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
     z-index: 8;
 
     @include at-query('min-width: 768px') {
       display: none;
     }
   }
-  @keyframes mouseWheel {
-    0% {
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
       transform: translateY(0) rotate(-45deg);
     }
-    50% {
-      transform: translateY(10px) rotate(-45deg);
+    40% {
+      transform: translateY(-30px) rotate(-45deg);
     }
-    100% {
-      transform: translateY(25px) rotate(-45deg);
+    60% {
+      transform: translateY(-15px) rotate(-45deg);
     }
   }
   &.imageContain {
@@ -332,12 +333,15 @@ export default {
   }
   &.--animLoaded {
     .owl-theme.owl-carousel {
-    .owl-dots {
-      &::after {
-        opacity: 1;
+      .owl-dots {
+        &::after {
+          opacity: 1;
+        }
       }
     }
-  }
+    .down-arrow-xs {
+      opacity: 1;
+    }
   }
 }
 .owl-theme.owl-carousel {
