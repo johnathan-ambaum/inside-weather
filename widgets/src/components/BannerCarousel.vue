@@ -130,6 +130,7 @@ export default {
         margin: 0 0 16px;
         font-family: $font-stack-avalon;
         font-weight: 700;
+        opacity: 0;
         @include fonts(45px,#ffffff,1.18,0.05em);
       }
       p {
@@ -137,6 +138,7 @@ export default {
         margin: 0 0 23px;
         font-family: $font-stack-avalon;
         font-weight: 500;
+        opacity: 0;
         @include fonts(18px,#ffffff,1.33,0);
       }
       a {
@@ -145,6 +147,7 @@ export default {
         position: relative;
         font-family: $font-stack-avalon;
         font-weight: 700;
+        opacity: 0;
         @include fonts(16px,#ffffff,1.18,0.1em);
         &::after {
           content: "";
@@ -188,6 +191,9 @@ export default {
       left: 50%;
       bottom: 41px;
       transform: translate(-50%,0);
+      &::after {
+        opacity: 0
+      }
       .owl-dot {
         outline: none;
         box-shadow: none;
