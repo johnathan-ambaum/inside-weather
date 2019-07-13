@@ -74,7 +74,7 @@ export default {
         margin: 0,
         loop: true,
         nav: true,
-        autoplay: false,
+        autoplay: true,
         dots: true,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
