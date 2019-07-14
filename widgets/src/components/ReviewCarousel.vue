@@ -280,7 +280,7 @@ export default {
     bottom: 0;
     width: 100%;
   }
-  .owl-theme {
+  .owl-theme.owl-carousel {
     .owl-nav {
       position: absolute;
       left: calc((1215px - 100vw) / 2);
@@ -290,7 +290,7 @@ export default {
     }
     .owl-dots {
       position: absolute;
-      right: calc(48% / 2);
+      right: 20%;
       bottom: -40px;
       &::after {
         background-color: #000000;
