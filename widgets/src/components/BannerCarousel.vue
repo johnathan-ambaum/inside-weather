@@ -78,7 +78,7 @@ export default {
         dots: true,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false},1025:{nav:true}}
+        responsive: {0:{nav:false, autoplayTimeout: 1500},1025:{nav:true, autoplayTimeout: 4000}}
       }
     }
   }

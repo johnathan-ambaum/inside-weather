@@ -127,7 +127,7 @@
     const pressTimeline = new TimelineLite()
     pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
     const pressTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.Press',
+      triggerElement: '.ValueProps .descriptions .details',
       reverse: false
     }).setTween(pressTimeline).addTo(controller);
 
