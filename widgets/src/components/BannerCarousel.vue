@@ -2,7 +2,7 @@
   <div 
     class="CarouselBanner"
     ref="CarouselBanner"
-    :class="[hasImage ? 'imageContain' : ' ']"
+    :class="[hasBannerImage ? 'imageContain' : ' ']"
   >
     <slider 
       :items="sliderProps.items"
@@ -17,34 +17,34 @@
     >
       <div 
         class="CarouselBanner__items" 
-        v-for="items in bannerContentItems" 
-        :key="items.$id"
+        v-for="item in bannerContentItems" 
+        :key="item.$id"
       >
         <div 
           class="CarouselBanner__image"
-          :style="[hasImage ? {'background': 'transparent'} : {'background': '#E5C78A'}]"
+          :style="[(hasBannerImage && (item.image !== ' ' && item.image !== '')) ? {'background': 'transparent'} : {'background': '#E5C78A'}]"
         >
           <figure 
-            v-if="hasImage"
-            v-bind:style="{ backgroundImage: 'url('+ items.image +')' }"
+            v-if="(hasBannerImage && (item.image !== ' ' && item.image !== ''))"
+            v-bind:style="{ backgroundImage: 'url('+ item.image +')' }"
           >
           </figure>
         </div>
         <div class="CarouselBanner__content">
           <h2 class="--caps">
-            {{items.heading}}
+            {{item.heading}}
           </h2>
           <p>
-            {{items.description}}
+            {{item.description}}
           </p>
           <div
             class="CarouselBannerAction"
           >
             <a 
-              :href="items.url" 
+              :href="item.url" 
               class="--caps"
             >
-              {{items.linkText}}
+              {{item.linkText}}
             </a>
           </div>
         </div>
@@ -64,11 +64,12 @@ export default {
   props: {
     bannerImage: String,
     hasImage: {type: Boolean, default: false},
-    bannerContent: Object
+    bannerContent: Object,
   },
   data() {
     return {
-      bannerContentItems: this.$attrs.bannercontent.items,
+      hasBannerImage: this.hasImage,
+      bannerContentItems: this.bannerContent.items,
       sliderProps: {
         items: 1,
         margin: 0,

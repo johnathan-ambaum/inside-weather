@@ -1,14 +1,16 @@
 <div id="app">
   {% assign bannerContent = "{'items':[{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Sofas','url':'/pages/category-sofa'},{'image':' ','heading':'Create your custom climate.','description':'The Weather is now entirely up to you.','linkText':'Shop Armchair','url':'/pages/category-armchair'},{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Table','url':'/pages/category-table'}]}"%}
 
-  <banner-carousel :bannerContent="{{bannerContent}}"></banner-carousel>
+  {% assign hasImage=true %}
+
+  <banner-carousel :banner-content="{{bannerContent}}" :has-image="{{hasImage}}"></banner-carousel>
 
   {% assign listItems= "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_1_livingrm.png?742906','buttonText':'Shop Living','link':'pages/category-sofa'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_2_diningrm.png?742909','buttonText':'Shop Dining','link':'pages/category-dining-tables'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_3_office.png?737551','buttonText':'Shop Office','link':'pages/category-lounge-chairs'}]"%}
 
   <div class="--custom-container category-list-container">
     <category-list 
       class="--pd-t-130 --pd-b-130" 
-      :listItems="{{listItems}}"
+      :list-items="{{listItems}}"
     >
     </category-list>
   </div>
@@ -29,12 +31,12 @@
 
   <div class="ReviewCarouselWrapper">
     <div class="--custom-container">
-      <review-carousel :reviewContent="{{reviewContent}}"></review-carousel>
+      <review-carousel :review-content="{{reviewContent}}"></review-carousel>
     </div>
   </div>
 
   <banner 
-    bannerImage="https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635"
+    banner-image="https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635"
   >
   </banner>
 

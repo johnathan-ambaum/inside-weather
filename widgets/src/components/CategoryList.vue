@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      categoryListItems: this.$attrs.listitems,
+      categoryListItems: this.listItems,
       sliderProps: {
         items: 3,
         margin: 0,

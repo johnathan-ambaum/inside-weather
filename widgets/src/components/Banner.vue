@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      bannerImageUrl: this.$attrs.bannerimage
+      bannerImageUrl: this.bannerImage
     }
   },
   methods: {

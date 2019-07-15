@@ -67,7 +67,7 @@ export default {
   },
   data() {
     return {
-      reviewContentItems: this.$attrs.reviewcontent,
+      reviewContentItems: this.reviewContent,
       sliderProps: {
         items: 1,
         margin: 10,
