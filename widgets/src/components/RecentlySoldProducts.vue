@@ -16,7 +16,8 @@
         <div
           v-for="(items, index) in imageGridRow" 
           :key="items.$id" 
-          v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1)]"
+          v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1) + ' ' + [((index + 1) > 4) ? 'second-section' : 'first-section']]"
+
           >
           <div 
             class="--lg-hidden more-info"

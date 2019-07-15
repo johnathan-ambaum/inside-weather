@@ -43,11 +43,15 @@ export default {
     touchDrag: {type: Boolean, default: true},
     pullDrag: {type: Boolean, default: true}
   },
+  data() {
+    return {
+      currentpos: 1
+    }
+  },
   methods: {
     animateDots(e) {
       var currentEventTarget = e.currentTarget,
           home_totitems,
-          currentpos = 1,
           banner_index,
           homecurrent = 1,
           target_index = e.page.index + 1
@@ -58,16 +62,18 @@ export default {
         banner_index = 1;
       }
 
-      $(currentEventTarget).find('.owl-dots').attr('class', 'owl-dots').addClass("indi_" + banner_index);
+      if(!$(currentEventTarget).find('.owl-dots').hasClass('disabled')) {
+        $(currentEventTarget).find('.owl-dots').attr('class', 'owl-dots').addClass("indi_" + banner_index);
+      }
 
-      if (banner_index > currentpos) {
+      if (banner_index > this.currentpos) {
         $(currentEventTarget).find('.owl-dots').attr('data-dir','navleft');
       }
       else {
         $(currentEventTarget).find('.owl-dots').attr('data-dir','navright');
       }
-      currentpos = banner_index;
-    } 
+      this.currentpos = banner_index;
+    }
   },
 }
 </script>

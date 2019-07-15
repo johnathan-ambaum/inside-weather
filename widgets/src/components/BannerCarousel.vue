@@ -79,7 +79,7 @@ export default {
         dots: true,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 1500},1025:{nav:true, autoplayTimeout: 4000}}
+        responsive: {0:{nav:false, autoplayTimeout: 4000},1025:{nav:true, autoplayTimeout: 5000}}
       }
     }
   }
@@ -485,6 +485,24 @@ export default {
       &::after {
         left: 55px;
         right: calc(100% - 65px);
+      }
+    }
+    &.indi_4 {
+      &::after {
+        left: 80px;
+        right: calc(100% - 90px);
+      }
+    }
+    &.indi_5 {
+      &::after {
+        left: 103px;
+        right: calc(100% - 113px);
+      }
+    }
+    &.indi_6 {
+      &::after {
+        left: 127px;
+        right: calc(100% - 137px);
       }
     }
   }

@@ -94,8 +94,6 @@ export default {
     ul {
       align-items: center;
       flex-wrap: wrap;
-      margin: 0 -20px;
-
       li {
         flex-basis: 45%;
         margin: 0 0 50px;

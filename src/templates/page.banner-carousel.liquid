@@ -1,9 +1,11 @@
 <div id="app">
+  {% assign hasImage = false %}
   {% assign bannerContent = "{'items':[{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Sofas','url':'/pages/category-sofa'},{'image':' ','heading':'Create your custom climate.','description':'The Weather is now entirely up to you.','linkText':'Shop Armchair','url':'/pages/category-armchair'},{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Table','url':'/pages/category-table'}]}"%}
 
-  {% assign hasImage=true %}
-
-  <banner-carousel :banner-content="{{bannerContent}}" :has-image="{{hasImage}}"></banner-carousel>
+  <banner-carousel 
+    :has-image="{{hasImage}}"
+    :banner-content="{{bannerContent}}">
+  </banner-carousel>
 
   {% assign listItems= "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_1_livingrm.png?742906','buttonText':'Shop Living','link':'pages/category-sofa'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_2_diningrm.png?742909','buttonText':'Shop Dining','link':'pages/category-dining-tables'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat-link_3_office.png?737551','buttonText':'Shop Office','link':'pages/category-lounge-chairs'}]"%}
 
@@ -27,7 +29,7 @@
     </div>
   </div>
 
-  {% assign reviewContent = "[{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'},{'headContent':'Exactly what I wanted!','starCount':4,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img2.png?753979','authorName':'Ashley','authorAddress':'Miami, FL'},{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'}]"%}
+  {% assign reviewContent = "[{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'},{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'},{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'}]"%}
 
   <div class="ReviewCarouselWrapper">
     <div class="--custom-container">
@@ -84,14 +86,14 @@
 
     const bannerCarouselTimeline = new TimelineLite();
     bannerCarouselTimeline.fromTo($('.CarouselBanner__image'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: ExpoScaleEase.config(1.05, 1, Power0.easeIn)})
-      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.5)
-      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.5)
-      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.75)
+      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
+      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
+      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.75)
       .call(function(){
         $('.CarouselBanner .owl-dots button').each(function(i){
           var row = $(this);
           setTimeout(function() {
-            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.8)
+            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.8)
             if($('.CarouselBanner .owl-dots button').length === (i + 1)) {
               $('.CarouselBanner').addClass('--animLoaded');
             }
@@ -104,38 +106,44 @@
     }).setTween(bannerCarouselTimeline).addTo(controller);
 
     const catTimeline = new TimelineLite()
-    catTimeline.fromTo($('._category-lists'), 0.7, {opacity:0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
+    catTimeline.fromTo($('._category-lists'), 0.9, {opacity:0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
     const catTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CategoryList',  
+      triggerElement: '.CarouselBanner .owl-dots',  
       reverse: false
     }).setTween(catTimeline).addTo(controller);
 
     const valuePropsTimeline = new TimelineLite()
-    valuePropsTimeline.fromTo($('.ValueProps .image_wrapper'), 0.7, {opacity: 0, y: 20, ease: Power0.easeInOut}, {opacity: 1, y: 0})
-      .fromTo($('.ValueProps .descriptions h2'), 0.9, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.5)
-      .call(function () {
-        $('.ValueProps .descriptions .details .point').each(function (i){
-          var row = $(this);
-          setTimeout(function() {
-            TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 1);
-          }, 200 * i);
-        });
-      })
+    valuePropsTimeline.fromTo($('.ValueProps .image_wrapper'), 0.9, {opacity: 0, y: 20, ease: Circ.easeOut}, {opacity: 1, y: 0})
+      .fromTo($('.ValueProps .descriptions h2'), 0.9, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
     const valuePropsTimelineScene = new ScrollMagic.Scene({
       triggerElement: '.CategoryList ._button-wrapper',
       reverse: false
     }).setTween(valuePropsTimeline).addTo(controller);
 
+    const valuePropsPointsTimeline = new TimelineLite()
+    valuePropsPointsTimeline.call(function () {
+      $('.ValueProps .descriptions .details .point').each(function (i){
+        var row = $(this);
+        setTimeout(function() {
+          TweenMax.fromTo(row, 1.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1);
+        }, 200 * i);
+      });
+    })
+    const valuePropsPointsScene = new ScrollMagic.Scene({
+      triggerElement: '.ValueProps .descriptions h2',
+      reverse: false
+    }).setTween(valuePropsPointsTimeline).addTo(controller);
+
     const pressTimeline = new TimelineLite()
-    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
+    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 100}, {opacity: 1, y: 0, ease: Circ.easeOut})
     const pressTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.ValueProps .descriptions .details',
+      triggerElement: '.ValueProps .descriptions .details .point',
       reverse: false
     }).setTween(pressTimeline).addTo(controller);
 
     const ReviewCarouselTimeline = new TimelineLite()
-    ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.7,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
-      .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.5)
+    ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
+      .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
     const ReviewCarouselTimelineScene = new ScrollMagic.Scene({
       triggerElement: '.ReviewCarousel',
       reverse: false
@@ -145,30 +153,56 @@
     bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: ExpoScaleEase.config(1.05, 1)})
       .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.75)
       .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 1)
-      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 1.5)
+      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1.5)
     const bannerScene = new ScrollMagic.Scene({
       triggerElement: '.ReviewCarouselWrapper .owl-item.active .Review__author',
       reverse: false
     }).setTween(bannerTimeline).addTo(controller);
 
     const productTimeline = new TimelineLite()
-    productTimeline.fromTo($('.SoldProducts .heading h2'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut})
-      .fromTo($('.SoldProducts .heading  p'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut}, 0.5)
-      .call(function(){
-        $('.RecentlySoldProducts .RecentlySoldProducts--column').each(function (i) {
-          var row = $(this).find('img');
-          setTimeout(function () {
-            TweenMax.fromTo(row, 0.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Power0.easeInOut});
-            if($('.RecentlySoldProducts .RecentlySoldProducts--column').length === (i + 1)) {
-              $('.RecentlySoldProducts .RecentlySoldProducts--column').addClass('--animLoaded');
-            }
-          }, 200 * i)
-        });
-      })
+    productTimeline.fromTo($('.SoldProducts .heading h2'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut})
+      .fromTo($('.SoldProducts .heading  p'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
     const productScene = new ScrollMagic.Scene({
       triggerElement: '.SoldProducts',
       reverse: false
     }).setTween(productTimeline).addTo(controller);
+
+    const soldProductFirstTimeline = new TimelineLite()
+    soldProductFirstTimeline.call(function () {
+      $('.RecentlySoldProducts .RecentlySoldProducts--column.first-section').each(function (i) {
+        var FirstRow = $(this).find('img');
+        setTimeout(function () {
+          TweenMax.fromTo(FirstRow, 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut});
+          if($('.RecentlySoldProducts .RecentlySoldProducts--column.first-section').length === (i + 1)) {
+            $('.RecentlySoldProducts .RecentlySoldProducts--column.first-section').addClass('--animLoaded');
+          }
+        }, 200 * i)
+      });
+    })
+    const soldProductFirstScene = new ScrollMagic.Scene({
+      triggerElement: '.SoldProducts .heading  p',
+      reverse: false
+    }).setTween(soldProductFirstTimeline).addTo(controller);
+
+
+    const soldProductSecondTimeline = new TimelineLite()
+    soldProductSecondTimeline.call(function () {
+      $('.RecentlySoldProducts .RecentlySoldProducts--column.second-section').each(function (i) {
+        var SecondRow = $(this).find('img');
+        setTimeout(function () {
+          TweenMax.fromTo(SecondRow, 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut});
+          if($('.RecentlySoldProducts .RecentlySoldProducts--column.second-section').length === (i + 1)) {
+            $('.RecentlySoldProducts .RecentlySoldProducts--column.second-section').addClass('--animLoaded');
+          }
+        }, 200 * i)
+      });
+    })
+    const soldProductSecondScene = new ScrollMagic.Scene({
+      triggerElement: '.RecentlySoldProducts .RecentlySoldProducts--column.second-section',
+      reverse: false
+    }).setTween(soldProductSecondTimeline).addTo(controller);
+
+    
 
 
 

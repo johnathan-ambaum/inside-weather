@@ -76,7 +76,7 @@ export default {
         autoplay: true,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, dots: false, autoplay: false, autoplayTimeout: 1500},1025:{nav:true, dots: true, autoplay: true, autoplayTimeout: 4000}}
+        responsive: {0:{nav:false, dots: false, autoplay: false, autoplayTimeout: 4000},992:{nav:true, dots: true, autoplay: true, autoplayTimeout: 5000}}
       }
     }
   }
@@ -171,11 +171,15 @@ export default {
     .Review__items {
       justify-content: center;
       .Review__content {
-        flex-basis: 42%
+        flex-basis: 42%;
+        padding-right: 25px;
       }
       .Review__image {
         flex-basis: 45%;
       }
+    }
+    .owl-theme.owl-carousel .owl-dots {
+      right: 22.5%;
     }
   }
   @include at-query('max-width: 1280px') {
