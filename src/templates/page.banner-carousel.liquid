@@ -167,40 +167,22 @@
       reverse: false
     }).setTween(productTimeline).addTo(controller);
 
-    const soldProductFirstTimeline = new TimelineLite()
-    soldProductFirstTimeline.call(function () {
-      $('.RecentlySoldProducts .RecentlySoldProducts--column.first-section').each(function (i) {
-        var FirstRow = $(this).find('img');
-        setTimeout(function () {
-          TweenMax.fromTo(FirstRow, 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut});
-          if($('.RecentlySoldProducts .RecentlySoldProducts--column.first-section').length === (i + 1)) {
-            $('.RecentlySoldProducts .RecentlySoldProducts--column.first-section').addClass('--animLoaded');
-          }
-        }, 200 * i)
-      });
-    })
-    const soldProductFirstScene = new ScrollMagic.Scene({
-      triggerElement: '.SoldProducts .heading  p',
-      reverse: false
-    }).setTween(soldProductFirstTimeline).addTo(controller);
-
-
-    const soldProductSecondTimeline = new TimelineLite()
-    soldProductSecondTimeline.call(function () {
-      $('.RecentlySoldProducts .RecentlySoldProducts--column.second-section').each(function (i) {
+    const soldProductTimeline = new TimelineLite()
+    soldProductTimeline.call(function () {
+      $('.RecentlySoldProducts .RecentlySoldProducts--column').each(function (i) {
         var SecondRow = $(this).find('img');
         setTimeout(function () {
           TweenMax.fromTo(SecondRow, 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut});
-          if($('.RecentlySoldProducts .RecentlySoldProducts--column.second-section').length === (i + 1)) {
-            $('.RecentlySoldProducts .RecentlySoldProducts--column.second-section').addClass('--animLoaded');
+          if($('.RecentlySoldProducts .RecentlySoldProducts--column').length === (i + 1)) {
+            $('.RecentlySoldProducts .RecentlySoldProducts--column').addClass('--animLoaded');
           }
         }, 200 * i)
       });
     })
     const soldProductSecondScene = new ScrollMagic.Scene({
-      triggerElement: '.RecentlySoldProducts .RecentlySoldProducts--column.second-section',
+      triggerElement: '.SoldProducts .heading  p',
       reverse: false
-    }).setTween(soldProductSecondTimeline).addTo(controller);
+    }).setTween(soldProductTimeline).addTo(controller);
 
     
 

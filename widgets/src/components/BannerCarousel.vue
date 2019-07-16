@@ -286,6 +286,10 @@ export default {
         a {
           font-weight: 400;
         }
+        p {
+          font-size: 14px;
+          font-weight: 400;
+        }
       }
     }
     &:not(.imageContain) {

@@ -16,7 +16,7 @@
         <div
           v-for="(items, index) in imageGridRow" 
           :key="items.$id" 
-          v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1) + ' ' + [((index + 1) > 4) ? 'second-section' : 'first-section']]"
+          v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1)]"
 
           >
           <div 
@@ -144,32 +144,60 @@ export default {
 .RecentlySoldProducts {
   padding: 100px 0 0;
   .RecentlySoldProducts--column {
-    padding: 1.3px 0 0px 1.3px;
     position: relative;
     background: #FFFFFF;
     pointer-events: none;
     transition: all 0.3s ease-in-out;
     .more-info {
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/gray_plus.png?1098232');
-      height: 30px;
+      height: 24px;
       position: absolute;
       right: 12.5px;
       top: 11px;
       opacity: 0;
-      width: 30px;
+      width: 24px;
       z-index: 9;
+      &::after, &::before {
+        content: "";
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+      &::before {
+        background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-plus-gray_3x_643f55a3-9c52-414a-9f49-2f0e7d975fd9.png?1249665');
+      }
+      &::after {
+        background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-cross_2bbf5dcb-d61e-44c4-8951-b50402a548a0.png?1250475');
+        width: 30px;
+        height: 30px;
+        left: -4px;
+        top: -3px;
+        opacity: 0;
+        visibility: hidden;
+      }
       &.close {
-        background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/icon-cross_2bbf5dcb-d61e-44c4-8951-b50402a548a0.png?1103187');
-        transform: scale(1.5);
+        &::before {
+          opacity: 0;
+          visibility: hidden;
+        }
+        &::after {
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
     &.--animLoaded {
-      background: rgba(32, 32, 32, 0.3);
       pointer-events: all;
       .more-info {
         opacity: 1;
+      }
+      figure {
+        box-shadow: inset 0.2px 0.25px 0.25px 0px #202020;
       }
     }
     figure {
@@ -210,7 +238,6 @@ export default {
       }
       >div {
         color: #FFFFFF;
-        font-family: $font-stack-avalon;
         width: auto;
         height: auto;
         position: absolute;
@@ -223,15 +250,19 @@ export default {
         span {
           display: block;
           font-size: 14px;
+          font-family: $font-stack-avalon;
+          font-weight: 400;
           line-height: 1.21;
-          letter-spacing: 0.035em;
+          letter-spacing: 0.04em;
           text-align: center;
         }
         p {
           display: block;
           font-size: 15px;
+          font-family: $font-stack-avalon;
+          font-weight: 600;
           line-height: 1.2;
-          letter-spacing: 0.035em;
+          letter-spacing: 0.04em;
           margin: 0;
           padding: 11.6px 0 14.7px;
           text-align: center;
@@ -286,6 +317,12 @@ export default {
     grid-column-start: 33;
   }
 
+  @include at-query('max-width: 1280px') {
+    .RecentlySoldProducts--column figure {
+      min-height: unset;
+    }
+  }
+
   @include at-query('max-width: 1024px') {
     padding: 75px 0 0;
     .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-3 {
@@ -335,14 +372,21 @@ export default {
     }
   }
   @include at-query('max-width: 767px') {
-    .RecentlySoldProducts--column figure {
-      min-height: 270px;
-    }
-  }
-  @include at-query('max-width: 767px') {
     padding: 42px 0 0;
-    .RecentlySoldProducts--column figure {
-      min-height: 225px;
+    .RecentlySoldProducts--column  {
+      .RecentlySoldProducts--overlayWrapper {
+        > div {
+          span {
+            font-size: 10px;
+            font-weight: 400;
+          }
+          p {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 14px;
+          }
+        }
+      }
     }
     .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-6, .RecentlySoldProducts--column-7{
       grid-column-end: span 21;

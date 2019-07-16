@@ -38,7 +38,8 @@
       font-weight: 400;
     }
     p {
-      line-height: 1.538;
+      font-size: 13px;
+      line-height: 20px;
       padding: 0 15px;
     }
   }
