@@ -36,7 +36,7 @@ export default {
     nav: {type: Boolean, default: true},
     autoplay: {type: Boolean, default: false},
     dots: {type: Boolean, default: true},
-    smartSpeed: {type: Number, default: 800},
+    smartSpeed: {type: Number, default: 1000},
     navText: Array,
     responsive: Object,
     mouseDrag: {type: Boolean, default: true},

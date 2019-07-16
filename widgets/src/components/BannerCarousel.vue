@@ -11,7 +11,6 @@
       :nav="sliderProps.nav"
       :autoplay="sliderProps.autoplay"
       :dots="sliderProps.dots"
-      :smartSpeed="sliderProps.smartSpeed"
       :navText="sliderProps.navText"
       :responsive="sliderProps.responsive"
     >
@@ -77,9 +76,8 @@ export default {
         nav: true,
         autoplay: true,
         dots: true,
-        smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 4000},1025:{nav:true, autoplayTimeout: 5000}}
+        responsive: {0:{nav:false, autoplayTimeout: 5000},1025:{nav:true, autoplayTimeout: 5000}}
       }
     }
   }
@@ -201,7 +199,8 @@ export default {
         opacity: 0;
         span {
           background: transparent;
-          border: 1px solid #ffffff;
+          border: 1.5px solid #ffffff;
+          margin: 4px;
           @include transition();
         }
         &:hover {
@@ -230,26 +229,10 @@ export default {
     opacity: 0;
     transform: rotate(-45deg);
     width: 20px;
-    -webkit-animation: bounce 2s infinite;
-    -moz-animation: bounce 2s infinite;
-    -ms-animation: bounce 2s infinite;
-    -o-animation: bounce 2s infinite;
-    animation: bounce 2s infinite;
     z-index: 8;
 
     @include at-query('min-width: 768px') {
       display: none;
-    }
-  }
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0) rotate(-45deg);
-    }
-    40% {
-      transform: translateY(-30px) rotate(-45deg);
-    }
-    60% {
-      transform: translateY(-15px) rotate(-45deg);
     }
   }
   &.imageContain {
@@ -287,6 +270,9 @@ export default {
   @include at-query('max-width: 767px') {
     .owl-theme .owl-dots {
       bottom: 27px;
+      span {
+        margin: 3px;
+      }
     }
     .CarouselBanner__items {
       .CarouselBanner__content {
@@ -317,11 +303,6 @@ export default {
       }
       .owl-theme .owl-dots {
         bottom: 95px;
-        .owl-dot {
-          span {
-            border: 2px solid #ffffff;
-          }
-        }
       }
     }
   }
@@ -333,13 +314,13 @@ export default {
     }
   }
   &.--animLoaded {
-    .owl-theme.owl-carousel {
-      .owl-dots {
-        &::after {
-          opacity: 1;
-        }
-      }
-    }
+    // .owl-theme.owl-carousel {
+    //   .owl-dots {
+    //     &::after {
+    //       opacity: 1;
+    //     }
+    //   }
+    // }
     .down-arrow-xs {
       opacity: 1;
     }
@@ -349,7 +330,7 @@ export default {
   .owl-nav {
     div {
       align-items: center;
-      background: #ffffff;
+      background: rgba($color: #ffffff, $alpha: 0.8);
       border: none;
       border-radius: 50%;
       box-shadow: none;
@@ -396,7 +377,7 @@ export default {
         }
   
         &:hover {
-          background: #ffffff;
+          background: rgba($color: #ffffff, $alpha: 0.8);
           span {
             &.prev {
               opacity: 0;
@@ -424,7 +405,7 @@ export default {
         }
   
         &:hover {
-          background: #ffffff;
+          background: rgba($color: #ffffff, $alpha: 0.8);
           span {
             &.next {
               opacity: 0;
