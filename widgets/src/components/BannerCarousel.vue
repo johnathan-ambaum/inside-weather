@@ -130,7 +130,7 @@ export default {
         font-family: $font-stack-avalon;
         font-weight: 700;
         opacity: 0;
-        @include fonts(45px,#ffffff,1.18,0.05em);
+        @include fonts(48px,#ffffff,1.18,0.05em);
       }
       p {
         display: block;
@@ -314,13 +314,6 @@ export default {
     }
   }
   &.--animLoaded {
-    // .owl-theme.owl-carousel {
-    //   .owl-dots {
-    //     &::after {
-    //       opacity: 1;
-    //     }
-    //   }
-    // }
     .down-arrow-xs {
       opacity: 1;
     }
@@ -424,66 +417,6 @@ export default {
             }
           }
         }
-      }
-    }
-  }
-  .owl-dots {
-    &::after {
-      content: "";
-      height: 10px;
-      width: auto;
-      position: absolute;
-      top: 5px;
-      background: #ffffff;
-      border-radius: 15px;
-      transition: left .3s cubic-bezier(0.51,0.92,0.24,1.15),right .3s .1s cubic-bezier(0.51,0.92,0.24,1.15);
-      left: 7px;
-      right: calc(100% - 17px);
-    }
-    &[data-dir='navleft'] {
-      &::after {
-        transition: left .3s .1s cubic-bezier(0.51,0.92,0.24,1.15),right .3s cubic-bezier(0.51,0.92,0.24,1.15);
-      }
-    }
-    &[data-dir='navright'] {
-      &::after {
-        transition: left .3s cubic-bezier(0.51,0.92,0.24,1.15),right .3s .1s cubic-bezier(0.51,0.92,0.24,1.15);
-      }
-    }
-    &.indi_1 {
-      &::after {
-        left: 7px;
-        right: calc(100% - 17px);
-      }
-    }
-    &.indi_2 {
-      &::after {
-        left: 31px;
-        right: calc(100% - 41px);
-      }
-    }
-    &.indi_3 {
-      &::after {
-        left: 55px;
-        right: calc(100% - 65px);
-      }
-    }
-    &.indi_4 {
-      &::after {
-        left: 80px;
-        right: calc(100% - 90px);
-      }
-    }
-    &.indi_5 {
-      &::after {
-        left: 103px;
-        right: calc(100% - 113px);
-      }
-    }
-    &.indi_6 {
-      &::after {
-        left: 127px;
-        right: calc(100% - 137px);
       }
     }
   }

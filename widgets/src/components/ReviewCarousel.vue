@@ -20,7 +20,7 @@
       >
         <div class="Review__content">
           <h5>{{review.headContent}}</h5>
-          <div class="Review__rating">
+          <div class="Review__rating clearfix">
             <figure
               v-for="i in review.starCount"
               :key="i.$id"
@@ -94,35 +94,44 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
     .Review__content {
       flex-basis: 50%;
-      font-family: $font-stack-avalon;
+      padding-right: 110px;
       h5 {
+        font-family: $font-stack-avalon;
         display: block;
-        font-weight: 400;
-        margin: 0 0 25px;
+        font-weight: 600;
+        margin: 0 0 22px;
         @include fonts(22px,#202020,1.18,0.026em);
       }
       p {
+        font-family: $font-stack-avalon;
         display: block;
-        font-weight: 400;
-        margin: 0 0 23px;
-        @include fonts(18px,#202020,1.6,0.035em);
+        font-weight: 500;
+        margin: 0 0 22px;
+        @include fonts(14px,#202020,22px,0.04em);
       }
       .Review__author {
         display: block;
-        margin: 0 0 38px;
+        margin: 0 0 37px;
         span {
+          font-family: $font-stack-avalon;
           display: block;
-          font-weight: 400;
-          @include fonts(18px,#212121,1.6,0.05em);
+          font-weight: 500;
+          @include fonts(18px,#202020,1.33,0.05em);
+          &:first-child {
+            color: #212121;
+            font-weight: 600;
+            margin: 0 0 5px;
+          }
         }
       }
       a {
-        border-bottom: 1px solid #212121;
-        font-weight: 400;
-        @include fonts(18px,#212121,1.6,0.05em);
+        font-family: $font-stack-avalon;
+        border-bottom: 1px solid #202020;
+        font-weight: 500;
+        @include fonts(14px,#202020,1.21,0.12em);
       }
     }
     .Review__image {
@@ -142,9 +151,10 @@ export default {
   }
   .Review__rating {
     display: block;
-    margin: 0 0 25px;
+    margin: 0 0 24px;
     figure {
       display: inline-block;
+      float: left;
       height: 20px;
       margin-right: 13px;
       width: 20px;
@@ -156,13 +166,13 @@ export default {
     }
   }
   .read-all-review-sm {
-    border-bottom: 1px solid #212121;
+    border-bottom: 1px solid #202020;
     display: inline-block;
-    font-weight: 400;
+    font-weight: 500;
     font-family: $font-stack-avalon;
     margin: 30px 0 0 15px;
     position: relative;
-    @include fonts(18px,#212121,1.6,0.05em);
+    @include fonts(14px,#202020,1.21,0.12em);
     @include at-query('min-width: 992px') {
       display: none;
     }
@@ -172,7 +182,7 @@ export default {
       justify-content: center;
       .Review__content {
         flex-basis: 42%;
-        padding-right: 25px;
+        padding-right: 100px;
       }
       .Review__image {
         flex-basis: 45%;
@@ -189,11 +199,9 @@ export default {
         flex-basis: 45%;
         padding-right: 25px;
         h5 {
-          font-size: 20px;
           margin: 0 0 20px;
         }
         p {
-          font-size: 15px;
           margin: 0 0 20px;
         }
         .Review__author {
@@ -215,6 +223,9 @@ export default {
       figure {
         margin-right: 8px;
       }
+    }
+    .owl-theme.owl-carousel .owl-dots {
+      right: 25%;
     }
   }
   @include at-query('max-width: 1199px') {
@@ -254,12 +265,6 @@ export default {
       overflow: hidden;
       .owl-stage-outer {
         overflow: visible;
-        .owl-item{
-          transition: opacity 0.3 ease-in-out;
-          &:not(.active) {
-            opacity: 0.5;
-          }
-        }
       }
     }
   }
@@ -268,6 +273,32 @@ export default {
     margin-right: -15px;
     .owl-carousel {
       padding: 0 55px 0 0;
+    }
+    .Review__items .Review__content {
+      h5 {
+        font-size: 16px;
+        margin: 0 0 22px;
+      }
+      p {
+        font-size: 13px;
+      }
+      .Review__author {
+        margin: 0;
+        span {
+          font-size: 13px;
+          font-weight: 400;
+          &:first-child {
+            color: #202020;
+          }
+        }
+      }
+    }
+    .Review__rating {
+      margin: 0 0 22px;
+      figure {
+        height: 14px;
+        width: 14px;
+      }
     }
   }
 }
@@ -294,11 +325,8 @@ export default {
     }
     .owl-dots {
       position: absolute;
-      right: 20%;
+      right: 25%;
       bottom: -40px;
-      &::after {
-        background-color: #000000;
-      }
       .owl-dot {
         outline: none;
         box-shadow: none;
@@ -341,9 +369,14 @@ export default {
     }
   }
   @include at-query('max-width: 1199px') {
+    padding: 0 0 75px;
     .owl-theme .owl-nav {
       left: calc((932px - 100vw) / 2);
     }
   }
+  @include at-query('max-width: 767px') {
+    padding: 0 0 58px;
+  }
+
 }
 </style>
