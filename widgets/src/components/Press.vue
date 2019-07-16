@@ -26,11 +26,11 @@ export default {
           description: 'A welcome addition to the new design world of ultra simplicity.'
         },
         {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_realsimple.png?751634',description: 'Inside Weather is out to prove that ease and customization are not mutually exclusive.'
-        },
-        {
           image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_washingtonpost.png?751634',
           description: 'A welcome addition to the new design world of ultra simplicity.'
+        },
+        {
+          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_realsimple.png?751634',description: 'Inside Weather is out to prove that ease and customization are not mutually exclusive.'
         }
       ]   
     }
@@ -70,15 +70,17 @@ export default {
         }
       }
       span {
+        display: inline-block;
         font-family: $font-stack-avalon;
         font-weight: 500;
-        display: inline-block;
-        @include fonts(16px,#98958F,1.18, 0.035em);
+        font-style: italic;
+        text-align: center;
+        @include fonts(16px,#98958F,22px, 0.04em);
       }
     }
   }
   @include at-query('max-width: 1280px'){
-    padding: 150px 0;
+    padding: 100px 0;
     .press--container {
       max-width: 100%;
       padding: 0 15px;
@@ -86,9 +88,6 @@ export default {
     ul li span {
       font-size: 15px;
     }
-  }
-  @include at-query('max-width: 1280px') {
-    padding: 100px 0;
   }
   @include at-query('max-width: 1119px') {
     ul {
@@ -105,14 +104,23 @@ export default {
     }
   }
   @include at-query('max-width: 991px') {
+    padding: 59px 0 27px;
     ul {
       flex-direction: column;
       li {
         flex-basis: unset;
         max-width: 500px;
-        max-resolution: 0 0 80px;
         &:last-child {
           display: none;
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 767px') {
+    ul {
+      li {
+        span {
+          font-size: 13px;
         }
       }
     }
