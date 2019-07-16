@@ -56,39 +56,17 @@ export default {
   text-transform: uppercase;
   width: 240px;
   @include transition(all,.3s,cubic-bezier(.55, .085, .68, .53));
-
-  &::after {
-    content: "";
-    background: #202020;
-    height: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: auto;
-    width: 100%;
-    z-index: -1;
-    @include transition(all,.3s,cubic-bezier(.55, .085, .68, .53));
-  }
-
   &:hover {
     color: #ffffff;
-    &::after {
-      top: auto;
-      bottom: 0;
-      height: 100%;
-    }
+    background: #202020;
   }
 
   &.linkButton--white {
     color: #ffffff;
     border-color: #ffffff;
-
-    &::after {
-      background: #ffffff;
-    }
     &:hover {
-      color: #000000;
+      background: #ffffff;
+      color: #202020;
     }
   }
   
@@ -108,14 +86,13 @@ export default {
     width: 200px;
   }
   @include at-query('max-width: 1024px') {
-    &::after {
-      display: none;
-    }
     &:hover {
+      background: transparent;
       color: #202020;
     }
     &.linkButton--white {
       &:hover {
+        background: transparent;
         color: #ffffff;
       }
     }
