@@ -68,7 +68,7 @@
       overflow: hidden;
       position: relative;
       height: 0;
-      padding-bottom: 39%;
+      padding-bottom: 37%;
       figure {
         position: absolute;
         left: 0;
@@ -109,14 +109,14 @@
         font-family: $font-stack-avalon;
         margin: 0;
         position: absolute;
-        top: 130px;
+        top: 163px;
         @include fonts(34px,#202020,1.2,0.04em);
       }
       .details {
         .point {
           opacity: 0;
           &:not(:last-child) {
-            margin: 0 0 30px;
+            margin: 0 0 25px;
           }
           h3 {
             cursor: pointer;
@@ -124,26 +124,27 @@
             font-family: $font-stack-avalon;
             font-weight: 500;
             margin: 0;
-            padding: 10px 0 10px 52px;
+            padding: 5px 0 5px 52px;
             position: relative;
             @include fonts(18px,#202020,1.2,0.02em);
             &::before, &::after{
               content: "";
-              width: 29px;
-              height: 29px;
+              width: 28px;
+              height: 28px;
               background-position: center;
               background-repeat: no-repeat;
+              background-size: cover;
               position: absolute;
               left: 0;
               top: 50%;
               @include translate(0,-50%);
             }
             &::before {
-              background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/icon-plus.png?749588');
+              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-plus2x.png?1235138');
             }
             &::after {
               opacity: 0;
-              background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/icon-cross.png?749587');
+              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-cross2x.png?1236350');
             }
           }
           &.show-details {
@@ -212,6 +213,7 @@
     }
   }
   @include at-query('max-width: 991px') {
+    padding: 0 0 53px;    
     .content {
       flex-wrap: wrap;
       .image_wrapper {
@@ -225,14 +227,27 @@
       }
       .descriptions {
         flex-basis: 100%;
-        padding: 15px 0 0;
+        padding: 40px 0 0 17px;
 
         h2 {
-          font-size: 35px;
-          font-weight: 400;
-          padding: 35px 0;
+          color: #202020;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          line-height: 32px;
+          padding: 0 0 31px;
           position: static;
 
+        }
+        .details {
+          .point{
+            &:not(:last-child) {
+              margin: 0 0 29px;
+            }
+            p {
+              padding: 11px 0 0px 52px;
+            }
+          }
         }
       }
     }
@@ -240,9 +255,6 @@
   @include at-query('max-width: 640px') {
     .content {
       .descriptions {
-        h2 {
-          font-size: 25px;
-        }
         p {
           padding: 14px 0 0 52px;
         }
