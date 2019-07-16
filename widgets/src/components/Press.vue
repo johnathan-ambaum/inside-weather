@@ -1,7 +1,11 @@
 <template>
   <div class="Press" ref="Press">
     <ul>
-      <li v-for="item in PressList" :key="item.$id">
+      <li 
+        v-for="(item , index) in PressList" 
+        :key="item.$id"
+        v-bind:class="['press-list-' + (index + 1)]"
+        >
         <figure>
           <img :src="item.image">
           

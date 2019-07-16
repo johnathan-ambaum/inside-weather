@@ -120,19 +120,47 @@
       reverse: false
     }).setTween(valuePropsTimeline).addTo(controller);
 
-    const valuePropsPointsTimeline = new TimelineLite()
-    valuePropsPointsTimeline.call(function () {
-      $('.ValueProps .descriptions .details .point').each(function (i){
-        var row = $(this);
-        setTimeout(function() {
-          TweenMax.fromTo(row, 1.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1);
-        }, 200 * i);
-      });
-    })
-    const valuePropsPointsScene = new ScrollMagic.Scene({
-      triggerElement: '.ValueProps .descriptions h2',
-      reverse: false
-    }).setTween(valuePropsPointsTimeline).addTo(controller);
+    $(window).on('load resize', function () {
+      if($(window).width() < 768) {
+        ValuePropsMobAnim();
+        reviewCarouselMobAnim();
+      }
+      if($(window).width() >= 768) {
+        ValuePropsDesktopAnim();
+        reviewCarouselDekstopAnim();
+      }
+    });
+
+    function ValuePropsDesktopAnim() {
+      const valuePropsPointsTimeline = new TimelineLite()
+      valuePropsPointsTimeline.call(function () {
+        $('.ValueProps .descriptions .details .point').each(function (i){
+          var row = $(this);
+          setTimeout(function() {
+            TweenMax.fromTo(row, 1.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1);
+          }, 200 * i);
+        });
+      })
+      const valuePropsPointsScene = new ScrollMagic.Scene({
+        triggerElement: '.ValueProps .descriptions h2',
+        reverse: false
+      }).setTween(valuePropsPointsTimeline).addTo(controller);
+    }
+    function ValuePropsMobAnim() {
+      const valuePropsPointsMobTimeline = new TimelineLite()
+      valuePropsPointsMobTimeline.call(function () {
+        $('.ValueProps .descriptions .details .point').each(function (i){
+          var row = $(this);
+          setTimeout(function() {
+            TweenMax.fromTo(row, 1.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1);
+          }, 200 * i);
+        });
+      })
+      const valuePropsPointsMobScene = new ScrollMagic.Scene({
+        triggerElement: '.ValueProps',
+        reverse: false
+      }).setTween(valuePropsPointsMobTimeline).addTo(controller);
+    }
 
     const pressTimeline = new TimelineLite()
     pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 100}, {opacity: 1, y: 0, ease: Circ.easeOut})
@@ -141,13 +169,25 @@
       reverse: false
     }).setTween(pressTimeline).addTo(controller);
 
-    const ReviewCarouselTimeline = new TimelineLite()
-    ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
-      .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-    const ReviewCarouselTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.ReviewCarousel',
-      reverse: false
-    }).setTween(ReviewCarouselTimeline).addTo(controller);
+    function reviewCarouselDekstopAnim() {
+      const ReviewCarouselTimeline = new TimelineLite()
+      ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
+        .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
+      const ReviewCarouselTimelineScene = new ScrollMagic.Scene({
+        triggerElement: '.ReviewCarouselWrapper',
+        reverse: false
+      }).setTween(ReviewCarouselTimeline).addTo(controller);
+    }
+
+    function reviewCarouselMobAnim() {
+      const ReviewCarouselMobTimeline = new TimelineLite()
+      ReviewCarouselMobTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
+        .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
+      const ReviewCarouselMobTimelineScene = new ScrollMagic.Scene({
+        triggerElement: '.Press ul li.press-list-2',
+        reverse: false
+      }).setTween(ReviewCarouselMobTimeline).addTo(controller);
+    }
 
     const bannerTimeline = new TimelineLite();
     bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: ExpoScaleEase.config(1.05, 1)})

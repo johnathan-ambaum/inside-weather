@@ -217,8 +217,8 @@ export default {
     }
   }
   .down-arrow-xs {
-    border-bottom: 3px solid #ffffff;
-    border-left: 3px solid #ffffff;
+    border-bottom: 1.5px solid #ffffff;
+    border-left: 1.5px solid #ffffff;
     display: block;
     height: 20px;
     position: absolute;
