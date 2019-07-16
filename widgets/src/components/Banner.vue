@@ -88,7 +88,7 @@ export default {
         display: block;
         font-family: $font-stack-avalon;
         font-size: 34px;
-        font-weight: 400;
+        font-weight: 600;
         line-height: 1.2;
         letter-spacing: 0.05em;
         margin: 0 0 16px;
@@ -98,8 +98,9 @@ export default {
         display: block;
         font-family: $font-stack-avalon;
         font-size: 14px;
-        letter-spacing: 0.035em;
-        line-height: 1.57;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        line-height: 22px;
         margin: 0 0 46.5px;
       }
     }
