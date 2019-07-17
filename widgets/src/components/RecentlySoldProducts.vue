@@ -48,64 +48,12 @@ export default {
   components: {
     HeadingWithDescription,
   },
+  props: {
+    recentlySoldProducts: Array
+  },
   data() {
     return {
-      imageGridRow: [
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-1.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-2.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-3.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-4.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-5.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-6.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-7.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-8.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        },
-        {
-          picture: 'https://cdn.shopify.com/s/files/1/2994/0144/files/product-9.png?744727', userFirstName:'Sara',
-          userSecondName:'F',
-          productName:'Mod Velvet Powell Sofa in Jade Green',
-          price:'$1198'
-        }
-      ]
+      imageGridRow: this.recentlySoldProducts
     }
   },
   methods: {
