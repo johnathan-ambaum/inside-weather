@@ -84,14 +84,17 @@ export default {
     }
   },
   mounted() {
-    updateOwlDotsPosition();
+    window.addEventListener('load', updateOwlDotsPosition);
     window.addEventListener('resize', updateOwlDotsPosition);
     function updateOwlDotsPosition() {
-      var reviewImage = document.querySelector('.owl-item.active .Review__image');
-      var getTheWidth = reviewImage.clientWidth;
-      var targetElement = document.querySelector('.ReviewCarousel .owl-dots');
-      targetElement.style.right = (reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)) + 'px';
-      targetElement.style.width = getTheWidth + 'px';
+      setTimeout(function () {
+        var reviewImage = document.querySelector('.owl-item.active .Review__image');
+        var getTheWidth = reviewImage.clientWidth;
+        var targetElement = document.querySelector('.ReviewCarousel .owl-dots');
+        targetElement.style.right = (reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)) + 'px';
+        targetElement.style.width = getTheWidth + 'px';
+      }, 500);
+
     }
 
   }
