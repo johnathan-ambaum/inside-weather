@@ -79,14 +79,16 @@ export default {
     }
   },
   mounted() {
-    maintaineSquareBox();
+    window.addEventListener('load', maintaineSquareBox);
     window.addEventListener('resize', maintaineSquareBox);
     function maintaineSquareBox() {
-      var productList = document.querySelectorAll('.RecentlySoldProducts--column')
-      for(var i = 0; i < productList.length; i++) {
-        var findTheCurrentWidth = productList[i].clientWidth;
-        productList[i].querySelector('figure').style.minHeight = findTheCurrentWidth + 'px';
-      }
+      setTimeout(function() {
+        var productList = document.querySelectorAll('.RecentlySoldProducts--column')
+        for(var i = 0; i < productList.length; i++) {
+          var findTheCurrentWidth = productList[i].clientWidth;
+          productList[i].querySelector('figure').style.minHeight = findTheCurrentWidth + 'px';
+        }
+      }, 300);
     }
   }
 }
@@ -296,50 +298,19 @@ export default {
 
   @include at-query('max-width: 1024px') {
     padding: 75px 0 0;
-    .RecentlySoldProducts--column-1, .RecentlySoldProducts--column-2, .RecentlySoldProducts--column-3 {
-      grid-column-end: span 14;
-    }
-    .RecentlySoldProducts--column-1 {
-      grid-column-start: 1;
-      grid-row: 1 / auto;
-    }
-    .RecentlySoldProducts--column-2 {
-      grid-column-start: 15;
-      grid-row: 1 / auto;
-    }
-    .RecentlySoldProducts--column-3 {
-      grid-column-start: 29;
-      grid-row: 1 / auto;
-    }
-    .RecentlySoldProducts--column-4 {
-      grid-column-start: 1;
-      grid-column-end: span 21;
-      grid-row: 2/span 2;
-    }
-    .RecentlySoldProducts--column-5 {
-      grid-column-start: 22;
-      grid-column-end: -1;
-      grid-row: 2/span 2;
-    }
-    .RecentlySoldProducts--column-6 {
-      grid-column-start: 1;
-      grid-column-end: span 11;
-      grid-row: 4/span 1;
-    }
-    .RecentlySoldProducts--column-7 {
-      grid-column-start: 12;
-      grid-column-end: span 10;
-      grid-row: 4/span 1;
-    }
-    .RecentlySoldProducts--column-8 {
-      grid-column-start: 22;
-      grid-column-end: span 10;
-      grid-row: 4/span 1;
-    }
-    .RecentlySoldProducts--column-9 {
-      grid-column-start: 32;
-      grid-column-end: span 10;
-      grid-row: 4/span 1;
+    .RecentlySoldProducts--column {
+      figure {
+        img {
+          max-width: 85%;
+          max-height: 85%;
+        }
+      }
+      .more-info {
+        height: 25px;
+        right: 10px;
+        top: 10px;
+        width: 25px;
+      }
     }
   }
   @include at-query('max-width: 767px') {
