@@ -26,21 +26,23 @@
     color: #202020;
     display: block;
     font-family: $font-stack-avalon;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
-    letter-spacing: 0.035em;
+    letter-spacing: 0.04em;
     line-height: 1.2;
     text-align: center;
     margin: 0;
   }
   @media only screen and (max-width: 767px) {
     h2 {
-      font-weight: 400;
+      font-weight: 600;
+      font-size: 24px;
     }
     p {
       font-size: 13px;
       line-height: 20px;
       padding: 0 15px;
+      font-weight: 500;
     }
   }
 }

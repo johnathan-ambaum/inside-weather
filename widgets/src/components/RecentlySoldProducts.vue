@@ -21,7 +21,30 @@
           >
           <div 
             class="--lg-hidden more-info"
-          ></div>
+          >
+            <i class="more-info-trigger-icons info-icon-plus">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g id="Group_318" data-name="Group 318" transform="translate(-343 -3113)">
+                  <circle id="Ellipse_9" data-name="Ellipse 9" cx="12" cy="12" r="12" transform="translate(343 3113)" fill="#efedea"/>
+                  <g id="Group_57" data-name="Group 57" transform="translate(349 3119)">
+                    <line id="Line_7" data-name="Line 7" y2="12" transform="translate(6)" fill="none" stroke="#7b7974" stroke-width="0.5"/>
+                    <line id="Line_8" data-name="Line 8" y1="12" transform="translate(12 6) rotate(90)" fill="none" stroke="#7b7974" stroke-width="0.5"/>
+                  </g>
+                </g>
+              </svg>
+            </i>
+            <i class="more-info-trigger-icons info-icon-cross">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.941 33.941">
+                <g id="Group_315" data-name="Group 315" transform="translate(-2443.761 -1941.715) rotate(-45)">
+                  <circle id="Ellipse_9" data-name="Ellipse 9" cx="12" cy="12" r="12" transform="translate(343 3113)" fill="none"/>
+                  <g id="Group_57" data-name="Group 57" transform="translate(349 3119)">
+                    <line id="Line_7" data-name="Line 7" y2="14" transform="translate(7)" fill="none" stroke="#fff" stroke-width="1"/>
+                    <line id="Line_8" data-name="Line 8" y1="14" transform="translate(14 7) rotate(90)" fill="none" stroke="#fff" stroke-width="1"/>
+                  </g>
+                </g>
+              </svg>
+            </i>
+          </div>
           <figure>
             <img :src="items.picture">
           </figure>
@@ -53,6 +76,17 @@ export default {
   data() {
     return {
       imageGridRow: this.recentlySoldProducts
+    }
+  },
+  mounted() {
+    maintaineSquareBox();
+    window.addEventListener('resize', maintaineSquareBox);
+    function maintaineSquareBox() {
+      var productList = document.querySelectorAll('.RecentlySoldProducts--column')
+      for(var i = 0; i < productList.length; i++) {
+        var findTheCurrentWidth = productList[i].clientWidth;
+        productList[i].querySelector('figure').style.minHeight = findTheCurrentWidth + 'px';
+      }
     }
   }
 }
@@ -89,45 +123,42 @@ export default {
     pointer-events: none;
     transition: all 0.3s ease-in-out;
     .more-info {
-      height: 24px;
+      height: 29px;
       position: absolute;
       right: 12.5px;
       top: 11px;
       opacity: 0;
-      width: 24px;
+      width: 29px;
       z-index: 9;
-      &::after, &::before {
-        content: "";
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 24px;
-        width: 24px;
+      i {
+        display: block;
+        height: 100%;
+        pointer-events: none;
         position: absolute;
+        top: 0;
         left: 0;
         right: 0;
-        top: 0;
-        bottom: 0;
-      }
-      &::before {
-        background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-plus-gray_3x_643f55a3-9c52-414a-9f49-2f0e7d975fd9.png?1249665');
-      }
-      &::after {
-        background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-cross_2bbf5dcb-d61e-44c4-8951-b50402a548a0.png?1250475');
-        width: 30px;
-        height: 30px;
-        left: -4px;
-        top: -3px;
-        opacity: 0;
-        visibility: hidden;
-      }
-      &.close {
-        &::before {
+        width: 100%;
+        &.info-icon-cross {
           opacity: 0;
           visibility: hidden;
         }
-        &::after {
-          opacity: 1;
-          visibility: visible;
+        svg {
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
+      }
+      &.close {
+        i {
+          &.info-icon-plus {
+            opacity: 0;
+            visibility: hidden;
+          }
+          &.info-icon-cross {
+            opacity: 1;
+            visibility: visible;
+          }
         }
       }
     }
