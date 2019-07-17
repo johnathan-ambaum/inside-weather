@@ -51,8 +51,9 @@ export default {
     li {
       text-align: center;
       padding: 0 10px;
+      margin: 0;
       figure {
-        margin: 0 auto 20px;
+        margin: 0 auto 18px;
         img {
           display: block;
           height: auto;
@@ -78,7 +79,7 @@ export default {
       padding: 0 15px;
     }
     ul li span {
-      font-size: 15px;
+      font-size: 13px;
     }
   }
   @include at-query('max-width: 1119px') {
@@ -99,9 +100,11 @@ export default {
     padding: 59px 0 27px;
     ul {
       flex-direction: column;
+      margin: 0;
       li {
         flex-basis: unset;
         max-width: 500px;
+        padding: 0 21px;
         &:last-child {
           display: none;
         }
