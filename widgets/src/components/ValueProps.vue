@@ -128,7 +128,7 @@
             margin: 0;
             padding: 5px 0 5px 52px;
             position: relative;
-            @include fonts(18px,#202020,1.2,0.02em);
+            @include fonts(18px,#202020,1.2,0.05em);
             &::before, &::after{
               content: "";
               width: 28px;
@@ -165,7 +165,7 @@
             font-weight: 500;
             margin: 0;
             padding: 0px 0 0px 52px;
-            @include fonts(14px,#202020,2,0.022em);
+            @include fonts(14px,#202020,22px,0.04em);
           }
         }
       }
