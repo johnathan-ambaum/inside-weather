@@ -367,6 +367,7 @@ export default {
     .RecentlySoldProducts--column-7 {
       grid-column-start: 21;
       grid-column-end: -1;
+      grid-row: 4/span 1;
     }
   }
 }
