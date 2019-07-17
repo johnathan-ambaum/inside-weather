@@ -35,6 +35,12 @@
             <span>{{review.authorName}}</span>
             <span>{{review.authorAddress}}</span>
           </div>
+          <a 
+            href="./" 
+            class="--caps"
+          >
+            Read All Reviews
+          </a>
         </div>
         <div class="Review__image">
           <figure>
