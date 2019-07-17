@@ -21,24 +21,20 @@
         <div class="Review__content">
           <h5>{{review.headContent}}</h5>
           <div class="Review__rating clearfix">
-            <figure
+            <i
               v-for="i in review.starCount"
               :key="i.$id"
             >
-              <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/star_c541c21b-071c-4fb3-ad61-d937c0c58c54.png?753977"/>
-            </figure>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.967 20">
+                <path id="Path_556" data-name="Path 556" d="M85.008,92.492l-6.613.733a.632.632,0,0,0-.529.431.621.621,0,0,0,.176.654c1.966,1.794,4.92,4.481,4.92,4.481s-.811,3.908-1.348,6.516a.633.633,0,0,0,.246.635.623.623,0,0,0,.675.035c2.315-1.316,5.782-3.294,5.782-3.294l5.78,3.3a.626.626,0,0,0,.924-.67c-.537-2.609-1.345-6.517-1.345-6.517s2.954-2.687,4.92-4.477a.633.633,0,0,0,.176-.658.626.626,0,0,0-.527-.428c-2.646-.3-6.615-.736-6.615-.736L88.89,86.428a.635.635,0,0,0-.572-.369.626.626,0,0,0-.569.369C86.651,88.854,85.008,92.492,85.008,92.492Z" transform="translate(-77.835 -86.059)" fill="#202020"/>
+              </svg>
+            </i>
           </div>
           <p>{{review.reviewDetail}}</p>
           <div class="Review__author">
             <span>{{review.authorName}}</span>
             <span>{{review.authorAddress}}</span>
           </div>
-          <a 
-            href="./" 
-            class="--caps"
-          >
-            Read All Reviews
-          </a>
         </div>
         <div class="Review__image">
           <figure>
@@ -80,6 +76,18 @@ export default {
         responsive: {0:{nav:false, dots: false, autoplay: false, autoplayTimeout: 4000},992:{nav:true, dots: true, autoplay: true, autoplayTimeout: 5000}}
       }
     }
+  },
+  mounted() {
+    updateOwlDotsPosition();
+    window.addEventListener('resize', updateOwlDotsPosition);
+    function updateOwlDotsPosition() {
+      var reviewImage = document.querySelector('.owl-item.active .Review__image');
+      var getTheWidth = reviewImage.clientWidth;
+      var targetElement = document.querySelector('.ReviewCarousel .owl-dots');
+      targetElement.style.right = (reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)) + 'px';
+      targetElement.style.width = getTheWidth + 'px';
+    }
+
   }
 }
 </script>
@@ -120,8 +128,8 @@ export default {
         span {
           font-family: $font-stack-avalon;
           display: block;
-          font-weight: 500;
-          @include fonts(18px,#202020,1.33,0.05em);
+          font-weight: 400;
+          @include fonts(14px,#202020,1.33,0.05em);
           &:first-child {
             color: #212121;
             font-weight: 600;
@@ -154,13 +162,13 @@ export default {
   .Review__rating {
     display: block;
     margin: 0 0 24px;
-    figure {
+    i {
       display: inline-block;
       float: left;
       height: 20px;
       margin-right: 13px;
       width: 20px;
-      img {
+      svg {
         display: block;
         height: 100%;
         width: 100%;
@@ -189,9 +197,6 @@ export default {
       .Review__image {
         flex-basis: 45%;
       }
-    }
-    .owl-theme.owl-carousel .owl-dots {
-      right: 22.5%;
     }
   }
   @include at-query('max-width: 1280px') {
@@ -222,12 +227,9 @@ export default {
     }
     .Review__rating {
       margin: 0 0 20px;
-      figure {
+      i {
         margin-right: 8px;
       }
-    }
-    .owl-theme.owl-carousel .owl-dots {
-      right: 25%;
     }
   }
   @include at-query('max-width: 1199px') {
@@ -297,7 +299,7 @@ export default {
     }
     .Review__rating {
       margin: 0 0 22px;
-      figure {
+      i {
         height: 14px;
         width: 14px;
       }
@@ -321,14 +323,15 @@ export default {
     .owl-nav {
       position: absolute;
       left: calc((1215px - 100vw) / 2);
-      top: 50%;
+      top: calc(50% + 96px);
       transform: translate(0,-50%);
       width: 100vw;
     }
     .owl-dots {
       position: absolute;
-      right: 25%;
+      right: 0;
       bottom: -40px;
+      width: auto;
       .owl-dot {
         outline: none;
         box-shadow: none;
