@@ -136,18 +136,17 @@
               height: 28px;
               background-position: center;
               background-repeat: no-repeat;
-              background-size: cover;
               position: absolute;
               left: 0;
               top: 50%;
               @include translate(0,-50%);
             }
             &::before {
-              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-plus2x.png?1235138');
+              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-round-plus.svg?1287374');
             }
             &::after {
               opacity: 0;
-              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-cross2x.png?1236350');
+              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-round-fill-close.svg?1287579');
             }
           }
           &.show-details {
@@ -165,7 +164,7 @@
             font-family: $font-stack-avalon;
             font-weight: 500;
             margin: 0;
-            padding: 0px 0 0px 52px;
+            padding: 11px 0 0px 52px;
             @include fonts(14px,#202020,22px,0.04em);
           }
         }
@@ -230,7 +229,7 @@
       }
       .descriptions {
         flex-basis: 100%;
-        padding: 40px 0 0 17px;
+        padding: 40px 17px 0;
 
         h2 {
           color: #202020;
