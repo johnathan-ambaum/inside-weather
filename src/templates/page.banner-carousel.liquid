@@ -38,9 +38,9 @@
       <review-carousel :review-content="{{reviewContent}}"></review-carousel>
     </div>
   </div>
-
+  {% assign bannerSectionAssets = "[{'bgLarge':'https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635', 'bgSmall': 'https://cdn2.shopify.com/s/files/1/2994/0144/files/banner-mobile-bg.png?1294680'}]"  %}
   <banner 
-    banner-image="https://cdn.shopify.com/s/files/1/2994/0144/files/design-services_bnr.png?751635"
+    :banner-image="{{bannerSectionAssets}}"
   >
   </banner>
 
@@ -124,7 +124,7 @@
       reverse: false
     }).setTween(valuePropsTimeline).addTo(controller);
 
-    $(window).on('load resize', function () {
+    $(window).on('load', function () {
       if($(window).width() < 768) {
         ValuePropsMobAnim();
         reviewCarouselMobAnim();

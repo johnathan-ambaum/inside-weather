@@ -27,18 +27,35 @@ export default {
   props: {
     hasOverlay: {type: Boolean, default: true},
     fillColor: {type: String, default: 'white'},
-    bannerImage: String
+    bannerImage: Array
   },
   data() {
     return {
-      bannerImageUrl: this.bannerImage
+      bannerImageUrl: ''
     }
+  },
+  created() {
+    this.updateBanner();
+    window.addEventListener('resize', this.updateBanner);
   },
   methods: {
     bannerClass() {
       return {
         'Banner--hideOverlay': !this.hasOverlay,
         'Banner--darkColor': this.fillColor === 'black'
+      }
+    },
+    updateBanner() {
+      if(window.innerWidth >= 481) {
+        this.bannerImageUrl = this.bannerImage[0].bgLarge;
+      }else {
+        if(window.innerWidth < 481) {
+          if(this.bannerImage[0].bgSmall) {
+            this.bannerImageUrl = this.bannerImage[0].bgSmall;
+          }else {
+            this.bannerImageUrl = this.bannerImage[0].bgLarge;
+          }
+        }
       }
     }
   }
