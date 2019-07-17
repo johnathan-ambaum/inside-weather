@@ -343,7 +343,8 @@ export default {
         box-shadow: none;
         span {
           background: transparent;
-          border: 1px solid #000000;
+          border: 1.5px solid #000000;
+          margin: 0 4px;
           @include transition();
         }
         &:hover {
