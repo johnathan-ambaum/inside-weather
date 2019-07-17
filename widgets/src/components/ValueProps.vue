@@ -39,6 +39,7 @@
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .ValuePropsWrapper {
   background: transparent;
   margin: 45px 0 0;

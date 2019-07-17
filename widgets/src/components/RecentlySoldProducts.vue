@@ -21,7 +21,6 @@
           >
           <div 
             class="--lg-hidden more-info"
-            @click="displayMoreInfo($event)"
           ></div>
           <figure>
             <img :src="items.picture">
@@ -54,13 +53,6 @@ export default {
   data() {
     return {
       imageGridRow: this.recentlySoldProducts
-    }
-  },
-  methods: {
-    displayMoreInfo(e) {
-      const targetElement = e.target.parentElement
-      $(e.target).toggleClass('close')
-      $(targetElement).find('.RecentlySoldProducts--overlayWrapper').toggleClass('show')
     }
   }
 }

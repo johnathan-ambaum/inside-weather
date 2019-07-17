@@ -2,7 +2,7 @@
   <div class="Press" ref="Press">
     <ul>
       <li 
-        v-for="(item , index) in PressList" 
+        v-for="(item , index) in pressListItems" 
         :key="item.$id"
         v-bind:class="['press-list-' + (index + 1)]"
         >
@@ -18,25 +18,12 @@
 
 <script>
 export default {
+  props: {
+    pressList: Array
+  },
   data() {
     return {
-      PressList: [
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_housemethod.png?751632',
-          description: 'Inside Weather is out to prove that ease and customization are not mutually exclusive.'
-        },
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_domino_2x_788a469b-7ccf-4ec6-a2eb-6b46463c92bb.png?751631',
-          description: 'A welcome addition to the new design world of ultra simplicity.'
-        },
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_washingtonpost.png?751634',
-          description: 'A welcome addition to the new design world of ultra simplicity.'
-        },
-        {
-          image: 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_realsimple.png?751634',description: 'Inside Weather is out to prove that ease and customization are not mutually exclusive.'
-        }
-      ]   
+      pressListItems: this.pressList
     }
   }
 }
@@ -45,6 +32,7 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .PressContainer {
   padding: 173px 0;
   @include block();

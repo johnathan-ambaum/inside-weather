@@ -35,6 +35,7 @@
 <script>
 import slider from './Slider.vue'
 import LinkButton from './LinkButton.vue'
+
 export default {
   components: {
     slider,

@@ -57,7 +57,8 @@
 </template>
 
 <script>
-import Slider from './Slider.vue' 
+import Slider from './Slider.vue'
+ 
 export default {
   components: {
     Slider
@@ -86,6 +87,7 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .ReviewCarousel {
   width: 100%;
   height: auto;
