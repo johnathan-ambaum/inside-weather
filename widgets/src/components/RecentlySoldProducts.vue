@@ -2,8 +2,8 @@
   <div class="SoldProducts --pd-t-130" ref="SoldProducts">
     <div class="heading">
       <heading-with-description>
-        <h2>Recently Sold</h2>
-        <p>Made-to-order furniture, shipped in days, because life is too short to wait.</p>
+        <h2>{{sectionHeading}}</h2>
+        <p>{{sectionDescription}}</p>
       </heading-with-description>
     </div>
     <div 
@@ -17,7 +17,6 @@
           v-for="(items, index) in imageGridRow" 
           :key="items.$id" 
           v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1)]"
-
           >
           <div 
             class="--lg-hidden more-info"
@@ -71,7 +70,9 @@ export default {
     HeadingWithDescription,
   },
   props: {
-    recentlySoldProducts: Array
+    recentlySoldProducts: Array,
+    sectionHeading: String,
+    sectionDescription: String
   },
   data() {
     return {

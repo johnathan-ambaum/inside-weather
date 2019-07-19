@@ -39,7 +39,7 @@
             href="./" 
             class="--caps"
           >
-            Read All Reviews
+            {{linkText}}
           </a>
         </div>
         <div class="Review__image">
@@ -53,7 +53,7 @@
       href="./" 
       class="--caps read-all-review-sm"
     >
-      Read All Reviews
+      {{linkText}}
     </a>  
   </div>
 </template>
@@ -66,7 +66,8 @@ export default {
     Slider
   },
   props: {
-    reviewContent: Array
+    reviewContent: Array,
+    linkText: String
   },
   data() {
     return {
