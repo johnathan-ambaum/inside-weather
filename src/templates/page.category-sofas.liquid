@@ -1,0 +1,11 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hasImage = false %}
+    {% assign bannerContent = "{'items':[{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Sofas','url':'/pages/category-sofa'},{'image':' ','heading':'Create your custom climate.','description':'The Weather is now entirely up to you.','linkText':'Shop Armchair','url':'/pages/category-armchair'},{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Table','url':'/pages/category-table'}]}"%}
+
+    <banner-carousel 
+      :has-image="{{hasImage}}"
+      :banner-content="{{bannerContent}}">
+    </banner-carousel>
+  </div>
+</div>

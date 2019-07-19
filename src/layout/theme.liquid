@@ -102,7 +102,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js"></script>
 
   <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' -%}
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' -%}
     {%- if customer -%}
       {%- if customer.metafields.global.favorites -%}
         {%- assign favorites = customer.metafields.global.favorites -%}
