@@ -3,38 +3,49 @@
     <div class="content">
       <div class="image_wrapper">
         <figure class="default" data-src="default">
-          <img src='https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img1.png?748574'>
+          <img :src='defaultImage'>
         </figure>
-        <figure data-src="free-shipping">
-          <img src='https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img2.png?748574'>
-        </figure>
-        <figure data-src="365-day-home-trial">
-          <img src='https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img1.png?748574'>
-        </figure>
-        <figure data-src="crafted">
-          <img src='https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img2.png?748574'>
-        </figure>
+        <figiure 
+          v-for="item in valuePropsContent"
+          :key="item.id"
+          v-bind:data-src="item.targetPoint"
+        >
+          <img :src="item.image">
+        </figiure>
       </div>
       <div class="descriptions">
-        <h2>A better way to shop for furniture</h2>
+        <h2>{{mainHeading}}</h2>
         <div class="details">
-          <div class="point">
-            <h3 data-target="free-shipping">Free shipping</h3>
-            <p>Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping.</p>
-          </div>
-          <div class="point">
-            <h3 data-target="365-day-home-trial">365 Day Home Trial</h3>
-            <p>Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping.</p>
-          </div>
-          <div class="point">
-            <h3 data-target="crafted">California Crafted</h3>
-            <p>Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping.</p>
-          </div>
+          <accordion
+            v-for="Item in valuePropsContent"
+            :key="Item.id"
+            :accordionHead="Item.accordionHead"
+            :accordionDescription="Item.accordionDescription"
+            :accordionTriggerElement="Item.targetPoint"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+import accordion from './accordion'
+export default {
+  props: {
+    valuePropsItems: Array,
+    defaultImage: String,
+    mainHeading: String
+  },
+  components: {
+    accordion
+  },
+  data() {
+    return {
+      valuePropsContent: this.valuePropsItems  
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 @import '../scss/mixins';
@@ -116,57 +127,8 @@
         @include fonts(34px,#202020,1.2,0.04em);
       }
       .details {
-        .point {
+        .point{
           opacity: 0;
-          &:not(:last-child) {
-            margin: 0 0 25px;
-          }
-          h3 {
-            cursor: pointer;
-            display: block;
-            font-family: $font-stack-avalon;
-            font-weight: 500;
-            margin: 0;
-            padding: 5px 0 5px 52px;
-            position: relative;
-            @include fonts(18px,#202020,1.2,0.05em);
-            &::before, &::after{
-              content: "";
-              width: 28px;
-              height: 28px;
-              background-position: center;
-              background-repeat: no-repeat;
-              position: absolute;
-              left: 0;
-              top: 50%;
-              @include translate(0,-50%);
-            }
-            &::before {
-              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-round-plus.svg?1287374');
-            }
-            &::after {
-              opacity: 0;
-              background-image: url('https://cdn2.shopify.com/s/files/1/2994/0144/files/icon-round-fill-close.svg?1287579');
-            }
-          }
-          &.show-details {
-            h3 {
-              &::before {
-                opacity: 0;
-              }
-              &::after {
-                opacity: 1;
-              }
-            }
-          }
-          p {
-            display: none;
-            font-family: $font-stack-avalon;
-            font-weight: 500;
-            margin: 0;
-            padding: 11px 0 0px 52px;
-            @include fonts(14px,#202020,22px,0.04em);
-          }
         }
       }
     }
@@ -182,16 +144,6 @@
 
         h2 {
           font-size: 34px;
-        }
-        .details {
-          .point {
-            h3 {
-              font-size: 16px;
-            }
-            p {
-              font-size: 13px;
-            }
-          }
         }
       }
       
@@ -209,9 +161,6 @@
           font-size: 28px;
         }
       }
-    }
-    .content .descriptions .details .point:not(:last-child) {
-      margin: 0 0 15px;
     }
   }
   @include at-query('max-width: 991px') {
@@ -240,16 +189,6 @@
           padding: 0 0 31px;
           position: static;
 
-        }
-        .details {
-          .point{
-            &:not(:last-child) {
-              margin: 0 0 29px;
-            }
-            p {
-              padding: 11px 0 0px 52px;
-            }
-          }
         }
       }
     }

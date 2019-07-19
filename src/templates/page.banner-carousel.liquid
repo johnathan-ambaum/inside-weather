@@ -17,9 +17,16 @@
     </category-list>
   </div>
 
+  {% assign valuePropsItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img2.png?748574', 'targetPoint': 'free-shipping', 'accordionHead': 'Free shipping', accordionDescription: 'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping.'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img1.png?748574', 'targetPoint': '365-day-home-trial', 'accordionHead': '365 Day Home Trial', accordionDescription: 'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping.'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img2.png?748574', 'targetPoint': 'crafted', 'accordionHead': 'California Crafted', accordionDescription: 'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping.'}]" %}
+  
   <div class="ValuePropsWrapper">
     <div class="--custom-container">
-      <value-props></value-props>
+      <value-props
+      :value-props-items="{{valuePropsItems}}"
+      default-image="https://cdn.shopify.com/s/files/1/2994/0144/files/vprop_img1.png?748574"
+      main-heading="A better way to shop for furniture"
+      >
+      </value-props>
     </div>
   </div>
 
