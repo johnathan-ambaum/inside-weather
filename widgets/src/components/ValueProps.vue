@@ -5,13 +5,13 @@
         <figure class="default" data-src="default">
           <img :src='defaultImage'>
         </figure>
-        <figiure 
+        <figure 
           v-for="item in valuePropsContent"
           :key="item.id"
           v-bind:data-src="item.targetPoint"
         >
           <img :src="item.image">
-        </figiure>
+        </figure>
       </div>
       <div class="descriptions">
         <h2>{{mainHeading}}</h2>
