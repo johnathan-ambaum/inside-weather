@@ -1,11 +1,39 @@
 <div id="app">
   <div class="categorySofas">
-    {% assign hasImage = false %}
-    {% assign bannerContent = "{'items':[{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Sofas','url':'/pages/category-sofa'},{'image':' ','heading':'Create your custom climate.','description':'The Weather is now entirely up to you.','linkText':'Shop Armchair','url':'/pages/category-armchair'},{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Table','url':'/pages/category-table'}]}"%}
+    {% assign hideDesktopSlider = true %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671`','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'arm-stle'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/ibp_d_banner_2_2x_de5df04a-5e15-42d9-9b6f-152ddefc57a8.png?1321831','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'upholstery'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671','heading':'Sofas','description':'Start with one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'shape'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671`','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'configuration'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/ibp_d_banner_2_2x_de5df04a-5e15-42d9-9b6f-152ddefc57a8.png?1321831','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'pillow-detail'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671','heading':'Sofas','description':'Start with one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'base'}]}"%}
 
-    <banner-carousel 
-      :has-image="{{hasImage}}"
-      :banner-content="{{bannerContent}}">
-    </banner-carousel>
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Arm Style', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'arm-stle'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'upholstery'}, {'accordionHead': 'Shape', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'shape'},{'accordionHead': 'Configuration', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'configuration'},{'accordionHead': 'Pillow Detail', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'pillow-detail'}, {'accordionHead': 'Base', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'base'},]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
   </div>
 </div>
+<script>
+jQuery(function ($) { 
+  jQuery('.point a').on('click', (e) => {
+    const $ = jQuery;
+    const targetParent = $('.CategoryBanner--clasification .point');
+    const allDescription = $('.CategoryBanner--clasification .point p');
+    if (e.target.parentElement.classList.contains('show-details')) {
+      toggleSlide(e.target.parentElement.children[1]);
+      e.target.parentElement.classList.remove('show-details');
+    }else {
+      $(allDescription).slideUp();
+      downSlide(e.target.parentElement.children[1]);
+      $(targetParent).removeClass('show-details');
+      e.target.parentElement.classList.add('show-details');
+    }
+  });
+});
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>

@@ -2,6 +2,7 @@
   <div class="point">
     <h3 :data-target="accordionTriggerElement">{{accordionHead}}</h3>
     <p>{{accordionDescription}}</p>
+    <a :href="'#' + accordionTriggerElement" :data-target="accordionTriggerElement" v-if="anchorTageRequire"></a>
   </div>  
 </template>
 <script>
@@ -9,7 +10,8 @@ export default {
   props: {
     accordionHead: String,
     accordionDescription: String,
-    accordionTriggerElement: String
+    accordionTriggerElement: String,
+    anchorTageRequire: {type: Boolean, default: false}
   }
 }
 </script>
@@ -17,6 +19,17 @@ export default {
 @import '../scss/mixins';
 @import '../scss/variables';
 .point{
+  position: relative;
+  a {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
   &:not(:last-child) {
     margin: 0 0 25px;
   }

@@ -14,6 +14,8 @@
         :mouseDrag="mouseDrag"
         :touchDrag="touchDrag"
         :pullDrag="pullDrag"
+        :animateOut="animateOut"
+        :animateIn="animateIn"
       >
         <slot></slot>
       </carousel>
@@ -40,7 +42,9 @@ export default {
     responsive: Object,
     mouseDrag: {type: Boolean, default: true},
     touchDrag: {type: Boolean, default: true},
-    pullDrag: {type: Boolean, default: true}
+    pullDrag: {type: Boolean, default: true},
+    animateOut: {type: [String, Boolean], default: false},
+    animateIn: {type: [String, Boolean], default: false}
   }
 }
 </script>

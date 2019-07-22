@@ -20,6 +20,7 @@ import ValueProps from './components/ValueProps.vue';
 import Press from './components/Press.vue';
 import ReviewCarousel from './components/ReviewCarousel.vue';
 import Banner from './components/Banner.vue';
+import CategoryBanner from './components/CategoryBanner';
 import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
@@ -54,6 +55,7 @@ const app = new Vue({
     ReviewCarousel,
     Banner,
     RecentlySoldProducts,
+    CategoryBanner
   },
 
   store,
