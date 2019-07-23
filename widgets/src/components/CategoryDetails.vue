@@ -1,34 +1,29 @@
 <template>
   <div class="image-content-wrapper">
-    <div 
-      class="image-content-box _pd-b-50"
-      v-for="productDetail in productDetails"
-      :key="productDetail.id"
-    >
+    <div class="--custom-container">
       <div 
-        class="col col-image"
-        v-bind:style="{ backgroundImage: 'url('+ productDetail.imageUrl +')' }"
+        class="image-content-box _pd-b-50"
+        v-for="productDetail in productDetails"
+        :key="productDetail.id"
       >
-      </div>
-      <div class="col col-text">
-        <div class="aligner-item">
-          <heading-with-description>
-            <h2>{{productDetail.title}}</h2>
-            <p>{{productDetail.description}}</p>
-          </heading-with-description>
-        </div>
+        <figure>
+          <img :src="productDetail.imageUrl" />
+        </figure>
+        <heading-with-description>
+          <h2>{{productDetail.title}}</h2>
+          <p>{{productDetail.description}}</p>
+        </heading-with-description>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import headingWithDescription from './HeadingWithDescription.vue'
+import HeadingWithDescription from './HeadingWithDescription.vue'
 
 export default {
-  name: 'CategoryDetails',
   components: {
-    headingWithDescription
+    HeadingWithDescription,
   },
   props: {
     productDetails: Array
@@ -42,61 +37,43 @@ export default {
 
 .image-content-wrapper {
   .image-content-box {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    flex-direction: row; 
-    -webkit-flex-direction: row;
-    -webkit-flex-wrap: wrap;
-    -webkit-justify-content: space-around;
-    &:nth-child(even) {
-      -webkit-flex-direction: row-reverse;
-      flex-direction: row-reverse;
-    }
-  }
-  .col {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    &.col-text {
-      height:20em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    &.col-image {
+    display: inline-flex;
+    figure {
+      background-position: center;
+      background-repeat: no-repeat;
       background-size: cover;
-      background-position:center center;
-    }
-  }
-  .aligner-item {
-    width: 60%;
-  }
-  @include at-query('max-width: 640px') {
-    .image-content-box {
-      height: 40em;
-      display: -webkit-flex;
-      -webkit-flex-direction: column;
-      flex-direction: column;
-      &:nth-child(even) {
-        -webkit-flex-direction: column;
-        flex-direction: column;
+      width: 65%;
+      height: 0;
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 43%;
+      img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: auto;
       }
     }
-    .col {
-      order: vertical;
-      &.col-text div p {
-        padding: 1em;
+    .HeadingWithDescription {
+      margin: auto 0;
+      padding: 0 0 0 77px;
+      text-align: center;
+      width: 35%;
+      h2 {
+        margin: 0 0 32px;
       }
     }
-    .aligner-item {
-      width: 90%;
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+      figure {
+        width: 55%;
+      }
+      .HeadingWithDescription {
+        width: 45%;
+        padding: 0 77px 0 0;
+      }
     }
   }
 }

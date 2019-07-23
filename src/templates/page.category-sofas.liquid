@@ -32,7 +32,7 @@
         section-description="The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience."
         :iframe-source-video={{iframeSourceVideo}}
       >
-      </category-vide>
+      </category-video>
     </div>
     <div class="section_lifeStylePhotos --pd-t-130">
       <life-style-photos
@@ -42,8 +42,14 @@
       </life-style-photos>
     </div>
 
+    {% assign productDetails = "[{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_upholstery.png?1446467','title': 'Upholstery','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_life_proof.png?1407107','title': 'LifeProof','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_comfort.png?1407107','title': 'Comfort','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},]" %}
+
+    <div class="productDetails --pd-t-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
   </div>
 </div>
+
 <script>
 jQuery(function ($) { 
   jQuery('.point a').on('click', (e) => {
