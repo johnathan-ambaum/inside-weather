@@ -47,6 +47,19 @@
     <div class="productDetails --pd-t-130">
       <category-details :product-details="{{productDetails}}"></category-details>
     </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Handcrafted in CA','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Quick Ship','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'365 Day Home Trial','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'}]"%}
+
+    {% assign categoryVprops = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Handcrafted in CA','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Quick Ship','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'365 Day Home Trial','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'}]"%}
+    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops :category-value-props="{{categoryValueProps}}"></category-vprops> 
+      <category-vprops 
+        :category-value-props="{{categoryVprops}}"
+        background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
   </div>
 </div>
 
