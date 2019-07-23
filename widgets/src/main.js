@@ -23,6 +23,7 @@ import Banner from './components/Banner.vue';
 import CategoryBanner from './components/CategoryBanner';
 import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import Collections from './components/Collections.vue';
+import CategoryVideo from './components/CategoryVideo';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
@@ -57,7 +58,8 @@ const app = new Vue({
     Banner,
     RecentlySoldProducts,
     CategoryBanner,
-    Collections
+    Collections,
+    CategoryVideo
   },
 
   store,
