@@ -25,6 +25,7 @@ import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import Collections from './components/Collections.vue';
 import CategoryDetails from './components/CategoryDetails.vue';
 import CategoryVideo from './components/CategoryVideo';
+import LifeStylePhotos from './components/LifeStylePhotos.vue'
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
@@ -62,6 +63,7 @@ const app = new Vue({
     Collections,
     CategoryDetails,
     CategoryVideo,
+    LifeStylePhotos,
   },
 
   store,
