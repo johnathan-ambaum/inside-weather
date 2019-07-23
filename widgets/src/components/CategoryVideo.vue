@@ -8,9 +8,25 @@
       class="--custom-container"
     >
       <div class="CategoryVideo--videoFrame">
-        <iframe src="" frameborder="0" allowfullscreen id="categoryVideoPlayer"></iframe>
+        <iframe 
+          frameborder="0" 
+          allowfullscreen 
+          id="categoryVideoPlayer"
+          v-if="iframeSourceVideo"
+          class="videoPlayer"
+        >
+        </iframe>
+        <video 
+          v-if="!iframeSourceVideo"
+          class="videoPlayer"
+          id="categoryVideoPlayer"
+        >
+          <source 
+            :src="videoUrl" 
+          /> 
+        </video>
         <div 
-          class="CategoryVideo--iframePoster"
+          class="CategoryVideo--CustomPoster"
           v-bind:style="{ backgroundImage: 'url('+ videoPoster +')' }"
           v-on:click="playVideo"
         >
@@ -43,6 +59,7 @@ export default {
     sectionHeading: String,
     sectionDescription: String,
     backCurtain: {type: Boolean, default: true},
+    iframeSourceVideo: {type: Boolean, default: true}
   },
   data() {
     return {
@@ -63,16 +80,32 @@ export default {
     
     playVideo: function (e) {
       const player = document.getElementById('categoryVideoPlayer');
-      if(this.videoPlayStatus === 0) {
-        e.target.classList.add('hiddenPoster')
-        const generateUrl = this.videoUrl + '?autoplay=1';
-        console.log(generateUrl);
-        player.attributes.src = generateUrl;
-        this.videoPlayStatus = 1;
+      if(this.iframeSourceVideo) {
+        if(this.videoPlayStatus === 0) {
+          player.src = this.videoUrl + '?autoplay=1';
+          this.videoPlayStatus = 1;
+          setTimeout(function() {
+            e.target.classList.add('hiddenPoster');
+          }, 500);
+        }
+        if(this.videoPlayStatus === 1) {
+          this.videoPlayStatus = 0;
+        }
+      }else {
+        if(player.paused === true) {
+          e.target.classList.add('hideVideoPoster');
+          player.play();
+        }else {
+          e.target.classList.remove('hideVideoPoster');
+          player.pause();
+        }
       }
-      if(this.videoPlayStatus === 1) {
-        this.videoPlayStatus = 0;
-      }
+    }
+  },
+  mounted() {
+    const player = document.getElementById('categoryVideoPlayer');
+    player.onended = function(e) {
+      document.querySelector('.CategoryVideo--CustomPoster').classList.remove('hideVideoPoster');
     }
   }
 }
@@ -102,7 +135,7 @@ export default {
     position: relative;
     padding-bottom: 56.25%;
     @include block(0);
-    iframe {
+    .videoPlayer {
       position: absolute;
       left: 0;
       right: 0;
@@ -111,7 +144,7 @@ export default {
       margin: auto;
       @include block(100%);
     } 
-    .CategoryVideo--iframePoster {
+    .CategoryVideo--CustomPoster {
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -123,6 +156,7 @@ export default {
       bottom: 0;
       margin: auto;
       z-index: 4;
+      transition: all 0.5s ease-in-out;
       @include block(100%);
       i {
         width: 82px;
@@ -133,6 +167,7 @@ export default {
         right: 0;
         top: 50%;
         margin: 0 auto;
+        pointer-events: none;
         transform: translateY(-50%);
         z-index: 5;
         svg {
@@ -143,6 +178,9 @@ export default {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
+      }
+      &.hideVideoPoster {
+        opacity: 0;
       }
     }
   }
