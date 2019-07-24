@@ -2,16 +2,15 @@
   <div class="categorySofas">
     {% assign hideDesktopSlider = true %}
     {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671`','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'arm-stle'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/ibp_d_banner_2_2x_de5df04a-5e15-42d9-9b6f-152ddefc57a8.png?1321831','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'upholstery'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671','heading':'Sofas','description':'Start with one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'shape'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671`','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'configuration'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/ibp_d_banner_2_2x_de5df04a-5e15-42d9-9b6f-152ddefc57a8.png?1321831','heading':'Sofas','description':'Start one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'pillow-detail'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category-main-banner-desktop.png?1337671','heading':'Sofas','description':'Start with one of these silhouettes and customize to make it your own.','linkText':'Customize now','url':'/', dataSource: 'base'}]}"%}
-
+    
     {% assign categoryBannerAccordion = "[{'accordionHead': 'Arm Style', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'arm-stle'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'upholstery'}, {'accordionHead': 'Shape', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'shape'},{'accordionHead': 'Configuration', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'configuration'},{'accordionHead': 'Pillow Detail', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'pillow-detail'}, {'accordionHead': 'Base', 'accordionDescription': 'Start with one of these silhouettes and customize to make it your own', 'accordionTarget': 'base'},]" %}
 
     <category-banner 
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
       :category-banner-accordion="{{categoryBannerAccordion}}"
-    >
+      >
     </category-banner>
-
 
     {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/150SDCAE7A0C/150SDCAE7A0C-0_small.jpg', 'title': 'Milo Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S67923829/150S67923829-0_small.jpg', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/t/31/assets/pf-ad525b40-8b5b-4b8e-9e6c-d9dae7a23a1b--150S7EEFC8F6-0small.jpg?286256', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150SDCAE7A0C/150SDCAE7A0C-0_small.jpg', 'title': 'Milo Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S67923829/150S67923829-0_small.jpg', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/t/31/assets/pf-ad525b40-8b5b-4b8e-9e6c-d9dae7a23a1b--150S7EEFC8F6-0small.jpg?286256', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S67923829/150S67923829-0_small.jpg', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/t/31/assets/pf-ad525b40-8b5b-4b8e-9e6c-d9dae7a23a1b--150S7EEFC8F6-0small.jpg?286256', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}]" %}
 
@@ -25,6 +24,12 @@
         </collections>
       </div>
     </div>
+    {% assign productDetails = "[{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_upholstery.png?1446467','title': 'Upholstery','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_life_proof.png?1407107','title': 'LifeProof','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_comfort.png?1407107','title': 'Comfort','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},]" %}
+
+    <div class="productDetails --pd-t-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
     <div class="section_categoryVideo --pd-t-130">
       <category-video
         video-url="https://player.vimeo.com/video/331135291"
@@ -33,19 +38,6 @@
         section-description="The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience."
       >
       </category-video>
-    </div>
-    <div class="section_lifeStylePhotos --pd-t-130">
-      <life-style-photos
-        section-heading="Get the Look"
-        section-description="The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience."
-      >
-      </life-style-photos>
-    </div>
-
-    {% assign productDetails = "[{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_upholstery.png?1446467','title': 'Upholstery','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_life_proof.png?1407107','title': 'LifeProof','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/details_comfort.png?1407107','title': 'Comfort','description': 'The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience.'},]" %}
-
-    <div class="productDetails --pd-t-130">
-      <category-details :product-details="{{productDetails}}"></category-details>
     </div>
 
     {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Handcrafted in CA','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Quick Ship','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'365 Day Home Trial','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'}]"%}
@@ -60,6 +52,22 @@
       >
       </category-vprops>
     </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-1.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-2.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-3.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-4.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-5.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-6.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-7.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-8.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-9.png?1455640'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/life-style-10.png?1455640'}]" %}
+
+    {% assign popUpList = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/popUp-img-1.png?1493728', 'title': 'Linen Weave Powell Sofa in Dijon', 'price': '$1098'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/popUp-img-2.png?1493728', 'title': 'Linen Weave Powell Sofette in Peppercorn', 'price': '$1098'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/popUp-img-3.png?1493728', 'title': 'Kobe Dining Chair in Dijon', 'price': '$1098'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/popUp-img-4.png?1493728', 'title': 'Latte Elle Side Table in Latte Wood', 'price': '$1098'}]" %}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get the Look"
+        section-description="The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience."
+        pop-up-heading="Get the Look"
+        :pop-up-list="{{popUpList}}"
+      >
+      </life-style-photos>
+    </div>
+
   </div>
 </div>
 
