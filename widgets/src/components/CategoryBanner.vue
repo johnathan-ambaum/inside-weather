@@ -3,7 +3,6 @@
     class="CategoryBanner CategoryBanner--sliderWrapper"
     ref="CategoryBanner--sliderWrapper"
     >
-    {{isBigScreen}} 
     <slider
       :items="sliderProps.items"
       :animateIn="sliderProps.animateIn"
@@ -82,7 +81,7 @@ export default {
       bannerContentItems: this.bannerContent.items,
       categoryAccordion: this.categoryBannerAccordion,
       anchorTageRequire: true,
-      isBigScreen: '',
+      isBigScreen: true,
       sliderProps: {
         items: 1,
         animateIn: 'fadeIn',
@@ -93,15 +92,16 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('load', changeTheBanner);
-    window.addEventListener('resize', changeTheBanner);
-    function changeTheBanner() {
-      if(window.innerWidth > 991) {
-        this.isBigScreen = 'true'
-      }else {
-        this.isBigScreen = 'false'
+    const changeTheBanner = () => {
+      if (window.innerWidth > 991) {
+       this.isBigScreen = true
+      } else {
+        this.isBigScreen = false
       }
-    }
+    };
+    
+    window.addEventListener('resize', changeTheBanner);
+    window.addEventListener('load', changeTheBanner);
   }
 }
 </script>
