@@ -121,8 +121,12 @@ export default {
   }
 }
 .LifeStylePhotos--gridContainer {
+  &.grid--container {
+    .LifeStylePhotos--column {
+      position: relative;
+    }  
+  }
   .LifeStylePhotos--column {
-    position: relative;
     figure {
       padding: 0 8px 16px;
       @include block(100%);

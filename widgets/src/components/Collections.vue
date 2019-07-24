@@ -60,11 +60,13 @@ export default {
     flex-basis: 25%;
     text-align: center;
     margin: 0;
-    &:nth-last-child(-n+4) {
-      box-shadow: inset 0 -0.25px 0 0 #202020;
+    box-shadow: inset -0.25px -0.25px 0 0 #202020;
+    &:nth-last-child(n+4) {
+      a {
+        box-shadow: inset 0px 0.25px 0 0 #202020;
+      }
     }
     a {
-      box-shadow: inset 0.2px 0.25px 0.25px 0px #202020;
       padding: 15px 44px 54px;
       @include block();
     }
@@ -97,6 +99,35 @@ export default {
       font-weight: 500;
       text-transform: uppercase;
       @include fonts(14px,#202020,1.5,0.121em);
+    }
+  }
+  @include at-query('max-width: 1280px') {
+    justify-content: left;
+
+    li {
+      flex-basis: 33.3333%;
+
+      &:nth-last-child(n+4) {  
+        a {
+          box-shadow: none;
+        }
+      }
+
+      &:nth-last-child(n+3) {
+        a {
+          box-shadow: inset 0px 0.25px 0 0 #202020;
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 991px') {
+    li {
+      a {
+        padding: 15px 10px 40px;
+        span {
+          display: inline;
+        }
+      }
     }
   }
 }

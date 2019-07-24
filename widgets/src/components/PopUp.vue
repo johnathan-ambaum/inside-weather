@@ -104,9 +104,8 @@ export default {
 
         figure {
           background: #202020;
-          height: 0;
+          height: 100%;
           position: relative;
-          padding: 0 0 100%;
           overflow: hidden;
 
           img {
@@ -117,6 +116,7 @@ export default {
             bottom: 0;
             height: auto;
             margin: auto;
+            object-fit: contain;
             max-height: 100%;
             max-width: 100%;
             width: auto;
@@ -145,7 +145,7 @@ export default {
             figure {
               box-shadow: inset 0.2px 0.25px 0.25px 0px #202020;
               height: 67px;
-              padding: 1px;
+              padding: 0.125px;
               width: 67px;
 
               img {
@@ -208,6 +208,76 @@ export default {
     font-weight: $demi;
     margin: 0 0 30px;
     @include fonts(28px,#202020,1.27,0.04em);
+  }
+  @include at-query('max-width: 1280px') {
+    .PopUp--dialog {
+      width: 75%;
+      .PopUp--body {
+        .PopUp--imageWrapper {
+          flex-basis: 60%;
+        }
+        .PopUp--content {
+          flex-basis: 40%;
+        }
+      }
+    }
+    .PopUp--heading {
+      font-size: 25px;
+    }
+  }
+  @include at-query('max-width: 1199px') {
+    .PopUp--dialog {
+      .PopUp--body {
+        .PopUp--imageWrapper {
+          flex-basis: 50%;
+        }
+        .PopUp--content {
+          flex-basis: 50%;
+          ul {
+            li {
+              margin: 0 0 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 991px') {
+    .PopUp--dialog {
+      width: calc(100% - 30px);
+      height: calc(100% - 200px);
+      .PopUp--body {
+        flex-direction: column;
+        position: relative;
+        .PopUp--imageWrapper {
+          flex-basis: 100%;
+          height: auto;
+          figure {
+            height: 0;
+            padding-bottom: 56.25%;
+          }
+        }
+        .PopUp--content {
+          flex-basis: 100%;
+          height: 45%;
+          position: static;
+        }
+      }
+    }
+    .PopUp--heading {
+      font-size: 24px;
+      text-align: center;
+    }
+    .PopUp--close {
+      top: -50px;
+      i {
+        svg {
+          line {
+            stroke: #ffffff;
+          }
+        }
+      }
+    }
   }
 }
 </style>

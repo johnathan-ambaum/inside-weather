@@ -3,6 +3,7 @@
     class="CategoryBanner CategoryBanner--sliderWrapper"
     ref="CategoryBanner--sliderWrapper"
     >
+    {{isBigScreen}} 
     <slider
       :items="sliderProps.items"
       :animateIn="sliderProps.animateIn"
@@ -16,14 +17,22 @@
         :key="item.$id"
         :data-src="item.dataSource"
         :data-hash="item.dataSource"
-        >
+      >
         <div class="CategoryBanner--imageWrapper">
           <figure 
-            v-bind:style="{ backgroundImage: 'url('+ item.image +')' }"
+            v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
+            v-if="isBigScreen"
+          >
+          </figure>
+
+          <figure 
+            v-bind:style="[{'background-image': 'url(' + item.imageSm + ')'}]"
+            v-if="isBigScreen !== true" 
           >
           </figure>
         </div>
-        <div class="CategoryBanner--content">
+        <div 
+          class="CategoryBanner--content">
           <h2 class="--caps">
             {{item.heading}}
           </h2>
@@ -66,19 +75,31 @@ export default {
   props: {
     bannerContent: Object,
     hideDesktopSlider:{type: Boolean, default: false},
-    categoryBannerAccordion: Array
+    categoryBannerAccordion: Array,
   },
   data() {
     return {
       bannerContentItems: this.bannerContent.items,
       categoryAccordion: this.categoryBannerAccordion,
       anchorTageRequire: true,
+      isBigScreen: '',
       sliderProps: {
         items: 1,
         animateIn: 'fadeIn',
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 5000},1025:{nav:!this.hideDesktopSlider, autoplayTimeout: 5000, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true}}
+        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: 'slideInRight', animateOut: 'slideOutLeft'}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut',}}
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener('load', changeTheBanner);
+    window.addEventListener('resize', changeTheBanner);
+    function changeTheBanner() {
+      if(window.innerWidth > 991) {
+        this.isBigScreen = 'true'
+      }else {
+        this.isBigScreen = 'false'
       }
     }
   }
@@ -142,7 +163,7 @@ export default {
   }
   .CategoryBanner--clasification {
     width: 220px;
-    display: inline-block;
+    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -157,8 +178,96 @@ export default {
         line-height: 1.46;
       }
     }
+    @include at-query('min-width: 992px') {
+      display: inline-block;
+    }
+
   }
 
+  @include at-query('max-width: 1280px') {
+    .CategoryBanner--clasification {
+      right: calc((100% - 1170px) / 2);
+      .point {
+        p {
+          font-size: 13px;
+        }
+        h3 {
+          &::after, &::before {
+            width: 29px;
+            height: 29px;
+          }
+        }
+      }
+    }
+    .CategoryBanner--items {
+      .CategoryBanner--content {
+        h2 {
+          font-size: 40px;
+        }
+        p {
+          font-size: 14px;
+        }
+        a {
+          font-size: 13px;
+        }
+      }
+      .CategoryBanner--imageWrapper {
+        height: 551px;
+      }
+    }
+  }
+  @include at-query('max-width: 1199px') {
+    .CategoryBanner--clasification {
+      right: calc((100% - 962px) / 2)
+    }
+    .CategoryBanner--items {
+      .CategoryBanner--content {
+        max-width: 450px;
+        h2 {
+          font-size: 35px;
+        }
+      }
+      .CategoryBanner--imageWrapper {
+        height: calc(100vh - 102px);
+      }
+    } 
+  }
+  @include at-query('max-width: 991px') {
+    .owl-theme {
+      .owl-dots {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 19px;
+        button {
+          box-shadow: none;
+          outline: none;
+          transition: all 0.3s ease-in-out;
+          height: 20px;
+          width: 14px;
+          span {
+            background: transparent;
+            border: 1.5px solid #ffffff;
+            border-radius: 50%;
+            display: block;
+            height: 8px;
+            margin: 0 auto;
+            width: 8px;
+          }
+          &:hover {
+            span {
+              background: transparent;
+            }
+          }
+          &.active {
+            span {
+              background: #ffffff;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 </style>
 
