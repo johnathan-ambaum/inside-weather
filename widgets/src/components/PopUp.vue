@@ -88,21 +88,27 @@ export default {
     top: 50%;
     transform: translateY(-60%);
     transition: all 0.3s ease-in-out;
+    height: 81.125%;
     margin: 0 auto;
     width: 1000px;
+
     .PopUp--body {
-      display: flex;
       background: #ffffff;
+      display: flex;
+      height: 100%;
       justify-content: space-between;
       .PopUp--imageWrapper {
-        flex-basis: 65%;
         background: #202020;
+        flex-basis: 65%;
+        height: 100%;
+
         figure {
           background: #202020;
           height: 0;
           position: relative;
           padding: 0 0 100%;
           overflow: hidden;
+
           img {
             position: absolute;
             left: 0;
@@ -119,7 +125,7 @@ export default {
       }
       .PopUp--content {
         flex-basis: 35%;
-        max-height: 650px;
+        height: 100%;
         padding: 25px 0 25px 30px;
         position: relative;
 

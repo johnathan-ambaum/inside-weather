@@ -2,7 +2,7 @@
   <div class="image-content-wrapper">
     <div class="--custom-container">
       <div 
-        class="image-content-box _pd-b-50"
+        class="image-content-box"
         v-for="productDetail in productDetails"
         :key="productDetail.id"
       >
@@ -37,12 +37,11 @@ export default {
 
 .image-content-wrapper {
   .image-content-box {
-    display: inline-flex;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
     figure {
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 65%;
+      flex-basis: 65%;
       height: 0;
       position: relative;
       overflow: hidden;
@@ -59,20 +58,27 @@ export default {
     .HeadingWithDescription {
       margin: auto 0;
       padding: 0 0 0 77px;
-      text-align: center;
-      width: 35%;
+      flex-basis: 35%;
       h2 {
         margin: 0 0 32px;
+        text-align: left;
+      }
+      p {
+        line-height: 1.57;
+        text-align: left;
       }
     }
     &:nth-child(even) {
       flex-direction: row-reverse;
       figure {
-        width: 55%;
+        flex-basis: 55%;
+        img {
+          right: auto;
+        }
       }
       .HeadingWithDescription {
-        width: 45%;
-        padding: 0 77px 0 0;
+        padding: 0 77px 0 85px;
+        flex-basis: 45%
       }
     }
   }
