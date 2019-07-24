@@ -82,7 +82,57 @@ export default {
           font-weight: 500;
           margin: 0 0 12px;
           text-align: center;
-          @include fonts(15px,#202020,1.46,0.035em);
+          @include fonts(14px,#202020,1.46,0.035em);
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 991px') {
+    .category-value-props {
+      .category-value-prop {
+        >div {
+          h2 {
+            font-size: 20px;
+          }
+          p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 767px') {
+    .category-value-props {
+      display: block;
+      margin: 0;
+      .category-value-prop {
+        align-items: center;
+        display: flex;
+        flex-basis: 100%;
+        padding: 0;
+        margin: 0 0 40px;
+        &:nth-child(even) {
+          flex-direction: row-reverse;
+        }
+        figure {
+          height: auto;
+          margin: 0;
+          padding-bottom: 0;
+          img {
+            position: relative;
+          }
+        }
+        >div {
+          h2 {
+            margin: 0 0 14px;
+            padding-left: 20px;
+            text-align: left;
+          }
+          p {
+            margin: 0;
+            padding-left: 20px;
+            text-align: left;
+          }
         }
       }
     }

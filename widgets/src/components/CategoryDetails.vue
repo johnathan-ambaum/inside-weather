@@ -127,7 +127,7 @@ export default {
     .image-content-box {
       flex-wrap: wrap;
       figure {
-        padding-bottom: 65.5%;
+        padding-bottom: 64.5%;
       }
       figure,
       .HeadingWithDescription {
