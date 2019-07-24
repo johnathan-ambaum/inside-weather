@@ -127,18 +127,24 @@ export default {
     .image-content-box {
       flex-wrap: wrap;
       figure {
-        padding-bottom: 64.5%;
+        padding: 0;
+        height: auto;
+        img {
+          position: static;
+        }
       }
-      figure,
-      .HeadingWithDescription {
+      figure, .HeadingWithDescription {
         flex-basis: 100%;
       }
+
       .HeadingWithDescription {
-        margin: 0 27.5px;
-        position: relative;
         background: #fff;
-        top: -4rem;
-        padding: 27px 23px;
+        max-width: calc(100% - 56px);
+        margin: 0 auto;
+        padding: 23px;
+        position: relative;
+        top: -57px;
+
         h2 {
           font-size: 20px;
           font-weight: 500;
@@ -165,17 +171,8 @@ export default {
     }
   }
   @include at-query('max-width: 640px') {
-    .image-content-box {
-      .HeadingWithDescription {
-        top: -3.5rem;
-      }
-    }
-  }
-  @include at-query('max-width: 640px') {
-    .image-content-box {
-      .HeadingWithDescription {
-        top: -2.4rem;
-      }
+    .--custom-container {
+      padding: 0;
     }
   }
 }

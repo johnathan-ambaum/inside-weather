@@ -110,28 +110,42 @@ export default {
         display: flex;
         flex-basis: 100%;
         padding: 0;
-        margin: 0 0 40px;
-        &:nth-child(even) {
-          flex-direction: row-reverse;
+
+        &:not(:last-child) {
+          margin: 0 0 45px;
         }
+
         figure {
           height: auto;
           margin: 0;
           padding-bottom: 0;
+
           img {
             position: relative;
           }
         }
         >div {
+          padding-left: 20px;
           h2 {
+            font-size: 14px;
             margin: 0 0 14px;
-            padding-left: 20px;
             text-align: left;
+            text-transform: uppercase;
+            padding: 0;
           }
           p {
+            font-size: 12px;
+            line-height: 1.66;
             margin: 0;
-            padding-left: 20px;
+            padding: 0;
             text-align: left;
+          }
+        }
+        &:nth-child(even) {
+          flex-direction: row-reverse;
+          >div {
+            padding-left: 0;
+            padding-right: 20px;
           }
         }
       }

@@ -61,7 +61,7 @@ export default {
     text-align: center;
     margin: 0;
     box-shadow: inset -0.25px -0.25px 0 0 #202020;
-    &:nth-last-child(n+4) {
+    &:nth-of-type(-n+4) {
       a {
         box-shadow: inset 0px 0.25px 0 0 #202020;
       }
@@ -107,13 +107,13 @@ export default {
     li {
       flex-basis: 33.3333%;
 
-      &:nth-last-child(n+4) {  
+      &:nth-of-type(-n+4) {  
         a {
           box-shadow: none;
         }
       }
 
-      &:nth-last-child(n+3) {
+      &:nth-of-type(-n+3) {
         a {
           box-shadow: inset 0px 0.25px 0 0 #202020;
         }
@@ -127,6 +127,38 @@ export default {
         span {
           display: inline;
         }
+      }
+    }
+  }
+  @include at-query('max-width: 767px') {
+    li {
+      flex-basis: 50%;
+      a {
+        padding: 10px 10px 30px;
+      }
+      &:nth-of-type(-n+3) {
+        a {
+          box-shadow: none;
+        }
+      }
+      &:nth-of-type(-n+2) {
+        a {
+          box-shadow: inset 0px 0.25px 0 0 #202020;
+        }
+      }
+    }
+  }
+}
+@include at-query('max-width: 640px') {
+  .Collections--itemWrapper{
+    padding: 50px 0;
+    li {
+      h3 {
+        font-size: 14px;
+        margin: 0 0 5px;
+      }
+      span {
+        font-size: 11px;
       }
     }
   }

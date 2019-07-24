@@ -91,10 +91,6 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-.grid--container {
-  width: auto;
-  margin: 66px -8px 0;
-}
 .LifeStylePhotos {
   .HeadingWithDescription {
     max-width: 655px;
@@ -122,6 +118,8 @@ export default {
 }
 .LifeStylePhotos--gridContainer {
   &.grid--container {
+    width: auto;
+    margin: 66px -8px 0;
     .LifeStylePhotos--column {
       position: relative;
     }  
@@ -171,6 +169,40 @@ export default {
       grid-column-start: 14;
       grid-column-end: -1;
       grid-row: 5/span 2;
+    }
+  }
+}
+@include at-query('max-width: 767px') {
+  .LifeStylePhotos {
+    .--custom-container {
+      padding: 0;
+    }
+    .more-info {
+      width: 21px;
+      height: 21px;
+      bottom: 9px;
+      right: 7.5px;
+    }
+    .HeadingWithDescription {
+      max-width: 75%;
+      h2 {
+        margin: 0 0 15px;
+      }
+    }
+  }
+  .LifeStylePhotos--gridContainer {
+    &.grid--container {
+      margin: 32px -3px 0;
+    }
+    .LifeStylePhotos--column figure {
+      padding: 0 1.5px 3px;
+    }
+  }
+}
+@include at-query('max-width: 640px') {
+  .LifeStylePhotos {
+    .HeadingWithDescription {
+      max-width: 100%;
     }
   }
 }

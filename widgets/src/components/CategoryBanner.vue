@@ -268,6 +268,22 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 767px') {
+    .CategoryBanner--items .CategoryBanner--content {
+      max-width: 75%;
+      h2 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 11px;
+      }
+    }
+  }
+  @include at-query('max-width: 640px') {
+    .CategoryBanner--items .CategoryBanner--content {
+      max-width: 90%;
+    }
+  }
 }
 </style>
 

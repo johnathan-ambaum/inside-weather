@@ -251,11 +251,7 @@ export default {
         position: relative;
         .PopUp--imageWrapper {
           flex-basis: 100%;
-          height: auto;
-          figure {
-            height: 0;
-            padding-bottom: 56.25%;
-          }
+          height: 56.25%;
         }
         .PopUp--content {
           flex-basis: 100%;
@@ -275,6 +271,20 @@ export default {
           line {
             stroke: #ffffff;
           }
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 640px') {
+    .PopUp--dialog {
+      .PopUp--body {
+        .PopUp--imageWrapper {
+          height: 41.6666%;
+        }
+        .PopUp--content {
+          flex-basis: 100%;
+          height: calc(100% - 41.6666%);
+          position: static;
         }
       }
     }

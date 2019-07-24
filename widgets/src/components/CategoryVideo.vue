@@ -120,7 +120,7 @@ export default {
   &:not(.--curtainDesabled) {
     &::before {
       content: "";
-      background: #F2F0ED;
+      background: #E8E6E2;
       height: calc(100% - 345px);
       position: absolute;
       left: 0;
@@ -190,6 +190,28 @@ export default {
     @include block();
     h2 {
       margin: 0 0 29px;
+    }
+  }
+  @include at-query('max-width: 1199px') {
+    &:not(.--curtainDesabled) {
+      &::before {
+        height: calc(100% - 200px);
+      }
+    }
+  }
+  @include at-query('max-width: 767px') {
+    padding-bottom: 45px;
+    &:not(.--curtainDesabled) {
+      &::before {
+        height: calc(100% - 80px);
+      }
+    }
+    .CategoryVideo--videoFrame .CategoryVideo--CustomPoster i {
+      width: 50px;
+      height: 50px;
+    }
+    .CategoryVideo--content h2 {
+      margin: 0 0 14px;
     }
   }
 }
