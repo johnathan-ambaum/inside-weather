@@ -126,13 +126,13 @@ export default {
       .PopUp--content {
         flex-basis: 35%;
         height: 100%;
-        padding: 25px 0 25px 30px;
+        padding: 25px 0;
         position: relative;
 
         ul {
           overflow: hidden;
           overflow-y: auto;
-          padding-right: 40px;
+          padding: 0 40px 0 30px;
           @include block(calc(100% - 65px));
 
           li {
@@ -262,6 +262,7 @@ export default {
     }
     .PopUp--heading {
       font-size: 24px;
+      margin: 0 0 19px;
       text-align: center;
     }
     .PopUp--close {

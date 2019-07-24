@@ -26,7 +26,7 @@
 
           <figure 
             v-bind:style="[{'background-image': 'url(' + item.imageSm + ')'}]"
-            v-if="isBigScreen !== true" 
+            v-if="!isBigScreen" 
           >
           </figure>
         </div>
@@ -87,7 +87,7 @@ export default {
         animateIn: 'fadeIn',
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: 'slideInRight', animateOut: 'slideOutLeft'}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut',}}
+        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: 'slideInRight', animateOut: 'slideOutLeft', mouseDrag: true, touchDrag: true, pullDrag: true}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut',}}
       }
     }
   },
