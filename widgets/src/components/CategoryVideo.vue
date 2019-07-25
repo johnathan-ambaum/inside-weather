@@ -9,11 +9,12 @@
     >
       <div class="CategoryVideo--videoFrame">
         <iframe 
-          frameborder="0" 
-          allowfullscreen 
-          id="categoryVideoPlayer"
           v-if="iframeSourceVideo"
+          id="categoryVideoPlayer"
           class="videoPlayer"
+          frameborder="0"
+          allow="autoplay"
+          allowfullscreen
         >
         </iframe>
         <video 
@@ -77,7 +78,6 @@ export default {
     }
   },
   methods: {
-    
     playVideo: function (e) {
       const player = document.getElementById('categoryVideoPlayer');
       if(this.iframeSourceVideo) {
