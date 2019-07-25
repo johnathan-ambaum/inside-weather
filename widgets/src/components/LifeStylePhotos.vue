@@ -103,11 +103,11 @@ export default {
   }
   .more-info {
     cursor: pointer;
-    height: 28px;
+    height: 29px;
     position: absolute;
     bottom: 32px;
     right: 28px;
-    width: 28px;
+    width: 29px;
     z-index: 9;
     i {
       pointer-events: none;
