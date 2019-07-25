@@ -105,11 +105,9 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .CategoryBanner {
   position: relative;
   @include block();
@@ -195,8 +193,8 @@ export default {
         }
         h3 {
           &::after, &::before {
-            width: 28px;
-            height: 28px;
+            width: 29px;
+            height: 29px;
           }
         }
       }
