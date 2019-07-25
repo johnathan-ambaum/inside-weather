@@ -43,6 +43,10 @@
         </div>
       </div>
     </div>
+    <div 
+      class="PopUp--courtain"
+      @click="closePopUp(popUpId)"
+    ></div>
   </div>
 </template>
 <script>
@@ -78,7 +82,6 @@ html {
   }
 }
 .PopUp {
-  background: rgba($color: #000000, $alpha: 0.5);
   display: none;
   height: 100%;
   position: fixed;
@@ -88,6 +91,20 @@ html {
   bottom: 0;
   width: 100%;
   z-index: 99999;
+  .PopUp--courtain {
+    background: rgba($color: #000000, $alpha: 0.5);
+    cursor: pointer;
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    z-index: 9;
+  }
   .PopUp--dialog {
     display: block;
     opacity: 0;
@@ -101,6 +118,7 @@ html {
     height: 81.125%;
     margin: 0 auto;
     width: 1000px;
+    z-index: 99;
 
     .PopUp--body {
       background: #ffffff;
@@ -190,6 +208,9 @@ html {
       .PopUp--dialog {
         opacity: 1;
         transform: translateY(-50%);
+      }
+      .PopUp--courtain {
+        opacity: 1;
       }
     }
   }

@@ -107,10 +107,6 @@ export default {
       }
     }
   },
-  // beforeUpdate: function(){
-  //   alert('Before Update');
-  //   alert(this.isBigScreen);
-  // },
   mounted() {
     const changeTheBanner = () => {
       if (window.innerWidth > 991) {
@@ -257,8 +253,10 @@ export default {
   }
   @include at-query('max-width: 991px') {
     .owl-theme {
-      .owl-stage {
-        transition: all 1.25s ease 0s !important;
+      &.owl-loaded {
+        .owl-stage {
+          transition: all 1s ease 0s !important;
+        }
       }
       .owl-dots {
         position: absolute;

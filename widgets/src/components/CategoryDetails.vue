@@ -43,6 +43,9 @@ export default {
     align-items: center;
     display: flex;
     flex-direction: row;
+    &:not(:last-child) {
+      margin: 0 0 45px;
+    }
     figure {
       flex-basis: 65%;
       height: 0;
@@ -129,6 +132,9 @@ export default {
   @include at-query('max-width: 767px') {
     .image-content-box {
       flex-wrap: wrap;
+      &:not(:last-child) {
+        margin: 0;
+      }
       figure {
         padding-bottom: 100%;
         height: 0;
