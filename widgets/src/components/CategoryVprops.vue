@@ -11,12 +11,22 @@
           v-for="item in categoryValueProps"
           :key="item.id"
         >
-          <figure>
+          <figure
+            :class="animationClass"
+          >
             <img :src="item.image"/>
           </figure>
           <div class="categoryValueProps--content">
-            <h2>{{item.title}}</h2>
-            <p>{{item.description}}</p>
+            <h2
+              :class="animationClass"
+            >
+              {{item.title}}
+            </h2>
+            <p
+              :class="animationClass"
+            >
+              {{item.description}}
+            </p>
           </div>
         </li>
       </ul>
@@ -28,8 +38,16 @@
 export default {
   props: {
     categoryValueProps: Array,
-    backgroundColor: {type: String, default: "transparent"}
-  }
+    backgroundColor: {type: String, default: "transparent"},
+    isScrollAnimationRequire: {type: Boolean, default: true}
+  },
+  computed: {
+    animationClass() {
+      return {
+        '--animElement': this.isScrollAnimationRequire
+      }
+    }
+  },
 }
 </script>
 

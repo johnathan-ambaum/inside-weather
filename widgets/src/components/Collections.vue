@@ -6,21 +6,38 @@
   >
     <div class="Collections--heading">
       <heading-with-description>
-        <h2>{{sectionHeading}}</h2>
-        <p>{{sectionDescription}}</p>
+        <h2>
+          {{sectionHeading}}
+        </h2>
+        <p>
+          {{sectionDescription}}
+        </p>
       </heading-with-description>
     </div>
-    <ul class="Collections--itemWrapper">
+    <ul 
+      class="Collections--itemWrapper"
+      :class="hasAnimation"
+    >
       <li
         v-for="item in productsList"
         :key="item.id"
       >
         <a :href="item.hyperLink">
-          <figure>
+          <figure
+            :class="animationElementClass"
+          >
             <img :src="item.image">
           </figure>
-          <h3>{{item.title}}</h3>
-          <span>{{item.linkText}}</span>
+          <h3
+            :class="animationElementClass"
+          >
+            {{item.title}}
+          </h3>
+          <span
+            :class="animationElementClass"
+          >
+            {{item.linkText}}
+          </span>
         </a>
       </li>
     </ul>
@@ -36,13 +53,26 @@ export default {
   props: {
     productCollections: Array,
     sectionHeading: String,
-    sectionDescription: String
+    sectionDescription: String,
+    isScrollAnimationRequire: {type: Boolean, default: true}
   },
   data() {
     return {
       productsList: this.productCollections
     }
-  }
+  },
+  computed: {
+    animationElementClass() {
+      return {
+        '--animElement': this.isScrollAnimationRequire
+      }
+    },
+    hasAnimation() {
+      return {
+        '--hasAnimation': this.isScrollAnimationRequire
+      }
+    }
+  },
   
 }
 </script>
@@ -61,6 +91,9 @@ export default {
     text-align: center;
     margin: 0;
     box-shadow: inset -0.25px -0.25px 0 0 #202020;
+    .--animElement {
+      opacity: 0;
+    }
     &:nth-of-type(-n+4) {
       a {
         box-shadow: inset 0px 0.25px 0 0 #202020;
@@ -101,6 +134,27 @@ export default {
       @include fonts(14px,#202020,1.5,0.121em);
     }
   }
+  &.--hasAnimation {
+    li {
+      box-shadow: none;
+      &:nth-of-type(-n+4) {
+        a {
+          box-shadow: none;
+        }
+      }
+    }
+    &.--animLoaded {
+      li {
+        box-shadow: inset -0.25px -0.25px 0 0 #202020;
+      }
+      &:nth-of-type(-n+4) {
+        a {
+          box-shadow: inset 0px 0.25px 0 0 #202020;
+        }
+      }
+    }
+
+  }
   @include at-query('max-width: 1280px') {
     justify-content: left;
 
@@ -113,6 +167,21 @@ export default {
         }
       }
 
+      &:nth-of-type(-n+3) {
+        a {
+          box-shadow: inset 0px 0.25px 0 0 #202020;
+        }
+      }
+    }
+    &.--animLoaded {
+      li {
+        box-shadow: inset -0.25px -0.25px 0 0 #202020;
+      }
+      &:nth-of-type(-n+4) {
+        a {
+          box-shadow: none;
+        }
+      }
       &:nth-of-type(-n+3) {
         a {
           box-shadow: inset 0px 0.25px 0 0 #202020;
@@ -135,6 +204,21 @@ export default {
       flex-basis: 50%;
       a {
         padding: 10px 10px 30px;
+      }
+      &:nth-of-type(-n+3) {
+        a {
+          box-shadow: none;
+        }
+      }
+      &:nth-of-type(-n+2) {
+        a {
+          box-shadow: inset 0px 0.25px 0 0 #202020;
+        }
+      }
+    }
+    &.--animLoaded {
+      li {
+        box-shadow: inset -0.25px -0.25px 0 0 #202020;
       }
       &:nth-of-type(-n+3) {
         a {

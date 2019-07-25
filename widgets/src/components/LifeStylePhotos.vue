@@ -79,11 +79,11 @@ export default {
       const findTarget = currentParent.querySelector('figure img');
       this.popUpMainImage = findTarget.src;
       const detectPopUp = document.getElementById('LifeStylePopUp');
-      const body = document.querySelector('body');
+      const html = document.querySelector('html');
       detectPopUp.classList.add('fade');
       setTimeout(function() {
         detectPopUp.classList.add('in');
-        body.classList.add('lock');
+        html.classList.add('lock');
       }, 300);
     }
   }

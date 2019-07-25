@@ -56,11 +56,11 @@ export default {
   methods: {
     closePopUp(id) {
       const getTarget = document.getElementById(id);
-      const body = document.querySelector('body');
+      const html = document.querySelector('html');
       getTarget.classList.remove('in');
       setTimeout(function() {
         getTarget.classList.remove('fade');
-        body.classList.remove('lock');
+        html.classList.remove('lock');
       }, 300);
     }
   }
@@ -69,13 +69,12 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-body {
+html {
   &.lock {
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 100%;
     overflow: hidden;
+    body {
+      overflow: hidden;
+    }
   }
 }
 .PopUp {

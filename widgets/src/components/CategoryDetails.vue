@@ -1,5 +1,8 @@
 <template>
-  <div class="image-content-wrapper">
+  <div 
+    class="CategoryDetails image-content-wrapper"
+    ref="CategoryDetails"
+  >
     <div class="--custom-container">
       <div 
         class="image-content-box"

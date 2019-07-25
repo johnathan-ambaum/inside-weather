@@ -21,25 +21,33 @@
           <figure 
             v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
             v-if="isBigScreen"
+            :class="animationClass"
           >
           </figure>
 
           <figure 
             v-bind:style="[{'background-image': 'url(' + item.imageSm + ')'}]"
             v-if="!isBigScreen" 
+            :class="animationClass"
           >
           </figure>
         </div>
         <div 
           class="CategoryBanner--content">
-          <h2 class="--caps">
+          <h2 
+            class="--caps"
+            :class="animationClass"
+          >
             {{item.heading}}
           </h2>
-          <p>
+          <p
+            :class="animationClass"
+          >
             {{item.description}}
           </p>
           <div
             class="CarouselBannerAction"
+            :class="animationClass"
           >
             <a 
               :href="item.url" 
@@ -75,6 +83,7 @@ export default {
     bannerContent: Object,
     hideDesktopSlider:{type: Boolean, default: false},
     categoryBannerAccordion: Array,
+    isScrollAnimationRequire: {type: Boolean, default: true}
   },
   data() {
     return {
@@ -88,6 +97,13 @@ export default {
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
         responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: 'slideInRight', animateOut: 'slideOutLeft', mouseDrag: true, touchDrag: true, pullDrag: true}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut',}}
+      }
+    }
+  },
+  computed: {
+    animationClass() {
+      return {
+        '--animElement': this.isScrollAnimationRequire
       }
     }
   },
@@ -120,6 +136,9 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         @include block(100%);
+      }
+      @include at-query('min-width: 1601px'){
+        height: 768px;
       }
     }
     .CategoryBanner--content {
