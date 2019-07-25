@@ -136,6 +136,7 @@ export default {
     padding-bottom: 56.25%;
     @include block(0);
     .videoPlayer {
+      background: rgba($color: #202020, $alpha: 0.2);
       position: absolute;
       left: 0;
       right: 0;

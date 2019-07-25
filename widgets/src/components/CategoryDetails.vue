@@ -130,10 +130,11 @@ export default {
     .image-content-box {
       flex-wrap: wrap;
       figure {
-        padding: 0;
-        height: auto;
+        padding-bottom: 100%;
+        height: 0;
         img {
-          position: static;
+          height: 100%;
+          object-fit: cover;
         }
       }
       figure, .HeadingWithDescription {

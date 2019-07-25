@@ -96,7 +96,7 @@ export default {
         animateIn: 'fadeIn',
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: 'slideInRight', animateOut: 'slideOutLeft', mouseDrag: true, touchDrag: true, pullDrag: true}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut',}}
+        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: false, animateOut: false, mouseDrag: true, touchDrag: true, pullDrag: true, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut'}}
       }
     }
   },
@@ -107,6 +107,10 @@ export default {
       }
     }
   },
+  // beforeUpdate: function(){
+  //   alert('Before Update');
+  //   alert(this.isBigScreen);
+  // },
   mounted() {
     const changeTheBanner = () => {
       if (window.innerWidth > 991) {
@@ -253,6 +257,9 @@ export default {
   }
   @include at-query('max-width: 991px') {
     .owl-theme {
+      .owl-stage {
+        transition: all 1.25s ease 0s !important;
+      }
       .owl-dots {
         position: absolute;
         left: 0;
