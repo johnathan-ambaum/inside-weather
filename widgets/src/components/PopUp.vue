@@ -56,9 +56,11 @@ export default {
   methods: {
     closePopUp(id) {
       const getTarget = document.getElementById(id);
+      const body = document.querySelector('body');
       getTarget.classList.remove('in');
       setTimeout(function() {
         getTarget.classList.remove('fade');
+        body.classList.remove('lock');
       }, 300);
     }
   }
@@ -67,6 +69,15 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+body {
+  &.lock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+}
 .PopUp {
   background: rgba($color: #000000, $alpha: 0.5);
   display: none;
@@ -206,7 +217,7 @@ export default {
     display: block;
     font-family: $font-stack-avalon;
     font-weight: $demi;
-    margin: 0 0 30px;
+    padding: 0 25px 30px;
     @include fonts(28px,#202020,1.27,0.04em);
   }
   @include at-query('max-width: 1280px') {
@@ -262,7 +273,7 @@ export default {
     }
     .PopUp--heading {
       font-size: 24px;
-      margin: 0 0 19px;
+      padding: 0 25px 19px;
       text-align: center;
     }
     .PopUp--close {
