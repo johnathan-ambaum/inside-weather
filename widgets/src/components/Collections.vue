@@ -97,8 +97,10 @@ export default {
       @include block();
     }
     &:nth-of-type(-n+4) {
-      box-shadow: inset 0px 0.25px 0 0 #202020;
-      -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+      a {
+        box-shadow: inset 0px 0.25px 0 0 #202020;
+        -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+      }
     }
     figure {
       overflow: hidden;
@@ -226,6 +228,43 @@ export default {
       }
       span {
         font-size: 11px;
+      }
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .Collections--itemWrapper {
+    li {
+      box-shadow: inset 1px -0.75px 0.75px 0 rgba($color: #202020, $alpha: 0.5);
+      -webkit-box-shadow: inset 1px -0.75px 0.75px 0 rgba($color: #202020, $alpha: 0.5);
+      &:nth-of-type(-n+4) {
+        a {
+          box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
+          -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
+        }
+      }
+    } 
+    &.--hasAnimation {
+      li {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        &:nth-of-type(-n+4) {
+          box-shadow: none;
+          -webkit-box-shadow: none;
+        }
+      }
+      &.--animLoaded {
+        li {
+          box-shadow: inset 1px -0.75px 0.75px 0 rgba($color: #202020, $alpha: 0.5);
+          -webkit-box-shadow: inset 1px -0.75px 0.75px 0 rgba($color: #202020, $alpha: 0.5);
+          &:nth-of-type(-n+4) {
+            a {
+              box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
+              -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
+            }
+          }
+        }
       }
     }
   }
