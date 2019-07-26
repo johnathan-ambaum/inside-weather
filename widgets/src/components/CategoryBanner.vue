@@ -5,8 +5,8 @@
     >
     <slider
       :items="sliderProps.items"
-      :animateIn="sliderProps.animateIn"
-      :animateOut="sliderProps.animateOut"
+      :animateIn="[isBigScreen ? 'fadeIn' : false]"
+      :animateOut="[isBigScreen ? 'fadeOut' : false]"
       :navText="sliderProps.navText"
       :responsive="sliderProps.responsive"
     >
@@ -96,8 +96,15 @@ export default {
         animateIn: 'fadeIn',
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, animateIn: false, animateOut: false, mouseDrag: true, touchDrag: true, pullDrag: true, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true, animateIn: 'fadeIn', animateOut: 'fadeOut'}}
+        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, mouseDrag: true, touchDrag: true, pullDrag: true, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true}}
       }
+    }
+  },
+  created: function () {
+    if(window.innerWidth > 991) {
+      this.isBigScreen = true
+    }else {
+      this.isBigScreen = false
     }
   },
   computed: {
@@ -117,7 +124,6 @@ export default {
     };
     
     window.addEventListener('resize', changeTheBanner);
-    window.addEventListener('load', changeTheBanner);
   }
 }
 </script>
@@ -255,11 +261,6 @@ export default {
   }
   @include at-query('max-width: 991px') {
     .owl-theme {
-      &.owl-loaded {
-        .owl-stage {
-          transition: all 1s ease 0s !important;
-        }
-      }
       .owl-dots {
         position: absolute;
         left: 0;

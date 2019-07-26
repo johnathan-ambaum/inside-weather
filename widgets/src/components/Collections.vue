@@ -92,15 +92,13 @@ export default {
     .--animElement {
       opacity: 0;
     }
-    &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
-      a {
-        box-shadow: inset 0px 0.25px 0 0 #202020;
-        -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
-      }
-    }
     a {
-      padding: 15px 44px 54px;
+      padding: 2px 44px 32px;
       @include block();
+    }
+    &:nth-of-type(-n+4) {
+      box-shadow: inset 0px 0.25px 0 0 #202020;
+      -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
     }
     figure {
       overflow: hidden;
@@ -121,7 +119,7 @@ export default {
       display: block;
       font-family: $font-stack-avalon;
       font-weight: $demi;
-      margin: 0 0 14px;
+      margin: 0 0 7px;
       @include fonts(20px,#202020,1.1,0.05em);
     }
     span {
@@ -137,22 +135,20 @@ export default {
     li {
       box-shadow: none;
       -webkit-box-shadow: none;
-      &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
-        a {
-          box-shadow: none;
-          -webkit-box-shadow: none;
-        }
+      &:nth-of-type(-n+4) {
+        box-shadow: none;
+        -webkit-box-shadow: none;
       }
     }
     &.--animLoaded {
       li {
         box-shadow: inset -0.25px -0.25px 0 0 #202020;
         -webkit-box-shadow: inset -0.25px -0.25px 0 0 #202020;
-      }
-      &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
-        a {
-          box-shadow: inset 0px 0.25px 0 0 #202020;
-          -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+        &:nth-of-type(-n+4) {
+          a {
+            box-shadow: inset 0px 0.25px 0 0 #202020;
+            -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+          }
         }
       }
     }
@@ -163,36 +159,22 @@ export default {
 
     li {
       flex-basis: 33.3333%;
-
       &:nth-of-type(4) {  
         a {
           box-shadow: none;
           -webkit-box-shadow: none;
         }
       }
-
-      &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3) {
-        a {
-          box-shadow: inset 0px 0.25px 0 0 #202020;
-          -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
-        }
-      }
     }
-    &.--animLoaded {
-      li {
-        box-shadow: inset -0.25px -0.25px 0 0 #202020;
-        -webkit-box-shadow: inset -0.25px -0.25px 0 0 #202020;
-      }
-      &:nth-of-type(4) {
-        a {
-          box-shadow: none;
-          -webkit-box-shadow: none;
-        }
-      }
-      &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3) {
-        a {
-          box-shadow: inset 0px 0.25px 0 0 #202020;
-          -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+    &.--hasAnimation {
+      &.--animLoaded {
+        li {
+          &:nth-of-type(4) {
+            a {
+              box-shadow: none;
+              -webkit-box-shadow: none;
+            }
+          }
         }
       }
     }
@@ -219,28 +201,16 @@ export default {
           -webkit-box-shadow: none;
         }
       }
-      &:nth-of-type(1), &:nth-of-type(2) {
-        a {
-          box-shadow: inset 0px 0.25px 0 0 #202020;
-          -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
-        }
-      }
     }
-    &.--animLoaded {
-      li {
-        box-shadow: inset -0.25px -0.25px 0 0 #202020;
-        -webkit-box-shadow: inset -0.25px -0.25px 0 0 #202020;
-      }
-      &:nth-of-type(3) {
-        a {
-          box-shadow: none;
-          -webkit-box-shadow: none;
-        }
-      }
-      &:nth-of-type(1), &:nth-of-type(2) {
-        a {
-          box-shadow: inset 0px 0.25px 0 0 #202020;
-          -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+    &.--hasAnimation {
+      &.--animLoaded {
+        li {
+          &:nth-of-type(3) {
+            a {
+              box-shadow: none;
+              -webkit-box-shadow: none;
+            }
+          }
         }
       }
     }

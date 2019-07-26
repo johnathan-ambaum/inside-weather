@@ -14,8 +14,8 @@
         :mouseDrag="mouseDrag"
         :touchDrag="touchDrag"
         :pullDrag="pullDrag"
-        :animateOut="animateOut"
-        :animateIn="animateIn"
+        :animateOut="animateOut[0]"
+        :animateIn="animateIn[0]"
       >
         <slot></slot>
       </carousel>
@@ -43,8 +43,12 @@ export default {
     mouseDrag: {type: Boolean, default: true},
     touchDrag: {type: Boolean, default: true},
     pullDrag: {type: Boolean, default: true},
-    animateOut: {type: [String, Boolean], default: false},
-    animateIn: {type: [String, Boolean], default: false}
+    animateOut: {type: [String, Boolean, Array], default: false},
+    animateIn: {type: [String, Boolean, Array], default: false}
+  },
+  created() {
+    console.log(this);
+    console.log('Here in slider');
   }
 }
 </script>
