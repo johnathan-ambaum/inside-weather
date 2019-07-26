@@ -168,9 +168,9 @@ html {
             margin: 0 0 25px;
             width: 100%;
             figure {
-              box-shadow: inset 0.2px 0.25px 0.25px 0px #202020;
+              box-shadow: inset 0.25px 0.25px 5px -3px #202020;
               height: 67px;
-              padding: 0.125px;
+              padding: 1px;
               width: 67px;
               img {
                 @include block();
@@ -233,6 +233,7 @@ html {
     display: block;
     font-family: $font-stack-avalon;
     font-weight: $demi;
+    margin: 0;
     padding: 0 25px 30px;
     @include fonts(28px,#202020,1.27,0.04em);
   }
@@ -274,16 +275,19 @@ html {
       width: calc(100% - 30px);
       height: calc(100% - 200px);
       .PopUp--body {
-        flex-direction: column;
+        display: block;
         position: relative;
         .PopUp--imageWrapper {
-          flex-basis: 100%;
+          width: 100%;
           height: 56.25%;
         }
         .PopUp--content {
-          flex-basis: 100%;
-          height: 45%;
+          width: 100%;
+          height: calc(100% - 56.25%);
           position: static;
+          ul {
+            height: calc(100% - 50px);
+          }
         }
       }
     }

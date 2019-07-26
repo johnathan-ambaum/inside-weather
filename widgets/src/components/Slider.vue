@@ -46,9 +46,5 @@ export default {
     animateOut: {type: [String, Boolean, Array], default: false},
     animateIn: {type: [String, Boolean, Array], default: false}
   },
-  created() {
-    console.log(this);
-    console.log('Here in slider');
-  }
 }
 </script>

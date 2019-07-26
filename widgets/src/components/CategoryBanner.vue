@@ -2,6 +2,7 @@
   <div 
     class="CategoryBanner CategoryBanner--sliderWrapper"
     ref="CategoryBanner--sliderWrapper"
+    :class="hasAnimation"
     >
     <slider
       :items="sliderProps.items"
@@ -110,7 +111,12 @@ export default {
   computed: {
     animationClass() {
       return {
-        '--animElement': this.isScrollAnimationRequire
+        '--animElement': this.isScrollAnimationRequire,
+      }
+    },
+    hasAnimation() {
+      return {
+        '--hasAnimation': this.isScrollAnimationRequire
       }
     }
   },
@@ -131,7 +137,16 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
+.--hasAnimation {
+  .point {
+    opacity: 0;
+  }
+  .active {
+    .--animElement {
+      opacity: 0;
+    }
+  }
+}
 .CategoryBanner {
   position: relative;
   @include block();
