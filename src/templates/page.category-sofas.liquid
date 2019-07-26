@@ -15,13 +15,13 @@
     {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/150SDCAE7A0C/150SDCAE7A0C-0_small.jpg', 'title': 'Milo Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S67923829/150S67923829-0_small.jpg', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/t/31/assets/pf-ad525b40-8b5b-4b8e-9e6c-d9dae7a23a1b--150S7EEFC8F6-0small.jpg?286256', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150SDCAE7A0C/150SDCAE7A0C-0_small.jpg', 'title': 'Milo Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S67923829/150S67923829-0_small.jpg', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/t/31/assets/pf-ad525b40-8b5b-4b8e-9e6c-d9dae7a23a1b--150S7EEFC8F6-0small.jpg?286256', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S67923829/150S67923829-0_small.jpg', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/t/31/assets/pf-ad525b40-8b5b-4b8e-9e6c-d9dae7a23a1b--150S7EEFC8F6-0small.jpg?286256', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $899', hyperLink: './'}]" %}
 
     <div class="productCollection --pd-t-130">
-      <div class="collection-main-wrapper">
-        <collections
+      <div class="category-collection-main-wrapper">
+        <category-collections
           :product-collections="{{productCollections}}"
           section-heading="Customize Our Best Sellers"
           section-description="Start with one of these silhouettes and customize to make it your own."
         >
-        </collections>
+        </category-collections>
       </div>
     </div>
 
@@ -126,22 +126,22 @@ jQuery(function ($) {
     fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
   }
 
-  fadeinup('.Collections .HeadingWithDescription *', ".productCollection");
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
   const collectionTween = new TimelineLite()
   collectionTween.call(function () {
-    $('.Collections--itemWrapper li').each(function (i) {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
         TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if($('.Collections--itemWrapper li').length === (i + 1)) {
-          $('.Collections--itemWrapper').addClass('--animLoaded');
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
       }, 200 * i);
     });
   });
 
   new ScrollMagic.Scene({
-    triggerElement: '.Collections--itemWrapper',
+    triggerElement: '.CtegoryCollections--itemWrapper',
     reverse: false,
     triggerHook: "onEnter", 
     offset: 250

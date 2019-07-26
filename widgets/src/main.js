@@ -22,7 +22,7 @@ import ReviewCarousel from './components/ReviewCarousel.vue';
 import Banner from './components/Banner.vue';
 import CategoryBanner from './components/CategoryBanner';
 import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
-import Collections from './components/Collections.vue';
+import CategoryCollections from './components/CategoryCollections.vue';
 import CategoryDetails from './components/CategoryDetails.vue';
 import CategoryVideo from './components/CategoryVideo.vue';
 import CategoryVprops from './components/CategoryVprops.vue';
@@ -61,7 +61,7 @@ const app = new Vue({
     Banner,
     RecentlySoldProducts,
     CategoryBanner,
-    Collections,
+    CategoryCollections,
     CategoryDetails,
     CategoryVideo,
     CategoryVprops,
