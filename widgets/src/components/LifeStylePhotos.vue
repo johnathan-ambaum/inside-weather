@@ -20,7 +20,7 @@
         >
           <figure>
             <img 
-              :src="item[index]"
+              :src="item"
             >
           </figure>
           <div 
