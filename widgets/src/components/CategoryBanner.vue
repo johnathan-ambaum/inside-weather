@@ -11,29 +11,28 @@
       :responsive="sliderProps.responsive"
     >
       <div 
-        class="CategoryBanner--items"
         v-for="item in bannerContentItems" 
         :key="item.$id"
         :data-src="item.dataSource"
         :data-hash="item.dataSource"
+        class="CategoryBanner--items"
       >
         <div class="CategoryBanner--imageWrapper">
           <figure 
-            v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
             v-if="isBigScreen"
+            v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
             :class="animationClass"
           >
           </figure>
 
           <figure 
-            v-bind:style="[{'background-image': 'url(' + item.imageSm + ')'}]"
             v-if="!isBigScreen" 
+            v-bind:style="[{'background-image': 'url(' + item.imageSm + ')'}]"
             :class="animationClass"
           >
           </figure>
         </div>
-        <div 
-          class="CategoryBanner--content">
+        <div class="CategoryBanner--content">
           <h2 
             class="--caps"
             :class="animationClass"
@@ -61,7 +60,7 @@
     </slider>
     <div class="CategoryBanner--clasification">
       <accordion
-        v-for="accItem in categoryAccordion"
+        v-for="accItem in categoryBannerAccordion"
         :key="accItem.id"
         :accordionHead="accItem.accordionHead"
         :accordionDescription="accItem.accordionDescription"
@@ -71,13 +70,15 @@
     </div>
   </div>  
 </template>
+
 <script>
 import slider from './Slider.vue'
-import accordion from './accordion'
+import accordion from './Accordion'
+
 export default {
   components: {
     slider,
-    accordion
+    accordion,
   },
   props: {
     bannerContent: Object,
@@ -88,7 +89,6 @@ export default {
   data() {
     return {
       bannerContentItems: this.bannerContent.items,
-      categoryAccordion: this.categoryBannerAccordion,
       anchorTageRequire: true,
       isBigScreen: true,
       sliderProps: {
@@ -121,9 +121,11 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .CategoryBanner {
   position: relative;
   @include block();

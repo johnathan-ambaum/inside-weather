@@ -14,13 +14,13 @@
         class="LifeStylePhotos--gridContainer grid--container"
       >
         <div 
-          v-for="(item, index) in lifeStyleContent"
+          v-for="(item, index) in lifeStyleItems"
           :key="item.$id"
           v-bind:class="['LifeStylePhotos--column column LifeStylePhotos--column-'+ (index + 1)]"
         >
           <figure>
             <img 
-              :src="item.image"
+              :src="item[index]"
             >
           </figure>
           <div 
@@ -46,18 +46,20 @@
       :PopUpImageSource="popUpMainImage"
       popUpId="LifeStylePopUp"
       :popUpHeading="popUpHeading"
-      :PopUpContentList="PopUpContentList"
+      :PopUpContentList="popUpList"
     >
     </pop-up>
   </div>
 </template>
+
 <script>
 import HeadingWithDescription from './HeadingWithDescription.vue'
 import PopUp from './PopUp.vue'
+
 export default {
   components: {
     HeadingWithDescription,
-    PopUp
+    PopUp,
   },
   props: {
     sectionHeading: String,
@@ -68,8 +70,6 @@ export default {
   } ,
   data() {
     return {
-      lifeStyleContent: this.lifeStyleItems,
-      PopUpContentList: this.popUpList,
       popUpMainImage: ''
     }
   },
@@ -90,9 +90,11 @@ export default {
 
 }
 </script>
+
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .LifeStylePhotos {
   .HeadingWithDescription {
     max-width: 655px;

@@ -1,5 +1,4 @@
 <template>
-
   <div 
     class="Collections"  
     ref="Collections"
@@ -19,7 +18,7 @@
       :class="hasAnimation"
     >
       <li
-        v-for="item in productsList"
+        v-for="item in productCollections"
         :key="item.id"
       >
         <a :href="item.hyperLink">
@@ -43,10 +42,11 @@
     </ul>
   </div>
 </template>
+
 <script>
 import HeadingWithDescription from './HeadingWithDescription.vue'
+
 export default {
-  name: 'collections',
   components: {
     HeadingWithDescription,
   },
@@ -55,11 +55,6 @@ export default {
     sectionHeading: String,
     sectionDescription: String,
     isScrollAnimationRequire: {type: Boolean, default: true}
-  },
-  data() {
-    return {
-      productsList: this.productCollections
-    }
   },
   computed: {
     animationElementClass() {
@@ -76,9 +71,11 @@ export default {
   
 }
 </script>
+
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .Collections--itemWrapper {
   align-items: center;
   display: flex;

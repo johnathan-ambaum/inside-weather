@@ -7,9 +7,9 @@
     <div class="--custom-container">
       <ul class="category-value-props --pd-t-130 --pd-b-130">
         <li
-          class="category-value-prop"
           v-for="item in categoryValueProps"
           :key="item.id"
+          class="category-value-prop"
         >
           <figure
             :class="animationClass"
@@ -62,19 +62,16 @@ export default {
     margin: 0 -23px;
     flex-direction: row;
     justify-content: space-between;
-
     .category-value-prop {
       flex-basis: 33.333%;
       padding: 0 23px;
       text-align: center;
-
       figure {
         margin: 0 0 28.5px;
         overflow: hidden;
         position: relative;
         padding-bottom: 62.5%;
         @include block(0);
-        
         img {
           position: absolute;
           left: 0;

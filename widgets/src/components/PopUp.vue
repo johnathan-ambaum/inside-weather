@@ -49,6 +49,7 @@
     ></div>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -70,9 +71,11 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 html {
   &.lock {
     overflow: hidden;
@@ -119,7 +122,6 @@ html {
     margin: 0 auto;
     width: 1000px;
     z-index: 99;
-
     .PopUp--body {
       background: #ffffff;
       display: flex;
@@ -129,13 +131,11 @@ html {
         background: #202020;
         flex-basis: 65%;
         height: 100%;
-
         figure {
           background: #202020;
           height: 100%;
           position: relative;
           overflow: hidden;
-
           img {
             position: absolute;
             left: 0;
@@ -156,26 +156,22 @@ html {
         height: 100%;
         padding: 25px 0;
         position: relative;
-
         ul {
           overflow: hidden;
           overflow-y: auto;
           padding: 0 40px 0 30px;
           @include block(calc(100% - 65px));
-
           li {
             align-items: center;
             display: flex;
             justify-content: space-between;
             margin: 0 0 25px;
             width: 100%;
-
             figure {
               box-shadow: inset 0.2px 0.25px 0.25px 0px #202020;
               height: 67px;
               padding: 0.125px;
               width: 67px;
-
               img {
                 @include block();
               }

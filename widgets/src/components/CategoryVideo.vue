@@ -19,8 +19,8 @@
         </iframe>
         <video 
           v-if="!iframeSourceVideo"
-          class="videoPlayer"
           id="categoryVideoPlayer"
+          class="videoPlayer"
         >
           <source 
             :src="videoUrl" 
@@ -50,10 +50,11 @@
     </div>
   </div>
 </template>
+
 <script>
 import HeadingWithDescription from './HeadingWithDescription.vue'
+
 export default {
-  name: 'category-video',
   props: {
     videoUrl: String,
     videoPoster:{type: String},
@@ -91,11 +92,11 @@ export default {
         if(this.videoPlayStatus === 1) {
           this.videoPlayStatus = 0;
         }
-      }else {
+      } else {
         if(player.paused === true) {
           e.target.classList.add('hideVideoPoster');
           player.play();
-        }else {
+        } else {
           e.target.classList.remove('hideVideoPoster');
           player.pause();
         }
@@ -110,9 +111,11 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
 .CategoryVideo {
   position: relative;
   padding-bottom: 85px;

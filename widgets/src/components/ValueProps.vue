@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import accordion from './accordion'
+import accordion from './Accordion'
 export default {
   props: {
     valuePropsItems: Array,

@@ -5,9 +5,9 @@
   >
     <div class="--custom-container">
       <div 
-        class="image-content-box"
         v-for="productDetail in productDetails"
         :key="productDetail.id"
+        class="image-content-box"
       >
         <figure>
           <img :src="productDetail.imageUrl" />
