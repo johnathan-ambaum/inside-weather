@@ -102,6 +102,9 @@ export default {
     h2 {
       margin: 0 0 33px;
     }
+    p {
+      line-height: 1.6;
+    }
   }
   .more-info {
     cursor: pointer;

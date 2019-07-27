@@ -160,36 +160,26 @@ export default {
   }
   @include at-query('max-width: 1280px') {
     justify-content: left;
-
-    li {
-      flex-basis: 33.3333%;
-      &:nth-of-type(4) {  
-        a {
-          box-shadow: none;
-          -webkit-box-shadow: none;
-        }
-      }
-    }
-    &.--hasAnimation {
-      &.--animLoaded {
-        li {
-          &:nth-of-type(4) {
-            a {
-              box-shadow: none;
-              -webkit-box-shadow: none;
-            }
-          }
-        }
-      }
-    }
   }
   @include at-query('max-width: 991px') {
     li {
       a {
-        padding: 15px 10px 40px;
-        span {
-          display: inline;
+        padding: 15px 10px 20px;
+      }
+      span {
+        display: inline;
+      }
+      figure {
+        padding-bottom: 66.66%;
+        img {
+          object-fit: contain;
         }
+      }
+      h3 {
+        font-size: 13px;
+      }
+      span {
+        font-size: 9px;
       }
     }
   }
@@ -197,7 +187,13 @@ export default {
     li {
       flex-basis: 50%;
       a {
-        padding: 10px 10px 30px;
+        padding: 10px 10px 25px;
+        figure {
+          padding-bottom: 66.66%;
+          img {
+            object-fit: contain;
+          }
+        }
       }
       &:nth-of-type(3) {
         a {
@@ -230,6 +226,18 @@ export default {
       }
       span {
         font-size: 11px;
+      }
+    }
+  }
+}
+@include at-query('max-width: 480px') {
+  .CtegoryCollections--itemWrapper{
+    li {
+      h3 {
+        font-size: 12px;
+      }
+      span {
+        font-size: 8px;
       }
     }
   }

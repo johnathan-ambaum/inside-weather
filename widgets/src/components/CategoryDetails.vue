@@ -133,7 +133,10 @@ export default {
     .image-content-box {
       flex-wrap: wrap;
       &:not(:last-child) {
-        margin: 0;
+        margin: 0 0 -7px;
+      }
+      &:last-child {
+        margin: 0 0 -51px;
       }
       figure {
         padding-bottom: 100%;
@@ -151,16 +154,16 @@ export default {
         background: #fff;
         max-width: calc(100% - 56px);
         margin: 0 auto;
-        padding: 23px;
+        padding: 23px 23px 0;
         position: relative;
         top: -57px;
 
         h2 {
           font-size: 20px;
-          font-weight: 500;
+          margin: 0 0 16px;
         }
         p {
-          @include fonts(12px,#202020,1.2,0.04em);
+          line-height: 1.4;
           padding: 0;
         }
       }

@@ -31,13 +31,15 @@
               v-for="item in PopUpContentList"
               :key="item.$id"
             >
-              <figure>
-                <img :src="item.image">
-              </figure>
-              <div>
-                <p>{{item.title}}</p>
-                <span>{{item.price}}</span>
-              </div>
+              <a :href="item.productUrl">
+                <figure>
+                  <img :src="item.image">
+                </figure>
+                <div>
+                  <p>{{item.title}}</p>
+                  <span>{{item.price}}</span>
+                </div>
+              </a>
             </li>
           </ul>
         </div>
@@ -142,7 +144,7 @@ html {
             right: 0;
             top: 0;
             bottom: 0;
-            height: auto;
+            height: 100%;
             margin: auto;
             object-fit: contain;
             max-height: 100%;
@@ -162,11 +164,14 @@ html {
           padding: 0 40px 0 30px;
           @include block(calc(100% - 65px));
           li {
-            align-items: center;
-            display: flex;
-            justify-content: space-between;
             margin: 0 0 25px;
-            width: 100%;
+            @include block();
+            a {
+              align-items: center;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+            }
             figure {
               box-shadow: inset 0.25px 0.25px 5px -3px #202020;
               height: 67px;
@@ -189,7 +194,7 @@ html {
               span {
                 display: block;
                 font-family: $font-stack-avalon;
-                font-weight: 500;
+                font-weight: 400;
                 @include fonts(14px,#202020,1.41,0.04em);
               }
             }
@@ -271,29 +276,52 @@ html {
     }
   }
   @include at-query('max-width: 991px') {
+    overflow: hidden;
+    overflow-y: auto;
     .PopUp--dialog {
+      height: auto;
+      margin-bottom: 20px;
+      min-height: calc(100% - 200px);
+      top: 0;
+      transform: translateY(0);
       width: calc(100% - 30px);
-      height: calc(100% - 200px);
+      
       .PopUp--body {
         display: block;
         position: relative;
         .PopUp--imageWrapper {
           width: 100%;
-          height: 56.25%;
+          height: auto;
+          figure {
+            height: 0;
+            padding-bottom: 100%;
+            img {
+              height: 85%;
+              object-fit: cover;
+              object-position: center;
+              width: 100%;
+            }
+          }
         }
         .PopUp--content {
           width: 100%;
-          height: calc(100% - 56.25%);
           position: static;
           ul {
-            height: calc(100% - 50px);
+            padding: 0 20px;
           }
+        }
+      }
+    }
+    &.fade {
+      &.in {
+        .PopUp--dialog  {
+          transform: translateY(48px);
         }
       }
     }
     .PopUp--heading {
       font-size: 24px;
-      padding: 0 25px 19px;
+      padding: 0 20px 19px;
       text-align: center;
     }
     .PopUp--close {
@@ -307,17 +335,10 @@ html {
       }
     }
   }
-  @include at-query('max-width: 640px') {
-    .PopUp--dialog {
-      .PopUp--body {
-        .PopUp--imageWrapper {
-          height: 41.6666%;
-        }
-        .PopUp--content {
-          flex-basis: 100%;
-          height: calc(100% - 41.6666%);
-          position: static;
-        }
+  @include at-query('max-width: 767px') {
+    .PopUp--dialog .PopUp--body .PopUp--content ul li div {
+      p, span{
+        font-size: 12px;
       }
     }
   }
