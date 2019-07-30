@@ -126,7 +126,7 @@ export default {
     }
     span {
       border-bottom: 1px solid;
-      display: inline-block;
+      display: inline;
       font-family: $font-stack-avalon;
       font-weight: 500;
       text-transform: uppercase;
@@ -160,6 +160,16 @@ export default {
   }
   @include at-query('max-width: 1280px') {
     justify-content: left;
+  }
+  @include at-query('max-width: 1024px') {
+    li {
+      h3 {
+        font-size: 16px;
+      }
+      span {
+        font-size: 12px;
+      }
+    }
   }
   @include at-query('max-width: 991px') {
     li {

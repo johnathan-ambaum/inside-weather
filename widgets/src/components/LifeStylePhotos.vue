@@ -17,6 +17,7 @@
           v-for="(item, index) in lifeStyleItems"
           :key="item.$id"
           v-bind:class="['LifeStylePhotos--column column LifeStylePhotos--column-'+ (index + 1)]"
+          v-on:click="showPopUp"
         >
           <figure>
             <img 
@@ -25,7 +26,6 @@
           </figure>
           <div 
             class="more-info"
-            v-on:click="showPopUp"
           >
             <i class="more-info-trigger-icons info-icon-plus">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -132,6 +132,7 @@ export default {
     }  
   }
   .LifeStylePhotos--column {
+    cursor: pointer;
     figure {
       padding: 0 8px 16px;
       @include block(100%);

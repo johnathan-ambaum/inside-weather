@@ -7,8 +7,9 @@
     <div class="PopUp--dialog">
       <div class="PopUp--body">
         <div class="PopUp--imageWrapper">
-          <figure>
-            <img :src="PopUpImageSource">
+          <figure
+            v-bind:style="{ backgroundImage: 'url('+ PopUpImageSource +')' }"
+          >
           </figure>
         </div>
         <div class="PopUp--content">
@@ -134,23 +135,11 @@ html {
         flex-basis: 65%;
         height: 100%;
         figure {
-          background: #202020;
+          width: 100%;
           height: 100%;
-          position: relative;
-          overflow: hidden;
-          img {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            margin: auto;
-            object-fit: contain;
-            max-height: 100%;
-            max-width: 100%;
-            width: auto;
-          }
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: 50%;
         }
       }
       .PopUp--content {
@@ -293,14 +282,7 @@ html {
           width: 100%;
           height: auto;
           figure {
-            height: 0;
             padding-bottom: 100%;
-            img {
-              height: 85%;
-              object-fit: cover;
-              object-position: center;
-              width: 100%;
-            }
           }
         }
         .PopUp--content {
@@ -325,8 +307,11 @@ html {
       text-align: center;
     }
     .PopUp--close {
-      top: -50px;
+      top: -28px;
+      padding: 7px;
       i {
+        width: 14px;
+        height: 14px;
         svg {
           line {
             stroke: #ffffff;
