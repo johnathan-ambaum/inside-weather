@@ -244,9 +244,7 @@ export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20
     });
 }
 
-export function getProductReviews({
-  commit,
-}, {
+export function getProductReviews({ commit }, {
   primaryCategory = 'coffee-tables',
   productFamily = 'kloss',
 }) {

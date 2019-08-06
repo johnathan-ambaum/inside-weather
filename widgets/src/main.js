@@ -18,7 +18,6 @@ import ProductCustomizer from './components/ProductCustomizer.vue';
 import ProductDetail from './components/ProductDetail.vue';
 import ProductFamily from './components/ProductFamily.vue';
 import ProductDetailSlider from './components/ProductDetailSlider.vue';
-import PageBuilderSection from './components/PageBuilderSection.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
 import SwatchBrowser from './components/SwatchBrowser.vue';
 import CategoryItem from './components/CategoryItem.vue';
@@ -48,7 +47,6 @@ const app = new Vue({
     ProductDetail,
     ProductFamily,
     ProductDetailSlider,
-    PageBuilderSection,
     GlyphLoading,
     SwatchBrowser,
     CategoryItem,

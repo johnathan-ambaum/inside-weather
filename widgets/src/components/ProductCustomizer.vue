@@ -41,11 +41,6 @@ export default {
     screenMonitor,
   ],
 
-  props: {
-    category: { type: String, default: 'tables' },
-    sku: { type: String, required: true },
-  },
-
   data() {
     return {
       mobileOpenPanels: [],
@@ -177,15 +172,6 @@ export default {
   },
 
   created() {
-    if (this.category) {
-      this.updateCategory(this.category);
-      this.pullFilter();
-    }
-
-    if (this.sku) {
-      this.loadProduct({ sku: this.sku });
-    }
-
     this.$bus.$on('filter:toggle', (payload) => {
       this.updateFilter({
         ...payload,
@@ -218,8 +204,8 @@ export default {
     });
 
     const sidebar = document.querySelector('.ProductDetailGrid__Sidebar');
-    const builderSection = document.querySelector('.PageBuilderSection');
-    const desktopWatcher = scrollMonitor.create(builderSection);
+    const reviewSection = document.querySelector('.ReviewCarousel');
+    const desktopWatcher = scrollMonitor.create(reviewSection);
     let mobileWatcher;
 
     window.addEventListener('wheel', (e) => {
@@ -228,7 +214,7 @@ export default {
       }
 
       const scrollDistance = Math.sign(e.deltaY) * 40;
-      const { top: builderTop } = builderSection.getBoundingClientRect();
+      const { top: builderTop } = reviewSection.getBoundingClientRect();
       const inViewport = builderTop <= this.screenHeight + scrollDistance;
       const scrollingToBottom = inViewport && scrollDistance > 0 && sidebar.scrollHeight - sidebar.scrollTop >= sidebar.clientHeight + 20;
       const scrollingToTop = window.pageYOffset === 0 && scrollDistance < 0 && sidebar.scrollHeight > 0;
@@ -275,7 +261,7 @@ export default {
        * Both need to be deducted from scrollMonitor offset to ensure it triggers at the right time
        */
       fixedSliderHeight -= 85;
-      mobileWatcher = scrollMonitor.create(builderSection, { top: -fixedSliderHeight });
+      mobileWatcher = scrollMonitor.create(reviewSection, { top: -fixedSliderHeight });
 
       mobileWatcher.visibilityChange(() => {
         if (!this.isMobile || this.repositioning) {
@@ -304,12 +290,10 @@ export default {
   methods: {
     ...mapActions([
       'updateFilter',
-      'pullFilter',
       'loadProduct',
     ]),
 
     ...mapMutations([
-      'updateCategory',
       'selectPanel',
     ]),
 

@@ -14,7 +14,7 @@
 
   <div id="app">
     <div class="ProductDetailGrid">
-      <product-detail class="ProductDetailGrid__Main">
+      <product-detail category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}" class="ProductDetailGrid__Main">
         <h1 class="ProductDetail__Title">{{ product.title }}</h1>
         <div class="ResponsiveImage__Wrapper"></div>
       </product-detail>
@@ -52,21 +52,16 @@
             </div> <!-- [itemprop="offers"] -->
           </div> <!-- .product-single__meta -->
           <hr>
-          <div class="Product__Explore">
-            <p class="Product__Lead">NOT SURE YOU FOUND THE PERFECT MATCH?</p>
-            <h3>
-              CUSTOMIZE
-              {% include 'icon-fa-arrow-right' %}
-            </h3>
-          </div>
-          <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}" v-cloak>
+          {% comment %}
+          <product-customizer v-cloak>
             {% include 'add-to-cart-row' %}
           </product-customizer>
+          {% endcomment %}
         {% endform %}
         <product-family v-if="product && isMobile"></product-family>
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
-    <page-builder-section></page-builder-section>
+    <review-carousel></review-carousel>
   </div> <!-- #app -->
 
   <script type="application/json" id="ProductJson-{{ section_id }}" data-product-json>

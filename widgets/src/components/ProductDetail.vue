@@ -40,11 +40,21 @@
             </div>
           </nav>
         </div>
-        <product-description id="details"/>
+        <!-- <product-description id="details"/> -->
         <product-dimensions
           id="dimensions"
           class="ProductDetail__Dimensions"
         />
+        <h2
+          v-if="filters.contents.length > 0"
+          class="ProductDetail__Heading"
+        >Details</h2>
+        <template-block
+          v-for="(block, index) in filters.contents"
+          :key="index"
+          :image="block.image_template"
+          :text="block.content_template"
+          :reverse="index % 2 !== 0" />
         <product-family
           v-if="'related_items' in product && product.related_items.length"
           id="families"
@@ -64,13 +74,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearchPlus } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ZoomGallery from './ZoomGallery.vue';
 import ProductDescription from './ProductDescription.vue';
 import ProductDimensions from './ProductDimensions.vue';
+import TemplateBlock from './TemplateBlock.vue';
 import ProductFamily from './ProductFamily.vue';
 import ResponsiveImage from './ResponsiveImage.vue';
 import productHandler from '../mixins/productHandler';
@@ -83,6 +94,7 @@ export default {
     ResponsiveImage,
     ProductDescription,
     ProductDimensions,
+    TemplateBlock,
     ProductFamily,
     FontAwesomeIcon,
     ZoomGallery,
@@ -92,6 +104,11 @@ export default {
     productHandler,
     screenMonitor,
   ],
+
+  props: {
+    category: { type: String, required: true },
+    sku: { type: String, required: true },
+  },
 
   data() {
     return {
@@ -111,7 +128,27 @@ export default {
     },
   },
 
+  created() {
+    if (this.category) {
+      this.updateCategory(this.category);
+      this.pullFilter();
+    }
+
+    if (this.sku) {
+      this.loadProduct({ sku: this.sku });
+    }
+  },
+
   methods: {
+    ...mapActions([
+      'pullFilter',
+      'loadProduct',
+    ]),
+
+    ...mapMutations([
+      'updateCategory',
+    ]),
+
     swapImage(index) {
       this.galleryImage = index;
     },
@@ -233,6 +270,11 @@ export default {
     @include at-query($breakpoint-small) {
       display: none;
     }
+  }
+
+  &__Heading {
+    font-weight: 600;
+    margin-bottom: 60px;
   }
 }
 </style>

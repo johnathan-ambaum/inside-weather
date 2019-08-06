@@ -4,65 +4,82 @@
 
     <!-- Review Write section -->
     <div class="ReviewCarousel__Write">
-      <a class="ReviewCarousel__Write--Link" href="https://insideweather.com/pages/write-a-review">
+      <a
+        class="ReviewCarousel__Write--Link"
+        href="https://insideweather.com/pages/write-a-review"
+      >
         <span class="ReviewCarousel__Write--BtnLabel">Write a Review</span>
       </a>
     </div>
 
     <!-- Review Items section -->
     <div
+      v-if="reviews.length > 0"
       class="ReviewCarousel__Category"
-      v-if="reviewData.length > 0"
     >
       <div
         @mouseenter="updateHoverState(true)"
         @mouseleave="updateHoverState(false)"
       >
         <swiper
-          :options="swiperOption"
           ref="swiper"
+          :options="swiperOption"
           @click.native="sliderClicked"
         >
           <swiper-slide
-            v-for="(item, index) in reviewData"
+            v-for="(item, index) in reviews"
             :key="`${index}`"
           >
             <carousel-item
-              :key=item.id
+              :key="item.id"
               :element-id="item.id.toString()"
-              :first-name=item.first_name
-              :last-name=item.last_name
-              :product-city=item.city
-              :product-state=item.state
-              :product-image=item.item_data.thumbnail_image
+              :first-name="item.first_name"
+              :last-name="item.last_name"
+              :product-city="item.city"
+              :product-state="item.state"
+              :product-image="item.item_data.thumbnail_image"
               :review-date="convertDate(item.submitted_at)"
-              :review-title=item.title
+              :review-title="item.title"
               :review-content="cutoffReviewContent(item.images, item.body)"
               :is-ellipsis="getEllipsisStatus(item.images, item.body)"
-              :review-images=item.images
-              :product-category=item.item_data.primary_category
-              :product-handle=item.item_data.handle
-              :star-count=item.rating
+              :review-images="item.images"
+              :product-category="item.item_data.primary_category"
+              :product-handle="item.item_data.handle"
+              :star-count="item.rating"
               :set-modal-image="setModalImage"
             />
           </swiper-slide>
           <div
-            class="swiper-button-next swiper-button" slot="button-next"
+            slot="button-next"
             :style="styleSliderButton"
+            class="swiper-button-next swiper-button"
           >
-            <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-next.png?342072" alt="Pre" width="18px" height="20px" />
+            <img
+              src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-next.png?342072"
+              alt="Pre"
+              width="18px"
+              height="20px" >
           </div>
           <div
-            class="swiper-button-prev swiper-button" slot="button-prev"
+            slot="button-prev"
             :style="styleSliderButton"
+            class="swiper-button-prev swiper-button"
           >
-            <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-prev.png?342072" alt="Pre" width="18px" height="20px" />
+            <img
+              src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-prev.png?342072"
+              alt="Pre"
+              width="18px"
+              height="20px" >
           </div>
-          <div class="swiper-pagination" slot="pagination"></div>
+          <div
+            slot="pagination"
+            class="swiper-pagination"/>
         </swiper>
       </div>
       <div class="ReviewCarousel__Read">
-        <a class="ReviewCarousel__Read--Link" href="https://insideweather.com/pages/reviews">
+        <a
+          class="ReviewCarousel__Read--Link"
+          href="https://insideweather.com/pages/reviews">
           <span class="ReviewCarousel__Read--BtnLabel">Read All Reviews</span>
         </a>
       </div>
@@ -88,24 +105,18 @@ import ReviewModal from './ReviewModal.vue';
 import Star from './Star.vue';
 
 export default {
-  mixins: [
-    screenMonitor,
-  ],
-
   components: {
     CarouselItem,
     ReviewModal,
     Star,
   },
 
-  props: {
-    primaryCategory: { type: String, default: '' },
-    productFamily: { type: String, default: '' },
-  },
+  mixins: [
+    screenMonitor,
+  ],
 
   data() {
     return {
-      reviewData: [],
       isShowSliderButton: false,
       modalShow: false,
       modalImage: '',
@@ -125,15 +136,15 @@ export default {
         },
         pagination: {
           el: '.swiper-pagination',
-          clickable: true
+          clickable: true,
         },
         on: {
-          slideChange: function () {
-          }
+          slideChange() {
+          },
         },
         breakpoints: {
           405: { // when window width is <= 375px
-            slidesPerView: 1.2, //300-330
+            slidesPerView: 1.2, // 300-330
           },
           440: {
             slidesPerView: 1.3,
@@ -232,13 +243,13 @@ export default {
             slidesPerView: 4.05, // 370-374
           },
           1621: {
-            slidesPerView: 4.1, //370-378
+            slidesPerView: 4.1, // 370-378
           },
           1660: {
-            slidesPerView: 4.2, //370-378
+            slidesPerView: 4.2, // 370-378
           },
           1699: {
-            slidesPerView: 4.3, //370-378
+            slidesPerView: 4.3, // 370-378
           },
           1737: {
             slidesPerView: 4.4, // 370-378
@@ -252,9 +263,45 @@ export default {
           1900: {
             slidesPerView: 4.75, // 370
           },
-        }
-      }
+        },
+      },
     };
+  },
+
+  computed: {
+    ...mapState({
+      product: state => state.activeProduct,
+      reviews: state => state.productReviews,
+      totalReviews: state => state.totalReviews,
+    }),
+
+    styleSliderButton() {
+      const showItem = {
+        visibility: this.isShowSliderButton ? 'visible' : 'hidden',
+      };
+
+      return showItem;
+    },
+
+    swiper() {
+      return this.$refs.swiper.swiper;
+    },
+  },
+
+  watch: {
+    product: {
+      immediate: true,
+      handler(newProduct, oldProduct) {
+        if (!newProduct || (oldProduct && newProduct.id === oldProduct.id)) {
+          return;
+        }
+
+        this.getProductReviews({
+          primaryCategory: newProduct.primary_category,
+          productFamily: this.product.product_family,
+        });
+      },
+    },
   },
 
   mounted() {
@@ -270,35 +317,6 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState({
-      product: state => state.activeProduct,
-      propReviews: state => state.productReviews,
-      totalReviews: state => state.totalReviews,
-    }),
-
-    styleSliderButton() {
-      const showItem = {
-        visibility: this.isShowSliderButton ? 'visible' : 'hidden',
-      };
-
-      return showItem;
-    },
-
-    swiper() {
-      return this.$refs.swiper.swiper
-    }
-  },
-
-  watch: {
-    primaryCategory(newCategory) {
-      this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
-    },
-    propReviews(newPropReviews) {
-      this.reviewData.push(...newPropReviews);
-    }
-  },
-
   methods: {
     ...mapActions([
       'getProductReviews',
@@ -311,7 +329,7 @@ export default {
 
     convertDate(isoDate) {
       const date = new Date(isoDate);
-      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     },
 
     updateHoverState(isHover) {
@@ -372,25 +390,19 @@ export default {
           if (reviewContent.length > 250) {
             ellipsisReviewContent = reviewContent.substring(0, 220);
           }
-        } else {
-          if (reviewContent.length > 150) {
-            ellipsisReviewContent = reviewContent.substring(0, 120);
-          }
+        } else if (reviewContent.length > 150) {
+          ellipsisReviewContent = reviewContent.substring(0, 120);
         }
-      } else {
-        if (imgCount === 0) {
-          if (reviewContent.length > 420) {
-            ellipsisReviewContent = reviewContent.substring(0, 390);
-          }
-        } else if (imgCount < 4 && imgCount > 0) {
-          if (reviewContent.length > 270) {
-            ellipsisReviewContent = reviewContent.substring(0, 240);
-          }
-        } else {
-          if (reviewContent.length > 150) {
-            ellipsisReviewContent = reviewContent.substring(0, 110);
-          }
+      } else if (imgCount === 0) {
+        if (reviewContent.length > 420) {
+          ellipsisReviewContent = reviewContent.substring(0, 390);
         }
+      } else if (imgCount < 4 && imgCount > 0) {
+        if (reviewContent.length > 270) {
+          ellipsisReviewContent = reviewContent.substring(0, 240);
+        }
+      } else if (reviewContent.length > 150) {
+        ellipsisReviewContent = reviewContent.substring(0, 110);
       }
 
       return ellipsisReviewContent;
@@ -409,60 +421,49 @@ export default {
           if (reviewContent.length > 250) {
             isEllipsis = true;
           }
-        } else {
-          if (reviewContent.length > 150) {
-            isEllipsis = true;
-          }
+        } else if (reviewContent.length > 150) {
+          isEllipsis = true;
         }
-      } else {
-        if (imgCount === 0) {
-          if (reviewContent.length > 420) {
-            isEllipsis = true;
-          }
-        } else if (imgCount < 4 && imgCount > 0) {
-          if (reviewContent.length > 270) {
-            isEllipsis = true;
-          }
-        } else {
-          if (reviewContent.length > 150) {
-            isEllipsis = true;
-          }
+      } else if (imgCount === 0) {
+        if (reviewContent.length > 420) {
+          isEllipsis = true;
         }
+      } else if (imgCount < 4 && imgCount > 0) {
+        if (reviewContent.length > 270) {
+          isEllipsis = true;
+        }
+      } else if (reviewContent.length > 150) {
+        isEllipsis = true;
       }
 
       return isEllipsis;
     },
 
-    sliderClicked: function (event) {
+    sliderClicked(event) {
       let selectedItem;
 
       if (this.modalImage !== '') {
         if (event.target.classList.contains('CarouselItem__Right--Image')) {
-          this.reviewData.forEach((item, index) => {
-            item.images.forEach(img => {
-              if(img.medium.url === this.modalImage) {
+          this.reviews.forEach((item) => {
+            item.images.forEach((img) => {
+              if (img.medium.url === this.modalImage) {
                 selectedItem = item;
-                return;
               }
-            })
-          })
+            });
+          });
         }
-      } else {
-        if (event.target.classList.contains('CarouselItem__Right--Readmore__Text') || event.target.classList.contains('CarouselItem__Right--Image')) {
-          this.reviewData.forEach((item, index) => {
-            if(event.target.classList.contains(item.id)) {
-              selectedItem = item;
-              return;
-            }
-          })
-        } else if (event.target.classList.contains('CarouselItem__Left--Image')) {
-          this.reviewData.forEach((item, index) => {
-            if (event.target.classList.contains(item.id)) {
-              window.open(`https://insideweather.com/collections/${item.item_data.primary_category}/products/${item.item_data.handle}`, "_blank");
-            }
-            return;
-          })
-        }
+      } else if (event.target.classList.contains('CarouselItem__Right--Readmore__Text') || event.target.classList.contains('CarouselItem__Right--Image')) {
+        this.reviews.forEach((item) => {
+          if (event.target.classList.contains(item.id)) {
+            selectedItem = item;
+          }
+        });
+      } else if (event.target.classList.contains('CarouselItem__Left--Image')) {
+        this.reviews.forEach((item) => {
+          if (event.target.classList.contains(item.id)) {
+            window.open(`https://insideweather.com/collections/${item.item_data.primary_category}/products/${item.item_data.handle}`, '_blank');
+          }
+        });
       }
 
       this.openModal(selectedItem);
@@ -488,7 +489,7 @@ export default {
 @import '../scss/mixins';
 
 .ReviewCarousel {
-  margin: 60px auto 0;
+  margin: 0 auto;
   padding: 60px 0;
   background: #f2f0ed;
   font-family: $font-stack-avalon;
