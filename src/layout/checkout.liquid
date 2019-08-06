@@ -49,34 +49,36 @@
         });
       }
 
-      if (window.location.href.indexOf('/thank_you') !== -1) {
-        dataLayer.push({
-          customerId: {{ customer.id | json }},
-          orderId: {{ checkout.order_number | json }},
-          ecommerce: {
-            purchase: {
-              actionField: {
-                id: {{ checkout.order_number | json }},
-                revenue: {{ checkout.total_price | divided_by: 100 | json }},
-                tax: {{ checkout.tax_price | divided_by: 100 | json }},
-                shipping: {{ checkout.shipping_price | divided_by: 100 | json }},
-                affiliation: "Online Store"
-              },
-              products: [
-                {%- for item in checkout.line_items -%}
-                  {
-                    id: {{ item.sku | json }},
-                    name: {{ item.title | json }},
-                    category: {{ item.product.collections.first.title | json }},
-                    price: {{ item.price | divided_by: 100 | json }},
-                    quantity: {{ item.quantity }}
-                  }{%- unless forloop.last -%},{%- endunless -%}
-                {%- endfor -%}
-              ]
+      {% if checkout.total_price > 0 %}
+        if (window.location.href.indexOf('/thank_you') !== -1) {
+          dataLayer.push({
+            customerId: {{ customer.id | json }},
+            orderId: {{ checkout.order_number | json }},
+            ecommerce: {
+              purchase: {
+                actionField: {
+                  id: {{ checkout.order_number | json }},
+                  revenue: {{ checkout.total_price | divided_by: 100 | json }},
+                  tax: {{ checkout.tax_price | divided_by: 100 | json }},
+                  shipping: {{ checkout.shipping_price | divided_by: 100 | json }},
+                  affiliation: "Online Store"
+                },
+                products: [
+                  {%- for item in checkout.line_items -%}
+                    {
+                      id: {{ item.sku | json }},
+                      name: {{ item.title | json }},
+                      category: {{ item.product.collections.first.title | json }},
+                      price: {{ item.price | divided_by: 100 | json }},
+                      quantity: {{ item.quantity }}
+                    }{%- unless forloop.last -%},{%- endunless -%}
+                  {%- endfor -%}
+                ]
+              }
             }
-          }
-        });
-      }
+          });
+        }
+      {% endif %}
     </script>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
