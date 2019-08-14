@@ -42,13 +42,14 @@ export default {
     @include block();
   }
   ul {
-    align-items: baseline;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     margin: 0 -10px;
     li {
+      flex-basis: 25%;
       text-align: center;
       padding: 0 10px;
       margin: 0;
