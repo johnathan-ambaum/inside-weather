@@ -1,6 +1,9 @@
 <div id="app">
-  {% assign hasImage = false %}
-  {% assign bannerContent = "{'items':[{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Sofas','url':'/pages/category-sofa'},{'image':' ','heading':'Create your custom climate.','description':'The Weather is now entirely up to you.','linkText':'Shop Armchair','url':'/pages/category-armchair'},{'image':' ','heading':'Create your custom climate','description':'The Weather is now entirely up to you.','linkText':'Shop Table','url':'/pages/category-table'}]}"%}
+  {% assign hasImage = true %}
+  {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_1-min.jpg?1657929',
+  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_1-min.jpg?1657932', 'heading':'RE-THINK YOUR SOFA','description':'Custom sofas starting at $798.','linkText':'Shop Sofas','url':'https://insideweather.com/pages/category-sofas'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_2-min.jpg?1657929',
+  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_2-min.jpg?1657932', 'heading':'HAVE AN IDEA? MAKE IT FLY','description':'Custom dining chairs starting at $98.','linkText':'SHOP DINING CHAIRS','url':'https://insideweather.com/pages/category-dining-chairs'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_3-min.jpg?1657929',
+  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_3-min.jpg?1657932', 'heading':'Let’s Get Personal','description':'Customize your storage needs with 400+ finish options.','linkText':'SHOP SIDEBOARDS','url':'https://insideweather.com/pages/category-sideboards'}]}"%}
 
   <banner-carousel 
     :has-image="{{hasImage}}"

@@ -23,9 +23,17 @@
           class="CarouselBanner__image"
           :style="[(hasBannerImage && (item.image !== ' ' && item.image !== '')) ? {'background': 'transparent'} : {'background': '#E5C78A'}]"
         >
+          <!-- Dekstop Banner -->
           <figure 
-            v-if="(hasBannerImage && (item.image !== ' ' && item.image !== ''))"
+            v-if="(hasBannerImage && (item.image !== ' ' && item.image !== '') && isBigScreen)"
             v-bind:style="{ backgroundImage: 'url('+ item.image +')' }"
+          >
+          </figure>
+
+          <!-- mobile Banner -->
+          <figure 
+            v-if="(hasBannerImage && (item.imageSm !== ' ' && item.imageSm !== '') && !isBigScreen)"
+            v-bind:style="{ backgroundImage: 'url('+ item.imageSm +')' }"
           >
           </figure>
         </div>
@@ -69,6 +77,7 @@ export default {
     return {
       hasBannerImage: this.hasImage,
       bannerContentItems: this.bannerContent.items,
+      isBigScreen: true,
       sliderProps: {
         items: 1,
         margin: 0,
@@ -80,6 +89,24 @@ export default {
         responsive: {0:{nav:false, autoplayTimeout: 5000},1025:{nav:true, autoplayTimeout: 5000}}
       }
     }
+  },
+  created: function () {
+    if(window.innerWidth > 991) {
+      this.isBigScreen = true
+    }else {
+      this.isBigScreen = false
+    }
+  },
+  mounted() {
+    const changeTheBanner = () => {
+      if (window.innerWidth > 991) {
+       this.isBigScreen = true
+      } else {
+        this.isBigScreen = false
+      }
+    };
+    
+    window.addEventListener('resize', changeTheBanner);
   }
 }
 </script>
