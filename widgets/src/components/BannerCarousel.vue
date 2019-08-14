@@ -165,14 +165,14 @@ export default {
         font-family: $font-stack-avalon;
         font-weight: 500;
         opacity: 0;
-        @include fonts(18px,#ffffff,1.33,0);
+        @include fonts(18px,#ffffff,1.33,0.035em);
       }
       a {
         display: inline-block;
         padding: 5px 0;
         position: relative;
         font-family: $font-stack-avalon;
-        font-weight: 700;
+        font-weight: 600;
         opacity: 0;
         @include fonts(16px,#ffffff,1.18,0.1em);
         &::after {
@@ -309,9 +309,6 @@ export default {
         padding: 45px 15px 0;
         h2 {
           font-size: 34px;
-        }
-        a {
-          font-weight: 400;
         }
         p {
           font-size: 14px;

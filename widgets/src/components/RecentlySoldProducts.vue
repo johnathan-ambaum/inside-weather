@@ -124,6 +124,7 @@ export default {
 }
 .RecentlySoldProducts {
   padding: 100px 0 0;
+  overflow: hidden;
   .RecentlySoldProducts--column {
     position: relative;
     background: #FFFFFF;

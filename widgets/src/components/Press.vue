@@ -49,7 +49,7 @@ export default {
     justify-content: space-between;
     margin: 0 -10px;
     li {
-      flex-basis: 25%;
+      flex-basis: 33.333%;
       text-align: center;
       padding: 0 10px;
       margin: 0;
@@ -92,7 +92,6 @@ export default {
         margin: 0 0 50px;
         span {
           font-size: 16px;
-          font-weight: 400;
         }
       }
     }

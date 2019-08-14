@@ -81,7 +81,7 @@ export default {
         autoplay: true,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, dots: false, autoplay: false, autoplayTimeout: 4000},992:{nav:true, dots: true, autoplay: true, autoplayTimeout: 5000}}
+        responsive: {0:{nav:false, dots: false, autoplay: false},992:{nav:true, dots: true, autoplay: true, autoplayTimeout: 6000}}
       }
     }
   },
