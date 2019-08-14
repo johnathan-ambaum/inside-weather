@@ -44,18 +44,22 @@
               </svg>
             </i>
           </div>
-          <figure>
-            <img :src="items.picture">
-          </figure>
-          <div 
-            class="RecentlySoldProducts--overlayWrapper"
+          <a
+            :href="items.targetLink"
             >
-            <div>
-              <span>{{items.userFirstName + ' ' + items.userSecondName}} bought</span>
-              <p>{{items.productName}}</p>
-              <span>for {{items.price}}</span>
+            <figure>
+              <img :src="items.picture">
+            </figure>
+            <div 
+              class="RecentlySoldProducts--overlayWrapper"
+              >
+              <div>
+                <span>{{items.userFirstName + ' ' + items.userSecondName}} bought</span>
+                <p>{{items.productName}}</p>
+                <span>for {{items.price}}</span>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -125,6 +129,9 @@ export default {
     background: #FFFFFF;
     pointer-events: none;
     transition: all 0.3s ease-in-out;
+    a {
+      @include block();
+    }
     .more-info {
       height: 29px;
       position: absolute;
@@ -185,6 +192,7 @@ export default {
         display: block;
         margin: 0;
         opacity: 0;
+        padding: 1px;
       }
     }
     .RecentlySoldProducts--overlayWrapper {
