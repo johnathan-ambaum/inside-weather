@@ -10,7 +10,23 @@
           :key="item.id"
           v-bind:data-src="item.targetPoint"
         >
-          <img :src="item.image">
+          <img 
+            v-if="item.isVideo === 'false'"
+            :src="item.url"
+          >
+
+          <video 
+            v-if="item.isVideo === 'true'"
+            id="valuePropsVideoPlayer"
+            class="valuePropsVideo"
+            loop
+          >
+          <source 
+            :src="item.url"
+            type="video/mp4" 
+          /> 
+          </video>
+          
         </figure>
       </div>
       <div class="descriptions">
@@ -91,10 +107,14 @@ export default {
         @include block(100%);
         @include transition();
         @include translate(0,100%);
-        img {
+        img{
           height: 100%;
           display: block;
           object-fit: cover;
+        }
+        video{
+          object-fit: cover;
+          @include block(100%);
         }
         &.default {
           @include translate(0,0);
