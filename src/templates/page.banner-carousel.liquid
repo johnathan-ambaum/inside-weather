@@ -38,13 +38,14 @@
     </div>
   </div>
 
-  {% assign reviewContent = "[{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'},{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'},{'headContent':'Love It!','starCount':5,'reviewDetail':'Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping. Made-to-order furniture, shipped in days, because life is too short to wait. Take the stress out of furniture shopping','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/reviews_img1.png?753978','authorName':'Sophia','authorAddress':'Santa Ana, CA'}]"%}
+  {% assign reviewContent = "[{'headContent':'Family loves it!','starCount':5,'reviewDetail':'t’s the perfect size for a mom, 2 kids and a dog to sit together and read or watch some Netflix.','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_reviews_01-min.jpg?1657950','reviewer':'Erin W.','reviewerAddress':'Raleigh, NC'},{'headContent':'Best of both worlds','starCount':5,'reviewDetail':'I love my Elle coffee table! I’d been looking for years for a simple one, and i was SO excited to finally find something well designed AND affordable…although when I saw all the pattern options i was tempted… you can’t go wrong with this company!','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_reviews_02-min.jpg?1657950','reviewer':'Kirstin','reviewerAddress':'San Francisco, CA'},{'headContent':'Easy and fun!','starCount':5,'reviewDetail':'So happy with my new dining table and chairs!','image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_reviews_03-min.jpg?1657950','reviewer':'Marija D.','reviewerAddress':'Los Angeles, CA'}]"%}
 
   <div class="ReviewCarouselWrapper">
     <div class="--custom-container">
       <review-carousel 
         :review-content="{{reviewContent}}" 
         link-text="Read All Reviews"
+        link-to="/pages/reviews"
       >
       </review-carousel>
     </div>

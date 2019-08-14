@@ -32,11 +32,11 @@
           </div>
           <p>{{review.reviewDetail}}</p>
           <div class="Review__author">
-            <span>{{review.authorName}}</span>
-            <span>{{review.authorAddress}}</span>
+            <span>{{review.reviewer}}</span>
+            <span>{{review.reviewerAddress}}</span>
           </div>
           <a 
-            href="./" 
+            v-bind:href="linkTo"
             class="--caps"
           >
             {{linkText}}
@@ -50,7 +50,7 @@
       </div>
     </slider>
     <a 
-      href="./" 
+      v-bind:href="linkTo"
       class="--caps read-all-review-sm"
     >
       {{linkText}}
@@ -67,7 +67,8 @@ export default {
   },
   props: {
     reviewContent: Array,
-    linkText: String
+    linkText: String,
+    linkTo: String
   },
   data() {
     return {
