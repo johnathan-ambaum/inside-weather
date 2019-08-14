@@ -9,9 +9,9 @@
       v-bind:style="{ backgroundImage: 'url(' + bannerImageUrl + ')' }"
     >
       <div class="Banner__content">
-        <h2>Get professional help</h2>
-        <p>First Class Service. I’m able to purchase exactly what I want without falling short of my dreams.</p>
-        <link-button btnText="Send an sos" linkTo="./" stroke="white" />
+        <h2>{{bannerHeading}}</h2>
+        <p>{{bannerDescription}}</p>
+        <link-button :btnText="buttonText" :linkTo="buttonLink" stroke="white" />
       </div>
     </div>
   </div>
@@ -27,7 +27,11 @@ export default {
   props: {
     hasOverlay: {type: Boolean, default: true},
     fillColor: {type: String, default: 'white'},
-    bannerImage: Array
+    bannerImage: Array,
+    bannerHeading: String,
+    bannerDescription: String,
+    buttonText: String,
+    buttonLink: String
   },
   data() {
     return {
