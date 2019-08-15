@@ -126,16 +126,6 @@ export default {
         background-position: center center;
         background-repeat: no-repeat;
         @include block(100%);
-        &:before {
-          content: "";
-          background: rgba($color: #000000, $alpha: 0.2);
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          @include block(100%);
-        }
       }
     }
     .CarouselBanner__content {

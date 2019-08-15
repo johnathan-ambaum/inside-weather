@@ -47,11 +47,11 @@ export default {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    margin: 0 -10px;
+    margin: 0 -35px;
     li {
       flex-basis: 33.333%;
       text-align: center;
-      padding: 0 10px;
+      padding: 0 35px;
       margin: 0;
       figure {
         margin: 0 auto 18px;
@@ -79,8 +79,14 @@ export default {
       max-width: 100%;
       padding: 0 15px;
     }
-    ul li span {
-      font-size: 13px;
+    ul {
+      margin: 0 -20px;
+      li {
+        padding: 0 20px;
+        span {
+          font-size: 13px;
+        }
+      }
     }
   }
   @include at-query('max-width: 1119px') {

@@ -119,6 +119,7 @@ export default {
     .Review__content {
       flex-basis: 50%;
       padding-right: 110px;
+      padding-bottom: 65px;
       h5 {
         font-family: $font-stack-avalon;
         display: block;
@@ -216,6 +217,7 @@ export default {
       .Review__content {
         flex-basis: 45%;
         padding-right: 25px;
+        padding-bottom: 35px;
         h5 {
           margin: 0 0 20px;
         }

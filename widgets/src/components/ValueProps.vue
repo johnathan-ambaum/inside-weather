@@ -74,7 +74,7 @@ export default {
   position: relative;
   &::before {
     content: "";
-    background: #D4D0CA;
+    background: #f2f2f2;
     height: calc(100% - 70px);
     position: absolute;
     left: 0;
