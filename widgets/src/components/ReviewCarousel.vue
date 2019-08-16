@@ -115,6 +115,10 @@ export default {
     screenMonitor,
   ],
 
+  props: {
+    category: { type: String, required: true },
+  },
+
   data() {
     return {
       isShowSliderButton: false,
@@ -270,7 +274,7 @@ export default {
 
   computed: {
     ...mapState({
-      product: state => state.activeProduct,
+      // product: state => state.activeProduct,
       reviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
     }),
@@ -288,21 +292,21 @@ export default {
     },
   },
 
-  watch: {
-    product: {
-      immediate: true,
-      handler(newProduct, oldProduct) {
-        if (!newProduct || (oldProduct && newProduct.id === oldProduct.id)) {
-          return;
-        }
+  // watch: {
+  //   product: {
+  //     immediate: true,
+  //     handler(newProduct, oldProduct) {
+  //       if (!newProduct || (oldProduct && newProduct.id === oldProduct.id)) {
+  //         return;
+  //       }
 
-        this.getProductReviews({
-          primaryCategory: newProduct.primary_category,
-          productFamily: this.product.product_family,
-        });
-      },
-    },
-  },
+  //       this.getProductReviews({
+  //         primaryCategory: newProduct.primary_category,
+  //         productFamily: this.product.product_family,
+  //       });
+  //     },
+  //   },
+  // },
 
   mounted() {
     if (this.isMobile) {
@@ -312,6 +316,10 @@ export default {
   },
 
   created() {
+    this.getProductReviews({
+      primaryCategory: this.category,
+    });
+
     if (this.isMobile) {
       this.swiperOption.centeredSlides = true;
     }

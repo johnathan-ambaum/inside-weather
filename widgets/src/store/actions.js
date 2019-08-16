@@ -1,6 +1,5 @@
 import ApiClient from '../util/ApiClient';
 import FilterStorage from '../util/FilterStorage';
-import { parsePreselectedFilters } from './helpers';
 
 const apiClient = new ApiClient();
 
@@ -10,6 +9,11 @@ const apiClient = new ApiClient();
 export function pullFilter({ commit, state }) {
   FilterStorage.getItem(state.category).then((filter) => {
     commit('defineFilter', { filter });
+    // TODO: DELETE THIS WHEN POSSIBLE
+    filter.attributes.forEach(({ parameter, values }) => {
+      commit('setOption', { parameter, value: values[0].value });
+    });
+    // TODO: END DELETE BLOCK
   });
 }
 
@@ -17,9 +21,6 @@ export function pullFilter({ commit, state }) {
  * Get single product matching SKU or selected option configuration for PDP
  */
 export function loadProduct({ commit, dispatch, state }, { last = null, sku = null }) {
-  // clear last error before checking for new product
-  commit('setErrorTrigger', null);
-
   apiClient
     .applyFilters({
       category: state.category,
@@ -30,17 +31,27 @@ export function loadProduct({ commit, dispatch, state }, { last = null, sku = nu
     .perPage(1)
     .getPage(1)
     .then(({ hits: results }) => {
-      if (!results.hits.length) {
-        commit('setErrorTrigger', last);
-        return;
-      }
-
       // eslint-disable-next-line
       commit('setProduct', results.hits[0]._source);
 
       if (sku) {
         dispatch('populateSelectedFromActive');
       }
+    });
+}
+
+/**
+ * Retrieves product images for selected options
+ */
+export function loadProductImages({ commit, state }) {
+  if (!state.filters.attributes.every(attribute => state.selectedOptions[attribute.parameter])) {
+    return;
+  }
+
+  apiClient
+    .getImages(state.selectedOptions)
+    .then((images) => {
+      commit('setProductImages', images);
     });
 }
 
@@ -64,141 +75,6 @@ export function populateSelectedFromActive({ state, commit }) {
   });
 
   commit('setSelectedOptions', options);
-  commit('setSelectedFilters', parsePreselectedFilters(state));
-}
-
-/**
- * Loads pre-selected featured products for first page of unfiltered results
- */
-export function loadFeatured({ commit, state }) {
-  const cacheKey = `featured.${state.category}`;
-  const now = (new Date()).getTime();
-  const oldExpires = localStorage.getItem(`${cacheKey}.expires`);
-  const featuredCache = localStorage.getItem(cacheKey);
-
-  if (featuredCache && (!oldExpires || oldExpires > now)) {
-    try {
-      commit('saveProducts', JSON.parse(featuredCache));
-      return;
-    // eslint-disable-next-line no-empty
-    } catch (err) {}
-  }
-
-  apiClient
-    .perPage(state.perPage)
-    .getFeatured(state.category)
-    // eslint-disable-next-line
-    .then(({ hits: results, total_item_count }) => {
-      const featuredProducts = {
-        total: total_item_count,
-        /* eslint-disable-next-line */
-        products: results.hits.map(product => product._source),
-        append: false,
-      };
-      commit('saveProducts', featuredProducts);
-
-      // cache featured items
-      const currentTimeInMilliseconds = (new Date()).getTime();
-      const hoursToKeep = 6;
-      const millisecondsPerHour = 60 * 60 * 1000;
-      const expires = currentTimeInMilliseconds + hoursToKeep * millisecondsPerHour;
-      localStorage.setItem(cacheKey, JSON.stringify(featuredProducts));
-      localStorage.setItem(`${cacheKey}.expires`, JSON.stringify(expires));
-    });
-}
-
-/**
- * Get page of product results based on current filters and update
- * the URL to include the current filters
- */
-export function loadProducts({ commit, state }, page = null) {
-  if (window.history.replaceState) {
-    const { protocol, host, pathname } = window.location;
-    let newUrl = `${protocol}//${host}${pathname}`;
-
-    const params = [];
-    state.selectedFilters.forEach((filter) => {
-      params.push(`f:${filter.group}:${filter.parameter}=${filter.values.join(',')}`);
-    });
-    state.selectedOptions.forEach((option) => {
-      params.push(`o:${option.parameter}=${option.values.join(',')}`);
-    });
-
-    if (params.length) {
-      const queryString = encodeURI(params.join('&'));
-      newUrl += `?${queryString}`;
-    }
-
-    window.history.replaceState({ path: newUrl }, '', newUrl);
-  }
-
-  if (page !== null) {
-    commit('setPage', page);
-  }
-
-  commit('setLoading', true);
-
-  apiClient
-    .applyFilters({
-      category: state.category,
-      filters: state.selectedOptions.concat(state.selectedFilters),
-    })
-    .perPage(state.perPage)
-    .getPage(state.currentPage)
-    .then(({ hits: results }) => {
-      commit('setLoading', false);
-      commit('saveProducts', {
-        total: results.total,
-        /* eslint-disable-next-line */
-        products: results.hits.map(product => product._source),
-        append: page !== 1,
-      });
-    });
-}
-
-/**
- * Increment page number and load next page of products
- */
-export function nextPage({ state, commit, dispatch }) {
-  commit('setPage', state.currentPage + 1);
-  dispatch('loadProducts');
-}
-
-/**
- * Clear all filters for filter group
- */
-export function clearSelections({ state, dispatch, commit }, group) {
-  commit('setSelectedOptions', state.selectedOptions.filter(option => option.group !== group));
-  commit('setSelectedFilters', state.selectedFilters.filter(filter => filter.group !== group));
-  dispatch('loadProducts');
-}
-
-/**
- * Add or remove selected filter/option
- */
-// eslint-disable-next-line
-export function updateFilter({ commit }, { group, parameter, value, queryParam, singleMode = false }) {
-  if (queryParam) {
-    // eslint-disable-next-line
-    commit('toggleOption', { group, parameter, value, singleMode });
-    return;
-  }
-
-  // eslint-disable-next-line
-  commit('toggleFilter', { group, parameter, value, singleMode });
-}
-
-/**
- * Set temporary flash message, with timed removal
- */
-export function flashMessage({ commit }, message) {
-  commit('setNotification', message);
-
-  const duration = document.documentElement.clientWidth >= 1024 ? 5000 : 4000;
-
-  setTimeout(() => {
-    commit('setNotification', '');
-  }, duration);
 }
 
 /**
@@ -259,16 +135,11 @@ export function getProductReviews({ commit }, {
 
 export default {
   loadProduct,
-  loadFeatured,
-  loadProducts,
+  loadProductImages,
   loadSKUs,
   loadFavorites,
-  nextPage,
   pullFilter,
-  updateFilter,
-  clearSelections,
   populateSelectedFromActive,
-  flashMessage,
   getReviews,
   getProductReviews,
 };

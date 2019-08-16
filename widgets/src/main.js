@@ -11,8 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import '../node_modules/swiper/dist/css/swiper.css';
 
-import BrowseWidget from './components/BrowseWidget.vue';
-import SearchResults from './components/SearchResults.vue';
 import ProductGrid from './components/ProductGrid.vue';
 import ProductCustomizer from './components/ProductCustomizer.vue';
 import ProductDetail from './components/ProductDetail.vue';
@@ -40,8 +38,6 @@ const app = new Vue({
   el: '#app',
 
   components: {
-    BrowseWidget,
-    SearchResults,
     ProductGrid,
     ProductCustomizer,
     ProductDetail,

@@ -4,14 +4,10 @@ import { localFavorites, customerFavorites } from './favorites';
 
 const apiClient = new ApiClient();
 
-export function setLoading(state, isLoading) {
-  Vue.set(state, 'loadingProducts', isLoading);
-}
-
 /**
  * Save products, appending to existing products if some have already been populated
  */
-export function saveProducts(state, { products, total, append }) {
+export function saveProducts(state, { products, append }) {
   if (append) {
     products.forEach((product) => {
       state.products.push(product);
@@ -19,14 +15,6 @@ export function saveProducts(state, { products, total, append }) {
   } else {
     Vue.set(state, 'products', products);
   }
-
-  if (total !== null) {
-    this.commit('setTotalResults', total);
-  }
-}
-
-export function setTotalResults(state, total) {
-  Vue.set(state, 'totalResults', total);
 }
 
 /**
@@ -74,212 +62,34 @@ export function applyQueryString(state) {
   if (options.length > 0) {
     Vue.set(state, 'selectedOptions', options);
   }
-
-  const filters = queryString
-    .split('&')
-    .filter(item => item.indexOf('f:') === 0)
-    .map((item) => {
-      const [prefixedParameter, values] = item.split('=');
-
-      if (values === '') {
-        return null;
-      }
-
-      const [group, parameter] = prefixedParameter.substring(2).split(':');
-
-      return {
-        group,
-        parameter,
-        values: values.split(','),
-      };
-    })
-    .filter(filter => filter !== null);
-
-  if (filters.length > 0) {
-    Vue.set(state, 'selectedFilters', filters);
-  }
-}
-
-/**
- * Save which filter triggered a 404 and needs an error message popup
- */
-export function setErrorTrigger(state, newTrigger) {
-  Vue.set(state, 'lastErrorTrigger', newTrigger);
-}
-
-/**
- * Activate/deactivate a clicked filter
- */
-export function toggleFilter(state, {
-  group, parameter, value, singleMode = false,
-}) {
-  const currentIndex = state.selectedFilters.findIndex(
-    filter => filter.parameter === parameter
-  );
-
-  let added = false;
-
-  if (currentIndex === -1) {
-    state.selectedFilters.push({
-      group,
-      parameter,
-      values: [value],
-    });
-    added = true;
-  }
-
-  let currentSelected = state.selectedFilters[currentIndex];
-  currentSelected = currentSelected ? currentSelected.values : [];
-
-  if (!added && !currentSelected.includes(value)) {
-    state.selectedFilters[currentIndex].values.push(value);
-    added = true;
-  }
-
-  if (!added) {
-    const filtered = currentSelected.filter(option => option !== value);
-
-    if (filtered.length > 0) {
-      Vue.set(state.selectedFilters[currentIndex], 'values', filtered);
-    } else {
-      state.selectedFilters.splice(currentIndex, 1);
-    }
-  }
-
-  if (singleMode) {
-    return;
-  }
-
-  /**
-   * If a new filter was added, we need to check that all currently selected options fall within the new
-   * filter parameters.  Leaving invalid options selected after the filters are changed will cause 0 results.
-   */
-  if (added) {
-    const optionIndex = state.selectedOptions.findIndex(
-      opt => opt.parameter === group
-    );
-
-    if (optionIndex !== -1) {
-      // get the option definitions for the filter's filterGroup, so that we can check their valid filter parameters
-      const optionGroup = state.filters.filterGroups.find(
-        filterGroup => filterGroup.parameter === group
-      );
-
-      /**
-       * We need to get the invalid option values which need to be deselected in 2 steps:
-       *
-       * 1. Find options that don't fit the new filter
-       * 2. Find options that do still apply
-       *
-       * We need both sets, so that we can use the eliminated options for messaging to the user
-       */
-      const eliminated = state.selectedOptions[optionIndex].values.filter(
-        (val) => {
-          // get the filter parameters that are valid for the selected option
-          const { parameters } = optionGroup.options.find(
-            option => option.value === val
-          );
-          // filter out selected options which still fit the new filter
-          return !parameters[parameter].includes(value);
-        }
-      );
-      const newSelected = state.selectedOptions[optionIndex].values.filter(
-        val => !eliminated.includes(val)
-      );
-
-      if (newSelected.length > 0) {
-        Vue.set(state.selectedOptions[optionIndex], 'values', newSelected);
-      } else {
-        state.selectedOptions.splice(optionIndex, 1);
-      }
-
-      if (eliminated.length > 0) {
-        const filter = optionGroup.filters.find(
-          item => item.parameter === parameter
-        );
-        const { name: filterValue } = filter.values.find(
-          item => item.value === value
-        );
-
-        let message = '<strong>WE REMOVED</strong> ';
-        message += eliminated
-          .slice(0, 2)
-          .map((val) => {
-            const { name } = optionGroup.options.find(
-              option => option.value === val
-            );
-            return `${optionGroup.name} | ${name}`;
-          })
-          .join(', ');
-        if (eliminated.length > 2) {
-          message += `, +${eliminated.length - 2} other options`;
-        }
-        message += ` &nbsp;&nbsp;&nbsp;<br><strong>BECAUSE YOU SELECTED</strong> ${
-          filter.name
-        } | ${filterValue}`;
-        this.dispatch('flashMessage', message);
-      }
-    }
-  }
-
-  this.dispatch('loadProducts', 1);
 }
 
 /**
  * Activate/deactivate a clicked option
  */
-export function toggleOption(state, {
-  group, parameter, value, singleMode,
-}) {
-  let updated = false;
+export function setOption(state, { parameter, value }) {
+  Vue.set(state.selectedOptions, parameter, value);
+  this.dispatch('loadProductImages');
+}
 
-  const currentIndex = state.selectedOptions.findIndex(
-    option => option.parameter === parameter
-  );
+/**
+ *  Set object containing the multiple sizes of product image set
+ */
+export function setProductImages(state, images) {
+  let newImages = images;
 
-  if (currentIndex === -1) {
-    state.selectedOptions.push({
-      group,
-      parameter,
-      values: [value],
-    });
-    updated = true;
+  /* eslint-disable no-underscore-dangle */
+  if (typeof newImages._thumb !== 'undefined') {
+    newImages = images._thumb.map((thumbnail, index) => ({
+      thumbnail,
+      medium: images._medium[index],
+      large: images._large[index],
+      full: images[''][index],
+    }));
   }
+  /* eslint-enable no-underscore-dangle */
 
-  let currentSelected = state.selectedOptions[currentIndex] || null;
-  currentSelected = currentSelected ? currentSelected.values : [];
-
-  if (!updated && !currentSelected.includes(value)) {
-    Vue.set(
-      state.selectedOptions[currentIndex],
-      'values',
-      singleMode
-        ? [value]
-        : state.selectedOptions[currentIndex].values.concat([value])
-    );
-    updated = true;
-  }
-
-  if (!updated) {
-    const filtered = currentSelected.filter(option => option !== value);
-
-    if (filtered.length > 0) {
-      Vue.set(state.selectedOptions[currentIndex], 'values', filtered);
-    } else if (!singleMode) {
-      state.selectedOptions.splice(currentIndex, 1);
-    }
-  }
-
-  if (singleMode) {
-    this.dispatch('loadProduct', {
-      last: {
-        parameter,
-        value,
-      },
-    });
-  } else {
-    this.dispatch('loadProducts', 1);
-  }
+  Vue.set(state, 'productImages', newImages);
 }
 
 /**
@@ -339,31 +149,10 @@ export function setSelectedOptions(state, selected) {
 }
 
 /**
- * Override all selected filters with a new set
- */
-export function setSelectedFilters(state, selected) {
-  Vue.set(state, 'selectedFilters', selected);
-}
-
-/**
- * Set current result page number (for API pagination)
- */
-export function setPage(state, newPage) {
-  Vue.set(state, 'currentPage', newPage);
-}
-
-/**
  * Set result count limit (for API pagination)
  */
 export function setPerPage(state, newLimit) {
   Vue.set(state, 'perPage', newLimit);
-}
-
-/**
- * Set notification message to pop up for the user
- */
-export function setNotification(state, message) {
-  Vue.set(state, 'notificationMessage', message);
 }
 
 /**
@@ -433,22 +222,16 @@ export function setProductReviews(state, { reviews }) {
 }
 
 export default {
-  setLoading,
   saveProducts,
-  setTotalResults,
   defineFilter,
-  toggleFilter,
-  toggleOption,
+  setOption,
+  setProductImages,
   updateCategory,
   setProduct,
   selectPanel,
   setSelectedOptions,
-  setSelectedFilters,
-  setPage,
   setPerPage,
   applyQueryString,
-  setErrorTrigger,
-  setNotification,
   toggleFavorite,
   setFavorites,
   setReviews,

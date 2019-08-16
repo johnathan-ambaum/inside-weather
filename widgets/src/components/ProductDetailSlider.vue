@@ -35,18 +35,6 @@
             </div>
           </div>
         </div>
-        <div class="ProductDetailSlider__HeaderRow">
-          <div>
-            <div
-              class="ProductDetailSlider__PopupLink"
-              @click="openPopup('details')"
-            >Details</div>
-            <div
-              class="ProductDetailSlider__PopupLink"
-              @click="openPopup('dimensions')"
-            >Dimensions</div>
-          </div>
-        </div>
       </div>
 
       <div class="ProductDetailSlider__Container">
@@ -120,14 +108,6 @@
             class="ProductDetailSlider__PopupClose"
             @click="closePopup"
           />
-          <product-description
-            v-show="activePopup === 'details'"
-            class="ProductDetailSlider__PopupBody"
-          />
-          <product-dimensions
-            v-show="activePopup === 'dimensions'"
-            class="ProductDetailSlider__PopupBody"
-          />
         </div>
       </transition>
     </div>
@@ -151,8 +131,6 @@ import {
 } from '@fortawesome/pro-light-svg-icons';
 import { faSearchPlus, faHeart as filledHeart } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import ProductDescription from './ProductDescription.vue';
-import ProductDimensions from './ProductDimensions.vue';
 import ZoomGallery from './ZoomGallery.vue';
 import ResponsiveImage from './ResponsiveImage.vue';
 import CloseButton from './CloseButton.vue';
@@ -167,8 +145,6 @@ export default {
     ResponsiveImage,
     CloseButton,
     FontAwesomeIcon,
-    ProductDescription,
-    ProductDimensions,
     ZoomGallery,
   },
 
@@ -463,20 +439,6 @@ body.popup-active {
 
     .ProductDetailSlider--Fixed & {
       top: $header-height-small;
-    }
-  }
-
-  &__HeaderRow {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-
-    & + & {
-      margin-top: 25px;
-    }
-
-    & > * {
-      flex: 0 1 auto;
     }
   }
 

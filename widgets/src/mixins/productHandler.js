@@ -93,13 +93,5 @@ export default {
     featuredImage() {
       return this.images[0] || emptyImage;
     },
-
-    secondImage() {
-      return this.images[1] || emptyImage;
-    },
-
-    secondaryImages() {
-      return this.images.slice(2);
-    },
   },
 };

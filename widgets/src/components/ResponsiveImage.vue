@@ -55,7 +55,7 @@ export default {
   computed: {
     placeholderSrc() {
       if (this.images.thumbnail !== undefined) {
-        return this.images.thumbnail.replace(/^https?:/i, '');
+        return this.images.thumbnail;
       }
 
       return null;
@@ -99,7 +99,7 @@ export default {
         return '';
       }
 
-      return this.images[this.defaultSize].replace(/^https?:/i, '');
+      return this.images[this.defaultSize];
     },
 
     getSrcSet() {
@@ -110,19 +110,19 @@ export default {
       const sources = [];
 
       if (this.images.full) {
-        sources.push(`${this.images.full.replace(/^https?:/i, '')} 2000w`);
+        sources.push(`${this.images.full} 2000w`);
       }
 
       if (this.images.large) {
-        sources.push(`${this.images.large.replace(/^https?:/i, '')} 1200w`);
+        sources.push(`${this.images.large} 1200w`);
       }
 
       if (this.images.medium) {
-        sources.push(`${this.images.medium.replace(/^https?:/i, '')} 800w`);
+        sources.push(`${this.images.medium} 800w`);
       }
 
       if (this.images.thumbnail) {
-        sources.push(`${this.images.thumbnail.replace(/^https?:/i, '')} 100w`);
+        sources.push(`${this.images.thumbnail} 100w`);
       }
 
       return sources.join(',');
@@ -182,6 +182,7 @@ export default {
     bottom: 0;
     left: 0;
     margin: auto;
+    max-width: 30%;
     opacity: .5;
     position: absolute;
     right: 0;

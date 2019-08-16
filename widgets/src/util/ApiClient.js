@@ -69,8 +69,8 @@ export default class ApiClient {
       .filter(([option, value]) => value !== null)
       .map(([option, value]) => `${option}=${value}`);
 
-    this.filters.forEach((filter) => {
-      params.push(`${filter.parameter}=${filter.values.join(',')}`);
+    Object.entries(this.filters).forEach(([parameter, value]) => {
+      params.push(`${parameter}=${value}`);
     });
 
     return encodeURI(params.join('&'));
@@ -186,5 +186,14 @@ export default class ApiClient {
         .then(response => resolve(response))
         .catch(err => reject(err));
     });
+  }
+
+  getImages(attributes) {
+    const attributeString = Object.entries(attributes).map(([parameter, value]) => `${parameter}:${value}`).join(',');
+    const url = `http://iw-images.herokuapp.com/api/v1/images?attributes=${attributeString}`;
+
+    return new Promise((resolve, reject) => this.debouncedSendRequest({
+      method: 'GET', url, resolve, reject,
+    }));
   }
 }

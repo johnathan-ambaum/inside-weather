@@ -10,15 +10,23 @@
       <img :src="image">
     </div>
     <div class="TemplateBlock__TextSection">
-      <p>{{ text }}</p>
+      <h3>{{ interpolatedHeading }}</h3>
+      <p>{{ interpolatedText }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import interpolator from '../mixins/interpolator';
+
 export default {
+  mixins: [
+    interpolator,
+  ],
+
   props: {
     image: { type: String, default: null },
+    heading: { type: String, default: '' },
     text: { type: String, required: true },
     reverse: { type: Boolean, default: false },
   },
@@ -28,6 +36,14 @@ export default {
       return {
         'TemplateBlock--Reversed': this.reverse,
       };
+    },
+
+    interpolatedHeading() {
+      return this.interpolateString(this.heading);
+    },
+
+    interpolatedText() {
+      return this.interpolateString(this.text);
     },
   },
 };
