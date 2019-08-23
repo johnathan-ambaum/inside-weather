@@ -78,16 +78,14 @@ export function setOption(state, { parameter, value }) {
 export function setProductImages(state, images) {
   let newImages = images;
 
-  /* eslint-disable no-underscore-dangle */
-  if (typeof newImages._thumb !== 'undefined') {
-    newImages = images._thumb.map((thumbnail, index) => ({
+  if (typeof newImages.thumb !== 'undefined') {
+    newImages = images.thumb.map((thumbnail, index) => ({
       thumbnail,
-      medium: images._medium[index],
-      large: images._large[index],
-      full: images[''][index],
+      medium: images.medium[index],
+      large: images.large[index],
+      full: images.full[index],
     }));
   }
-  /* eslint-enable no-underscore-dangle */
 
   Vue.set(state, 'productImages', newImages);
 }
@@ -221,6 +219,14 @@ export function setProductReviews(state, { reviews }) {
   Vue.set(state, 'productReviews', reviews);
 }
 
+export function setProductCreationInProgress(state, inProgress) {
+  Vue.set(state, 'productCreationInProgress', inProgress);
+}
+
+export function setVariantId(state, id) {
+  Vue.set(state, 'variantId', id);
+}
+
 export default {
   saveProducts,
   defineFilter,
@@ -237,4 +243,6 @@ export default {
   setReviews,
   setTotalReviews,
   setProductReviews,
+  setProductCreationInProgress,
+  setVariantId,
 };

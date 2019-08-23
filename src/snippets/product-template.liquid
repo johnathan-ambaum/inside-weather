@@ -45,9 +45,7 @@
 
             </div> <!-- [itemprop="offers"] -->
           </div> <!-- .product-single__meta -->
-          <product-customizer v-cloak>
-            {% include 'add-to-cart-row' %}
-          </product-customizer>
+          <product-customizer v-cloak :initial-variant="{{ product.selected_or_first_available_variant.id }}"></product-customizer>
           <hr>
         {% endform %}
         <product-family v-if="product && isMobile"></product-family>

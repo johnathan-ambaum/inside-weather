@@ -9,6 +9,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     activeProduct: null,
+    productCreationInProgress: false,
+    variantId: null,
     category: '',
     favorites,
     filters: {},

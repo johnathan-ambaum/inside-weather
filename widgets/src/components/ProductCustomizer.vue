@@ -5,7 +5,7 @@
       <div class="ProductCustomizer__Model">{{ modelNumber }}</div>
     </div>
     <div class="ProductCustomizer__PriceRow">
-      <span class="ProductCustomizer__Price">${{ productPrice }}</span>
+      <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
     </div>
     <div class="ProductCustomizer__ShippingDays">
       FREE Shipping | Custom made in {{ fulfillmentTime }}
@@ -14,7 +14,15 @@
       class="ProductCustomizer__Trigger"
       @click.prevent="showCustomizer"
     >Customize</button>
-    <slot/>
+    <add-to-cart
+      :processing="addToCartProcessing"
+      @addToCart="addToCart"
+    />
+    <p
+      :data-amount="productPrice * 100"
+      data-page-type="product"
+      class="affirm-as-low-as"
+    />
     <div
       :class="{ 'ProductCustomizer--Active': active }"
       class="ProductCustomizer"
@@ -51,8 +59,6 @@
                   ref="coverImages"
                   :src="attribute.cover_image_url"
                   :alt="attribute.name"
-                  @mouseenter="swapCoverImage(true)"
-                  @mouseleave="swapCoverImage(false)"
                 >
                 <span class="ProductCustomizer__NavItemTitle">{{ index + 1 }}. {{ attribute.name }}</span>
               </div>
@@ -85,6 +91,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 import ProductGallery from './ProductGallery.vue';
 import FilterPanel from './FilterPanel.vue';
+import AddToCart from './AddToCart.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 
@@ -92,6 +99,7 @@ export default {
   components: {
     ProductGallery,
     FilterPanel,
+    AddToCart,
   },
 
   mixins: [
@@ -99,9 +107,14 @@ export default {
     interpolator,
   ],
 
+  props: {
+    initialVariant: { type: Number, required: true },
+  },
+
   data() {
     return {
       active: false,
+      addToCartProcessing: false,
     };
   },
 
@@ -115,6 +128,8 @@ export default {
       openPanel: state => state.openPanel,
       productImages: state => state.productImages,
       selectedOptions: state => state.selectedOptions,
+      productCreationInProgress: state => state.productCreationInProgress,
+      variantId: state => state.variantId,
     }),
 
     isOpen() {
@@ -134,6 +149,10 @@ export default {
     },
 
     productPrice() {
+      if (!this.basePrice || Object.keys(this.selectedOptions).length < 1) {
+        return null;
+      }
+
       return Object.entries(this.selectedOptions).reduce((total, [parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
         const selected = attribute.values.find(item => item.value === value);
@@ -262,8 +281,11 @@ export default {
   },
 
   created() {
+    this.setVariantId(this.initialVariant);
+
     this.$bus.$on('filter:toggle', (payload) => {
       this.setOption(payload);
+      setTimeout(window.affirm.ui.refresh, 200);
     });
 
     // window.addEventListener('popstate', ({ state }) => {
@@ -274,13 +296,6 @@ export default {
   },
 
   mounted() {
-    // const addToCartButtons = document.querySelectorAll('button.add-to-cart');
-    // Array.from(addToCartButtons).forEach((button) => {
-    //   button.addEventListener('click', () => {
-    //     this.productAdded();
-    //   });
-    // });
-
     // const sidebar = document.querySelector('.ProductDetailGrid__Sidebar');
     // const reviewSection = document.querySelector('.ReviewCarousel');
     // const desktopWatcher = scrollMonitor.create(reviewSection);
@@ -367,12 +382,13 @@ export default {
 
   methods: {
     ...mapActions([
-      // 'loadProduct',
+      'createProductFromSelected',
     ]),
 
     ...mapMutations([
       'selectPanel',
       'setOption',
+      'setVariantId',
     ]),
 
     close() {
@@ -381,6 +397,10 @@ export default {
         return;
       }
 
+      this.createProductFromSelected({
+        name: this.productName,
+        image: this.productImages[0].full,
+      });
       this.active = false;
     },
 
@@ -388,11 +408,31 @@ export default {
       this.active = true;
     },
 
-    swapCoverImage(index, hover) {
-      if (!this.isMobile && this.$refs.coverImages[index]) {
-        const attribute = this.attributes[index];
-        this.$refs.coverImages[index].src = hover ? attribute.cover_image_hover_url : attribute.cover_image_url;
+    addToCart(quantity) {
+      this.addToCartProcessing = true;
+
+      if (this.productCreationInProgress) {
+        setTimeout(() => {
+          this.addToCart(quantity);
+        }, 250);
+        return;
       }
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: this.variantId,
+          quantity,
+        }),
+      })
+        .then((cart) => {
+          this.addToCartProcessing = false;
+          window.$('body').trigger('added.ajaxProduct');
+        });
     },
 
     // productAdded() {

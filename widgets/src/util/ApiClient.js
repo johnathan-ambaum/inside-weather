@@ -196,4 +196,17 @@ export default class ApiClient {
       method: 'GET', url, resolve, reject,
     }));
   }
+
+  createProduct({ name, image, attributes }) {
+    const url = 'https://iw-content.herokuapp.com/api/v1/product/Sofa';
+    const body = {
+      name,
+      image_url: image,
+      attributes,
+    };
+
+    return new Promise((resolve, reject) => this.debouncedSendRequest({
+      method: 'POST', url, body, resolve, reject,
+    }));
+  }
 }

@@ -133,6 +133,21 @@ export function getProductReviews({ commit }, {
     });
 }
 
+export function createProductFromSelected({ state, commit }, { name, image }) {
+  commit('setProductCreationInProgress', true);
+
+  apiClient
+    .createProduct({
+      name,
+      image,
+      attributes: state.selectedOptions,
+    })
+    .then(({ variant: { id } }) => {
+      commit('setVariantId', id);
+      commit('setProductCreationInProgress', false);
+    });
+}
+
 export default {
   loadProduct,
   loadProductImages,
@@ -142,4 +157,5 @@ export default {
   populateSelectedFromActive,
   getReviews,
   getProductReviews,
+  createProductFromSelected,
 };
