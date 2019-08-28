@@ -34,7 +34,7 @@
             >
               <a :href="item.productUrl">
                 <figure>
-                  <img :src="item.image">
+                  <img :src="item.productImage">
                 </figure>
                 <div>
                   <p>{{item.title}}</p>

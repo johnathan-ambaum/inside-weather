@@ -17,11 +17,11 @@
           v-for="(item, index) in lifeStyleItems"
           :key="item.$id"
           v-bind:class="['LifeStylePhotos--column column LifeStylePhotos--column-'+ (index + 1)]"
-          v-on:click="showPopUp"
+          v-on:click="showPopUp($event, index)"
         >
           <figure>
             <img 
-              :src="item"
+              :src="item.image"
             >
           </figure>
           <div 
@@ -46,7 +46,7 @@
       :PopUpImageSource="popUpMainImage"
       popUpId="LifeStylePopUp"
       :popUpHeading="popUpHeading"
-      :PopUpContentList="popUpList"
+      :PopUpContentList="popUpListContent"
     >
     </pop-up>
   </div>
@@ -66,15 +66,16 @@ export default {
     lifeStyleItems: Array,
     sectionDescription: String,
     popUpHeading: String,
-    popUpList: Array
   } ,
   data() {
     return {
-      popUpMainImage: ''
+      popUpMainImage: '',
+      popUpListContent: [],
     }
   },
   methods: {
-    showPopUp: function(e) {
+    showPopUp: function(e, i) {
+      this.popUpListContent = this.lifeStyleItems[i].popUpList;
       const currentParent = e.target.parentElement;
       const findTarget = currentParent.querySelector('figure img');
       this.popUpMainImage = findTarget.src;

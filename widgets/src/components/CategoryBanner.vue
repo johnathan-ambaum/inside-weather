@@ -33,7 +33,10 @@
           >
           </figure>
         </div>
-        <div class="CategoryBanner--content">
+        <div 
+          class="CategoryBanner--content"
+          v-if="hasBannerContent"
+        >
           <h2 
             class="--caps"
             :class="animationClass"
@@ -59,7 +62,10 @@
         </div>
       </div>
     </slider>
-    <div class="CategoryBanner--clasification">
+    <div 
+      class="CategoryBanner--clasification"
+      v-if="hasBannerContent"
+    >
       <accordion
         v-for="accItem in categoryBannerAccordion"
         :key="accItem.id"
@@ -84,8 +90,10 @@ export default {
   props: {
     bannerContent: Object,
     hideDesktopSlider:{type: Boolean, default: false},
+    hideMobileSlider:{type: Boolean, default: false},
     categoryBannerAccordion: Array,
-    isScrollAnimationRequire: {type: Boolean, default: true}
+    isScrollAnimationRequire: {type: Boolean, default: true},
+    hasBannerContent: {type: Boolean, default: true}
   },
   data() {
     return {
@@ -97,7 +105,7 @@ export default {
         animateIn: 'fadeIn',
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, autoplayTimeout: 5000, dots: true, loop: true, URLhashListener: false, mouseDrag: true, touchDrag: true, pullDrag: true, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true}}
+        responsive: {0:{nav:!this.hideMobileSlider, autoplayTimeout: 5000, dots: !this.hideMobileSlider, loop: !this.hideMobileSlider, URLhashListener: false, mouseDrag: !this.hideMobileSlider, touchDrag: !this.hideMobileSlider, pullDrag: !this.hideMobileSlider, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true}}
       }
     }
   },
