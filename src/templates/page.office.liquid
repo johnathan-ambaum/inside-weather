@@ -92,27 +92,8 @@ function fadeIn(a, t) {
 }
 
 jQuery(function ($) { 
-  jQuery('.point a').on('click', (e) => {
-    const $ = jQuery;
-    const targetParent = $('.CategoryBanner--clasification .point');
-    const allDescription = $('.CategoryBanner--clasification .point p');
-    if (e.target.parentElement.classList.contains('show-details')) {
-      toggleSlide(e.target.parentElement.children[1]);
-      e.target.parentElement.classList.remove('show-details');
-    } else {
-      $(allDescription).slideUp();
-      downSlide(e.target.parentElement.children[1]);
-      $(targetParent).removeClass('show-details');
-      e.target.parentElement.classList.add('show-details');
-    }
-  });
 
   fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
-  if($(window).width() < 992) {
-    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
-  } else {
-    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
-  }
 
   fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
   const collectionTween = new TimelineLite()
@@ -134,30 +115,6 @@ jQuery(function ($) {
     triggerHook: "onEnter", 
     offset: 250
   }).setTween(collectionTween).addTo(controller);
-
-  $('.CategoryDetails .image-content-box').each(function (i) {
-    var figureElement = $(this).find('figure');
-    var contentElements = $(this).find('.HeadingWithDescription *');
-
-    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
-    new ScrollMagic.Scene( {
-      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
-      reverse: false, triggerHook: "onEnter", offset: 250
-    }).setTween(categoryDetailsTween).addTo(controller);
-
-    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
-    new ScrollMagic.Scene( {
-      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
-      reverse: false, triggerHook: "onEnter", offset: 250
-    }).setTween(categoryDetailsContentTween).addTo(controller);
-
-  });
-
-  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
-  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
-  $('.categoryValueProps').each(function (i) {
-    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
-  });
 
   fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
 
