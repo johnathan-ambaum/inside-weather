@@ -17,6 +17,7 @@
         :data-src="item.dataSource"
         :data-hash="item.dataSource"
         class="CategoryBanner--items"
+        :class="bannerClass"
       >
         <div class="CategoryBanner--imageWrapper">
           <figure 
@@ -126,6 +127,11 @@ export default {
       return {
         '--hasAnimation': this.isScrollAnimationRequire
       }
+    },
+    bannerClass() {
+      return {
+        '--simpleBanner': !this.hasBannerContent
+      }
     }
   },
   mounted() {
@@ -210,6 +216,22 @@ export default {
         @include fonts(14px,#202020,1.21,0.12em);
       }
     }
+    &.--simpleBanner {
+      .CategoryBanner--imageWrapper {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 33.333%;
+        position: relative;
+        figure {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+        }
+      }
+    }
   }
   .CategoryBanner--clasification {
     width: 220px;
@@ -262,7 +284,7 @@ export default {
         }
       }
       .CategoryBanner--imageWrapper {
-        height: 551px;
+        height: 470px;
       }
     }
   }

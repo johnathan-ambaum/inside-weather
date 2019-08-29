@@ -80,7 +80,7 @@ export default {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   padding: 75px 0 50px;
   width: 100%;
   li {
