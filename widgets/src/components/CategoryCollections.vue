@@ -87,8 +87,8 @@ export default {
     flex-basis: 25%;
     text-align: center;
     margin: 0;
-    box-shadow: inset -0.25px -0.25px 0 0 #202020;
-    -webkit-box-shadow: inset -0.25px -0.25px 0 0 #202020;
+    box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
+    -webkit-box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
     .--animElement {
       opacity: 0;
     }
@@ -98,16 +98,17 @@ export default {
     }
     &:nth-of-type(-n+4) {
       a {
-        box-shadow: inset 0px 0.25px 0 0 #202020;
-        -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+        box-shadow: inset 0px 0.25px 0 0 #8B8986;
+        -webkit-box-shadow: inset 0px 0.25px 0 0 #8B8986;
       }
     }
     figure {
       overflow: hidden;
       position: relative;
-      padding-bottom: 100%;
+      padding-bottom: 90%;
       @include block(0);
       img {
+        object-fit: contain;
         position: absolute;
         left: 0;
         right: 0;
@@ -146,12 +147,12 @@ export default {
     }
     &.--animLoaded {
       li {
-        box-shadow: inset -0.25px -0.25px 0 0 #202020;
-        -webkit-box-shadow: inset -0.25px -0.25px 0 0 #202020;
+        box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
+        -webkit-box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
         &:nth-of-type(-n+4) {
           a {
-            box-shadow: inset 0px 0.25px 0 0 #202020;
-            -webkit-box-shadow: inset 0px 0.25px 0 0 #202020;
+            box-shadow: inset 0px 0.25px 0 0 #8B8986;
+            -webkit-box-shadow: inset 0px 0.25px 0 0 #8B8986;
           }
         }
       }
@@ -256,12 +257,12 @@ export default {
 @-moz-document url-prefix() {
   .CtegoryCollections--itemWrapper {
     li {
-      box-shadow: 0.9px 0.9px 0.4px 0px rgba(32, 32, 32, 0.5);
-      -webkit-box-shadow: 0.9px 0.9px 0.4px 0px rgba(32, 32, 32, 0.5);
+      box-shadow: 0.9px 0.9px 0.4px 0px rgba($color: #8B8986, $alpha: 0.5);
+      -webkit-box-shadow: 0.9px 0.9px 0.4px 0px rgba($color: #8B8986, $alpha: 0.5);
       &:nth-of-type(-n+4) {
         a {
-          box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
-          -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
+          box-shadow: inset 0px 1px 0 0 rgba($color: #8B8986, $alpha: 0.5);
+          -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #8B8986, $alpha: 0.5);
         }
       }
     } 
@@ -276,12 +277,12 @@ export default {
       }
       &.--animLoaded {
         li {
-          box-shadow: 0.9px 0.9px 0.4px 0px rgba(32, 32, 32, 0.5);
-          -webkit-box-shadow: 0.9px 0.9px 0.4px 0px rgba(32, 32, 32, 0.5);
+          box-shadow: 0.9px 0.9px 0.4px 0px rgba($color: #8B8986, $alpha: 0.5);
+          -webkit-box-shadow: 0.9px 0.9px 0.4px 0px rgba($color: #8B8986, $alpha: 0.5);
           &:nth-of-type(-n+4) {
             a {
-              box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
-              -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #202020, $alpha: 0.5);
+              box-shadow: inset 0px 1px 0 0 rgba($color: #8B8986, $alpha: 0.5);
+              -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #8B8986, $alpha: 0.5);
             }
           }
         }
