@@ -77,7 +77,7 @@ export default {
 @import '../scss/variables';
 
 .CtegoryCollections--itemWrapper {
-  align-items: center;
+  align-content: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;

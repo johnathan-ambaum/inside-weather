@@ -106,7 +106,7 @@ export default {
         animateIn: 'fadeIn',
         animateOut: 'fadeOut',
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:!this.hideMobileSlider, autoplayTimeout: 5000, dots: !this.hideMobileSlider, loop: !this.hideMobileSlider, URLhashListener: false, mouseDrag: !this.hideMobileSlider, touchDrag: !this.hideMobileSlider, pullDrag: !this.hideMobileSlider, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: !this.hideDesktopSlider, loop: !this.hideDesktopSlider, URLhashListener: true}}
+        responsive: {0:{nav:!this.hideMobileSlider, autoplayTimeout: 5000, dots: !this.hideMobileSlider, loop: !this.hideMobileSlider, URLhashListener: false, mouseDrag: !this.hideMobileSlider, touchDrag: !this.hideMobileSlider, pullDrag: !this.hideMobileSlider, startPosition: 0}, 992:{nav:!this.hideDesktopSlider, mouseDrag: !this.hideDesktopSlider, touchDrag: !this.hideDesktopSlider, pullDrag: !this.hideDesktopSlider, dots: true, loop: !this.hideDesktopSlider, URLhashListener: true}}
       }
     }
   },
@@ -274,7 +274,7 @@ export default {
     .CategoryBanner--items {
       .CategoryBanner--content {
         h2 {
-          font-size: 40px;
+          font-size: 30px;
         }
         p {
           font-size: 14px;
@@ -284,7 +284,7 @@ export default {
         }
       }
       .CategoryBanner--imageWrapper {
-        height: 470px;
+        height: 500px;
       }
     }
   }
@@ -303,6 +303,14 @@ export default {
         height: calc(100vh - 102px);
       }
     } 
+  }
+  @include at-query('min-width: 992px') {
+    .owl-theme {
+      .owl-dots {
+        opacity: 0;
+        position: absolute;
+      }
+    }
   }
   @include at-query('max-width: 991px') {
     .owl-theme {

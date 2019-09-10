@@ -10,7 +10,19 @@
         class="image-content-box"
       >
         <figure>
-          <img :src="productDetail.imageUrl" />
+          <img 
+            :src="productDetail.objectUrl" 
+            v-if="productDetail.isVideo === 'false'"
+          />
+          <video 
+            v-if="productDetail.isVideo === 'true'"
+            loop autoplay muted
+          >
+            <source 
+              :src="productDetail.objectUrl"
+              type="video/mp4"
+            /> 
+          </video>
         </figure>
         <heading-with-description>
           <h2>{{productDetail.title}}</h2>
@@ -52,7 +64,7 @@ export default {
       position: relative;
       overflow: hidden;
       padding-bottom: 43%;
-      img {
+      img, video {
         position: absolute;
         bottom: 0;
         left: 0;

@@ -5,7 +5,7 @@
     :style="{ 'background': backgroundColor }"
   >
     <div class="--custom-container">
-      <ul class="category-value-props --pd-t-130 --pd-b-130">
+      <ul class="category-value-props jishnu">
         <li
           v-for="item in categoryValueProps"
           :key="item.id"
