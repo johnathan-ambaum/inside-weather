@@ -9,7 +9,9 @@
         :key="productDetail.id"
         class="image-content-box"
       >
-        <figure>
+        <figure
+          v-if="isBigScreen"
+        >
           <img 
             :src="productDetail.objectUrl" 
             v-if="productDetail.isVideo === 'false'"
@@ -20,6 +22,23 @@
           >
             <source 
               :src="productDetail.objectUrl"
+              type="video/mp4"
+            /> 
+          </video>
+        </figure>
+        <figure
+          v-if="!isBigScreen"
+        >
+          <img 
+            :src="productDetail.objectUrlMob" 
+            v-if="productDetail.isVideo === 'false'"
+          />
+          <video 
+            v-if="productDetail.isVideo === 'true'"
+            loop autoplay muted
+          >
+            <source 
+              :src="productDetail.objectUrlMob"
               type="video/mp4"
             /> 
           </video>
@@ -42,7 +61,19 @@ export default {
   },
   props: {
     productDetails: Array
-  }
+  },
+  data() {
+    return {
+      isBigScreen: Boolean
+    }
+  },
+  created: function () {
+    if(window.innerWidth > 767) {
+      this.isBigScreen = true
+    }else {
+      this.isBigScreen = false
+    }
+  },
 } 
 </script>
 
