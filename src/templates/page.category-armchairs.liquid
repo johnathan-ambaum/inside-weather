@@ -32,27 +32,10 @@
       <category-details :product-details="{{productDetails}}"></category-details>
     </div>
 
-    {% comment %} <div class="section_categoryVideo --pd-t-130">
-      <category-video
-        video-url="https://player.vimeo.com/video/331135291"
-        video-poster="https://cdn.shopify.com/s/files/1/2994/0144/files/video-poster.png?1395318"
-        section-heading="Quick Assembly"
-        section-description="The subtle tonality of the Oxford Weave (100% Polyester) is a Ph.D in sophistication. All cushions & pillows are enclosed in a waterproof nylon case and all that are non-tufted are equipped with hidden zippers for easy removal and cleaning; life-proof for your convenience."
-      >
-      </category-video>
-    </div> {% endcomment %}
-
     {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468','title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468','title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468','title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
-
-    {% comment %} {% assign categoryVprops = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Handcrafted in CA','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'Quick Ship','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/category_list.png?1455600','title':'365 Day Home Trial','description':'The frame is constructed with kiln dried solid wood, baltic birch plywood, and always wrapped in high-density polyurethane foam'}]"%} {% endcomment %}
     
     <div class="categoryValuePropsWrapper --pd-t-130">
       <category-vprops :category-value-props="{{categoryValueProps}}"></category-vprops> 
-      {% comment %} <category-vprops 
-        :category-value-props="{{categoryVprops}}"
-        background-color="#F2F2F2"
-      >
-      </category-vprops> {% endcomment %}
     </div>
 
     {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_01-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S41579B0A/138S41579B0A-0_small.jpg','title':'Vegan Leather Nox Armchair in Ivory','price':'$498', 'productUrl':'https://insideweather.com/collections/armchairs/products/138s41579b0a-nox-armchair-380634'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S753F88CC/47S753F88CC-0_small.jpg','title':'Espresso Tate Side Table in Green Marble','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s753f88cc-tate-side-table-389164'}]},
