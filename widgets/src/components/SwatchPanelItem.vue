@@ -34,7 +34,7 @@ export default {
     load: {
       immediate: true,
       handler(newValue) {
-        if (newValue) {
+        if (newValue && this.option.swatch_hover_url) {
           this.hoverImage = new Image();
           this.hoverImage.src = this.option.swatch_hover_url;
         }
@@ -50,7 +50,7 @@ export default {
     },
 
     swapImage(hover) {
-      if (!this.isMobile) {
+      if (!this.isMobile && this.option.swatch_hover_url) {
         this.$refs.img.src = hover ? this.option.swatch_hover_url : this.option.swatch_url;
       }
     },

@@ -22,9 +22,6 @@ export function saveProducts(state, { products, append }) {
  */
 export function defineFilter(state, { filter }) {
   Vue.set(state, 'filters', filter);
-  if (state.activeProduct) {
-    this.dispatch('populateSelectedFromActive');
-  }
 }
 
 /**
@@ -106,38 +103,6 @@ export function selectPanel(state, newPanel) {
   document.body.classList.toggle('BrowseFilters--Open', newPanel !== '');
 }
 
-export function setProduct(state, newProduct) {
-  Vue.set(state, 'activeProduct', newProduct);
-
-  if (window.history.pushState && newProduct && newProduct.handle) {
-    const { protocol, host, pathname } = window.location;
-    const uri = `/collections/${newProduct.primary_category}/products/${
-      newProduct.handle
-    }`;
-    const newUrl = `${protocol}//${host}${uri}`;
-    const navState = {
-      path: newUrl,
-      sku: newProduct.sku,
-    };
-    const title = `${newProduct.name} - Inside Weather`;
-
-    document.title = title;
-
-    if (uri === pathname) {
-      // need to replace current state on initial load so that we have a state object when back button clicked later
-      window.history.replaceState(navState, title, newUrl);
-    } else {
-      window.history.pushState(navState, title, newUrl);
-    }
-  }
-
-  if (state.category) {
-    return;
-  }
-
-  this.commit('updateCategory', newProduct.primary_category);
-  this.dispatch('pullFilter');
-}
 
 /**
  * Override all selected options with a new set
@@ -233,7 +198,6 @@ export default {
   setOption,
   setProductImages,
   updateCategory,
-  setProduct,
   selectPanel,
   setSelectedOptions,
   setPerPage,

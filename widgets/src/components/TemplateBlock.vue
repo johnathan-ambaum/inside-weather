@@ -7,7 +7,7 @@
       v-if="image"
       class="TemplateBlock__ImageSection"
     >
-      <img :src="image">
+      <img :src="interpolatedImage">
     </div>
     <div class="TemplateBlock__TextSection">
       <h3>{{ interpolatedHeading }}</h3>
@@ -36,6 +36,10 @@ export default {
       return {
         'TemplateBlock--Reversed': this.reverse,
       };
+    },
+
+    interpolatedImage() {
+      return this.interpolateString(this.image);
     },
 
     interpolatedHeading() {

@@ -24,7 +24,7 @@ export default {
         const [attributeName, property] = placeholder.replace(/[{}]/g, '').split('.');
         const attribute = this.attributes.find(att => att.name === attributeName);
         if (attribute) {
-          const selected = attribute.values.find(item => item.value === this.selectedOptions[attribute.parameter]);
+          const selected = attribute.values.find(item => item.value === this.selectedOptions[attribute.parameter]) || {};
           replacement = selected[property] || '';
         }
         content = content.split(placeholder).join(replacement);

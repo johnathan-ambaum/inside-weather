@@ -20,32 +20,17 @@ export function pullFilter({ dispatch, commit, state }) {
 }
 
 /**
- * Get single product matching SKU or selected option configuration for PDP
- */
-export function loadProduct({ commit, dispatch, state }, { last = null, sku = null }) {
-  apiClient
-    .applyFilters({
-      category: state.category,
-      filters: sku
-        ? [{ parameter: 'sku', values: [sku] }]
-        : state.selectedOptions,
-    })
-    .perPage(1)
-    .getPage(1)
-    .then(({ hits: results }) => {
-      // eslint-disable-next-line
-      commit('setProduct', results.hits[0]._source);
-
-      if (sku) {
-        dispatch('populateSelectedFromActive');
-      }
-    });
-}
-
-/**
  * Retrieves product images for selected options
  */
-export function loadProductImages({ commit, state }) {
+export function loadProductImages({ dispatch, commit, state }) {
+  if (!state.filters.attributes) {
+    // keep retrying if still waiting on filter retrieval
+    setTimeout(() => {
+      dispatch('loadProductImages');
+    }, 200);
+    return;
+  }
+
   if (!state.filters.attributes.every(attribute => state.selectedOptions[attribute.parameter])) {
     return;
   }
@@ -151,7 +136,6 @@ export function createProductFromSelected({ state, commit }, { name, image }) {
 }
 
 export default {
-  loadProduct,
   loadProductImages,
   loadSKUs,
   loadFavorites,
