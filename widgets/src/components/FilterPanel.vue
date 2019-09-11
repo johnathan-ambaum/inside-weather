@@ -93,11 +93,25 @@ export default {
     display: flex;
     flex: 0 0 $sidebar-heading-height;
     flex-direction: column;
+    font-size: 24px;
+    font-size: 600;
     justify-content: center;
+    line-height: 30px;
     text-align: center;
 
     @include at-query($breakpoint-small) {
       flex-direction: row;
+      font-size: 18px;
+    }
+  }
+
+  &__GroupSelect {
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 15px;
+
+    @include at-query($breakpoint-large) {
+      font-size: 13px;
     }
   }
 

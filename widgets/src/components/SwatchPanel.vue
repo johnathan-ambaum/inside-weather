@@ -60,6 +60,7 @@ export default {
 $swatch-margin: 5px;
 
 .SwatchPanel {
+  align-items: flex-start;
   display: flex;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

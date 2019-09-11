@@ -128,8 +128,13 @@ export default {
   }
 
   &__Heading {
+    font-size: 24px;
     font-weight: 600;
     margin-bottom: 60px;
+
+    @include at-query($breakpoint-large) {
+      font-size: 34px;
+    }
   }
 
   &__Dimensions {

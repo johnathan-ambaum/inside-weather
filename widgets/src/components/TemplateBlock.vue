@@ -69,6 +69,28 @@ export default {
   &__TextSection {
     flex: 1 1 auto;
     padding: 0 80px 0 50px;
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 30px;
+
+      @include at-query($breakpoint-large) {
+        font-size: 28px;
+      }
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .025em;
+      line-height: 16px;
+
+      @include at-query($breakpoint-large) {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
   }
 
   &--Reversed &__TextSection {

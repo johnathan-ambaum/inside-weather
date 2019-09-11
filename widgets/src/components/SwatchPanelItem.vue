@@ -85,6 +85,7 @@ export default {
 
   &__Swatch {
     display: block;
+    margin-bottom: 12px;
 
     &[src=""] {
       visibility: hidden;
@@ -94,24 +95,26 @@ export default {
   &__Title {
     color: #202020;
     font-family: $font-stack-avalon;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     line-height: 1;
 
-    @include at-query($breakpoint-small) {
-      .SwatchPanel__Body--swatch {
-        flex: 1 1 auto;
-      }
+    @include at-query($breakpoint-large) {
+      font-size: 14px;
     }
   }
 
   &__Subtitle {
     color: #202020;
     font-family: $font-stack-roboto;
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: .075em;
     margin-top: 7px;
     text-transform: uppercase;
+
+    @include at-query($breakpoint-large) {
+      font-size: 10px;
+    }
   }
 }
 </style>

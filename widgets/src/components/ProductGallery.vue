@@ -135,7 +135,7 @@ export default {
     display: flex;
     font-size: 18px;
     position: absolute;
-    right: 0;
+    right: 10%;
     z-index: 10;
   }
 
