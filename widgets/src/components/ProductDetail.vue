@@ -53,7 +53,8 @@ export default {
 
   props: {
     category: { type: String, required: true },
-    sku: { type: String, required: true },
+    initialVariant: { type: Number, required: true },
+    initialAttributes: { type: Object, required: true },
   },
 
   computed: {
@@ -91,19 +92,21 @@ export default {
       this.pullFilter();
     }
 
-    // if (this.sku) {
-    //   this.loadProduct({ sku: this.sku });
-    // }
+    this.setVariantId(this.initialVariant);
+    this.setSelectedOptions(this.initialAttributes);
+    this.loadProductImages();
   },
 
   methods: {
     ...mapActions([
       'pullFilter',
-      // 'loadProduct',
+      'loadProductImages',
     ]),
 
     ...mapMutations([
       'updateCategory',
+      'setSelectedOptions',
+      'setVariantId',
     ]),
   },
 };

@@ -53,8 +53,7 @@ export default class FilterStorage {
    * @param {String} category
    */
   static requestFilter(category) {
-    // const filterEndpoint = `https://banksy-search.herokuapp.com/api/v1/filters/${category}.min.json`;
-    const filterEndpoint = 'https://iw-content.herokuapp.com/api/v1/product/Sofa';
+    const filterEndpoint = `https://iw-content.herokuapp.com/api/v1/product/${category}`;
 
     return fetch(filterEndpoint)
       .then(response => response.json())

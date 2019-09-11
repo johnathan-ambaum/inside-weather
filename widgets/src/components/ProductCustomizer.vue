@@ -107,10 +107,6 @@ export default {
     interpolator,
   ],
 
-  props: {
-    initialVariant: { type: Number, required: true },
-  },
-
   data() {
     return {
       active: false,

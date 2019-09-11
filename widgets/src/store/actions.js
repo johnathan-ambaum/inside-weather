@@ -6,14 +6,16 @@ const apiClient = new ApiClient();
 /**
  * Set up filter definition for category
  */
-export function pullFilter({ commit, state }) {
+export function pullFilter({ dispatch, commit, state }) {
+  if (!state.category) {
+    setTimeout(() => {
+      dispatch('pullFilter');
+    }, 200);
+    return;
+  }
+
   FilterStorage.getItem(state.category).then((filter) => {
     commit('defineFilter', { filter });
-    // TODO: DELETE THIS WHEN POSSIBLE
-    filter.attributes.forEach(({ parameter, values }) => {
-      commit('setOption', { parameter, value: values[0].value });
-    });
-    // TODO: END DELETE BLOCK
   });
 }
 
