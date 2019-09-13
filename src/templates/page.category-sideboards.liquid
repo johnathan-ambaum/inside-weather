@@ -1,0 +1,181 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_d_00-min.jpg?1662747', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_m_00-min.jpg?1662747','heading':'Sideboards','description':'Start with a silhouette and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/collections/sideboards/products/195s3b540560-voss-sideboard-141290', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_d_01-min.jpg?1662747', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_m_01-min.jpg?1662747','heading':'Wood Finish','description':'Hand waxed finishes come in robust Espresso or crisp Latte.','linkText':'Customize now','url':'https://insideweather.com/collections/sideboards/products/195s3b540560-voss-sideboard-141290', dataSource: 'wood-finish'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_d_02-min.jpg?1662747','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_m_02-min.jpg?1662747','heading':'Surface Design','description':'There’s a lot of space to fill here. Design something that gives you joy everyday.','linkText':'Customize now','url':'https://insideweather.com/collections/sideboards/products/195s3b540560-voss-sideboard-141290', dataSource: 'surface-design'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_d_03-min.jpg?1662747','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_m_03-min.jpg?1662747','heading':'Handle Style','description':'Get a grip on the details. Pair the perfect handle.','linkText':'Customize now','url':'https://insideweather.com/collections/sideboards/products/195s3b540560-voss-sideboard-141290', dataSource: 'handle-style'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_d_04-min.jpg?1662747','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_tb_m_04-min.jpg?1662747','heading':'Base Style','description':'Give your style a leg up. Choose from 15 different looks.','linkText':'Customize now','url':'https://insideweather.com/collections/sideboards/products/195s3b540560-voss-sideboard-141290', dataSource: 'base-style'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Wood Finish', 'accordionDescription': 'Hand waxed finishes come in robust Espresso or crisp Latte.', 'accordionTarget': 'wood-finish'},{'accordionHead': 'Surface Design', 'accordionDescription': 'There’s a lot of space to fill here. Design something that gives you joy everyday.', 'accordionTarget': 'surface-design'}, {'accordionHead': 'Handle Style', 'accordionDescription': 'Get a grip on the details. Pair the perfect handle.', 'accordionTarget': 'handle-style'}, {'accordionHead': 'Base Style', 'accordionDescription': 'Give your style a leg up. Choose from 15 different looks.', 'accordionTarget': 'base-style'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_col_01.jpg?1662776', 'title': 'Espresso Wood Grain', 'linkText': 'Customize starting at $738', hyperLink: 'https://insideweather.com/collections/sideboards/products/195sdf5573c3-voss-sideboard-392556'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_col_02.jpg?1662776', 'title': 'Latte Wood Grain', 'linkText': 'Customize starting at $738', hyperLink: 'https://insideweather.com/collections/sideboards/products/195sf5fa9c2b-voss-sideboard-391859'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_col_03.jpg?1662776', 'title': 'Custom Colors', 'linkText': 'Customize starting at $738', hyperLink: 'https://insideweather.com/collections/sideboards/products/195sc6782317-voss-sideboard-391911'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboard_col_04.jpg?1662776', 'title': 'Custom Graphics', 'linkText': 'Customize starting at $738', hyperLink: 'https://insideweather.com/collections/sideboards/products/195s641aaaf3-voss-sideboard-391927'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}" 
+          section-heading="Start With The Look You Want"
+          section-description="Customize the finish, then dial in the details."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'true','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza-sideboard_01_d.mp4?1662657', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza-sideboard_01_m.mp4?1662657', 'title': 'Customize Your Style','description': 'Get the look you want. Whether you decide to keep it classic with a natural wood surface, throw some color on it, or show your maximalist side with one of our original custom patterns, this piece is 100% you.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza-sideboard_02_d-min.jpg?1662659', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza-sideboard_02_m-min.jpg?1662659', 'title': 'Materials You Want','description': 'Your Credenza is constructed from 100% FSC-certified birchwood, so you know it’s sustainable and dependable. Woods and metals for the bases and handles are made from solid ash wood and high-strength, powder-coated stainless steel. Don’t worry, we’ll never skip the details.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza-sideboard_03_d.gif?1662661', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza-sideboard_03_m.gif?1662661', 'title': 'Versatile Function','description': 'This versatile piece is a star no matter where you put it, whether that’s the dining room, living room, or sleeping quarters. Anywhere you got stuff to store and stuff to display (like all those books you say you’re going to read) the Credenza has your back.'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
+    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_01-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S84CAE066/195S84CAE066-0_small.jpg','title':'Latte Voss Sideboard in Green Marble','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195s3c2fae7d-voss-sideboard-391947'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S753F88CC/47S753F88CC-0_small.jpg','title':'Espresso Tate Side Table in Green Marble','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s753f88cc-tate-side-table-389164'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_02-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SE819F2F1/195SE819F2F1-0_small.jpg','title':'Latte Voss Sideboard in Nordic Cool Gray','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195se819f2f1-voss-sideboard-141083'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/144S8D4F3F7F/144S8D4F3F7F-0_small.jpg','title':'Nola Side Chair in Cloud','price':'$98', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/144s8d4f3f7f-nola-side-chair-888839'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48SE5910C00/48SE5910C00-0_small.jpg','title':'Latte Tate Dining Table in Latte Wood','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48se5910c00-tate-dining-table-389447'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_03-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S025DE42E/195S025DE42E-0_small.jpg','title':'Latte Voss Sideboard in Nordic Blue','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195s025de42e-voss-sideboard-141379'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_04-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S405D7F7B/195S405D7F7B-0_small.jpg','title':'Latte Voss Sideboard in Muted Melang','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195s405d7f7b-voss-sideboard-139546'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_05-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SAEA8A5C4/195SAEA8A5C4-0_small.jpg','title':'Latte Sloan Credenza in Latte Wood','price':'$538', 'productUrl':'https://insideweather.com/collections/credenzas/products/195saea8a5c4-sloan-credenza-391698'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_06-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S4FA32D3E/195S4FA32D3E-0_small.jpg','title':'Espresso Voss Sideboard in Sunset Strokes','price':'$838', 'productUrl':'https://insideweather.com/collections/sideboards/products/195s4fa32d3e-voss-sideboard-148231'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_07-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SC6782317/195SC6782317-0-small.jpg','title':'Latte Voss Sideboard in White','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195sc6782317-voss-sideboard-391911'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/143S6D4DFEAB/143S6D4DFEAB-0_small.jpg','title':'Nola Armchair in Ivory','price':'$178', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/143s6d4dfeab-nola-armchair-888787'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_08-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SEB060EE1/195SEB060EE1-0_small.jpg','title':'Espresso Voss Sideboard in Rosy Geometry','price':'$818', 'productUrl':'https://insideweather.com/collections/sideboards/products/195seb060ee1-voss-sideboard-149318'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_09-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S2CA93635/195S2CA93635-0_small.jpg','title':'Latte Sloan Credenza in White','price':'$538', 'productUrl':'https://insideweather.com/collections/credenzas/products/195s2ca93635-sloan-credenza-391706'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S0DDBCC0E/195S0DDBCC0E-0_small.jpg','title':'Latte Voss Sideboard in Vivid Variety','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195s0ddbcc0e-voss-sideboard-139506'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S3036760B/195S3036760B-0_small.jpg','title':'Espresso Sloan Credenza in Pacific Waters','price':'$638', 'productUrl':'https://insideweather.com/collections/credenzas/products/195s3036760b-sloan-credenza-142384'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sideboards_lg_10-min.jpg?1662882','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SD2D14DD9/195SD2D14DD9-0_small.jpg','title':'Espresso Sloan Credenza in Sunset Stroke','price':'$638', 'productUrl':'https://insideweather.com/collections/sideboards/products/195sd2d14dd9-voss-sideboard-392069'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82SB33A2A03/82SB33A2A03-0_small.jpg','title':'Latte Polk Armchair in Heathered Taupe','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82sb33a2a03-polk-armchair-899149'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48S7EBD6014/48S7EBD6014-0_small.jpg','title':'Latte Jax Dining Table in Black Marble','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s7ebd6014-jax-dining-table-390355'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script> 
