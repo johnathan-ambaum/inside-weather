@@ -41,11 +41,26 @@
           <h2 
             class="--caps"
             :class="animationClass"
+            v-if="isBigScreen"
+          >
+            {{bannerContentItems[0].heading}}
+          </h2>
+          <p
+            :class="animationClass"
+            v-if="isBigScreen"
+          >
+            {{bannerContentItems[0].description}}
+          </p>
+          <h2 
+            class="--caps"
+            :class="animationClass"
+            v-if="!isBigScreen"
           >
             {{item.heading}}
           </h2>
           <p
             :class="animationClass"
+            v-if="!isBigScreen"
           >
             {{item.description}}
           </p>
@@ -234,7 +249,7 @@ export default {
     }
   }
   .CategoryBanner--clasification {
-    width: 220px;
+    width: 245px;
     display: none;
     position: absolute;
     top: 50%;
@@ -242,10 +257,13 @@ export default {
     right: calc((100% - 1245px) / 2);
     z-index: 9;
     .point {
+      &:not(:last-child) {
+        margin: 0 0 20px;
+      }
       p {
         font-family: $font-stack-roboto;
-        font-weight: 500;
-        font-size: 15px;
+        font-weight: 400;
+        font-size: 14px;
         letter-spacing: 0.04em;
         line-height: 1.46;
       }
@@ -362,6 +380,14 @@ export default {
   @include at-query('max-width: 640px') {
     .CategoryBanner--items .CategoryBanner--content {
       max-width: 90%;
+    }
+    .CategoryBanner--items .CategoryBanner--imageWrapper {
+      height: calc(100vh - 220px);
+    }
+  }
+  @include at-query('max-width: 480px') {
+    .CategoryBanner--items .CategoryBanner--content {
+      max-width: calc(100% - 100px);
     }
   }
 }

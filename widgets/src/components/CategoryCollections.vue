@@ -105,7 +105,7 @@ export default {
     figure {
       overflow: hidden;
       position: relative;
-      padding-bottom: 90%;
+      padding-bottom: 80%;
       @include block(0);
       img {
         object-fit: contain;

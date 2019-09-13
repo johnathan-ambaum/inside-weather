@@ -1,0 +1,181 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_tb_d_00-min.jpg?1662163', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_tb_m_00-min.jpg?1662163','heading':'Lounge chairs','description':'Pick a model and design the details.','linkText':'Customize now','url':'https://insideweather.com/collections/lounge-chairs/products/149s0b8b2c33-vita-lounge-chair-889560', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_tb_d_01-min.jpg?1662163', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_tb_m_01-min.jpg?1662163','heading':'Wood Finish','description':'Select the silhouette and choose from a number of finishes to perfectly accent your home.','linkText':'Customize now','url':'https://insideweather.com/collections/lounge-chairs/products/149s0b8b2c33-vita-lounge-chair-889560', dataSource: 'wood-finish'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_tb_d_02-min.jpg?1662163','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_tb_m_02-min.jpg?1662163','heading':'Upholstery','description':'Make it yours: choose from over 200 unique, quality upholsteries.','linkText':'Customize now','url':'https://insideweather.com/collections/lounge-chairs/products/149s0b8b2c33-vita-lounge-chair-889560', dataSource: 'upholstery'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Wood Finish', 'accordionDescription': 'Select the silhouette and choose from a number of finishes to perfectly accent your home.', 'accordionTarget': 'wood-finish'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Make it yours: choose from over 200 unique, quality upholsteries.', 'accordionTarget': 'upholstery'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chair_col_01.jpg?1662167', 'title': 'Ace Lounge Chair', 'linkText': 'Customize starting at $498', hyperLink: 'https://insideweather.com/collections/lounge-chairs/products/140s8edb2fed-ace-lounge-chair-568370'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chair_col_02.jpg?1662167', 'title': 'Vita Lounge Chair', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/collections/lounge-chairs/products/149s816cac83-vita-lounge-chair-889716'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chair_col_03.jpg?1662167', 'title': 'Vita in Custom Colors', 'linkText': 'Customize starting at $398', hyperLink: 'https://insideweather.com/collections/lounge-chairs/products/149s9a140be3-vita-lounge-chair-889653'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chair_col_04.jpg?1662167', 'title': 'Vita in Custom Graphics', 'linkText': 'Customize starting at $398', hyperLink: 'https://insideweather.com/collections/lounge-chairs/products/149s7f5e1868-vita-lounge-chair-889594'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Design Your Own Vita and Ace"
+          section-description="Choose between colors, graphics and finishes."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_01_d-min.jpg?1662188', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_01_m-min.jpg?1662188', 'title': 'Custom Upholstery','description': 'Play around and flip through all the colors and patterns! When you’ve narrowed it down to your favs, order some swatches for that IRL buzz. Next thing you know you’ll be sitting plop right on top of your custom made throne.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_02_d-min.jpg?1662188', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_02_m-min.jpg?1662188', 'title': 'Attention to Detail','description': 'Our lounge chairs come in a variety of materials and finishes, each one designed to add the perfect accent to your space, from the unique layered look of finished plywood edges, to the fine-grain details of solid ash wood.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_03_d-min.jpg?1662188', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_03_m-min.jpg?1662188', 'title': 'Life-Proof','description': 'Each lounge chair style comes with features that fit the pace of your unique life. Whether you want swappable custom seat pads with Vita, or Ace’s sleek, easy-to-clean cushions, there’s a chair here that’s got you covered.'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
+    
+    <div class="categoryValuePropsWrapper --pd-t-130">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_01-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/140SBFEA59AA/140SBFEA59AA-0_small.jpg','title':'Espresso Ace Lounge Chair in Seashell','price':'$498', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/140sbfea59aa-ace-lounge-chair-568382'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_02-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/149S776CF5D8/149S776CF5D8-0_small.jpg','title':'Espresso Vita Lounge Chair in Sweet Palm','price':'$398', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/149s776cf5d8-vita-lounge-chair-889750'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_03-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/140S27F06B39/140S27F06B39-0_small.jpg','title':'Espresso Ace Lounge Chair in Sunflower','price':'$498', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/140s27f06b39-ace-lounge-chair-568378'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_04-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/149S3873E653/149S3873E653-0_small.jpg','title':'Espresso Vita Lounge Chair in Dark Warm Gray','price':'$398', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/149s3873e653-vita-lounge-chair-889872'},]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_05-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/149S68076676/149S68076676-0-small.jpg','title':'Espresso Vita Lounge Chair in Minty Fragmentation','price':'$398', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/149s68076676-vita-lounge-chair-889846'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_06-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/140SA9A0D645/140SA9A0D645-0-small.jpg','title':'Black Ace Lounge Chair in Steel Blue','price':'$598', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/140sa9a0d645-ace-lounge-chair-568427'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/140SD0AAC2B2/140SD0AAC2B2-0_small.jpg','title':'Spresso Ace Lounge Chair in Vanilla','price':'$598', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/140sd0aac2b2-ace-lounge-chair-568421'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/140S0614F366/140S0614F366-0_small.jpg','title':'Latte Ace Lounge Chair in Aegean Blue','price':'$578', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/140s0614f366-ace-lounge-chair-568373'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_07-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/149SD91589EA/149SD91589EA-0_small.jpg','title':'Latte Vita Lounge Chair in Sunset Strokes','price':'$398', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/149sd91589ea-vita-lounge-chair-889550'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_08-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/149S206B21AA/149S206B21AA-0.jpg','title':'Espresso Vita Lounge Chair in Mid Warm Gray','price':'$398', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/149s206b21aa-vita-lounge-chair-889869'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_09-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/149S8E01A57F/149S8E01A57F-0_small.jpg','title':'Latte Vita Lounge Chair in Nordic Turquoise','price':'$398', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/149s8e01a57f-vita-lounge-chair-889684'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_lg_10-min.jpg?1662637','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/140SBA0E52F7/140SBA0E52F7-0_small.jpg','title':'Latte Ace Lounge Chair in Stone Blue','price':'$498', 'productUrl':'https://insideweather.com/collections/lounge-chairs/products/140sba0e52f7-ace-lounge-chair-568340'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script> 

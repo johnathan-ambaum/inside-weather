@@ -182,10 +182,11 @@ export default {
         margin: 0 0 -51px;
       }
       figure {
-        padding-bottom: 100%;
+        padding-bottom: 56.25%;
         height: 0;
-        img {
+        img, video {
           height: 100%;
+          width: 100%;
           object-fit: cover;
         }
       }

@@ -14,7 +14,7 @@
           <figure
             :class="animationClass"
           >
-            <img :src="item.image"/>
+            <img :src="isBigScreen ? item.image : item.imageSm"/>
           </figure>
           <div class="categoryValueProps--content">
             <h2
@@ -41,6 +41,18 @@ export default {
     backgroundColor: {type: String, default: "transparent"},
     isScrollAnimationRequire: {type: Boolean, default: true}
   },
+  data() {
+    return {
+      isBigScreen: true
+    }
+  },
+  created: function () {
+    if(window.innerWidth > 991) {
+      this.isBigScreen = true
+    }else {
+      this.isBigScreen = false
+    }
+  },
   computed: {
     animationClass() {
       return {
@@ -48,15 +60,26 @@ export default {
       }
     }
   },
+  mounted() {
+    const changeTheBanner = () => {
+      if (window.innerWidth > 991) {
+       this.isBigScreen = true
+      } else {
+        this.isBigScreen = false
+      }
+    };
+    
+    window.addEventListener('resize', changeTheBanner);
+  }
 }
 </script>
 
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .categoryValueProps {
   position: relative;
+  padding: 90px 0;
   .category-value-props {
     display: flex;
     margin: 0 -23px;
