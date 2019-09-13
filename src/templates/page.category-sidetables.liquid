@@ -1,0 +1,181 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_d_00-min.jpg?1663692', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_m_00-min.jpg?1663692','heading':'Side tables','description':'Start with a silhouette and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/collections/side-tables/products/47sf76df3c3-elle-side-table-751237', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_d_01-min.jpg?1663692', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_m_01-min.jpg?1663692','heading':'Table Top','description':'Got a favorite finish? Find it in your favorite shape.','linkText':'Customize now','url':'https://insideweather.com/collections/side-tables/products/47sf76df3c3-elle-side-table-751237', dataSource: 'table-top'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_d_02-min.jpg?1663692','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_m_02-min.jpg?1663692','heading':'Surface Design','description':'Style your new sidekick with 80+ custom colors and prints.','linkText':'Customize now','url':'https://insideweather.com/collections/side-tables/products/47sf76df3c3-elle-side-table-751237', dataSource: 'surface-design'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_d_03-min.jpg?1663692','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_tb_m_03-min.jpg?1663692','heading':'Base Style','description':'Everything from elegant hairpins to tapered brass.','linkText':'Customize now','url':'https://insideweather.com/collections/side-tables/products/47sf76df3c3-elle-side-table-751237', dataSource: 'base-style'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Table Top', 'accordionDescription': 'Got a favorite finish? Find it in your favorite shape.', 'accordionTarget': 'table-top'},{'accordionHead': 'Surface Design', 'accordionDescription': 'Style your new sidekick with 80+ custom colors and prints.', 'accordionTarget': 'surface-design'}, {'accordionHead': 'Base Style', 'accordionDescription': 'Everything from elegant hairpins to tapered brass.', 'accordionTarget': 'base-style'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-table_col_01.jpg?1663695', 'title': 'Elle Side Table', 'linkText': 'Customize starting at $128', hyperLink: 'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-table_col_02.jpg?1663695', 'title': 'Tate Side Table', 'linkText': 'Customize starting at $128', hyperLink: 'https://insideweather.com/collections/side-tables/products/47sd248954d-tate-side-table-389236'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-table_col_03.jpg?1663695', 'title': 'Jax Side Table', 'linkText': 'Customize starting at $128', hyperLink: 'https://insideweather.com/collections/side-tables/products/47sd45adc1d-jax-side-table-389183'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start With A Shape"
+          section-description="Customize every detail from tabletop design all the way down to the legs."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_01_d-min.jpg?1663192', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_01_m-min.jpg?1663192', 'title': 'Customize Your Style','description': 'Whether you’ve got a favorite color, a thing for wood grain, or you simply dig stylish patterns, the top of your table is prime real estate to make a statement and put the perfect accent on your room.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_02_d.mp4?1663087', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_02_m.mp4?1663170', 'title': 'Life-Proof','description': 'Not only does it look good, but it’s also ruggedly durable. A scuff-free, UV-resistant surface means that it’s perfect for that sunny spot in your home. It’s also FDA approved for all you messy eaters out there. And when you’re done, wipe it down with any cleaner you like.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_03_d-min.jpg?1663183', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_03_m-min.jpg?1663183', 'title': 'Materials You Want','description': 'Your table is constructed from 100% FSC-certified birchwood, so you know it’s sustainable and dependable. Woods and metals for the bases and handles are made from solid ash wood and high-strength, powder-coated stainless steel. Don’t worry, we’ll never skip the details.'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
+    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_01-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Elle Side Table in Espresso Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s7600861f-elle-side-table-389225'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_02-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S30A4F09B/150S30A4F09B-0_small.jpg','title':'Pebble Weave Levi Sofa in Poppy Orange','price':'$1,098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s30a4f09b-levi-sofa-938744'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Elle Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'},]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_03-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S84CAE066/195S84CAE066-0_small.jpg','title':'Latte Sloan Credenza in Green Marble','price':'$538', 'productUrl':'https://insideweather.com/collections/credenzas/products/195s84cae066-sloan-credenza-391612'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S753F88CC/47S753F88CC-0_small.jpg','title':'Espresso Tate Side Table in Green Marble','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s753f88cc-tate-side-table-389164'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_04-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150SBADE544C/150SBADE544C-0_small.jpg','title':'Satin Weave Levi Sofa in Slate Gray','price':'$1198', 'productUrl':'https://insideweather.com/collections/sofas/products/150sbade544c-levi-sofa-478043'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Elle Side Table in Espresso Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s7600861f-elle-side-table-389225'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_05-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48SEEBF6157/48SEEBF6157-0_small.jpg','title':'Latte Jax Side Table in Nordic Cream','price':'$148', 'productUrl':'https://insideweather.com/collections/side-tables/products/48seebf6157-jax-side-table-767833'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_06-min.jpg?1663705','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/141S17FC3C8F/141S17FC3C8F-0_small.jpg','title':'Cross Weave Issa Sofette in Cloud','price':'$598', 'productUrl':'https://insideweather.com/collections/sofettes/products/141s17fc3c8f-issa-sofette-584851'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Elle Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_07-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S71BB2536/48S71BB2536-0_small.jpg','title':'Espresso Elle Side Table in Espresso Wood','price':'$298', 'productUrl':'https://insideweather.com/collections/side-tables/products/48s71bb2536-elle-side-table-390100'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/138S493F326E/138S493F326E-0_small.jpg','title':'Linen Weave Issa Armchair in Fog','price':'$398', 'productUrl':'https://insideweather.com/collections/armchairs/products/138s493f326e-issa-armchair-559692'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_08-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47S924BC418/47S924BC418-0_small.jpg','title':'Latte Elle Side Table in Blush Marble','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s924bc418-elle-side-table-389212'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_09-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Elle Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/141S5115AF77/141S5115AF77-0_small.jpg','title':'Oxford Weave Milo Sofette in Daffodil','price':'$798', 'productUrl':'https://insideweather.com/collections/sofettes/products/141s5115af77-milo-sofette-055380'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_side-tables_lg_10-min.jpg?1663704','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/141S4202BDD5/141S4202BDD5-0_small.jpg','title':'Cross Weave Milo Sofette in Cayenne','price':'$724', 'productUrl':'https://insideweather.com/collections/sofettes/products/141s4202bdd5-milo-sofette-592552'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Elle Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script> 

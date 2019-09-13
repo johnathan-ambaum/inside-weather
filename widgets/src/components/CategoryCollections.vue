@@ -15,7 +15,7 @@
     </div>
     <ul 
       class="CtegoryCollections--itemWrapper"
-      :class="hasAnimation"
+      :class="catCollectionClasses"
     >
       <li
         v-for="item in productCollections"
@@ -62,9 +62,10 @@ export default {
         '--animElement': this.isScrollAnimationRequire
       }
     },
-    hasAnimation() {
+    catCollectionClasses() {
       return {
-        '--hasAnimation': this.isScrollAnimationRequire
+        '--hasAnimation': this.isScrollAnimationRequire,
+        '--alignCenter': this.productCollections.length < 4
       }
     }
   },
@@ -157,7 +158,20 @@ export default {
         }
       }
     }
-
+  }
+  &.--alignCenter {
+    justify-content: center;
+    &.--hasAnimation {
+      &.--animLoaded {
+        li {
+          &:nth-of-type(1) {
+            a {
+              box-shadow: inset 0.25px 0.25px 0 0 #8B8986;
+            }
+          }
+        }
+      }
+    }
   }
   @include at-query('max-width: 1280px') {
     justify-content: left;
@@ -224,6 +238,9 @@ export default {
           }
         }
       }
+    }
+    &.--alignCenter {
+      justify-content: left;
     }
   }
 }
