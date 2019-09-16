@@ -170,6 +170,7 @@ export default {
       &:nth-child(even) {
         figure {
           flex-basis: 50%;
+          padding-bottom: 56.25%;
         }
         .HeadingWithDescription {
           flex-basis: 50%;
@@ -242,8 +243,15 @@ export default {
     .--custom-container {
       padding: 0;
     }
-    .image-content-box figure {
-      padding-bottom: 100%;
+    .image-content-box {
+      &:nth-child(even) { 
+        figure {
+          padding-bottom: 100%;
+        }
+      }
+      figure {
+        padding-bottom: 100%;
+      }
     }
   }
 }
