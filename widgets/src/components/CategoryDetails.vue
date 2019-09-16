@@ -123,6 +123,7 @@ export default {
       flex-direction: row-reverse;
       figure {
         flex-basis: 55%;
+        padding-bottom: 33.3333%;
         img {
           right: auto;
         }
