@@ -102,6 +102,8 @@ export default {
         right: 0;
         top: 0;
         margin: auto;
+        object-fit: cover;
+        @include block(100%);
       }
     }
     .HeadingWithDescription {
@@ -154,6 +156,9 @@ export default {
   }
   @include at-query('max-width: 991px') {
     .image-content-box {
+      figure {
+        padding-bottom: 56.25%;
+      }
       .HeadingWithDescription {
         padding: 0 0 0 30px;
         h2 {
@@ -230,6 +235,14 @@ export default {
   @include at-query('max-width: 640px') {
     .--custom-container {
       padding: 0;
+    }
+  }
+  @include at-query('max-width: 480px') {
+    .--custom-container {
+      padding: 0;
+    }
+    .image-content-box figure {
+      padding-bottom: 100%;
     }
   }
 }
