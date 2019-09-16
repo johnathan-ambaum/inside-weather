@@ -106,7 +106,7 @@ export default {
     figure {
       overflow: hidden;
       position: relative;
-      padding-bottom: 80%;
+      padding-bottom: 100%;
       @include block(0);
       img {
         object-fit: contain;
@@ -117,6 +117,7 @@ export default {
         bottom: 0;
         margin: auto;
         @include block(100%);
+        @include Scale(0.8);
       }
     }
     h3 {
