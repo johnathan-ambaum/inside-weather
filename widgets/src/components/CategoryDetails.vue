@@ -87,10 +87,10 @@ export default {
     display: flex;
     flex-direction: row;
     &:not(:last-child) {
-      margin: 0 0 45px;
+      margin: 0 0 100px;
     }
     figure {
-      flex-basis: 65%;
+      flex-basis: 67%;
       height: 0;
       position: relative;
       overflow: hidden;
@@ -109,7 +109,7 @@ export default {
     .HeadingWithDescription {
       margin: auto 0;
       padding: 0 0 0 77px;
-      flex-basis: 35%;
+      flex-basis: 33%;
       h2 {
         margin: 0 0 32px;
         text-align: left;
@@ -122,15 +122,15 @@ export default {
     &:nth-child(even) {
       flex-direction: row-reverse;
       figure {
-        flex-basis: 55%;
-        padding-bottom: 33.3333%;
+        flex-basis: 43%;
+        padding-bottom: 25%;
         img {
           right: auto;
         }
       }
       .HeadingWithDescription {
         padding: 0 77px 0 85px;
-        flex-basis: 45%
+        flex-basis: 57%
       }
     }
   }
