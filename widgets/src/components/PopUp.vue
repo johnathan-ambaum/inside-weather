@@ -32,7 +32,7 @@
               v-for="item in PopUpContentList"
               :key="item.$id"
             >
-              <a :href="item.productUrl">
+              <a :href="item.productUrl" target="_blank">
                 <figure>
                   <img :src="item.productImage">
                 </figure>
