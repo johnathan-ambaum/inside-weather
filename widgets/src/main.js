@@ -20,13 +20,13 @@ import ValueProps from './components/ValueProps.vue';
 import Press from './components/Press.vue';
 import ReviewCarousel from './components/ReviewCarousel.vue';
 import Banner from './components/Banner.vue';
-import CategoryBanner from './components/CategoryBanner';
+import CategoryBanner from './components/CategoryBanner.vue';
 import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import CategoryCollections from './components/CategoryCollections.vue';
 import CategoryDetails from './components/CategoryDetails.vue';
 import CategoryVideo from './components/CategoryVideo.vue';
 import CategoryVprops from './components/CategoryVprops.vue';
-import LifeStylePhotos from './components/LifeStylePhotos.vue'
+import LifeStylePhotos from './components/LifeStylePhotos.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
