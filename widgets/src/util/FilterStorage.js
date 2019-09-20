@@ -8,12 +8,12 @@ export default class FilterStorage {
   static getItem(category) {
     let filters;
 
-    const now = (new Date()).getTime();
-    const expires = localStorage.getItem(`filters.${category}.expires`);
+    // const now = (new Date()).getTime();
+    // const expires = localStorage.getItem(`filters.${category}.expires`);
 
-    if (!expires || expires > now) {
-      filters = localStorage.getItem(`filters.${category}`);
-    }
+    // if (!expires || expires > now) {
+    //   filters = localStorage.getItem(`filters.${category}`);
+    // }
 
     if (!filters) {
       return FilterStorage.requestFilter(category);
