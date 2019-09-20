@@ -568,6 +568,26 @@ $btnBackgroundPosition: 150% 35%;
 html, body {
   padding: 0;
   margin: 0;
+
+  a {
+    color: #202020;
+
+    &:hover {
+      color: #202020;
+    }
+  }
+
+  .btn {
+    color: #fff;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color: #202020;
+  }
+
+  .input-group {
+    display: table;
+  }
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
@@ -2327,6 +2347,15 @@ label.error {
   width: 1%;
   padding: 0;
 
+  .subscribe-btn {
+    color: #fff;
+    background: #202020;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
   .icon {
     vertical-align: initial;
   }
@@ -3897,6 +3926,10 @@ $z-index-page-overlay: 27;
   .collapsible-content p,
   .site-footer__linklist a {
     font-size: em(floor($type_base_size * 0.93));
+
+    &:hover {
+      color: #fff !important;
+    }
   }
 
   @include media-query($small) {
@@ -3921,7 +3954,7 @@ $z-index-page-overlay: 27;
   }
 
   a {
-    color: $colorFooterText;
+    color: $colorFooterText !important;
   }
 }
 
@@ -10059,7 +10092,7 @@ div[data-section-type="fading-images"] {
 
 .product-single__meta {
   @include media-query($small) {
-    margin-top: $gutter / 2;
+    {% comment %} margin-top: $gutter / 2; {% endcomment %}
   }
 
   .social-sharing {
@@ -11112,6 +11145,7 @@ html body.MobileNav--Active {
     -o-transition: all .3s;
     transition: all .3s;
     border-color: #202020;
+    color: #202020;
   }
 }
 
@@ -11158,6 +11192,8 @@ html body.MobileNav--Active {
   }
 
   .Dropdown__Content__Link.has-hover:hover {
+    color: #202020;
+
     .Dropdown__Content__DefaultImage {
       display: none;
     }
