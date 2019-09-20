@@ -18,6 +18,19 @@
       v-if="option.subname"
       class="SwatchPanelItem__Subtitle"
     >{{ option.subname }}</div>
+    <div
+      v-if="option.icons.length > 0"
+      class="SwatchPanelItem__Icons"
+    >
+      <img
+        v-for="icon in option.icons"
+        :key="icon.name"
+        :src="icon.image_url"
+        :alt="icon.name"
+        :title="icon.description"
+        class="SwatchPanelItem__Icon"
+      >
+    </div>
   </div>
 </template>
 
@@ -69,9 +82,9 @@ export default {
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 0;
-  padding: 20px;
+  padding: 16px 32px;
   position: relative;
   text-align: center;
 
@@ -80,6 +93,7 @@ export default {
   }
 
   &.is-selected {
+    background: #f2f0ed;
     border-color: #202020;
   }
 
@@ -89,6 +103,12 @@ export default {
 
     &[src=""] {
       visibility: hidden;
+    }
+
+    @include at-query($breakpoint-small) {
+      height: 92px;
+      margin-bottom: 6px;
+      width: auto;
     }
   }
 
@@ -109,11 +129,26 @@ export default {
     font-family: $font-stack-roboto;
     font-size: 8px;
     letter-spacing: .075em;
-    margin-top: 7px;
     text-transform: uppercase;
 
     @include at-query($breakpoint-large) {
       font-size: 10px;
+      margin-top: 7px;
+    }
+  }
+
+  &__Icons {
+    margin-top: 8px;
+  }
+
+  &__Icon {
+    display: inline-block;
+    height: 15px;
+    margin: 0 8px;
+    width: auto;
+
+    @include at-query($breakpoint-large) {
+      height: 20px;
     }
   }
 }

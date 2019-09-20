@@ -1,36 +1,47 @@
 <template>
   <div class="ProductDetail">
-    <template v-if="screenWidth >= 1024">
-      <product-gallery :images="productImages" />
-      <h2 class="ProductDetail__Heading">Dimensions</h2>
-      <div class="ProductDetail__Dimensions">
-        <img
-          v-for="image in dimensionImages"
-          :key="image"
-          :src="image">
+    <product-gallery
+      v-if="!isMobile"
+      :images="productImages"
+    />
+    <h2 class="ProductDetail__Heading">Dimensions</h2>
+    <div class="ProductDetail__Dimensions">
+      <img
+        v-for="image in dimensionImages"
+        :key="image"
+        :src="image">
+    </div>
+    <div class="ProductDetail__SplitBlocks">
+      <div>
+        <h2 class="ProductDetail__Heading">Assembly</h2>
+        <p>{{ interpolatedAssembly }}</p>
       </div>
-      <h2
-        v-if="filters.contents"
-        class="ProductDetail__Heading"
-      >Details</h2>
-      <template-block
-        v-for="(block, index) in filters.contents"
-        :key="index"
-        :image="block.image_template"
-        :heading="block.header_template"
-        :text="block.content_template"
-        :reverse="index % 2 !== 0" />
-        <!-- <product-family
-        v-if="'related_items' in product && product.related_items.length"
-        id="families"
-        class="ProductDetail__Family"
-      /> -->
-    </template>
+      <div>
+        <h2 class="ProductDetail__Heading">Shipping</h2>
+        <p>{{ interpolatedShipping }}</p>
+      </div>
+    </div>
+    <h2
+      v-if="filters.contents"
+      class="ProductDetail__Heading"
+    >Details</h2>
+    <template-block
+      v-for="(block, index) in filters.contents"
+      :key="index"
+      :image="block.image_template"
+      :heading="block.header_template"
+      :text="block.content_template"
+      :reverse="index % 2 !== 0" />
+      <!-- <product-family
+      v-if="'related_items' in product && product.related_items.length"
+      id="families"
+      class="ProductDetail__Family"
+    /> -->
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 import ProductGallery from './ProductGallery.vue';
 import ZoomGallery from './ZoomGallery.vue';
 import TemplateBlock from './TemplateBlock.vue';
@@ -50,12 +61,6 @@ export default {
     screenMonitor,
     interpolator,
   ],
-
-  props: {
-    category: { type: String, required: true },
-    initialVariant: { type: Number, required: true },
-    initialAttributes: { type: Object, required: true },
-  },
 
   computed: {
     ...mapState({
@@ -84,30 +89,24 @@ export default {
 
       return images;
     },
-  },
 
-  created() {
-    if (this.category) {
-      this.updateCategory(this.category);
-      this.pullFilter();
-    }
+    interpolatedAssembly() {
+      if (!this.filters.templates) {
+        return '';
+      }
 
-    this.setVariantId(this.initialVariant);
-    this.setSelectedOptions(this.initialAttributes);
-    this.loadProductImages();
-  },
+      const { template } = this.filters.templates.find(item => item.key === 'assembly') || { template: '' };
+      return this.interpolateString(template);
+    },
 
-  methods: {
-    ...mapActions([
-      'pullFilter',
-      'loadProductImages',
-    ]),
+    interpolatedShipping() {
+      if (!this.filters.templates) {
+        return '';
+      }
 
-    ...mapMutations([
-      'updateCategory',
-      'setSelectedOptions',
-      'setVariantId',
-    ]),
+      const { template } = this.filters.templates.find(item => item.key === 'shipping') || { template: '' };
+      return this.interpolateString(template);
+    },
   },
 };
 </script>
@@ -130,16 +129,84 @@ export default {
   &__Heading {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 60px;
+    margin-bottom: 45px;
+
+    @include at-query($breakpoint-small) {
+      padding: 0 $horizontal-wrapper-padding;
+    }
 
     @include at-query($breakpoint-large) {
       font-size: 34px;
+      margin-bottom: 60px;
     }
   }
 
   &__Dimensions {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px;
+
+    @include at-query($breakpoint-small) {
+      padding: 0 $horizontal-wrapper-padding;
+
+      img + img {
+        margin-top: 50px;
+      }
+    }
+
+    @include at-query($breakpoint-large) {
+      flex-direction: row;
+
+      img + img {
+        margin-left: 40px;
+      }
+    }
+  }
+
+  &__SplitBlocks {
     display: flex;
     margin-bottom: 80px;
+
+    @include at-query($breakpoint-small) {
+      flex-direction: column;
+
+      & > div:first-child {
+        margin-bottom: 50px;
+      }
+    }
+
+    & > div {
+      @include at-query($breakpoint-large) {
+        flex: 0 0 50%;
+        padding-right: 10%;
+
+        &:last-child {
+          padding-right: 5%;
+        }
+      }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .025em;
+      line-height: 18px;
+      margin: 0;
+
+      @include at-query($breakpoint-small) {
+        padding: 0 $horizontal-wrapper-padding;
+      }
+
+      @include at-query($breakpoint-large) {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
   }
 }
 </style>

@@ -1,12 +1,9 @@
 <template>
-  <div
-    :class="wrapperClasses"
-    class="ResponsiveImage__Wrapper"
-  >
+  <div class="ResponsiveImage__Wrapper">
     <img
       v-if="showPlaceholder"
       :src="placeholderSrc"
-      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
+      :class="imageClasses"
       class="ResponsiveImage ResponsiveImage__Placeholder">
     <img
       v-if="src.length"
@@ -14,15 +11,13 @@
       :src="src"
       :srcset="srcset"
       :style="imageStyles"
-      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
+      :class="imageClasses"
       class="ResponsiveImage"
       @load="finishLoading">
-    <transition name="fade">
-      <glyph-loading
-        v-if="showSpinner && sizes.length < 10"
-        class="ResponsiveImage__Spinner"
-      />
-    </transition>
+    <glyph-loading
+      v-if="showSpinner && sizes.length < 10"
+      class="ResponsiveImage__Spinner"
+    />
   </div>
 </template>
 
@@ -49,6 +44,7 @@ export default {
       src: this.getSrc(),
       srcset: this.getSrcSet(),
       showSpinner: this.initialSpinner,
+      loading: true,
     };
   },
 
@@ -71,9 +67,10 @@ export default {
       };
     },
 
-    wrapperClasses() {
+    imageClasses() {
       return {
-        'ResponsiveImage__Wrapper--Loaded': this.loaded,
+        'ResponsiveImage--Loaded': this.loaded,
+        'ResponsiveImage--Loading': this.loading,
       };
     },
   },
@@ -87,7 +84,7 @@ export default {
 
     images(newImages) {
       if (this.load) {
-        this.showSpinner = true;
+        this.loading = true;
         this.loadImages();
       }
     },
@@ -135,6 +132,7 @@ export default {
 
     finishLoading() {
       this.loaded = true;
+      this.loading = false;
       this.showSpinner = false;
     },
   },
@@ -147,35 +145,27 @@ export default {
 
 .ResponsiveImage {
   bottom: 0;
+  filter: blur(4px);
   left: 0;
   margin: auto;
   position: absolute;
   right: 0;
   top: 0;
-  width: 90% !important;
-
-  @include at-query($breakpoint-mlarge) {
-    width: 100% !important;
-  }
-
-  @include at-query($breakpoint-xsmall) {
-    width: 85% !important;
-  }
+  transition: filter .2s linear;
+  width: 100%;
 
   &--Loading {
     opacity: .6;
   }
 
+  &--Loaded {
+    filter: blur(0);
+  }
+
   &__Wrapper {
-    filter: blur(4px);
     height: 0;
     padding-top: 100%;
     position: relative;
-    transition: filter .2s linear;
-
-    &--Loaded {
-      filter: blur(0);
-    }
   }
 
   &__Spinner {

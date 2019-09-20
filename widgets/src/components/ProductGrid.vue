@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import ProductGridItem from './ProductGridItem.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import FilterStorage from '../util/FilterStorage';
@@ -64,7 +64,6 @@ export default {
   computed: {
     ...mapState({
       filters: state => state.filters,
-      products: state => state.products,
       favorites: state => state.favorites,
     }),
 
@@ -137,10 +136,6 @@ export default {
     if (typeof window.pnwCfg !== 'undefined') {
       this.customerId = window.pnwCfg.id;
     }
-
-    if (this.showFavorites) {
-      this.loadFavorites();
-    }
   },
 
   mounted() {
@@ -160,10 +155,6 @@ export default {
     ...mapMutations([
       'toggleFavorite',
       'setFavorites',
-    ]),
-
-    ...mapActions([
-      'loadFavorites',
     ]),
   },
 };

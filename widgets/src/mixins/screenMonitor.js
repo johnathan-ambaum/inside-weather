@@ -1,5 +1,3 @@
-import { mapMutations } from 'vuex';
-
 export default {
   data() {
     return {
@@ -18,16 +16,9 @@ export default {
         || document.documentElement.clientHeight
         || document.body.clientHeight;
       this.isMobile = this.screenWidth < 1024;
-      this.setPerPage(this.isMobile ? 6 : 54);
     };
 
     window.addEventListener('resize', saveSize);
     saveSize();
-  },
-
-  methods: {
-    ...mapMutations([
-      'setPerPage',
-    ]),
   },
 };

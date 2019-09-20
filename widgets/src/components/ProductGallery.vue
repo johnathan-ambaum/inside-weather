@@ -4,15 +4,11 @@
       class="ProductGallery__FeaturedImage"
       @click="showZoom = true"
     >
-      <responsive-image :images="images[galleryImage] || {}" />
+      <responsive-image
+        :images="images[galleryImage] || {}"
+        :initial-spinner="true"
+      />
     </div>
-    <button
-      class="ProductGallery__Zoom"
-      @click.prevent="showZoom = true"
-    >
-      <font-awesome-icon :icon="['fas', 'search-plus']" />
-      <span class="ProductGallery__ZoomText">click to zoom</span>
-    </button>
     <nav class="ProductGallery__Nav">
       <div
         v-for="(image, index) in images"
@@ -27,6 +23,10 @@
           sizes="70px"
         />
       </div>
+      <zoom-button
+        class="ProductGallery__Zoom"
+        @click.native.prevent="showZoom = true"
+      />
     </nav>
     <transition name="fade">
       <zoom-gallery
@@ -40,19 +40,15 @@
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearchPlus } from '@fortawesome/pro-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ResponsiveImage from './ResponsiveImage.vue';
+import ZoomButton from './ZoomButton.vue';
 import ZoomGallery from './ZoomGallery.vue';
-
-library.add(faSearchPlus);
 
 export default {
   components: {
     ResponsiveImage,
+    ZoomButton,
     ZoomGallery,
-    FontAwesomeIcon,
   },
 
   props: {
@@ -87,9 +83,12 @@ export default {
 .ProductGallery {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
   position: relative;
   top: -40px;
+
+  @include at-query($breakpoint-large) {
+    margin-bottom: 30px;
+  }
 
   &__FeaturedImage {
     cursor: zoom-in;
@@ -107,7 +106,7 @@ export default {
   }
 
   &__Item {
-    border: 1px solid #d4d0ca;
+    border: 1px solid transparent;
     cursor: pointer;
     flex: 0 1 74px;
 
@@ -121,33 +120,11 @@ export default {
   }
 
   &__Thumb img {
-    border: 1px solid #d4d0ca;
-
-    .ProductDetail__Item--Active & {
-      border: 2px solid #202020;
-    }
+    border: .25px solid #202020;
   }
 
   &__Zoom {
-    align-items: center;
-    bottom: 98px;
-    color: #202020;
-    display: flex;
-    font-size: 18px;
-    position: absolute;
-    right: 10%;
-    z-index: 10;
-  }
-
-  &__ZoomText {
-    font-family: $font-stack-roboto;
-    font-size: 10px;
-    margin-left: 8px;
-    letter-spacing: $normal-text-spacing;
-
-    @include at-query($breakpoint-small) {
-      display: none;
-    }
+    margin-left: 24px;
   }
 }
 </style>

@@ -60,13 +60,13 @@ export default {
 $swatch-margin: 5px;
 
 .SwatchPanel {
-  align-items: flex-start;
   display: flex;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
 
   @include at-query($breakpoint-large) {
+    align-content: flex-start;
     flex-wrap: wrap;
   }
 }

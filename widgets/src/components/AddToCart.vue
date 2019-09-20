@@ -55,22 +55,25 @@ export default {
 
   .select-wrap {
     select {
-      background-position: right 20px center;
-      border: 1px solid #959595;
+      background-position: right 15px center;
+      border: .25px solid #202020;
       height: 100%;
-      margin-right: 10px;
-      padding: 0 35px 0 20px;
+      margin-right: 20px;
+      padding: 0 22px 0 10px;
+      width: 60px;
     }
   }
 
   button {
     font-family: $font-stack-avalon;
-    letter-spacing: .05em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .12em;
     text-transform: uppercase;
 
     &, &:hover {
-      padding-bottom: 15px;
-      padding-top: 15px;
+      padding-bottom: 13px;
+      padding-top: 12px;
     }
   }
 

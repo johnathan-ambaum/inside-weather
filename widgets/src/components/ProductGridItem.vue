@@ -58,7 +58,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as emptyHeart } from '@fortawesome/pro-light-svg-icons';
 import { faHeart as filledHeart } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import FeatureSlider from './FeatureSlider.vue';
 import FeatureRollover from './FeatureRollover.vue';
 import ResponsiveImage from './ResponsiveImage.vue';
 import productHandler from '../mixins/productHandler';
@@ -67,7 +66,6 @@ library.add(emptyHeart, filledHeart);
 
 export default {
   components: {
-    FeatureSlider,
     FeatureRollover,
     ResponsiveImage,
     FontAwesomeIcon,
@@ -102,7 +100,7 @@ export default {
     },
 
     featureComponent() {
-      return this.isMobile ? FeatureSlider : FeatureRollover;
+      return FeatureRollover;
     },
 
     loadFeatureImages() {

@@ -1,28 +1,44 @@
 <template>
   <div>
-    <div class="ProductCustomizer__Name">
-      {{ productName }}
-      <!-- <div class="ProductCustomizer__Model">{{ modelNumber }}</div> -->
+    <div class="ProductCustomizer__DetailWrapper">
+      <div class="ProductCustomizer__HeaderRow">
+        <div class="ProductCustomizer__Name">
+          {{ productName }}
+          <!-- <div class="ProductCustomizer__Model">{{ modelNumber }}</div> -->
+        </div>
+        <span
+          :class="{ isFavorite }"
+          role="button"
+          class="ProductCustomizer__Favorite"
+          @click.stop.prevent="favoriteCurrentProduct"
+        >
+          <font-awesome-icon :icon="favoriteIcon"/>
+        </span>
+      </div>
+      <product-detail-slider v-if="isMobile" />
+      <div class="ProductCustomizer__PriceRow">
+        <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
+      </div>
+      <div class="ProductCustomizer__ShippingDays">
+        FREE Shipping | Custom made in {{ fulfillmentTime }}
+      </div>
+      <button
+        class="ProductCustomizer__Trigger"
+        @click.prevent="showCustomizer"
+      >Customize</button>
+      <add-to-cart
+        :processing="addToCartProcessing"
+        @addToCart="addToCart"
+      />
+      <p
+        :data-amount="productPrice * 100"
+        data-page-type="product"
+        class="affirm-as-low-as"
+      />
     </div>
-    <div class="ProductCustomizer__PriceRow">
-      <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
-    </div>
-    <div class="ProductCustomizer__ShippingDays">
-      FREE Shipping | Custom made in {{ fulfillmentTime }}
-    </div>
-    <button
-      class="ProductCustomizer__Trigger"
-      @click.prevent="showCustomizer"
-    >Customize</button>
-    <add-to-cart
-      :processing="addToCartProcessing"
-      @addToCart="addToCart"
-    />
-    <p
-      :data-amount="productPrice * 100"
-      data-page-type="product"
-      class="affirm-as-low-as"
-    />
+    <hr>
+    <inspiration-options />
+    <swatch-browser />
     <div
       :class="{ 'ProductCustomizer--Active': active }"
       class="ProductCustomizer"
@@ -36,7 +52,12 @@
           <span class="ProductCustomizer__Price">${{ productPrice }}</span>
         </div>
       </div>
+      <product-detail-slider
+        v-if="isMobile"
+        class="ProductCustomizer__Slider"
+      />
       <product-gallery
+        v-if="!isMobile"
         :images="productImages"
         class="ProductCustomizer__Gallery"
       />
@@ -46,7 +67,7 @@
             v-if="!openPanel"
             class="ProductCustomizer__Nav"
           >
-            <div class="ProductCustomizer__NavHeading">Customise your {{ category }}</div>
+            <div class="ProductCustomizer__NavHeading">Customize Your {{ category }}</div>
             <div class="ProductCustomizer__NavBody">
               <div
                 v-for="(attribute, index) in attributes"
@@ -89,23 +110,41 @@
 <script>
 // import scrollMonitor from 'scrollmonitor';
 import { mapState, mapActions, mapMutations } from 'vuex';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHeart } from '@fortawesome/pro-light-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import ProductDetailSlider from './ProductDetailSlider.vue';
 import ProductGallery from './ProductGallery.vue';
 import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
+import InspirationOptions from './InspirationOptions.vue';
+import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 
+library.add(faHeart);
+
 export default {
   components: {
+    ProductDetailSlider,
+    FontAwesomeIcon,
     ProductGallery,
     FilterPanel,
     AddToCart,
+    InspirationOptions,
+    SwatchBrowser,
   },
 
   mixins: [
     screenMonitor,
     interpolator,
   ],
+
+  props: {
+    category: { type: String, required: true },
+    initialVariant: { type: Number, required: true },
+    initialAttributes: { type: Object, required: true },
+  },
 
   data() {
     return {
@@ -116,9 +155,6 @@ export default {
 
   computed: {
     ...mapState({
-      category: state => state.filters.name,
-      basePrice: state => state.filters.price,
-      templates: state => state.filters.templates,
       attributes: state => state.filters.attributes,
       minDays: state => state.filters.min_fulfillment_days,
       maxDays: state => state.filters.max_fulfillment_days,
@@ -133,31 +169,16 @@ export default {
       return panel => this.openPanel === panel;
     },
 
-    productName() {
-      if (!this.templates) {
-        return '';
-      }
-      const { template = '' } = this.templates.find(item => item.key === 'name') || {};
-      return this.interpolateString(template);
+    isFavorite() {
+      return false;
     },
 
-    modelNumber() {
-      return '';
-    },
-
-    productPrice() {
-      if (!this.basePrice || Object.keys(this.selectedOptions).length < 1) {
-        return null;
+    favoriteIcon() {
+      if (this.isFavorite) {
+        return ['fas', 'heart'];
       }
 
-      return Object.entries(this.selectedOptions).reduce((total, [parameter, value]) => {
-        const attribute = this.attributes.find(item => item.parameter === parameter);
-        const selected = attribute.values.find(item => item.value === value);
-        if (!selected.price_markup) {
-          return total;
-        }
-        return total + Number(selected.price_markup);
-      }, Number(this.basePrice));
+      return ['fal', 'heart'];
     },
 
     fulfillmentTime() {
@@ -192,23 +213,70 @@ export default {
 
   watch: {
     active(isActive) {
-      document.body.style.overflow = isActive ? 'hidden' : '';
+      const bodyClass = 'ProductCustomizer--Open';
+      if (isActive) {
+        document.body.classList.add(bodyClass);
+        return;
+      }
+
+      document.body.classList.remove(bodyClass);
+      const zendesk = document.querySelector('.zEWidget-launcher');
+      if (zendesk) {
+        // fix bug causing widget to be set to 5px wide by some zendesk javascript after closing customizer
+        zendesk.style.width = '';
+      }
     },
   },
 
   created() {
+    if (this.category) {
+      this.updateCategory(this.category);
+      this.pullFilter();
+    }
+
+    this.customerId = null;
+    if (typeof window.pnwCfg !== 'undefined') {
+      this.customerId = window.pnwCfg.id;
+    }
+
+    this.setVariantId(this.initialVariant);
+    this.setSelectedOptions(this.initialAttributes);
+    this.loadProductImages();
+
     this.$bus.$on('filter:toggle', (payload) => {
       this.setOption(payload);
-      setTimeout(window.affirm.ui.refresh, 200);
+      this.$nextTick(() => {
+        window.affirm.ui.refresh();
+      });
+    });
+  },
+
+  mounted() {
+    const updateAffirm = () => {
+      if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
+        setTimeout(updateAffirm, 200);
+        return;
+      }
+      window.affirm.ui.refresh();
+    };
+
+    this.$nextTick(() => {
+      updateAffirm();
     });
   },
 
   methods: {
     ...mapActions([
+      'pullFilter',
+      'loadProductImages',
       'createProductFromSelected',
     ]),
 
     ...mapMutations([
+      'setSelectedOptions',
+      'updateCategory',
+      'toggleFavorite',
+      'setVariantId',
       'selectPanel',
       'setOption',
     ]),
@@ -228,6 +296,13 @@ export default {
 
     showCustomizer() {
       this.active = true;
+    },
+
+    favoriteCurrentProduct() {
+      this.toggleFavorite({
+        attributes: this.selectedOptions,
+        customerId: this.customerId,
+      });
     },
 
     addToCart(quantity) {
@@ -268,9 +343,19 @@ export default {
   display: none;
 }
 
+body.ProductCustomizer--Open {
+  overflow: hidden;
+
+  // zendesk widget
+  .zEWidget-launcher {
+    display: none !important;
+  }
+}
+
 .ProductCustomizer {
   background: #fff;
   display: flex;
+  flex-direction: column;
   height: 100vh;
   left: 0;
   opacity: 0;
@@ -280,16 +365,49 @@ export default {
   width: 100vw;
   z-index: 1001;
 
+  @include at-query($breakpoint-large) {
+    flex-direction: row;
+  }
+
   &--Active {
     opacity: 1;
     top: 0;
     transition: opacity .2s linear;
   }
 
+  &__DetailWrapper {
+    @include at-query($breakpoint-small) {
+      margin-bottom: 80px;
+      padding: 0 $horizontal-wrapper-padding;
+    }
+
+    & + hr {
+      display: none;
+
+      @include at-query($breakpoint-large) {
+        display: block;
+      }
+    }
+  }
+
+  &__HeaderRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 100;
+
+    @include at-query($breakpoint-small) {
+      position: absolute;
+      width: calc(100% - #{$horizontal-wrapper-padding * 2});
+    }
+  }
+
   &__Name {
+    flex: 0 1 70%;
     font-family: $font-stack-avalon;
     font-size: 18px;
     font-weight: 500;
+    letter-spacing: .05em;
     line-height: 22px;
 
     @include at-query($breakpoint-large) {
@@ -308,17 +426,37 @@ export default {
     letter-spacing: $normal-text-spacing;
   }
 
+  &__Favorite {
+    cursor: pointer;
+    flex: 0 0 30px;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
   &__PriceRow {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+
+    @include at-query($breakpoint-small) {
+      justify-content: center;
+      margin-top: -20px;
+      position: relative;
+    }
+  }
+
+  &--Active &__PriceRow {
+    @include at-query($breakpoint-small) {
+      justify-content: flex-start;
+      margin: 0;
+    }
   }
 
   &__Price {
     font-size: 18px;
     font-weight: 600;
+    letter-spacing: .05em;
     line-height: 1;
-    margin-right: 10px;
 
     @include at-query($breakpoint-large) {
       font-size: 22px;
@@ -329,35 +467,42 @@ export default {
     margin: 25px 0;
     font-size: 13px;
     font-weight: 500;
-    letter-spacing: .035em;
+    letter-spacing: .075em;
     line-height: 15px;
 
     @include at-query($breakpoint-small) {
       font-size: 11px;
       line-height: 14px;
-      margin: 8px 0 12px;
-      text-align: right;
+      margin: 12px 0 20px;
+      text-align: center;
     }
   }
 
   &__Trigger {
     background: transparent;
-    border: 2px solid #202020;
+    border: 1.5px solid #202020;
     color: #202020;
     display: block;
     font-family: $font-stack-avalon;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     height: 48px;
+    letter-spacing: .12em;
     margin-bottom: 40px;
-    letter-spacing: .05em;
     text-transform: uppercase;
     width: 100%;
   }
 
   &__NameOverlay {
-    left: 60px;
+    left: $horizontal-wrapper-padding;
     position: absolute;
-    top: 40px;
+    top: 20px;
+    z-index: 100;
+
+    @include at-query($breakpoint-large) {
+      left: 60px;
+      top: 40px;
+    }
   }
 
   &__NameOverlay &__Name {
@@ -378,6 +523,11 @@ export default {
     }
   }
 
+  .ProductDetailSlider {
+    margin: 0;
+  }
+
+  &__Slider,
   &__Gallery {
     flex: 1;
   }
@@ -385,42 +535,65 @@ export default {
   &__Sidebar {
     border-left: 1px solid #b7b7b7;
     display: flex;
-    flex: 0 0 440px;
+    flex: 0 0 auto;
     flex-direction: column;
+
+    @include at-query($breakpoint-large) {
+      flex: 0 0 440px;
+    }
   }
 
   &__SidebarBody {
     flex: 1;
+
+    @include at-query($breakpoint-small) {
+      flex: 0 0 auto;
+      z-index: 100;
+    }
   }
 
   &__Nav {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - #{$sidebar-footer-height});
+    height: 100%;
+
+    @include at-query($breakpoint-large) {
+      height: calc(100vh - #{$sidebar-footer-height});
+    }
   }
 
   &__NavHeading {
-    align-items: center;
-    border-bottom: 1px solid #c8c8c8;
+    border-bottom: .25px solid #202020;
     display: flex;
-    flex: 0 0 110px;
     font-size: 18px;
     font-weight: 600;
     justify-content: center;
-    line-height: 30px;
+    line-height: 1;
+    padding: 26px 0;
     text-align: center;
 
+    @include at-query($breakpoint-small) {
+      border-top: .25px solid #202020;
+    }
+
     @include at-query($breakpoint-large) {
+      align-items: center;
+      flex: 0 0 110px;
       font-size: 24px;
+      padding: 0;
     }
   }
 
   &__NavBody {
     display: flex;
-    flex: 0 1 calc(100% - #{$sidebar-heading-height});
-    flex-direction: column;
+    flex: 1;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+
+    @include at-query($breakpoint-large) {
+      flex: 0 1 calc(100% - #{$sidebar-heading-height});
+      flex-direction: column;
+    }
   }
 
   &__NavItem {
@@ -431,25 +604,54 @@ export default {
     flex-direction: column;
     font-size: 12px;
     justify-content: center;
+    letter-spacing: .05em;
     padding: 30px 0;
 
-    & + & {
-      border-top: 1px solid #c8c8c8;
+    &:hover {
+      -webkit-filter: contrast(115%); /* Safari 6.0 - 9.0 */
+      filter: contrast(115%);
+    }
+
+    @include at-query($breakpoint-small) {
+      padding: 24px 18px;
+
+      & + & {
+        border-left: .25px solid #202020;
+      }
+
+      img {
+        height: 92px;
+      }
+    }
+
+    @include at-query($breakpoint-large) {
+      & + & {
+        border-top: .25px solid #202020;
+      }
     }
   }
 
-  &__Panel:not(&__Panel--Active) {
-    display: none;
+  &__Panel {
+    height: 100%;
+
+    &:not(#{&}--Active) {
+      display: none;
+    }
   }
 
   &__Close {
     background: #202020;
     color: #fff;
-    flex: 0 0 $sidebar-footer-height;
+    flex: 0 0 $sidebar-footer-height-mobile;
     font-family: $font-stack-avalon;
-    font-weight: 600;
-    letter-spacing: .05em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .12em;
     text-transform: uppercase;
+
+    @include at-query($breakpoint-large) {
+      flex: 0 0 $sidebar-footer-height;
+    }
   }
 
   .ProductGallery {

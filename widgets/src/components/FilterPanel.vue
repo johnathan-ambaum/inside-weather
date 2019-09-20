@@ -3,19 +3,21 @@
     <div class="FilterPanel__Header">
       <div class="FilterPanel__Title">{{ index + 1 }}. {{ name }}</div>
       <div
-        v-if="groups"
+        v-if="groups.length > 0"
         class="FilterPanel__Filter"
       >
         <select
           v-model="group"
           class="FilterPanel__GroupSelect"
         >
-          <option value="">SORT: A-Z</option>
           <option
             v-for="group in groups"
-            :key="group"
+            :key="group.id"
             :value="group"
-          >{{ group }}</option>
+          >
+            <template v-if="group.group_type === 'sort'">Sort: <strong>A-Z</strong></template>
+            <template v-else>{{ group.name }}</template>
+          </option>
         </select>
       </div>
     </div>
@@ -30,7 +32,6 @@
 
 <script>
 import { mapState } from 'vuex';
-// import SimpleScrollbar from 'simple-scrollbar';
 import SwatchPanel from './SwatchPanel.vue';
 
 export default {
@@ -49,7 +50,7 @@ export default {
 
   data() {
     return {
-      group: '',
+      group: this.groups[0] || '',
     };
   },
 
@@ -64,7 +65,11 @@ export default {
         return this.values;
       }
 
-      return this.values.filter(value => value.groups && value.groups.includes(this.group));
+      if (this.group.group_type === 'sort') {
+        return [...this.values].sort((a, b) => (a[this.group.reference] < b[this.group.reference] ? -1 : 1));
+      }
+
+      return this.values.filter(value => value[this.group.reference]);
     },
   },
 
@@ -85,33 +90,69 @@ export default {
   display: flex;
   flex-direction: column;
   font-family: $font-stack-avalon;
-  height: calc(100vh - #{$sidebar-footer-height});
+  height: 100%;
+
+  @include at-query($breakpoint-large) {
+    height: calc(100vh - #{$sidebar-footer-height});
+  }
 
   &__Header {
     align-items: center;
-    border-bottom: 1px solid #c8c8c8;
+    border-bottom: .25px solid #202020;
     display: flex;
-    flex: 0 0 $sidebar-heading-height;
-    flex-direction: column;
     font-size: 24px;
     font-size: 600;
-    justify-content: center;
     line-height: 30px;
     text-align: center;
 
     @include at-query($breakpoint-small) {
+      border-top: .25px solid #202020;
       flex-direction: row;
       font-size: 18px;
+      justify-content: space-between;
+      padding: 20px $horizontal-wrapper-padding;
+    }
+
+    @include at-query($breakpoint-large) {
+      flex: 0 0 $sidebar-heading-height;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  &__Title {
+    line-height: 1;
+
+    @include at-query($breakpoint-small) {
+      padding: 6px 30px 6px 0;
+    }
+  }
+
+  &__Filter {
+    @include at-query($breakpoint-small) {
+      flex: 1;
     }
   }
 
   &__GroupSelect {
+    border: .25px solid #202020;
+    color: #202020;
     font-size: 11px;
-    font-weight: 500;
-    margin-bottom: 15px;
+    font-weight: 400;
+    letter-spacing: .08em;
+    line-height: 28px;
+    max-width: 195px;
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 100%;
+
+    strong {
+      font-weight: 500;
+    }
 
     @include at-query($breakpoint-large) {
       font-size: 13px;
+      margin-top: 18px;
     }
   }
 
@@ -121,7 +162,9 @@ export default {
   }
 
   &__Body {
-    flex-grow: 1;
+    @include at-query($breakpoint-large) {
+      flex-grow: 1;
+    }
   }
 }
 

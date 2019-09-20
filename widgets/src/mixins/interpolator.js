@@ -4,14 +4,43 @@ export default {
   computed: {
     ...mapState({
       attributes: state => state.filters.attributes,
+      basePrice: state => state.filters.price,
+      templates: state => state.filters.templates,
       selectedOptions: state => state.selectedOptions,
     }),
+
+    productName() {
+      if (!this.templates) {
+        return '';
+      }
+      const { template = '' } = this.templates.find(item => item.key === 'name') || {};
+      return this.interpolateString(template);
+    },
+
+    modelNumber() {
+      return '';
+    },
+
+    productPrice() {
+      if (!this.basePrice || Object.keys(this.selectedOptions).length < 1) {
+        return null;
+      }
+
+      return Object.entries(this.selectedOptions).reduce((total, [parameter, value]) => {
+        const attribute = this.attributes.find(item => item.parameter === parameter);
+        const selected = attribute.values.find(item => item.value === value);
+        if (!selected.price_markup) {
+          return total;
+        }
+        return total + Number(selected.price_markup);
+      }, Number(this.basePrice));
+    },
   },
 
   methods: {
     interpolateString(text) {
       // placeholders for interpolation are formatted as {{Attribute Dislay Name.selected_value_property}}
-      const matches = text.match(/\{\{[A-z_ ]+\.[A-z_ ]+\}\}/g);
+      const matches = text.match(/\{\{[^.]+\.[^}]+\}\}/g);
 
       if (!matches) {
         return text;

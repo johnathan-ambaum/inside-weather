@@ -1,13 +1,14 @@
-$gutter: 40px;
-$sidebar-width: 425px;
+$gutter: 30px;
+$sidebar-width: 432px;
 
 .template-collection .page-container {
   padding-bottom: 56px;
 }
 
 .ProductDetailGrid {
-  margin: 0 auto;
-  max-width: 2000px + $sidebar-width;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
   min-height: 100vh;
   padding: 0;
   position: relative;
@@ -19,6 +20,8 @@ $sidebar-width: 425px;
   }
 
   @media only screen and (min-width: 1024px) {
+    flex-direction: row;
+    max-width: 2000px + $sidebar-width;
     padding-left: $gutter;
   }
 
@@ -32,13 +35,14 @@ $sidebar-width: 425px;
 }
 
 .ProductDetailGrid__Main {
+  order: 1;
+
   @media only screen and (min-width: 1024px) {
-    float: left;
+    flex: 1 1 100%;
     margin-top: $gutter;
-    max-width: 1208px;
+    order: 0;
     padding-right: 60px;
     position: relative;
-    width: calc(100vw - #{$sidebar-width});
   }
 }
 
@@ -51,7 +55,7 @@ $sidebar-width: 425px;
   @media only screen and (max-width: 1023px) {
     position: relative;
 
-    .product-single__meta + hr {
+    .product-single__meta ~ hr {
       display: none;
     }
 
@@ -62,34 +66,13 @@ $sidebar-width: 425px;
   }
 
   @media only screen and (min-width: 1024px) {
-    float: right;
+    margin-right: $gutter;
     padding-top: $gutter / 2;
-    width: $sidebar-width;
+    flex: 0 0 $sidebar-width;
+  }
 
-    &.is-fixed,
-    &.hug-bottom {
-      max-height: calc(100vh - 110px);
-      overflow: auto;
-      right: 0;
-
-      .MainNav--Small & {
-        max-height: calc(100vh - 70px);
-      }
-    }
-
-    &.is-fixed {
-      position: fixed;
-      top: 142px;
-
-      .MainNav--Small & {
-        top: 102px;
-      }
-    }
-
-    &.hug-bottom {
-      bottom: 0;
-      position: absolute;
-    }
+  @media only screen and (min-width: 1024px) and (max-width: 1200px) {
+    flex-shrink: 1;
   }
 }
 

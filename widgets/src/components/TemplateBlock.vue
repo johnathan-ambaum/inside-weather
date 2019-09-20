@@ -63,20 +63,29 @@ export default {
   margin-bottom: 100px;
 
   @include at-query($breakpoint-small) {
+    align-items: stretch;
     flex-direction: column;
+    margin-bottom: 20px;
   }
 
   &__TextSection {
+    background: #fff;
     flex: 1 1 auto;
-    padding: 0 80px 0 50px;
+    padding: 0 0 0 50px;
+
+    @include at-query($breakpoint-small) {
+      margin: -50px 30px 0 30px;
+      padding: 20px;
+    }
 
     h3 {
       font-size: 20px;
       font-weight: 600;
-      margin-bottom: 30px;
+      margin-bottom: 22px;
 
       @include at-query($breakpoint-large) {
         font-size: 28px;
+        margin-bottom: 30px;
       }
     }
 
@@ -84,7 +93,8 @@ export default {
       font-size: 12px;
       font-weight: 500;
       letter-spacing: .025em;
-      line-height: 16px;
+      line-height: 18px;
+      margin-bottom: 10px;
 
       @include at-query($breakpoint-large) {
         font-size: 14px;
@@ -93,17 +103,19 @@ export default {
     }
   }
 
-  &--Reversed &__TextSection {
-    padding: 0 50px 0 80px;
-  }
+  @include at-query($breakpoint-large) {
+    &--Reversed &__TextSection {
+      padding: 0 50px 0 80px;
+    }
 
-  &__ImageSection {
-    flex: 0 0 60%;
-  }
+    &__ImageSection {
+      flex: 0 0 60%;
+    }
 
-  &--Reversed &__ImageSection {
-    flex: 0 0 45%;
-    order: 2;
+    &--Reversed &__ImageSection {
+      flex: 0 0 45%;
+      order: 2;
+    }
   }
 }
 </style>

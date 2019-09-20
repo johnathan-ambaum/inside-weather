@@ -14,22 +14,10 @@
 
   <div id="app">
     <div class="ProductDetailGrid">
-      <product-detail
-        category="{{ product.type }}"
-        :initial-variant="{{ product.selected_or_first_available_variant.id }}"
-        :initial-attributes="{{ product.metafields.products.attributes | json | escape }}"
-        class="ProductDetailGrid__Main"
-      >
+      <product-detail class="ProductDetailGrid__Main">
         <div class="ResponsiveImage__Wrapper"></div>
       </product-detail>
       <div class="ProductDetailGrid__Sidebar">
-
-        <product-detail-slider v-if="isMobile"></product-detail-slider>
-
-        {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
-        {% form 'product', product, id: form_id, class: 'product-single__form' %}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
           <div class="product-single__meta">
             <div class="Product__FavoriteRow">
               <span role="button" class="Product__Favorite">
@@ -49,10 +37,13 @@
 
             </div> <!-- [itemprop="offers"] -->
           </div> <!-- .product-single__meta -->
-          <product-customizer v-cloak></product-customizer>
-          <hr>
-        {% endform %}
-        <product-family v-if="isMobile"></product-family>
+          <product-customizer
+            v-cloak
+            category="{{ product.type }}"
+            :initial-variant="{{ product.selected_or_first_available_variant.id }}"
+            :initial-attributes="{{ product.metafields.products.attributes | json | escape }}"
+          ></product-customizer>
+        <!-- <product-family v-if="isMobile"></product-family> -->
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
     <review-carousel category="{{ product.type }}"></review-carousel>
