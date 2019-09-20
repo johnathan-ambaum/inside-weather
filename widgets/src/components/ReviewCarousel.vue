@@ -1,401 +1,652 @@
 <template>
-  <div 
-    class="ReviewCarousel" 
-    ref="ReviewCarousel"
-  >
-    <slider 
-      :items="sliderProps.items"
-      :margin="sliderProps.margin"
-      :loop="sliderProps.loop"
-      :nav="sliderProps.nav"
-      :autoplay="sliderProps.autoplay"
-      :dots="sliderProps.dots"
-      :navText="sliderProps.navText"
-      :responsive="sliderProps.responsive"
+  <div class="ReviewCarousel">
+    <div class="ReviewCarousel__Title">Reviews</div>
+
+    <!-- Review Write section -->
+    <div class="ReviewCarousel__Write">
+      <a
+        class="ReviewCarousel__Write--Link"
+        href="https://insideweather.com/pages/write-a-review">
+        <span class="ReviewCarousel__Write--BtnLabel">Write a Review</span>
+      </a>
+    </div>
+
+    <!-- Review Items section -->
+    <div
+      v-if="reviewData.length > 0"
+      class="ReviewCarousel__Category"
     >
-      <div 
-        class="Review__items"
-        v-for="review in reviewContentItems"
-        :key="review.$id"
+      <div
+        @mouseenter="updateHoverState(true)"
+        @mouseleave="updateHoverState(false)"
       >
-        <div class="Review__content">
-          <h5>{{review.headContent}}</h5>
-          <div class="Review__rating clearfix">
-            <i
-              v-for="i in review.starCount"
-              :key="i.$id"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.967 20">
-                <path id="Path_556" data-name="Path 556" d="M85.008,92.492l-6.613.733a.632.632,0,0,0-.529.431.621.621,0,0,0,.176.654c1.966,1.794,4.92,4.481,4.92,4.481s-.811,3.908-1.348,6.516a.633.633,0,0,0,.246.635.623.623,0,0,0,.675.035c2.315-1.316,5.782-3.294,5.782-3.294l5.78,3.3a.626.626,0,0,0,.924-.67c-.537-2.609-1.345-6.517-1.345-6.517s2.954-2.687,4.92-4.477a.633.633,0,0,0,.176-.658.626.626,0,0,0-.527-.428c-2.646-.3-6.615-.736-6.615-.736L88.89,86.428a.635.635,0,0,0-.572-.369.626.626,0,0,0-.569.369C86.651,88.854,85.008,92.492,85.008,92.492Z" transform="translate(-77.835 -86.059)" fill="#202020"/>
-              </svg>
-            </i>
-          </div>
-          <p>{{review.reviewDetail}}</p>
-          <div class="Review__author">
-            <span>{{review.reviewer}}</span>
-            <span>{{review.reviewerAddress}}</span>
-          </div>
-          <a 
-            v-bind:href="linkTo"
-            class="--caps"
+        <swiper
+          ref="swiper"
+          :options="swiperOption"
+          @click.native="sliderClicked"
+        >
+          <swiper-slide
+            v-for="(item, index) in reviewData"
+            :key="`${index}`"
           >
-            {{linkText}}
-          </a>
-        </div>
-        <div class="Review__image">
-          <figure>
-            <img :src="review.image">
-          </figure>
-        </div>
+            <carousel-item
+              :key="item.id"
+              :element-id="item.id.toString()"
+              :first-name="item.first_name"
+              :last-name="item.last_name"
+              :product-city="item.city"
+              :product-state="item.state"
+              :product-image="item.item_data.thumbnail_image"
+              :review-date="convertDate(item.submitted_at)"
+              :review-title="item.title"
+              :review-content="cutoffReviewContent(item.images, item.body)"
+              :is-ellipsis="getEllipsisStatus(item.images, item.body)"
+              :review-images="item.images"
+              :product-category="item.item_data.primary_category"
+              :product-handle="item.item_data.handle"
+              :star-count="item.rating"
+              :set-modal-image="setModalImage"
+            />
+          </swiper-slide>
+          <div
+            slot="button-next"
+            :style="styleSliderButton"
+            class="swiper-button-next swiper-button"
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-next.png?342072"
+              alt="Pre"
+              width="18px"
+              height="20px" >
+          </div>
+          <div
+            slot="button-prev"
+            :style="styleSliderButton"
+            class="swiper-button-prev swiper-button"
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/2994/0144/files/swiper-prev.png?342072"
+              alt="Pre"
+              width="18px"
+              height="20px" >
+          </div>
+          <div
+            slot="pagination"
+            class="swiper-pagination"/>
+        </swiper>
       </div>
-    </slider>
-    <a 
-      v-bind:href="linkTo"
-      class="--caps read-all-review-sm"
-    >
-      {{linkText}}
-    </a>  
+      <div class="ReviewCarousel__Read">
+        <a
+          class="ReviewCarousel__Read--Link"
+          href="https://insideweather.com/pages/reviews">
+          <span class="ReviewCarousel__Read--BtnLabel">Read All Reviews</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Review Modal section -->
+    <review-modal
+      v-if="modalShow"
+      :show="modalShow"
+      :modal-data="modalData"
+      :modal-default-image="modalImage"
+      :close-modal="closeModal"
+    />
   </div>
 </template>
 
 <script>
-import Slider from './Slider.vue'
- 
+import { mapState, mapActions, mapMutations } from 'vuex';
+
+import screenMonitor from '../mixins/screenMonitor';
+import CarouselItem from './CarouselItem.vue';
+import ReviewModal from './ReviewModal.vue';
+import Star from './Star.vue';
+
 export default {
+
   components: {
-    Slider
+    CarouselItem,
+    ReviewModal,
+    Star,
   },
+  mixins: [
+    screenMonitor,
+  ],
+
   props: {
-    reviewContent: Array,
-    linkText: String,
-    linkTo: String
+    primaryCategory: { type: String, default: '' },
+    productFamily: { type: String, default: '' },
   },
+
   data() {
     return {
-      reviewContentItems: this.reviewContent,
-      sliderProps: {
-        items: 1,
-        margin: 10,
+      reviewData: [],
+      isShowSliderButton: false,
+      modalShow: false,
+      modalImage: '',
+      modalData: {},
+      silderWidth: 0,
+
+      swiperOption: {
+        slidesPerView: 4.75,
+        spaceBetween: 18,
+        centeredSlides: true,
+        allowTouchMove: false,
         loop: true,
-        nav: true,
-        autoplay: true,
-        dots: true,
-        navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, dots: false, autoplay: false},992:{nav:true, dots: true, autoplay: true, autoplayTimeout: 6000}}
-      }
+        watchSlidesVisibility: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        on: {
+          slideChange() {
+          },
+        },
+        breakpoints: {
+          405: { // when window width is <= 375px
+            slidesPerView: 1.2, // 300-330
+          },
+          440: {
+            slidesPerView: 1.3,
+          },
+          475: {
+            slidesPerView: 1.4,
+          },
+          510: {
+            slidesPerView: 1.5,
+          },
+          545: {
+            slidesPerView: 1.6,
+          },
+          580: {
+            slidesPerView: 1.7,
+          },
+          615: {
+            slidesPerView: 1.8,
+          },
+          650: {
+            slidesPerView: 1.9,
+          },
+          685: {
+            slidesPerView: 2,
+          },
+          720: {
+            slidesPerView: 2.1,
+          },
+          755: {
+            slidesPerView: 2.2,
+          },
+          790: {
+            slidesPerView: 2.3,
+          },
+          825: {
+            slidesPerView: 2.4,
+          },
+          860: {
+            slidesPerView: 2.5,
+          },
+          895: {
+            slidesPerView: 2.6,
+          },
+          930: {
+            slidesPerView: 2.7,
+          },
+          965: {
+            slidesPerView: 2.8,
+          },
+          1023: {
+            slidesPerView: 2.9,
+          },
+          1078: {
+            slidesPerView: 2.7,
+          },
+          1118: {
+            slidesPerView: 2.8,
+          },
+          1175: {
+            slidesPerView: 2.9,
+          },
+          1194: {
+            slidesPerView: 3.05,
+          },
+          1234: {
+            slidesPerView: 3.1, //
+          },
+          1272: {
+            slidesPerView: 3.2, //
+          },
+          1310: {
+            slidesPerView: 3.3, //
+          },
+          1349: {
+            slidesPerView: 3.4, //
+          },
+          1388: {
+            slidesPerView: 3.5, //
+          },
+          1427: {
+            slidesPerView: 3.6, //
+          },
+          1466: {
+            slidesPerView: 3.7, //
+          },
+          1500: {
+            slidesPerView: 3.8, //
+          },
+          1524: {
+            slidesPerView: 3.85, //
+          },
+          1563: {
+            slidesPerView: 3.95, // 370-379
+          },
+          1582: {
+            slidesPerView: 4.05, // 370-374
+          },
+          1621: {
+            slidesPerView: 4.1, // 370-378
+          },
+          1660: {
+            slidesPerView: 4.2, // 370-378
+          },
+          1699: {
+            slidesPerView: 4.3, // 370-378
+          },
+          1737: {
+            slidesPerView: 4.4, // 370-378
+          },
+          1776: {
+            slidesPerView: 4.5, // 370-378
+          },
+          1834: {
+            slidesPerView: 4.6, // 370 - 382
+          },
+          1900: {
+            slidesPerView: 4.75, // 370
+          },
+        },
+      },
+    };
+  },
+
+  mounted() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+      this.swiperOption.allowTouchMove = true;
     }
   },
-  mounted() {
-    window.addEventListener('load', updateOwlDotsPosition);
-    window.addEventListener('resize', updateOwlDotsPosition);
-    function updateOwlDotsPosition() {
-      setTimeout(function () {
-        var reviewImage = document.querySelector('.owl-item.active .Review__image');
-        var getTheWidth = reviewImage.clientWidth;
-        var targetElement = document.querySelector('.ReviewCarousel .owl-dots');
-        targetElement.style.right = (reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)) + 'px';
-        targetElement.style.width = getTheWidth + 'px';
-      }, 500);
 
+  created() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
     }
+  },
 
-  }
-}
+  computed: {
+    ...mapState({
+      product: state => state.activeProduct,
+      propReviews: state => state.productReviews,
+      totalReviews: state => state.totalReviews,
+    }),
+
+    styleSliderButton() {
+      const showItem = {
+        visibility: this.isShowSliderButton ? 'visible' : 'hidden',
+      };
+
+      return showItem;
+    },
+
+    swiper() {
+      return this.$refs.swiper.swiper;
+    },
+  },
+
+  watch: {
+    primaryCategory(newCategory) {
+      this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
+    },
+    propReviews(newPropReviews) {
+      this.reviewData.push(...newPropReviews);
+    },
+  },
+
+  methods: {
+    ...mapActions([
+      'getProductReviews',
+    ]),
+
+    ...mapMutations([
+      'updateCategory',
+      'selectPanel',
+    ]),
+
+    convertDate(isoDate) {
+      const date = new Date(isoDate);
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    },
+
+    updateHoverState(isHover) {
+      this.isShowSliderButton = isHover;
+    },
+
+    setModalImage(image) {
+      this.modalImage = image;
+    },
+
+    getSliderWidth() {
+      const screenW = this.screenWidth;
+      let sliderW = 0;
+      if (screenW > 1440) {
+        sliderW = screenW / 4.25;
+      } else if (screenW <= 1440 && screenW > 1300) {
+        sliderW = screenW / 3.75;
+      } else if (screenW <= 1300 && screenW > 1150) {
+        sliderW = screenW / 3.25;
+      } else if (screenW <= 1150 && screenW > 800) {
+        sliderW = screenW / 2.75;
+      } else if (screenW <= 800 && screenW > 690) {
+        sliderW = screenW / 2.2;
+      } else if (screenW <= 690 && screenW > 450) {
+        sliderW = screenW / 1.5;
+      } else if (screenW <= 450) {
+        sliderW = screenW / 1.2;
+      }
+
+      this.silderWidth = sliderW - 20;
+    },
+
+    cutoffReviewContent(reviewImages, reviewContent) {
+      let ellipsisReviewContent = reviewContent;
+      const imgCount = reviewImages.length;
+      // this.getSliderWidth();
+
+      // const imageW = 85 + 8;
+
+      // const allImageW = imageW * imgCount;
+      // const itemClientW = this.isMobile ? this.silderWidth - 48 : this.silderWidth - 84;
+
+      // let imageLine = 0;
+      // if (allImageW === 0 ) {
+      //   imageLine = 0;
+      // } else if (allImageW > 0 && itemClientW > allImageW) {
+      //   imageLine = 1
+      // } else {
+      //   imageLine = 2
+      // }
+
+      if (this.isMobile) {
+        if (imgCount === 0) {
+          if (reviewContent.length > 370) {
+            ellipsisReviewContent = reviewContent.substring(0, 350);
+          }
+        } else if (imgCount < 3 && imgCount > 0) {
+          if (reviewContent.length > 250) {
+            ellipsisReviewContent = reviewContent.substring(0, 220);
+          }
+        } else if (reviewContent.length > 150) {
+          ellipsisReviewContent = reviewContent.substring(0, 120);
+        }
+      } else if (imgCount === 0) {
+        if (reviewContent.length > 420) {
+          ellipsisReviewContent = reviewContent.substring(0, 390);
+        }
+      } else if (imgCount < 4 && imgCount > 0) {
+        if (reviewContent.length > 270) {
+          ellipsisReviewContent = reviewContent.substring(0, 240);
+        }
+      } else if (reviewContent.length > 150) {
+        ellipsisReviewContent = reviewContent.substring(0, 110);
+      }
+
+      return ellipsisReviewContent;
+    },
+
+    getEllipsisStatus(reviewImages, reviewContent) {
+      let isEllipsis = false;
+      const imgCount = reviewImages.length;
+
+      if (this.isMobile) {
+        if (imgCount === 0) {
+          if (reviewContent.length > 370) {
+            isEllipsis = true;
+          }
+        } else if (imgCount < 3 && imgCount > 0) {
+          if (reviewContent.length > 250) {
+            isEllipsis = true;
+          }
+        } else if (reviewContent.length > 150) {
+          isEllipsis = true;
+        }
+      } else if (imgCount === 0) {
+        if (reviewContent.length > 420) {
+          isEllipsis = true;
+        }
+      } else if (imgCount < 4 && imgCount > 0) {
+        if (reviewContent.length > 270) {
+          isEllipsis = true;
+        }
+      } else if (reviewContent.length > 150) {
+        isEllipsis = true;
+      }
+
+      return isEllipsis;
+    },
+
+    sliderClicked(event) {
+      let selectedItem;
+
+      if (this.modalImage !== '') {
+        if (event.target.classList.contains('CarouselItem__Right--Image')) {
+          this.reviewData.forEach((item, index) => {
+            item.images.forEach((img) => {
+              if (img.medium.url === this.modalImage) {
+                selectedItem = item;
+              }
+            });
+          });
+        }
+      } else if (event.target.classList.contains('CarouselItem__Right--Readmore__Text') || event.target.classList.contains('CarouselItem__Right--Image')) {
+        this.reviewData.forEach((item, index) => {
+          if (event.target.classList.contains(item.id)) {
+            selectedItem = item;
+          }
+        });
+      } else if (event.target.classList.contains('CarouselItem__Left--Image')) {
+        this.reviewData.forEach((item, index) => {
+          if (event.target.classList.contains(item.id)) {
+            window.open(`https://insideweather.com/collections/${item.item_data.primary_category}/products/${item.item_data.handle}`, '_blank');
+          }
+        });
+      }
+
+      this.openModal(selectedItem);
+    },
+
+    openModal(item) {
+      if (!item) return;
+      this.modalShow = true;
+      this.modalData = item;
+    },
+
+    closeModal() {
+      this.modalShow = false;
+      this.modalImage = '';
+    },
+  },
+};
+
 </script>
 
 <style lang="scss">
-@import '../scss/mixins';
 @import '../scss/variables';
+@import '../scss/mixins';
 
 .ReviewCarousel {
-  width: 100%;
-  height: auto;
-  display: block;
-  .Review__items {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: center;
-    .Review__content {
-      flex-basis: 50%;
-      padding-right: 110px;
-      padding-bottom: 65px;
-      h5 {
-        font-family: $font-stack-avalon;
-        display: block;
-        font-weight: 600;
-        margin: 0 0 22px;
-        @include fonts(22px,#202020,1.18,0.026em);
-      }
-      p {
-        font-family: $font-stack-avalon;
-        display: block;
-        font-weight: 500;
-        margin: 0 0 22px;
-        @include fonts(14px,#202020,22px,0.04em);
-      }
-      .Review__author {
-        display: block;
-        margin: 0 0 37px;
-        span {
-          font-family: $font-stack-avalon;
-          display: block;
-          font-weight: 400;
-          @include fonts(14px,#202020,1.33,0.05em);
-          &:first-child {
-            color: #212121;
-            font-weight: 600;
-            margin: 0 0 5px;
-          }
-        }
-      }
-      a {
-        font-family: $font-stack-avalon;
-        border-bottom: 1px solid #202020;
-        font-weight: 500;
-        @include fonts(14px,#202020,1.21,0.12em);
-      }
-    }
-    .Review__image {
-      flex-basis: 50%;
-      figure {
-        height: auto;
-        width: auto;
-        img {
-          display: block;
-          height: auto;
-          margin: 0 0 0 auto;
-          max-width: 100%;
-          width: auto;
-        }
-      }
-    }
-  }
-  .Review__rating {
-    display: block;
-    margin: 0 0 24px;
-    i {
-      display: inline-block;
-      float: left;
-      height: 20px;
-      margin-right: 13px;
-      width: 20px;
-      svg {
-        display: block;
-        height: 100%;
-        width: 100%;
-      }
-    }
-  }
-  .read-all-review-sm {
-    border-bottom: 1px solid #202020;
-    display: inline-block;
-    font-weight: 500;
-    font-family: $font-stack-avalon;
-    margin: 30px 0 0 15px;
-    position: relative;
-    @include fonts(14px,#202020,1.21,0.12em);
-    @include at-query('min-width: 992px') {
-      display: none;
-    }
-  }
-  @include at-query('max-width: 1500px') {
-    .Review__items {
-      justify-content: center;
-      .Review__content {
-        flex-basis: 42%;
-        padding-right: 100px;
-      }
-      .Review__image {
-        flex-basis: 45%;
-      }
-    }
-  }
-  @include at-query('max-width: 1280px') {
-    .Review__items {
-      justify-content: center;
-      .Review__content {
-        flex-basis: 45%;
-        padding-right: 25px;
-        padding-bottom: 35px;
-        h5 {
-          margin: 0 0 20px;
-        }
-        p {
-          margin: 0 0 20px;
-        }
-        .Review__author {
-          margin: 0 0 20px;
-          span {
-            font-size: 15px;
-          }
-        }
-        a {
-          font-size: 17px;
-        }
-      }
-      .Review__image {
-        flex-basis: 45%;
-      }
-    }
-    .Review__rating {
-      margin: 0 0 20px;
-      i {
-        margin-right: 8px;
-      }
-    }
-  }
-  @include at-query('max-width: 1199px') {
-    .Review__items {
-      .Review__content {
-        flex-basis: 40%;
-      }
-      .Review__image {
-        flex-basis: 52%;
-      }
-    }
-  }
-  @include at-query('max-width: 991px') {
-    .Review__items {
-      flex-direction: column-reverse;
-      flex-wrap: wrap;
-      .Review__image {
-        flex-basis: 100%;
-        width: 100%;
-        figure {
-          img {
-            margin: 0 auto 0 0;
-          }
-        }
-      }
-      .Review__content {
-        flex-basis: 100%;
-        padding: 25px 35px 0 15px;
-        width: 100%;
-        a {
-          display: none;
-        }
-      }
-    }
-    .owl-carousel {
-      padding: 0 100px 0 0;
-      overflow: hidden;
-      .owl-stage-outer {
-        overflow: visible;
-      }
-    }
-  }
-  @include at-query('max-width: 767px') {
-    width: auto;
-    margin-right: -15px;
-    .owl-carousel {
-      padding: 0 55px 0 0;
-    }
-    .Review__items .Review__content {
-      h5 {
-        font-size: 16px;
-        margin: 0 0 22px;
-      }
-      p {
-        font-size: 13px;
-      }
-      .Review__author {
-        margin: 0;
-        span {
-          font-size: 13px;
-          font-weight: 400;
-          &:first-child {
-            color: #202020;
-          }
-        }
-      }
-    }
-    .Review__rating {
-      margin: 0 0 22px;
-      i {
-        height: 14px;
-        width: 14px;
-      }
-    }
-  }
-}
-.ReviewCarouselWrapper {
-  padding: 0 0 117px;
-  position: relative;
-  &::before {
-    content: "";
-    background: #E8E6E2;
-    height: calc(100% - 96px);
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-  }
-  .owl-theme.owl-carousel {
-    .owl-nav {
-      position: absolute;
-      left: calc((1215px - 100vw) / 2);
-      top: calc(50% + 96px);
-      transform: translate(0,-50%);
-      width: 100vw;
-    }
-    .owl-dots {
-      position: absolute;
-      right: 0;
-      bottom: -40px;
-      width: auto;
-      .owl-dot {
-        outline: none;
-        box-shadow: none;
-        span {
-          background: transparent;
-          border: 1.5px solid #000000;
-          margin: 0 4px;
-          @include transition();
-        }
-        &:hover {
-          span {
-            background: transparent;
-          }
-        }
-        &.active {
-          span {
-            background: #000000;
-          }
-        }
-      }
-    }
-  }
-  &:hover {
-    .owl-theme {
-      .owl-nav {
-        div {
-          opacity: 1;
-          pointer-events: all;
-          visibility: visible;
-  
-          &.owl-prev, &.owl-next{
-            @include translate(0,0);
-          }
-        }
-      }
-    }
-  }
-  @include at-query('max-width: 1274px') {
-    .owl-theme .owl-nav {
-      left: calc((1140px - 100vw) / 2);
-    }
-  }
-  @include at-query('max-width: 1199px') {
-    padding: 0 0 75px;
-    .owl-theme .owl-nav {
-      left: calc((932px - 100vw) / 2);
-    }
-  }
-  @include at-query('max-width: 767px') {
-    padding: 0 0 58px;
+  margin: 60px auto 0;
+  padding: 60px 0;
+  background: #f2f0ed;
+  font-family: $font-stack-avalon;
+
+  .swiper-container {
+    padding: 45px 0;
   }
 
+  .swiper-slide {
+    width: 28%;
+  }
+
+  .swiper-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #e8e6e2;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include at-query($breakpoint-msmall) {
+      display: none;
+    }
+    @include at-query($breakpoint-mlarge) {
+      display: flex;
+    }
+  }
+
+  .swiper-pagination-bullets .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border: 2px solid #202020;
+    opacity: 1;
+
+    &.swiper-pagination-bullet-active {
+      background: #202020;
+    }
+  }
+
+  &__Category {
+    margin: 0 5px;
+  }
+
+  &__Title {
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  &__Write {
+    padding: 4px 0 -3px;
+    text-align: center;
+
+    &--Link {
+      color: #202020;
+
+      &:hover {
+        color: #202020;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+
+    &--BtnLabel {
+      font-size: 13px;
+      font-weight: 400;
+      font-family: $font-stack-roboto;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #202020;
+    }
+  }
+
+  &__Read {
+    width: 240px;
+    height: 48px;
+    margin: 25px auto 0;
+    text-align: center;
+    background: white;
+    border: 1px solid #202020;
+
+    &--Link {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      color: #202020;
+      font-weight: 600;
+
+      &:hover {
+        background: #202020;
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+
+    &--BtnLabel {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  }
+
+   @include at-query($breakpoint-small) {
+    margin: 0;
+    padding: 0 0 24px;
+
+    .swiper-container {
+      padding: 26px 0 50px;
+    }
+
+    .swiper-pagination-bullets .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+    }
+
+    &__Read {
+      margin: 6px auto 0;
+    }
+
+    &__Title {
+      font-size: 28px;
+      padding: 24px 0;
+      line-height: 19px;
+    }
+
+    &__Category {
+      height: auto;
+    }
+
+    &__Write {
+      flex-direction: column;
+      line-height: 9px;
+
+      &--Title {
+        font-size: 18px;
+      }
+
+      &--Button {
+        width: auto;
+        height: auto;
+        border: 0;
+        text-align: left;
+      }
+
+      &--Link {
+        padding: 0;
+      }
+
+      &--BtnLabel {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid #202020;
+      }
+    }
+  }
 }
 </style>

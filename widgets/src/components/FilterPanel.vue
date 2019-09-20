@@ -587,9 +587,6 @@ $options-footer-height: 105px;
   }
 
   &__Options {
-    &--Standalone {
-      padding-top: 10px;
-    }
 
     @include at-query($breakpoint-large) {
       .FilterPanel--Full & {
@@ -610,7 +607,8 @@ $options-footer-height: 105px;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: .025em;
-    margin-bottom: 17px;
+    margin-bottom: 24px;
+    margin-top: 24px;
     text-transform: uppercase;
 
     @include at-query($breakpoint-large) {
@@ -619,6 +617,7 @@ $options-footer-height: 105px;
           font-size: 18px;
           height: $options-header-height;
           margin-bottom: 0;
+          margin-top: 0;
           text-align: center;
         }
       }
@@ -752,12 +751,12 @@ $options-footer-height: 105px;
 .ss-scroll {
   position: relative;
   background: #bebebe;
-  width: 3px;
-  border-radius: 4px;
+  width: 10px;
+  border-radius: 2px;
   top: 0;
   z-index: 2;
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.25s linear;
 
   @include at-query($breakpoint-small) {

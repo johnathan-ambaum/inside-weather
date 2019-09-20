@@ -56,7 +56,7 @@ export default {
   }
 
   @include at-query($breakpoint-large) {
-    margin-bottom: 110px;
+    margin-bottom: 150px;
   }
 
   &__Body {
@@ -131,6 +131,7 @@ export default {
       font-size: 15px;
       line-height: 1;
       margin-bottom: 20px;
+      letter-spacing: $normal-text-spacing;
     }
   }
 
@@ -144,6 +145,7 @@ export default {
       font-size: 12px;
       line-height: 18px;
       margin-bottom: 30px;
+      letter-spacing: $normal-text-spacing;
     }
   }
 }
