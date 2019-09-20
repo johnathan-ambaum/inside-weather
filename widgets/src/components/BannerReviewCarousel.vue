@@ -1,45 +1,52 @@
 <template>
-  <div 
-    class="ReviewCarousel" 
+  <div
     ref="ReviewCarousel"
+    class="BannerReviewCarousel"
   >
-    <slider 
+    <slider
       :items="sliderProps.items"
       :margin="sliderProps.margin"
       :loop="sliderProps.loop"
       :nav="sliderProps.nav"
       :autoplay="sliderProps.autoplay"
       :dots="sliderProps.dots"
-      :navText="sliderProps.navText"
+      :nav-text="sliderProps.navText"
       :responsive="sliderProps.responsive"
     >
-      <div 
-        class="Review__items"
+      <div
         v-for="review in reviewContentItems"
         :key="review.$id"
+        class="Review__items"
       >
         <div class="Review__content">
-          <h5>{{review.headContent}}</h5>
+          <h5>{{ review.headContent }}</h5>
           <div class="Review__rating clearfix">
             <i
               v-for="i in review.starCount"
               :key="i.$id"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.967 20">
-                <path id="Path_556" data-name="Path 556" d="M85.008,92.492l-6.613.733a.632.632,0,0,0-.529.431.621.621,0,0,0,.176.654c1.966,1.794,4.92,4.481,4.92,4.481s-.811,3.908-1.348,6.516a.633.633,0,0,0,.246.635.623.623,0,0,0,.675.035c2.315-1.316,5.782-3.294,5.782-3.294l5.78,3.3a.626.626,0,0,0,.924-.67c-.537-2.609-1.345-6.517-1.345-6.517s2.954-2.687,4.92-4.477a.633.633,0,0,0,.176-.658.626.626,0,0,0-.527-.428c-2.646-.3-6.615-.736-6.615-.736L88.89,86.428a.635.635,0,0,0-.572-.369.626.626,0,0,0-.569.369C86.651,88.854,85.008,92.492,85.008,92.492Z" transform="translate(-77.835 -86.059)" fill="#202020"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20.967 20">
+                <path
+                  id="Path_556"
+                  data-name="Path 556"
+                  d="M85.008,92.492l-6.613.733a.632.632,0,0,0-.529.431.621.621,0,0,0,.176.654c1.966,1.794,4.92,4.481,4.92,4.481s-.811,3.908-1.348,6.516a.633.633,0,0,0,.246.635.623.623,0,0,0,.675.035c2.315-1.316,5.782-3.294,5.782-3.294l5.78,3.3a.626.626,0,0,0,.924-.67c-.537-2.609-1.345-6.517-1.345-6.517s2.954-2.687,4.92-4.477a.633.633,0,0,0,.176-.658.626.626,0,0,0-.527-.428c-2.646-.3-6.615-.736-6.615-.736L88.89,86.428a.635.635,0,0,0-.572-.369.626.626,0,0,0-.569.369C86.651,88.854,85.008,92.492,85.008,92.492Z"
+                  transform="translate(-77.835 -86.059)"
+                  fill="#202020"/>
               </svg>
             </i>
           </div>
-          <p>{{review.reviewDetail}}</p>
+          <p>{{ review.reviewDetail }}</p>
           <div class="Review__author">
-            <span>{{review.reviewer}}</span>
-            <span>{{review.reviewerAddress}}</span>
+            <span>{{ review.reviewer }}</span>
+            <span>{{ review.reviewerAddress }}</span>
           </div>
-          <a 
-            v-bind:href="linkTo"
+          <a
+            :href="linkTo"
             class="--caps"
           >
-            {{linkText}}
+            {{ linkText }}
           </a>
         </div>
         <div class="Review__image">
@@ -49,26 +56,26 @@
         </div>
       </div>
     </slider>
-    <a 
-      v-bind:href="linkTo"
+    <a
+      :href="linkTo"
       class="--caps read-all-review-sm"
     >
-      {{linkText}}
-    </a>  
+      {{ linkText }}
+    </a>
   </div>
 </template>
 
 <script>
-import Slider from './Slider.vue'
- 
+import Slider from './Slider.vue';
+
 export default {
   components: {
-    Slider
+    Slider,
   },
   props: {
     reviewContent: Array,
     linkText: String,
-    linkTo: String
+    linkTo: String,
   },
   data() {
     return {
@@ -81,33 +88,36 @@ export default {
         autoplay: true,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{nav:false, dots: false, autoplay: false},992:{nav:true, dots: true, autoplay: true, autoplayTimeout: 6000}}
-      }
-    }
+        responsive: {
+          0: { nav: false, dots: false, autoplay: false },
+          992: {
+            nav: true, dots: true, autoplay: true, autoplayTimeout: 6000,
+          },
+        },
+      },
+    };
   },
   mounted() {
     window.addEventListener('load', updateOwlDotsPosition);
     window.addEventListener('resize', updateOwlDotsPosition);
     function updateOwlDotsPosition() {
-      setTimeout(function () {
-        var reviewImage = document.querySelector('.owl-item.active .Review__image');
-        var getTheWidth = reviewImage.clientWidth;
-        var targetElement = document.querySelector('.ReviewCarousel .owl-dots');
-        targetElement.style.right = (reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)) + 'px';
-        targetElement.style.width = getTheWidth + 'px';
+      setTimeout(() => {
+        const reviewImage = document.querySelector('.owl-item.active .Review__image');
+        const getTheWidth = reviewImage.clientWidth;
+        const targetElement = document.querySelector('.ReviewCarousel .owl-dots');
+        targetElement.style.right = `${reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)}px`;
+        targetElement.style.width = `${getTheWidth}px`;
       }, 500);
-
     }
-
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
 
-.ReviewCarousel {
+.BannerReviewCarousel {
   width: 100%;
   height: auto;
   display: block;
@@ -374,7 +384,7 @@ export default {
           opacity: 1;
           pointer-events: all;
           visibility: visible;
-  
+
           &.owl-prev, &.owl-next{
             @include translate(0,0);
           }

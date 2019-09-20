@@ -1,6 +1,6 @@
 {
+    "/manifest.js": "/manifest.js",
     "/widgets.js": "/widgets.js",
     "/widgets.css": "/widgets.css",
-    "/widgets.vendor.js": "/widgets.vendor.js",
-    "/manifest.js": "/manifest.js"
+    "/widgets.vendor.js": "/widgets.vendor.js"
 }

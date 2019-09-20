@@ -485,6 +485,7 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/mixins';
+@import '../../node_modules/swiper/dist/css/swiper.css';
 
 .ReviewCarousel {
   margin: 60px auto 0;

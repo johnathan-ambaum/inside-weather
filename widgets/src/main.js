@@ -9,7 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
-import '../node_modules/swiper/dist/css/swiper.css';
+// this import moved into ReviewCarousel to fix not being included in CSS output
+// import '../node_modules/swiper/dist/css/swiper.css';
 
 import BrowseWidget from './components/BrowseWidget.vue';
 import SearchResults from './components/SearchResults.vue';
