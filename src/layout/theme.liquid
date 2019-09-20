@@ -116,16 +116,16 @@
         };
       </script>
     {%- endif -%}
-    <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
-    <script src="{{ 'manifest.js' | asset_url }}" defer></script>
-    <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
-    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
     {% assign small_header = true %}
   {%- else -%}
     {% assign small_header = false %}
   {%- endif -%}
+  <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+  <script src="{{ 'manifest.js' | asset_url }}" defer></script>
+  <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
+  <script src="{{ 'widgets.js' | asset_url }}" defer></script>
   <!-- end browse and product customizer widgets -->
 
   {{ content_for_header }}
