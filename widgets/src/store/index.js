@@ -14,8 +14,6 @@ export default new Vuex.Store({
     favorites,
     filters: {},
     openPanel: '',
-    perPage: 54,
-    products: [],
     selectedOptions: {},
     reviews: [],
     totalReviews: 0,

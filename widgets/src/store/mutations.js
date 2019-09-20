@@ -112,56 +112,49 @@ export function setSelectedOptions(state, selected) {
 }
 
 /**
- * Set result count limit (for API pagination)
- */
-export function setPerPage(state, newLimit) {
-  Vue.set(state, 'perPage', newLimit);
-}
-
-/**
  * Add or remove a product from the user's favorites
  */
-export function toggleFavorite(state, { product, customerId }) {
-  const index = state.favorites.findIndex(fav => fav === product.sku);
+export function toggleFavorite(state, { attributes, customerId }) {
+  // const index = state.favorites.findIndex(fav => fav === product.sku);
 
-  if (index !== -1) {
-    state.favorites.splice(index, 1);
-  } else {
-    state.favorites.push(product.sku);
-  }
+  // if (index !== -1) {
+  //   state.favorites.splice(index, 1);
+  // } else {
+  //   state.favorites.push(product.sku);
+  // }
 
-  window.dataLayer.push({
-    event: 'AddToWishlist',
-    eventCategory: 'Favorite',
-    eventAction: index === -1 ? 'add' : 'remove',
-    eventLabel: product.long_display_name,
-    productIds: [product.sku],
-    productName: product.long_display_name,
-    totalValue: product.price,
-    productHandle: product.handle,
-  });
+  // window.dataLayer.push({
+  //   event: 'AddToWishlist',
+  //   eventCategory: 'Favorite',
+  //   eventAction: index === -1 ? 'add' : 'remove',
+  //   eventLabel: product.long_display_name,
+  //   productIds: [product.sku],
+  //   productName: product.long_display_name,
+  //   totalValue: product.price,
+  //   productHandle: product.handle,
+  // });
 
-  if (!customerId) {
-    localStorage.setItem('favoriteProducts', JSON.stringify(state.favorites));
-    return;
-  }
+  // if (!customerId) {
+  //   localStorage.setItem('favoriteProducts', JSON.stringify(state.favorites));
+  //   return;
+  // }
 
-  // sync all local favorites to server if first time
-  if (!customerFavorites.length && localFavorites.length) {
-    apiClient
-      .addFavorites(customerId, Array.from(state.favorites))
-      .then(() => {
-        localStorage.removeItem('favoriteProducts');
-      });
-    return;
-  }
+  // // sync all local favorites to server if first time
+  // if (!customerFavorites.length && localFavorites.length) {
+  //   apiClient
+  //     .addFavorites(customerId, Array.from(state.favorites))
+  //     .then(() => {
+  //       localStorage.removeItem('favoriteProducts');
+  //     });
+  //   return;
+  // }
 
-  if (index !== -1) {
-    apiClient.removeFavorites(customerId, product.sku);
-    return;
-  }
+  // if (index !== -1) {
+  //   apiClient.removeFavorites(customerId, product.sku);
+  //   return;
+  // }
 
-  apiClient.addFavorites(customerId, product.sku);
+  // apiClient.addFavorites(customerId, product.sku);
 }
 
 /**
@@ -200,7 +193,6 @@ export default {
   updateCategory,
   selectPanel,
   setSelectedOptions,
-  setPerPage,
   applyQueryString,
   toggleFavorite,
   setFavorites,

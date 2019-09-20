@@ -64,39 +64,6 @@ export function populateSelectedFromActive({ state, commit }) {
   commit('setSelectedOptions', options);
 }
 
-/**
- * Load products from API for specific batch of SKUs
- */
-export function loadSKUs({ commit }, skus) {
-  apiClient
-    .applyFilters({
-      category: null,
-      filters: [{
-        parameter: 'sku',
-        values: skus,
-      }],
-    })
-    .perPage(skus.length)
-    .getPage(1)
-    .then(({ hits: results }) => {
-      commit('saveProducts', {
-        total: results.total,
-        /* eslint-disable-next-line */
-        products: results.hits.map(product => product._source),
-        append: false,
-      });
-    });
-}
-
-/**
- * Load user's favorited products (if they've favorited any)
- */
-export function loadFavorites({ state, dispatch }) {
-  if (state.favorites) {
-    dispatch('loadSKUs', state.favorites);
-  }
-}
-
 export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20 }) {
   apiClient
     .getReviews(category, from, size)
@@ -137,8 +104,6 @@ export function createProductFromSelected({ state, commit }, { name, image }) {
 
 export default {
   loadProductImages,
-  loadSKUs,
-  loadFavorites,
   pullFilter,
   populateSelectedFromActive,
   getReviews,
