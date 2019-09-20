@@ -4,47 +4,64 @@
       <div class="CarouselItem__Left">
         <div class="CarouselItem__Left--Content">
           <div class="CarouselItem__Left--Info">
-            <div class="CarouselItem__Left--Product" :style="styleReviewItem">
-              <div class="CarouselItem__Left--Text CarouselItem__Left--Title" :id="elementId">{{ firstName }} {{ lastName }}</div>
-              <div class="CarouselItem__Left--Checkbox" :style="styleCheckmark">
+            <div
+              :style="styleReviewItem"
+              class="CarouselItem__Left--Product">
+              <div
+                :id="elementId"
+                class="CarouselItem__Left--Text CarouselItem__Left--Title">{{ firstName }} {{ lastName }}</div>
+              <div
+                :style="styleCheckmark"
+                class="CarouselItem__Left--Checkbox">
                 <selected-checkbox />
               </div>
             </div>
             <div class="CarouselItem__Left--Text CarouselItem__Left--Address">{{ productCity }}, {{ productStateAbbr }}</div>
           </div>
           <!-- <a :href="'https://insideweather.com/collections/' + productCategory + '/products/' + productHandle" target="_blank" class="CarouselItem__Left--Link"> -->
-          <div class="CarouselItem__Left--Image" :style="{ 'background-image': 'url(' + productImage + ')'}" :class="elementId" />
-          <!-- </a> -->
+          <div
+            :style="{ 'background-image': 'url(' + productImage + ')'}"
+            :class="elementId"
+            class="CarouselItem__Left--Image" />
+            <!-- </a> -->
         </div>
       </div>
       <div class="CarouselItem__Right">
         <div class="CarouselItem__Right--Rectangle">
           <div class="CarouselItem__Right--Top">
-            <star :star-count="starRating" class-name="CarouselItem__Right--Star" />
+            <star
+              :star-count="starRating"
+              class-name="CarouselItem__Right--Star" />
             <div class="CarouselItem__Right--Date">{{ reviewDate }}</div>
           </div>
           <div class="CarouselItem__Right--Title">{{ reviewTitle }}</div>
 
-          <div :class="{'CarouselItem__Right--EllipsisContent': isEllipsis }" class="CarouselItem__Right--Content">
+          <div
+            :class="{'CarouselItem__Right--EllipsisContent': isEllipsis }"
+            class="CarouselItem__Right--Content">
             {{ reviewContent }}
           </div>
 
-          <div v-if="isEllipsis" class="CarouselItem__Right--Readmore">
+          <div
+            v-if="isEllipsis"
+            class="CarouselItem__Right--Readmore">
             <span
-              class="CarouselItem__Right--Readmore__Text"
               :class="elementId"
+              class="CarouselItem__Right--Readmore__Text"
             >
               Continue Reading
             </span>
           </div>
 
-          <div v-if="reviewImages.length > 0" class="CarouselItem__Right--Images">
+          <div
+            v-if="reviewImages.length > 0"
+            class="CarouselItem__Right--Images">
             <div
-              class="CarouselItem__Right--Image"
               v-for="(image, index) in reviewImages"
               :key="index"
               :class="elementId"
               :style="{ 'background-image': 'url(' + image.thumb.url + ')' }"
+              class="CarouselItem__Right--Image"
               @click="setModalImage(image.medium.url)"
             />
           </div>
@@ -73,9 +90,6 @@ import STATE from '../static/STATE';
 library.add(faStar);
 
 export default {
-  mixins: [
-    screenMonitor,
-  ],
 
   components: {
     FontAwesomeIcon,
@@ -86,6 +100,9 @@ export default {
     BCol,
     Star,
   },
+  mixins: [
+    screenMonitor,
+  ],
 
   props: {
     elementId: { type: String, default: '' },
@@ -119,6 +136,31 @@ export default {
     };
   },
 
+  computed: {
+    styleReviewItem() {
+      if (this.elementHeight > 30) {
+        return {
+          display: 'flex',
+          alignItems: 'flex-start',
+        };
+      }
+      return {
+        display: 'flex',
+        alignItems: 'center',
+      };
+    },
+    styleCheckmark() {
+      if (this.elementHeight > 30) {
+        return {
+          paddingTop: '7px',
+        };
+      }
+      return {
+        paddingTop: '0',
+      };
+    },
+  },
+
   created() {
     window.addEventListener('resize', this.handleResize);
   },
@@ -134,40 +176,12 @@ export default {
     this.getElementSize(id);
   },
 
-  computed: {
-    styleReviewItem() {
-      if (this.elementHeight > 30) {
-        return {
-          display: 'flex',
-          alignItems: 'flex-start',
-        }
-      } else {
-        return {
-          display: 'flex',
-          alignItems: 'center',
-        }
-      }
-    },
-    styleCheckmark() {
-      if (this.elementHeight > 30) {
-        return {
-          paddingTop: '7px',
-        }
-      } else {
-        return {
-          paddingTop: '0',
-        }
-      }
-    },
-  },
-
   methods: {
     getAbbrState(us_state) {
       let state_abbreviation = '';
-      this.stateData.forEach(item => {
+      this.stateData.forEach((item) => {
         if (item.name === us_state) {
           state_abbreviation = item.abbreviation;
-          return;
         }
       });
       return state_abbreviation;
@@ -264,7 +278,7 @@ export default {
     &--Top {
       display: flex;
       flex-flow: column-reverse;
-      align-items: end;
+      align-items: flex-end;
       justify-content: space-between;
       margin-bottom: 18px;
     }

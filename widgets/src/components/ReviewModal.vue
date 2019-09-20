@@ -1,11 +1,27 @@
 <template>
-  <b-modal v-model="modalShow" v-if="modalImage" @hidden="onHideModal" hide-footer size="xl">
-    <template slot="modal-header" slot-scope="{ close }">
-      <h5></h5>
+  <b-modal
+    v-if="modalImage"
+    v-model="modalShow"
+    hide-footer
+    size="xl"
+    @hidden="onHideModal">
+    <template
+      slot="modal-header"
+      slot-scope="{ close }">
+      <h5/>
       <!-- Emulate built in modal header close button action -->
-      <div size="sm" variant="outline-danger" @click="close()">
-        <img v-if="isMobile" src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245" class="ReviewModal__Close" />
-        <img v-else src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
+      <div
+        size="sm"
+        variant="outline-danger"
+        @click="close()">
+        <img
+          v-if="isMobile"
+          src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245"
+          class="ReviewModal__Close" >
+        <img
+          v-else
+          src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049"
+          class="ReviewModal__Close" >
       </div>
     </template>
     <b-container fluid>
@@ -17,35 +33,52 @@
         >
           <div v-if="screenWidth < 992 && modalData.images.length > 0">
             <carousel
+              ref="carousel"
               :navigation-enabled="true"
               :loop="true"
               :per-page="1"
-              pagination-position="bottom-overlay"
               :pagination-size="4"
+              pagination-position="bottom-overlay"
               pagination-active-color="#fff"
-              navigationPrevLabel="<img width='12px' src='https://cdn.shopify.com/s/files/1/2994/0144/files/arrow-left_wht.png?605840' />"
-              navigationNextLabel="<img width='12px' src='https://cdn.shopify.com/s/files/1/2994/0144/files/arrow-right_wht.png?605840' />"
-              ref="carousel"
+              navigation-prev-label="<img width='12px' src='https://cdn.shopify.com/s/files/1/2994/0144/files/arrow-left_wht.png?605840' />"
+              navigation-next-label="<img width='12px' src='https://cdn.shopify.com/s/files/1/2994/0144/files/arrow-right_wht.png?605840' />"
             >
-              <slide v-for="(image, index) in modalData.images" :key="`${index}`">
+              <slide
+                v-for="(image, index) in modalData.images"
+                :key="`${index}`">
                 <div class="ReviewModal__ImageBox">
-                  <div :style="{ 'background-image': 'url(' + image.medium.url + ')'}" class="ReviewModal__Image" />
+                  <div
+                    :style="{ 'background-image': 'url(' + image.medium.url + ')'}"
+                    class="ReviewModal__Image" />
                 </div>
               </slide>
             </carousel>
           </div>
-          <div v-else class="ReviewModal__ImageBox">
-            <div :style="{ 'background-image': 'url(' + modalImage + ')'}" class="ReviewModal__Image" />
+          <div
+            v-else
+            class="ReviewModal__ImageBox">
+            <div
+              :style="{ 'background-image': 'url(' + modalImage + ')'}"
+              class="ReviewModal__Image" />
           </div>
         </b-col>
-        <b-col sm="12" lg="4" class="ReviewModal__ContentBox">
+        <b-col
+          sm="12"
+          lg="4"
+          class="ReviewModal__ContentBox">
           <div class="ReviewModal ReviewItem">
             <div class="ReviewModal__Left">
               <div class="ReviewModal__Left--Content">
                 <div class="ReviewModal__Mobile--Right ReviewItem__Mobile--Right">
-                  <div class="ReviewModal__Left--Product ReviewItem__Left--Product" :style="styleModalReviewItem">
-                    <div class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title" id="modalTitleId">{{ modalData.first_name }} {{ modalData.last_name }}</div>
-                    <div class="ReviewItem__Left--Checkbox" :style="styleModalCheckmark">
+                  <div
+                    :style="styleModalReviewItem"
+                    class="ReviewModal__Left--Product ReviewItem__Left--Product">
+                    <div
+                      id="modalTitleId"
+                      class="ReviewItem__Left--Text ReviewItem__Left--Title ReviewModal__Left--Title">{{ modalData.first_name }} {{ modalData.last_name }}</div>
+                    <div
+                      :style="styleModalCheckmark"
+                      class="ReviewItem__Left--Checkbox">
                       <selected-checkbox
                         class-name="ReviewModal__Left--Checkbox"
                       />
@@ -53,25 +86,34 @@
                   </div>
                   <div class="ReviewModal__Left--Address ReviewItem__Left--Text ReviewItem__Left--Address">{{ modalData.city }}, {{ productStateAbbr }}</div>
                 </div>
-                <a :href="'https://insideweather.com/collections/' + modalData.item_data.primary_category + '/products/' + modalData.item_data.handle" target="_blank" class="ReviewItem__Left--Link ReviewModal__Left--Link">
-                  <div class="ReviewModal__Left--Image ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + modalData.item_data.medium_image + ')'}"></div>
+                <a
+                  :href="'https://insideweather.com/collections/' + modalData.item_data.primary_category + '/products/' + modalData.item_data.handle"
+                  target="_blank"
+                  class="ReviewItem__Left--Link ReviewModal__Left--Link">
+                  <div
+                    :style="{ 'background-image': 'url(' + modalData.item_data.medium_image + ')'}"
+                    class="ReviewModal__Left--Image ReviewItem__Left--Image"/>
                 </a>
               </div>
             </div>
             <div class="ReviewModal__Right">
               <div class="ReviewModal__Right--Rectangle">
                 <div class="ReviewModal__Right--Top ReviewItem__Right--Top">
-                  <star :star-count="starRating" class-name="ReviewModal__Right--Star" />
+                  <star
+                    :star-count="starRating"
+                    class-name="ReviewModal__Right--Star" />
                   <div class="ReviewModal__Right--Date ReviewItem__Right--Date">{{ convertedReviewDate }}</div>
                 </div>
                 <div class="ReviewModal__Right--Title ReviewItem__Right--Title">{{ modalData.title }}</div>
                 <div class="ReviewModal__Right--Content ReviewItem__Right--Content">{{ modalData.body }}</div>
-                <div v-if="modalData.images.length > 0" class="ReviewModal__Right--Images ReviewItem__Right--Images">
+                <div
+                  v-if="modalData.images.length > 0"
+                  class="ReviewModal__Right--Images ReviewItem__Right--Images">
                   <div
-                    class="ReviewModal__Right--Image ReviewItem__Right--Image"
                     v-for="(image, index) in modalData.images"
                     :key="index"
                     :style="{ 'background-image': 'url(' + image.thumb.url + ')'}"
+                    class="ReviewModal__Right--Image ReviewItem__Right--Image"
                     @click="handlePopupImage(image.medium.url, index)"
                   />
                 </div>
@@ -83,13 +125,29 @@
     </b-container>
   </b-modal>
 
-  <b-modal v-model="modalShow" v-else @hidden="onHideModal" hide-footer size="sm">
-    <template slot="modal-header" slot-scope="{ close }">
-      <h5></h5>
+  <b-modal
+    v-else
+    v-model="modalShow"
+    hide-footer
+    size="sm"
+    @hidden="onHideModal">
+    <template
+      slot="modal-header"
+      slot-scope="{ close }">
+      <h5/>
       <!-- Emulate built in modal header close button action -->
-      <div size="sm" variant="outline-danger" @click="close()">
-        <img v-if="isMobile" src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245" class="ReviewModal__Close" />
-        <img v-else src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049" class="ReviewModal__Close" />
+      <div
+        size="sm"
+        variant="outline-danger"
+        @click="close()">
+        <img
+          v-if="isMobile"
+          src="https://cdn.shopify.com/s/files/1/2994/0144/files/close-white_3x_fda3deb6-ddda-4808-aaea-4968ff309aff.png?305245"
+          class="ReviewModal__Close" >
+        <img
+          v-else
+          src="https://cdn.shopify.com/s/files/1/2994/0144/files/close_3x_0b0ac7a3-5104-40a7-8fec-ff4a4cffc4a5.png?304049"
+          class="ReviewModal__Close" >
       </div>
     </template>
     <b-container fluid>
@@ -99,9 +157,15 @@
             <div class="ReviewModal__Left">
               <div class="ReviewModal__Left--Content">
                 <div class="ReviewModal__Mobile--Right ReviewItem__Mobile--Right">
-                  <div class="ReviewModal__Left--Product ReviewItem__Left--Product" :style="styleModalReviewItem">
-                    <div class="ReviewModal__Left--Title ReviewItem__Left--Text ReviewItem__Left--Title" id="modalTitleId">{{ modalData.first_name }} {{ modalData.last_name }}</div>
-                    <div class="ReviewItem__Left--Checkbox" :style="styleModalCheckmark">
+                  <div
+                    :style="styleModalReviewItem"
+                    class="ReviewModal__Left--Product ReviewItem__Left--Product">
+                    <div
+                      id="modalTitleId"
+                      class="ReviewModal__Left--Title ReviewItem__Left--Text ReviewItem__Left--Title">{{ modalData.first_name }} {{ modalData.last_name }}</div>
+                    <div
+                      :style="styleModalCheckmark"
+                      class="ReviewItem__Left--Checkbox">
                       <selected-checkbox
                         class-name="ReviewModal__Left--Checkbox"
                       />
@@ -109,15 +173,22 @@
                   </div>
                   <div class="ReviewModal__Left--Address ReviewItem__Left--Text ReviewItem__Left--Address">{{ modalData.city }}, {{ productStateAbbr }}</div>
                 </div>
-                <a :href="'https://insideweather.com/collections/' + modalData.item_data.primary_category + '/products/' + modalData.item_data.handle" target="_blank" class="ReviewItem__Left--Link ReviewModal__Left--Link">
-                  <div class="ReviewModal__Left--Image ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + modalData.item_data.medium_image + ')'}"></div>
+                <a
+                  :href="'https://insideweather.com/collections/' + modalData.item_data.primary_category + '/products/' + modalData.item_data.handle"
+                  target="_blank"
+                  class="ReviewItem__Left--Link ReviewModal__Left--Link">
+                  <div
+                    :style="{ 'background-image': 'url(' + modalData.item_data.medium_image + ')'}"
+                    class="ReviewModal__Left--Image ReviewItem__Left--Image"/>
                 </a>
               </div>
             </div>
             <div class="ReviewModal__Right--NoImage">
               <div class="ReviewModal__Right--Rectangle">
                 <div class="ReviewModal__Right--Top ReviewItem__Right--Top">
-                  <star :star-count="starRating" class-name="ReviewModal__Right--Star" />
+                  <star
+                    :star-count="starRating"
+                    class-name="ReviewModal__Right--Star" />
                   <div class="ReviewModal__Right--Date ReviewItem__Right--Date">{{ convertedReviewDate }}</div>
                 </div>
                 <div class="ReviewModal__Right--Title ReviewItem__Right--Title">{{ modalData.title }}</div>
@@ -151,9 +222,6 @@ import STATE from '../static/STATE';
 library.add(faStar);
 
 export default {
-  mixins: [
-    screenMonitor,
-  ],
 
   components: {
     FontAwesomeIcon,
@@ -164,8 +232,11 @@ export default {
     BCol,
     Star,
     Carousel,
-    Slide
+    Slide,
   },
+  mixins: [
+    screenMonitor,
+  ],
 
   props: {
     show: { type: Boolean },
@@ -186,6 +257,32 @@ export default {
     };
   },
 
+  computed: {
+    // Modal style
+    styleModalReviewItem() {
+      if (this.modalTitleElementHeight > 30) {
+        return {
+          display: 'flex',
+          alignItems: 'flex-start',
+        };
+      }
+      return {
+        display: 'flex',
+        alignItems: 'center',
+      };
+    },
+    styleModalCheckmark() {
+      if (this.modalTitleElementHeight > 30) {
+        return {
+          paddingTop: '7px',
+        };
+      }
+      return {
+        paddingTop: '0',
+      };
+    },
+  },
+
   created() {
     window.addEventListener('resize', this.handleResize);
   },
@@ -200,53 +297,21 @@ export default {
 
     if (this.modalDefaultImage) {
       this.modalImage = this.modalDefaultImage;
-    } else {
-      if (this.modalData.images.length > 0)
-        this.modalImage = this.modalData.images[0].medium.url;
-      else this.modalImage = null;
-    }
+    } else if (this.modalData.images.length > 0) { this.modalImage = this.modalData.images[0].medium.url; } else this.modalImage = null;
 
     if (this.screenWidth < 992) {
       setTimeout(() => {
-        this.$refs['carousel'].onResize();
-        this.$refs['carousel'].goToPage(0);
+        this.$refs.carousel.onResize();
+        this.$refs.carousel.goToPage(0);
       }, 200);
     }
-  },
-
-  computed: {
-    // Modal style
-    styleModalReviewItem() {
-      if (this.modalTitleElementHeight > 30) {
-        return {
-          display: 'flex',
-          alignItems: 'flex-start',
-        }
-      } else {
-        return {
-          display: 'flex',
-          alignItems: 'center',
-        }
-      }
-    },
-    styleModalCheckmark() {
-      if (this.modalTitleElementHeight > 30) {
-        return {
-          paddingTop: '7px',
-        }
-      } else {
-        return {
-          paddingTop: '0',
-        }
-      }
-    },
   },
 
   methods: {
     handlePopupImage(image, index) {
       this.modalImage = image;
       if (this.screenWidth < 992) {
-        this.$refs['carousel'].goToPage(index);
+        this.$refs.carousel.goToPage(index);
       }
     },
 
@@ -256,15 +321,14 @@ export default {
 
     convertDate(isoDate) {
       const date = new Date(isoDate);
-      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     },
 
     getAbbrState(us_state) {
       let state_abbreviation = '';
-      this.stateData.forEach(item => {
+      this.stateData.forEach((item) => {
         if (item.name === us_state) {
           state_abbreviation = item.abbreviation;
-          return;
         }
       });
       return state_abbreviation;
@@ -477,7 +541,7 @@ export default {
 
     &--Top {
       flex-flow: column-reverse;
-      align-items: end !important;
+      align-items: flex-end !important;
       margin-bottom: 18px !important;
     }
 
