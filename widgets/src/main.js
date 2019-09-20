@@ -74,6 +74,6 @@ function disableAdminBar() {
 
 const uri = window.location.pathname;
 
-if (uri.includes('/collections/') || uri.includes('/products/')) {
+if (uri.includes('/products/')) {
   disableAdminBar();
 }
