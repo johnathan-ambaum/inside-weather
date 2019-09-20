@@ -53,7 +53,12 @@ export default class FilterStorage {
    * @param {String} category
    */
   static requestFilter(category) {
-    const filterEndpoint = `https://iw-content.herokuapp.com/api/v1/product/${category}`;
+    const urlParams = new URLSearchParams(window.location.search);
+    const version = urlParams.get('version');
+    let filterEndpoint = `https://iw-content.herokuapp.com/api/v1/product/${category}`;
+    if (version) {
+      filterEndpoint += `?version=${version}`;
+    }
 
     return fetch(filterEndpoint)
       .then(response => response.json())
