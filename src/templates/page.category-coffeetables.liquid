@@ -1,0 +1,180 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_d_00-min.jpg?1663020', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_m_00-min.jpg?1663020','heading':'Coffee tables','description':'Start with a silhouette and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/collections/coffee-tables/products/47s842b135b-kloss-coffee-table-750256', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_d_01-min.jpg?1663020', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_m_01-min.jpg?1663020','heading':'Table Top','description':'Custom shapes and finishes.','linkText':'Customize now','url':'https://insideweather.com/collections/coffee-tables/products/47s842b135b-kloss-coffee-table-750256', dataSource: 'table-top'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_d_02-min.jpg?1663020','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_m_02-min.jpg?1663020','heading':'Surface Design','description':'Over 180 reasons to start eating on the couch.','linkText':'Customize now','url':'https://insideweather.com/collections/coffee-tables/products/47s842b135b-kloss-coffee-table-750256', dataSource: 'surface-design'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_d_03-min.jpg?1663020','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_tb_m_03-min.jpg?1663020','heading':'Base Style','description':'Everything from elegant hairpins to tapered brass.','linkText':'Customize now','url':'https://insideweather.com/collections/coffee-tables/products/47s842b135b-kloss-coffee-table-750256', dataSource: 'base-style'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Table Top', 'accordionDescription': 'Custom shapes and finishes.', 'accordionTarget': 'table-top'},{'accordionHead': 'Surface Design', 'accordionDescription': 'Over 180 reasons to start eating on the couch.', 'accordionTarget': 'surface-design'}, {'accordionHead': 'Base Style', 'accordionDescription': 'Everything from elegant hairpins to tapered brass.', 'accordionTarget': 'base-style'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-table_col_01.jpg?1663047', 'title': 'Round Coffee Table', 'linkText': 'Customize starting at $178', hyperLink: 'https://insideweather.com/collections/coffee-tables/products/47s3238af84-elle-coffee-table-389170'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-table_col_02.jpg?1663047', 'title': 'Oval Coffee Table', 'linkText': 'Customize starting at $178', hyperLink: 'https://insideweather.com/collections/coffee-tables/products/47s7eb209a4-kloss-coffee-table-389163'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-table_col_03.jpg?1663047', 'title': 'Square Coffee Table', 'linkText': 'Customize starting at $178', hyperLink: 'https://insideweather.com/collections/coffee-tables/products/47s7810ed83-jax-coffee-table-389248'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-table_col_04.jpg?1663047', 'title': 'Rectangle Coffee Table', 'linkText': 'Customize starting at $178', hyperLink: 'https://insideweather.com/collections/coffee-tables/products/47s00105945-tate-coffee-table-389138'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Shape"
+          section-description="Customize every detail from tabletop design all the way down to the legs."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_01_d-min.jpg?1663192', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_01_m-min.jpg?1663192', 'title': 'Customize Your Style','description': 'Whether you’ve got a favorite color, a thing for wood grain, or you simply dig stylish patterns, the top of your table is prime real estate to make a statement and put the perfect accent on your room.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_02_d.mp4?1663087', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_02_m.mp4?1663170', 'title': 'Life-Proof','description': 'Not only does it look good, but it’s also ruggedly durable. A scuff-free, UV-resistant surface means that it’s perfect for that sunny spot in your home. It’s also FDA approved for all you messy eaters out there. And when you’re done, wipe it down with any cleaner you like.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_03_d-min.jpg?1663183', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_03_m-min.jpg?1663183', 'title': 'Materials You Want','description': 'Your table is constructed from 100% FSC-certified birchwood, so you know it’s sustainable and dependable. Woods and metals for the bases are made from solid ash wood and high-strength, powder-coated stainless steel. Don’t worry, we’ll never skip the details.'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
+    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_01-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48SC1046F07/48SC1046F07-0_small.jpg','title':'Latte Round Coffee Table in Metallic Mashup','price':'$198', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/48sc1046f07-elle-coffee-table-766439'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_02-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47S3CEB8D42/47S3CEB8D42-0_small.jpg','title':'Latte Oval Coffee Table in Cream','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47s3ceb8d42-kloss-coffee-table-750374'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/150SFE2EFB41/150SFE2EFB41-0_small.jpg','title':'Micro Suede Milo Sofa in Charcoal','price':'$898', 'productUrl':'https://insideweather.com/collections/sofas/products/150sfe2efb41-milo-sofa-931269'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S0FACAE70/47S0FACAE70-0_small.jpg','title':'Latte Round Side Table in Cream','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s0facae70-elle-side-table-751289'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_03-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150SFA8521F7/150SFA8521F7-0_small.jpg','title':'Linen Weave Levi Sofa in Fog','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150sfa8521f7-levi-sofa-169678'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S563BAC97/47S563BAC97-0_small.jpg','title':'Latte Oval Coffee Table in White','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47s563bac97-kloss-coffee-table-389200'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_04-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S3AB9EF18/48S3AB9EF18-0_small.jpg','title':'Latte Round Coffee Table in White Marble','price':'$198', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/48s3ab9ef18-elle-coffee-table-389983'},]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_05-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SE9A5972E/47SE9A5972E-0_small.jpg','title':'Espresso Rectangle Coffee Table in Vibrant Tessellation','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47se9a5972e-tate-coffee-table-752236'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_06-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SB8B8E413/47SB8B8E413-0_small.jpg','title':'Espresso Oval Coffee Table in Espresso Wood','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47sb8b8e413-kloss-coffee-table-389145'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Round Side Table in Espresso Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s7600861f-elle-side-table-389225'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/150S58F74FEB/150S58F74FEB-0_small.jpg','title':'Linen Weave Jett Sofa in Fog','price':'$1198', 'productUrl':'https://insideweather.com/collections/sofas/products/150s58f74feb-jett-sofa-095160'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_07-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47S842B135B/47S842B135B-0_small.jpg','title':'Latte Oval Coffee Table in Sweet Paradise','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47s842b135b-kloss-coffee-table-750256'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/150S9F92541C/150S9F92541C-0_small.jpg','title':'Pebble Weave Levi Sofa in Poppy Orange','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s9f92541c-levi-sofa-402384'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_08-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S47FE94E0/48S47FE94E0-0_small.jpg','title':'Latte Square Coffee Table in Modern Patchwork','price':'$198', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/48s47fe94e0-jax-coffee-table-776239'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/141SE125A50F/141SE125A50F-0_small.jpg','title':'Pebble Weave Brooklyn Sofette in Cinder Gray','price':'$648', 'productUrl':'https://insideweather.com/collections/sofettes/products/141se125a50f-brooklyn-sofette-678013'}]},  
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_10-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48SC1046F07/48SC1046F07-0_small.jpg','title':'Latte Round Coffee Table in Metallic Mashup','price':'$198', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/48sc1046f07-elle-coffee-table-766439'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_coffee-tables_lg_09-min.jpg?1663293','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SE58BF9B8/47SE58BF9B8-0_small.jpg','title':'Latte Oval Coffee Table in White Marble','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47se58bf9b8-kloss-coffee-table-389169'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script> 

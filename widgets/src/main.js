@@ -14,8 +14,22 @@ import ProductDetailSlider from './components/ProductDetailSlider.vue';
 import PageBuilderSection from './components/PageBuilderSection.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
 import SwatchBrowser from './components/SwatchBrowser.vue';
+import BannerCarousel from './components/BannerCarousel.vue';
+import CategoryList from './components/CategoryList.vue';
+import ValueProps from './components/ValueProps.vue';
+import Press from './components/Press.vue';
+import ReviewCarousel from './components/ReviewCarousel.vue';
+import Banner from './components/Banner.vue';
+import CategoryBanner from './components/CategoryBanner';
+import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
+import CategoryCollections from './components/CategoryCollections.vue';
+import CategoryDetails from './components/CategoryDetails.vue';
+import CategoryVideo from './components/CategoryVideo.vue';
+import CategoryVprops from './components/CategoryVprops.vue';
+import LifeStylePhotos from './components/LifeStylePhotos.vue'
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
+
 
 Vue.config.productionTip = false;
 
@@ -39,6 +53,19 @@ const app = new Vue({
     GlyphLoading,
     SwatchBrowser,
     FontAwesomeIcon,
+    BannerCarousel,
+    CategoryList,
+    ValueProps,
+    Press,
+    ReviewCarousel,
+    Banner,
+    RecentlySoldProducts,
+    CategoryBanner,
+    CategoryCollections,
+    CategoryDetails,
+    CategoryVideo,
+    CategoryVprops,
+    LifeStylePhotos,
   },
 
   store,

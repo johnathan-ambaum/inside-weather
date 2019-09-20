@@ -1,0 +1,181 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_d_00.jpg?1661596', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_m_00.jpg?1661596','heading':'Dining chairs','description':'Choose your favorite model. What’s next is up to you','linkText':'Customize now','url':'https://insideweather.com/collections/dining-chairs/products/82sac39949d-kobe-side-chair-925072', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_d_01.jpg?1661596', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_m_01.jpg?1661596','heading':'Chair Style','description':'Seat yourself as you wish with 8+ silhouettes.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-chairs/products/82sac39949d-kobe-side-chair-925072', dataSource: 'chair-style'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_d_02.jpg?1661596','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_m_02.jpg?1661596','heading':'Wood Finish','description':'Choose from Black, White, Espresso, and Latte for the perfect accent.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-chairs/products/82sac39949d-kobe-side-chair-925072', dataSource: 'wood-finish'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_d_03.jpg?1661596', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_m_03.jpg?1661596','heading':'Metal Finish','description':'Choose from Brass, Carbon, and Silver to give your chairs the perfect shine.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-chairs/products/82sac39949d-kobe-side-chair-925072', dataSource: 'metal-finish'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_d_04.jpg?1661596','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_m_04.jpg?1661596','heading':'Upholstery','description':'Light up your chairs with over 200 colors and designs.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-chairs/products/82sac39949d-kobe-side-chair-925072', dataSource: 'upholstery'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_d_05.jpg?1661596', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_tb_m_05.jpg?1661596','heading':'Base Style','description':'Whether you like finished wood dowels or modern brass, we got you covered.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-chairs/products/82sac39949d-kobe-side-chair-925072', dataSource: 'base-style'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Chair Style', 'accordionDescription': 'Seat yourself as you wish with 8+ silhouettes.', 'accordionTarget': 'chair-style'},{'accordionHead': 'Wood Finish', 'accordionDescription': 'Choose from Black, White, Espresso, and Latte for the perfect accent.', 'accordionTarget': 'wood-finish'}, {'accordionHead': 'Metal Finish', 'accordionDescription': 'Choose from Brass, Carbon, and Silver to give your chairs the perfect shine.', 'accordionTarget': 'metal-finish'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Light up your chairs with over 200 colors and designs.', 'accordionTarget': 'upholstery'},{'accordionHead': 'Base Style', 'accordionDescription': 'Whether you like finished wood dowels or modern brass, we got you covered.', 'accordionTarget': 'base-style'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_01.jpg?1661604', 'title': 'Kobe Side Chair', 'linkText': 'Customize starting at $118', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82sd12e6d2c-kobe-side-chair-924739'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_02.jpg?1661604', 'title': 'Polk Side Chair', 'linkText': 'Customize starting at $118', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82s17d5df2d-polk-side-chair-924734'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_03.jpg?1661604', 'title': 'Luna Side Chair', 'linkText': 'Customize starting at $118', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82s20a1d309-luna-side-chair-924732'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_04.jpg?1661604', 'title': 'Nola Side Chair', 'linkText': 'Customize starting at $98', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/144s11f5d449-nola-side-chair-888842'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_05.jpg?1661604', 'title': 'Kobe Armchair', 'linkText': 'Customize starting at $148', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82scd09311a-kobe-armchair-925192'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_06.jpg?1661604', 'title': 'Polk Armchair', 'linkText': 'Customize starting at $148', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82s780176b1-polk-armchair-925198'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_07.jpg?1661604', 'title': 'Luna Armchair', 'linkText': 'Customize starting at $148', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82s166b3383-luna-armchair-925190'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chair_col_08.jpg?1661604', 'title': 'Nola Armchair', 'linkText': 'Customize starting at $128', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/143sbc7d174b-nola-armchair-888602'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Silhouette"
+          section-description="Then choose between colors & finishes to make it yours!"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_details_01_d-min.jpg?1661606', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_details_01_m-min.jpg?1661606', 'title': 'Custom Upholstery','description': 'Make your dining set up a feast for the eyes! With over 200 fabric options, and so many favorites to choose from, it won’t be the casserole that your dinner guests are salivating over.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_details_02_d.mp4?1661608', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_details_02_m.mp4?1661608', 'title': 'Made for Life','description': 'Whether you like to change with the seasons, or you just feel like a quick refresh, our customizable and switchable seat pads are a great way to grab a new look without spending an arm and a leg.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_details_03_d-min.jpg?1661610', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_details_03_m-min.jpg?1661610', 'title': 'Quality Materials','description': 'Sit tight! Our dining chairs feature legs made from solid ash and high-strength powder-coated steel, and they’re designed to carry up to 350 lbs. So go ahead, help yourself to seconds.'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
+    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_01-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82S4269F128/82S4269F128-0_small.jpg','title':'Latte Luna Side Chair in Sunny Tropics','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s4269f128-luna-side-chair-897356'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48S7E8D7023/48S7E8D7023-0_small.jpg','title':'Latte Round Dining Table in White Marble','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s7e8d7023-elle-dining-table-389376'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_02-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82SB33A2A03/82SB33A2A03-0_small.jpg','title':'Latte Polk Armchair in Heathered Taupe','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82sb33a2a03-polk-armchair-899149'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48S8EF73EAF/48S8EF73EAF-0_small.jpg','title':'Latte Round Dining Table in White Marble','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s8ef73eaf-elle-dining-table-389377'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_03-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82SB1003DBE/82SB1003DBE-0_small.jpg','title':'Espresso Kobe Side Chair in Ivory','price':'$168', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82sb1003dbe-kobe-side-chair-924743'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48S7EBD6014/48S7EBD6014-0_small.jpg','title':'Latte Square Dining Table in Black Marble','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s7ebd6014-jax-dining-table-390355'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195SB4E5B664/195SB4E5B664-0_small.jpg','title':'Latte Sloan Credenza in Black Marble','price':'$538', 'productUrl':'https://insideweather.com/collections/credenzas/products/195sb4e5b664-sloan-credenza-391766'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_04-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/143S6D4DFEAB/143S6D4DFEAB-0_small.jpg','title':'Nola Armchair in Ivory','price':'$178', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/143s6d4dfeab-nola-armchair-888787'},]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_05-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82S838174DF/82S838174DF-0_small.jpg','title':'Latte Kobe Side Chair in Dijon','price':'$118', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s838174df-kobe-side-chair-892870'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_06-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82SC86A0BD6/82SC86A0BD6-0_small.jpg','title':'Latte Kobe Side Chair in Purple Palm','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82sc86a0bd6-kobe-side-chair-900434'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82SE3921F76/82SE3921F76-0_small.jpg','title':'Latte Kobe Side Chair in Nordic Blue','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82se3921f76-kobe-side-chair-922052'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S5F75AAD9/82S5F75AAD9-0_small.jpg','title':'Latte Kobe Side Chair in Nordic Green','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s5f75aad9-kobe-side-chair-922106'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S2DCA1A3E/82S2DCA1A3E-0_small.jpg','title':'Latte Kobe Side Chair in Nordic Yellow','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s2dca1a3e-kobe-side-chair-921306'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S7849E877/82S7849E877-0_small.jpg','title':'Latte Kobe Side Chair in Nordic Orange','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s7849e877-kobe-side-chair-921389'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_07-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/144S2042D2C9/144S2042D2C9-0_small.jpg','title':'Nola Side Chair in Whiskey','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/144s2042d2c9-nola-side-chair-889031'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48S2AC4926D/48S2AC4926D-0_small.jpg','title':'Latte Rectangle Dining Table in Latte Wood','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s2ac4926d-tate-dining-table-389446'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_08-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/144S516756BA/144S516756BA-0_small.jpg','title':'Nola Side Chair in Raven Gray','price':'$98', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/144s516756ba-nola-side-chair-888858'}]},  
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_10-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82S5093640B/82S5093640B-0_small.jpg','title':'Latte Polk Side Chair in Onyx','price':'$168', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s5093640b-polk-side-chair-892157'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48SE1EC96FD/48SE1EC96FD-0_small.jpg','title':'Latte Round Dining Table in Black','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48se1ec96fd-elle-dining-table-756744'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-chairs_lg_09-min.jpg?1662157','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/82S12D26323/82S12D26323-0_small.jpg','title':'Latte Polk Side Chair in Chilly Topography','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s12d26323-polk-side-chair-902162'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82SCC8E3CCD/82SCC8E3CCD-0_small.jpg','title':'Latte Kobe Side Chair in Midnight Topography','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82scc8e3ccd-kobe-side-chair-902010'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script> 

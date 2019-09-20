@@ -1,0 +1,131 @@
+@import './mixins';
+
+a {
+  text-decoration: none;
+  &:focus, &:hover, &:active {
+    outline: none;
+    text-decoration: none;
+  }
+}
+ul, ol, figure {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+html, body {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  min-width: 320px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+//****Custom container**//
+.--custom-container {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 738px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 962px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1170px;
+  }
+
+  @media (min-width: 1275px) {
+    max-width: 1245px;
+  }
+}
+
+.--lg-hidden {
+  
+  @include at-query('min-width: 1025px') {
+    display: none;
+  }
+}
+.--pd-t-130 {
+
+  @include at-query('max-width: 767px') {  
+    padding-top: 50px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-top: 70px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-top: 100px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-top: 130px;
+  }
+}
+
+.--pd-b-130 {
+
+  @include at-query('max-width: 767px') {  
+    padding-bottom: 50px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-bottom: 70px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-bottom: 100px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-bottom: 130px;
+  }
+}
+
+.--pd-t-100 {
+  
+  @include at-query('max-width: 767px') {  
+    padding-top: 15px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-top: 40px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-top: 70px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-top: 100px;
+  }
+}
+
+.--pd-b-100 {
+  @include at-query('max-width: 767px') {  
+    padding-bottom: 15px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-bottom: 40px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-bottom: 70px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-bottom: 100px;
+  }
+}
+
+.--clearfix {
+  @include clearfix();
+}
+
+.--caps {
+  text-transform: uppercase;
+}
+
+:root {
+  --cells: 40;
+  --cellSize: calc(100vw / var(--cells));
+}

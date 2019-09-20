@@ -1,0 +1,127 @@
+<div id="app">
+  <div class="livingRoom">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = true %}
+    {% assign isScrollAnimationRequire = false %}
+    {% assign hasBannerContent = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_tb-min.jpg?1660796', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_tb_m.jpg?1661298'}]}"%}
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-content="{{hasBannerContent}}"
+
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_01.jpg?1661410', 'title': 'Sofas', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/pages/category-sofas'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_02.jpg?1661410', 'title': 'Sofettes', 'linkText': 'Customize starting at $648', hyperLink: 'https://insideweather.com/pages/category-sofettes'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_03.jpg?1661410', 'title': 'Armchairs', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/pages/category-armchairs'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_04.jpg?1661410', 'title': 'Lounge Chairs', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/pages/category-lounge-chairs'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_05.jpg?1661410', 'title': 'Coffee Tables', 'linkText': 'Customize starting at $178', hyperLink: 'https://insideweather.com/pages/category-coffee-tables'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_06.jpg?1661410', 'title': 'Side Tables', 'linkText': 'Customize starting at $128', hyperLink: 'https://insideweather.com/pages/category-side-tables'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_07.jpg?1661410', 'title': 'Credenzas', 'linkText': 'Customize starting at $518', hyperLink: 'https://insideweather.com/pages/category-credenzas'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_08.jpg?1661410', 'title': 'Sideboards', 'linkText': 'Customize starting at $718', hyperLink: 'https://insideweather.com/pages/category-sideboards'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_09.jpg?1661410', 'title': 'Nola Accent Chair', 'linkText': 'Customize starting at $98', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/143sbc7d174b-nola-armchair-888602'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_10.jpg?1661410', 'title': 'Kobe Accent Chair', 'linkText': 'Customize starting at $118', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82scd09311a-kobe-armchair-925192'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_11.jpg?1661410', 'title': 'Polk Accent Chair', 'linkText': 'Customize starting at $118', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82s780176b1-polk-armchair-925198'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_12.jpg?1661410', 'title': 'Luna Accent Chair', 'linkText': 'Customize starting at $118', hyperLink: 'https://insideweather.com/collections/dining-chairs/products/82s166b3383-luna-armchair-925190'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Living Room"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_01-min.jpg?1660818','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150SB261F87C/150SB261F87C-0_small.jpg','title':'Pebble Weave Jett Sofa in Seashell','price':'$1098', 'productUrl':'/collections/sofas/products/150sb261f87c-jett-sofa-482278',}]},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_02-min.jpg?1660818','popUpList': [
+    {'productImage': 'https://banksy-images.s3.amazonaws.com/items/141S17FC3C8F/141S17FC3C8F-0_small.jpg','title':'Cross Weave Issa Sofette in Cloud','price':'$598','productUrl':'/collections/sofettes/products/141s17fc3c8f-issa-sofette-584851',},{'productImage': 'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$128','productUrl':'/collections/side-tables/products/47sa643c56d-elle-side-table-389208',}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_03-min.jpg?1660818','popUpList': [{'productImage': 'https://banksy-images.s3.amazonaws.com/items/150S5039A4A7/150S5039A4A7-0_small.jpg','title':'Linen Weave Levi Sofa in Fog','price':'$1,098','productUrl':'/collections/sofas/products/150s5039a4a7-levi-sofa-401498',},{'productImage': 'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$128','productUrl': '/collections/side-tables/products/47sa643c56d-elle-side-table-389208',}]},{
+    'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_04-min.jpg?1660818','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/141SB50310B6/141SB50310B6-0_small.jpg','title':'Mod Velvet Powell Sofette in Jade Green','price':'$874','productUrl': '/collections/sofettes/products/141sb50310b6-powell-sofette-344942',},{
+    'productImage': 'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Round Side Table in Espresso Wood','price':'$128','productUrl': '/collections/side-tables/products/47s7600861f-elle-side-table-389225',}]},{
+    'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_05-min.jpg?1660818',
+    'popUpList':[{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S30A4F09B/150S30A4F09B-0_small.jpg','title':'Pebble Weave Levi Sofa in Poppy Orange','price':'$1,098','productUrl':'/collections/sofas/products/150s30a4f09b-levi-sofa-938744',},]},{
+    'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_06-min.jpg?1660818','popUpList': [{'productImage': 'https://banksy-images.s3.amazonaws.com/items/195S2CA93635/195S2CA93635-1_small.jpg','title':'Latte Sloan Credenza in White','price':'$538','productUrl':'/collections/credenzas/products/195s2ca93635-sloan-credenza-391706',},{
+    'productImage': 'https://banksy-images.s3.amazonaws.com/items/143S6D4DFEAB/143S6D4DFEAB-0_small.jpg','title':'Nola Armchair in Ivory','price':'$178','productUrl':'/collections/dining-chairs/products/143s6d4dfeab-nola-armchair-888787',}]},{
+    'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_07-min.jpg?1660818',
+    'popUpList': [{
+    'productImage': 'https://banksy-images.s3.amazonaws.com/items/47S52664A77/47S52664A77-0_small.jpg','title':'Latte Oval Coffee Table in Tropical Botanicals','price':'$178','productUrl':'/collections/coffee-tables/products/47s52664a77-kloss-coffee-table-750255',},{
+    'productImage': 'https://banksy-images.s3.amazonaws.com/items/150S1A8EBBD1/150S1A8EBBD1-0_small.jpg','title':'Pebble Weave Milo Sofa in Poppy Orange','price':'$998','productUrl': '/collections/sofas/products/150s1a8ebbd1-milo-sofa-933407',}]},{
+    'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_08-min.jpg?1660818',
+    'popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SE58BF9B8/47SE58BF9B8-0_small.jpg','title':'Latte Oval Coffee Table in White Marble','price':'$178','productUrl': '/collections/coffee-tables/products/47se58bf9b8-kloss-coffee-table-389169',},]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_10-min.jpg?1660818',
+    'popUpList': [{'productImage': 'https://banksy-images.s3.amazonaws.com/items/138S4E6B3C57/138S4E6B3C57-0_small.jpg','title':'Oxford Weave Milo Armchair in Daffodil','price':'$498','productUrl':'/collections/armchairs/products/138s4e6b3c57-milo-armchair-471328',},{
+    'productImage': 'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$128','productUrl': '/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_09-min.jpg?1660818',
+    'popUpList': [{'productImage': 'https://banksy-images.s3.amazonaws.com/items/150SFA8521F7/150SFA8521F7-0_small.jpg','title':'Linen Weave Levi Sofa in Fog','price':'$1,098','productUrl':'/collections/sofas/products/150sfa8521f7-levi-sofa-169678',},{
+    'productImage': 'https://banksy-images.s3.amazonaws.com/items/47S563BAC97/47S563BAC97-0_small.jpg','title':'Latte Oval Coffee Table in White','price':'$178','productUrl': '/collections/coffee-tables/products/47s563bac97-kloss-coffee-table-389200'}]}]"%}
+    
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+</script>

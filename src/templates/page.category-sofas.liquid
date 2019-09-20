@@ -1,0 +1,181 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_00-min.jpg?1661458', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_00-min.jpg?1661465','heading':'Sofas','description':'Start with a silhouette and customize every detail to make it your own.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_01-min.jpg?1661458', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_01-min.jpg?1661465','heading':'Arm Style','description':'Everything from tall & thin, to short & stout. Select from 10+ styles.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'arm-style'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_02-min.jpg?1661458','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_02-min.jpg?1661465','heading':'Upholstery','description':'Where nice colors and fine textures come to party. 45+ Options to explore.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'upholstery'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_03-min.jpg?1661458', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_03-min.jpg?1661465','heading':'Pillow & Cushion Shape','description':'Choose either Plush or Snug and give your sofa the perfect sit.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'pillow-cushion-shape'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_04-min.jpg?1661458','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_04-min.jpg?1661465','heading':'Configuration','description':'Design any combination of split and 3-seater cushion options.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'configuration'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_05-min.jpg?1664672', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_05-min.jpg?1664672','heading':'Pillow Detail','description':'Button ‘em, tuft ‘em, stitch ‘em, or leave ‘em bare: anything goes.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'pillow-detail'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_06-min.jpg?1664672','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_06-min.jpg?1664672','heading':'Cushion Detail','description':'Tuft ‘em, stitch ‘em, or leave ‘em bare: whatever you want.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'cushion-detail'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_07-min.jpg?1661458','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_07-min.jpg?1661465','heading':'Base Style','description':'From Retro to this-century modern, choose the base that fits your style.','linkText':'Customize now','url':'https://insideweather.com/collections/sofas/products/150s2e78c1df-levi-sofa-938746', dataSource: 'base-style'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Arm Style', 'accordionDescription': 'Everything from tall & thin, to short & stout. Select from 10+ styles.', 'accordionTarget': 'arm-style'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Where nice colors and fine textures come to party. 45+ Options to explore.', 'accordionTarget': 'upholstery'}, {'accordionHead': 'Pillow & Cushion Shape', 'accordionDescription': 'Choose either Plush or Snug and give your sofa the perfect sit.', 'accordionTarget': 'pillow-cushion-shape'},{'accordionHead': 'Configuration', 'accordionDescription': 'Design any combination of split and 3-seater cushion options.', 'accordionTarget': 'configuration'},{'accordionHead': 'Pillow Detail', 'accordionDescription': 'Button ‘em, tuft ‘em, stitch ‘em, or leave ‘em bare: anything goes.', 'accordionTarget': 'pillow-detail'}, {'accordionHead': 'Cushion Detail', 'accordionDescription': 'Tuft ‘em, stitch ‘em, or leave ‘em bare: whatever you want.', 'accordionTarget': 'cushion-detail'}, {'accordionHead': 'Base Style', 'accordionDescription': 'From Retro to this-century modern, choose the base that fits your style.', 'accordionTarget': 'base-style'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_01.jpg?1661503', 'title': 'Issa Sofa', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/collections/sofas/products/150sbef1757b-issa-sofa-236481'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_02.jpg?1661503', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $1098', hyperLink: 'https://insideweather.com/collections/sofas/products/150se9f1cbcd-levi-sofa-093032'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_03.jpg?1661503', 'title': 'Powell Sofa', 'linkText': 'Customize starting at $998', hyperLink: 'https://insideweather.com/collections/sofas/products/150sa1aab6d9-powell-sofa-154832'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_04.jpg?1661503', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $998', hyperLink: 'https://insideweather.com/collections/sofas/products/150s186e2200-brooklyn-sofa-554382'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_05.jpg?1661503', 'title': 'Asher Sofa', 'linkText': 'Customize starting at $1,198', hyperLink: 'https://insideweather.com/collections/sofas/products/150sfcf874ce-asher-sofa-957744'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_06.jpg?1661503', 'title': 'Nox Sofa', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/collections/sofas/products/150s806d8958-nox-sofa-775794'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_07.jpg?1661503', 'title': 'Jett Sofa', 'linkText': 'Customize starting at $1,148', hyperLink: 'https://insideweather.com/collections/sofas/products/150sc54f4421-jett-sofa-481255'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_08.jpg?1661503', 'title': 'Milo Sofa', 'linkText': 'Customize starting at $998', hyperLink: 'https://insideweather.com/collections/sofas/products/150sa9154e6c-milo-sofa-319609'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Silhouette"
+          section-description="Choose your favorite collection and make it your own."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_01_d.jpg?1661520', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_01_m.jpg?1661520', 'title': 'Custom Upholstery','description': 'Play around and flip through all the colors and textures! When you’ve narrowed it down to your favs, order some free swatches for that IRL buzz. Next thing you know you’ll be sitting pretty on top of your custom made throne.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_02_d.jpg?1661520', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_02_m.jpg?1661520', 'title': 'Life-Proof','description': 'Our sofas are designed to withstand whatever life throws at them. Like to eat on the couch? No problem, our fabrics are easy to clean. Have a fuzzy friend? No worries, they’re pet-friendly too! And if you have to move? Sofas can be put together, and taken apart with ease.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_03_d.mp4?1664668', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_03_m.mp4?1661520', 'title': 'Customize Your Comfort','description': 'It shouldn’t just look custom, it should feel custom too. Whether you like a little more support, or prefer a softer sit, Snug and Plush cushion options allow you to customize for comfort. Now doesn’t that feel nice?'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops> 
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_01-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150SEB2C61FF/150SEB2C61FF-0_small.jpg','title':'Mod Velvet Issa Sofa in Vanilla','price':'$998', 'productUrl':'https://insideweather.com/collections/sofas/products/150seb2c61ff-issa-sofa-622656'}, ]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_02-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150SB9253F30/150SB9253F30-0_small.jpg','title':'Linen Weave Milo Sofa in Dijon','price':'$998', 'productUrl':'https://insideweather.com/collections/sofas/products/150sb9253f30-milo-sofa-164558'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/141SBA0FF08C/141SBA0FF08C-0_small.jpg','title':'Linen Weave Issa Sofette in Dijon','price':'$674', 'productUrl':'https://insideweather.com/collections/sofettes/products/141sba0ff08c-issa-sofette-581736'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S838174DF/82S838174DF-0_small.jpg','title':'Latte Kobe Side Chair in Dijon','price':'$118', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s838174df-kobe-side-chair-892870'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_03-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S817D16D1/150S817D16D1-0_small.jpg','title':'Linen Weave Levi Sofa in Fog','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s817d16d1-levi-sofa-937866'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SE58BF9B8/47SE58BF9B8-0_small.jpg','title':'Latte Oval Coffee Table in White Marble','price':'$178', 'productUrl':'https://insideweather.com/collections/coffee-tables/products/47se58bf9b8-kloss-coffee-table-389169'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_04-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S30A4F09B/150S30A4F09B-0_small.jpg','title':'Pebble Weave Levi Sofa in Poppy Orange','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s30a4f09b-levi-sofa-938744'}, ]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_05-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S5E6C4104/150S5E6C4104-0_small.jpg','title':'Cross Weave Levi Sofa in Raven Gray','price':'$998', 'productUrl':'https://insideweather.com/collections/sofas/products/150s5e6c4104-levi-sofa-479962'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Round Side Table in Espresso Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s7600861f-elle-side-table-389225'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_06-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S30A4F09B/150S30A4F09B-0_small.jpg','title':'Pebble Weave Levi Sofa in Poppy Orange','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s30a4f09b-levi-sofa-938744'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_07-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S206EA8DE/150S206EA8DE-0_small.jpg','title':'Mod Velvet Powell Sofa in Jade Green','price':'$1198', 'productUrl':'https://insideweather.com/collections/sofas/products/150s206ea8de-powell-sofa-465580'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Round Side Table in Espresso Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47s7600861f-elle-side-table-389225'},]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_08-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S6DA8C3BB/150S6DA8C3BB-0_small.jpg','title':'Cross Weave Asher Sofa in Yale Blue','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s6da8c3bb-asher-sofa-421856'}, ]},  
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_10-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150S5039A4A7/150S5039A4A7-0_small.jpg','title':'Linen Weave Levi Sofa in Fog','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150s5039a4a7-levi-sofa-401498'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$128', 'productUrl':'https://insideweather.com/collections/side-tables/products/47sa643c56d-elle-side-table-389208'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofas_lg_09-min.jpg?1661514','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/150SB261F87C/150SB261F87C-0_small.jpg','title':'Pebble Weave Jett Sofa in Seashell','price':'$1098', 'productUrl':'https://insideweather.com/collections/sofas/products/150sb261f87c-jett-sofa-482278'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function (event){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>

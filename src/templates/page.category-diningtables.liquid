@@ -1,0 +1,181 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_d_00-min.jpg?1663479', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_m_00-min.jpg?1663479','heading':'Dining tables','description':'Start with a silhouette and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-tables/products/48s3ec68cf8-elle-dining-table-756711', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_d_01-min.jpg?1663479', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_m_01-min.jpg?1663479','heading':'Table Top','description':'Table styles in every shape and finish.','url':'https://insideweather.com/collections/dining-tables/products/48s3ec68cf8-elle-dining-table-756711', dataSource: 'table-top'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_d_02-min.jpg?1663479','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_m_02-min.jpg?1663479','heading':'Surface Design','description':'Make mealtime more colorful with 180+ custom colors and prints.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-tables/products/48s3ec68cf8-elle-dining-table-756711', dataSource: 'surface-design'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_d_03-min.jpg?1663479','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_tb_m_03-min.jpg?1663479','heading':'Base Style','description':'Everything from elegant hairpins to tapered brass.','linkText':'Customize now','url':'https://insideweather.com/collections/dining-tables/products/48s3ec68cf8-elle-dining-table-756711', dataSource: 'base-style'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Table Top', 'accordionDescription': 'Table styles in every shape and finish.', 'accordionTarget': 'table-top'},{'accordionHead': 'Surface Design', 'accordionDescription': 'Over 180 reasons to start eating on the couch.', 'accordionTarget': 'surface-design'}, {'accordionHead': 'Base Style', 'accordionDescription': 'Everything from elegant hairpins to tapered brass.', 'accordionTarget': 'base-style'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-table_col_01.jpg?1663406', 'title': 'Round Dining Table', 'linkText': 'Customize starting at $278', hyperLink: 'https://insideweather.com/collections/dining-tables/products/48s17cb54ce-elle-dining-table-389531'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-table_col_02.jpg?1663406', 'title': 'Rectangle Dining Table', 'linkText': 'Customize starting at $278', hyperLink: 'https://insideweather.com/collections/dining-tables/products/48sc4246094-tate-dining-table-389448'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-table_col_03.jpg?1663406', 'title': 'Oval Dining Table', 'linkText': 'Customize starting at $278', hyperLink: 'https://insideweather.com/collections/dining-tables/products/48s34924498-kloss-dining-table-390386'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-table_col_04.jpg?1663406', 'title': 'Square Dining Table', 'linkText': 'Customize starting at $278', hyperLink: 'https://insideweather.com/collections/dining-tables/products/48sdc402de3-jax-dining-table-390331'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Shape"
+          section-description="Customize every detail from tabletop design all the way down to the legs."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_01_d-min.jpg?1663192', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_01_m-min.jpg?1663192', 'title': 'Customize Your Style','description': 'Whether you’ve got a favorite color, a thing for wood grain, or you simply dig stylish patterns, the top of your table is prime real estate to make a statement and put the perfect accent on your room.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_02_d.mp4?1663087', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_02_m.mp4?1663170', 'title': 'Life-Proof','description': 'Not only does it look good, but it’s also ruggedly durable. A scuff-free, UV-resistant surface means that it’s perfect for that sunny spot in your home. It’s also FDA approved for all you messy eaters out there. And when you’re done, wipe it down with any cleaner you like.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_03_d-min.jpg?1663183', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_tables_details_03_m-min.jpg?1663183', 'title': 'Materials You Want','description': 'Your table is constructed from 100% FSC-certified birchwood, so you know it’s sustainable and dependable. Woods and metals for the bases are made from solid ash wood and high-strength, powder-coated stainless steel. Don’t worry, we’ll never skip the details.'},]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Free Shipping','description':'That’s right. Free shipping on every order! And did we mention that it ships within days? Besides, life’s too short to wait...and you desperately need a place to sit.'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}]"%}
+    
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_01-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S7EBD6014/48S7EBD6014-0_small.jpg','title':'Latte Square Dining Table in Black Marble','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s7ebd6014-jax-dining-table-390355'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82SB33A2A03/82SB33A2A03-0_small.jpg','title':'Latte Polk Armchair in Heathered Taupe','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82sb33a2a03-polk-armchair-899149'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S91847F2B/195S91847F2B-0_small.jpg','title':'Latte Sloan Credenza in Black Marble','price':'$518', 'productUrl':'https://insideweather.com/collections/credenzas/products/195s91847f2b-sloan-credenza-391786'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_02-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S8432B6FB/48S8432B6FB-0_small.jpg','title':'Latte Rectangle Dining Table in Muted Melange','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s8432b6fb-tate-dining-table-757648'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/144S1FC54B97/144S1FC54B97-0_small.jpg','title':'Nola Side Chair in Aegean Blue','price':'$128', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/144s1fc54b97-nola-side-chair-888985'},]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_03-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S8D51AA46/48S8D51AA46-0_small.jpg','title':'Latte Round Dining Table in White Marble','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s8d51aa46-elle-dining-table-389378'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S4269F128/82S4269F128-0_small.jpg','title':'Latte Luna Side Chair in Sunny Tropics','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s4269f128-luna-side-chair-897356'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_04-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S91CA0B32/48S91CA0B32-0_small.jpg','title':'Latte Round Dining Table in Vibrant Dark Blue','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s91ca0b32-elle-dining-table-756808'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S9AB6F35F/82S9AB6F35F-0_small.jpg','title':'Latte Kobe Side Chair in Vibrant Yellow','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s9ab6f35f-kobe-side-chair-920159'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_05-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S2AC4926D/48S2AC4926D-0.jpg','title':'Latte Rectangle Dining Table in Latte Wood','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s2ac4926d-tate-dining-table-389446'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/144S2042D2C9/144S2042D2C9-0_small.jpg','title':'Nola Side Chair in Whiskey','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/144s2042d2c9-nola-side-chair-889031'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_06-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48SD386112F/48SD386112F-0_small.jpg','title':'Latte Rectangle Dining Table in White','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48sd386112f-tate-dining-table-389578'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/144S153497F3/144S153497F3-0_small.jpg','title':'Nola Side Chair in Cayenne','price':'$98', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/144s153497f3-nola-side-chair-888825'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195SEA0111A6/195SEA0111A6-0_small.jpg','title':'Latte Voss Sideboard in Nordic Blue','price':'$738', 'productUrl':'https://insideweather.com/collections/sideboards/products/195sea0111a6-voss-sideboard-141384'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_07-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48SDE7558C2/48SDE7558C2-0_small.jpg','title':'Espresso Round Dining Table in Metallic Mashup','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48sde7558c2-elle-dining-table-753330'}]},
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_08-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S8D1759A5/48S8D1759A5-0.jpg','title':'Espresso Round Dining Table in Vibrant Tessellation','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s8d1759a5-elle-dining-table-752669'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S34D1B328/82S34D1B328-0_small.jpg','title':'Espresso Luna Side Chair in Vibrant Red','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s34d1b328-luna-side-chair-920744'}]},  
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_10-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S2AC4926D/48S2AC4926D-0.jpg','title':'Latte Rectangle Dining Table in Latte Wood','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48s2ac4926d-tate-dining-table-389446'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S733C5F86/82S733C5F86-0_small.jpg','title':'Latte Kobe Side Chair in Nordic Red','price':'$148', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s733c5f86-kobe-side-chair-922426'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining-tables_lg_09-min.jpg?1663684','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/48SAC14EDA6/48SAC14EDA6-0_small.jpg','title':'Latte Round Dining Table in Dark Cool Gray','price':'$298', 'productUrl':'https://insideweather.com/collections/dining-tables/products/48sac14eda6-elle-dining-table-756696'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/82S5093640B/82S5093640B-0_small.jpg','title':'Latte Polk Side Chair in Onyx','price':'$168', 'productUrl':'https://insideweather.com/collections/dining-chairs/products/82s5093640b-polk-side-chair-892157'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Visualize the Possibilities"
+        section-description="Ask more from your furniture."
+        pop-up-heading="Visualize the Possibilities"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script> 
