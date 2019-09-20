@@ -344,6 +344,8 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/mixins';
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 
 .VueCarousel-pagination {
   & .VueCarousel-dot {

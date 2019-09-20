@@ -5,8 +5,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as emptyHeart } from '@fortawesome/pro-light-svg-icons';
 import { faHeart as filledHeart } from '@fortawesome/pro-solid-svg-icons';
 import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+// this import moved into ReviewModal to fix not being included in CSS output
+// import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 // this import moved into ReviewCarousel to fix not being included in CSS output
