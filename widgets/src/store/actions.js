@@ -45,26 +45,37 @@ export function loadProductImages({ dispatch, commit, state }) {
     });
 }
 
-/**
- * Pre-select filters and options that apply to the currently displayed product on PDP
- */
-export function populateSelectedFromActive({ state, commit }) {
-  if (!state.activeProduct || !state.filters || !state.filters.filterGroups) {
+export function populateSelected({ state, dispatch, commit }, selectedOptions) {
+  if (!state.filters.attributes) {
+    // wait for filters to be available if not loaded yet
+    setTimeout(() => {
+      dispatch('populateSelected', selectedOptions);
+    }, 100);
     return;
   }
 
-  const options = [];
-  state.filters.filterGroups.forEach(({ parameter }) => {
-    if (typeof state.activeProduct[parameter] !== 'undefined') {
-      options.push({
-        group: parameter,
-        parameter,
-        values: [state.activeProduct[parameter]],
-      });
+  const cleanOptions = {};
+  Object.entries(selectedOptions || {}).forEach(([parameter, value]) => {
+    const attribute = state.filters.attributes.find(item => item.parameter === parameter);
+    if (!attribute) {
+      console.error(`Attribute "${parameter}" not found`);
+      return;
+    }
+    let selected = attribute.values.find(item => item.value === value);
+    if (!selected) {
+      console.error(`Attribute value "${value}" not found`);
+      selected = attribute.values[0] || {};
+    }
+    cleanOptions[parameter] = selected.value;
+  });
+
+  state.filters.attributes.forEach(({ parameter, values }) => {
+    if (!cleanOptions[parameter]) {
+      cleanOptions[parameter] = values[0].value;
     }
   });
 
-  commit('setSelectedOptions', options);
+  commit('setSelectedOptions', cleanOptions);
 }
 
 export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20 }) {
@@ -110,7 +121,7 @@ export function createProductFromSelected({ state, commit }, { name, model, imag
 export default {
   loadProductImages,
   pullFilter,
-  populateSelectedFromActive,
+  populateSelected,
   getReviews,
   getProductReviews,
   createProductFromSelected,

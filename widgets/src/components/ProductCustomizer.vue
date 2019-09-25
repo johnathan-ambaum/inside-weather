@@ -240,7 +240,7 @@ export default {
     }
 
     this.setVariantId(this.initialVariant);
-    this.setSelectedOptions(this.initialAttributes);
+    this.populateSelected(this.initialAttributes);
     this.loadProductImages();
 
     this.$bus.$on('filter:toggle', (payload) => {
@@ -269,11 +269,11 @@ export default {
     ...mapActions([
       'pullFilter',
       'loadProductImages',
+      'populateSelected',
       'createProductFromSelected',
     ]),
 
     ...mapMutations([
-      'setSelectedOptions',
       'updateCategory',
       'toggleFavorite',
       'setVariantId',
