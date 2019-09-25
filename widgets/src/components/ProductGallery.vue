@@ -62,12 +62,6 @@ export default {
     };
   },
 
-  computed: {
-    scale() {
-      return this.filters.detailScale;
-    },
-  },
-
   methods: {
     swapImage(index) {
       this.galleryImage = index;

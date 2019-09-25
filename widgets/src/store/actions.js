@@ -77,6 +77,7 @@ export function populateSelected({ state, dispatch, commit }, selectedOptions) {
   });
 
   commit('setSelectedOptions', cleanOptions);
+  dispatch('loadProductImages');
 }
 
 export function getReviews({ commit }, { category = 'sofas', from = 0, size = 20 }) {

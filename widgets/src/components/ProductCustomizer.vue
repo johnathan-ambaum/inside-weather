@@ -243,7 +243,6 @@ export default {
 
     this.setVariantId(this.initialVariant);
     this.populateSelected(this.initialAttributes);
-    this.loadProductImages();
 
     this.$bus.$on('filter:toggle', (payload) => {
       this.setOption(payload);
@@ -270,7 +269,6 @@ export default {
   methods: {
     ...mapActions([
       'pullFilter',
-      'loadProductImages',
       'populateSelected',
       'createProductFromSelected',
     ]),
