@@ -71,6 +71,7 @@ export function populateSelected({ state, dispatch, commit }, selectedOptions) {
 
   state.filters.attributes.forEach(({ parameter, values }) => {
     if (!cleanOptions[parameter]) {
+      console.error(`Missing value for "${parameter}" attribute`);
       cleanOptions[parameter] = values[0].value;
     }
   });
