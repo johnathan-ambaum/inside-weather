@@ -4,7 +4,10 @@
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <!-- <div class="ProductCustomizer__Model">{{ modelNumber }}</div> -->
+          <div
+            v-if="modelNumber"
+            class="ProductCustomizer__Model"
+          >Model No&deg; {{ modelNumber }}</div>
         </div>
         <span
           :class="{ isFavorite }"
@@ -46,7 +49,6 @@
       <div class="ProductCustomizer__NameOverlay">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div class="ProductCustomizer__Model">{{ modelNumber }}</div>
         </div>
         <div class="ProductCustomizer__PriceRow">
           <span class="ProductCustomizer__Price">${{ productPrice }}</span>
@@ -421,10 +423,17 @@ body.ProductCustomizer--Open {
 
   &__Model {
     display: block;
-    font-size: 18px;
-    font-weight: 700;
-    padding-top: 10px;
-    letter-spacing: $normal-text-spacing;
+    font-family: $font-stack-avalon;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: .12em;
+    margin-top: 5px;
+    text-transform: uppercase;
+
+    @include at-query($breakpoint-large) {
+      font-size: 10px;
+      margin-top: 0;
+    }
   }
 
   &__Favorite {
