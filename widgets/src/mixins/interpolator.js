@@ -18,7 +18,11 @@ export default {
     },
 
     modelNumber() {
-      return '';
+      if (!this.templates) {
+        return '';
+      }
+      const { template = '' } = this.templates.find(item => item.key === 'model_number') || {};
+      return this.interpolateString(template);
     },
 
     productPrice() {

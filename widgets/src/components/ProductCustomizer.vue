@@ -289,6 +289,7 @@ export default {
 
       this.createProductFromSelected({
         name: this.productName,
+        model: this.modelNumber,
         image: this.productImages[0].full,
       });
       this.active = false;

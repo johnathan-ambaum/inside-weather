@@ -36,7 +36,10 @@ export function loadProductImages({ dispatch, commit, state }) {
   }
 
   apiClient
-    .getImages(state.selectedOptions)
+    .getImages({
+      type: state.category,
+      attributes: state.selectedOptions,
+    })
     .then((images) => {
       commit('setProductImages', images);
     });
