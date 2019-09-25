@@ -90,12 +90,14 @@ export function getProductReviews({ commit }, {
     });
 }
 
-export function createProductFromSelected({ state, commit }, { name, image }) {
+export function createProductFromSelected({ state, commit }, { name, model, image }) {
   commit('setProductCreationInProgress', true);
 
   apiClient
     .createProduct({
       name,
+      model,
+      type: state.category,
       image,
       attributes: state.selectedOptions,
     })
