@@ -32,8 +32,11 @@ export default {
 
       return Object.entries(this.selectedOptions).reduce((total, [parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
+        if (!attribute) {
+          return total;
+        }
         const selected = attribute.values.find(item => item.value === value);
-        if (!selected.price_markup) {
+        if (!selected || !selected.price_markup) {
           return total;
         }
         return total + Number(selected.price_markup);
@@ -42,9 +45,17 @@ export default {
   },
 
   methods: {
-    interpolateString(text) {
+    interpolateString(text, debug = false) {
+      if (!Object.keys(this.selectedOptions).length) {
+        return '';
+      }
+
       // placeholders for interpolation are formatted as {{Attribute Dislay Name.selected_value_property}}
       const matches = text.match(/\{\{[^.]+\.[^}]+\}\}/g);
+
+      if (debug) {
+        console.log({ matches });
+      }
 
       if (!matches) {
         return text;
@@ -56,9 +67,15 @@ export default {
         let replacement;
         const [attributeName, property] = placeholder.replace(/[{}]/g, '').split('.');
         const attribute = this.attributes.find(att => att.name === attributeName);
+        if (debug) {
+          console.log({ attributeName, property, attribute: JSON.parse(JSON.stringify(attribute)) });
+        }
         if (attribute) {
           const selected = attribute.values.find(item => item.value === this.selectedOptions[attribute.parameter]) || {};
           replacement = selected[property] || '';
+          if (debug) {
+            console.log({ selected: JSON.parse(JSON.stringify(selected)), replacement });
+          }
         }
         content = content.split(placeholder).join(replacement);
       });
