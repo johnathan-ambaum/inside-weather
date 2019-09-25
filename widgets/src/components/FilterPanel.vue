@@ -15,7 +15,7 @@
             :key="group.id"
             :value="group"
           >
-            <template v-if="group.group_type === 'sort'">Sort: <strong>A-Z</strong></template>
+            <template v-if="group.group_type === 'sort'">Sort: <strong>{{ group.name }}</strong></template>
             <template v-else>{{ group.name }}</template>
           </option>
         </select>
@@ -72,12 +72,6 @@ export default {
       return this.values.filter(value => value[this.group.reference]);
     },
   },
-
-  // mounted() {
-  //   this.$el.querySelectorAll('.scrollable').forEach((el) => {
-  //     SimpleScrollbar.initEl(el);
-  //   });
-  // },
 };
 </script>
 
