@@ -5,7 +5,7 @@
       <div
         v-for="option in options"
         :key="option.image"
-        class="InpirationOptions__Item"
+        class="InspirationOptions__Item"
       >
         <img :src="option.image">
       </div>
@@ -59,11 +59,14 @@ export default {
   }
 
   &__Item {
+    align-items: center;
     cursor: pointer;
-    flex: 1 1 percentage(1 / 3);
+    display: flex;
+    flex: 1 1 50%;
+    justify-content: center;
 
-    @include at-query($breakpoint-small) {
-      flex: 1 1 50%;
+    @include at-query($breakpoint-mlarge) {
+      flex: 1 1 percentage(1 / 3);
     }
   }
 }
