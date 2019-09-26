@@ -114,7 +114,7 @@ export default {
   }
 
   &__Thumb img {
-    border: .25px solid #202020;
+    border: 1px solid #D4D0CA;
   }
 
   &__Zoom {

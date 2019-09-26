@@ -92,7 +92,7 @@ export default {
 
   &__Header {
     align-items: center;
-    border-bottom: .25px solid #202020;
+    border-bottom: 1px solid #D4D0CA;
     display: flex;
     font-size: 24px;
     font-size: 600;
@@ -100,7 +100,7 @@ export default {
     text-align: center;
 
     @include at-query($breakpoint-small) {
-      border-top: .25px solid #202020;
+      border-top: 1px solid #D4D0CA;
       flex-direction: row;
       font-size: 18px;
       justify-content: space-between;
@@ -129,7 +129,7 @@ export default {
   }
 
   &__GroupSelect {
-    border: .25px solid #202020;
+    border: 1px solid #D4D0CA;
     color: #202020;
     font-size: 11px;
     font-weight: 400;

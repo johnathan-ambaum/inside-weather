@@ -56,7 +56,7 @@ export default {
   .select-wrap {
     select {
       background-position: right 15px center;
-      border: .25px solid #202020;
+      border: 1px solid #D4D0CA;
       height: 100%;
       margin-right: 20px;
       padding: 0 22px 0 10px;

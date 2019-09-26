@@ -571,7 +571,7 @@ body.ProductCustomizer--Open {
   }
 
   &__NavHeading {
-    border-bottom: .25px solid #202020;
+    border-bottom: 1px solid #D4D0CA;
     display: flex;
     font-size: 18px;
     font-weight: 600;
@@ -581,7 +581,7 @@ body.ProductCustomizer--Open {
     text-align: center;
 
     @include at-query($breakpoint-small) {
-      border-top: .25px solid #202020;
+      border-top: 1px solid #D4D0CA;
     }
 
     @include at-query($breakpoint-large) {
@@ -624,7 +624,7 @@ body.ProductCustomizer--Open {
       padding: 24px 18px;
 
       & + & {
-        border-left: .25px solid #202020;
+        border-left: 1px solid #D4D0CA;
       }
 
       img {
@@ -634,7 +634,7 @@ body.ProductCustomizer--Open {
 
     @include at-query($breakpoint-large) {
       & + & {
-        border-top: .25px solid #202020;
+        border-top: 1px solid #D4D0CA;
       }
     }
   }
