@@ -57,6 +57,10 @@ export default {
     interpolateWithValues({
       template, attributes, selectedOptions, debug = false,
     }) {
+      if (debug) {
+        console.log({ selectedOptions });
+      }
+
       if (!Object.keys(selectedOptions).length) {
         return '';
       }
@@ -85,7 +89,7 @@ export default {
           const selected = attribute.values.find(item => item.value === selectedOptions[attribute.parameter]) || {};
           replacement = selected[property] || '';
           if (debug) {
-            console.log({ selected: JSON.parse(JSON.stringify(selected)), replacement });
+            console.log({ selectedValue: selectedOptions[attribute.parameter], selected: JSON.parse(JSON.stringify(selected)), replacement });
           }
         }
         content = content.split(placeholder).join(replacement);
