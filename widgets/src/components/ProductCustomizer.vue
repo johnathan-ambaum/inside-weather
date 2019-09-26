@@ -368,6 +368,14 @@ export default {
         return;
       }
 
+      if (!this.activeProduct.id) {
+        this.createProduct();
+        setTimeout(() => {
+          this.addToCart(quantity);
+        }, 250);
+        return;
+      }
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {

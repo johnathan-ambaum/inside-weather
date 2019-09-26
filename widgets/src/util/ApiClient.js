@@ -55,18 +55,11 @@ export default class ApiClient {
    * Construct proper request to favorites endpoint, wrapping the request
    * in a Promise which is returned to the caller for handling
    */
-  sendFavoriteRequest({
-    // eslint-disable-next-line camelcase
-    method, customerId, handle, product_type, name, cover_image_url, attributes,
-  }) {
+  sendFavoriteRequest({ method, customerId, favorites }) {
     const url = 'https://iw-favorites.herokuapp.com/api/v2/favorites';
     const body = {
       user_id: customerId,
-      handle,
-      product_type,
-      name,
-      cover_image_url,
-      attributes,
+      favorites,
     };
 
     return new Promise((resolve, reject) => this.sendRequest({
@@ -80,7 +73,8 @@ export default class ApiClient {
    * @param {Object} productData
    */
   addFavorites(customerId, productData) {
-    return this.sendFavoriteRequest({ method: 'POST', customerId, ...productData });
+    const favorites = Array.isArray(productData) ? productData : [productData];
+    return this.sendFavoriteRequest({ method: 'POST', customerId, favorites });
   }
 
   /**
@@ -89,7 +83,8 @@ export default class ApiClient {
    * @param {Object} productData
    */
   removeFavorites(customerId, productData) {
-    return this.sendFavoriteRequest({ method: 'DELETE', customerId, ...productData });
+    const favorites = Array.isArray(productData) ? productData : [productData];
+    return this.sendFavoriteRequest({ method: 'DELETE', customerId, favorites });
   }
 
   getReviews(category, from, size) {

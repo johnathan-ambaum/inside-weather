@@ -122,6 +122,10 @@ export function createProductFromSelected({ state, dispatch, commit }, { name, m
       commit('setActiveProduct', { id, handle });
       commit('setProductCreationInProgress', false);
       dispatch('updateUrl', { handle, replace: true });
+    })
+    .catch((err) => {
+      console.error(err);
+      commit('setProductCreationInProgress', false);
     });
 }
 

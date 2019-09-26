@@ -101,8 +101,8 @@
   <!-- Browse and product customizer widgets -->
   {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'full-reviews'  -%}
     {%- if customer -%}
-      {%- if customer.metafields.global.favorites -%}
-        {%- assign favorites = customer.metafields.global.favorites -%}
+      {%- if customer.metafields.global.v2-favorites -%}
+        {%- assign favorites = customer.metafields.global.v2-favorites -%}
       {%- else -%}
         {%- assign favorites = '' | split: ',' -%}
       {%- endif -%}

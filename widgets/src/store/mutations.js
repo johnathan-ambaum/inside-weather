@@ -117,6 +117,10 @@ export function setSelectedOptions(state, selected) {
  * Add or remove a product from the user's favorites
  */
 export function toggleFavorite(state, { customerId, product }) {
+  if (!product.id || !product.handle) {
+    return;
+  }
+
   const index = state.favorites.findIndex(fav => fav && fav.handle === product.handle);
 
   if (index !== -1) {
@@ -159,14 +163,6 @@ export function toggleFavorite(state, { customerId, product }) {
   apiClient.addFavorites(customerId, product);
 }
 
-/**
- * Override the currently favorited products. This affects local state only,
- * for displaying the icon filled or not.
- */
-export function setFavorites(state, { skus }) {
-  Vue.set(state, 'favorites', skus);
-}
-
 export function setReviews(state, { reviews }) {
   Vue.set(state, 'reviews', reviews);
 }
@@ -197,7 +193,6 @@ export default {
   setSelectedOptions,
   applyQueryString,
   toggleFavorite,
-  setFavorites,
   setReviews,
   setTotalReviews,
   setProductReviews,
