@@ -162,6 +162,10 @@ $tile-size: 100vw;
     bottom: 50px;
     position: absolute;
     width: 100%;
+
+    @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
+      bottom: 22vw;
+    }
   }
 
   &__Bullets {

@@ -96,46 +96,49 @@ export default {
     align-items: center;
     border-bottom: 1px solid #D4D0CA;
     display: flex;
-    font-size: 24px;
-    font-size: 600;
-    line-height: 30px;
     text-align: center;
 
     @include at-query($breakpoint-small) {
       border-top: 1px solid #D4D0CA;
       flex-direction: row;
-      font-size: 18px;
-      justify-content: space-between;
       padding: 20px $horizontal-wrapper-padding;
     }
 
     @include at-query($breakpoint-large) {
-      flex: 0 0 $sidebar-heading-height;
+      flex: 0 0 auto;
       flex-direction: column;
       justify-content: center;
+      padding: 40px 0 28px;
     }
   }
 
   &__Title {
+    font-size: 18px;
+    font-weight: 600;
     line-height: 1;
 
     @include at-query($breakpoint-small) {
       padding: 6px 30px 6px 0;
     }
+
+    @include at-query($breakpoint-large) {
+      font-size: 24px;
+    }
   }
 
   &__Filter {
     @include at-query($breakpoint-small) {
-      flex: 1;
+      flex: 0 0 auto;
     }
   }
 
   &__GroupSelect {
+    background-color: #fff;
     border: 1px solid #D4D0CA;
     color: #202020;
     font-size: 11px;
     font-weight: 400;
-    letter-spacing: .08em;
+    letter-spacing: .0875em;
     line-height: 28px;
     max-width: 195px;
     padding-bottom: 0;
@@ -148,13 +151,8 @@ export default {
 
     @include at-query($breakpoint-large) {
       font-size: 13px;
-      margin-top: 18px;
+      margin-top: 15px;
     }
-  }
-
-  &__Title {
-    font-size: 1.2rem;
-    font-weight: 600;
   }
 
   &__Body {

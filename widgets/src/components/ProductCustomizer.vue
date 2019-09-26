@@ -410,6 +410,7 @@ body.ProductCustomizer--Open {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  justify-content: space-between;
   left: 0;
   opacity: 0;
   position: fixed;
@@ -590,16 +591,26 @@ body.ProductCustomizer--Open {
   &__Slider,
   &__Gallery {
     flex: 1;
+    min-height: 0;
+  }
+
+  &__Slider {
+    @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
+      flex: 0 1 calc(100vh - 350px);
+      margin-top: -10%;
+    }
   }
 
   &__Sidebar {
+    background: #fff;
     border-left: 1px solid #b7b7b7;
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
+    z-index: 100;
 
     @include at-query($breakpoint-large) {
-      flex: 0 0 440px;
+      flex: 0 0 458px;
     }
   }
 
@@ -651,7 +662,7 @@ body.ProductCustomizer--Open {
     -webkit-overflow-scrolling: touch;
 
     @include at-query($breakpoint-large) {
-      flex: 0 1 calc(100% - #{$sidebar-heading-height});
+      flex: 0 1 100%;
       flex-direction: column;
     }
   }
