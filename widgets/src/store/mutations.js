@@ -67,6 +67,7 @@ export function applyQueryString(state) {
 export function setOption(state, { parameter, value }) {
   Vue.set(state.selectedOptions, parameter, value);
   this.dispatch('loadProductImages');
+  this.dispatch('updateUrl');
 }
 
 /**
@@ -109,6 +110,7 @@ export function selectPanel(state, newPanel) {
  */
 export function setSelectedOptions(state, selected) {
   Vue.set(state, 'selectedOptions', selected);
+  this.dispatch('loadProductImages');
 }
 
 /**

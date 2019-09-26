@@ -243,14 +243,42 @@ export default {
       this.customerId = window.pnwCfg.id;
     }
 
-    this.setVariantId(this.initialVariant);
-    this.populateSelected(this.initialAttributes);
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has('attributes')) {
+      const queryAttributes = {};
+      params.get('attributes').split(',').forEach((attribute) => {
+        const [key, value] = decodeURIComponent(attribute).split(':');
+        queryAttributes[key] = value;
+      });
+      this.populateSelected({
+        selectedOptions: queryAttributes,
+      }).then(() => {
+        this.createProduct();
+      });
+    } else {
+      this.setActiveProduct({
+        id: this.initialVariant,
+        handle: this.initialHandle,
+      });
+      this.populateSelected({
+        selectedOptions: this.initialAttributes,
+        exists: true,
+      });
+    }
 
     this.$bus.$on('filter:toggle', (payload) => {
       this.setOption(payload);
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
+    });
+
+    window.addEventListener('popstate', ({ state }) => {
+      if (state) {
+        this.setActiveProduct(state.product);
+        this.setSelectedOptions(state.attributes);
+      }
     });
   },
 
