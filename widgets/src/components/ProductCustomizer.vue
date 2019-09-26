@@ -66,7 +66,7 @@
       <div class="ProductCustomizer__Sidebar">
         <div class="ProductCustomizer__SidebarBody">
           <nav
-            v-if="!openPanel"
+            v-show="!openPanel"
             class="ProductCustomizer__Nav"
           >
             <div class="ProductCustomizer__NavHeading">Customize Your {{ category }}</div>
