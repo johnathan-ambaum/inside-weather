@@ -55,12 +55,18 @@ export default class ApiClient {
    * Construct proper request to favorites endpoint, wrapping the request
    * in a Promise which is returned to the caller for handling
    */
-  sendFavoriteRequest({ method, customerId, skus }) {
+  sendFavoriteRequest({
+    // eslint-disable-next-line camelcase
+    method, customerId, handle, product_type, name, cover_image_url, attributes,
+  }) {
     const url = 'https://iw-favorites.herokuapp.com/api/v2/favorites';
-    const skuArray = Array.isArray(skus) ? skus : [skus];
     const body = {
       user_id: customerId,
-      skus: skuArray,
+      handle,
+      product_type,
+      name,
+      cover_image_url,
+      attributes,
     };
 
     return new Promise((resolve, reject) => this.sendRequest({
@@ -71,19 +77,19 @@ export default class ApiClient {
   /**
    * Add SKU(s) to customer's saved favorites
    * @param {Number} customerId
-   * @param {Array|String} skus
+   * @param {Object} productData
    */
-  addFavorites(customerId, skus) {
-    return this.sendFavoriteRequest({ method: 'POST', customerId, skus });
+  addFavorites(customerId, productData) {
+    return this.sendFavoriteRequest({ method: 'POST', customerId, ...productData });
   }
 
   /**
    * Remove SKU(s) from customer's saved favorites
    * @param {Number} customerId
-   * @param {Array|String} skus
+   * @param {Object} productData
    */
-  removeFavorites(customerId, skus) {
-    return this.sendFavoriteRequest({ method: 'DELETE', customerId, skus });
+  removeFavorites(customerId, productData) {
+    return this.sendFavoriteRequest({ method: 'DELETE', customerId, ...productData });
   }
 
   getReviews(category, from, size) {
@@ -134,7 +140,7 @@ export default class ApiClient {
   createProduct({
     name, model, type, image, attributes,
   }) {
-    const url = 'https://iw-content.herokuapp.com/api/v1/product/Sofa';
+    const url = `https://iw-content.herokuapp.com/api/v1/product/${type}`;
     const body = {
       name,
       model_number: model,

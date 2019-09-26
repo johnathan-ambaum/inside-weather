@@ -145,6 +145,7 @@ export default {
   props: {
     category: { type: String, required: true },
     initialVariant: { type: Number, required: true },
+    initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
   },
 
@@ -164,7 +165,8 @@ export default {
       productImages: state => state.productImages,
       selectedOptions: state => state.selectedOptions,
       productCreationInProgress: state => state.productCreationInProgress,
-      variantId: state => state.variantId,
+      activeProduct: state => state.activeProduct,
+      favorites: state => state.favorites,
     }),
 
     isOpen() {
@@ -172,7 +174,7 @@ export default {
     },
 
     isFavorite() {
-      return false;
+      return this.favorites.some(favorite => favorite && favorite.handle === this.activeProduct.handle);
     },
 
     favoriteIcon() {
@@ -276,10 +278,25 @@ export default {
     ...mapMutations([
       'updateCategory',
       'toggleFavorite',
-      'setVariantId',
+      'setActiveProduct',
+      'setSelectedOptions',
       'selectPanel',
       'setOption',
     ]),
+
+    createProduct() {
+      if (!this.productImages.length) {
+        setTimeout(() => {
+          this.createProduct();
+        }, 200);
+        return;
+      }
+      this.createProductFromSelected({
+        name: this.productName,
+        model: this.modelNumber,
+        image: this.productImages[0].full,
+      });
+    },
 
     close() {
       if (this.openPanel) {
@@ -287,11 +304,7 @@ export default {
         return;
       }
 
-      this.createProductFromSelected({
-        name: this.productName,
-        model: this.modelNumber,
-        image: this.productImages[0].full,
-      });
+      this.createProduct();
       this.active = false;
     },
 
@@ -300,9 +313,20 @@ export default {
     },
 
     favoriteCurrentProduct() {
+      if (!this.attributes) {
+        return;
+      }
+
       this.toggleFavorite({
-        attributes: this.selectedOptions,
         customerId: this.customerId,
+        product: {
+          ...this.activeProduct,
+          product_type: this.category,
+          name: this.productName,
+          price: this.productPrice,
+          cover_image_url: this.productImages[0].full,
+          attributes: this.selectedOptions,
+        },
       });
     },
 
@@ -323,7 +347,7 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: this.variantId,
+          id: this.activeProduct.id,
           quantity,
         }),
       })

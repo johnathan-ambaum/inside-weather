@@ -40,13 +40,14 @@
           <product-customizer
             v-cloak
             category="{{ product.type }}"
+            initial-handle="{{ product.handle }}"
             :initial-variant="{{ product.selected_or_first_available_variant.id }}"
             :initial-attributes="{{ product.metafields.products.attributes | json | escape }}"
           ></product-customizer>
         <!-- <product-family v-if="isMobile"></product-family> -->
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
-    <review-carousel category="{{ product.type }}"></review-carousel>
+    <review-carousel category="{{ product.type | handle }}"></review-carousel>
   </div> <!-- #app -->
 
   <script type="application/json" id="ProductJson-{{ section_id }}" data-product-json>

@@ -114,47 +114,47 @@ export function setSelectedOptions(state, selected) {
 /**
  * Add or remove a product from the user's favorites
  */
-export function toggleFavorite(state, { attributes, customerId }) {
-  // const index = state.favorites.findIndex(fav => fav === product.sku);
+export function toggleFavorite(state, { customerId, product }) {
+  const index = state.favorites.findIndex(fav => fav && fav.handle === product.handle);
 
-  // if (index !== -1) {
-  //   state.favorites.splice(index, 1);
-  // } else {
-  //   state.favorites.push(product.sku);
-  // }
+  if (index !== -1) {
+    state.favorites.splice(index, 1);
+  } else {
+    state.favorites.push(product);
+  }
 
   // window.dataLayer.push({
   //   event: 'AddToWishlist',
   //   eventCategory: 'Favorite',
   //   eventAction: index === -1 ? 'add' : 'remove',
-  //   eventLabel: product.long_display_name,
+  //   eventLabel: product.name,
   //   productIds: [product.sku],
-  //   productName: product.long_display_name,
+  //   productName: product.name,
   //   totalValue: product.price,
   //   productHandle: product.handle,
   // });
 
-  // if (!customerId) {
-  //   localStorage.setItem('favoriteProducts', JSON.stringify(state.favorites));
-  //   return;
-  // }
+  if (!customerId) {
+    localStorage.setItem('favoriteProducts', JSON.stringify(state.favorites));
+    return;
+  }
 
-  // // sync all local favorites to server if first time
-  // if (!customerFavorites.length && localFavorites.length) {
-  //   apiClient
-  //     .addFavorites(customerId, Array.from(state.favorites))
-  //     .then(() => {
-  //       localStorage.removeItem('favoriteProducts');
-  //     });
-  //   return;
-  // }
+  // sync all local favorites to server if first time
+  if (!customerFavorites.length && localFavorites.length) {
+    apiClient
+      .addFavorites(customerId, Array.from(state.favorites))
+      .then(() => {
+        localStorage.removeItem('favoriteProducts');
+      });
+    return;
+  }
 
-  // if (index !== -1) {
-  //   apiClient.removeFavorites(customerId, product.sku);
-  //   return;
-  // }
+  if (index !== -1) {
+    apiClient.removeFavorites(customerId, product);
+    return;
+  }
 
-  // apiClient.addFavorites(customerId, product.sku);
+  apiClient.addFavorites(customerId, product);
 }
 
 /**
@@ -181,8 +181,8 @@ export function setProductCreationInProgress(state, inProgress) {
   Vue.set(state, 'productCreationInProgress', inProgress);
 }
 
-export function setVariantId(state, id) {
-  Vue.set(state, 'variantId', id);
+export function setActiveProduct(state, product) {
+  Vue.set(state, 'activeProduct', product);
 }
 
 export default {
@@ -200,5 +200,5 @@ export default {
   setTotalReviews,
   setProductReviews,
   setProductCreationInProgress,
-  setVariantId,
+  setActiveProduct,
 };

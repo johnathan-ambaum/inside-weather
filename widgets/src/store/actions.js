@@ -114,8 +114,8 @@ export function createProductFromSelected({ state, commit }, { name, model, imag
       image,
       attributes: state.selectedOptions,
     })
-    .then(({ variant: { id } }) => {
-      commit('setVariantId', id);
+    .then(({ handle, variant: { id } }) => {
+      commit('setActiveProduct', { id, handle });
       commit('setProductCreationInProgress', false);
     });
 }
