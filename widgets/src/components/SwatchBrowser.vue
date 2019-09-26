@@ -4,11 +4,21 @@
       <div>
         <h3>Still Deciding?</h3>
         <p>Get 15 samples shipped to your door.</p>
-        <span class="SwatchBrowser__TriggerLink">Get Free Swatches</span>
+        <span
+          v-if="screenWidth < 768"
+          class="SwatchBrowser__TriggerLink"
+        >Get Free Swatches</span>
+        <button
+          v-if="isTablet"
+          @click.prevent
+        >Get Free Swatches</button>
       </div>
       <div>
         <img src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/free-swatches.png">
-        <button @click.prevent>Get Free Swatches</button>
+        <button
+          v-if="!isMobile"
+          @click.prevent
+        >Get Free Swatches</button>
       </div>
     </div>
     <div class="SwatchBrowser" />
@@ -16,7 +26,13 @@
 </template>
 
 <script>
-export default {};
+import screenMonitor from '../mixins/screenMonitor';
+
+export default {
+  mixins: [
+    screenMonitor,
+  ],
+};
 </script>
 
 <style lang="scss">
@@ -28,13 +44,18 @@ export default {};
     align-items: center;
     background: #f2f4f4;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 50px;
-    padding: 30px $horizontal-wrapper-padding;
+    padding: 34px;
+
+    @include at-query($breakpoint-mlarge) {
+      padding: 36px;
+    }
 
     @include at-query($breakpoint-large) {
       display: block;
       margin: 0;
-      padding: 20px 0 50px;
+      padding: 48px 0 50px;
       position: sticky;
       text-align: center;
     }
@@ -42,6 +63,10 @@ export default {};
     h3 {
       font-size: 18px;
       font-weight: 600;
+
+      @include at-query($breakpoint-mlarge) {
+        font-size: 32px;
+      }
 
       @include at-query($breakpoint-large) {
         font-size: 28px;
@@ -54,6 +79,11 @@ export default {};
       font-weight: 500;
       line-height: 23px;
       margin: 0;
+
+      @include at-query($breakpoint-mlarge) {
+        font-size: 15px;
+        letter-spacing: .125em;
+      }
     }
 
     img {
@@ -77,20 +107,17 @@ export default {};
     #{&}Link {
       margin-top: 10px;
       text-decoration: underline;
-
-      @include at-query($breakpoint-large) {
-        display: none;
-      }
     }
 
     button {
       background: #fff;
       border: 1px solid #202020;
+      margin-top: 30px;
       padding: 12px 0;
       width: 100%;
 
-      @include at-query($breakpoint-small) {
-        display: none;
+      @include at-query($breakpoint-large) {
+        margin-top: 0;
       }
     }
 
@@ -102,8 +129,17 @@ export default {};
       }
 
       &:last-child {
-        display: inline-block;
         flex: 0 0 35%;
+
+        @include at-query($breakpoint-mlarge) {
+          display: flex;
+          flex: 0 0 45%;
+          justify-content: flex-end;
+        }
+
+        @include at-query($breakpoint-large) {
+          display: inline-block;
+        }
       }
     }
   }

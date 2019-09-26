@@ -4,6 +4,7 @@ export default {
       screenWidth: null,
       screenHeight: null,
       isMobile: false,
+      isTablet: false,
     };
   },
 
@@ -16,6 +17,7 @@ export default {
         || document.documentElement.clientHeight
         || document.body.clientHeight;
       this.isMobile = this.screenWidth < 1024;
+      this.isTablet = this.screenWidth < 1044 && this.screenWidth > 767;
     };
 
     window.addEventListener('resize', saveSize);
