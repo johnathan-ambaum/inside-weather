@@ -45,33 +45,44 @@ export default {
   },
 
   methods: {
-    interpolateString(text, debug = false) {
-      if (!Object.keys(this.selectedOptions).length) {
+    interpolateString(template, debug = false) {
+      return this.interpolateWithValues({
+        template,
+        attributes: this.attributes,
+        selectedOptions: this.selectedOptions,
+        debug,
+      });
+    },
+
+    interpolateWithValues({
+      template, attributes, selectedOptions, debug = false,
+    }) {
+      if (!Object.keys(selectedOptions).length) {
         return '';
       }
 
       // placeholders for interpolation are formatted as {{Attribute Dislay Name.selected_value_property}}
-      const matches = text.match(/\{\{[^.]+\.[^}]+\}\}/g);
+      const matches = template.match(/\{\{[^.]+\.[^}]+\}\}/g);
 
       if (debug) {
         console.log({ matches });
       }
 
       if (!matches) {
-        return text;
+        return template;
       }
 
-      let content = text;
+      let content = template;
 
       matches.forEach((placeholder) => {
         let replacement;
         const [attributeName, property] = placeholder.replace(/[{}]/g, '').split('.');
-        const attribute = this.attributes.find(att => att.name === attributeName);
+        const attribute = attributes.find(att => att.name === attributeName);
         if (debug) {
           console.log({ attributeName, property, attribute: JSON.parse(JSON.stringify(attribute)) });
         }
         if (attribute) {
-          const selected = attribute.values.find(item => item.value === this.selectedOptions[attribute.parameter]) || {};
+          const selected = attribute.values.find(item => item.value === selectedOptions[attribute.parameter]) || {};
           replacement = selected[property] || '';
           if (debug) {
             console.log({ selected: JSON.parse(JSON.stringify(selected)), replacement });

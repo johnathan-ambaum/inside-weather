@@ -1,6 +1,6 @@
 <h1 class="text-center" style="font-family: Avalon, Poppins, 'HelveticaNeue', 'Helvetica Neue', sans-serif; padding-top: 10px;">{{ page.title }}</h1>
 <div id="app">
-  <product-grid :show-favorites="true" v-cloak>
+  <product-grid :products="{{ customer.metafields.global.v2-favorites | json | escape }}" v-cloak>
     You don't have any favorites yet
   </product-grid>
 </div>
