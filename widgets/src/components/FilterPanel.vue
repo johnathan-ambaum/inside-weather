@@ -23,6 +23,7 @@
     </div>
     <swatch-panel
       :parameter="parameter"
+      :swatch-type="swatch_type"
       :values="filteredValues"
       :load="load"
       class="FilterPanel__Body"
@@ -44,6 +45,7 @@ export default {
     index: { type: Number, required: true },
     name: { type: String, required: true },
     groups: { type: Array, default: () => [] },
+    swatch_type: { type: String, default: 'square' },
     values: { type: Array, required: true },
     load: { type: Boolean, default: false },
   },

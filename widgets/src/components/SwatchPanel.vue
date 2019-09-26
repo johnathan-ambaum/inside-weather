@@ -5,6 +5,7 @@
       :key="option.value"
       :option="option"
       :value="isSelected(option)"
+      :type="swatchType"
       :load="load"
       :is-mobile="isMobile"
       @input="toggleOption(option)"
@@ -28,6 +29,7 @@ export default {
 
   props: {
     parameter: { type: String, required: true },
+    swatchType: { type: String, default: 'square' },
     values: { type: Array, default: () => [] },
     load: { type: Boolean, default: false },
   },

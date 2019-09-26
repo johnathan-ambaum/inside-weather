@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ 'is-selected': value }"
+    :class="itemClasses"
     class="SwatchPanelItem"
     @click="toggle"
   >
@@ -38,9 +38,19 @@
 export default {
   props: {
     option: { type: Object, required: true },
+    type: { type: String, default: 'square' },
     value: { type: Boolean, default: false },
     load: { type: Boolean, default: false },
     isMobile: { type: Boolean, default: false },
+  },
+
+  computed: {
+    itemClasses() {
+      return {
+        'is-selected': this.value,
+        [`SwatchPanelItem--${this.type}`]: true,
+      };
+    },
   },
 
   watch: {
@@ -84,12 +94,22 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   min-width: 0;
-  padding: 16px 32px;
+  padding: 18px;
   position: relative;
   text-align: center;
 
+  &--square {
+    padding: 18px 32px;
+  }
+
   @include at-query($breakpoint-large) {
-    flex: 0 0 50%;
+    flex: 0 0 100%;
+
+    @at-root {
+      #{&}--square {
+        flex: 0 0 50%;
+      }
+    }
   }
 
   &.is-selected {
@@ -117,10 +137,12 @@ export default {
     font-family: $font-stack-avalon;
     font-size: 12px;
     font-weight: 500;
+    letter-spacing: .05em;
     line-height: 1;
 
     @include at-query($breakpoint-large) {
       font-size: 14px;
+      line-height: 18px;
     }
   }
 
@@ -133,7 +155,7 @@ export default {
 
     @include at-query($breakpoint-large) {
       font-size: 10px;
-      margin-top: 7px;
+      margin-top: 2px;
     }
   }
 
