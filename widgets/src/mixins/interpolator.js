@@ -3,6 +3,7 @@ import { mapState } from 'vuex';
 export default {
   computed: {
     ...mapState({
+      filters: state => state.filters,
       attributes: state => state.filters.attributes,
       basePrice: state => state.filters.price,
       templates: state => state.filters.templates,
@@ -41,6 +42,27 @@ export default {
         }
         return total + Number(selected.price_markup);
       }, Number(this.basePrice));
+    },
+
+    msrp() {
+      return this.filters.msrp ? Number(this.filters.msrp) : null;
+    },
+
+    msrpDisplay() {
+      if (Math.floor(this.msrp) === this.msrp) {
+        return this.msrp;
+      }
+      return `$${this.msrp.toFixed(2)}`;
+    },
+
+    savings() {
+      const savings = this.msrp - this.productPrice;
+
+      if (Math.floor(savings) === savings) {
+        return savings;
+      }
+
+      return savings.toFixed(2);
     },
   },
 

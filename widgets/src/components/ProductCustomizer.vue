@@ -21,6 +21,14 @@
       <product-detail-slider v-if="isMobile" />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
+        <span
+          v-if="msrp"
+          class="ProductCustomizer__MSRP"
+        >{{ msrpDisplay }}</span>
+        <span
+          v-if="msrp"
+          class="ProductCustomizer__Savings"
+        >YOU SAVE ${{ savings }}</span>
       </div>
       <div class="ProductCustomizer__ShippingDays">
         FREE Shipping | Custom made in {{ fulfillmentTime }}
@@ -513,6 +521,14 @@ body.ProductCustomizer--Open {
       margin-top: -20px;
       position: relative;
     }
+
+    & > * {
+      margin-right: 15px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   &--Active &__PriceRow {
@@ -531,6 +547,21 @@ body.ProductCustomizer--Open {
     @include at-query($breakpoint-large) {
       font-size: 22px;
     }
+  }
+
+  &__MSRP {
+    color: #959595;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .05em;
+    text-decoration: line-through;
+  }
+
+  &__Savings {
+    color: #a9a9a9;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .075em;
   }
 
   &__ShippingDays {
