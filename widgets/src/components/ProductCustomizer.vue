@@ -69,7 +69,7 @@
             v-show="!openPanel"
             class="ProductCustomizer__Nav"
           >
-            <div class="ProductCustomizer__NavHeading">Customize Your {{ category }}</div>
+            <div class="ProductCustomizer__NavHeading">Customize</div>
             <div class="ProductCustomizer__NavBody">
               <div
                 v-for="(attribute, index) in attributes"
