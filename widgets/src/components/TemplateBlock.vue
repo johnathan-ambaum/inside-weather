@@ -4,10 +4,25 @@
     class="TemplateBlock"
   >
     <div
-      v-if="image"
+      v-if="hasImage"
       class="TemplateBlock__ImageSection"
     >
-      <img :src="interpolatedImage">
+      <img
+        v-if="!isVideo"
+        :src="interpolatedImage"
+      >
+      <video
+        v-if="isVideo"
+        preload="none"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source
+          :src="interpolatedImage"
+          type="video/mp4">
+      </video>
     </div>
     <div class="TemplateBlock__TextSection">
       <h3>{{ interpolatedHeading }}</h3>
@@ -26,9 +41,11 @@ export default {
 
   props: {
     image: { type: String, default: null },
+    mobileImage: { type: String, default: null },
     heading: { type: String, default: '' },
     text: { type: String, required: true },
     reverse: { type: Boolean, default: false },
+    isMobile: { type: Boolean, default: false },
   },
 
   computed: {
@@ -38,8 +55,23 @@ export default {
       };
     },
 
+    isVideo() {
+      return this.interpolatedImage.endsWith('.mp4');
+    },
+
+    hasImage() {
+      if (this.isMobile) {
+        return this.mobileImage !== null;
+      }
+
+      return this.image !== null;
+    },
+
     interpolatedImage() {
-      return this.interpolateString(this.image);
+      if (this.isMobile) {
+        return this.interpolateString(this.mobileImage).trim();
+      }
+      return this.interpolateString(this.image).trim();
     },
 
     interpolatedHeading() {

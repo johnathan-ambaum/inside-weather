@@ -29,9 +29,12 @@
       v-for="(block, index) in filters.contents"
       :key="index"
       :image="block.image_template"
+      :mobile-image="block.mobile_image_template"
       :heading="block.header_template"
       :text="block.content_template"
-      :reverse="index % 2 !== 0" />
+      :reverse="index % 2 !== 0"
+      :is-mobile="isMobile"
+    />
       <!-- <product-family
       v-if="'related_items' in product && product.related_items.length"
       id="families"
