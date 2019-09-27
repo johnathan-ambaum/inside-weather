@@ -87,7 +87,7 @@ export default {
 
 .SwatchPanelItem {
   align-items: center;
-  border: 1px solid #c8c8c8;
+  box-shadow: .9px .9px .4px 0 rgba(139,137,134,.5);
   cursor: pointer;
   display: flex;
   flex: 0 0 auto;
@@ -114,7 +114,8 @@ export default {
 
   &.is-selected {
     background: #f2f0ed;
-    border-color: #202020;
+    border: 1px solid #202020;
+    box-shadow: none;
   }
 
   &__Swatch {
