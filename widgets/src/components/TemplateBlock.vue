@@ -100,6 +100,10 @@ export default {
     margin-bottom: 20px;
   }
 
+  video {
+    max-width: 100%;
+  }
+
   &__TextSection {
     background: #fff;
     flex: 1 1 auto;
