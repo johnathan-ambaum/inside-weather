@@ -15,12 +15,12 @@
 
 <script>
 const options = [
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-1.png' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-2.png' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-3.png' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-4.png' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-5.png' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-6.png' },
+  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-1.png?999' },
+  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-2.png?999' },
+  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-3.png?999' },
+  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-4.png?999' },
+  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-5.png?999' },
+  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-6.png?999' },
 ];
 
 export default {
@@ -64,9 +64,14 @@ export default {
     display: flex;
     flex: 1 1 50%;
     justify-content: center;
+    padding: 0 18px;
 
     @include at-query($breakpoint-mlarge) {
       flex: 1 1 percentage(1 / 3);
+    }
+
+    @include at-query($breakpoint-large) {
+      padding: 0;
     }
   }
 }
