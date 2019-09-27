@@ -42,7 +42,7 @@
             category="{{ product.type }}"
             initial-handle="{{ product.handle }}"
             :initial-variant="{{ product.selected_or_first_available_variant.id }}"
-            :initial-attributes="{{ product.metafields.products.attributes | json | escape }}"
+            :initial-attributes="{{ product.metafields.products.attributes | json | escape }} || {}"
           ></product-customizer>
         <!-- <product-family v-if="isMobile"></product-family> -->
       </div> <!-- .ProductDetailGrid__Sidebar -->

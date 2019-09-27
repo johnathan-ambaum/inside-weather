@@ -448,6 +448,7 @@ body.ProductCustomizer--Open {
 
       @include at-query($breakpoint-large) {
         display: block;
+        margin-bottom: 30px;
       }
     }
   }
@@ -560,6 +561,13 @@ body.ProductCustomizer--Open {
     margin-bottom: 40px;
     text-transform: uppercase;
     width: 100%;
+
+    &:hover,
+    &:active {
+      background: #202020;
+      border: none;
+      color: #fff;
+    }
   }
 
   &__NameOverlay {
@@ -611,13 +619,13 @@ body.ProductCustomizer--Open {
 
   &__Sidebar {
     background: #fff;
-    border-left: 1px solid #b7b7b7;
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
     z-index: 100;
 
     @include at-query($breakpoint-large) {
+      box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
       flex: 0 0 458px;
     }
   }

@@ -63,17 +63,17 @@ const app = new Vue({
   },
 });
 
-function disableAdminBar() {
-  const bar = document.querySelector('#preview-bar-iframe');
-  if (!bar) {
-    setTimeout(disableAdminBar, 100);
-    return;
-  }
-  bar.parentNode.removeChild(bar);
-}
+// function disableAdminBar() {
+//   const bar = document.querySelector('#preview-bar-iframe');
+//   if (!bar) {
+//     setTimeout(disableAdminBar, 100);
+//     return;
+//   }
+//   bar.parentNode.removeChild(bar);
+// }
 
-const uri = window.location.pathname;
+// const uri = window.location.pathname;
 
-if (uri.includes('/products/')) {
-  disableAdminBar();
-}
+// if (uri.includes('/products/')) {
+//   disableAdminBar();
+// }

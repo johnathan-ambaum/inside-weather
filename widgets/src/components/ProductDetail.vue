@@ -35,7 +35,7 @@
       :reverse="index % 2 !== 0"
       :is-mobile="isMobile"
     />
-      <!-- <product-family
+    <!-- <product-family
       v-if="'related_items' in product && product.related_items.length"
       id="families"
       class="ProductDetail__Family"
@@ -147,8 +147,12 @@ export default {
   &__Dimensions {
     align-items: center;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     margin-bottom: 80px;
+
+    img {
+      flex: 0 0 auto;
+    }
 
     @include at-query($breakpoint-small) {
       padding: 0 $horizontal-wrapper-padding;

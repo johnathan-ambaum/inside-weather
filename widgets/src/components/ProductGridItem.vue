@@ -6,6 +6,7 @@
     >
       <responsive-image
         :images="featuredImage"
+        :scale="80"
         sizes="(min-width: 1025px) 340px, 50vw"
         class="ProductGridItem__Image"
       />
@@ -129,7 +130,7 @@ export default {
   flex: 0 0 50%;
   margin: 0;
   overflow: hidden;
-  padding: 33% 10px 10px;
+  padding: 0 10px 10px;
   position: relative;
   text-align: center;
 
@@ -144,7 +145,7 @@ export default {
 
   @include at-query($breakpoint-large) {
     flex: 0 0 25%;
-    padding: 18% 20px 20px;
+    padding: 0;
 
     @at-root {
       &:nth-child(1),
@@ -177,27 +178,27 @@ export default {
   }
 
   &:last-child {
-    &:nth-child(1),
-    &:nth-child(2) {
+    &:nth-child(1) {
       border-right: 1px solid #d4d0ca;
     }
-  }
 
-  @include at-query($breakpoint-large) {
-    &:last-child {
-      &:nth-child(3) {
+    @include at-query($breakpoint-small) {
+      &:nth-child(2n+3) {
+        border-right: 1px solid #d4d0ca;
+      }
+    }
+
+    @include at-query($breakpoint-large) {
+      &:nth-child(4n+1),
+      &:nth-child(4n+2),
+      &:nth-child(4n+3) {
         border-right: 1px solid #d4d0ca;
       }
     }
   }
 
   & &__Image {
-    left: 0;
-    margin: -10% auto 0;
-    max-width: 85%;
-    position: absolute;
-    right: 0;
-    top: 0;
+    margin: 0 auto;
     width: 100%;
 
     img {
@@ -211,9 +212,19 @@ export default {
   }
 
   &__TitleRow {
+    display: block;
+    margin-top: -25%;
+    padding: 0 20px;
     position: relative;
-    top: -10%;
-    z-index: 10;
+    width: 100%;
+    z-index: 100;
+
+    @include at-query($breakpoint-large) {
+      bottom: 20px;
+      left: 0;
+      margin-top: 0;
+      position: absolute;
+    }
   }
 
   &__Title {
@@ -258,7 +269,7 @@ export default {
     z-index: 100;
 
     @include at-query($breakpoint-large) {
-      font-size: 24px;
+      font-size: 18px;
       right: 20px;
       top: 20px;
       z-index: 20;

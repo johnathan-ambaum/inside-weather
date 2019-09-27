@@ -122,6 +122,18 @@ export default {
 @import '../scss/variables';
 @import '../scss/mixins';
 
+.Favorites__Header {
+  color: #202020;
+  font-family: $font-stack-avalon;
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 80px;
+
+  @include at-query($breakpoint-large) {
+    font-size: 34px;
+  }
+}
+
 .ProductGrid {
   display: flex;
   flex-wrap: wrap;

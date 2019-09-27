@@ -82,7 +82,7 @@ export default {
 
       @include at-query($breakpoint-mlarge) {
         font-size: 15px;
-        letter-spacing: .125em;
+        letter-spacing: .035em;
       }
     }
 
@@ -115,6 +115,12 @@ export default {
       margin-top: 30px;
       padding: 12px 0;
       width: 100%;
+
+      &:hover, &:active {
+        background: #202020;
+        border: none;
+        color: #fff;
+      }
 
       @include at-query($breakpoint-large) {
         margin-top: 0;

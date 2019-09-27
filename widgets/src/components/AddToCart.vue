@@ -81,7 +81,9 @@ export default {
     color: #fff;
     background: #202020;
 
-    &:hover {
+    &:hover,
+    &:active {
+      background: #3B3B3B;
       color: #fff;
     }
   }
