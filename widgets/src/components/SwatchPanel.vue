@@ -1,5 +1,8 @@
 <template>
-  <div class="SwatchPanel">
+  <div
+    ref="body"
+    class="SwatchPanel"
+  >
     <swatch-panel-item
       v-for="option in values"
       :key="option.value"
@@ -41,6 +44,16 @@ export default {
 
     isSelected() {
       return option => this.selectedOptions[this.parameter] === option.value;
+    },
+  },
+
+  watch: {
+    values() {
+      if (this.isMobile) {
+        this.$refs.body.scrollLeft = 0;
+      } else {
+        this.$refs.body.scrollTop = 0;
+      }
     },
   },
 
