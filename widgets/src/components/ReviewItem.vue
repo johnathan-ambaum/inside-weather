@@ -4,16 +4,27 @@
       <div class="ReviewItem__Left">
         <div class="ReviewItem__Left--Content">
           <div class="ReviewItem__Mobile--Right">
-            <div class="ReviewItem__Left--Product" :style="styleReviewItem">
-              <div class="ReviewItem__Left--Text ReviewItem__Left--Title" :id="elementId">{{ reviewData.first_name }} {{ reviewData.last_name }}</div>
-              <div class="ReviewItem__Left--Checkbox" :style="styleCheckmark">
+            <div
+              :style="styleReviewItem"
+              class="ReviewItem__Left--Product">
+              <div
+                :id="elementId"
+                class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ reviewData.first_name }} {{ reviewData.last_name }}</div>
+              <div
+                :style="styleCheckmark"
+                class="ReviewItem__Left--Checkbox">
                 <selected-checkbox />
               </div>
             </div>
             <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ reviewData.city }}, {{ productStateAbbr }}</div>
           </div>
-          <a :href="'https://insideweather.com/collections/' + reviewData.item_data.primary_category + '/products/' + reviewData.item_data.handle" target="_blank" class="ReviewItem__Left--Link">
-            <div class="ReviewItem__Left--Image" :style="{ 'background-image': 'url(' + reviewData.item_data.medium_image + ')'}" />
+          <a
+            :href="'https://insideweather.com/collections/' + reviewData.item_data.primary_category + '/products/' + reviewData.item_data.handle"
+            target="_blank"
+            class="ReviewItem__Left--Link">
+            <div
+              :style="{ 'background-image': 'url(' + reviewData.item_data.medium_image + ')'}"
+              class="ReviewItem__Left--Image" />
           </a>
         </div>
       </div>
@@ -25,12 +36,14 @@
           </div>
           <div class="ReviewItem__Right--Title">{{ reviewData.title }}</div>
           <div class="ReviewItem__Right--Content">{{ reviewData.body }}</div>
-          <div v-if="reviewData.images.length > 0" class="ReviewItem__Right--Images">
+          <div
+            v-if="reviewData.images.length > 0"
+            class="ReviewItem__Right--Images">
             <div
-              class="ReviewItem__Right--Image"
               v-for="(image, index) in reviewData.images"
               :key="index"
               :style="{ 'background-image': 'url(' + image.thumb.url + ')'}"
+              class="ReviewItem__Right--Image"
               @click="handleModal(image.medium.url)"
             />
           </div>
@@ -49,15 +62,9 @@
 </template>
 
 <script>
-import { faStar, faArrowLeft } from '@fortawesome/pro-light-svg-icons';
+import { faStar } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  BContainer,
-  BRow,
-  BCol,
-} from 'bootstrap-vue/es/components';
-
 import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';
 import ReviewModal from './ReviewModal.vue';
@@ -67,19 +74,16 @@ import STATE from '../static/STATE';
 library.add(faStar);
 
 export default {
-  mixins: [
-    screenMonitor,
-  ],
 
   components: {
     FontAwesomeIcon,
     SelectedCheckbox,
-    BContainer,
     ReviewModal,
-    BRow,
-    BCol,
     Star,
   },
+  mixins: [
+    screenMonitor,
+  ],
 
   props: {
     reviewData: { type: Object, default: {} },
@@ -99,6 +103,31 @@ export default {
     };
   },
 
+  computed: {
+    styleReviewItem() {
+      if (this.elementHeight > 30) {
+        return {
+          display: 'flex',
+          alignItems: 'flex-start',
+        };
+      }
+      return {
+        display: 'flex',
+        alignItems: 'center',
+      };
+    },
+    styleCheckmark() {
+      if (this.elementHeight > 30) {
+        return {
+          paddingTop: '7px',
+        };
+      }
+      return {
+        paddingTop: '0',
+      };
+    },
+  },
+
   created() {
     window.addEventListener('resize', this.handleResize);
   },
@@ -115,45 +144,17 @@ export default {
     this.getElementSize(id);
   },
 
-  computed: {
-    styleReviewItem() {
-      if (this.elementHeight > 30) {
-        return {
-          display: 'flex',
-          alignItems: 'flex-start',
-        }
-      } else {
-        return {
-          display: 'flex',
-          alignItems: 'center',
-        }
-      }
-    },
-    styleCheckmark() {
-      if (this.elementHeight > 30) {
-        return {
-          paddingTop: '7px',
-        }
-      } else {
-        return {
-          paddingTop: '0',
-        }
-      }
-    },
-  },
-
   methods: {
     convertDate(isoDate) {
       const date = new Date(isoDate);
-      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     },
 
     getAbbrState(us_state) {
       let state_abbreviation = '';
-      this.stateData.forEach(item => {
+      this.stateData.forEach((item) => {
         if (item.name === us_state) {
           state_abbreviation = item.abbreviation;
-          return;
         }
       });
       return state_abbreviation;
@@ -183,7 +184,7 @@ export default {
     handlePopupImage(image) {
       this.modalImage = image;
     },
-  }
+  },
 };
 </script>
 
@@ -377,7 +378,7 @@ export default {
 
       &--Top {
         flex-flow: column-reverse;
-        align-items: end;
+        align-items: flex-end;
         margin-bottom: 18px;
       }
 

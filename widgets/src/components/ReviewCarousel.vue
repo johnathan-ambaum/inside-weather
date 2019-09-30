@@ -14,7 +14,7 @@
 
     <!-- Review Items section -->
     <div
-      v-if="reviews.length > 0"
+      v-if="reviewData.length > 0"
       class="ReviewCarousel__Category"
     >
       <div
@@ -292,37 +292,13 @@ export default {
     },
   },
 
-  // watch: {
-  //   product: {
-  //     immediate: true,
-  //     handler(newProduct, oldProduct) {
-  //       if (!newProduct || (oldProduct && newProduct.id === oldProduct.id)) {
-  //         return;
-  //       }
-
-  //       this.getProductReviews({
-  //         primaryCategory: newProduct.primary_category,
-  //         productFamily: this.product.product_family,
-  //       });
-  //     },
-  //   },
-  // },
-
-  mounted() {
-    if (this.isMobile) {
-      this.swiperOption.centeredSlides = true;
-      this.swiperOption.allowTouchMove = true;
-    }
-  },
-
-  created() {
-    this.getProductReviews({
-      primaryCategory: this.category,
-    });
-
-    if (this.isMobile) {
-      this.swiperOption.centeredSlides = true;
-    }
+  watch: {
+    primaryCategory(newCategory) {
+      this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
+    },
+    propReviews(newPropReviews) {
+      this.reviewData.push(...newPropReviews);
+    },
   },
 
   methods: {
@@ -452,7 +428,7 @@ export default {
 
       if (this.modalImage !== '') {
         if (event.target.classList.contains('CarouselItem__Right--Image')) {
-          this.reviews.forEach((item) => {
+          this.reviewData.forEach((item, index) => {
             item.images.forEach((img) => {
               if (img.medium.url === this.modalImage) {
                 selectedItem = item;
@@ -461,13 +437,13 @@ export default {
           });
         }
       } else if (event.target.classList.contains('CarouselItem__Right--Readmore__Text') || event.target.classList.contains('CarouselItem__Right--Image')) {
-        this.reviews.forEach((item) => {
+        this.reviewData.forEach((item, index) => {
           if (event.target.classList.contains(item.id)) {
             selectedItem = item;
           }
         });
       } else if (event.target.classList.contains('CarouselItem__Left--Image')) {
-        this.reviews.forEach((item) => {
+        this.reviewData.forEach((item, index) => {
           if (event.target.classList.contains(item.id)) {
             window.open(`https://insideweather.com/collections/${item.item_data.primary_category}/products/${item.item_data.handle}`, '_blank');
           }
@@ -495,6 +471,7 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/mixins';
+@import '../../node_modules/swiper/dist/css/swiper.css';
 
 .ReviewCarousel {
   margin: 0 auto;

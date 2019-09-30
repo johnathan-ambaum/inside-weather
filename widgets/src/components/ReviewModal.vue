@@ -213,7 +213,7 @@ import {
   BModal,
   BRow,
   BCol,
-} from 'bootstrap-vue/es/components';
+} from 'bootstrap-vue';
 
 import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';
@@ -351,6 +351,8 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/mixins';
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 
 body.modal-open {
   .zEWidget-launcher {
@@ -554,7 +556,7 @@ body.modal-open {
 
     &--Top {
       flex-flow: column-reverse;
-      align-items: end !important;
+      align-items: flex-end !important;
       margin-bottom: 18px !important;
     }
 
