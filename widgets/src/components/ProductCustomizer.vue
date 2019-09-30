@@ -241,8 +241,19 @@ export default {
   },
 
   created() {
-    if (this.category) {
-      this.updateCategory(this.category);
+    let { category } = this;
+
+    if (category.startsWith('Lounge Chair')) {
+      const matches = this.initialHandle.match(/[^A-z]*?(ace|vita)[^A-z]*?/);
+      const prefix = matches && matches[1] ? matches[1] : '';
+      category = `${prefix} ${category}`.trim();
+    } else if (category.startsWith('Dining Chair')) {
+      category = /[^A-z]*?nola[^A-z]*?/.test(this.initialHandle) ? 'Nola Dining Chairs' : 'Canvas Dining Chairs';
+    }
+    category = category.charAt(0).toUpperCase() + category.substring(1);
+
+    if (category) {
+      this.updateCategory(category);
       this.pullFilter();
     }
 
