@@ -48,7 +48,7 @@
       />
     </div>
     <hr>
-    <inspiration-options />
+    <inspiration-options :products="filters.featured_products || []" />
     <swatch-browser />
     <div
       :class="{ 'ProductCustomizer--Active': active }"

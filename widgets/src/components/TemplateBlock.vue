@@ -139,6 +139,11 @@ export default {
     }
   }
 
+  &__ImageSection {
+    position: relative;
+    z-index: -1;
+  }
+
   @include at-query($breakpoint-large) {
     &--Reversed &__TextSection {
       padding: 0 50px 0 80px;

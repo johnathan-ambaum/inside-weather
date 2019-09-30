@@ -1,33 +1,27 @@
 <template>
-  <div class="InspirationOptions">
-    <h3 class="InspirationOptions__Heading">Spark Your Creativity</h3>
+  <div
+    v-if="products.length"
+    class="InspirationOptions"
+  >
+    <h3 class="InspirationOptions__Heading">Curator's Picks</h3>
     <div class="InspirationOptions__Body">
-      <div
-        v-for="option in options"
-        :key="option.image"
+      <a
+        v-for="product in products"
+        :key="product.product_url"
+        :href="product.product_url"
         class="InspirationOptions__Item"
       >
-        <img :src="option.image">
-      </div>
+        <img :src="product.product_thumbnail">
+      </a>
     </div>
   </div>
 </template>
 
 <script>
-const options = [
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-1.png?999' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-2.png?999' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-3.png?999' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-4.png?999' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-5.png?999' },
-  { image: '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/tmp-spark-6.png?999' },
-];
 
 export default {
-  data() {
-    return {
-      options,
-    };
+  props: {
+    products: { type: Array, required: true },
   },
 };
 </script>
@@ -37,6 +31,8 @@ export default {
 @import '../scss/mixins';
 
 .InspirationOptions {
+  margin-bottom: 40px;
+
   &__Heading {
     font-family: $font-stack-avalon;
     font-size: 16px;
@@ -60,7 +56,6 @@ export default {
 
   &__Item {
     align-items: center;
-    cursor: pointer;
     display: flex;
     flex: 1 1 50%;
     justify-content: center;
