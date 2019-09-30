@@ -37,7 +37,7 @@
     >
       <span class="ProductGridItem__Title">
         {{ product.short_display_name }}
-        <small class="ProductGridItem__Model">{{ product.model_number }}</small>
+        <span class="ProductGridItem__Model">{{ product.model_number }}</span>
       </span>
       <span class="ProductGridItem__Price">${{ dollarPrice }}</span>
       <span
@@ -186,10 +186,11 @@ export default {
     padding: $gutter ($gutter / 2) 0 0;
     position: relative;
     z-index: 25;
+    color: #202020;
   }
 
   &__Link {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   &__Title {
@@ -199,9 +200,9 @@ export default {
 
     @include at-query($breakpoint-small) {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       margin: 16px auto 5px;
-      max-width: 34ch;
+      max-width: 36ch;
       text-align: center;
 
       br {
@@ -228,6 +229,7 @@ export default {
 
   &__Model {
     display: inline;
+    font-size: 12px;
 
     @include at-query($breakpoint-large) {
       display: block;

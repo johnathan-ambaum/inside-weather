@@ -6,7 +6,7 @@
     <img
       v-if="showPlaceholder"
       :src="placeholderSrc"
-      :class="{ 'ResponsiveImage--Loading': showSpinner }"
+      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
       class="ResponsiveImage ResponsiveImage__Placeholder">
     <img
       v-if="src.length"
@@ -14,12 +14,12 @@
       :src="src"
       :srcset="srcset"
       :style="imageStyles"
-      :class="{ 'ResponsiveImage--Loading': showSpinner }"
+      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
       class="ResponsiveImage"
       @load="finishLoading">
     <transition name="fade">
       <glyph-loading
-        v-if="showSpinner"
+        v-if="showSpinner && sizes.length < 10"
         class="ResponsiveImage__Spinner"
       />
     </transition>
@@ -142,6 +142,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../scss/variables';
+@import '../scss/mixins';
+
 .ResponsiveImage {
   bottom: 0;
   left: 0;
@@ -149,7 +152,15 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  width: 100%;
+  width: 90% !important;
+
+  @include at-query($breakpoint-mlarge) {
+    width: 100% !important;
+  }
+
+  @include at-query($breakpoint-xsmall) {
+    width: 85% !important;
+  }
 
   &--Loading {
     opacity: .6;

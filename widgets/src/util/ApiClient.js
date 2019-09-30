@@ -151,4 +151,40 @@ export default class ApiClient {
   removeFavorites(customerId, skus) {
     return this.sendFavoriteRequest({ method: 'DELETE', customerId, skus });
   }
+
+  getReviews(category, from, size) {
+    this.options.primary_category = category;
+    this.options.from = from;
+    this.options.size = size;
+
+    // eslint-disable-next-line max-len
+    let url = `https://iw-reviews.herokuapp.com/api/v1/reviews/search?primary_category=${category}`;
+
+    if (this.options.size) {
+      url += `&page=${this.options.from}&size=${this.options.size}`;
+    }
+
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => resolve(response))
+        .catch(err => reject(err));
+    });
+  }
+
+  getProductReviews(primaryCategory, productFamily) {
+    // eslint-disable-next-line max-len
+    let url = `https://iw-reviews.herokuapp.com/api/v1/reviews/for_product?primary_category=${primaryCategory}&product_family=${productFamily}`;
+
+    if (this.options.size) {
+      url += `&page=${this.options.from}&size=${this.options.size}`;
+    }
+
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => resolve(response))
+        .catch(err => reject(err));
+    });
+  }
 }

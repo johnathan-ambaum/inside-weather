@@ -44,7 +44,7 @@ export function defineFilter(state, { filter }) {
  * so that the URL is shareable to see the same results
  */
 export function applyQueryString(state) {
-  const queryString = window.location.search.substring(1);
+  const queryString = decodeURIComponent(window.location.search.substring(1));
 
   if (!queryString.length) {
     return;
@@ -420,6 +420,18 @@ export function setFavorites(state, { skus }) {
   Vue.set(state, 'favorites', skus);
 }
 
+export function setReviews(state, { reviews }) {
+  Vue.set(state, 'reviews', reviews);
+}
+
+export function setTotalReviews(state, { totalReviews }) {
+  Vue.set(state, 'totalReviews', totalReviews);
+}
+
+export function setProductReviews(state, { reviews }) {
+  Vue.set(state, 'productReviews', reviews);
+}
+
 export default {
   setLoading,
   saveProducts,
@@ -439,4 +451,7 @@ export default {
   setNotification,
   toggleFavorite,
   setFavorites,
+  setReviews,
+  setTotalReviews,
+  setProductReviews,
 };

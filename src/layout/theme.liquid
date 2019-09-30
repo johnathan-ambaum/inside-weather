@@ -102,7 +102,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js"></script>
 
   <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' or template.suffix == 'living-room' or template.suffix == 'dining-room' or template.suffix == 'office'  or template.suffix == 'category-sofettes'  or template.suffix == 'category-armchairs'  or template.suffix == 'category-diningchairs'  or template.suffix == 'category-loungechairs'  or template.suffix == 'category-coffeetables'  or template.suffix == 'category-diningtables'  or template.suffix == 'category-sidetables'  or template.suffix == 'category-credenzas'  or template.suffix == 'category-sideboards' -%}
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' or template.suffix == 'living-room' or template.suffix == 'dining-room' or template.suffix == 'office'  or template.suffix == 'category-sofettes'  or template.suffix == 'category-armchairs'  or template.suffix == 'category-diningchairs'  or template.suffix == 'category-loungechairs'  or template.suffix == 'category-coffeetables'  or template.suffix == 'category-diningtables'  or template.suffix == 'category-sidetables'  or template.suffix == 'category-credenzas'  or template.suffix == 'category-sideboards' or template.suffix == 'full-reviews' -%}
     {%- if customer -%}
       {%- if customer.metafields.global.favorites -%}
         {%- assign favorites = customer.metafields.global.favorites -%}
@@ -116,16 +116,16 @@
         };
       </script>
     {%- endif -%}
-    <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
-    <script src="{{ 'manifest.js' | asset_url }}" defer></script>
-    <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
-    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
     {% assign small_header = true %}
   {%- else -%}
     {% assign small_header = false %}
   {%- endif -%}
+  <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+  <script src="{{ 'manifest.js' | asset_url }}" defer></script>
+  <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
+  <script src="{{ 'widgets.js' | asset_url }}" defer></script>
   <!-- end browse and product customizer widgets -->
 
   {{ content_for_header }}

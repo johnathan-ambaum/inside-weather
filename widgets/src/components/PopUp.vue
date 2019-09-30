@@ -1,16 +1,15 @@
 <template>
   <div
-    class="PopUp"
     ref="PopUp"
     :id="popUpId"
+    class="PopUp"
   >
     <div class="PopUp--dialog">
       <div class="PopUp--body">
         <div class="PopUp--imageWrapper">
           <figure
-            v-bind:style="{ backgroundImage: 'url('+ PopUpImageSource +')' }"
-          >
-          </figure>
+            :style="{ backgroundImage: 'url('+ PopUpImageSource +')' }"
+          />
         </div>
         <div class="PopUp--content">
           <button
@@ -18,27 +17,50 @@
             @click="closePopUp(popUpId)"
           >
             <i>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.414 17.414">
-                <g id="Group_176" data-name="Group 176" transform="translate(-1267.793 -302.793)">
-                  <line id="Line_117" data-name="Line 117" x2="16" y2="16" transform="translate(1268.5 303.5)" fill="none" stroke="#202020" stroke-width="2"/>
-                  <line id="Line_118" data-name="Line 118" x2="16" y2="16" transform="translate(1284.5 303.5) rotate(90)" fill="none" stroke="#202020" stroke-width="2"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 17.414 17.414">
+                <g
+                  id="Group_176"
+                  data-name="Group 176"
+                  transform="translate(-1267.793 -302.793)">
+                  <line
+                    id="Line_117"
+                    data-name="Line 117"
+                    x2="16"
+                    y2="16"
+                    transform="translate(1268.5 303.5)"
+                    fill="none"
+                    stroke="#202020"
+                    stroke-width="2"/>
+                  <line
+                    id="Line_118"
+                    data-name="Line 118"
+                    x2="16"
+                    y2="16"
+                    transform="translate(1284.5 303.5) rotate(90)"
+                    fill="none"
+                    stroke="#202020"
+                    stroke-width="2"/>
                 </g>
               </svg>
             </i>
           </button>
-          <h2 class="PopUp--heading">{{popUpHeading}}</h2>
+          <h2 class="PopUp--heading">{{ popUpHeading }}</h2>
           <ul>
             <li
               v-for="item in PopUpContentList"
               :key="item.$id"
             >
-              <a :href="item.productUrl" target="_blank">
+              <a
+                :href="item.productUrl"
+                target="_blank">
                 <figure>
                   <img :src="item.productImage">
                 </figure>
                 <div>
-                  <p>{{item.title}}</p>
-                  <span>{{item.price}}</span>
+                  <p>{{ item.title }}</p>
+                  <span>{{ item.price }}</span>
                 </div>
               </a>
             </li>
@@ -46,10 +68,10 @@
         </div>
       </div>
     </div>
-    <div 
+    <div
       class="PopUp--courtain"
       @click="closePopUp(popUpId)"
-    ></div>
+    />
   </div>
 </template>
 
@@ -59,20 +81,20 @@ export default {
     PopUpContentList: Array,
     PopUpImageSource: String,
     popUpId: String,
-    popUpHeading: String
+    popUpHeading: String,
   },
   methods: {
     closePopUp(id) {
       const getTarget = document.getElementById(id);
       const html = document.querySelector('html');
       getTarget.classList.remove('in');
-      setTimeout(function() {
+      setTimeout(() => {
         getTarget.classList.remove('fade');
         html.classList.remove('lock');
       }, 300);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -190,11 +212,12 @@ html {
           }
         }
       }
-    } 
+    }
   }
   &.fade {
     display: block;
     &.in {
+      opacity: 1;
       .PopUp--dialog {
         opacity: 1;
         transform: translateY(-50%);
@@ -274,7 +297,7 @@ html {
       top: 0;
       transform: translateY(0);
       width: calc(100% - 30px);
-      
+
       .PopUp--body {
         display: block;
         position: relative;
@@ -329,5 +352,3 @@ html {
   }
 }
 </style>
-
-

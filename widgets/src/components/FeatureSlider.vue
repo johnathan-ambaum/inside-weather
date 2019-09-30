@@ -21,14 +21,14 @@
               <div class="FeatureSlider__Footer">
                 <span class="ProductGridItem__Title">
                   {{ product.short_display_name }}
-                  <small class="ProductGridItem__Model">{{ product.model_number }}</small>
+                  <span class="ProductGridItem__Model">{{ product.model_number }}</span>
                 </span>
                 <div class="ProductGridItem__Price">${{ dollarPrice }}</div>
                 <span
                   :class="{ isFavorite }"
                   role="button"
                   class="FeatureSlider__Favorite"
-                  @click.stop.prevent="$bus.$emit('favorite', product.sku)"
+                  @click.stop.prevent="$bus.$emit('favorite', product)"
                 >
                   <font-awesome-icon :icon="favoriteIcon"/>
                 </span>
@@ -202,6 +202,7 @@ $tile-size: 100vw;
     position: absolute;
     text-align: center;
     width: $tile-size;
+    padding-left: 10px;
   }
 
   &__Bullet {

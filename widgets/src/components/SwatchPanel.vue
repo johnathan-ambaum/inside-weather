@@ -168,6 +168,8 @@ export default {
         [`SwatchPanel__Body--${this.name}`]: true,
         [`SwatchPanel__Body--${this.type}`]: true,
         'single-row': this.sanitizedOptions.length === perRow,
+        [`${this.group.optionImageSize}-swatches`]: true,
+        // [`col-${this.group.mobileColumns}`]: true,
       };
     },
   },
@@ -280,7 +282,6 @@ $swatch-margin: 5px;
     font-size: 12px;
     font-weight: 400;
     line-height: 14px;
-    margin-bottom: 20px;
     text-align: center;
 
     .SwatchPanel.is-active & {
@@ -334,7 +335,7 @@ $swatch-margin: 5px;
     }
 
     &--hybrid {
-      max-width: 375px;
+      max-width: 375px !important;
 
       & > .SwatchPanelItem {
         align-items: flex-start;
@@ -350,7 +351,7 @@ $swatch-margin: 5px;
     }
 
     &--Finish {
-      max-width: 300px;
+      max-width: 300px !important;
 
       & > * {
         flex: 0 1 calc(#{percentage(1 / 3)} - #{$swatch-margin * 2 / 3});
@@ -377,7 +378,7 @@ $swatch-margin: 5px;
     &--checkbox {
       align-items: center;
       justify-content: flex-start;
-      max-width: 340px;
+      max-width: 340px !important;
     }
 
     &--Wide {
@@ -385,8 +386,36 @@ $swatch-margin: 5px;
     }
 
     .FilterPanel__Options & {
-      justify-content: center;
       max-width: 100%;
+
+      &:not(.SwatchPanel__Body--Wide) {
+        &.col-2 > * {
+          flex: 0 1 calc(50% - #{$swatch-margin / 2});
+          margin-left: $swatch-margin;
+
+          &:nth-child(2n+1) {
+            margin-left: 0;
+          }
+        }
+
+        &.col-3 > * {
+          flex: 0 1 calc(#{percentage(1 / 3)} - #{$swatch-margin * 2 / 3});
+          margin-left: $swatch-margin;
+
+          &:nth-child(3n+1) {
+            margin-left: 0;
+          }
+        }
+
+        &.col-4 > * {
+          flex: 0 1 calc(25% - #{$swatch-margin * 3 / 4});
+          margin-left: $swatch-margin;
+
+          &:nth-child(4n+1) {
+            margin-left: 0;
+          }
+        }
+      }
     }
 
     @at-root {
@@ -397,8 +426,17 @@ $swatch-margin: 5px;
           flex-wrap: wrap;
 
           & > * {
-            flex: 0 0 auto;
+            flex-grow: 0;
+            flex-shrink: 0;
             margin-left: 20px;
+          }
+
+          &.small-swatches > * {
+            flex-basis: 134px;
+          }
+
+          &.large-swatches > * {
+            flex-basis: 275px;
           }
         }
       }
