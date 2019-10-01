@@ -452,7 +452,7 @@ body.ProductCustomizer--Open {
   top: -100vh;
   transition: opacity .2s linear, top 0s linear .2s;
   width: 100vw;
-  z-index: 1001;
+  z-index: -1;
 
   @include at-query($breakpoint-large) {
     flex-direction: row;
@@ -462,6 +462,7 @@ body.ProductCustomizer--Open {
     opacity: 1;
     top: 0;
     transition: opacity .2s linear;
+    z-index: 1001;
   }
 
   &__DetailWrapper {
