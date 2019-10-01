@@ -121,6 +121,7 @@ export default {
 
   data() {
     return {
+      reviewData: [],
       isShowSliderButton: false,
       modalShow: false,
       modalImage: '',
@@ -274,7 +275,6 @@ export default {
 
   computed: {
     ...mapState({
-      // product: state => state.activeProduct,
       reviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
     }),
@@ -293,12 +293,29 @@ export default {
   },
 
   watch: {
-    primaryCategory(newCategory) {
-      this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
+    category: {
+      immediate: true,
+      handler(newCategory) {
+        this.getProductReviews({ primaryCategory: newCategory });
+      },
     },
-    propReviews(newPropReviews) {
+
+    reviews(newPropReviews) {
       this.reviewData.push(...newPropReviews);
     },
+  },
+
+  mounted() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+      this.swiperOption.allowTouchMove = true;
+    }
+  },
+
+  created() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+    }
   },
 
   methods: {
