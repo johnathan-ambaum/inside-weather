@@ -227,13 +227,13 @@ export default {
 
   watch: {
     active(isActive) {
-      const bodyClass = 'ProductCustomizer--Open';
+      const openClass = 'ProductCustomizer--Open';
       if (isActive) {
-        document.body.classList.add(bodyClass);
+        document.documentElement.classList.add(openClass);
         return;
       }
 
-      document.body.classList.remove(bodyClass);
+      document.documentElement.classList.remove(openClass);
       const zendesk = document.querySelector('.zEWidget-launcher');
       if (zendesk) {
         // fix bug causing widget to be set to 5px wide by some zendesk javascript after closing customizer
@@ -431,7 +431,7 @@ export default {
   display: none;
 }
 
-body.ProductCustomizer--Open {
+html.ProductCustomizer--Open {
   overflow: hidden;
 
   // zendesk widget
