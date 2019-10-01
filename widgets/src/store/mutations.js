@@ -116,7 +116,7 @@ export function setSelectedOptions(state, selected) {
 /**
  * Add or remove a product from the user's favorites
  */
-export function toggleFavorite(state, { customerId, product }) {
+export function toggleFavorite(state, { customerId, sku, product }) {
   if (!product.id || !product.handle) {
     return;
   }
@@ -129,16 +129,18 @@ export function toggleFavorite(state, { customerId, product }) {
     state.favorites.push(product);
   }
 
-  // window.dataLayer.push({
-  //   event: 'AddToWishlist',
-  //   eventCategory: 'Favorite',
-  //   eventAction: index === -1 ? 'add' : 'remove',
-  //   eventLabel: product.name,
-  //   productIds: [product.sku],
-  //   productName: product.name,
-  //   totalValue: product.price,
-  //   productHandle: product.handle,
-  // });
+  if (sku) {
+    window.dataLayer.push({
+      event: 'AddToWishlist',
+      eventCategory: 'Favorite',
+      eventAction: index === -1 ? 'add' : 'remove',
+      eventLabel: product.name,
+      productIds: [sku],
+      productName: product.name,
+      totalValue: product.price,
+      productHandle: product.handle,
+    });
+  }
 
   if (!customerId) {
     localStorage.setItem('favoriteProducts', JSON.stringify(state.favorites));

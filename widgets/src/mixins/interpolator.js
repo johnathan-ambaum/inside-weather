@@ -8,6 +8,8 @@ export default {
       basePrice: state => state.filters.price,
       templates: state => state.filters.templates,
       selectedOptions: state => state.selectedOptions,
+      activeProduct: state => state.activeProduct,
+      productType: state => state.category,
     }),
 
     productName() {
@@ -24,6 +26,10 @@ export default {
       }
       const { template = '' } = this.templates.find(item => item.key === 'model_number') || {};
       return this.interpolateString(template);
+    },
+
+    productSku() {
+      return this.modelNumber;
     },
 
     productPrice() {
@@ -63,6 +69,19 @@ export default {
       }
 
       return savings.toFixed(2);
+    },
+
+    fullProduct() {
+      return {
+        name: this.productName,
+        handle: this.activeProduct.handle,
+        sku: this.productSku,
+        model: this.modelNumber,
+        price: this.productPrice,
+        msrp: this.msrp,
+        category: this.productType,
+        image: this.productImages.length ? this.productImages[0].large : null,
+      };
     },
   },
 

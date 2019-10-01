@@ -110,7 +110,7 @@ export function getProductReviews({ commit }, {
 export function createProductFromSelected({ state, dispatch, commit }, { name, model, image }) {
   commit('setProductCreationInProgress', true);
 
-  apiClient
+  return apiClient
     .createProduct({
       name,
       model,

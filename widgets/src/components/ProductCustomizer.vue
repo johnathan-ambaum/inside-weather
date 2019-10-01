@@ -131,6 +131,7 @@ import InspirationOptions from './InspirationOptions.vue';
 import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
+import tracker from '../mixins/tracker';
 
 library.add(faHeart);
 
@@ -148,6 +149,7 @@ export default {
   mixins: [
     screenMonitor,
     interpolator,
+    tracker,
   ],
 
   props: {
@@ -283,6 +285,8 @@ export default {
       this.populateSelected({
         selectedOptions: this.initialAttributes,
         exists: true,
+      }).then(() => {
+        this.trackViewProduct();
       });
     }
 
@@ -342,6 +346,8 @@ export default {
         name: this.productName,
         model: this.modelNumber,
         image: this.productImages[0].full,
+      }).then(() => {
+        this.trackViewProduct();
       });
     },
 
@@ -366,6 +372,7 @@ export default {
 
       this.toggleFavorite({
         customerId: this.customerId,
+        sku: this.productSku,
         product: {
           ...this.activeProduct,
           product_type: this.category,
@@ -409,6 +416,7 @@ export default {
         .then((cart) => {
           this.addToCartProcessing = false;
           window.$('body').trigger('added.ajaxProduct');
+          this.trackAddToCart(this.fullProduct);
         });
     },
   },
