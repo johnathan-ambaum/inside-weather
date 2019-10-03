@@ -1,12 +1,9 @@
 <template>
-  <div
-    :class="wrapperClasses"
-    class="ResponsiveImage__Wrapper"
-  >
+  <div class="ResponsiveImage__Wrapper">
     <img
       v-if="showPlaceholder"
       :src="placeholderSrc"
-      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
+      :class="imageClasses"
       class="ResponsiveImage ResponsiveImage__Placeholder">
     <img
       v-if="src.length"
@@ -14,15 +11,13 @@
       :src="src"
       :srcset="srcset"
       :style="imageStyles"
-      :class="{ 'ResponsiveImage--Loading': showSpinner && sizes.length < 10 }"
+      :class="imageClasses"
       class="ResponsiveImage"
       @load="finishLoading">
-    <transition name="fade">
-      <glyph-loading
-        v-if="showSpinner && sizes.length < 10"
-        class="ResponsiveImage__Spinner"
-      />
-    </transition>
+    <glyph-loading
+      v-if="showSpinner && sizes.length < 10"
+      class="ResponsiveImage__Spinner"
+    />
   </div>
 </template>
 
@@ -49,13 +44,14 @@ export default {
       src: this.getSrc(),
       srcset: this.getSrcSet(),
       showSpinner: this.initialSpinner,
+      loading: true,
     };
   },
 
   computed: {
     placeholderSrc() {
       if (this.images.thumbnail !== undefined) {
-        return this.images.thumbnail.replace(/^https?:/i, '');
+        return this.images.thumbnail;
       }
 
       return null;
@@ -71,9 +67,10 @@ export default {
       };
     },
 
-    wrapperClasses() {
+    imageClasses() {
       return {
-        'ResponsiveImage__Wrapper--Loaded': this.loaded,
+        'ResponsiveImage--Loaded': this.loaded,
+        'ResponsiveImage--Loading': this.loading,
       };
     },
   },
@@ -87,7 +84,7 @@ export default {
 
     images(newImages) {
       if (this.load) {
-        this.showSpinner = true;
+        this.loading = true;
         this.loadImages();
       }
     },
@@ -99,7 +96,7 @@ export default {
         return '';
       }
 
-      return this.images[this.defaultSize].replace(/^https?:/i, '');
+      return this.images[this.defaultSize];
     },
 
     getSrcSet() {
@@ -110,19 +107,19 @@ export default {
       const sources = [];
 
       if (this.images.full) {
-        sources.push(`${this.images.full.replace(/^https?:/i, '')} 2000w`);
+        sources.push(`${this.images.full} 2000w`);
       }
 
       if (this.images.large) {
-        sources.push(`${this.images.large.replace(/^https?:/i, '')} 1200w`);
+        sources.push(`${this.images.large} 1200w`);
       }
 
       if (this.images.medium) {
-        sources.push(`${this.images.medium.replace(/^https?:/i, '')} 800w`);
+        sources.push(`${this.images.medium} 800w`);
       }
 
       if (this.images.thumbnail) {
-        sources.push(`${this.images.thumbnail.replace(/^https?:/i, '')} 100w`);
+        sources.push(`${this.images.thumbnail} 100w`);
       }
 
       return sources.join(',');
@@ -135,6 +132,7 @@ export default {
 
     finishLoading() {
       this.loaded = true;
+      this.loading = false;
       this.showSpinner = false;
     },
   },
@@ -147,41 +145,34 @@ export default {
 
 .ResponsiveImage {
   bottom: 0;
+  filter: blur(4px);
   left: 0;
   margin: auto;
   position: absolute;
   right: 0;
   top: 0;
-  width: 90% !important;
-
-  @include at-query($breakpoint-mlarge) {
-    width: 100% !important;
-  }
-
-  @include at-query($breakpoint-xsmall) {
-    width: 85% !important;
-  }
+  transition: filter .2s linear;
+  width: 100%;
 
   &--Loading {
     opacity: .6;
   }
 
+  &--Loaded {
+    filter: blur(0);
+  }
+
   &__Wrapper {
-    filter: blur(4px);
     height: 0;
     padding-top: 100%;
     position: relative;
-    transition: filter .2s linear;
-
-    &--Loaded {
-      filter: blur(0);
-    }
   }
 
   &__Spinner {
     bottom: 0;
     left: 0;
     margin: auto;
+    max-width: 30%;
     opacity: .5;
     position: absolute;
     right: 0;

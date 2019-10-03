@@ -9,34 +9,30 @@
       ref="leftEdge"
       class="ZoomGallery__Edge ZoomGallery__Edge--Left"
     />
+    <arrow-button
+      class="ZoomGallery__Arrow"
+      direction="left"
+      @click.native="prevImage"
+    />
     <responsive-image
       :images="images[activeImage]"
       class="ZoomGallery__Image"
+    />
+    <arrow-button
+      class="ZoomGallery__Arrow"
+      direction="right"
+      @click.native="nextImage"
     />
     <div
       ref="rightEdge"
       class="ZoomGallery__Edge ZoomGallery__Edge--Right"
     />
-    <nav class="ZoomGallery__Nav">
-      <button
-        class="ZoomGallery__Arrow"
-        @click="prevImage"
-      >
-        <font-awesome-icon :icon="['fal', 'arrow-left']"/>
-      </button>
-      <button
-        class="ZoomGallery__Arrow"
-        @click="nextImage"
-      >
-        <font-awesome-icon :icon="['fal', 'arrow-right']"/>
-      </button>
-      <close-button
-        :size="32"
-        stroke="semibold"
-        class="ZoomGallery__Close"
-        @click="$emit('close')"
-      />
-    </nav>
+    <close-button
+      :size="32"
+      stroke="semibold"
+      class="ZoomGallery__Close"
+      @click.native="$emit('close')"
+    />
     <nav class="ZoomGallery__Bullets">
       <button
         v-for="(image, index) in images"
@@ -50,19 +46,15 @@
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faArrowRight } from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ResponsiveImage from './ResponsiveImage.vue';
+import ArrowButton from './ArrowButton.vue';
 import CloseButton from './CloseButton.vue';
 import { debounce } from '../util/helpers';
-
-library.add(faArrowLeft, faArrowRight);
 
 export default {
   components: {
     ResponsiveImage,
-    FontAwesomeIcon,
+    ArrowButton,
     CloseButton,
   },
 
@@ -82,6 +74,13 @@ export default {
 
   mounted() {
     document.body.style.overflow = 'hidden';
+    const zendesk = document.querySelector('.zEWidget-launcher');
+    if (zendesk) {
+      zendesk.style.display = 'none';
+    }
+
+    const { height } = this.$refs.container.getBoundingClientRect();
+    this.$refs.container.scrollTop = height / 3;
 
     const managePosition = debounce((e) => {
       const { left } = this.$refs.leftEdge.getBoundingClientRect();
@@ -111,6 +110,12 @@ export default {
 
   beforeDestroy() {
     document.body.style.overflow = '';
+    const zendesk = document.querySelector('.zEWidget-launcher');
+    if (zendesk) {
+      zendesk.style.display = '';
+      // fix bug causing widget to be set to 5px wide by some zendesk javascript after closing customizer
+      zendesk.style.width = '';
+    }
   },
 
   methods: {
@@ -199,26 +204,22 @@ export default {
     }
   }
 
-  &__Nav {
-    align-items: center;
-    display: flex;
-    position: fixed;
-    right: 13px;
-    top: 17px;
-
-    @include at-query($breakpoint-large) {
-      right: 40px;
-      top: 40px;
-    }
-  }
-
   &__Arrow {
+    bottom: 0;
     font-size: 30px;
     line-height: 1;
+    margin: auto;
     padding: 0;
+    position: fixed;
+    top: 0;
+    z-index: 100;
 
-    & + & {
-      margin: 0 68px 0 40px;
+    &.left {
+      left: 60px;
+    }
+
+    &.right {
+      right: 60px;
     }
 
     @include at-query($breakpoint-small) {
@@ -227,7 +228,14 @@ export default {
   }
 
   &__Close {
-    margin-top: -4px;
+    position: fixed;
+    right: 13px;
+    top: 17px;
+
+    @include at-query($breakpoint-large) {
+      right: 40px;
+      top: 40px;
+    }
   }
 
   &__Bullets {
@@ -249,6 +257,10 @@ export default {
 
     &--Active {
       background: #212121;
+    }
+
+    @include at-query($breakpoint-small) {
+      margin: 0 2px;
     }
   }
 }

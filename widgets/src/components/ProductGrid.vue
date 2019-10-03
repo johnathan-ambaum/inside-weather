@@ -1,42 +1,27 @@
 <template>
   <div>
     <div
-      v-if="showEmpty"
+      v-if="!favorites.length"
       class="ProductGrid--Empty"
     >
       <slot/>
     </div>
-    <div
-      :class="{ 'ProductGrid--Favorites': showFavorites }"
-      class="ProductGrid"
-    >
-      <template
-        v-for="(row, rowNum) in productTriplets"
-      >
-        <div
-          :key="rowNum"
-          class="ProductGridRow"
-        >
-          <product-grid-item
-            v-for="product in row"
-            :key="product.id"
-            :product="product"
-            :filters="itemFilters(product.primary_category)"
-            :is-favorite="isFavoriteProduct(product.sku)"
-            :load-mobile="loadRowMobile(rowNum)"
-            :is-mobile="screenWidth < 1024"/>
-          <div
-            v-for="i in (3 - row.length)"
-            :key="i"
-            class="ProductGridItem is-empty"/>
-        </div>
-      </template>
+    <div class="ProductGrid">
+      <product-grid-item
+        v-for="(product, index) in favorites"
+        :key="product.id"
+        :product="product"
+        :filters="itemFilters(product.product_type)"
+        :is-favorite="isFavoriteProduct(product.handle)"
+        :load-mobile="loadItemMobile(index)"
+        :is-mobile="isMobile"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import ProductGridItem from './ProductGridItem.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import FilterStorage from '../util/FilterStorage';
@@ -50,38 +35,21 @@ export default {
     screenMonitor,
   ],
 
-  props: {
-    showFavorites: { type: Boolean, default: false },
-  },
-
   data() {
     return {
       cachedFilters: {},
       mobileLoadCount: 0,
+      filtersLoaded: false,
     };
   },
 
   computed: {
     ...mapState({
-      filters: state => state.filters,
-      products: state => state.products,
       favorites: state => state.favorites,
     }),
 
-    showEmpty() {
-      if (this.showFavorites) {
-        return !this.favorites.length;
-      }
-
-      return !this.products.length;
-    },
-
     itemFilters() {
       return (category) => {
-        if (!this.showFavorites) {
-          return this.filters;
-        }
-
         if (this.cachedFilters[category]) {
           return this.cachedFilters[category];
         }
@@ -90,45 +58,12 @@ export default {
       };
     },
 
-    productTriplets() {
-      const tuples = [];
-      const copy = [...this.products];
-
-      while (copy.length > 0) {
-        tuples.push(copy.splice(0, 3));
-      }
-
-      return tuples;
-    },
-
     isFavoriteProduct() {
-      return sku => this.favorites.includes(sku);
+      return handle => this.favorites.some(product => product.handle === handle);
     },
 
-    loadRowMobile() {
-      return rowNum => this.mobileLoadCount >= (rowNum * 3);
-    },
-  },
-
-  watch: {
-    products(newProducts) {
-      if (!this.showFavorites) {
-        return;
-      }
-
-      const processed = [];
-
-      newProducts.map(product => product.primary_category).forEach((category) => {
-        if (this.cachedFilters[category] || processed.includes(category)) {
-          return;
-        }
-
-        FilterStorage.getItem(category).then((filters) => {
-          this.$set(this.cachedFilters, category, filters);
-        });
-
-        processed.push(category);
-      });
+    loadItemMobile() {
+      return index => this.mobileLoadCount >= index;
     },
   },
 
@@ -138,9 +73,7 @@ export default {
       this.customerId = window.pnwCfg.id;
     }
 
-    if (this.showFavorites) {
-      this.loadFavorites();
-    }
+    this.loadFilters();
   },
 
   mounted() {
@@ -159,12 +92,28 @@ export default {
   methods: {
     ...mapMutations([
       'toggleFavorite',
-      'setFavorites',
     ]),
 
-    ...mapActions([
-      'loadFavorites',
-    ]),
+    loadFilters() {
+      if (!this.favorites.length) {
+        this.filtersLoaded = true;
+        return;
+      }
+
+      const processed = [];
+
+      this.favorites.map(product => product.product_type).forEach((category) => {
+        if (this.cachedFilters[category] || processed.includes(category)) {
+          return;
+        }
+
+        FilterStorage.getItem(category).then((filters) => {
+          this.$set(this.cachedFilters, category, filters);
+        });
+
+        processed.push(category);
+      });
+    },
   },
 };
 </script>
@@ -173,18 +122,26 @@ export default {
 @import '../scss/variables';
 @import '../scss/mixins';
 
-.ProductGrid {
+.Favorites__Header {
+  color: #202020;
   font-family: $font-stack-avalon;
-  margin: 2rem 0;
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 80px;
 
   @include at-query($breakpoint-large) {
-    @include clearfix;
-    margin: 160px 0 2rem;
-    padding: 0 $gutter;
+    font-size: 34px;
+  }
+}
 
-    &--Favorites {
-      margin-top: 40px;
-    }
+.ProductGrid {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: $font-stack-avalon;
+  margin: 40px 0;
+
+  @include at-query($breakpoint-large) {
+    margin-top: 50px;
   }
 
   &--Empty {
@@ -197,22 +154,6 @@ export default {
     justify-content: center;
     letter-spacing: .05em;
     text-transform: uppercase;
-  }
-}
-
-.ProductGridRow {
-  @include at-query($breakpoint-large) {
-    // slightly less tall than the full available space with header and BrowseWidgetNav taken into account
-    display: flex;
-    height: calc(80vh - 245px);
-    justify-content: space-between;
-    margin-bottom: $gutter;
-    max-height: 2000px - 245px;
-
-    .MainNav--Small & {
-      height: calc(80vh - 205px);
-      max-height: 2000px - 205px;
-    }
   }
 }
 </style>

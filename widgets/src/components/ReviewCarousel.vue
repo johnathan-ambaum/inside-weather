@@ -6,7 +6,8 @@
     <div class="ReviewCarousel__Write">
       <a
         class="ReviewCarousel__Write--Link"
-        href="https://insideweather.com/pages/write-a-review">
+        href="https://insideweather.com/pages/write-a-review"
+      >
         <span class="ReviewCarousel__Write--BtnLabel">Write a Review</span>
       </a>
     </div>
@@ -26,7 +27,7 @@
           @click.native="sliderClicked"
         >
           <swiper-slide
-            v-for="(item, index) in reviewData"
+            v-for="(item, index) in reviews"
             :key="`${index}`"
           >
             <carousel-item
@@ -104,19 +105,18 @@ import ReviewModal from './ReviewModal.vue';
 import Star from './Star.vue';
 
 export default {
-
   components: {
     CarouselItem,
     ReviewModal,
     Star,
   },
+
   mixins: [
     screenMonitor,
   ],
 
   props: {
-    primaryCategory: { type: String, default: '' },
-    productFamily: { type: String, default: '' },
+    category: { type: String, required: true },
   },
 
   data() {
@@ -273,23 +273,9 @@ export default {
     };
   },
 
-  mounted() {
-    if (this.isMobile) {
-      this.swiperOption.centeredSlides = true;
-      this.swiperOption.allowTouchMove = true;
-    }
-  },
-
-  created() {
-    if (this.isMobile) {
-      this.swiperOption.centeredSlides = true;
-    }
-  },
-
   computed: {
     ...mapState({
-      product: state => state.activeProduct,
-      propReviews: state => state.productReviews,
+      reviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
     }),
 
@@ -307,12 +293,29 @@ export default {
   },
 
   watch: {
-    primaryCategory(newCategory) {
-      this.getProductReviews({ primaryCategory: newCategory, productFamily: this.product.product_family });
+    category: {
+      immediate: true,
+      handler(newCategory) {
+        this.getProductReviews({ primaryCategory: newCategory });
+      },
     },
-    propReviews(newPropReviews) {
+
+    reviews(newPropReviews) {
       this.reviewData.push(...newPropReviews);
     },
+  },
+
+  mounted() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+      this.swiperOption.allowTouchMove = true;
+    }
+  },
+
+  created() {
+    if (this.isMobile) {
+      this.swiperOption.centeredSlides = true;
+    }
   },
 
   methods: {
@@ -488,7 +491,7 @@ export default {
 @import '../../node_modules/swiper/dist/css/swiper.css';
 
 .ReviewCarousel {
-  margin: 60px auto 0;
+  margin: 0 auto;
   padding: 60px 0;
   background: #f2f0ed;
   font-family: $font-stack-avalon;

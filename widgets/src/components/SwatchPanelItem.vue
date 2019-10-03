@@ -1,66 +1,54 @@
 <template>
   <div
-    ref="item"
-    :class="{ 'is-selected': value, 'is-option': isOption }"
+    :class="itemClasses"
     class="SwatchPanelItem"
     @click="toggle"
   >
+    <img
+      v-if="load"
+      ref="img"
+      :src="option.swatch_url"
+      :title="option.name"
+      class="SwatchPanelItem__Swatch"
+      @mouseenter="swapImage(true)"
+      @mouseleave="swapImage(false)"
+    >
+    <div class="SwatchPanelItem__Title">{{ option.name }}</div>
     <div
-      :class="frameClasses"
-      class="SwatchPanelItem__Frame"
+      v-if="option.subname"
+      class="SwatchPanelItem__Subtitle"
+    >{{ option.subname }}</div>
+    <div
+      v-if="option.icons.length > 0"
+      class="SwatchPanelItem__Icons"
     >
       <img
-        v-if="load"
-        ref="img"
-        :src="item.swatchURL"
-        :title="item.name"
-        class="SwatchPanelItem__Swatch"
-        @mouseenter="swapImage(true)"
-        @mouseleave="swapImage(false)"
+        v-for="icon in option.icons"
+        :key="icon.name"
+        :src="icon.image_url"
+        :alt="icon.name"
+        :title="icon.description"
+        class="SwatchPanelItem__Icon"
       >
-      <transition name="fade">
-        <div
-          v-if="hasError"
-          ref="errorTooltip"
-          class="SwatchPanelItem__Error"
-          @click.stop="dismissError"
-        >Hey, sorry this combination doesn’t exist</div>
-      </transition>
     </div>
-    <slot>
-      <div v-if="showLabel">
-        <div class="SwatchPanelItem__Title">{{ item.name }}</div>
-        <div
-          v-if="item.subname"
-          class="SwatchPanelItem__Subtitle"
-        >{{ item.subname }}</div>
-      </div>
-    </slot>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-
 export default {
   props: {
-    item: { type: Object, required: true },
+    option: { type: Object, required: true },
+    type: { type: String, default: 'square' },
     value: { type: Boolean, default: false },
-    isOption: { type: Boolean, default: false },
-    showLabel: { type: Boolean, default: true },
-    shape: { type: String, default: 'square' },
-    border: { type: Boolean, default: true },
-    hasError: { type: Boolean, default: false },
     load: { type: Boolean, default: false },
     isMobile: { type: Boolean, default: false },
   },
 
   computed: {
-    frameClasses() {
+    itemClasses() {
       return {
-        'has-label': this.showLabel,
-        'has-border': this.border,
-        'SwatchPanelItem__Frame--Round': !this.isOption && this.shape === 'round',
+        'is-selected': this.value,
+        [`SwatchPanelItem--${this.type}`]: true,
       };
     },
   },
@@ -69,31 +57,25 @@ export default {
     load: {
       immediate: true,
       handler(newValue) {
-        if (!this.isMobile && this.isOption && newValue) {
+        if (newValue && this.option.swatch_hover_url) {
           this.hoverImage = new Image();
-          this.hoverImage.src = this.item.swatchHoverURL;
+          this.hoverImage.src = this.option.swatch_hover_url;
         }
       },
     },
   },
 
   methods: {
-    ...mapMutations([
-      'setErrorTrigger',
-    ]),
-
     toggle() {
-      this.$emit('input', !this.value);
-    },
-
-    swapImage(hover) {
-      if (!this.isMobile && this.isOption) {
-        this.$refs.img.src = hover ? this.item.swatchHoverURL : this.item.swatchURL;
+      if (!this.value) {
+        this.$emit('input', !this.value);
       }
     },
 
-    dismissError() {
-      this.setErrorTrigger(null);
+    swapImage(hover) {
+      if (!this.isMobile && this.option.swatch_hover_url) {
+        this.$refs.img.src = hover ? this.option.swatch_hover_url : this.option.swatch_url;
+      }
     },
   },
 };
@@ -105,93 +87,92 @@ export default {
 
 .SwatchPanelItem {
   align-items: center;
+  box-shadow: .9px .9px .4px 0 rgba(139,137,134,.5);
   cursor: pointer;
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 0;
-  margin-bottom: 12px;
+  padding: 18px;
   position: relative;
   text-align: center;
 
-  @include at-query($breakpoint-small) {
-    .SwatchPanel__Body--swatch & {
-      justify-content: flex-start;
+  &--square {
+    padding: 18px 32px;
+  }
+
+  @include at-query($breakpoint-large) {
+    flex: 0 0 100%;
+
+    @at-root {
+      #{&}--square {
+        flex: 0 0 50%;
+      }
     }
   }
 
-  &__Frame {
-    border: 4px solid transparent;
-    position: relative;
-
-    &.has-label {
-      margin-bottom: 10px;
-    }
-
-    &--Round {
-      border-radius: 50%;
-      border-width: 2px;
-    }
-  }
-
-  &__Error {
-    background: #fff;
-    border: 1px solid #acacac;
-    bottom: 100%;
-    font-family: $font-stack-roboto;
-    font-size: 10px;
-    left: 50%;
-    line-height: 28px;
-    padding: 5px;
-    position: absolute;
-    transform: translateX(-50%);
-    width: 210px;
-  }
-
-  &.is-selected &__Frame.has-border {
-    border-color: #212121;
+  &.is-selected {
+    background: #f2f0ed;
+    border: 1px solid #202020;
+    box-shadow: none;
   }
 
   &__Swatch {
     display: block;
+    margin-bottom: 12px;
 
     &[src=""] {
       visibility: hidden;
     }
 
-    @at-root {
-      .SwatchPanelItem__Frame--Round & {
-        border: 2px solid #ccc;
-        border-radius: 50%;
-
-        .SwatchPanelItem.is-selected & {
-          border-color: #212121;
-        }
-      }
+    @include at-query($breakpoint-small) {
+      height: 92px;
+      margin-bottom: 6px;
+      width: auto;
     }
   }
 
   &__Title {
     color: #202020;
     font-family: $font-stack-avalon;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
+    letter-spacing: .05em;
     line-height: 1;
 
-    @include at-query($breakpoint-small) {
-      .SwatchPanel__Body--swatch {
-        flex: 1 1 auto;
-      }
+    @include at-query($breakpoint-large) {
+      font-size: 14px;
+      line-height: 18px;
     }
   }
 
   &__Subtitle {
     color: #202020;
     font-family: $font-stack-roboto;
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: .075em;
-    margin-top: 7px;
     text-transform: uppercase;
+
+    @include at-query($breakpoint-large) {
+      font-size: 10px;
+      margin-top: 2px;
+    }
+  }
+
+  &__Icons {
+    margin-top: 8px;
+  }
+
+  &__Icon {
+    display: inline-block;
+    height: 15px;
+    margin: 0 8px;
+    width: auto;
+
+    @include at-query($breakpoint-large) {
+      height: 20px;
+    }
   }
 }
 </style>

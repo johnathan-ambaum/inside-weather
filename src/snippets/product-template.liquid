@@ -15,58 +15,39 @@
   <div id="app">
     <div class="ProductDetailGrid">
       <product-detail class="ProductDetailGrid__Main">
-        <h1 class="ProductDetail__Title">{{ product.title }}</h1>
         <div class="ResponsiveImage__Wrapper"></div>
       </product-detail>
-      <div class="ProductDetailGrid__Sidebar is-fixed">
-
-        <product-detail-slider v-if="product && isMobile"></product-detail-slider>
-
-        {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
-        {% form 'product', product, id: form_id, class: 'product-single__form' %}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
+      <div class="ProductDetailGrid__Sidebar">
           <div class="product-single__meta">
             <div class="Product__FavoriteRow">
-              <span role="button" class="Product__Favorite" @click="favoriteCurrentProduct">
-                <font-awesome-icon :icon="favoriteIcon"/>
+              <span role="button" class="Product__Favorite">
+                <!-- <font-awesome-icon :icon="favoriteIcon"/> -->
               </span>
             </div>
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <div class="Product__PriceRow">
-                <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price" content="{{ current_variant.price | divided_by: 100 }}">
+                <span id="ProductPrice-{{ section_id }}" class="product__price" itemprop="price" content="{{ current_variant.price | divided_by: 100 }}" style="display: none;">
                   ${{ current_variant.price | divided_by: 100 }}
                 </span>
-
-                <div class="Product__ShippingNote"></div>
               </div>
 
               <meta itemprop="priceCurrency" content="{{ shop.currency }}">
               <link itemprop="itemCondition" href="http://schema.org/NewCondition">
               <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
-              <div class="Product__ShippingDays"></div>
-
-              {% include 'add-to-cart-row' %}
-
             </div> <!-- [itemprop="offers"] -->
           </div> <!-- .product-single__meta -->
-          <hr>
-          <div class="Product__Explore">
-            <p class="Product__Lead">NOT SURE YOU FOUND THE PERFECT MATCH?</p>
-            <h3>
-              CUSTOMIZE
-              {% include 'icon-fa-arrow-right' %}
-            </h3>
-          </div>
-          <product-customizer category="{{ collection.handle }}" sku="{{ product.selected_or_first_available_variant.sku }}" v-cloak>
-            {% include 'add-to-cart-row' %}
-          </product-customizer>
-        {% endform %}
-        <product-family v-if="product && isMobile"></product-family>
+          <product-customizer
+            v-cloak
+            category="{{ product.type }}"
+            initial-handle="{{ product.handle }}"
+            :initial-variant="{{ product.selected_or_first_available_variant.id }}"
+            :initial-attributes="{{ product.metafields.products.attributes | json | escape }} || {}"
+          ></product-customizer>
+        <!-- <product-family v-if="isMobile"></product-family> -->
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
-    <page-builder-section></page-builder-section>
+    <review-carousel category="{{ product.type | handle }}"></review-carousel>
   </div> <!-- #app -->
 
   <script type="application/json" id="ProductJson-{{ section_id }}" data-product-json>

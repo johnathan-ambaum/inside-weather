@@ -1,11 +1,10 @@
-import { mapMutations } from 'vuex';
-
 export default {
   data() {
     return {
       screenWidth: null,
       screenHeight: null,
       isMobile: false,
+      isTablet: false,
     };
   },
 
@@ -17,17 +16,11 @@ export default {
       this.screenHeight = window.innerHeight
         || document.documentElement.clientHeight
         || document.body.clientHeight;
-      this.isMobile = this.screenWidth < 1024;
-      this.setPerPage(this.isMobile ? 6 : 54);
+      this.isMobile = this.screenWidth < 1025;
+      this.isTablet = this.screenWidth < 1025 && this.screenWidth > 767;
     };
 
     window.addEventListener('resize', saveSize);
     saveSize();
-  },
-
-  methods: {
-    ...mapMutations([
-      'setPerPage',
-    ]),
   },
 };

@@ -8,12 +8,12 @@ export default class FilterStorage {
   static getItem(category) {
     let filters;
 
-    const now = (new Date()).getTime();
-    const expires = localStorage.getItem(`filters.${category}.expires`);
+    // const now = (new Date()).getTime();
+    // const expires = localStorage.getItem(`filters.${category}.expires`);
 
-    if (!expires || expires > now) {
-      filters = localStorage.getItem(`filters.${category}`);
-    }
+    // if (!expires || expires > now) {
+    //   filters = localStorage.getItem(`filters.${category}`);
+    // }
 
     if (!filters) {
       return FilterStorage.requestFilter(category);
@@ -53,7 +53,12 @@ export default class FilterStorage {
    * @param {String} category
    */
   static requestFilter(category) {
-    const filterEndpoint = `https://banksy-search.herokuapp.com/api/v1/filters/${category}.min.json`;
+    const urlParams = new URLSearchParams(window.location.search);
+    const version = urlParams.get('version');
+    let filterEndpoint = `https://iw-content.herokuapp.com/api/v1/product/${category}`;
+    if (version) {
+      filterEndpoint += `?version=${version}`;
+    }
 
     return fetch(filterEndpoint)
       .then(response => response.json())
