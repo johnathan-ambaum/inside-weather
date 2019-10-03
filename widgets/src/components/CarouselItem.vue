@@ -80,7 +80,7 @@ import {
   BModal,
   BRow,
   BCol,
-} from 'bootstrap-vue/es/components';
+} from 'bootstrap-vue';
 
 import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';

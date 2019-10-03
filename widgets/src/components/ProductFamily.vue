@@ -2,7 +2,10 @@
   <div class="ProductFamily">
     <div class="ProductFamily__Body">
       <div class="ProductFamily__LabelWrap">
-        <h2 class="ProductFamily__Label" v-if="'related_items' in product && product.related_items.length">MEET THE REST OF THE FAMILY</h2>
+        <h2
+          v-if="product.related_items && product.related_items.length"
+          class="ProductFamily__Label"
+        >MEET THE REST OF THE FAMILY</h2>
       </div>
       <div class="ProductFamily__Images">
         <div
@@ -10,7 +13,10 @@
           :key="index"
           class="ProductFamily__Images--Items"
         >
-          <a :href="'/collections/' + item.primary_category + '/products/' + item.handle" :title="item.short_display_name" target="blank">
+          <a
+            :href="'/collections/' + item.primary_category + '/products/' + item.handle"
+            :title="item.short_display_name"
+            target="blank">
             <img :src="item.images.medium">
           </a>
         </div>

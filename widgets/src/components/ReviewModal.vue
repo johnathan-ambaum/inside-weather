@@ -4,7 +4,8 @@
     v-model="modalShow"
     hide-footer
     size="xl"
-    @hidden="onHideModal">
+    @hidden="onHideModal"
+  >
     <template
       slot="modal-header"
       slot-scope="{ close }">
@@ -212,7 +213,7 @@ import {
   BModal,
   BRow,
   BCol,
-} from 'bootstrap-vue/es/components';
+} from 'bootstrap-vue';
 
 import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';
@@ -283,6 +284,12 @@ export default {
     },
   },
 
+  watch: {
+    modalShow(isShown) {
+      document.body.classList.toggle('modal-open', isShown);
+    },
+  },
+
   created() {
     window.addEventListener('resize', this.handleResize);
   },
@@ -346,6 +353,12 @@ export default {
 @import '../scss/mixins';
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import '../../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
+
+body.modal-open {
+  .zEWidget-launcher {
+    z-index: 0 !important;
+  }
+}
 
 .VueCarousel-pagination {
   & .VueCarousel-dot {

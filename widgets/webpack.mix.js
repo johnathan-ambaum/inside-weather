@@ -7,8 +7,6 @@ mix
   .extract([
     '@glidejs/glide',
     'scrollmonitor',
-    'shvl',
-    'simple-scrollbar',
     'vue',
     'vuex',
   ], 'widgets.vendor.js')

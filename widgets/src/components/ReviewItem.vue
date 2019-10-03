@@ -4,17 +4,27 @@
       <div class="ReviewItem__Left">
         <div class="ReviewItem__Left--Content">
           <div class="ReviewItem__Mobile--Right">
-            <div :style="styleReviewItem" class="ReviewItem__Left--Product">
-              <div :id="elementId" class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ reviewData.first_name }} {{ reviewData.last_name }}</div>
-              <div :style="styleCheckmark" class="ReviewItem__Left--Checkbox">
+            <div
+              :style="styleReviewItem"
+              class="ReviewItem__Left--Product">
+              <div
+                :id="elementId"
+                class="ReviewItem__Left--Text ReviewItem__Left--Title">{{ reviewData.first_name }} {{ reviewData.last_name }}</div>
+              <div
+                :style="styleCheckmark"
+                class="ReviewItem__Left--Checkbox">
                 <selected-checkbox />
               </div>
             </div>
             <div class="ReviewItem__Left--Text ReviewItem__Left--Address">{{ reviewData.city }}, {{ productStateAbbr }}</div>
           </div>
-          <a :href="'https://insideweather.com/collections/' + reviewData.item_data.primary_category + '/products/' + reviewData.item_data.handle" 
-target="_blank" class="ReviewItem__Left--Link">
-            <div :style="{ 'background-image': 'url(' + reviewData.item_data.medium_image + ')'}" class="ReviewItem__Left--Image" />
+          <a
+            :href="'https://insideweather.com/collections/' + reviewData.item_data.primary_category + '/products/' + reviewData.item_data.handle"
+            target="_blank"
+            class="ReviewItem__Left--Link">
+            <div
+              :style="{ 'background-image': 'url(' + reviewData.item_data.medium_image + ')'}"
+              class="ReviewItem__Left--Image" />
           </a>
         </div>
       </div>
@@ -26,13 +36,14 @@ target="_blank" class="ReviewItem__Left--Link">
           </div>
           <div class="ReviewItem__Right--Title">{{ reviewData.title }}</div>
           <div class="ReviewItem__Right--Content">{{ reviewData.body }}</div>
-          <div v-if="reviewData.images.length > 0" 
-class="ReviewItem__Right--Images">
+          <div
+            v-if="reviewData.images.length > 0"
+            class="ReviewItem__Right--Images">
             <div
               v-for="(image, index) in reviewData.images"
-              class="ReviewItem__Right--Image"
               :key="index"
               :style="{ 'background-image': 'url(' + image.thumb.url + ')'}"
+              class="ReviewItem__Right--Image"
               @click="handleModal(image.medium.url)"
             />
           </div>
@@ -51,15 +62,9 @@ class="ReviewItem__Right--Images">
 </template>
 
 <script>
-import { faStar, faArrowLeft } from '@fortawesome/pro-light-svg-icons';
+import { faStar } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  BContainer,
-  BRow,
-  BCol,
-} from 'bootstrap-vue/es/components';
-
 import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';
 import ReviewModal from './ReviewModal.vue';
@@ -73,10 +78,7 @@ export default {
   components: {
     FontAwesomeIcon,
     SelectedCheckbox,
-    BContainer,
     ReviewModal,
-    BRow,
-    BCol,
     Star,
   },
   mixins: [
@@ -107,24 +109,22 @@ export default {
         return {
           display: 'flex',
           alignItems: 'flex-start',
-        }
-      } else {
-        return {
-          display: 'flex',
-          alignItems: 'center',
-        }
+        };
       }
+      return {
+        display: 'flex',
+        alignItems: 'center',
+      };
     },
     styleCheckmark() {
       if (this.elementHeight > 30) {
         return {
           paddingTop: '7px',
-        }
-      } else {
-        return {
-          paddingTop: '0',
-        }
+        };
       }
+      return {
+        paddingTop: '0',
+      };
     },
   },
 
@@ -147,7 +147,7 @@ export default {
   methods: {
     convertDate(isoDate) {
       const date = new Date(isoDate);
-      return `${date.getMonth() + 1  }/${  date.getDate()  }/${  date.getFullYear()}`;
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     },
 
     getAbbrState(us_state) {
@@ -155,7 +155,6 @@ export default {
       this.stateData.forEach((item) => {
         if (item.name === us_state) {
           state_abbreviation = item.abbreviation;
-          return;
         }
       });
       return state_abbreviation;
