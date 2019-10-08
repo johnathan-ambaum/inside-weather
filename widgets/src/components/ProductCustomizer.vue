@@ -110,9 +110,13 @@
         </div>
         <button
           class="ProductCustomizer__Close"
-          @click.prevent="close"
+          @click.prevent="close(false)"
         >{{ closeButtonText }}</button>
       </div>
+      <close-button
+        class="ProductCustomizer__Exit"
+        @click.native.prevent="close(true)"
+      />
     </div>
   </div>
 </template>
@@ -127,6 +131,7 @@ import ProductDetailSlider from './ProductDetailSlider.vue';
 import ProductGallery from './ProductGallery.vue';
 import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
+import CloseButton from './CloseButton.vue';
 import InspirationOptions from './InspirationOptions.vue';
 import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
@@ -142,6 +147,7 @@ export default {
     ProductGallery,
     FilterPanel,
     AddToCart,
+    CloseButton,
     InspirationOptions,
     SwatchBrowser,
   },
@@ -351,8 +357,8 @@ export default {
       });
     },
 
-    close() {
-      if (this.openPanel) {
+    close(closeAll) {
+      if (this.openPanel && !closeAll) {
         this.selectPanel('');
         return;
       }
@@ -362,6 +368,7 @@ export default {
     },
 
     showCustomizer() {
+      this.selectPanel('');
       this.active = true;
     },
 
@@ -500,6 +507,10 @@ html.ProductCustomizer--Open {
     font-weight: 500;
     letter-spacing: .05em;
     line-height: 22px;
+
+    @include at-query($breakpoint-small) {
+      padding-right: 40px;
+    }
 
     @include at-query($breakpoint-large) {
       font-size: 22px;
@@ -678,6 +689,24 @@ html.ProductCustomizer--Open {
     @include at-query($breakpoint-large) {
       box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
       flex: 0 0 458px;
+    }
+  }
+
+  &__Exit {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+
+    svg {
+      @include at-query($breakpoint-small) {
+        height: auto;
+        width: 16px;
+      }
+    }
+
+    @include at-query($breakpoint-large) {
+      right: 498px;
+      top: 40px;
     }
   }
 
