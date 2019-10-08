@@ -122,7 +122,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-sofas",
+              "url": "shopify:\/\/pages\/sofas",
               "image": "shopify:\/\/shop_images\/nav_seating_sofa_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_sofa_hover_2x-min.jpg"
             }
@@ -131,7 +131,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-sofettes",
+              "url": "shopify:\/\/pages\/sofettes",
               "image": "shopify:\/\/shop_images\/nav_seating_sofette_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette_hover_2x-min.jpg"
             }
@@ -140,7 +140,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-armchairs",
+              "url": "shopify:\/\/pages\/armchairs",
               "image": "shopify:\/\/shop_images\/nav_seating_armchair_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_armchair_hover_2x-min.jpg"
             }
@@ -149,7 +149,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-lounge-chairs",
+              "url": "shopify:\/\/pages\/lounge-chairs",
               "image": "shopify:\/\/shop_images\/nav_seating_lounge_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_lounge_hover_2x-min.jpg"
             }
@@ -158,7 +158,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-dining-chairs",
+              "url": "shopify:\/\/pages\/dining-chairs",
               "image": "shopify:\/\/shop_images\/nav_seating_dining_2x-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_dining_hover_2x-min.jpg"
             }
@@ -167,7 +167,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-credenzas",
+              "url": "shopify:\/\/pages\/credenzas",
               "image": "shopify:\/\/shop_images\/nav_storage_credenza-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_storage_credenza_hover_2x-min.jpg"
             }
@@ -176,7 +176,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-sideboards",
+              "url": "shopify:\/\/pages\/sideboards",
               "image": "shopify:\/\/shop_images\/nav_storage_sideboard-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_storage_sideboard_hover_2x-min.jpg"
             }
@@ -185,7 +185,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-coffee-tables",
+              "url": "shopify:\/\/pages\/coffee-tables",
               "image": "shopify:\/\/shop_images\/nav_tables_coffee-min.png",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_coffee_hover_2x-min.jpg"
             }
@@ -194,7 +194,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-dining-tables",
+              "url": "shopify:\/\/pages\/dining-tables",
               "image": "shopify:\/\/shop_images\/nav_tables_dining-min.jpg",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_dining_hover_2x-min.jpg"
             }
@@ -203,7 +203,7 @@
             "type": "collection_hover_image",
             "settings": {
               "collection": "",
-              "url": "shopify:\/\/pages\/category-side-tables",
+              "url": "shopify:\/\/pages\/side-tables",
               "image": "shopify:\/\/shop_images\/nav_tables_side-min.png",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_side_hover_2x-min.jpg"
             }
