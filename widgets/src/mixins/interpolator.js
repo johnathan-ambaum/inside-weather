@@ -55,20 +55,12 @@ export default {
     },
 
     msrpDisplay() {
-      if (Math.floor(this.msrp) === this.msrp) {
-        return this.msrp;
-      }
-      return `$${this.msrp.toFixed(2)}`;
+      return `$${Math.round(this.msrp)}`;
     },
 
     savings() {
       const savings = this.msrp - this.productPrice;
-
-      if (Math.floor(savings) === savings) {
-        return savings;
-      }
-
-      return savings.toFixed(2);
+      return Math.round(savings);
     },
 
     fullProduct() {
