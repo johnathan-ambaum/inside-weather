@@ -62,17 +62,19 @@
           <span class="ProductCustomizer__Price">${{ productPrice }}</span>
         </div>
       </div>
-      <product-detail-slider
-        v-if="isMobile"
-        class="ProductCustomizer__Slider"
-      />
-      <product-gallery
-        v-if="!isMobile"
-        :images="productImages"
-        class="ProductCustomizer__Gallery"
-      />
+      <div class="ProductCustomizer__Slider">
+        <product-detail-slider />
+        <button
+          v-if="!isMobile"
+          class="ProductCustomizer__Close"
+          @click.prevent="close(true)"
+        >Save Customization</button>
+      </div>
       <div class="ProductCustomizer__Sidebar">
-        <div class="ProductCustomizer__SidebarBody">
+        <div
+          :class="{ 'has-footer': isMobile || hasPrev }"
+          class="ProductCustomizer__SidebarBody"
+        >
           <nav
             v-show="!openPanel"
             class="ProductCustomizer__Nav"
@@ -108,12 +110,26 @@
             />
           </div>
         </div>
-        <button
-          class="ProductCustomizer__Close"
-          @click.prevent="close(false)"
-        >{{ closeButtonText }}</button>
+        <div class="ProductCustomizer__Footer">
+          <button
+            v-if="hasPrev"
+            class="ProductCustomizer__Skip"
+            @click.prevent="backToStart"
+          >Back</button>
+          <button
+            v-if="hasPrev && hasNext"
+            class="ProductCustomizer__Skip"
+            @click.prevent="nextPanel"
+          >Next</button>
+          <button
+            v-if="isMobile && !hasPrev"
+            class="ProductCustomizer__Close"
+            @click.prevent="close(false)"
+          >Save Customization</button>
+        </div>
       </div>
       <close-button
+        v-if="isMobile"
         class="ProductCustomizer__Exit"
         @click.native.prevent="close(true)"
       />
@@ -174,7 +190,7 @@ export default {
 
   computed: {
     ...mapState({
-      attributes: state => state.filters.attributes,
+      attributes: state => state.filters.attributes || [],
       minDays: state => state.filters.min_fulfillment_days,
       maxDays: state => state.filters.max_fulfillment_days,
       openPanel: state => state.openPanel,
@@ -187,6 +203,18 @@ export default {
 
     isOpen() {
       return panel => this.openPanel === panel;
+    },
+
+    activeIndex() {
+      return this.attributes.findIndex(attribute => attribute.parameter === this.openPanel);
+    },
+
+    hasPrev() {
+      return this.openPanel !== '';
+    },
+
+    hasNext() {
+      return this.activeIndex < this.attributes.length - 1;
     },
 
     isFavorite() {
@@ -220,14 +248,6 @@ export default {
       }
 
       return text;
-    },
-
-    closeButtonText() {
-      if (this.openPanel) {
-        return 'Back to main menu';
-      }
-
-      return 'Done';
     },
   },
 
@@ -355,6 +375,19 @@ export default {
       }).then(() => {
         this.trackViewProduct();
       });
+    },
+
+    backToStart() {
+      this.selectPanel('');
+    },
+
+    nextPanel() {
+      if (this.activeIndex >= this.attributes.length) {
+        this.selectPanel('');
+        return;
+      }
+      const { parameter } = this.attributes[this.activeIndex + 1];
+      this.selectPanel(parameter);
     },
 
     close(closeAll) {
@@ -553,6 +586,10 @@ html.ProductCustomizer--Open {
       position: relative;
     }
 
+    @include at-query($breakpoint-large) {
+      margin-top: 15px;
+    }
+
     & > * {
       margin-right: 15px;
 
@@ -626,9 +663,7 @@ html.ProductCustomizer--Open {
 
     &:hover,
     &:active {
-      background: #202020;
-      border: none;
-      color: #fff;
+      background: #F2F0ED;
     }
   }
 
@@ -663,19 +698,22 @@ html.ProductCustomizer--Open {
   }
 
   .ProductDetailSlider {
-    margin: 0;
-  }
-
-  &__Slider,
-  &__Gallery {
-    flex: 1;
-    min-height: 0;
+    @include at-query($breakpoint-small) {
+      margin: 0;
+    }
   }
 
   &__Slider {
+    flex: 1;
+    min-height: 0;
+
     @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
       flex: 0 1 calc(100vh - 350px);
       margin-top: -10%;
+    }
+
+    @include at-query($breakpoint-large) {
+      position: relative;
     }
   }
 
@@ -711,11 +749,15 @@ html.ProductCustomizer--Open {
   }
 
   &__SidebarBody {
-    flex: 1;
+    flex: 0 0 auto;
+    z-index: 100;
 
-    @include at-query($breakpoint-small) {
-      flex: 0 0 auto;
-      z-index: 100;
+    @include at-query($breakpoint-large) {
+      flex: 1;
+
+      &.has-footer {
+        flex: 0 0 calc(100vh - #{$sidebar-footer-height});
+      }
     }
   }
 
@@ -725,7 +767,7 @@ html.ProductCustomizer--Open {
     height: 100%;
 
     @include at-query($breakpoint-large) {
-      height: calc(100vh - #{$sidebar-footer-height});
+      height: 100vh;
     }
   }
 
@@ -806,18 +848,87 @@ html.ProductCustomizer--Open {
     }
   }
 
+  &__Footer {
+    background: #dfb2a3;
+    display: flex;
+    flex: 0 0 $sidebar-footer-height-mobile;
+
+    @include at-query($breakpoint-large) {
+      background: #f2f0ed;
+      flex-basis: $sidebar-footer-height;
+      padding-right: 12px;
+    }
+  }
+
+  &__Skip {
+    align-items: center;
+    background: transparent;
+    color: #fff;
+    display: flex;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: center;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+
+    &:first-child::before {
+      content: '';
+      display: block;
+      border-top: 1px solid #fff;
+      border-left: 1px solid #fff;
+      height: 7px;
+      margin-right: 5px;
+      transform: rotate(-45deg);
+      width: 7px;
+
+      @include at-query($breakpoint-large) {
+        border-color: #202020;
+      }
+    }
+
+    & + & {
+      border-left: 1px solid #fff;
+
+      &::after {
+        content: '';
+        display: block;
+        border-right: 1px solid #fff;
+        border-top: 1px solid #fff;
+        height: 7px;
+        margin-left: 5px;
+        transform: rotate(45deg);
+        width: 7px;
+
+        @include at-query($breakpoint-large) {
+          border-color: #202020;
+        }
+      }
+    }
+
+    @include at-query($breakpoint-large) {
+      color: #202020;
+    }
+  }
+
   &__Close {
     background: #202020;
     color: #fff;
-    flex: 0 0 $sidebar-footer-height-mobile;
     font-family: $font-stack-avalon;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: .12em;
     text-transform: uppercase;
+    width: 100%;
 
     @include at-query($breakpoint-large) {
-      flex: 0 0 $sidebar-footer-height;
+      bottom: 80px;
+      height: 58px;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      width: 324px;
     }
   }
 
