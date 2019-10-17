@@ -1,9 +1,9 @@
 <template>
   <button class="CloseButton">
     <svg
+      :width="size"
+      :height="size"
       xmlns="http://www.w3.org/2000/svg"
-      width="32.121"
-      height="32.121"
       viewBox="0 0 32.121 32.121"
     >
       <g transform="translate(-1800.004 -54.004)">
@@ -28,7 +28,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    size: { type: Number, default: 32.121 },
+  },
+};
 </script>
 
 <style lang="scss">

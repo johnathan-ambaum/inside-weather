@@ -29,6 +29,27 @@
           v-if="msrp"
           class="ProductCustomizer__Savings"
         >YOU SAVE ${{ savings }}</span>
+        <div
+          class="ProductCustomizer__TooltipTrigger"
+          @mouseenter="showTooltip = true"
+          @mouseleave="showTooltip = false"
+        >
+          <img
+            src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261"
+            @click="showTooltip = !showTooltip"
+          >
+          <div
+            :class="{ open: showTooltip }"
+            class="ProductCustomizer__TooltipBody"
+          >
+            <p>In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.</p>
+            <close-button
+              :size="10"
+              class="ProductCustomizer__TooltipClose"
+              @click.native.prevent="showTooltip = false"
+            />
+          </div>
+        </div>
       </div>
       <div class="ProductCustomizer__ShippingDays">
         FREE Shipping | Custom made in {{ fulfillmentTime }}
@@ -138,7 +159,6 @@
 </template>
 
 <script>
-// import scrollMonitor from 'scrollmonitor';
 import { mapState, mapActions, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
@@ -185,6 +205,7 @@ export default {
     return {
       active: false,
       addToCartProcessing: false,
+      showTooltip: false,
     };
   },
 
@@ -630,6 +651,100 @@ html.ProductCustomizer--Open {
     font-size: 12px;
     font-weight: 400;
     letter-spacing: .075em;
+  }
+
+  &__TooltipTrigger {
+    display: inline-block;
+    position: relative;
+  }
+
+  &__TooltipBody {
+    background: #fff;
+    border: 1px solid #959595;
+    color: #a9a9a9;
+    display: none;
+    padding: 10px 15px;
+    position: absolute;
+    right: -60px;
+    width: 240px;
+
+    @include at-query($breakpoint-small) {
+      top: calc(100% + 12px);
+    }
+
+    @include at-query($breakpoint-large) {
+      bottom: calc(100% + 12px);
+    }
+
+    @media only screen and (min-width: 1201px) {
+      left: -60px;
+      right: auto;
+    }
+
+    &.open {
+      display: block;
+    }
+
+    &::after,
+    &::before {
+      border: solid transparent;
+      bottom: 100%;
+      content: '';
+      height: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 62px;
+      width: 0;
+
+      @include at-query($breakpoint-large) {
+        bottom: auto;
+        top: 100%;
+      }
+
+      @media only screen and (min-width: 1201px) {
+        left: 70px;
+        right: auto;
+      }
+    }
+
+    &::after {
+      border-bottom-color: #fff;
+      border-width: 0 6px 10px 6px;
+      margin-left: -10px;
+
+      @include at-query($breakpoint-large) {
+        border-top-color: #fff;
+        border-bottom-color: transparent;
+        border-width: 10px 6px 0 6px;
+      }
+    }
+
+    &::before {
+      border-bottom-color: #959595;
+      border-width: 0 6px 12px 9px;
+      margin-left: -12px;
+
+      @include at-query($breakpoint-large) {
+        border-bottom-color: transparent;
+        border-top-color: #959595;
+        border-width: 12px 6px 0 9px;
+      }
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .035em;
+      line-height: 17px;
+      margin: 0;
+    }
+  }
+
+  &__TooltipClose {
+    line-height: 1;
+    position: absolute;
+    right: 8px;
+    top: 2px;
   }
 
   &__ShippingDays {
