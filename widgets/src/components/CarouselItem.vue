@@ -72,15 +72,9 @@
 </template>
 
 <script>
-import { faStar, faArrowLeft } from '@fortawesome/pro-light-svg-icons';
+import { faStar } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  BContainer,
-  BModal,
-  BRow,
-  BCol,
-} from 'bootstrap-vue';
 
 import screenMonitor from '../mixins/screenMonitor';
 import SelectedCheckbox from './SelectedCheckbox.vue';
@@ -94,10 +88,6 @@ export default {
   components: {
     FontAwesomeIcon,
     SelectedCheckbox,
-    BContainer,
-    BModal,
-    BRow,
-    BCol,
     Star,
   },
   mixins: [
@@ -115,18 +105,18 @@ export default {
     reviewTitle: { type: String, default: '' },
     reviewContent: { type: String, default: '' },
     isEllipsis: { type: Boolean, default: false },
-    reviewImages: { type: Array, default: [] },
+    reviewImages: { type: Array, default: () => [] },
     starCount: { type: String, default: '' },
     productCategory: { type: String, default: '' },
     productHandle: { type: String, default: '' },
-    setModalImage: { type: Function },
+    setModalImage: { type: Function, default: () => {} },
   },
 
   data() {
     return {
       hoverState: false,
       stateData: STATE,
-      starRating: parseInt(this.starCount),
+      starRating: parseInt(this.starCount, 10),
       productStateAbbr: '',
       elementHeight: 0,
       reviewContentHeight: 0,
@@ -177,14 +167,9 @@ export default {
   },
 
   methods: {
-    getAbbrState(us_state) {
-      let state_abbreviation = '';
-      this.stateData.forEach((item) => {
-        if (item.name === us_state) {
-          state_abbreviation = item.abbreviation;
-        }
-      });
-      return state_abbreviation;
+    getAbbrState(state) {
+      const { abbreviation = '' } = this.stateData.find(item => item.name === state) || {};
+      return abbreviation;
     },
 
     getElementSize(id) {
@@ -278,7 +263,7 @@ export default {
     &--Top {
       display: flex;
       flex-flow: column-reverse;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
       margin-bottom: 18px;
     }
@@ -289,7 +274,9 @@ export default {
     }
 
     &--Star {
-      margin-right: 10px !important;
+      & + & {
+        margin-left: 10px !important;
+      }
     }
 
     &--Date {
