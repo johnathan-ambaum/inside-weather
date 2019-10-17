@@ -35,76 +35,68 @@ import FullReviews from './containers/FullReviews.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 
+(function init() {
+  const rootEl = document.querySelector('#app');
 
-Vue.config.productionTip = false;
+  if (!rootEl) {
+    return;
+  }
 
-const bus = new Vue();
+  Vue.config.productionTip = false;
 
-Object.defineProperty(Vue.prototype, '$bus', { get() { return bus; } });
+  const bus = new Vue();
 
-Vue.use(VueAwesomeSwiper);
+  Object.defineProperty(Vue.prototype, '$bus', { get() { return bus; } });
 
-const app = new Vue({
-  el: '#app',
+  Vue.use(VueAwesomeSwiper);
 
-  components: {
-    ProductGrid,
-    ProductCustomizer,
-    ProductDetail,
-    ProductFamily,
-    ProductDetailSlider,
-    GlyphLoading,
-    CategoryItem,
-    FullReviews,
-    ReviewCarousel,
-    FontAwesomeIcon,
-    BannerCarousel,
-    CategoryList,
-    ValueProps,
-    Press,
-    Banner,
-    BannerReviewCarousel,
-    RecentlySoldProducts,
-    CategoryBanner,
-    CategoryCollections,
-    CategoryDetails,
-    CategoryVideo,
-    CategoryVprops,
-    LifeStylePhotos,
-    BootstrapVue,
-  },
+  const app = new Vue({
+    el: rootEl,
 
-  mixins: [
-    screenMonitor,
-  ],
+    components: {
+      ProductGrid,
+      ProductCustomizer,
+      ProductDetail,
+      ProductFamily,
+      ProductDetailSlider,
+      GlyphLoading,
+      CategoryItem,
+      FullReviews,
+      ReviewCarousel,
+      FontAwesomeIcon,
+      BannerCarousel,
+      CategoryList,
+      ValueProps,
+      Press,
+      Banner,
+      BannerReviewCarousel,
+      RecentlySoldProducts,
+      CategoryBanner,
+      CategoryCollections,
+      CategoryDetails,
+      CategoryVideo,
+      CategoryVprops,
+      LifeStylePhotos,
+      BootstrapVue,
+    },
 
-  store,
+    mixins: [
+      screenMonitor,
+    ],
 
-  computed: {
-    ...mapState({
-      favorites: state => state.favorites,
-    }),
-  },
+    store,
 
-  created() {
-    this.customerId = null;
-    if (typeof window.pnwCfg !== 'undefined') {
-      this.customerId = window.pnwCfg.id;
-    }
-  },
-});
+    computed: {
+      ...mapState({
+        favorites: state => state.favorites,
+      }),
+    },
 
-// function disableAdminBar() {
-//   const bar = document.querySelector('#preview-bar-iframe');
-//   if (!bar) {
-//     setTimeout(disableAdminBar, 100);
-//     return;
-//   }
-//   bar.parentNode.removeChild(bar);
-// }
-
-// const uri = window.location.pathname;
-
-// if (uri.includes('/products/')) {
-//   disableAdminBar();
-// }
+    created() {
+      this.customerId = null;
+      if (typeof window.pnwCfg !== 'undefined') {
+        this.customerId = window.pnwCfg.id;
+      }
+    },
+  });
+}());
