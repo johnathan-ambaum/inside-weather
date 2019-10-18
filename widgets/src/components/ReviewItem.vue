@@ -378,7 +378,7 @@ export default {
 
       &--Top {
         flex-flow: column-reverse;
-        align-items: flex-end;
+        align-items: flex-start;
         margin-bottom: 18px;
       }
 

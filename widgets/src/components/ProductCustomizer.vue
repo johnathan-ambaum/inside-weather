@@ -213,8 +213,6 @@ export default {
   computed: {
     ...mapState({
       attributes: state => state.filters.attributes || [],
-      minDays: state => state.filters.min_fulfillment_days,
-      maxDays: state => state.filters.max_fulfillment_days,
       openPanel: state => state.openPanel,
       productImages: state => state.productImages,
       selectedOptions: state => state.selectedOptions,
@@ -249,27 +247,6 @@ export default {
       }
 
       return ['fal', 'heart'];
-    },
-
-    fulfillmentTime() {
-      let text = '';
-
-      if (this.minDays) {
-        text += this.minDays;
-        if (this.maxDays) {
-          text += '-';
-        }
-      }
-
-      if (this.maxDays) {
-        text += this.maxDays;
-      }
-
-      if (text.length > 0) {
-        text += ' days';
-      }
-
-      return text;
     },
   },
 
@@ -473,6 +450,9 @@ export default {
         body: JSON.stringify({
           id: this.activeProduct.id,
           quantity,
+          properties: {
+            'Estimated time to ship': this.fulfillmentTime,
+          },
         }),
       })
         .then((cart) => {
