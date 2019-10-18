@@ -250,7 +250,7 @@ export default {
 
     &--Top {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       margin-bottom: 24px;
     }

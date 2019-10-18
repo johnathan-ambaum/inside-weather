@@ -551,7 +551,7 @@ body.modal-open {
 
     &--Top {
       flex-flow: column-reverse;
-      align-items: center !important;
+      align-items: flex-start !important;
       margin-bottom: 18px !important;
     }
 

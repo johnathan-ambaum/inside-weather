@@ -260,6 +260,7 @@ $tile-size-desktop: 100%;
     padding-left: 10px;
 
     @include at-query($breakpoint-large) {
+      padding-left: 0;
       width: $tile-size-desktop;
     }
   }
@@ -272,13 +273,12 @@ $tile-size-desktop: 100%;
     padding: 0;
     width: 8px;
 
-    &.glide__bullet--active {
-      background: #202020;
+    @include at-query($breakpoint-large) {
+      margin: 2px 4px;
     }
 
-    @include at-query($breakpoint-large) {
-      height: 10px;
-      width: 10px;
+    &.glide__bullet--active {
+      background: #202020;
     }
   }
 

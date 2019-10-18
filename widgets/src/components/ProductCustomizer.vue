@@ -44,6 +44,7 @@
           >
             <p>In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.</p>
             <close-button
+              v-if="isMobile"
               :size="10"
               class="ProductCustomizer__TooltipClose"
               @click.native.prevent="showTooltip = false"
@@ -614,6 +615,10 @@ html.ProductCustomizer--Open {
     & > * {
       margin-right: 15px;
 
+      &.ProductCustomizer__Savings {
+        margin-right: 10px;
+      }
+
       &:last-child {
         margin-right: 0;
       }
@@ -778,7 +783,8 @@ html.ProductCustomizer--Open {
 
     &:hover,
     &:active {
-      background: #F2F0ED;
+      background: #202020;
+      color: #fff;
     }
   }
 
