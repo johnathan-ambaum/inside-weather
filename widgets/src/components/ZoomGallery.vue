@@ -251,7 +251,7 @@ export default {
     border: 2px solid #212121;
     border-radius: 50%;
     height: 8px;
-    margin: 0 5px;
+    margin: 0 4px;
     padding: 0;
     width: 8px;
 

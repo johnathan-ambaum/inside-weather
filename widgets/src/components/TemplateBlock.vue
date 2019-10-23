@@ -13,6 +13,7 @@
       >
       <video
         v-if="isVideo"
+        ref="video"
         preload="none"
         autoplay
         loop
@@ -80,6 +81,16 @@ export default {
 
     interpolatedText() {
       return this.interpolateString(this.text);
+    },
+  },
+
+  watch: {
+    interpolatedImage() {
+      this.$nextTick(() => {
+        if (this.isVideo) {
+          this.$refs.video.load();
+        }
+      });
     },
   },
 };

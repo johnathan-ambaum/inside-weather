@@ -331,14 +331,9 @@ export default {
       return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     },
 
-    getAbbrState(us_state) {
-      let state_abbreviation = '';
-      this.stateData.forEach((item) => {
-        if (item.name === us_state) {
-          state_abbreviation = item.abbreviation;
-        }
-      });
-      return state_abbreviation;
+    getAbbrState(state) {
+      const { abbreviation = '' } = this.stateData.find(item => item.name === state) || {};
+      return abbreviation;
     },
 
     handleResize() {
@@ -556,7 +551,7 @@ body.modal-open {
 
     &--Top {
       flex-flow: column-reverse;
-      align-items: flex-end !important;
+      align-items: flex-start !important;
       margin-bottom: 18px !important;
     }
 

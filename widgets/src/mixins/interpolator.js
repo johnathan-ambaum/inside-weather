@@ -51,24 +51,40 @@ export default {
     },
 
     msrp() {
-      return this.filters.msrp ? Number(this.filters.msrp) : null;
+      return this.productPrice * this.filters.msrp_markup;
     },
 
     msrpDisplay() {
-      if (Math.floor(this.msrp) === this.msrp) {
-        return this.msrp;
-      }
-      return `$${this.msrp.toFixed(2)}`;
+      return `$${Math.round(this.msrp)}`;
     },
 
     savings() {
       const savings = this.msrp - this.productPrice;
+      return Math.round(savings);
+    },
 
-      if (Math.floor(savings) === savings) {
-        return savings;
+    fulfillmentTime() {
+      if (!this.filters) {
+        return null;
       }
 
-      return savings.toFixed(2);
+      let min = this.filters.min_fulfillment_days;
+      let max = this.filters.max_fulfillment_days;
+
+      Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
+        const attribute = this.attributes.find(item => item.parameter === parameter);
+        if (!attribute) {
+          return true;
+        }
+        const selected = attribute.values.find(item => item.value === value);
+        if (!selected) {
+          return true;
+        }
+        min += selected.min_fulfillment_days_markup || 0;
+        max += selected.max_fulfillment_days_markup || 0;
+      });
+
+      return `${min}-${max} days`;
     },
 
     fullProduct() {
