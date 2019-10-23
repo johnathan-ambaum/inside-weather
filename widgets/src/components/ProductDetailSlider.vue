@@ -1,44 +1,62 @@
 <template>
   <div>
-    <div
-      ref="slider"
-      class="ProductDetailSlider glide"
-    >
+    <arrow-button
+      class="ProductDetailSlider__Arrow"
+      direction="left"
+      @click.native="prevImage"
+    />
+    <arrow-button
+      class="ProductDetailSlider__Arrow"
+      direction="right"
+      @click.native="nextImage"
+    />
+    <div class="ProductDetailSlider">
       <div
-        class="glide__track ProductDetailSlider__Track"
-        data-glide-el="track"
+        ref="slider"
+        class="glide"
       >
-        <ul class="glide__slides ProductDetailSlider__Slides">
-          <li
-            v-for="(image, index) in productImages"
-            :key="image.thumbnail"
-            class="glide__slide ProductDetailSlider__Slide"
-          >
-            <responsive-image
-              :images="image"
-              :initial-spinner="true"
-              @click.native="triggerZoom(index)"
-            />
-          </li>
-        </ul>
-      </div>
-      <div class="ProductDetailSlider__Footer">
         <div
-          class="glide__bullets ProductDetailSlider__Bullets"
-          data-glide-el="controls[nav]"
+          class="glide__track ProductDetailSlider__Track"
+          data-glide-el="track"
         >
-          <button
-            v-for="(image, index) in productImages"
-            :key="image.thumb"
-            :data-glide-dir="`=${index}`"
-            class="glide__bullet ProductDetailSlider__Bullet"
+          <ul class="glide__slides ProductDetailSlider__Slides">
+            <li
+              v-for="(image, index) in productImages"
+              :key="image.thumbnail"
+              class="glide__slide ProductDetailSlider__Slide"
+            >
+              <responsive-image
+                :images="image"
+                :initial-spinner="true"
+                @click.native="triggerZoom(index)"
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="ProductDetailSlider__Footer">
+          <div
+            class="glide__bullets ProductDetailSlider__Bullets"
+            data-glide-el="controls[nav]"
+          >
+            <button
+              v-for="(image, index) in productImages"
+              :key="image.thumb"
+              :data-glide-dir="`=${index}`"
+              class="glide__bullet ProductDetailSlider__Bullet"
+            />
+          </div>
+          <zoom-button
+            v-if="isMobile"
+            class="ProductDetailSlider__Zoom"
+            @click.native.prevent="triggerZoom()"
           />
         </div>
-        <zoom-button
-          class="ProductDetailSlider__Zoom"
-          @click.native.prevent="triggerZoom()"
-        />
       </div>
+      <zoom-button
+        v-if="!isMobile"
+        class="ProductDetailSlider__Zoom"
+        @click.native.prevent="triggerZoom()"
+      />
     </div>
     <transition name="fade">
       <zoom-gallery
@@ -57,16 +75,16 @@ import { mapState } from 'vuex';
 import Glide, { Swipe, Controls } from '@glidejs/glide/dist/glide.modular.esm';
 import ZoomGallery from './ZoomGallery.vue';
 import ResponsiveImage from './ResponsiveImage.vue';
+import ArrowButton from './ArrowButton.vue';
 import ZoomButton from './ZoomButton.vue';
-import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 
 export default {
   components: {
     ResponsiveImage,
+    ArrowButton,
     ZoomButton,
-    CloseButton,
     ZoomGallery,
   },
 
@@ -127,6 +145,14 @@ export default {
       this.currentImage = index === null ? this.getCurrentIndex() : index;
       this.showZoom = true;
     },
+
+    prevImage() {
+      this.glide.go('<');
+    },
+
+    nextImage() {
+      this.glide.go('>');
+    },
   },
 };
 </script>
@@ -135,17 +161,62 @@ export default {
 @import '../scss/variables';
 @import '../scss/mixins';
 
-$tile-size: 100vw;
+$tile-size-mobile: 100vw;
+$tile-size-desktop: 100%;
+
+.glide {
+  overflow: hidden;
+}
 
 .ProductDetailSlider {
   margin-left: -$horizontal-wrapper-padding;
   margin-top: $top-bar-height;
-  overflow: hidden;
   position: relative;
   width: 100vw;
 
+  @include at-query($breakpoint-large) {
+    bottom: 80px;
+    left: 0;
+    margin: auto;
+    max-width: 775px;
+    position: absolute;
+    right: 0;
+    top: 55px;
+    width: 100%;
+  }
+
+  &__Arrow {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    font-size: 30px;
+    height: 40px;
+    line-height: 1;
+    margin: auto;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+
+    &.left {
+      left: 60px;
+    }
+
+    &.right {
+      right: 60px;
+    }
+
+    @include at-query($breakpoint-small) {
+      display: none;
+    }
+  }
+
   &__Track {
-    height: $tile-size;
+    height: $tile-size-mobile;
+
+    @include at-query($breakpoint-large) {
+      height: $tile-size-desktop;
+    }
   }
 
   &__Slides {
@@ -155,7 +226,11 @@ $tile-size: 100vw;
   }
 
   &__Slide {
-    flex: 0 0 $tile-size;
+    flex: 0 0 $tile-size-mobile;
+
+    @include at-query($breakpoint-large) {
+      flex-basis: auto;
+    }
   }
 
   &__Footer {
@@ -165,6 +240,10 @@ $tile-size: 100vw;
 
     @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
       bottom: 22vw;
+    }
+
+    @include at-query($breakpoint-large) {
+      bottom: 80px;
     }
   }
 
@@ -177,20 +256,29 @@ $tile-size: 100vw;
     left: 0;
     position: absolute;
     text-align: center;
-    width: $tile-size;
+    width: $tile-size-mobile;
     padding-left: 10px;
+
+    @include at-query($breakpoint-large) {
+      padding-left: 0;
+      width: $tile-size-desktop;
+    }
   }
 
   &__Bullet {
-    border: 2px solid #212121;
+    border: 2px solid #202020;
     border-radius: 50%;
     height: 8px;
     margin: 2px;
     padding: 0;
     width: 8px;
 
+    @include at-query($breakpoint-large) {
+      margin: 2px 4px;
+    }
+
     &.glide__bullet--active {
-      background: #212121;
+      background: #202020;
     }
   }
 
@@ -198,6 +286,11 @@ $tile-size: 100vw;
     bottom: -4px;
     position: absolute;
     right: 15px;
+
+    @include at-query($breakpoint-large) {
+      bottom: 20px;
+      right: -15px;
+    }
   }
 }
 </style>

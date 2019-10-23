@@ -156,10 +156,16 @@ export default {
 
     @include at-query($breakpoint-small) {
       padding: 0 $horizontal-wrapper-padding;
+    }
 
+    @include at-query($breakpoint-msmall) {
       img + img {
         margin-top: 50px;
       }
+    }
+
+    @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
+
     }
 
     @include at-query($breakpoint-large) {

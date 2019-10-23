@@ -6,7 +6,7 @@
       :class="className"
       class="ReviewItemStar__Image"
       src="https://cdn.shopify.com/s/files/1/2994/0144/files/star_2x_157511bd-230e-435d-a13f-242fd235281b.png?290387"
-    />
+    >
   </div>
 </template>
 
@@ -27,13 +27,16 @@ export default {
   display: flex;
 
   &__Image {
-    margin-right: 12px;
     width: 18px;
     height: 18px;
 
     @include at-query($breakpoint-small) {
       width: 15px;
       height: 15px;
+    }
+
+    & + & {
+      margin-left: 12px;
     }
   }
 }

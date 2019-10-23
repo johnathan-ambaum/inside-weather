@@ -6,7 +6,7 @@
     >
       <responsive-image
         :images="featuredImage"
-        :scale="80"
+        :scale="imageScale"
         sizes="(min-width: 1025px) 340px, 50vw"
         class="ProductGridItem__Image"
       />
@@ -37,6 +37,7 @@ import { faHeart as filledHeart } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ResponsiveImage from './ResponsiveImage.vue';
 import interpolator from '../mixins/interpolator';
+import screenMonitor from '../mixins/screenMonitor';
 
 library.add(emptyHeart, filledHeart);
 
@@ -48,6 +49,7 @@ export default {
 
   mixins: [
     interpolator,
+    screenMonitor,
   ],
 
   props: {
@@ -65,6 +67,22 @@ export default {
 
     detailUrl() {
       return `/products/${this.product.handle}`;
+    },
+
+    imageScale() {
+      if (this.isMobile) {
+        return 76;
+      }
+
+      if (this.screenWidth < 1250) {
+        return 60;
+      }
+
+      if (this.screenWidth < 1500) {
+        return 65;
+      }
+
+      return 76;
     },
 
     featuredImage() {
@@ -237,7 +255,7 @@ export default {
     max-width: 26ch;
 
     @include at-query($breakpoint-large) {
-      font-size: 20px;
+      font-size: 18px;
       line-height: 22px;
     }
   }

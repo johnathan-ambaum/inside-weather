@@ -250,7 +250,7 @@ export default {
 
     &--Top {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       margin-bottom: 24px;
     }
@@ -378,7 +378,7 @@ export default {
 
       &--Top {
         flex-flow: column-reverse;
-        align-items: flex-end;
+        align-items: flex-start;
         margin-bottom: 18px;
       }
 
