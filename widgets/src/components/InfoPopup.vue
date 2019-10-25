@@ -7,7 +7,7 @@
     <slot @click="show = !show" />
     <div
       v-show="show"
-      :class="{ 'InfoPopup__Dialog--Bottom': position === 'bottom' }"
+      :class="{ 'InfoPopup__Dialog--AlwaysOnTop': alwaysOnTop }"
       class="InfoPopup__Dialog"
     >
       <p>{{ text }}</p>
@@ -36,7 +36,7 @@ export default {
 
   props: {
     text: { type: String, required: true },
-    position: { type: String, default: 'top' },
+    alwaysOnTop: { type: Boolean, default: false },
   },
 
   data() {
@@ -81,17 +81,13 @@ export default {
       right: auto;
     }
 
-    &--Bottom {
-      @include at-query($breakpoint-small) {
-        bottom: calc(100% + 12px);
-        right: 0;
-        top: auto;
-        width: 260px;
-      }
+    &--AlwaysOnTop {
+      bottom: calc(100% + 12px);
+      right: 0;
+      top: auto;
+      width: 260px;
 
       @include at-query($breakpoint-large) {
-        bottom: auto;
-        top: calc(100% + 12px);
         width: 310px;
       }
 
@@ -123,7 +119,7 @@ export default {
       }
     }
 
-    &--Bottom {
+    &--AlwaysOnTop {
       &::after,
       &::before {
         bottom: auto;
@@ -131,11 +127,6 @@ export default {
 
         @include at-query($breakpoint-small) {
           right: 20px;
-        }
-
-        @include at-query($breakpoint-large) {
-          bottom: 100%;
-          top: auto;
         }
 
         @media only screen and (min-width: 1201px) {
@@ -173,16 +164,11 @@ export default {
       }
     }
 
-    &--Bottom {
+    &--AlwaysOnTop {
       &::after {
         border-top-color: #fff;
         border-bottom-color: transparent;
         border-width: 10px 6px 0 6px;
-
-        @include at-query($breakpoint-large) {
-          border-bottom-color: #fff;
-          border-width: 0 6px 10px 6px;
-        }
       }
 
       &::before {
@@ -192,8 +178,6 @@ export default {
         right: 19px;
 
         @include at-query($breakpoint-large) {
-          border-bottom-color: #959595;
-          border-width: 0 7px 12px 7px;
           right: 69px;
         }
       }

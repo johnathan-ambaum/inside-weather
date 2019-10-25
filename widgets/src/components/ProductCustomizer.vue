@@ -37,7 +37,7 @@
         FREE Shipping | Custom made in
         <info-popup
           v-if="hasFulfillmentMarkup"
-          position="bottom"
+          always-on-top
           text="Heads up! This design's lead time is longer than usual since we are temporarily out of a few materials needed to get started right away."
         >
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
