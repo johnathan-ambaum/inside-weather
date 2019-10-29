@@ -18,7 +18,7 @@ export default {
         return;
       }
 
-      const productPrice = (price / 100).toFixed(2);
+      const productPrice = price.toFixed(2);
 
       const { protocol, host } = window.location;
       const uri = `/products/${handle}`;
