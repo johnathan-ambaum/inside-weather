@@ -11108,7 +11108,7 @@ html body.MobileNav--Active {
   left:0;
   top:90px;
   min-height:320px;
-  padding: 3% 8% 5.5% 8%;
+  padding: 3% 30px 5.5% 30px;
   width:100%;
   background-color:white;
   border-top:1px solid #d3d3d3;
@@ -11163,6 +11163,8 @@ html body.MobileNav--Active {
 
 /* SHOP DROPDOWN */
 .Dropdown__Content--MultiColumn {
+  margin: 0;
+
   a {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -11185,6 +11187,11 @@ html body.MobileNav--Active {
     max-height: 200px;
     width: auto;
     margin-right: 15px;
+
+    .NavBlock__List__Item--First & {
+      margin-right: 0;
+      max-height: 160px;
+    }
   }
 
   .Dropdown__Content__HoverImage {
@@ -11207,6 +11214,10 @@ html body.MobileNav--Active {
     padding:0 10px;
     font-size: 16px;
     letter-spacing: .05em;
+
+    .NavBlock__List__Item--First & {
+      padding: 0;
+    }
   }
 }
 
@@ -11214,6 +11225,11 @@ html body.MobileNav--Active {
 a.Dropdown__Content__Link.has-hover span {
   font-weight:500;
   padding-top:10px;
+
+  .NavBlock__List__Item--First & {
+    text-align: center;
+    white-space: normal;
+  }
 }
 
 /* FREE SWATCHES DROPDOWN */
