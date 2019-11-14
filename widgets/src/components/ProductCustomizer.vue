@@ -29,31 +29,20 @@
           v-if="msrp"
           class="ProductCustomizer__Savings"
         >YOU SAVE ${{ savings }}</span>
-        <div
-          class="ProductCustomizer__TooltipTrigger"
-          @mouseenter="showTooltip = true"
-          @mouseleave="showTooltip = false"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261"
-            @click="showTooltip = !showTooltip"
-          >
-          <div
-            :class="{ open: showTooltip }"
-            class="ProductCustomizer__TooltipBody"
-          >
-            <p>In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.</p>
-            <close-button
-              v-if="isMobile"
-              :size="10"
-              class="ProductCustomizer__TooltipClose"
-              @click.native.prevent="showTooltip = false"
-            />
-          </div>
-        </div>
+        <info-popup text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
+          <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
+        </info-popup>
       </div>
       <div class="ProductCustomizer__ShippingDays">
-        FREE Shipping | Custom made in {{ fulfillmentTime }}
+        FREE Shipping | Custom made in
+        <info-popup
+          v-if="hasFulfillmentMarkup"
+          always-on-top
+          text="Heads up! This design's lead time is longer than usual since we are temporarily out of a few materials needed to get started right away."
+        >
+          <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
+        </info-popup>
+        <span v-else>{{ fulfillmentTime }}</span>
       </div>
       <button
         class="ProductCustomizer__Trigger"
@@ -169,6 +158,7 @@ import ProductGallery from './ProductGallery.vue';
 import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
 import CloseButton from './CloseButton.vue';
+import InfoPopup from './InfoPopup.vue';
 import InspirationOptions from './InspirationOptions.vue';
 import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
@@ -185,6 +175,7 @@ export default {
     FilterPanel,
     AddToCart,
     CloseButton,
+    InfoPopup,
     InspirationOptions,
     SwatchBrowser,
   },
@@ -206,7 +197,6 @@ export default {
     return {
       active: false,
       addToCartProcessing: false,
-      showTooltip: false,
     };
   },
 
@@ -638,100 +628,6 @@ html.ProductCustomizer--Open {
     letter-spacing: .075em;
   }
 
-  &__TooltipTrigger {
-    display: inline-block;
-    position: relative;
-  }
-
-  &__TooltipBody {
-    background: #fff;
-    border: 1px solid #959595;
-    color: #a9a9a9;
-    display: none;
-    padding: 10px 15px;
-    position: absolute;
-    right: -60px;
-    width: 240px;
-
-    @include at-query($breakpoint-small) {
-      top: calc(100% + 12px);
-    }
-
-    @include at-query($breakpoint-large) {
-      bottom: calc(100% + 12px);
-    }
-
-    @media only screen and (min-width: 1201px) {
-      left: -60px;
-      right: auto;
-    }
-
-    &.open {
-      display: block;
-    }
-
-    &::after,
-    &::before {
-      border: solid transparent;
-      bottom: 100%;
-      content: '';
-      height: 0;
-      pointer-events: none;
-      position: absolute;
-      right: 62px;
-      width: 0;
-
-      @include at-query($breakpoint-large) {
-        bottom: auto;
-        top: 100%;
-      }
-
-      @media only screen and (min-width: 1201px) {
-        left: 70px;
-        right: auto;
-      }
-    }
-
-    &::after {
-      border-bottom-color: #fff;
-      border-width: 0 6px 10px 6px;
-      margin-left: -10px;
-
-      @include at-query($breakpoint-large) {
-        border-top-color: #fff;
-        border-bottom-color: transparent;
-        border-width: 10px 6px 0 6px;
-      }
-    }
-
-    &::before {
-      border-bottom-color: #959595;
-      border-width: 0 6px 12px 9px;
-      margin-left: -12px;
-
-      @include at-query($breakpoint-large) {
-        border-bottom-color: transparent;
-        border-top-color: #959595;
-        border-width: 12px 6px 0 9px;
-      }
-    }
-
-    p {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .035em;
-      line-height: 17px;
-      margin: 0;
-    }
-  }
-
-  &__TooltipClose {
-    line-height: 1;
-    position: absolute;
-    right: 8px;
-    top: 2px;
-  }
-
   &__ShippingDays {
     margin: 25px 0;
     font-size: 13px;
@@ -744,6 +640,11 @@ html.ProductCustomizer--Open {
       line-height: 14px;
       margin: 12px 0 20px;
       text-align: center;
+    }
+
+    &--Delayed {
+      border-bottom: 1px solid #202020;
+      display: inline-block;
     }
   }
 
