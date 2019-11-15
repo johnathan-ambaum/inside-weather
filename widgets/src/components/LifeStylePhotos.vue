@@ -135,6 +135,7 @@ export default {
   .LifeStylePhotos--column {
     cursor: pointer;
     figure {
+      margin: 0;
       padding: 0 8px 16px;
       @include block(100%);
       img {
