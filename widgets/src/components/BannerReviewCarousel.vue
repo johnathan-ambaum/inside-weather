@@ -85,13 +85,13 @@ export default {
         margin: 10,
         loop: true,
         nav: true,
-        autoplay: true,
+        autoplay: false,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
         responsive: {
           0: { nav: false, dots: false, autoplay: false },
           992: {
-            nav: true, dots: true, autoplay: true, autoplayTimeout: 6000,
+            nav: true, dots: true, autoplay: false, autoplayTimeout: 6000,
           },
         },
       },
@@ -121,6 +121,7 @@ export default {
   width: 100%;
   height: auto;
   display: block;
+  padding: 0 0 117px;
   .Review__items {
     display: flex;
     flex-direction: row;
@@ -244,9 +245,6 @@ export default {
           font-size: 17px;
         }
       }
-      .Review__image {
-        flex-basis: 45%;
-      }
     }
     .Review__rating {
       margin: 0 0 20px;
@@ -328,9 +326,12 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 767px') {
+    padding: 0 0 58px;
+  }
 }
 .ReviewCarouselWrapper {
-  padding: 0 0 117px;
+  // padding: 0 0 117px;
   position: relative;
   &::before {
     content: "";
@@ -342,7 +343,7 @@ export default {
     bottom: 0;
     width: 100%;
   }
-  .owl-theme.owl-carousel {
+  .owl-theme {
     .owl-nav {
       position: absolute;
       left: calc((1215px - 100vw) / 2);
@@ -351,10 +352,10 @@ export default {
       width: 100vw;
     }
     .owl-dots {
+      width: 50%;
       position: absolute;
       right: 0;
-      bottom: -40px;
-      width: auto;
+      text-align: center;
       .owl-dot {
         outline: none;
         box-shadow: none;
@@ -392,19 +393,39 @@ export default {
       }
     }
   }
+  @include at-query('max-width: 1500px')  {
+    .owl-theme {
+      .owl-dots {
+        width: 45%;
+        right: calc((100% - 87%) / 2);
+      }
+    }
+  }
+  @include at-query('max-width: 1280px') {
+    .owl-theme {
+      .owl-dots {
+        right: calc((100% - 90%) / 2);
+      }
+    }
+  }
   @include at-query('max-width: 1274px') {
-    .owl-theme .owl-nav {
-      left: calc((1140px - 100vw) / 2);
+    .owl-theme {
+      .owl-nav {
+        left: calc((1140px - 100vw) / 2);
+      }
     }
   }
   @include at-query('max-width: 1199px') {
     padding: 0 0 75px;
-    .owl-theme .owl-nav {
-      left: calc((932px - 100vw) / 2);
+    .owl-theme {
+      .owl-nav {
+        left: calc((932px - 100vw) / 2);
+      }
+      .owl-dots {
+        width: 52%;
+        right: calc((100% - 92%) / 2);
+      }
     }
-  }
-  @include at-query('max-width: 767px') {
-    padding: 0 0 58px;
   }
 
 }
