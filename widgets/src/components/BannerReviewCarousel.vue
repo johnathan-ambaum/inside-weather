@@ -97,19 +97,19 @@ export default {
       },
     };
   },
-  mounted() {
-    window.addEventListener('load', updateOwlDotsPosition);
-    window.addEventListener('resize', updateOwlDotsPosition);
-    function updateOwlDotsPosition() {
-      setTimeout(() => {
-        const reviewImage = document.querySelector('.owl-item.active .Review__image');
-        const getTheWidth = reviewImage.clientWidth;
-        const targetElement = document.querySelector('.ReviewCarousel .owl-dots');
-        targetElement.style.right = `${reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)}px`;
-        targetElement.style.width = `${getTheWidth}px`;
-      }, 500);
-    }
-  },
+  // mounted() {
+  //   window.addEventListener('load', updateOwlDotsPosition);
+  //   window.addEventListener('resize', updateOwlDotsPosition);
+  //   function updateOwlDotsPosition() {
+  //     setTimeout(() => {
+  //       const reviewImage = document.querySelector('.owl-item.active .Review__image');
+  //       const getTheWidth = reviewImage.clientWidth;
+  //       const targetElement = document.querySelector('.ReviewCarousel .owl-dots');
+  //       targetElement.style.right = `${reviewImage.parentElement.clientWidth - (reviewImage.offsetLeft + reviewImage.clientWidth)}px`;
+  //       targetElement.style.width = `${getTheWidth}px`;
+  //     }, 500);
+  //   }
+  // },
 };
 </script>
 
