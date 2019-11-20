@@ -137,6 +137,11 @@
             class="ProductCustomizer__Close"
             @click.prevent="close(false)"
           >Save Customization</button>
+          <button
+            v-if="!hasNext"
+            class="ProductCustomizer__Skip"
+            @click.prevent="close(false)"
+          >Save</button>
         </div>
       </div>
       <close-button
