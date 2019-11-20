@@ -85,13 +85,13 @@ export default {
         margin: 10,
         loop: true,
         nav: true,
-        autoplay: false,
+        autoplay: true,
         dots: true,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
         responsive: {
           0: { nav: false, dots: false, autoplay: false },
           992: {
-            nav: true, dots: true, autoplay: false, autoplayTimeout: 6000,
+            nav: true, dots: true, autoplay: true, autoplayTimeout: 6000,
           },
         },
       },

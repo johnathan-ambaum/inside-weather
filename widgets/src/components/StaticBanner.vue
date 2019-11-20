@@ -27,8 +27,14 @@ export default {
 <style lang="scss">
 .StaticBanner {
   a {
-    width: 100%;
     height: auto;
+    width: 100%;
+    
+    img {
+      display: block;
+      margin: auto;
+      width: 100%
+    }
   }
 }
 </style>
