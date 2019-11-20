@@ -5561,6 +5561,142 @@ $z-index-page-overlay: 27;
   margin-bottom: $gutter / 2;
 }
 
+#shopify-section-newsletter-popup {
+  .modal-open & .modal {
+    &::before {
+      content: '';
+      display: block !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #202020;
+      -webkit-animation: overlay-on 0.5s forwards;
+      animation: overlay-on 0.5s forwards;
+      cursor: pointer;
+    }
+  }
+
+  .modal__inner {
+    align-items: stretch;
+    border: none !important;
+    max-width: 90vw;
+    width: 340px;
+
+    @media only screen and (min-width: 1025px) {
+      width: 708px;
+    }
+  }
+
+  .modal__half {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @media only screen and (min-width: 1025px) {
+      display: flex;
+      flex: 0 0 50%;
+    }
+  }
+
+  .modal__centered-content {
+    padding: 44px 20px;
+
+    @media only screen and (min-width: 1025px) {
+      padding: 54px 40px;
+    }
+  }
+
+  .modal__close {
+    right: 3px;
+    top: 4px;
+  }
+
+  .h1, p, .disclaimer {
+    @media only screen and (min-width: 1025px) {
+      text-align: left !important;
+    }
+  }
+
+  .h1 {
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    margin-bottom: 28px;
+    padding-right: 0;
+
+    @media only screen and (min-width: 1025px) {
+      margin-bottom: 35px;
+    }
+  }
+
+  .rte p {
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    margin-bottom: 32px;
+
+    @media only screen and (min-width: 1025px) {
+      margin-bottom: 42px;
+    }
+
+    b, strong {
+      font-weight: 700;
+    }
+  }
+
+  .input-group {
+    display: block;
+  }
+
+  input[type="email"] {
+    background: #fff;
+    border: 1px solid #d4d0ca;
+    color: #202020;
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .12em;
+
+    &::placeholder {
+      color: #202020;
+    }
+  }
+
+  .subscribe-btn {
+    display: block;
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    margin-top: 24px;
+    white-space: nowrap;
+    width: 100%;
+
+    @media only screen and (min-width: 1025px) {
+      margin-top: 25px;
+    }
+
+    &:hover {
+      padding-right: .75rem;
+    }
+  }
+
+  .disclaimer {
+    color: #a9a9a9;
+    font-size: 13px;
+    line-height: 1;
+    margin-top: 32px;
+
+    @media only screen and (min-width: 1025px) {
+      margin-top: 38px;
+    }
+  }
+}
+
 @include media-query($small) {
   .modal--mobile-friendly {
     top: auto;

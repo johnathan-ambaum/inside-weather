@@ -14,9 +14,19 @@
     <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email-{{ section_id }}" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
     <span class="input-group-btn">
       <button type="submit" class="btn subscribe-btn" name="commit">
-        <span class="form__submit--large">{{ 'general.newsletter_form.submit' | t }}</span>
+        <span class="form__submit--large">
+          {%- if button_text -%}
+            {{ button_text }}
+          {%- else -%}
+            {{ 'general.newsletter_form.submit' | t }}
+          {%- endif -%}
+        </span>
         <span class="form__submit--small">
-          {% include 'icon-arrow-right' %}
+          {%- if button_text -%}
+            {{ button_text }}
+          {%- else -%}
+            {% include 'icon-arrow-right' %}
+          {%- endif -%}
         </span>
       </button>
     </span>
