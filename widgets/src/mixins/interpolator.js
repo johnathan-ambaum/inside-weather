@@ -64,7 +64,7 @@ export default {
     },
 
     fulfillmentTime() {
-      if (!this.filters) {
+      if (!this.filters || !this.filters.min_fulfillment_days) {
         return null;
       }
 
@@ -85,6 +85,20 @@ export default {
       });
 
       return `${min}-${max} days`;
+    },
+
+    hasFulfillmentMarkup() {
+      return Object.entries(this.selectedOptions).some(([parameter, value]) => {
+        const attribute = this.attributes.find(item => item.parameter === parameter);
+        if (!attribute) {
+          return false;
+        }
+        const selected = attribute.values.find(item => item.value === value);
+        if (!selected) {
+          return false;
+        }
+        return selected.min_fulfillment_days_markup || selected.max_fulfillment_days_markup;
+      });
     },
 
     fullProduct() {
