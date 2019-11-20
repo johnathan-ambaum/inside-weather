@@ -25,7 +25,7 @@
           <figure
             :class="animationElementClass"
           >
-            <img :src="item.image">
+            <img :src="item.image" :class="customImageClass">
           </figure>
           <h3
             :class="animationElementClass"
@@ -54,7 +54,8 @@ export default {
     productCollections: Array,
     sectionHeading: String,
     sectionDescription: String,
-    isScrollAnimationRequire: {type: Boolean, default: true}
+    isScrollAnimationRequire: {type: Boolean, default: true},
+    collectionCustomImageStyle:{type: Boolean, default: false}
   },
   computed: {
     animationElementClass() {
@@ -66,6 +67,11 @@ export default {
       return {
         '--hasAnimation': this.isScrollAnimationRequire,
         '--alignCenter': this.productCollections.length < 4
+      }
+    },
+    customImageClass() {
+      return {
+        '--customImageStyle': this.collectionCustomImageStyle
       }
     }
   },
@@ -94,6 +100,7 @@ export default {
       opacity: 0;
     }
     a {
+      text-decoration: none;
       padding: 2px 44px 32px;
       @include block();
     }
@@ -104,12 +111,13 @@ export default {
       }
     }
     figure {
+      margin: 0;
       overflow: hidden;
       position: relative;
       padding-bottom: 100%;
       @include block(0);
       img {
-        object-fit: contain;
+        object-fit: cover;
         position: absolute;
         left: 0;
         right: 0;
@@ -117,7 +125,9 @@ export default {
         bottom: 0;
         margin: auto;
         @include block(100%);
-        @include Scale(0.8);
+        &.--customImageStyle {
+          object-fit: contain;
+        }
       }
     }
     h3 {
@@ -197,9 +207,6 @@ export default {
       }
       figure {
         padding-bottom: 66.66%;
-        img {
-          object-fit: contain;
-        }
       }
       h3 {
         font-size: 13px;
@@ -216,9 +223,6 @@ export default {
         padding: 10px 10px 25px;
         figure {
           padding-bottom: 66.66%;
-          img {
-            object-fit: contain;
-          }
         }
       }
       &:nth-of-type(3) {
@@ -256,6 +260,13 @@ export default {
       span {
         font-size: 11px;
       }
+      figure {
+        img {
+          &.--customImageStyle {
+            @include Scale(1.2);
+          }
+        }
+      }
     }
   }
 }
@@ -264,6 +275,8 @@ export default {
     li {
       h3 {
         font-size: 12px;
+        position: relative;
+        top: 10px;
       }
       span {
         font-size: 8px;

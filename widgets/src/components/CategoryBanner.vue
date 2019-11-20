@@ -187,6 +187,7 @@ export default {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        margin: 0;
         @include block(100%);
       }
       @include at-query('min-width: 1601px'){

@@ -189,6 +189,7 @@ export default {
       height: 100%;
       justify-content: center;
       min-height: 320px;
+      margin: 0;
       img {
         display: block;
         margin: 0;
