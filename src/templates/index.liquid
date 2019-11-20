@@ -1,11 +1,21 @@
 <div id="app">
-  {% assign hasImage = true %}
+  {% comment %} {% assign hasImage = true %}
   {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_1-min.jpg?1657929',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_1-min.jpg?1657932', 'heading':'RE-THINK YOUR SOFA','description':'Custom sofas starting at $898','linkText':'Shop Sofas','url':'https://insideweather.com/pages/sofas'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_2-min.jpg?1657929',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_2-min.jpg?1657932', 'heading':'HAVE AN IDEA? MAKE IT FLY','description':'Custom dining chairs starting at $118','linkText':'SHOP DINING CHAIRS','url':'https://insideweather.com/pages/dining-chairs'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_3-min.jpg?1657929','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_3-min.jpg?1657932', 'heading':'Let’s Get Personal','description':'Customize your storage needs with 400+ finish options','linkText':'SHOP SIDEBOARDS','url':'https://insideweather.com/pages/sideboards'}]}"%}
 
   <banner-carousel
     :has-image="{{hasImage}}"
     :banner-content="{{bannerContent}}">
-  </banner-carousel>
+  </banner-carousel> {% endcomment %}
+
+  <div class="staticBannerWrapper --clip-header">
+    <static-banner
+      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/hp_tb_112219_d_v2.jpg?1675817"
+      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/hp_tb_112219_m.jpg"
+      responsive-point="840px"
+    >
+    </static-banner>
+  </div>
+
 
   {% assign listItems= "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_1-min.jpg?1657935','buttonText':'Shop Living','link':'https://insideweather.com/pages/living-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_2-min.jpg?1657935','buttonText':'Shop Dining','link':'https://insideweather.com/pages/dining-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_3-min.jpg?1657935','buttonText':'Shop Office','link':'https://insideweather.com/pages/office'}]"%}
 
@@ -73,6 +83,7 @@
 </div>
 
 <script>
+
   jQuery(function ($) {
     var count = 0;
     var playerId = '';

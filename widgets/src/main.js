@@ -17,6 +17,7 @@ import ProductFamily from './components/ProductFamily.vue';
 import ProductDetailSlider from './components/ProductDetailSlider.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
 import BannerCarousel from './components/BannerCarousel.vue';
+import StaticBanner from './components/StaticBanner.vue';
 import CategoryList from './components/CategoryList.vue';
 import ValueProps from './components/ValueProps.vue';
 import Press from './components/Press.vue';
@@ -65,6 +66,7 @@ import store from './store';
       ReviewCarousel,
       FontAwesomeIcon,
       BannerCarousel,
+      StaticBanner,
       CategoryList,
       ValueProps,
       Press,
