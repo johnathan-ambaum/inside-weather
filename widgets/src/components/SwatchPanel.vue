@@ -5,6 +5,7 @@
   >
     <swatch-panel-item
       v-for="option in values"
+      ref="options"
       :key="option.value"
       :option="option"
       :value="isSelected(option)"
@@ -55,6 +56,22 @@ export default {
         this.$refs.body.scrollTop = 0;
       }
     },
+  },
+
+  mounted() {
+    this.$bus.$on('panel:show', (parameter) => {
+      if (this.parameter !== parameter) {
+        return;
+      }
+      this.$nextTick(() => {
+        const index = this.values.findIndex(item => this.selectedOptions[parameter] === item.value);
+        const selectedEl = this.$refs.options[index].$el;
+        const { top: parentTop } = selectedEl.parentNode.getBoundingClientRect();
+        let { top } = selectedEl.getBoundingClientRect();
+        top += this.$refs.body.scrollTop;
+        this.$refs.body.scrollTop = top - parentTop;
+      });
+    });
   },
 
   methods: {

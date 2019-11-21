@@ -96,7 +96,7 @@
                 v-for="(attribute, index) in attributes"
                 :key="attribute.parameter"
                 class="ProductCustomizer__NavItem"
-                @click="selectPanel(attribute.parameter)"
+                @click="showPanel(attribute.parameter)"
               >
                 <img
                   v-if="attribute.cover_image_url"
@@ -371,6 +371,11 @@ export default {
       });
     },
 
+    showPanel(parameter) {
+      this.selectPanel(parameter);
+      this.$bus.$emit('panel:show', parameter);
+    },
+
     backToStart() {
       this.selectPanel('');
     },
@@ -382,6 +387,7 @@ export default {
       }
       const { parameter } = this.attributes[this.activeIndex + 1];
       this.selectPanel(parameter);
+      this.$bus.$emit('panel:show', parameter);
     },
 
     close(closeAll) {
