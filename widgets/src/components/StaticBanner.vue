@@ -1,14 +1,16 @@
 <template>
-  <div 
+  <div
     class="StaticBanner"
     ref="StaticBanner"
   >
-    <a href="javascript:void(0)">
+    <a
+      :href="bannerLink"
+    >
       <picture>
-        <source 
+        <source
           v-bind:media="'(max-width:' + responsivePoint + ')' "
           :srcset="mobileBanner">
-        <img 
+        <img
           :src="desktopBanner"
         >
       </picture>
@@ -20,7 +22,8 @@ export default {
   props: {
     desktopBanner: String,
     mobileBanner: String,
-    responsivePoint: String
+    responsivePoint: String,
+    bannerLink: String
   }
 }
 </script>
@@ -29,7 +32,7 @@ export default {
   a {
     height: auto;
     width: 100%;
-    
+
     img {
       display: block;
       margin: auto;
@@ -38,5 +41,3 @@ export default {
   }
 }
 </style>
-
-

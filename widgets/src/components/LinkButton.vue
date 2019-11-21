@@ -1,6 +1,6 @@
 <template>
   <div class="_button-wrapper">
-    <a 
+    <a
       :href="linkTo"
       :class="buttonClass"
       class="--btn"
@@ -57,8 +57,9 @@ export default {
   width: 240px;
   @include transition(all,.3s,cubic-bezier(.55, .085, .68, .53));
   &:hover {
-    color: #ffffff;
     background: #202020;
+    color: #ffffff;
+    text-decoration: none;
   }
 
   &.linkButton--white {
@@ -69,7 +70,7 @@ export default {
       color: #202020;
     }
   }
-  
+
   &.linkButton--noBorder {
     border: none;
   }
