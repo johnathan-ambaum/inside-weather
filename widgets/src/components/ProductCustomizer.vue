@@ -337,6 +337,12 @@ export default {
     this.$nextTick(() => {
       updateAffirm();
     });
+
+    document.addEventListener('mulberry-shopify:loaded', async () => {
+      await mulberry.core.init({
+        publicToken: 'XgWTtjgGtSjJZzVQySjxA8GBJh4',
+      });
+    });
   },
 
   methods: {
@@ -354,6 +360,27 @@ export default {
       'selectPanel',
       'setOption',
     ]),
+
+    async initializeMulberry(quantity = 1) {
+      const { id } = this.activeProduct;
+      const { name: title, price } = this.fullProduct;
+      const offer = await mulberry.core.getWarrantyOffer({ id, title, price });
+
+      mulberry.modal.init({
+        offers: offer,
+        settings: mulberry.core.settings,
+        onWarrantySelect: async (warranty) => {
+          const result = await mulberryShop.addToProductCatalog(warranty);
+          await mulberryShop.addWarrantyToCart(result)
+          mulberry.modal.close();
+          this.addToCart(quantity, true);
+        },
+        onWarrantyDecline: () => {
+          mulberry.modal.close();
+          this.addToCart(quantity, true);
+        },
+      });
+    },
 
     createProduct() {
       if (!this.productImages.length) {
@@ -424,7 +451,7 @@ export default {
       });
     },
 
-    addToCart(quantity) {
+    async addToCart(quantity, warrantySelected = false) {
       this.addToCartProcessing = true;
 
       if (this.productCreationInProgress) {
@@ -439,6 +466,12 @@ export default {
         setTimeout(() => {
           this.addToCart(quantity);
         }, 250);
+        return;
+      }
+
+      if (! warrantySelected) {
+        await this.initializeMulberry(quantity);
+        mulberry.modal.open();
         return;
       }
 
