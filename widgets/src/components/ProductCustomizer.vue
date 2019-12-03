@@ -139,9 +139,9 @@
           >Save Customization</button>
           <button
             v-if="!hasNext"
-            class="ProductCustomizer__Skip"
-            @click.prevent="close(false)"
-          >Save</button>
+            class="ProductCustomizer__Skip ProductCustomizer__Skip--Last"
+            @click.prevent="close(true)"
+          >Save Customization</button>
         </div>
       </div>
       <close-button
@@ -903,7 +903,7 @@ html.ProductCustomizer--Open {
     & + & {
       border-left: 1px solid #fff;
 
-      &::after {
+      &:not(.ProductCustomizer__Skip--Last)::after {
         content: '';
         display: block;
         border-right: 1px solid #fff;
