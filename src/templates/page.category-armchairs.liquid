@@ -15,10 +15,13 @@
 
     {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_01.jpg?1661574', 'title': 'Issa Armchair', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/products/ac18bd11101019-pebble-weave-issa-armchair-in-heathered-slate'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_02.jpg?1661574', 'title': 'Levi Armchair', 'linkText': 'Customize starting at $598', hyperLink: 'https://insideweather.com/products/ac15bc11101017-pebble-weave-levi-armchair-in-heathered-taupe'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_03.jpg?1661574', 'title': 'Soba Armchair', 'linkText': 'Customize starting at $698', hyperLink: 'https://insideweather.com/products/ac10ar11101013-oxford-weave-soba-armchair-in-pebble'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_04.jpg?1661574', 'title': 'Brooklyn Armchair', 'linkText': 'Customize starting at $548', hyperLink: 'https://insideweather.com/products/ac19bl11101010-cross-weave-brooklyn-armchair-in-cloud'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_05.jpg?1661574', 'title': 'Asher Armchair', 'linkText': 'Customize starting at $648', hyperLink: 'https://insideweather.com/products/ac22bd11101014-pebble-weave-asher-armchair-in-heathered-slate'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_06.jpg?1661574', 'title': 'Nox Armchair', 'linkText': 'Customize starting at $448', hyperLink: 'https://insideweather.com/products/ac13bc11101021-pebble-weave-nox-armchair-in-heathered-taupe'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_07.jpg?1661574', 'title': 'Milo Armchair', 'linkText': 'Customize starting at $498', hyperLink: 'https://insideweather.com/products/ac14ar11101023-oxford-weave-milo-armchair-in-pebble'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_08.jpg?1661574', 'title': 'Jett Armchair', 'linkText': 'Customize starting at $598', hyperLink: 'https://insideweather.com/products/ac17bl11101015-cross-weave-jett-armchair-in-cloud'}]" %}
 
+    {% assign collectionCustomImageStyle = true %}
+
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
           :product-collections="{{productCollections}}"
+          :collection-custom-image-style="{{collectionCustomImageStyle}}"
           section-heading="Start with a Silhouette"
           section-description="Choose your favorite collection and make it your own."
         >

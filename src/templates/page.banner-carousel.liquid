@@ -14,7 +14,7 @@
 
   <div class="--custom-container category-list-container">
     <category-list
-      class="--pd-t-130 --pd-b-130"
+      class="--pd-t-90 --pd-b-130"
       :list-items="{{listItems}}"
     >
     </category-list>
@@ -149,8 +149,10 @@
     const catTimeline = new TimelineLite()
     catTimeline.fromTo($('._category-lists'), 0.9, {opacity:0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
     const catTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner .owl-dots',
-      reverse: false
+      triggerElement: '.CarouselBanner',
+      reverse: false,
+      triggerHook: 'onEnter',
+      offset: 25,
     }).setTween(catTimeline).addTo(controller);
 
     const valuePropsTimeline = new TimelineLite()

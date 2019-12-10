@@ -90,6 +90,7 @@ export default {
       margin: 0 0 100px;
     }
     figure {
+      margin: 0;
       flex-basis: 67%;
       height: 0;
       position: relative;

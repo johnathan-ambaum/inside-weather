@@ -48,6 +48,10 @@ html, body {
   }
 }
 
+.--clip-header {
+  margin-top: 102px;
+}
+
 .--lg-hidden {
   
   @include at-query('min-width: 1025px') {
@@ -114,6 +118,21 @@ html, body {
   }
   @include at-query('min-width: 1200px') {  
     padding-bottom: 100px;
+  }
+}
+
+.--pd-t-90 {
+  @include at-query('max-width: 767px') {  
+    padding-top: 35px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-top: 50px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-top: 60px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-top: 90px;
   }
 }
 

@@ -39,11 +39,15 @@
     var $body = $('body');
     var $mobileNav = $(".MainNav--Mobile");
 
-    {% unless template == 'product' or template == 'collection' or template.suffix == 'favorites' %}
+    {% unless template == 'index' or template == 'product' or template == 'collection' or template.suffix == 'favorites' %}
         $document.on("scroll", function() {
             $body.toggleClass("MainNav--Small", $document.scrollTop() >= 40);
         });
     {% endunless %}
+
+    {% if template == 'index' %}
+      $body.addClass("MainNav--Small");
+    {% endif %}
 
     $("#MobileToggler").click(function(){
         $mobileNav.slideToggle();

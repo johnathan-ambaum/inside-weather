@@ -1,17 +1,28 @@
 <div id="app">
-  {% assign hasImage = true %}
+  {% comment %} {% assign hasImage = true %}
   {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_1-min.jpg?1657929',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_1-min.jpg?1657932', 'heading':'RE-THINK YOUR SOFA','description':'Custom sofas starting at $898','linkText':'Shop Sofas','url':'https://insideweather.com/pages/sofas'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_2-min.jpg?1657929',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_2-min.jpg?1657932', 'heading':'HAVE AN IDEA? MAKE IT FLY','description':'Custom dining chairs starting at $118','linkText':'SHOP DINING CHAIRS','url':'https://insideweather.com/pages/dining-chairs'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_3-min.jpg?1657929','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_3-min.jpg?1657932', 'heading':'Let’s Get Personal','description':'Customize your storage needs with 400+ finish options','linkText':'SHOP SIDEBOARDS','url':'https://insideweather.com/pages/sideboards'}]}"%}
 
   <banner-carousel
     :has-image="{{hasImage}}"
     :banner-content="{{bannerContent}}">
-  </banner-carousel>
+  </banner-carousel> {% endcomment %}
+
+  <div class="staticBannerWrapper --clip-header">
+    <static-banner
+      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/112219_hp-tb_d_v4.jpg?1676316"
+      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/112219_hp-tb_m_v2.jpg?1676316"
+      responsive-point="840px"
+      banner-link="https://insideweather.com/pages/2019-black-friday"
+    >
+    </static-banner>
+  </div>
+
 
   {% assign listItems= "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_1-min.jpg?1657935','buttonText':'Shop Living','link':'https://insideweather.com/pages/living-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_2-min.jpg?1657935','buttonText':'Shop Dining','link':'https://insideweather.com/pages/dining-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_3-min.jpg?1657935','buttonText':'Shop Office','link':'https://insideweather.com/pages/office'}]"%}
 
   <div class="--custom-container category-list-container">
     <category-list
-      class="--pd-t-130 --pd-b-130"
+      class="--pd-t-90 --pd-b-130"
       :list-items="{{listItems}}"
     >
     </category-list>
@@ -73,6 +84,7 @@
 </div>
 
 <script>
+
   jQuery(function ($) {
     var count = 0;
     var playerId = '';
@@ -146,8 +158,10 @@
     const catTimeline = new TimelineLite()
     catTimeline.fromTo($('._category-lists'), 0.9, {opacity:0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
     const catTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner .owl-dots',
-      reverse: false
+      triggerElement: '.CarouselBanner',
+      reverse: false,
+      triggerHook: 'onEnter',
+      offset: 25,
     }).setTween(catTimeline).addTo(controller);
 
     const valuePropsTimeline = new TimelineLite()
@@ -214,19 +228,47 @@
     }).setTween(pressTimeline).addTo(controller);
 
     function reviewCarouselDekstopAnim() {
-      const ReviewCarouselTimeline = new TimelineLite()
-      ReviewCarouselTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
-        .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-      const ReviewCarouselTimelineScene = new ScrollMagic.Scene({
-        triggerElement: '.ReviewCarouselWrapper',
-        reverse: false
-      }).setTween(ReviewCarouselTimeline).addTo(controller);
+      const element = '.ReviewCarouselWrapper .owl-item .Review__image';
+      var reviewSetTarget = '.ReviewCarouselWrapper'
+      const reviewSet = TweenMax.staggerFromTo(element, 0.9,
+        {
+          opacity: 0,
+          y: 50
+        },{
+          opacity: 1,
+          y: 0,
+          force3D: true,
+        }, 0.2);
+      new ScrollMagic.Scene( {
+        triggerElement: reviewSetTarget,
+        reverse: false,
+        triggerHook: "onEnter",
+        offset: 250
+      }).setTween(reviewSet).addTo(controller);
+
+      const ReviewContentElement = '.ReviewCarouselWrapper .owl-item .Review__content';
+      const reviewContentSet = TweenMax.staggerFromTo(ReviewContentElement, 0.9,
+        {
+          opacity: 0,
+          y: 50
+        },{
+          opacity: 1,
+          y: 0,
+          force3D: true,
+        }, 0.2);
+      new ScrollMagic.Scene( {
+        triggerElement: reviewSetTarget,
+        reverse: false,
+        triggerHook: "onEnter",
+        offset: 250
+      }).setTween(reviewContentSet).addTo(controller);
+
     }
 
     function reviewCarouselMobAnim() {
       const ReviewCarouselMobTimeline = new TimelineLite()
-      ReviewCarouselMobTimeline.fromTo($('.ReviewCarousel .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
-        .fromTo($('.ReviewCarousel .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
+      ReviewCarouselMobTimeline.fromTo($('.ReviewCarouselWrapper .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
+        .fromTo($('.ReviewCarouselWrapper .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
       const ReviewCarouselMobTimelineScene = new ScrollMagic.Scene({
         triggerElement: '.Press ul li.press-list-2',
         reverse: false
