@@ -96,7 +96,7 @@
                 v-for="(attribute, index) in attributes"
                 :key="attribute.parameter"
                 class="ProductCustomizer__NavItem"
-                @click="selectPanel(attribute.parameter)"
+                @click="showPanel(attribute.parameter)"
               >
                 <img
                   v-if="attribute.cover_image_url"
@@ -136,6 +136,11 @@
             v-if="isMobile && !hasPrev"
             class="ProductCustomizer__Close"
             @click.prevent="close(false)"
+          >Save Customization</button>
+          <button
+            v-if="!hasNext"
+            class="ProductCustomizer__Skip ProductCustomizer__Skip--Last"
+            @click.prevent="close(true)"
           >Save Customization</button>
         </div>
       </div>
@@ -366,6 +371,11 @@ export default {
       });
     },
 
+    showPanel(parameter) {
+      this.selectPanel(parameter);
+      this.$bus.$emit('panel:show', parameter);
+    },
+
     backToStart() {
       this.selectPanel('');
     },
@@ -377,6 +387,7 @@ export default {
       }
       const { parameter } = this.attributes[this.activeIndex + 1];
       this.selectPanel(parameter);
+      this.$bus.$emit('panel:show', parameter);
     },
 
     close(closeAll) {
@@ -892,7 +903,7 @@ html.ProductCustomizer--Open {
     & + & {
       border-left: 1px solid #fff;
 
-      &::after {
+      &:not(.ProductCustomizer__Skip--Last)::after {
         content: '';
         display: block;
         border-right: 1px solid #fff;

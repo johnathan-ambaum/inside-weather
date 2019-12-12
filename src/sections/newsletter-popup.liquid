@@ -9,7 +9,11 @@
   data-delay-seconds="{{ section.settings.popup_seconds }}"
   data-test-mode="{% if section.settings.mode == 'testing' %}true{% else %}false{% endif %}">
   <div class="modal__inner">
-    <div class="modal__centered medium-up--text-center">
+    {% if section.settings.popup_image %}
+      <div class="modal__half" style="background-image: url({{ section.settings.popup_image | img_url: '708x' }});"></div>
+    {% endif %}
+
+    <div class="modal__centered text-center medium-up--text-left">
       <div class="modal__centered-content">
 
         <div class="newsletter">
@@ -17,31 +21,15 @@
             <h2 class="h1">{{ section.settings.popup_title }}</h2>
           {% endif %}
 
-          {% if section.settings.popup_image %}
-            <div class="image-wrap small--hide" style="height: 0; padding-bottom: {{ 100 | divided_by: section.settings.popup_image.aspect_ratio }}%;">
-              {%- assign img_url = section.settings.popup_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-              <img class="lazyload lazypreload" role="presentation"
-                  data-src="{{ img_url }}"
-                  data-widths="[540, 720, 900, 1080]"
-                  data-aspectratio="{{ section.settings.popup_image.aspect_ratio }}"
-                  data-sizes="auto"
-                  alt="{{ section.settings.popup_image.alt }}">
-            </div>
-          {% endif %}
-
           {% if section.settings.popup_text != blank %}
             <div class="rte">
               {{ section.settings.popup_text }}
             </div>
           {% endif %}
-<!-- GIVEAWAY FINE PRINT -->
-         <div style="padding-bottom: 15px;"> <span style="font-size:10px; margin-bottom: 15px;"> *By entering you agree to the <a href="https://insideweather.com/pages/giveaway-terms-conditions" target="_blank" style="text-decoration:underline;">Terms & Conditions </a>of this giveaway. </span>
-          </div>
-  <!--END GIVEAWAY -->
 
           {% if section.settings.enable_newsletter %}
           <div class="popup-cta">
-            {% include 'newsletter-form', section_id: section.id, snippet_context: 'popup' %}
+            {% include 'newsletter-form', section_id: section.id, snippet_context: 'popup', button_text: 'SIGN UP' %}
           </div>
           {% endif %}
 
@@ -53,7 +41,11 @@
           </div>
           {% endif %}
 
-         <button type="button" class="text-close js-modal-close">{{ section.settings.close_text }}</button>
+          <div class="disclaimer">Valid on your first purchase.</div>
+
+          {%- unless section.settings.close_text == blank -%}
+            <button type="button" class="text-close js-modal-close">{{ section.settings.close_text }}</button>
+          {%- endunless -%}
         </div>
       </div>
 
