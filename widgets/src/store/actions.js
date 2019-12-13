@@ -3,6 +3,7 @@ import FilterStorage from '../util/FilterStorage';
 // import interpolator from '../mixins/interpolator';
 
 const apiClient = new ApiClient();
+let cylindoViewer;
 
 /**
  * Set up filter definition for category
@@ -24,7 +25,7 @@ export function pullFilter({ dispatch, commit, state }) {
  * Retrieves product images for selected options
  */
 export function loadProductImages({ dispatch, commit, state }) {
-  if (!state.filters.attributes) {
+  if (!state.filters.attributes || !window.cylindo) {
     // keep retrying if still waiting on filter retrieval
     setTimeout(() => {
       dispatch('loadProductImages');
@@ -36,14 +37,29 @@ export function loadProductImages({ dispatch, commit, state }) {
     return;
   }
 
-  apiClient
-    .getImages({
-      type: state.category,
-      attributes: state.selectedOptions,
-    })
-    .then((images) => {
-      commit('setProductImages', images);
+  const features = Object.entries(state.selectedOptions).map(([parameter, value]) => {
+    const { values } = state.filters.attributes.find(att => att.parameter === parameter);
+    const selected = values.find(item => item.value === value);
+    return selected.feature_id || null;
+  }).filter(feature => feature !== null);
+
+  if (cylindoViewer) {
+    cylindoViewer.setFeatures(features);
+    return;
+  }
+  console.log({ features, baseSKU: state.filters.cylindo_sku });
+
+  window.cylindo.on('ready', () => {
+    cylindoViewer = window.cylindo.viewer.create({
+      accountID: 4931,
+      SKU: state.filters.cylindo_sku || '',
+      features,
+      country: 'us',
+      containerID: '#cylindo-viewer',
     });
+  });
+
+  // commit('setProductImages', images);
 }
 
 export function populateSelected({ state, dispatch, commit }, { selectedOptions, exists = false }) {

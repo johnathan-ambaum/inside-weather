@@ -4,10 +4,11 @@
       class="ProductGallery__FeaturedImage"
       @click="showZoom = true"
     >
-      <responsive-image
+      <!-- <responsive-image
         :images="images[galleryImage] || {}"
         :initial-spinner="true"
-      />
+      /> -->
+      <div id="cylindo-viewer"/>
     </div>
     <nav class="ProductGallery__Nav">
       <div

@@ -123,15 +123,6 @@ export default class ApiClient {
     });
   }
 
-  getImages({ type, attributes }) {
-    const attributeString = Object.entries(attributes).map(([parameter, value]) => `${parameter}:${value}`).join(',');
-    const url = `https://iw-images.herokuapp.com/api/v1/images?product_type=${type}&attributes=${attributeString}`;
-
-    return new Promise((resolve, reject) => this.debouncedSendRequest({
-      method: 'GET', url, resolve, reject,
-    }));
-  }
-
   createProduct({
     name, model, type, image, attributes,
   }) {
