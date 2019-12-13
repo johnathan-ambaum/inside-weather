@@ -111,6 +111,46 @@
 
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
+
+    <style>
+      .breadcrumb__item:nth-child(3) {
+        display: none;
+      }
+
+      .step[data-step="shipping_method"] {
+        visibility: hidden;
+      }
+
+      .main__content {
+        position: relative;
+      }
+
+      .main__content .GlyphLoading {
+        bottom: 0;
+        display: none;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .GlyphLoading {
+        animation: spin 2s linear infinite;
+        fill: #010101;
+        height: auto;
+        width: 50px;
+      }
+    </style>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -137,6 +177,7 @@
           </div>
           <div class="main__content">
             {{ content_for_layout }}
+            {% include 'icon-spinner' %}
           </div>
           <div class="main__footer">
             {{ content_for_footer }}
@@ -154,5 +195,22 @@
     </div>
 
     {{ tracking_code }}
+
+    <script>
+      (function () {
+        function hideShippingStep() {
+          var shippingBody = document.querySelector('.step[data-step="shipping_method"]');
+          var spinner = document.querySelector('.main__content .GlyphLoading');
+          if (!shippingBody || !spinner) {
+            return;
+          }
+          spinner.style.display = 'block';
+          shippingBody.querySelector('form').submit();
+        }
+
+        document.addEventListener('page:load', hideShippingStep);
+        document.addEventListener('page:change', hideShippingStep);
+      })();
+    </script>
   </body>
 </html>
