@@ -77,6 +77,35 @@
         $('.' + activeClass).removeClass(activeClass);
         $body.removeClass(bodyActiveClass);
     });
+
+    (function () {
+        var scrollUp = 'scroll-up';
+        var scrollDown = 'scroll-down';
+        var lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (screenWidth > 1024) {
+                return;
+            }
+            var currentScroll = window.pageYOffset;
+            if (currentScroll == 0) {
+                document.body.classList.remove(scrollUp);
+                return;
+            }
+
+            if (currentScroll > lastScroll && !document.body.classList.contains(scrollDown)) {
+                // down
+                document.body.classList.remove(scrollUp);
+                document.body.classList.add(scrollDown);
+            } else if (currentScroll < lastScroll && document.body.classList.contains(scrollDown)) {
+                // up
+                document.body.classList.remove(scrollDown);
+                document.body.classList.add(scrollUp);
+            }
+            lastScroll = currentScroll;
+        });
+    })();
 </script>
 
 {% schema %}

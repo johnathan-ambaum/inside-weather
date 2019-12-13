@@ -11024,14 +11024,22 @@ html body.MobileNav--Active {
   .MainNav--Active &,
   .MainNav--Small &,
   .MainNav--Mobile {
-    -webkit-transition: background .3s ease-out, height .3s ease-out;
-    -o-transition: background .3s ease-out, height .3s ease-out;
-    transition: background .3s ease-out, height .3s ease-out;
+    -webkit-transition: background .3s ease-out, height .3s ease-out, transform .3s linear;
+    -o-transition: background .3s ease-out, height .3s ease-out, transform .3s linear;
+    transition: background .3s ease-out, height .3s ease-out, transform .3s linear;
     background: #ffffff;
   }
 
   @media only screen and (max-width: 1023px) {
     background: #fff;
+  }
+
+  .scroll-down & {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  .scroll-up & {
+    transform: none;
   }
 
   a {
