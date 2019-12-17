@@ -338,11 +338,13 @@ export default {
       updateAffirm();
     });
 
-    document.addEventListener('mulberry-shopify:loaded', async () => {
-      await mulberry.core.init({
-        publicToken: 'XgWTtjgGtSjJZzVQySjxA8GBJh4',
+    if (window.theme.settings.mulberry.active) {
+      document.addEventListener('mulberry-shopify:loaded', async () => {
+        await mulberry.core.init({
+          publicToken: '6oMVIT3bWc-8sWgS12eToRhzV8I',
+        });
       });
-    });
+    }
   },
 
   methods: {
@@ -469,7 +471,7 @@ export default {
         return;
       }
 
-      if (! warrantySelected) {
+      if (theme.settings.mulberry.active && ! warrantySelected) {
         await this.initializeMulberry(quantity);
         mulberry.modal.open();
         return;
