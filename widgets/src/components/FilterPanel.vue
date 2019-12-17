@@ -6,19 +6,12 @@
         v-if="groups.length > 0"
         class="FilterPanel__Filter"
       >
-        <select
-          v-model="group"
+        <styled-select
+          :options="groupOptions"
+          :value="group.id"
           class="FilterPanel__GroupSelect"
-        >
-          <option
-            v-for="group in groups"
-            :key="group.id"
-            :value="group"
-          >
-            <template v-if="group.group_type === 'sort'">Sort: <strong>{{ group.name }}</strong></template>
-            <template v-else>{{ group.name }}</template>
-          </option>
-        </select>
+          @input="setGroup"
+        />
       </div>
     </div>
     <swatch-panel
@@ -33,10 +26,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import StyledSelect from './StyledSelect.vue';
 import SwatchPanel from './SwatchPanel.vue';
 
 export default {
   components: {
+    StyledSelect,
     SwatchPanel,
   },
 
@@ -72,6 +67,28 @@ export default {
       }
 
       return this.values.filter(value => value[this.group.reference]);
+    },
+
+    groupOptions() {
+      return this.groups.map((group) => {
+        let display = `<strong>${group.name}</strong>`;
+        if (group.group_type === 'sort') {
+          display = `SORT: ${display}`;
+        }
+        return {
+          value: group.id,
+          display,
+        };
+      });
+    },
+  },
+
+  methods: {
+    setGroup(selectedId) {
+      const selected = this.groups.find(group => group.id === selectedId);
+      if (selected) {
+        this.group = selected;
+      }
     },
   },
 };
@@ -141,7 +158,7 @@ export default {
 
   &__Filter {
     @include at-query($breakpoint-small) {
-      flex: 0 0 auto;
+      flex: 1 0 auto;
     }
   }
 
@@ -149,13 +166,8 @@ export default {
     background-color: #fff;
     border: 1px solid #D4D0CA;
     color: #202020;
-    font-size: 11px;
     font-weight: 400;
-    letter-spacing: .0875em;
-    line-height: 28px;
     max-width: 195px;
-    padding-bottom: 0;
-    padding-top: 0;
     width: 100%;
 
     strong {
@@ -165,6 +177,8 @@ export default {
     @include at-query($breakpoint-large) {
       font-size: 13px;
       margin-top: 15px;
+      max-width: 100%;
+      width: 250px;
     }
   }
 
