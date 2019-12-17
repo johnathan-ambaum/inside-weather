@@ -5,7 +5,7 @@
   >
     <div
       class="StyledSelect__Value"
-      @click="active = !active"
+      @click.stop="active = !active"
       v-html="displayValue"
     />
     <div class="StyledSelect__List">
@@ -14,7 +14,7 @@
         :key="option.value"
         :class="{ 'is-active': value === option.value }"
         class="StyledSelect__Option"
-        @click="selectOption(option.value)"
+        @click.stop="selectOption(option.value)"
         v-html="option.display"
       />
     </div>
@@ -45,13 +45,13 @@ export default {
   },
 
   mounted() {
-    function clickOutside(e) {
+    const clickOutside = (e) => {
       if (this.active) {
         this.active = !this.active;
       }
-    }
+    };
 
-    document.body.addEventListener('click', clickOutside);
+    document.addEventListener('click', clickOutside);
     this.$on('hook:beforeDestroy', () => {
       document.removeEventListener('click', clickOutside);
     });
