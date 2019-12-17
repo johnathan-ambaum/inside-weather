@@ -82,14 +82,27 @@ export default {
 @import '../scss/mixins';
 
 .FilterPanel {
+  animation-delay: .6s;
+  animation-duration: .5s;
+  bottom: $sidebar-footer-height-mobile;
   color: #121212;
   display: flex;
   flex-direction: column;
   font-family: $font-stack-avalon;
-  height: 100%;
+  height: auto;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 200;
 
   @include at-query($breakpoint-large) {
-    height: calc(100vh - #{$sidebar-footer-height});
+    bottom: 0;
+    box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
+    height: 100vh;
+  }
+
+  &.slideOutRight {
+    animation-delay: 0s;
   }
 
   &__Header {
@@ -158,6 +171,12 @@ export default {
   &__Body {
     @include at-query($breakpoint-large) {
       flex-grow: 1;
+
+      &::after {
+        content: '';
+        height: $sidebar-footer-height;
+        flex: 0 0 100%;
+      }
     }
   }
 }

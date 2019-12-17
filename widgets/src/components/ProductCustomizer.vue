@@ -82,66 +82,93 @@
         >Save Customization</button>
       </div>
       <div class="ProductCustomizer__Sidebar">
-        <div
-          :class="{ 'has-footer': isMobile || hasPrev }"
-          class="ProductCustomizer__SidebarBody"
-        >
-          <nav
-            v-show="!openPanel"
-            class="ProductCustomizer__Nav"
+        <div class="ProductCustomizer__SidebarBody">
+          <transition
+            enter-active-class="animated slideInRight"
+            leave-active-class="animated slideOutRight"
           >
-            <div class="ProductCustomizer__NavHeading">Customize</div>
-            <div class="ProductCustomizer__NavBody">
-              <div
-                v-for="(attribute, index) in attributes"
-                :key="attribute.parameter"
-                class="ProductCustomizer__NavItem"
-                @click="showPanel(attribute.parameter)"
-              >
-                <img
-                  v-if="attribute.cover_image_url"
-                  ref="coverImages"
-                  :src="attribute.cover_image_url"
-                  :alt="attribute.name"
+            <nav
+              v-show="active && !openPanel"
+              class="ProductCustomizer__Nav"
+            >
+              <div class="ProductCustomizer__NavHeading">Customize</div>
+              <div class="ProductCustomizer__NavBody">
+                <div
+                  v-for="(attribute, index) in attributes"
+                  :key="attribute.parameter"
+                  class="ProductCustomizer__NavItem"
+                  @click="showPanel(attribute.parameter)"
                 >
-                <span class="ProductCustomizer__NavItemTitle">{{ index + 1 }}. {{ attribute.name }}</span>
+                  <img
+                    v-if="attribute.cover_image_url"
+                    ref="coverImages"
+                    :src="attribute.cover_image_url"
+                    :alt="attribute.name"
+                  >
+                  <span class="ProductCustomizer__NavItemTitle">{{ index + 1 }}. {{ attribute.name }}</span>
+                </div>
               </div>
-            </div>
-          </nav>
+            </nav>
+          </transition>
           <div
             v-for="(attribute, index) in attributes"
             :key="attribute.parameter"
-            :class="{ 'ProductCustomizer__Panel--Active': isOpen(attribute.parameter) }"
             class="ProductCustomizer__Panel"
           >
-            <filter-panel
-              v-bind="attribute"
-              :index="index"
-              :load="active"
-            />
+            <transition
+              enter-active-class="animated slideInRight"
+              leave-active-class="animated slideOutRight"
+            >
+              <filter-panel
+                v-show="isOpen(attribute.parameter)"
+                v-bind="attribute"
+                :index="index"
+                :load="true"
+              />
+            </transition>
           </div>
         </div>
         <div class="ProductCustomizer__Footer">
-          <button
-            v-if="hasPrev"
-            class="ProductCustomizer__Skip"
-            @click.prevent="backToStart"
-          >Back</button>
-          <button
-            v-if="hasPrev && hasNext"
-            class="ProductCustomizer__Skip"
-            @click.prevent="nextPanel"
-          >Next</button>
-          <button
-            v-if="isMobile && !hasPrev"
-            class="ProductCustomizer__Close"
-            @click.prevent="close(false)"
-          >Save Customization</button>
-          <button
-            v-if="!hasNext"
-            class="ProductCustomizer__Skip ProductCustomizer__Skip--Last"
-            @click.prevent="close(true)"
-          >Save Customization</button>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="hasPrev"
+              class="ProductCustomizer__Skip"
+              @click.prevent="backToStart"
+            >Back</button>
+          </transition>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="hasNext"
+              class="ProductCustomizer__Skip"
+              @click.prevent="nextPanel"
+            >Next</button>
+          </transition>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="hasPrev && !hasNext"
+              class="ProductCustomizer__Skip ProductCustomizer__Skip--Last"
+              @click.prevent="close(true)"
+            >Save Customization</button>
+          </transition>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="active && isMobile && !hasPrev"
+              class="ProductCustomizer__Close"
+              @click.prevent="close(false)"
+            >Save Customization</button>
+          </transition>
         </div>
       </div>
       <close-button
@@ -229,7 +256,7 @@ export default {
     },
 
     hasNext() {
-      return this.activeIndex < this.attributes.length - 1;
+      return this.openPanel !== '' && this.activeIndex < this.attributes.length - 1;
     },
 
     isFavorite() {
@@ -735,10 +762,10 @@ html.ProductCustomizer--Open {
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
+    position: relative;
     z-index: 100;
 
     @include at-query($breakpoint-large) {
-      box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
       flex: 0 0 458px;
     }
   }
@@ -767,20 +794,30 @@ html.ProductCustomizer--Open {
 
     @include at-query($breakpoint-large) {
       flex: 1;
-
-      &.has-footer {
-        flex: 0 0 calc(100vh - #{$sidebar-footer-height});
-      }
+      padding-bottom: $sidebar-footer-height;
     }
   }
 
   &__Nav {
+    animation-delay: .6s;
+    animation-duration: .5s;
+    bottom: $sidebar-footer-height-mobile;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
 
     @include at-query($breakpoint-large) {
+      bottom: 0;
+      box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
       height: 100vh;
+    }
+
+    &.slideOutRight {
+      animation-delay: 0s
     }
   }
 
@@ -854,36 +891,59 @@ html.ProductCustomizer--Open {
   }
 
   &__Panel {
-    height: 100%;
+    // height: 100%;
 
-    &:not(#{&}--Active) {
-      display: none;
-    }
+    // &:not(#{&}--Active) {
+    //   display: none;
+    // }
   }
 
   &__Footer {
-    background: #dfb2a3;
+    bottom: 0;
     display: flex;
-    flex: 0 0 $sidebar-footer-height-mobile;
+    height: $sidebar-footer-height-mobile;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
 
     @include at-query($breakpoint-large) {
-      background: #f2f0ed;
-      flex-basis: $sidebar-footer-height;
+      height: $sidebar-footer-height;
       padding-right: 12px;
+    }
+  }
+
+  &__Footer &__Close {
+    animation-delay: 1s;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &.slideOutDown {
+      animation-delay: 0s;
     }
   }
 
   &__Skip {
     align-items: center;
-    background: transparent;
+    animation-delay: 1s;
+    animation-duration: .5s;
+    background: #dfb2a3;
     color: #fff;
     display: flex;
-    flex: 1;
+    flex: 0 0 50%;
     font-size: 14px;
     font-weight: 500;
     justify-content: center;
     letter-spacing: .12em;
+    position: relative;
     text-transform: uppercase;
+
+    &.slideOutDown {
+      animation-delay: 0s;
+    }
 
     &:first-child::before {
       content: '';
@@ -915,6 +975,21 @@ html.ProductCustomizer--Open {
 
         @include at-query($breakpoint-large) {
           border-color: #202020;
+        }
+      }
+
+      @include at-query($breakpoint-large) {
+        // this is to add extra background color beyond the edge of the Next button
+        // needs to be part of the button to facilitate animations, used to be the whole footer bg color
+        &::before {
+          background: inherit;
+          content: '';
+          height: 100%;
+          left: 100%;
+          position: absolute;
+          top: 0;
+          width: 20px;
+          z-index: -1;
         }
       }
     }
