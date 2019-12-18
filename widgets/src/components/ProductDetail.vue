@@ -148,24 +148,15 @@ export default {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 80px;
+    margin-bottom: 30px;
 
     img {
       flex: 0 0 auto;
+      margin-bottom: 50px;
     }
 
     @include at-query($breakpoint-small) {
       padding: 0 $horizontal-wrapper-padding;
-    }
-
-    @include at-query($breakpoint-msmall) {
-      img + img {
-        margin-top: 50px;
-      }
-    }
-
-    @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
-
     }
 
     @include at-query($breakpoint-large) {
