@@ -1004,10 +1004,6 @@ html.ProductCustomizer--Open {
         margin-left: 5px;
         transform: rotate(45deg);
         width: 7px;
-
-        @include at-query($breakpoint-large) {
-          border-color: #202020;
-        }
       }
 
       @include at-query($breakpoint-large) {
