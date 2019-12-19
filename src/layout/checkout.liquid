@@ -198,7 +198,16 @@
 
     <script>
       (function () {
+        function renameContinueButtonOnInfoStep() {
+          var button = document.querySelector('.step[data-step="contact_information"] .step__footer .btn__content');
+          if (!button) {
+            return;
+          }
+          button.innerHTML = 'Continue to payment';
+        }
+
         function hideShippingStep() {
+          renameContinueButtonOnInfoStep();
           var shippingBody = document.querySelector('.step[data-step="shipping_method"]');
           var spinner = document.querySelector('.main__content .GlyphLoading');
           if (!shippingBody || !spinner) {
