@@ -833,6 +833,7 @@ html.ProductCustomizer--Open {
   &__Nav {
     animation-delay: .6s;
     animation-duration: .5s;
+    background: #fff;
     bottom: $sidebar-footer-height-mobile;
     display: flex;
     flex-direction: column;

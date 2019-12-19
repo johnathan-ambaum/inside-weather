@@ -119,6 +119,7 @@ export default {
 .FilterPanel {
   animation-delay: .6s;
   animation-duration: .5s;
+  background: #fff;
   bottom: $sidebar-footer-height-mobile;
   color: #121212;
   display: flex;
@@ -142,6 +143,7 @@ export default {
 
   &__Header {
     align-items: center;
+    background: #fff;
     border-bottom: 1px solid #D4D0CA;
     display: flex;
     text-align: center;
