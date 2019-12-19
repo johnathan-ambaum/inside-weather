@@ -1025,10 +1025,6 @@ html.ProductCustomizer--Open {
         }
       }
     }
-
-    @include at-query($breakpoint-large) {
-      color: #202020;
-    }
   }
 
   &__Close {
