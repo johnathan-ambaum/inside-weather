@@ -6,7 +6,20 @@
         v-if="groups.length > 0"
         class="FilterPanel__Filter"
       >
+        <select
+          v-if="isMobile"
+          :value="group.id"
+          class="FilterPanel__GroupSelect"
+          @input="setGroup"
+        >
+          <option
+            v-for="option in groupOptions"
+            :key="option.value"
+            :value="option.value"
+          >{{ option.display }}</option>
+        </select>
         <styled-select
+          v-else
           :options="groupOptions"
           :value="group.id"
           class="FilterPanel__GroupSelect"
@@ -28,6 +41,7 @@
 import { mapState } from 'vuex';
 import StyledSelect from './StyledSelect.vue';
 import SwatchPanel from './SwatchPanel.vue';
+import screenMonitor from '../mixins/screenMonitor';
 
 export default {
   components: {
@@ -44,6 +58,10 @@ export default {
     values: { type: Array, required: true },
     load: { type: Boolean, default: false },
   },
+
+  mixins: [
+    screenMonitor,
+  ],
 
   data() {
     return {
@@ -71,7 +89,7 @@ export default {
 
     groupOptions() {
       return this.groups.map((group) => {
-        let display = `<strong>${group.name}</strong>`;
+        let display = this.isMobile ? group.name : `<strong>${group.name}</strong>`;
         if (group.group_type === 'sort') {
           display = `SORT: ${display}`;
         }
