@@ -144,20 +144,11 @@
             leave-active-class="animated slideOutDown"
           >
             <button
-              v-if="hasNext"
+              v-if="hasPrev"
+              :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
               class="ProductCustomizer__Skip"
               @click.prevent="nextPanel"
-            >Next</button>
-          </transition>
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="hasPrev && !hasNext"
-              class="ProductCustomizer__Skip ProductCustomizer__Skip--Last"
-              @click.prevent="close(true)"
-            >Save Customization</button>
+            >{{ hasNext ? 'Next' : 'Save Customization' }}</button>
           </transition>
           <transition
             enter-active-class="animated slideInUp"
@@ -437,10 +428,16 @@ export default {
     },
 
     nextPanel() {
+      if (!this.hasNext) {
+        this.close(true);
+        return;
+      }
+
       if (this.activeIndex >= this.attributes.length) {
         this.selectPanel('');
         return;
       }
+
       const { parameter } = this.attributes[this.activeIndex + 1];
       this.selectPanel(parameter);
       this.$bus.$emit('panel:show', parameter);
