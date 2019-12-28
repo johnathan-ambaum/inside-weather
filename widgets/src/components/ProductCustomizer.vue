@@ -356,7 +356,7 @@ export default {
       updateAffirm();
     });
 
-    if (window.theme.settings.mulberry.active) {
+    if (window.theme.settings.mulberry && window.theme.settings.mulberry.active) {
       document.addEventListener('mulberry-shopify:loaded', async () => {
         await mulberry.core.init({
           publicToken: '6oMVIT3bWc-8sWgS12eToRhzV8I',
