@@ -37,11 +37,20 @@ export function loadProductImages({ dispatch, commit, state }) {
     return;
   }
 
-  const features = Object.entries(state.selectedOptions).map(([parameter, value]) => {
-    const { values } = state.filters.attributes.find(att => att.parameter === parameter);
-    const selected = values.find(item => item.value === value);
-    return selected.feature_id || null;
-  }).filter(feature => feature !== null);
+  const features = [
+    'OTTOMAN', 'ON',
+    'BASE', 'BEVELED.WOOD.WOODLEGS.LATTE',
+    'UPHOLSTERY', 'UPHOLSTERY.NAPLES.BLUSH',
+    'PILLOW SHAPE', 'SNUG',
+    'PILLOW DETAIL', 'NO BUTTONS',
+    'ARMREST TYPE', 'ASHER',
+    'WOOD ARMREST FINISH', 'ESPRESSO',
+  ];
+  // Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
+  //   const { values } = state.filters.attributes.find(att => att.parameter === parameter);
+  //   const selected = values.find(item => item.value === value);
+  //   return selected.feature_id || null;
+  // }).filter(feature => feature !== null);
 
   if (cylindoViewer) {
     cylindoViewer.setFeatures(features);
@@ -51,8 +60,9 @@ export function loadProductImages({ dispatch, commit, state }) {
 
   window.cylindo.on('ready', () => {
     cylindoViewer = window.cylindo.viewer.create({
+      debug: true,
       accountID: 4931,
-      SKU: state.filters.cylindo_sku || '',
+      SKU: 'ANA_ARM', // state.filters.cylindo_sku || '',
       features,
       country: 'us',
       containerID: '#cylindo-viewer',
