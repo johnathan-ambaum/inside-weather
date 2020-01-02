@@ -65,7 +65,8 @@ export function loadProductImages({ dispatch, commit, state }) {
       SKU: 'ANA_ARM', // state.filters.cylindo_sku || '',
       features,
       country: 'us',
-      containerID: '#cylindo-viewer',
+      containerID: 'cylindo-viewer',
+      viewerType: 2,
     });
   });
 
