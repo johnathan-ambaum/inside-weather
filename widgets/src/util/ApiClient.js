@@ -31,7 +31,8 @@ export default class ApiClient {
         .then(response => resolve(response))
         .catch(err => reject(err));
     };
-    this.debouncedSendRequest = debounce(this.sendRequest, 1000);
+    this.debouncedImagesRequest = debounce(this.sendRequest, 500);
+    this.debouncedProductRequest = debounce(this.sendRequest, 1000);
   }
 
   /**
@@ -127,7 +128,7 @@ export default class ApiClient {
     const attributeString = Object.entries(attributes).map(([parameter, value]) => `${parameter}:${value}`).join(',');
     const url = `https://iw-images.herokuapp.com/api/v1/images?product_type=${type}&attributes=${attributeString}`;
 
-    return new Promise((resolve, reject) => this.debouncedSendRequest({
+    return new Promise((resolve, reject) => this.debouncedImagesRequest({
       method: 'GET', url, resolve, reject,
     }));
   }
@@ -144,7 +145,7 @@ export default class ApiClient {
       attributes,
     };
 
-    return new Promise((resolve, reject) => this.debouncedSendRequest({
+    return new Promise((resolve, reject) => this.debouncedProductRequest({
       method: 'POST', url, body, resolve, reject,
     }));
   }
