@@ -49,6 +49,10 @@ export default {
     SwatchPanel,
   },
 
+  mixins: [
+    screenMonitor,
+  ],
+
   props: {
     parameter: { type: String, required: true },
     index: { type: Number, required: true },
@@ -58,10 +62,6 @@ export default {
     values: { type: Array, required: true },
     load: { type: Boolean, default: false },
   },
-
-  mixins: [
-    screenMonitor,
-  ],
 
   data() {
     return {
@@ -130,6 +130,10 @@ export default {
   position: absolute;
   width: 100%;
   z-index: 200;
+
+  @include at-iphone {
+    bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+  }
 
   @include at-query($breakpoint-large) {
     bottom: 0;

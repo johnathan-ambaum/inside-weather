@@ -843,6 +843,10 @@ html.ProductCustomizer--Open {
     width: 100%;
     z-index: 100;
 
+    @include at-iphone {
+      bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+    }
+
     @include at-query($breakpoint-large) {
       bottom: 0;
       box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
@@ -936,9 +940,14 @@ html.ProductCustomizer--Open {
     display: flex;
     height: $sidebar-footer-height-mobile;
     left: 0;
+    overflow: hidden;
     position: absolute;
     width: 100%;
     z-index: 100;
+
+    @include at-iphone {
+      bottom: $iphone-action-bar-height;
+    }
 
     @include at-query($breakpoint-large) {
       height: $sidebar-footer-height;
