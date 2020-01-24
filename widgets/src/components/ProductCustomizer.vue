@@ -44,7 +44,9 @@
         </info-popup>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
+      <simple-customizer v-if="isDecor" />
       <button
+        v-else
         class="ProductCustomizer__Trigger"
         @click.prevent="showCustomizer"
       >Customize</button>
@@ -60,8 +62,9 @@
     </div>
     <hr>
     <inspiration-options :products="filters.featured_products || []" />
-    <swatch-browser />
+    <swatch-browser v-if="!isDecor" />
     <div
+      v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active }"
       class="ProductCustomizer"
     >
@@ -182,6 +185,7 @@ import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
 import CloseButton from './CloseButton.vue';
 import InfoPopup from './InfoPopup.vue';
+import SimpleCustomizer from './SimpleCustomizer.vue';
 import InspirationOptions from './InspirationOptions.vue';
 import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
@@ -199,6 +203,7 @@ export default {
     AddToCart,
     CloseButton,
     InfoPopup,
+    SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
   },
@@ -225,6 +230,7 @@ export default {
 
   computed: {
     ...mapState({
+      filters: state => state.filters,
       attributes: state => state.filters.attributes || [],
       openPanel: state => state.openPanel,
       productImages: state => state.productImages,
@@ -233,6 +239,10 @@ export default {
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
     }),
+
+    isDecor() {
+      return this.filters.configurator_type === 'small';
+    },
 
     isOpen() {
       return panel => this.openPanel === panel;
