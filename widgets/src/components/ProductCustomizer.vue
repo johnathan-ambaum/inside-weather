@@ -224,6 +224,7 @@ export default {
   data() {
     return {
       active: false,
+      optionsChanged: false,
       addToCartProcessing: false,
     };
   },
@@ -339,6 +340,7 @@ export default {
     }
 
     this.$bus.$on('filter:toggle', (payload) => {
+      this.optionsChanged = true;
       this.setOption(payload);
       this.$nextTick(() => {
         window.affirm.ui.refresh();
@@ -425,6 +427,7 @@ export default {
         image: this.productImages[0].full,
       }).then(() => {
         this.trackViewProduct();
+        this.optionsChanged = false;
       });
     },
 
@@ -497,7 +500,7 @@ export default {
         return;
       }
 
-      if (!this.activeProduct.id) {
+      if (this.optionsChanged || !this.activeProduct.id) {
         this.createProduct();
         setTimeout(() => {
           this.addToCart(quantity);
