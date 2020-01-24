@@ -280,7 +280,7 @@ export default {
     ...mapState({
       reviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
-      showReviews: state => state.filters && state.filters.configurator_type !== 'small',
+      showReviews: state => state.filters && state.filters.configurator_type && state.filters.configurator_type !== 'small',
     }),
 
     styleSliderButton() {
