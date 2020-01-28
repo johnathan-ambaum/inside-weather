@@ -169,6 +169,27 @@ export default {
     }
   }
 
+  &__Description {
+    &, p {
+      color: #202020;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .035em;
+      line-height: 16px;
+
+      @include at-query($breakpoint-large) {
+        font-family: $font-stack-avalon;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 22px;
+      }
+    }
+
+    @include at-query($breakpoint-small) {
+      padding: 0 $horizontal-wrapper-padding;
+    }
+  }
+
   &__Dimensions {
     align-items: center;
     display: flex;

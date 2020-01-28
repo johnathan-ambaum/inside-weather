@@ -95,6 +95,7 @@ export default {
     align-items: center;
     cursor: pointer;
     display: flex;
+    font-family: $font-stack-avalon;
     justify-content: center;
     margin-left: 12px;
     text-align: center;
@@ -118,6 +119,7 @@ export default {
 
   &__Square {
     border: 1px solid transparent;
+    font-size: 12px;
     font-weight: 400;
     letter-spacing: .1em;
     line-height: 1;
@@ -131,7 +133,7 @@ export default {
     div {
       background: #f2f0ed;
       border: 2px solid #fff;
-      padding: 10px 20px;
+      padding: 9px 20px;
     }
   }
 }

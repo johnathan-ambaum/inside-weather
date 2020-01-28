@@ -29,12 +29,17 @@
           v-if="msrp"
           class="ProductCustomizer__Savings"
         >YOU SAVE ${{ savings }}</span>
-        <info-popup text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
+        <info-popup
+          v-if="!isDecor"
+          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$."
+        >
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
       </div>
       <div class="ProductCustomizer__ShippingDays">
-        FREE Shipping | Custom made in
+        FREE Shipping |
+        <template v-if="isDecor">Ships in</template>
+        <template v-else>Custom made in</template>
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
