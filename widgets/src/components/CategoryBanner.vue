@@ -71,6 +71,7 @@
             <a 
               :href="item.url" 
               class="--caps"
+              v-if="item.linkText.length > 0"
             >
               {{item.linkText}}
             </a>

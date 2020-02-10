@@ -1,0 +1,127 @@
+<div id="app">
+  <div class="diningRoom">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = true %}
+    {% assign isScrollAnimationRequire = false %}
+    {% assign hasBannerAccoridon = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_decor-bedroom_tb_d.jpg?v=1581117420', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_decor-bedroom_tb_m.jpg?v=1581116932', 'heading':'Bedroom Accessories','description':'Creative solutions for every corner.','linkText':'','url':'javascript:void(0)', dataSource: 'default'}]}"%}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-accoridon="{{hasBannerAccoridon}}"
+
+      >
+    </category-banner>
+    
+
+    {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/HD100B/HD100B-0_small.jpg', 'title': 'Pax Wood Towel Bar in Espresso', 'linkText': 'Customize starting at $49', hyperLink: 'https://insideweather.com/products/hd100b-pax-wood-towel-bar-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD100A/HD100A-0_small.jpg', 'title': 'Pax Wood Towel Bar in Latte', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd100a-pax-wood-towel-bar-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD101A1/HD101A1-0_small.jpg', 'title': 'Creative Wall Hook Rack in Latte, 3 Hook', 'linkText': 'Customize starting at $44', hyperLink: 'https://insideweather.com/products/hd101a1-creative-wall-hook-rack-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD101B1/HD101B1-0_small.jpg', 'title': 'Creative Wall Hook Rack in Espresso, 3 Hook', 'linkText': 'Customize starting at $49', hyperLink: 'https://insideweather.com/products/hd101b1-creative-wall-hook-rack-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD101A2/HD101A2-0_small.jpg', 'title': 'Creative Wall Hook Rack in Latte, 5 Hook', 'linkText': 'Customize starting at $59', hyperLink: 'https://insideweather.com/products/hd101a2-creative-wall-hook-rack-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD101B2/HD101B2-0_small.jpg', 'title': 'Creative Wall Hook Rack in Espresso, 5 Hook', 'linkText': 'Customize starting at $69', hyperLink: 'https://insideweather.com/products/hd101b2-creative-wall-hook-rack-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD104A/HD104A-0_small.jpg', 'title': 'Mila Multifunctional Wall Rack in Latte', 'linkText': 'Customize starting at $49', hyperLink: 'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD104B/HD104B-0_small.jpg', 'title': 'Mila Multifunctional Wall Rack in Espresso', 'linkText': 'Customize starting at $59', hyperLink: 'https://insideweather.com/products/hd104b-mila-multifunctional-wall-rack-in-espresso'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD105/HD105-0_small.jpg', 'title': 'Mod Brass S Hook', 'linkText': 'Customize starting at $5', hyperLink: 'https://insideweather.com/products/hd105-mod-brass-s-hook'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD107A/HD107A-0_small.jpg', 'title': 'Kito Wall Hook in Latte', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd107a-kito-wall-hook-in-latte'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD107B/HD107B-0_small.jpg', 'title': 'Kito Wall Hook in Espresso', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd107b-kito-wall-hook-in-espresso'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD108A/HD108A-0_small.jpg', 'title': 'Ina Display Coat Rack Set in Latte', 'linkText': 'Customize starting at $69', hyperLink: 'https://insideweather.com/products/hd108a-ina-display-coat-rack-set-in-latte'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD108B/HD108B-0_small.jpg', 'title': 'Ina Display Coat Rack Set in Espresso', 'linkText': 'Customize starting at $79', hyperLink: 'https://insideweather.com/products/hd108b-ina-display-coat-rack-set-in-espresso'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD111A/HD111A-0_small.jpg', 'title': 'Moda Table Mirror in Carbon', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd111a-moda-table-mirror-in-carbon'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD111B/HD111B-0_small.jpg', 'title': 'Moda Table Mirror in White', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd111b-moda-table-mirror-in-white'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD112/HD112-0_small.jpg', 'title': 'Lido Table Mirror', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd112-lido-table-mirror'}, 
+
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD114A/HD114A-0_small.jpg', 'title': 'Digital Marble Alarm Clock in White', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd114a-digital-marble-alarm-clock-in-white'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg', 'title': 'Digital Marble Alarm Clock in Black', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD115/HD115-0_small.jpg', 'title': 'Marbleized Wall Hook Set', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd115-marbleized-wall-hook-set'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD116/HD116-0_small.jpg', 'title': 'Terrazzo Wall Hook Set', 'linkText': 'Customize starting at $39', hyperLink: 'https://insideweather.com/products/hd116-terrazzo-wall-hook-set'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD121A/HD121A-0_small.jpg', 'title': 'Mika Over the Door Coat Rack in Gray', 'linkText': 'Customize starting at $44', hyperLink: 'https://insideweather.com/products/hd121a-mika-over-the-door-coat-rack-in-gray'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD121B/HD121B-0_small.jpg', 'title': 'Mika Over the Door Coat Rack in Green', 'linkText': 'Customize starting at $44', hyperLink: 'https://insideweather.com/products/hd121b-mika-over-the-door-coat-rack-in-green'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD121B/HD121B-0_small.jpg', 'title': 'Mika Over the Door Coat Rack in Green', 'linkText': 'Customize starting at $44', hyperLink: 'https://insideweather.com/products/hd121b-mika-over-the-door-coat-rack-in-green'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD122A/HD122A-0_small.jpg', 'title': 'Oslo Over the Door Coat Rack in Gray', 'linkText': 'Customize starting at $44', hyperLink: 'https://insideweather.com/products/hd122a-oslo-over-the-door-coat-rack-in-gray'}, 
+
+
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD122B/HD122B-0_small.jpg', 'title': 'Oslo Over the Door Coat Rack in Green', 'linkText': 'Customize starting at $44', hyperLink: 'https://insideweather.com/products/hd122b-oslo-over-the-door-coat-rack-in-green'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD123A/HD123A-0_small.jpg', 'title': 'Pyramid Candle in Gray', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd123a-pyramid-candle-in-gray'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD123B/HD123B-0_small.jpg', 'title': 'Pyramid Candle in Charcoal', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd123b-pyramid-candle-in-charcoal'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD123C/HD123C-0_small.jpg', 'title': 'Pyramid Candle in White', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd123c-pyramid-candle-in-white'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD125/HD125-0_small.jpg', 'title': 'Nordic Coat Rack', 'linkText': 'Customize starting at $149', hyperLink: 'https://insideweather.com/products/hd125-nordic-coat-rack'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106A1/HD106A1-0_small.jpg', 'title': 'Chet Wall Hook Set in Latte, Sml', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106a1-chet-wall-hook-set-in-latte'},
+
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106A2/HD106A2-0_small.jpg', 'title': 'Chet Wall Hook Set in Latte, Med', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106a2-chet-wall-hook-set-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106A3/HD106A3-0_small.jpg', 'title': 'Chet Wall Hook Set in Latte, Lrg', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106a3-chet-wall-hook-set-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106A4/HD106A4-0_small.jpg', 'title': 'Chet Wall Hook Set in Latte, Mixed', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106a4-chet-wall-hook-set-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B1/HD106B1-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Sml', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106b1-chet-wall-hook-set-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B2/HD106B2-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Med', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106b2-chet-wall-hook-set-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B3/HD106B3-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Lrg', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106b3-chet-wall-hook-set-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B4/HD106B4-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Mixed', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106b4-chet-wall-hook-set-in-espresso'},    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B3/HD106B3-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Lrg', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106b3-chet-wall-hook-set-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B4/HD106B4-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Mixed', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/products/hd106b4-chet-wall-hook-set-in-espresso'},
+
+    ]" %}
+    {% assign collectionCustomImageStyle = true %}
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          :collection-custom-image-style="{{collectionCustomImageStyle}}"
+          section-description="While furniture is our bread & butter, we all know that the right decor is the frosting on every room. In an effort to deliver you a complete custom home (w/sprinkles on top), we’ve partnered with various makers to present our first line of accessories! This curated selection brings modern design elements to a space in the home that demands thoughtful organization solutions in colors & finishes that bring you joy. Bon Appétit!"
+        >
+        </category-collections>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+});
+
+</script>
