@@ -80,7 +80,7 @@
     </slider>
     <div 
       class="CategoryBanner--clasification"
-      v-if="hasBannerContent"
+      v-if="hasBannerContent || hasBannerAccoridon"
     >
       <accordion
         v-for="accItem in categoryBannerAccordion"
@@ -109,7 +109,8 @@ export default {
     hideMobileSlider:{type: Boolean, default: false},
     categoryBannerAccordion: Array,
     isScrollAnimationRequire: {type: Boolean, default: true},
-    hasBannerContent: {type: Boolean, default: true}
+    hasBannerContent: {type: Boolean, default: true},
+    hasBannerAccoridon: {type: Boolean, default: true}
   },
   data() {
     return {
