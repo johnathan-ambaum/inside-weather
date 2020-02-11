@@ -23,6 +23,11 @@
           class="CarouselBanner__image"
           :style="[(hasBannerImage && (item.image !== ' ' && item.image !== '')) ? {'background': 'transparent'} : {'background': '#E5C78A'}]"
         >
+          <a 
+            :href="item.url"
+            class="common-link"
+            v-if="disableSlideContent && item.url.length > 0"></a>
+
           <!-- Dekstop Banner -->
           <figure 
             v-if="(hasBannerImage && (item.image !== ' ' && item.image !== '') && isBigScreen)"
@@ -37,7 +42,10 @@
           >
           </figure>
         </div>
-        <div class="CarouselBanner__content">
+        <div 
+          class="CarouselBanner__content"
+          v-if="!disableSlideContent"
+        >
           <h2 class="--caps">
             {{item.heading}}
           </h2>
@@ -72,16 +80,18 @@ export default {
     bannerImage: String,
     hasImage: {type: Boolean, default: false},
     bannerContent: Object,
+    disableSlideContent: {type: Boolean, default: false},
   },
   data() {
     return {
       hasBannerImage: this.hasImage,
       bannerContentItems: this.bannerContent.items,
       isBigScreen: true,
+      checkLoop: true,
       sliderProps: {
         items: 1,
         margin: 0,
-        loop: true,
+        loop: this.checkLoop,
         nav: true,
         autoplay: true,
         dots: true,
@@ -91,6 +101,12 @@ export default {
     }
   },
   created: function () {
+    if(this.bannerContentItems.lenght > 1) {
+      this.checkLoop = true
+    } else {
+      this.checkLoop = false
+    }
+
     if(window.innerWidth > 991) {
       this.isBigScreen = true
     }else {
@@ -120,7 +136,20 @@ export default {
     position: relative;
     @include block();
     .CarouselBanner__image {
+      position: relative;
       @include block(580px);
+
+      .common-link {
+        height: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+        width: 100%;
+      }
+
       figure {
         background-size: cover;
         background-position: center center;
