@@ -30,8 +30,10 @@
     font-size: 14px;
     letter-spacing: 0.04em;
     line-height: 1.2;
+    max-width: 765px;
     text-align: center;
-    margin: 0;
+    margin: 0 auto;
+    width: 100%;
   }
   @media only screen and (max-width: 767px) {
     h2 {
