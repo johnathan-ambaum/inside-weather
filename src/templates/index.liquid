@@ -155,23 +155,6 @@
       reverse: false
     }).setTween(bannerCarouselTimeline).addTo(controller);
 
-    const catTimeline = new TimelineLite()
-    catTimeline.fromTo($('._category-lists'), 0.9, {opacity:0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
-    const catTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner',
-      reverse: false,
-      triggerHook: 'onEnter',
-      offset: 25,
-    }).setTween(catTimeline).addTo(controller);
-
-    const valuePropsTimeline = new TimelineLite()
-    valuePropsTimeline.fromTo($('.ValueProps .image_wrapper'), 0.9, {opacity: 0, y: 20, ease: Circ.easeOut}, {opacity: 1, y: 0})
-      .fromTo($('.ValueProps .descriptions h2'), 0.9, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-    const valuePropsTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.CategoryList ._button-wrapper',
-      reverse: false
-    }).setTween(valuePropsTimeline).addTo(controller);
-
     $(window).on('load', function () {
       if($(window).width() < 768) {
         ValuePropsMobAnim();
