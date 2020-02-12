@@ -10,7 +10,7 @@
           v-if="isMobile"
           :value="group.id"
           class="FilterPanel__GroupSelect"
-          @input="setGroup"
+          @change="e => setGroup(e.target.value)"
         >
           <option
             v-for="option in groupOptions"
@@ -49,6 +49,10 @@ export default {
     SwatchPanel,
   },
 
+  mixins: [
+    screenMonitor,
+  ],
+
   props: {
     parameter: { type: String, required: true },
     index: { type: Number, required: true },
@@ -58,10 +62,6 @@ export default {
     values: { type: Array, required: true },
     load: { type: Boolean, default: false },
   },
-
-  mixins: [
-    screenMonitor,
-  ],
 
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
 
   methods: {
     setGroup(selectedId) {
-      const selected = this.groups.find(group => group.id === selectedId);
+      const selected = this.groups.find(group => group.id == selectedId);
       if (selected) {
         this.group = selected;
       }
@@ -130,6 +130,10 @@ export default {
   position: absolute;
   width: 100%;
   z-index: 200;
+
+  @include at-iphone {
+    bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+  }
 
   @include at-query($breakpoint-large) {
     bottom: 0;
