@@ -34,6 +34,7 @@
           </h3>
           <span
             :class="animationElementClass"
+            :data-type="[item.linkText.length > 10 ? animationElementClass : 'limittedText']"
           >
             {{item.linkText}}
           </span>
@@ -212,6 +213,10 @@ export default {
       }
       span {
         font-size: 9px;
+        
+        &[data-type="limittedText"] {
+          font-size: 10px;
+        }
       }
     }
   }
