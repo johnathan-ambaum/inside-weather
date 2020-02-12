@@ -421,7 +421,10 @@ export default {
   }
   @include at-query('max-width: 480px') {
     .CategoryBanner--items .CategoryBanner--content {
-      max-width: calc(100% - 100px);
+      max-width: calc(100% - 30px);
+      h2 {
+        font-size: 22px;
+      }
     }
   }
 }
