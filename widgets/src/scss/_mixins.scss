@@ -135,3 +135,15 @@
     background: $bgColor;
   }
 }
+
+@mixin at-iphone() {
+  // iphone x
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) {
+    @content;
+  }
+
+  // iphone 11
+  @media only screen and (min-device-width: 414px) and (max-device-width: 896px) {
+    @content;
+  }
+}

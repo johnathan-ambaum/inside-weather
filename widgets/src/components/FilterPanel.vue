@@ -131,6 +131,10 @@ export default {
   width: 100%;
   z-index: 200;
 
+  @include at-iphone {
+    bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+  }
+
   @include at-query($breakpoint-large) {
     bottom: 0;
     box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
