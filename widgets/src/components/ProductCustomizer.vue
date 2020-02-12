@@ -57,6 +57,7 @@
       >Customize</button>
       <add-to-cart
         :processing="addToCartProcessing"
+        :out-of-stock="!inStock"
         @addToCart="addToCart"
       />
       <p
@@ -224,6 +225,7 @@ export default {
     initialVariant: { type: Number, required: true },
     initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
+    initialQuantity: { type: Number, default: 1 },
   },
 
   data() {
@@ -245,6 +247,13 @@ export default {
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
     }),
+
+    inStock() {
+      if (!this.filters.track_inventory) {
+        return true;
+      }
+      return this.activeProduct.inventory && this.activeProduct.inventory.available > 0;
+    },
 
     isDecor() {
       return this.filters.configurator_type === 'small';
@@ -335,6 +344,9 @@ export default {
       this.setActiveProduct({
         id: this.initialVariant,
         handle: this.initialHandle,
+        inventory: {
+          available: this.initialQuantity,
+        },
       });
       this.populateSelected({
         selectedOptions: this.initialAttributes,
@@ -346,7 +358,10 @@ export default {
 
     this.$bus.$on('filter:toggle', (payload) => {
       this.optionsChanged = true;
-      this.setOption(payload);
+      this.setOption(payload)
+      if (this.filters.track_inventory) {
+        this.createProduct();
+      }
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
@@ -516,6 +531,11 @@ export default {
       if (theme.settings.mulberry.active && ! warrantySelected) {
         await this.initializeMulberry(quantity);
         mulberry.modal.open();
+        return;
+      }
+
+      if (!this.inStock) {
+        this.addToCartProcessing = false;
         return;
       }
 
