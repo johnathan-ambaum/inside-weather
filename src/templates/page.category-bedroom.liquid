@@ -105,11 +105,11 @@ jQuery(function ($) {
     $('.CtegoryCollections--itemWrapper li').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
-        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+        TweenMax.staggerFromTo(row, 0.6, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if(parseInt(($('.CtegoryCollections--itemWrapper li').length / 2)) === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
-      }, 200 * i);
+      }, 100 * i);
     });
   });
 
