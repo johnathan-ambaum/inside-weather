@@ -82,7 +82,6 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .CtegoryCollections--itemWrapper {
   align-content: center;
   display: flex;
@@ -281,6 +280,16 @@ export default {
       span {
         font-size: 8px;
       }
+    }
+  }
+}
+
+.productCollection {
+  &:not([class^="--pd-t-"]) {
+    padding-top: 75px;
+    
+    @include at-query('max-width: 767px') {  
+      padding-top: 35px;
     }
   }
 }
