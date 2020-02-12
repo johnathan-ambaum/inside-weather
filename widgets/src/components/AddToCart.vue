@@ -110,7 +110,9 @@ export default {
     }
 
     &[disabled] {
-      background: #959595;
+      &, &:hover {
+        background: #959595;
+      }
     }
   }
 
