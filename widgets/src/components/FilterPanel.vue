@@ -10,7 +10,7 @@
           v-if="isMobile"
           :value="group.id"
           class="FilterPanel__GroupSelect"
-          @input="setGroup"
+          @change="e => setGroup(e.target.value)"
         >
           <option
             v-for="option in groupOptions"
@@ -103,7 +103,7 @@ export default {
 
   methods: {
     setGroup(selectedId) {
-      const selected = this.groups.find(group => group.id === selectedId);
+      const selected = this.groups.find(group => group.id == selectedId);
       if (selected) {
         this.group = selected;
       }
