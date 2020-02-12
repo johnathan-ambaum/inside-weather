@@ -87,11 +87,11 @@ export default {
       hasBannerImage: this.hasImage,
       bannerContentItems: this.bannerContent.items,
       isBigScreen: true,
-      checkLoop: true,
+      itemLength : this.bannerContent.items.length,
       sliderProps: {
         items: 1,
         margin: 0,
-        loop: this.checkLoop,
+        loop: true,
         nav: true,
         autoplay: true,
         dots: true,
@@ -101,10 +101,10 @@ export default {
     }
   },
   created: function () {
-    if(this.bannerContentItems.lenght > 1) {
-      this.checkLoop = true
+    if(this.itemLength > 1) {
+      this.sliderProps.loop = true
     } else {
-      this.checkLoop = false
+      this.sliderProps.loop = false
     }
 
     if(window.innerWidth > 991) {
