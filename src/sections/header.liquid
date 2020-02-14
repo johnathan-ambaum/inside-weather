@@ -93,7 +93,7 @@
                 return;
             }
             var currentScroll = window.pageYOffset;
-            if (currentScroll == 0) {
+            if (currentScroll <= 0) {
                 document.body.classList.remove(scrollUp);
                 return;
             }

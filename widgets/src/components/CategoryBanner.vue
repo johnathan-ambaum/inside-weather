@@ -19,7 +19,10 @@
         class="CategoryBanner--items"
         :class="bannerClass"
       >
-        <div class="CategoryBanner--imageWrapper">
+        <div 
+          class="CategoryBanner--imageWrapper"
+          :class="bannerHeight"
+          >
           <figure 
             v-if="isBigScreen"
             v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
@@ -71,6 +74,7 @@
             <a 
               :href="item.url" 
               class="--caps"
+              v-if="item.linkText.length > 0"
             >
               {{item.linkText}}
             </a>
@@ -80,7 +84,7 @@
     </slider>
     <div 
       class="CategoryBanner--clasification"
-      v-if="hasBannerContent"
+      v-if="hasBannerContent || hasBannerAccoridon"
     >
       <accordion
         v-for="accItem in categoryBannerAccordion"
@@ -109,7 +113,9 @@ export default {
     hideMobileSlider:{type: Boolean, default: false},
     categoryBannerAccordion: Array,
     isScrollAnimationRequire: {type: Boolean, default: true},
-    hasBannerContent: {type: Boolean, default: true}
+    hasBannerContent: {type: Boolean, default: true},
+    hasBannerAccoridon: {type: Boolean, default: true},
+    enableMediumHeight: {type: Boolean, default: false}
   },
   data() {
     return {
@@ -147,6 +153,11 @@ export default {
       return {
         '--simpleBanner': !this.hasBannerContent
       }
+    },
+    bannerHeight() {
+      return {
+        '--mediumHeight': this.enableMediumHeight
+      }
     }
   },
   mounted() {
@@ -183,6 +194,10 @@ export default {
     @include block();
     .CategoryBanner--imageWrapper {
       @include block(651px);
+      &.--mediumHeight {
+        height: 500px;
+      }
+
       figure {
         background-position: center;
         background-repeat: no-repeat;
@@ -362,6 +377,24 @@ export default {
             span {
               background: #ffffff;
             }
+          }
+        }
+      }
+    }
+    .CategoryBanner--items {
+      .CategoryBanner--imageWrapper {
+        &.--mediumHeight {
+          height: 0;
+          overflow: hidden;
+          padding-bottom: 100%;
+
+          figure {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
           }
         }
       }

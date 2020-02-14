@@ -752,7 +752,7 @@
         "type": "newsletter-popup",
         "settings": {
           "mode": "enabled",
-          "popup_seconds": 30,
+          "popup_seconds": 5,
           "popup_days": 2,
           "popup_title": "Sit with us!",
           "popup_image": "shopify:\/\/shop_images\/3.0_signup_d_v1_image_caea6d77-1d07-4ee7-93cc-7b3b7546b5ea.png",
@@ -788,9 +788,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#b4c3c2",
+          "background_color": "#437683",
           "font_color": "#ffffff",
-          "text": "<p>Treat yo&rsquo; self with 15% OFF. Use code HOLIDAY<\/p>"
+          "text": "<p>Brighten up Winter | Save up to <strong>15% OFF<\/strong> EVERYTHING!&nbsp; <strong><a href=\"\/pages\/feb-2020-sale\" title=\"February 2020 Sale\">SHOP NOW<\/a><\/strong><\/p>",
+          "mobile_text": "<p>Brighten up Winter | Save up to&nbsp;<strong>15% OFF!<\/strong>&nbsp;&nbsp;<strong><a href=\"\/pages\/feb-2020-sale\" title=\"February 2020 Sale\">SHOP NOW<\/a><\/strong><\/p>"
         }
       }
     },

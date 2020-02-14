@@ -5,7 +5,7 @@
     {% assign isScrollAnimationRequire = false %}
     {% assign hasBannerContent = false %}
     {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_tb-min.jpg?1660796', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_tb_m.jpg?1661298'}]}"%}
-    <category-banner 
+    <category-banner
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
       :hide-mobile-slider="{{hideMobileSlider}}"
@@ -21,7 +21,6 @@
       <div class="category-collection-main-wrapper">
         <category-collections
           :product-collections="{{productCollections}}"
-          :collection-custom-image-style="{{collectionCustomImageStyle}}"
           section-heading="Living Room"
         >
         </category-collections>
@@ -48,7 +47,7 @@
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_lg_09-min.jpg?1660818',
     'popUpList': [{'productImage': 'https://banksy-images.s3.amazonaws.com/items/150S2F6F59FB/150S2F6F59FB-0_small.jpg','title':'Linen Weave Levi Sofa in Fog','price':'$1,398','productUrl':'https://insideweather.com/products/sf15bg1012111013-linen-weave-levi-sofa-in-fog',},{
     'productImage': 'https://banksy-images.s3.amazonaws.com/items/47S563BAC97/47S563BAC97-0_small.jpg','title':'Latte Oval Coffee Table in White','price':'$178','productUrl': 'https://insideweather.com/products/ct16ad12-latte-oval-coffee-table-in-white'}]}]"%}
-    
+
 
     <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
       <life-style-photos
@@ -93,7 +92,7 @@ function fadeIn(a, t) {
   ).setTween(setFade).addTo(controller);
 }
 
-jQuery(function ($) { 
+jQuery(function ($) {
 
   fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
 
@@ -114,7 +113,7 @@ jQuery(function ($) {
   new ScrollMagic.Scene({
     triggerElement: '.CtegoryCollections--itemWrapper',
     reverse: false,
-    triggerHook: "onEnter", 
+    triggerHook: "onEnter",
     offset: 250
   }).setTween(collectionTween).addTo(controller);
 
