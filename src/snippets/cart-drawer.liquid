@@ -2,7 +2,22 @@
   <div id="CartDrawer" class="drawer drawer--right drawer--has-fixed-footer">
     <div class="drawer__fixed-header">
       <div class="drawer__header appear-animation appear-delay-1">
-        <div class="drawer__title">{{ 'cart.general.title' | t }}</div>
+        <div class="drawer__title">
+          {{ 'cart.general.title' | t }}
+            <div class="drawer-clock__container" style="display:none;">
+              <span id="drawer__countdown-timer"></span> 
+              <span class="drawer-clock__header">
+                <script>
+                  document.write(theme.settings.vwo.initialTextHeader);
+                </script>
+              </span>
+              <p class="drawer-clock__text">
+                <script>
+                  document.write(theme.settings.vwo.initialTextContent);
+                </script>
+              </p>
+            </div>
+        </div>
         <div class="drawer__close">
           <button type="button" class="drawer__close-button js-drawer-close">
             {% include 'icon-close' %}
@@ -16,3 +31,64 @@
     </div>
   </div>
 {% endif %}
+  <script>
+  function cartDrawerClockHandler(){
+    if(theme.settings.vwo.countdownActive){
+      $('.drawer__close').css('vertical-align', 'top' );
+      $('.drawer__close-button').css('height', 'auto');
+      run_clock('drawer__countdown-timer', theme.settings.vwo.timerDurationInMinutes);
+      $(".drawer-clock__container").show();
+    }
+  }
+  function coundownComplete(id){
+    localStorage.setItem('pdp-countdown-timer',JSON.stringify('DONE'));
+    $('#'+ id).text('0:00');
+    $(".drawer-clock__header").text(theme.settings.vwo.expirationTextHeader);
+    $(".drawer-clock__text").text(theme.settings.vwo.expirationTextContent);
+
+  }
+
+
+  function time_remaining(endtime){
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor( (t/1000) % 60 );
+    var minutes = Math.floor( (t/1000/60) % 60 );
+    return {'total':t, 'minutes':minutes, 'seconds':seconds};
+  }
+  
+  function run_clock(id, time_in_minutes){
+    var clock = document.getElementById(id);
+    var current_time = Date.parse(new Date());
+    var endtime;
+    var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
+
+    if(is_done){
+      coundownComplete(id);
+    }else if(localStorage.getItem('pdp-countdown-timer')){
+      endtime = JSON.parse(localStorage.getItem('pdp-countdown-timer'));
+    }else{
+      endtime = new Date(current_time + time_in_minutes*60*1000);
+      localStorage.setItem('pdp-countdown-timer', JSON.stringify(endtime));
+    }
+    function update_clock(){
+      var t = time_remaining(endtime);
+      if(!is_done){
+        if(t.minutes < 10 && t.seconds < 10){
+          clock.innerHTML = t.minutes +':0'+t.seconds;
+        }else if(t.minutes < 10 && !t.seconds < 10){
+          clock.innerHTML = t.minutes +':'+t.seconds;
+        }else if(!t.minutes < 10 && t.seconds < 10){
+          clock.innerHTML = t.minutes +':0'+t.seconds;
+        }else if(!t.minutes < 10 && !t.seconds < 10){
+          clock.innerHTML = t.minutes+':'+t.seconds;
+        }
+      }
+      if(t.total<=0){ 
+        clearInterval(timeinterval);
+        coundownComplete(id);
+      }
+    }
+    update_clock();
+    var timeinterval = setInterval(update_clock,1000);
+  }
+  </script>

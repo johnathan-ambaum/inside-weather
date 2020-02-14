@@ -2706,21 +2706,44 @@ symbol {
     // }
   }
 }
+.drawer-clock__container{
+  margin-top:0.5rem;
+}
+.drawer-clock__header{
+  font-size:15pt;
+  line-height: 20pt;
+  letter-spacing:calc(35/1000 * 15pt);
+}
+.drawer-clock__text{
+  margin-top:0.5rem;
+  font-size:12pt;
+  font-weight: normal;
+  line-height: 19pt;
+  letter-spacing:calc(35/1000 * 12pt);    
+}
+#drawer__countdown-timer{
+  color:red;
+  font-size:15pt;
+  line-height: 20pt;
+  letter-spacing:calc(35/1000 * 15pt);
+}
+
 
 // Drawer content with fixed footer
 
 .drawer__inner--has-fixed-footer {
+  margin-top: 9rem;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  margin: 0;
   padding: ($gutter / 2) ($gutter / 2) 0;
   bottom: $drawerCartFooterHeight; // overwritten with JS
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 
   @include media-query($medium-up) {
+    margin-top: 3rem;
     padding: ($gutter / 1.35) $gutter 0;
   }
 
