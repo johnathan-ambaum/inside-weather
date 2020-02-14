@@ -22,25 +22,36 @@
         <div 
           class="CarouselBanner__image"
           :style="[(hasBannerImage && (item.image !== ' ' && item.image !== '')) ? {'background': 'transparent'} : {'background': '#E5C78A'}]"
+          v-if="!disableSlideContent"
         >
-          <a 
-            :href="item.url"
-            class="common-link"
-            v-if="disableSlideContent && item.url.length > 0"></a>
-
           <!-- Dekstop Banner -->
           <figure 
-            v-if="(hasBannerImage && (item.image !== ' ' && item.image !== '') && isBigScreen)"
+            v-if="(hasBannerImage && (item.image !== ' ' && item.image !== '') && isBigScreen && !disableSlideContent)"
             v-bind:style="{ backgroundImage: 'url('+ item.image +')' }"
           >
           </figure>
 
           <!-- mobile Banner -->
           <figure 
-            v-if="(hasBannerImage && (item.imageSm !== ' ' && item.imageSm !== '') && !isBigScreen)"
+            v-if="(hasBannerImage && (item.imageSm !== ' ' && item.imageSm !== '') && !isBigScreen && !disableSlideContent)"
             v-bind:style="{ backgroundImage: 'url('+ item.imageSm +')' }"
           >
           </figure>
+        </div>
+        <div 
+          class="static_image_wrapper"
+          v-if="disableSlideContent"
+        >
+          <a 
+          :href="item.url"
+          class="common-link"
+          v-if="disableSlideContent && item.url.length > 0"></a>
+          <static-banner
+            :desktop-banner="item.image"
+            :mobile-banner="item.imageSm"
+            :responsive-point="991 + 'px'"
+          >
+          </static-banner>
         </div>
         <div 
           class="CarouselBanner__content"
@@ -71,10 +82,12 @@
 
 <script>
 import slider from './Slider.vue'
+import StaticBanner from './StaticBanner.vue'
 
 export default {
   components: {
-    slider
+    slider,
+    StaticBanner
   },
   props: {
     bannerImage: String,
@@ -123,6 +136,16 @@ export default {
     };
     
     window.addEventListener('resize', changeTheBanner);
+
+    // if(this.sliderProps.autoplay) {
+    //   $('.CarouselBanner .owl-carousel').on('translated.owl.carousel', () => {
+    //     $('.CarouselBanner .owl-carousel').trigger('stop.owl.autoplay')
+    //     console.log($('.CarouselBanner .owl-carousel'))
+    //     // setTimeout(() => {
+    //     //   $('.CarouselBanner .owl-carousel').trigger('play.owl.autoplay')
+    //     // }, 500);
+    //   });
+    // }
   }
 }
 </script>
@@ -138,17 +161,6 @@ export default {
     .CarouselBanner__image {
       position: relative;
       @include block(580px);
-
-      .common-link {
-        height: 100%;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 2;
-        width: 100%;
-      }
 
       figure {
         background-size: cover;
@@ -205,6 +217,20 @@ export default {
           bottom: 3px;
         }
       }
+    }
+    .static_image_wrapper {
+      position: relative;
+    }
+
+    .common-link {
+      height: 100%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
     }
   }
   .owl-theme {
