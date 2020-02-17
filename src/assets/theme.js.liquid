@@ -1380,7 +1380,7 @@ lazySizesConfig.expFactor = 4;
         var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
       
         if(is_done){
-          this.countdownComplete(id);
+          CartDrawer.prototype.countdownComplete(id);
         }else if(localStorage.getItem('pdp-countdown-timer')){
           endtime = JSON.parse(localStorage.getItem('pdp-countdown-timer'));
         }else{
@@ -1402,7 +1402,7 @@ lazySizesConfig.expFactor = 4;
           }
           if(t.total<=0){ 
             clearInterval(PDPCountdownTimeInterval);
-            this.coundownComplete(id);
+            CartDrawer.prototype.countdownComplete(id);
           }
         }
         update_clock();
