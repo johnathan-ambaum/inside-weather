@@ -1162,8 +1162,11 @@ lazySizesConfig.expFactor = 4;
         $(".add-to-cart").on("click", function(){
           localStorage.removeItem('pdp-countdown-timer');
           clearInterval(PDPCountdownTimeInterval);
-          $(CartDrawer.prototype.cartDrawerClockHandler).one();
+          if(theme.settings.vwo.countdown.countdownActive){
+            CartDrawer.prototype.cartDrawerClockHandler();
+          }  
         });
+
 
         $(window).on('resize' + config.namespace, $.debounce(150, this.sizeFooter.bind(this)));
 
