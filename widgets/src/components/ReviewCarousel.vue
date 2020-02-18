@@ -1,5 +1,8 @@
 <template>
-  <div class="ReviewCarousel">
+  <div
+    v-if="showReviews"
+    class="ReviewCarousel"
+  >
     <div class="ReviewCarousel__Title">Reviews</div>
 
     <!-- Review Write section -->
@@ -277,6 +280,7 @@ export default {
     ...mapState({
       reviews: state => state.productReviews,
       totalReviews: state => state.totalReviews,
+      showReviews: state => state.filters && state.filters.configurator_type && state.filters.configurator_type !== 'small',
     }),
 
     styleSliderButton() {

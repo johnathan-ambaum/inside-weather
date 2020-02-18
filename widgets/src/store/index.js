@@ -11,6 +11,7 @@ export default new Vuex.Store({
     activeProduct: {
       id: null,
       handle: '',
+      inventory: {},
     },
     productCreationInProgress: false,
     category: '',

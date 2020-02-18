@@ -29,12 +29,17 @@
           v-if="msrp"
           class="ProductCustomizer__Savings"
         >YOU SAVE ${{ savings }}</span>
-        <info-popup text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
+        <info-popup
+          v-if="!isDecor"
+          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$."
+        >
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
       </div>
       <div class="ProductCustomizer__ShippingDays">
-        FREE Shipping | Custom made in
+        FREE Shipping |
+        <template v-if="isDecor">Ships in</template>
+        <template v-else>Custom made in</template>
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
@@ -44,12 +49,15 @@
         </info-popup>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
+      <simple-customizer v-if="isDecor" />
       <button
+        v-else
         class="ProductCustomizer__Trigger"
         @click.prevent="showCustomizer"
       >Customize</button>
       <add-to-cart
         :processing="addToCartProcessing"
+        :out-of-stock="!inStock"
         @addToCart="addToCart"
       />
       <p
@@ -60,8 +68,9 @@
     </div>
     <hr>
     <inspiration-options :products="filters.featured_products || []" />
-    <swatch-browser />
+    <swatch-browser v-if="!isDecor" />
     <div
+      v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active }"
       class="ProductCustomizer"
     >
@@ -182,6 +191,7 @@ import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
 import CloseButton from './CloseButton.vue';
 import InfoPopup from './InfoPopup.vue';
+import SimpleCustomizer from './SimpleCustomizer.vue';
 import InspirationOptions from './InspirationOptions.vue';
 import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
@@ -199,6 +209,7 @@ export default {
     AddToCart,
     CloseButton,
     InfoPopup,
+    SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
   },
@@ -214,17 +225,20 @@ export default {
     initialVariant: { type: Number, required: true },
     initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
+    initialQuantity: { type: Number, default: 1 },
   },
 
   data() {
     return {
       active: false,
+      optionsChanged: false,
       addToCartProcessing: false,
     };
   },
 
   computed: {
     ...mapState({
+      filters: state => state.filters,
       attributes: state => state.filters.attributes || [],
       openPanel: state => state.openPanel,
       productImages: state => state.productImages,
@@ -233,6 +247,17 @@ export default {
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
     }),
+
+    inStock() {
+      if (!this.filters.track_inventory) {
+        return true;
+      }
+      return this.activeProduct.inventory && this.activeProduct.inventory.available > 0;
+    },
+
+    isDecor() {
+      return this.filters.configurator_type === 'small';
+    },
 
     isOpen() {
       return panel => this.openPanel === panel;
@@ -319,6 +344,9 @@ export default {
       this.setActiveProduct({
         id: this.initialVariant,
         handle: this.initialHandle,
+        inventory: {
+          available: this.initialQuantity,
+        },
       });
       this.populateSelected({
         selectedOptions: this.initialAttributes,
@@ -329,7 +357,11 @@ export default {
     }
 
     this.$bus.$on('filter:toggle', (payload) => {
-      this.setOption(payload);
+      this.optionsChanged = true;
+      this.setOption(payload)
+      if (this.filters.track_inventory) {
+        this.createProduct();
+      }
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
@@ -415,6 +447,7 @@ export default {
         image: this.productImages[0].full,
       }).then(() => {
         this.trackViewProduct();
+        this.optionsChanged = false;
       });
     },
 
@@ -487,7 +520,7 @@ export default {
         return;
       }
 
-      if (!this.activeProduct.id) {
+      if (this.optionsChanged || !this.activeProduct.id) {
         this.createProduct();
         setTimeout(() => {
           this.addToCart(quantity);
@@ -498,6 +531,11 @@ export default {
       if (theme.settings.mulberry.active && ! warrantySelected) {
         await this.initializeMulberry(quantity);
         mulberry.modal.open();
+        return;
+      }
+
+      if (!this.inStock) {
+        this.addToCartProcessing = false;
         return;
       }
 
@@ -843,6 +881,10 @@ html.ProductCustomizer--Open {
     width: 100%;
     z-index: 100;
 
+    @include at-iphone {
+      bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+    }
+
     @include at-query($breakpoint-large) {
       bottom: 0;
       box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
@@ -936,9 +978,14 @@ html.ProductCustomizer--Open {
     display: flex;
     height: $sidebar-footer-height-mobile;
     left: 0;
+    overflow: hidden;
     position: absolute;
     width: 100%;
     z-index: 100;
+
+    @include at-iphone {
+      bottom: $iphone-action-bar-height;
+    }
 
     @include at-query($breakpoint-large) {
       height: $sidebar-footer-height;
