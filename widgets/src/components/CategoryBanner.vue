@@ -19,7 +19,10 @@
         class="CategoryBanner--items"
         :class="bannerClass"
       >
-        <div class="CategoryBanner--imageWrapper">
+        <div 
+          class="CategoryBanner--imageWrapper"
+          :class="bannerHeight"
+          >
           <figure 
             v-if="isBigScreen"
             v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
@@ -37,6 +40,7 @@
         <div 
           class="CategoryBanner--content"
           v-if="hasBannerContent"
+          :class="[hasBannerAccoridon ? '' : 'large-content-frame']"
         >
           <h2 
             class="--caps"
@@ -71,6 +75,7 @@
             <a 
               :href="item.url" 
               class="--caps"
+              v-if="item.linkText.length > 0"
             >
               {{item.linkText}}
             </a>
@@ -80,7 +85,7 @@
     </slider>
     <div 
       class="CategoryBanner--clasification"
-      v-if="hasBannerContent"
+      v-if="hasBannerContent || hasBannerAccoridon"
     >
       <accordion
         v-for="accItem in categoryBannerAccordion"
@@ -109,7 +114,9 @@ export default {
     hideMobileSlider:{type: Boolean, default: false},
     categoryBannerAccordion: Array,
     isScrollAnimationRequire: {type: Boolean, default: true},
-    hasBannerContent: {type: Boolean, default: true}
+    hasBannerContent: {type: Boolean, default: true},
+    hasBannerAccoridon: {type: Boolean, default: true},
+    enableMediumHeight: {type: Boolean, default: false}
   },
   data() {
     return {
@@ -147,6 +154,11 @@ export default {
       return {
         '--simpleBanner': !this.hasBannerContent
       }
+    },
+    bannerHeight() {
+      return {
+        '--mediumHeight': this.enableMediumHeight
+      }
     }
   },
   mounted() {
@@ -183,10 +195,15 @@ export default {
     @include block();
     .CategoryBanner--imageWrapper {
       @include block(651px);
+      &.--mediumHeight {
+        height: 500px;
+      }
+
       figure {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        margin: 0;
         @include block(100%);
       }
       @include at-query('min-width: 1601px'){
@@ -204,6 +221,11 @@ export default {
       top: 36px;
       margin: 0 auto;
       z-index: 8;
+
+      &.large-content-frame {
+        max-width: calc(100% - 30px);
+      }
+
       h2 {
         display: block;
         font-family: $font-stack-avalon;
@@ -365,6 +387,24 @@ export default {
         }
       }
     }
+    .CategoryBanner--items {
+      .CategoryBanner--imageWrapper {
+        &.--mediumHeight {
+          height: 0;
+          overflow: hidden;
+          padding-bottom: 100%;
+
+          figure {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+          }
+        }
+      }
+    }
   }
   @include at-query('max-width: 767px') {
     .CategoryBanner--items .CategoryBanner--content {
@@ -387,7 +427,10 @@ export default {
   }
   @include at-query('max-width: 480px') {
     .CategoryBanner--items .CategoryBanner--content {
-      max-width: calc(100% - 100px);
+      max-width: calc(100% - 30px);
+      h2 {
+        font-size: 22px;
+      }
     }
   }
 }

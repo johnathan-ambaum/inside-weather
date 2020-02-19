@@ -29,12 +29,17 @@
           v-if="msrp"
           class="ProductCustomizer__Savings"
         >YOU SAVE ${{ savings }}</span>
-        <info-popup text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
+        <info-popup
+          v-if="!isDecor"
+          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$."
+        >
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
       </div>
       <div class="ProductCustomizer__ShippingDays">
-        FREE Shipping | Custom made in
+        FREE Shipping |
+        <template v-if="isDecor">Ships in</template>
+        <template v-else>Custom made in</template>
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
@@ -44,12 +49,15 @@
         </info-popup>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
+      <simple-customizer v-if="isDecor" />
       <button
+        v-else
         class="ProductCustomizer__Trigger"
         @click.prevent="showCustomizer"
       >Customize</button>
       <add-to-cart
         :processing="addToCartProcessing"
+        :out-of-stock="!inStock"
         @addToCart="addToCart"
       />
       <p
@@ -60,8 +68,9 @@
     </div>
     <hr>
     <inspiration-options :products="filters.featured_products || []" />
-    <swatch-browser />
+    <swatch-browser v-if="!isDecor" />
     <div
+      v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active }"
       class="ProductCustomizer"
     >
@@ -82,66 +91,84 @@
         >Save Customization</button>
       </div>
       <div class="ProductCustomizer__Sidebar">
-        <div
-          :class="{ 'has-footer': isMobile || hasPrev }"
-          class="ProductCustomizer__SidebarBody"
-        >
-          <nav
-            v-show="!openPanel"
-            class="ProductCustomizer__Nav"
+        <div class="ProductCustomizer__SidebarBody">
+          <transition
+            enter-active-class="animated slideInRight"
+            leave-active-class="animated slideOutRight"
           >
-            <div class="ProductCustomizer__NavHeading">Customize</div>
-            <div class="ProductCustomizer__NavBody">
-              <div
-                v-for="(attribute, index) in attributes"
-                :key="attribute.parameter"
-                class="ProductCustomizer__NavItem"
-                @click="showPanel(attribute.parameter)"
-              >
-                <img
-                  v-if="attribute.cover_image_url"
-                  ref="coverImages"
-                  :src="attribute.cover_image_url"
-                  :alt="attribute.name"
+            <nav
+              v-show="active && !openPanel"
+              class="ProductCustomizer__Nav"
+            >
+              <div class="ProductCustomizer__NavHeading">Customize</div>
+              <div class="ProductCustomizer__NavBody">
+                <div
+                  v-for="(attribute, index) in attributes"
+                  :key="attribute.parameter"
+                  class="ProductCustomizer__NavItem"
+                  @click="showPanel(attribute.parameter)"
                 >
-                <span class="ProductCustomizer__NavItemTitle">{{ index + 1 }}. {{ attribute.name }}</span>
+                  <img
+                    v-if="attribute.cover_image_url"
+                    ref="coverImages"
+                    :src="attribute.cover_image_url"
+                    :alt="attribute.name"
+                  >
+                  <span class="ProductCustomizer__NavItemTitle">{{ index + 1 }}. {{ attribute.name }}</span>
+                </div>
               </div>
-            </div>
-          </nav>
+            </nav>
+          </transition>
           <div
             v-for="(attribute, index) in attributes"
             :key="attribute.parameter"
-            :class="{ 'ProductCustomizer__Panel--Active': isOpen(attribute.parameter) }"
             class="ProductCustomizer__Panel"
           >
-            <filter-panel
-              v-bind="attribute"
-              :index="index"
-              :load="active"
-            />
+            <transition
+              enter-active-class="animated slideInRight"
+              leave-active-class="animated slideOutRight"
+            >
+              <filter-panel
+                v-show="isOpen(attribute.parameter)"
+                v-bind="attribute"
+                :index="index"
+                :load="true"
+              />
+            </transition>
           </div>
         </div>
         <div class="ProductCustomizer__Footer">
-          <button
-            v-if="hasPrev"
-            class="ProductCustomizer__Skip"
-            @click.prevent="backToStart"
-          >Back</button>
-          <button
-            v-if="hasPrev && hasNext"
-            class="ProductCustomizer__Skip"
-            @click.prevent="nextPanel"
-          >Next</button>
-          <button
-            v-if="isMobile && !hasPrev"
-            class="ProductCustomizer__Close"
-            @click.prevent="close(false)"
-          >Save Customization</button>
-          <button
-            v-if="!hasNext"
-            class="ProductCustomizer__Skip ProductCustomizer__Skip--Last"
-            @click.prevent="close(true)"
-          >Save Customization</button>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="hasPrev"
+              class="ProductCustomizer__Skip"
+              @click.prevent="backToStart"
+            >Back</button>
+          </transition>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="hasPrev"
+              :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
+              class="ProductCustomizer__Skip"
+              @click.prevent="nextPanel"
+            >{{ hasNext ? 'Next' : 'Save Customization' }}</button>
+          </transition>
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
+            <button
+              v-if="active && isMobile && !hasPrev"
+              class="ProductCustomizer__Close"
+              @click.prevent="close(false)"
+            >Save Customization</button>
+          </transition>
         </div>
       </div>
       <close-button
@@ -164,6 +191,7 @@ import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
 import CloseButton from './CloseButton.vue';
 import InfoPopup from './InfoPopup.vue';
+import SimpleCustomizer from './SimpleCustomizer.vue';
 import InspirationOptions from './InspirationOptions.vue';
 import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
@@ -181,6 +209,7 @@ export default {
     AddToCart,
     CloseButton,
     InfoPopup,
+    SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
   },
@@ -196,17 +225,20 @@ export default {
     initialVariant: { type: Number, required: true },
     initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
+    initialQuantity: { type: Number, default: 1 },
   },
 
   data() {
     return {
       active: false,
+      optionsChanged: false,
       addToCartProcessing: false,
     };
   },
 
   computed: {
     ...mapState({
+      filters: state => state.filters,
       attributes: state => state.filters.attributes || [],
       openPanel: state => state.openPanel,
       productImages: state => state.productImages,
@@ -215,6 +247,17 @@ export default {
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
     }),
+
+    inStock() {
+      if (!this.filters.track_inventory) {
+        return true;
+      }
+      return this.activeProduct.inventory && this.activeProduct.inventory.available > 0;
+    },
+
+    isDecor() {
+      return this.filters.configurator_type === 'small';
+    },
 
     isOpen() {
       return panel => this.openPanel === panel;
@@ -229,7 +272,7 @@ export default {
     },
 
     hasNext() {
-      return this.activeIndex < this.attributes.length - 1;
+      return this.openPanel !== '' && this.activeIndex < this.attributes.length - 1;
     },
 
     isFavorite() {
@@ -301,6 +344,9 @@ export default {
       this.setActiveProduct({
         id: this.initialVariant,
         handle: this.initialHandle,
+        inventory: {
+          available: this.initialQuantity,
+        },
       });
       this.populateSelected({
         selectedOptions: this.initialAttributes,
@@ -311,7 +357,11 @@ export default {
     }
 
     this.$bus.$on('filter:toggle', (payload) => {
-      this.setOption(payload);
+      this.optionsChanged = true;
+      this.setOption(payload)
+      if (this.filters.track_inventory) {
+        this.createProduct();
+      }
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
@@ -337,6 +387,14 @@ export default {
     this.$nextTick(() => {
       updateAffirm();
     });
+
+    if (window.theme.settings.mulberry && window.theme.settings.mulberry.active) {
+      document.addEventListener('mulberry-shopify:loaded', async () => {
+        await mulberry.core.init({
+          publicToken: '6oMVIT3bWc-8sWgS12eToRhzV8I',
+        });
+      });
+    }
   },
 
   methods: {
@@ -355,6 +413,27 @@ export default {
       'setOption',
     ]),
 
+    async initializeMulberry(quantity = 1) {
+      const { id } = this.activeProduct;
+      const { name: title, price } = this.fullProduct;
+      const offer = await mulberry.core.getWarrantyOffer({ id, title, price });
+
+      mulberry.modal.init({
+        offers: offer,
+        settings: mulberry.core.settings,
+        onWarrantySelect: async (warranty) => {
+          const result = await mulberryShop.addToProductCatalog(warranty);
+          await mulberryShop.addWarrantyToCart(result)
+          mulberry.modal.close();
+          this.addToCart(quantity, true);
+        },
+        onWarrantyDecline: () => {
+          mulberry.modal.close();
+          this.addToCart(quantity, true);
+        },
+      });
+    },
+
     createProduct() {
       if (!this.productImages.length) {
         setTimeout(() => {
@@ -368,6 +447,7 @@ export default {
         image: this.productImages[0].full,
       }).then(() => {
         this.trackViewProduct();
+        this.optionsChanged = false;
       });
     },
 
@@ -381,10 +461,16 @@ export default {
     },
 
     nextPanel() {
+      if (!this.hasNext) {
+        this.close(true);
+        return;
+      }
+
       if (this.activeIndex >= this.attributes.length) {
         this.selectPanel('');
         return;
       }
+
       const { parameter } = this.attributes[this.activeIndex + 1];
       this.selectPanel(parameter);
       this.$bus.$emit('panel:show', parameter);
@@ -424,7 +510,7 @@ export default {
       });
     },
 
-    addToCart(quantity) {
+    async addToCart(quantity, warrantySelected = false) {
       this.addToCartProcessing = true;
 
       if (this.productCreationInProgress) {
@@ -434,11 +520,22 @@ export default {
         return;
       }
 
-      if (!this.activeProduct.id) {
+      if (this.optionsChanged || !this.activeProduct.id) {
         this.createProduct();
         setTimeout(() => {
           this.addToCart(quantity);
         }, 250);
+        return;
+      }
+
+      if (theme.settings.mulberry.active && ! warrantySelected) {
+        await this.initializeMulberry(quantity);
+        mulberry.modal.open();
+        return;
+      }
+
+      if (!this.inStock) {
+        this.addToCartProcessing = false;
         return;
       }
 
@@ -735,10 +832,10 @@ html.ProductCustomizer--Open {
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
+    position: relative;
     z-index: 100;
 
     @include at-query($breakpoint-large) {
-      box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
       flex: 0 0 458px;
     }
   }
@@ -767,20 +864,35 @@ html.ProductCustomizer--Open {
 
     @include at-query($breakpoint-large) {
       flex: 1;
-
-      &.has-footer {
-        flex: 0 0 calc(100vh - #{$sidebar-footer-height});
-      }
+      padding-bottom: $sidebar-footer-height;
     }
   }
 
   &__Nav {
+    animation-delay: .6s;
+    animation-duration: .5s;
+    background: #fff;
+    bottom: $sidebar-footer-height-mobile;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+
+    @include at-iphone {
+      bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+    }
 
     @include at-query($breakpoint-large) {
+      bottom: 0;
+      box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
       height: 100vh;
+    }
+
+    &.slideOutRight {
+      animation-delay: 0s
     }
   }
 
@@ -854,36 +966,64 @@ html.ProductCustomizer--Open {
   }
 
   &__Panel {
-    height: 100%;
+    // height: 100%;
 
-    &:not(#{&}--Active) {
-      display: none;
-    }
+    // &:not(#{&}--Active) {
+    //   display: none;
+    // }
   }
 
   &__Footer {
-    background: #dfb2a3;
+    bottom: 0;
     display: flex;
-    flex: 0 0 $sidebar-footer-height-mobile;
+    height: $sidebar-footer-height-mobile;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+
+    @include at-iphone {
+      bottom: $iphone-action-bar-height;
+    }
 
     @include at-query($breakpoint-large) {
-      background: #f2f0ed;
-      flex-basis: $sidebar-footer-height;
+      height: $sidebar-footer-height;
       padding-right: 12px;
+    }
+  }
+
+  &__Footer &__Close {
+    animation-delay: 1s;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &.slideOutDown {
+      animation-delay: 0s;
     }
   }
 
   &__Skip {
     align-items: center;
-    background: transparent;
+    animation-delay: 1s;
+    animation-duration: .5s;
+    background: #dfb2a3;
     color: #fff;
     display: flex;
-    flex: 1;
+    flex: 0 0 50%;
     font-size: 14px;
     font-weight: 500;
     justify-content: center;
     letter-spacing: .12em;
+    position: relative;
     text-transform: uppercase;
+
+    &.slideOutDown {
+      animation-delay: 0s;
+    }
 
     &:first-child::before {
       content: '';
@@ -894,10 +1034,6 @@ html.ProductCustomizer--Open {
       margin-right: 5px;
       transform: rotate(-45deg);
       width: 7px;
-
-      @include at-query($breakpoint-large) {
-        border-color: #202020;
-      }
     }
 
     & + & {
@@ -912,15 +1048,22 @@ html.ProductCustomizer--Open {
         margin-left: 5px;
         transform: rotate(45deg);
         width: 7px;
+      }
 
-        @include at-query($breakpoint-large) {
-          border-color: #202020;
+      @include at-query($breakpoint-large) {
+        // this is to add extra background color beyond the edge of the Next button
+        // needs to be part of the button to facilitate animations, used to be the whole footer bg color
+        &::before {
+          background: inherit;
+          content: '';
+          height: 100%;
+          left: 100%;
+          position: absolute;
+          top: 0;
+          width: 20px;
+          z-index: -1;
         }
       }
-    }
-
-    @include at-query($breakpoint-large) {
-      color: #202020;
     }
   }
 

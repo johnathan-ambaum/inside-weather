@@ -1,0 +1,101 @@
+<div id="app">
+  <div class="category-accessories">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = true %}
+    {% assign isScrollAnimationRequire = false %}
+    {% assign hasBannerAccoridon = false %}
+    {% assign enableMediumHeight = true %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_decor-accessories_tb_d.jpg?v=1581116931', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_decor-accessories_tb_m.jpg?v=1581116931', 'heading':'Accessories','description':'Must-have sidekicks for modern life.','linkText':'','url':'javascript:void(0)', dataSource: 'default'}]}"%}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-accoridon="{{hasBannerAccoridon}}"
+      :enable-medium-height="{{enableMediumHeight}}"
+
+      >
+    </category-banner>
+    
+
+    {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/HD102A/HD102A-0_small.jpg', 'title': 'Dita Desk Caddy in Latte', 'linkText': '$34', hyperLink: 'https://insideweather.com/products/hd102a-dita-desk-caddy-in-latte'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD102B/HD102B-0_small.jpg', 'title': 'Dita Desk Caddy in Espresso', 'linkText': '$39', hyperLink: 'https://insideweather.com/products/hd102b-dita-desk-caddy-in-espresso'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD111A/HD111A-0_small.jpg', 'title': 'Mod Vanity Desk Mirror in Carbon', 'linkText': '$39', hyperLink: 'https://insideweather.com/products/hd111a-moda-table-mirror-in-carbon'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD111B/HD111B-0_small.jpg', 'title': 'Mod Vanity Desk Mirror in White', 'linkText': '$39', hyperLink: 'https://insideweather.com/products/hd111b-moda-table-mirror-in-white'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD112/HD112-0_small.jpg', 'title': 'Lido Table Mirror', 'linkText': '$39', hyperLink: 'https://insideweather.com/products/hd112-lido-table-mirror'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD114A/HD114A-0_small.jpg', 'title': 'Digital Marble Alarm Clock in White', 'linkText': '$39', hyperLink: 'https://insideweather.com/products/hd114a-digital-marble-alarm-clock-in-white'},
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg', 'title': 'Digital Marble Alarm Clock in Black', 'linkText': '$39', hyperLink: 'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD123A/HD123A-0_small.jpg', 'title': 'Pyramid Candle in Gray', 'linkText': '$29', hyperLink: 'https://insideweather.com/products/hd123a-pyramid-candle-in-gray'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD123B/HD123B-0_small.jpg', 'title': 'Pyramid Candle in Charcoal', 'linkText': '$29', hyperLink: 'https://insideweather.com/products/hd123b-pyramid-candle-in-charcoal'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/HD123C/HD123C-0_small.jpg', 'title': 'Pyramid Candle in White', 'linkText': '$29', hyperLink: 'https://insideweather.com/products/hd123c-pyramid-candle-in-white'}, 
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD124/HD124-0_small.jpg', 'title': 'Moma Moose Trivets', 'linkText': '$29', hyperLink: 'https://insideweather.com/products/hd124-moma-moose-trivets'},
+    ]" %}
+    {% assign collectionCustomImageStyle = true %}
+    <div class="productCollection">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          :collection-custom-image-style="{{collectionCustomImageStyle}}"
+          section-description="While furniture is our bread & butter, we all know that the right decor is the frosting on every room. In an effort to deliver you a complete custom home (w/sprinkles on top), we’ve partnered with various makers to present our first line of accessories! This curated selection brings modern design elements to a space in the home that demands thoughtful organization solutions in colors & finishes that bring you joy. Bon Appétit!"
+        >
+        </category-collections>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.6, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if(parseInt(($('.CtegoryCollections--itemWrapper li').length / 2)) === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 100 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+  
+});
+
+</script>

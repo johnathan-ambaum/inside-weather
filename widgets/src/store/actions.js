@@ -145,8 +145,8 @@ export function createProductFromSelected({ state, dispatch, commit }, { name, m
       image,
       attributes: state.selectedOptions,
     })
-    .then(({ handle, variant: { id } }) => {
-      commit('setActiveProduct', { id, handle });
+    .then(({ handle, variant: { id, inventory_data: inventory } }) => {
+      commit('setActiveProduct', { id, handle, inventory });
       commit('setProductCreationInProgress', false);
       dispatch('updateUrl', { handle, replace: true });
     })

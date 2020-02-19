@@ -7,18 +7,24 @@
         class="FilterPanel__Filter"
       >
         <select
-          v-model="group"
+          v-if="isMobile"
+          :value="group.id"
           class="FilterPanel__GroupSelect"
+          @change="e => setGroup(e.target.value)"
         >
           <option
-            v-for="group in groups"
-            :key="group.id"
-            :value="group"
-          >
-            <template v-if="group.group_type === 'sort'">Sort: <strong>{{ group.name }}</strong></template>
-            <template v-else>{{ group.name }}</template>
-          </option>
+            v-for="option in groupOptions"
+            :key="option.value"
+            :value="option.value"
+          >{{ option.display }}</option>
         </select>
+        <styled-select
+          v-else
+          :options="groupOptions"
+          :value="group.id"
+          class="FilterPanel__GroupSelect"
+          @input="setGroup"
+        />
       </div>
     </div>
     <swatch-panel
@@ -33,12 +39,19 @@
 
 <script>
 import { mapState } from 'vuex';
+import StyledSelect from './StyledSelect.vue';
 import SwatchPanel from './SwatchPanel.vue';
+import screenMonitor from '../mixins/screenMonitor';
 
 export default {
   components: {
+    StyledSelect,
     SwatchPanel,
   },
+
+  mixins: [
+    screenMonitor,
+  ],
 
   props: {
     parameter: { type: String, required: true },
@@ -73,6 +86,28 @@ export default {
 
       return this.values.filter(value => value[this.group.reference]);
     },
+
+    groupOptions() {
+      return this.groups.map((group) => {
+        let display = this.isMobile ? group.name : `<strong>${group.name}</strong>`;
+        if (group.group_type === 'sort') {
+          display = `SORT: ${display}`;
+        }
+        return {
+          value: group.id,
+          display,
+        };
+      });
+    },
+  },
+
+  methods: {
+    setGroup(selectedId) {
+      const selected = this.groups.find(group => group.id == selectedId);
+      if (selected) {
+        this.group = selected;
+      }
+    },
   },
 };
 </script>
@@ -82,18 +117,37 @@ export default {
 @import '../scss/mixins';
 
 .FilterPanel {
+  animation-delay: .6s;
+  animation-duration: .5s;
+  background: #fff;
+  bottom: $sidebar-footer-height-mobile;
   color: #121212;
   display: flex;
   flex-direction: column;
   font-family: $font-stack-avalon;
-  height: 100%;
+  height: auto;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 200;
+
+  @include at-iphone {
+    bottom: $iphone-action-bar-height + $sidebar-footer-height-mobile;
+  }
 
   @include at-query($breakpoint-large) {
-    height: calc(100vh - #{$sidebar-footer-height});
+    bottom: 0;
+    box-shadow: -0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
+    height: 100vh;
+  }
+
+  &.slideOutRight {
+    animation-delay: 0s;
   }
 
   &__Header {
     align-items: center;
+    background: #fff;
     border-bottom: 1px solid #D4D0CA;
     display: flex;
     text-align: center;
@@ -128,7 +182,7 @@ export default {
 
   &__Filter {
     @include at-query($breakpoint-small) {
-      flex: 0 0 auto;
+      flex: 1 0 auto;
     }
   }
 
@@ -136,13 +190,8 @@ export default {
     background-color: #fff;
     border: 1px solid #D4D0CA;
     color: #202020;
-    font-size: 11px;
     font-weight: 400;
-    letter-spacing: .0875em;
-    line-height: 28px;
     max-width: 195px;
-    padding-bottom: 0;
-    padding-top: 0;
     width: 100%;
 
     strong {
@@ -152,12 +201,20 @@ export default {
     @include at-query($breakpoint-large) {
       font-size: 13px;
       margin-top: 15px;
+      max-width: 100%;
+      width: 250px;
     }
   }
 
   &__Body {
     @include at-query($breakpoint-large) {
       flex-grow: 1;
+
+      &::after {
+        content: '';
+        height: $sidebar-footer-height;
+        flex: 0 0 100%;
+      }
     }
   }
 }

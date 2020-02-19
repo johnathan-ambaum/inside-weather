@@ -25,7 +25,7 @@
           <figure
             :class="animationElementClass"
           >
-            <img :src="item.image">
+            <img :src="item.image" :class="customImageClass">
           </figure>
           <h3
             :class="animationElementClass"
@@ -34,6 +34,7 @@
           </h3>
           <span
             :class="animationElementClass"
+            :data-type="[item.linkText.length > 10 ? animationElementClass : 'limittedText']"
           >
             {{item.linkText}}
           </span>
@@ -54,7 +55,8 @@ export default {
     productCollections: Array,
     sectionHeading: String,
     sectionDescription: String,
-    isScrollAnimationRequire: {type: Boolean, default: true}
+    isScrollAnimationRequire: {type: Boolean, default: true},
+    collectionCustomImageStyle:{type: Boolean, default: false}
   },
   computed: {
     animationElementClass() {
@@ -67,6 +69,11 @@ export default {
         '--hasAnimation': this.isScrollAnimationRequire,
         '--alignCenter': this.productCollections.length < 4
       }
+    },
+    customImageClass() {
+      return {
+        '--customImageStyle': this.collectionCustomImageStyle
+      }
     }
   },
   
@@ -76,7 +83,6 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .CtegoryCollections--itemWrapper {
   align-content: center;
   display: flex;
@@ -94,6 +100,7 @@ export default {
       opacity: 0;
     }
     a {
+      text-decoration: none;
       padding: 2px 44px 32px;
       @include block();
     }
@@ -104,12 +111,13 @@ export default {
       }
     }
     figure {
+      margin: 0;
       overflow: hidden;
       position: relative;
       padding-bottom: 100%;
       @include block(0);
       img {
-        object-fit: contain;
+        object-fit: cover;
         position: absolute;
         left: 0;
         right: 0;
@@ -117,7 +125,9 @@ export default {
         bottom: 0;
         margin: auto;
         @include block(100%);
-        @include Scale(0.8);
+        &.--customImageStyle {
+          object-fit: contain;
+        }
       }
     }
     h3 {
@@ -197,15 +207,16 @@ export default {
       }
       figure {
         padding-bottom: 66.66%;
-        img {
-          object-fit: contain;
-        }
       }
       h3 {
         font-size: 13px;
       }
       span {
         font-size: 9px;
+        
+        &[data-type="limittedText"] {
+          font-size: 10px;
+        }
       }
     }
   }
@@ -216,9 +227,6 @@ export default {
         padding: 10px 10px 25px;
         figure {
           padding-bottom: 66.66%;
-          img {
-            object-fit: contain;
-          }
         }
       }
       &:nth-of-type(3) {
@@ -256,6 +264,13 @@ export default {
       span {
         font-size: 11px;
       }
+      figure {
+        img {
+          &.--customImageStyle {
+            @include Scale(1.2);
+          }
+        }
+      }
     }
   }
 }
@@ -264,10 +279,22 @@ export default {
     li {
       h3 {
         font-size: 12px;
+        position: relative;
+        top: 10px;
       }
       span {
         font-size: 8px;
       }
+    }
+  }
+}
+
+.productCollection {
+  &:not([class^="--pd-t-"]) {
+    padding-top: 75px;
+    
+    @include at-query('max-width: 767px') {  
+      padding-top: 35px;
     }
   }
 }

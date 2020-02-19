@@ -6,7 +6,8 @@
 </style>
 
 <div class="TopBar">
-  {{ section.settings.text }}
+  <span class="hide--small">{{ section.settings.text }}</span>
+  <span class="hide--large">{{ section.settings.mobile_text }}</span>
 </div>
 
 {% schema %}
@@ -30,6 +31,12 @@
         "type": "richtext",
         "label": "Text",
         "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
+      },
+      {
+        "id": "mobile_text",
+        "type": "richtext",
+        "label": "Text (mobile)",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
       }
     ]
   }

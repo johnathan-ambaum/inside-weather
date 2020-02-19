@@ -123,8 +123,8 @@
             "settings": {
               "collection": "",
               "url": "shopify:\/\/pages\/sofas",
-              "image": "shopify:\/\/shop_images\/nav_seating_sofa_2x-min.jpg",
-              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofa_hover_2x-min.jpg"
+              "image": "shopify:\/\/shop_images\/nav_seating_sofa_1.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofa_2.png"
             }
           },
           "1546537742693": {
@@ -132,8 +132,8 @@
             "settings": {
               "collection": "",
               "url": "shopify:\/\/pages\/sofettes",
-              "image": "shopify:\/\/shop_images\/nav_seating_sofette_2x-min.jpg",
-              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette_hover_2x-min.jpg"
+              "image": "shopify:\/\/shop_images\/nav_seating_sofette_1.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette_2.png"
             }
           },
           "1546537839761": {
@@ -141,8 +141,8 @@
             "settings": {
               "collection": "",
               "url": "shopify:\/\/pages\/armchairs",
-              "image": "shopify:\/\/shop_images\/nav_seating_armchair_2x-min.jpg",
-              "hover_image": "shopify:\/\/shop_images\/nav_seating_armchair_hover_2x-min.jpg"
+              "image": "shopify:\/\/shop_images\/nav_seating_armchair_1.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_armchair_2.png"
             }
           },
           "1546537857207": {
@@ -150,8 +150,8 @@
             "settings": {
               "collection": "",
               "url": "shopify:\/\/pages\/lounge-chairs",
-              "image": "shopify:\/\/shop_images\/nav_seating_lounge_2x-min.jpg",
-              "hover_image": "shopify:\/\/shop_images\/nav_seating_lounge_hover_2x-min.jpg"
+              "image": "shopify:\/\/shop_images\/nav_seating_lounge-chair_1.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_lounge-chair_2.png"
             }
           },
           "1546537880112": {
@@ -159,8 +159,8 @@
             "settings": {
               "collection": "",
               "url": "shopify:\/\/pages\/dining-chairs",
-              "image": "shopify:\/\/shop_images\/nav_seating_dining_2x-min.jpg",
-              "hover_image": "shopify:\/\/shop_images\/nav_seating_dining_hover_2x-min.jpg"
+              "image": "shopify:\/\/shop_images\/nav_seating_dining-chair_1.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_dining-chair_2.png"
             }
           },
           "1546537908171": {
@@ -207,6 +207,69 @@
               "image": "shopify:\/\/shop_images\/nav_tables_side-min.png",
               "hover_image": "shopify:\/\/shop_images\/nav_tables_side_hover_2x-min.jpg"
             }
+          },
+          "1576013173810": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/sofa-sectionals",
+              "image": "shopify:\/\/shop_images\/nav_seating_sofa-sectional_1_5ffe1283-1c28-455b-9b51-81076b81aec5.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofa-sectional_2.png"
+            }
+          },
+          "1576013203143": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/sofette-sectionals",
+              "image": "shopify:\/\/shop_images\/nav_seating_sofette-sectional_1.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette-sectional_2.png"
+            }
+          },
+          "1581477791929": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-organization",
+              "image": "shopify:\/\/shop_images\/nav_decor_organization_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_organization_1.png"
+            }
+          },
+          "1581477836976": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-kitchen",
+              "image": "shopify:\/\/shop_images\/nav_decor_kitchen_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_kitchen_1.png"
+            }
+          },
+          "1581477861824": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-bath",
+              "image": "shopify:\/\/shop_images\/nav_decor_bath_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_bath_1.png"
+            }
+          },
+          "1581477892671": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-bedroom",
+              "image": "shopify:\/\/shop_images\/nav_decor_bedroom_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_bedroom_1.png"
+            }
+          },
+          "1581477919579": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-accessories",
+              "image": "shopify:\/\/shop_images\/nav_decor_accessories_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_accessories_1.png"
+            }
           }
         },
         "block_order": [
@@ -219,7 +282,14 @@
           "1546537926514",
           "1546537953655",
           "1546537970185",
-          "1546537987645"
+          "1546537987645",
+          "1576013173810",
+          "1576013203143",
+          "1581477791929",
+          "1581477836976",
+          "1581477861824",
+          "1581477892671",
+          "1581477919579"
         ],
         "settings": {
           "Logo": "shopify:\/\/shop_images\/logo_0061561f-e478-495d-b96b-803216dd2749.png",
@@ -732,12 +802,12 @@
         "type": "newsletter-popup",
         "settings": {
           "mode": "enabled",
-          "popup_seconds": 60,
-          "popup_days": 30,
-          "popup_title": "FEEL LIKE A <br>$500 SHOPPING SPREE?",
-          "popup_image": "shopify:\/\/shop_images\/donut-popup_donut.png",
-          "popup_text": "<p>Make it rain. Sign up for sneak peaks, product leaks, and insider treats. Oh and a chance to win $500 to deck out your home. Yes, that too.<\/p>",
-          "close_text": "BRB, I have to go ask my mom for permission",
+          "popup_seconds": 5,
+          "popup_days": 2,
+          "popup_title": "Sit with us!",
+          "popup_image": "shopify:\/\/shop_images\/3.0_signup_d_v1_image_caea6d77-1d07-4ee7-93cc-7b3b7546b5ea.png",
+          "popup_text": "<p>Sign up and get $50 OFF your first order!<\/p>",
+          "close_text": "",
           "enable_newsletter": true,
           "button_label": "",
           "button_link": "",
@@ -768,9 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#f5eeea",
-          "font_color": "#202020",
-          "text": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>"
+          "background_color": "#390708",
+          "font_color": "#ffffff",
+          "text": "<p>Fall in love and save up to 15% OFF EVERYTHING!&nbsp;<strong><a href=\"\/pages\/feb-2020-sale\" title=\"February 2020 Sale\">SHOP NOW<\/a><\/strong><\/p>",
+          "mobile_text": "<p>Fall in love and save up to 15% OFF EVERYTHING!&nbsp;<strong><a href=\"\/pages\/feb-2020-sale\" title=\"February 2020 Sale\">SHOP NOW<\/a><\/strong><\/p>"
         }
       }
     },

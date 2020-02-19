@@ -4,27 +4,35 @@
       v-if="!isMobile"
       :images="productImages"
     />
-    <h2 class="ProductDetail__Heading">Dimensions</h2>
-    <div class="ProductDetail__Dimensions">
-      <img
-        v-for="image in dimensionImages"
-        :key="image"
-        :src="image">
-    </div>
-    <div class="ProductDetail__SplitBlocks">
-      <div>
-        <h2 class="ProductDetail__Heading">Assembly</h2>
-        <p>{{ interpolatedAssembly }}</p>
+    <template v-if="!isDecor">
+      <h2 class="ProductDetail__Heading">Dimensions</h2>
+      <div class="ProductDetail__Dimensions">
+        <img
+          v-for="image in dimensionImages"
+          :key="image"
+          :src="image">
       </div>
-      <div>
-        <h2 class="ProductDetail__Heading">Shipping</h2>
-        <p>{{ interpolatedShipping }}</p>
+      <div class="ProductDetail__SplitBlocks">
+        <div>
+          <h2 class="ProductDetail__Heading">Assembly</h2>
+          <p>{{ interpolatedAssembly }}</p>
+        </div>
+        <div>
+          <h2 class="ProductDetail__Heading">Shipping</h2>
+          <p>{{ interpolatedShipping }}</p>
+        </div>
       </div>
-    </div>
+    </template>
     <h2
-      v-if="filters.contents"
+      v-if="isDecor || filters.contents"
       class="ProductDetail__Heading"
     >Details</h2>
+    <div
+      v-if="isDecor"
+      class="ProductDetail__Description"
+    >
+      <p>{{ interpolatedDescription }}</p>
+    </div>
     <template-block
       v-for="(block, index) in filters.contents"
       :key="index"
@@ -71,6 +79,10 @@ export default {
       productImages: state => state.productImages,
     }),
 
+    isDecor() {
+      return this.filters.configurator_type === 'small';
+    },
+
     dimensionImages() {
       const images = [];
 
@@ -110,6 +122,15 @@ export default {
       const { template } = this.filters.templates.find(item => item.key === 'shipping') || { template: '' };
       return this.interpolateString(template);
     },
+
+    interpolatedDescription() {
+      if (!this.filters.templates) {
+        return '';
+      }
+
+      const { template } = this.filters.templates.find(item => item.key === 'description') || { template: '' };
+      return this.interpolateString(template);
+    },
   },
 };
 </script>
@@ -120,6 +141,10 @@ export default {
 
 .ProductDetail {
   position: relative;
+
+  .ProductCustomizer--Simple & {
+    padding-bottom: 80px;
+  }
 
   &, h1, h2, h3, p {
     font-family: $font-stack-avalon;
@@ -144,28 +169,40 @@ export default {
     }
   }
 
-  &__Dimensions {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 80px;
+  &__Description {
+    &, p {
+      color: #202020;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .035em;
+      line-height: 16px;
 
-    img {
-      flex: 0 0 auto;
+      @include at-query($breakpoint-large) {
+        font-family: $font-stack-avalon;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 22px;
+      }
     }
 
     @include at-query($breakpoint-small) {
       padding: 0 $horizontal-wrapper-padding;
     }
+  }
 
-    @include at-query($breakpoint-msmall) {
-      img + img {
-        margin-top: 50px;
-      }
+  &__Dimensions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+
+    img {
+      flex: 0 0 auto;
+      margin-bottom: 50px;
     }
 
-    @media only screen and ($breakpoint-mlarge) and ($breakpoint-small) {
-
+    @include at-query($breakpoint-small) {
+      padding: 0 $horizontal-wrapper-padding;
     }
 
     @include at-query($breakpoint-large) {

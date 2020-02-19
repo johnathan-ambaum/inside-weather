@@ -11,6 +11,7 @@
 
 .HeadingWithDescription {
   padding: 0 15px;
+  
   h2 {
     display: block;
     font-family: $font-stack-avalon;
@@ -22,6 +23,7 @@
     margin: 0 0 10px;
     text-align: center;
   }
+
   p {
     color: #202020;
     display: block;
@@ -29,10 +31,13 @@
     font-weight: 500;
     font-size: 14px;
     letter-spacing: 0.04em;
-    line-height: 1.2;
+    line-height: 1.5;
+    max-width: 765px;
     text-align: center;
-    margin: 0;
+    margin: 0 auto;
+    width: 100%;
   }
+
   @media only screen and (max-width: 767px) {
     h2 {
       font-weight: 600;
