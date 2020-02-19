@@ -10990,6 +10990,31 @@ div[data-section-type="fading-images"] {
   }
 }
 
+.product-customizer__modal {
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: hidden;
+  -webkit-animation: modal-open 0.5s forwards;
+  animation: modal-open 0.5s forwards;
+}
+
+/* Modal Content/Box */
+.product-customizer__modal-content {
+  text-align:center;
+  background-color: #fff;
+  margin: 20vh auto; /* 15% from the top and centered */
+  padding: 2rem 3rem;
+  border: 1px solid #888;
+  max-width: 500px; /* Could be more or less, depending on screen size */
+}
+
+
 /*================ New Header Menu ================*/
 
 html body.MobileNav--Active {

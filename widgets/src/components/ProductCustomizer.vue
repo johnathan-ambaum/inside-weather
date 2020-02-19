@@ -177,6 +177,7 @@
         @click.native.prevent="close(true)"
       />
     </div>
+    <customizer-product-modal ref="modal" ></customizer-product-modal>
   </div>
 </template>
 
@@ -197,6 +198,7 @@ import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
+import CustomizerProductModal from './CustomizerProductModal.vue';
 
 library.add(faHeart);
 
@@ -212,6 +214,7 @@ export default {
     SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
+    CustomizerProductModal
   },
 
   mixins: [
@@ -450,7 +453,10 @@ export default {
         this.optionsChanged = false;
       });
     },
-
+    openModal() { 
+      console.log("open modal")
+      this.$refs.modal.show() 
+    },
     showPanel(parameter) {
       this.selectPanel(parameter);
       this.$bus.$emit('panel:show', parameter);
@@ -477,6 +483,7 @@ export default {
     },
 
     close(closeAll) {
+      this.openModal();
       if (this.openPanel && !closeAll) {
         this.selectPanel('');
         return;
