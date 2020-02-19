@@ -1,8 +1,9 @@
 <div id="app">
   {% assign hasImage = true %}
   {% assign disableSlideContent = true %}
-  {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_d_v1.jpg?v=1581638358',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_m_v1.jpg?v=1581638359', 'url':'https://insideweather.com/pages/feb-2020-sale'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_d_flw.jpg?v=1581639944','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_m_flw.jpg?v=1581639944','url':'https://insideweather.com/pages/franklloydwright'}]}"%}
+  {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_d_v1.jpg?v=1581653966',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_m_v1.jpg?v=1581653966', 'url':'https://insideweather.com/pages/feb-2020-sale'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_d_flw.jpg?v=1581639944','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_m_flw.jpg?v=1581639944','url':'https://insideweather.com/pages/franklloydwright'}]}"%}
 
+  {% comment %}
   <div class="--clip-header">
     <banner-carousel
     :has-image="{{hasImage}}"
@@ -11,16 +12,17 @@
     >
     </banner-carousel>
   </div>
+  {% endcomment %}
 
-  {% comment %} <div class="staticBannerWrapper --clip-header">
+  <div class="staticBannerWrapper --clip-header">
     <static-banner
-      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/020620_hp-tb_d_v1.jpg?v=1580940189"
-      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/020620_hp-tb_m_v1.jpg?v=1580940189"
+      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_d_v1.jpg?v=1581653966"
+      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_m_v1.jpg?v=1581653966"
       responsive-point="840px"
       banner-link="https://insideweather.com/pages/feb-2020-sale"
     >
     </static-banner>
-  </div> {% endcomment %}
+  </div>
 
 
   {% assign listItems= "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_1-min.jpg?1657935','buttonText':'Shop Living','link':'https://insideweather.com/pages/living-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_2-min.jpg?1657935','buttonText':'Shop Dining','link':'https://insideweather.com/pages/dining-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_3-min.jpg?1657935','buttonText':'Shop Office','link':'https://insideweather.com/pages/office'}]"%}
