@@ -1350,6 +1350,7 @@ lazySizesConfig.expFactor = 4;
           var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
           $('.drawer__close').css('vertical-align', 'top' );
           $('.drawer__close-button').css('height', 'auto');
+          $('.drawer__body').addClass('drawer__body--has-clock');
           CartDrawer.prototype.run_clock('drawer__countdown-timer', theme.settings.vwo.countdown.timerDurationInMinutes);
           if(is_done){
             $(".drawer-clock__header").text(theme.settings.vwo.countdown.expirationTextHeader);

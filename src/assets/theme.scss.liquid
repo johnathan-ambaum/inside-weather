@@ -2602,7 +2602,7 @@ symbol {
   width: 100%;
   padding: ($gutter / 2.6) 0;
   margin-bottom: 0;
-  border-bottom: 1px solid $colorDrawerBorder;
+  border-bottom: 1px solid $colorDrawerBorder; 
   @include media-query($medium-up) {
     height: $drawerHeaderHeightLarge;
   }
@@ -2679,7 +2679,7 @@ symbol {
 }
 
 /*================ Drawer content ================*/
-
+.drawer__body,
 .drawer__inner {
   position: absolute;
   top: $drawerHeaderHeight;
@@ -2709,30 +2709,98 @@ symbol {
 .drawer-clock__container{
   margin-top:0.5rem;
 }
+#drawer__countdown-timer{
+  font-family: Avalon;
+  font-weight: 600;
+  font-size:13px;
+  letter-spacing: 0.04em;
+  line-height:20px;
+  text-align:left;
+  color: red;
+}
 .drawer-clock__header{
-  font-size:15pt;
-  line-height: 20pt;
-  letter-spacing:calc(35/1000 * 15pt);
+  font-family: Avalon;
+  font-weight: 600;
+  font-size:13px;
+  letter-spacing: 0.04em;
+  line-height:20px;
+  text-align:left;
+  color: #202020;
 }
 .drawer-clock__text{
-  margin-top:0.5rem;
-  font-size:12pt;
-  font-weight: normal;
-  line-height: 19pt;
-  letter-spacing:calc(35/1000 * 12pt);    
+  font-family: Avalon;
+  font-weight: 500;
+  font-size:11px;
+  letter-spacing: 0.04em;
+  line-height:19px;
+  text-align:left;
+  color: #202020;   
 }
-#drawer__countdown-timer{
-  color:red;
-  font-size:15pt;
-  line-height: 20pt;
-  letter-spacing:calc(35/1000 * 15pt);
-}
+.drawer__body {
+  position: absolute;
+  top: $drawerHeaderHeight;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: ($gutter / 2) ($gutter / 2) 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 
+  .drawer--has-fixed-footer & {
+    overflow-y: auto; // remove if uncommenting below media query
+
+    // Enable to prevent fixed footer on short screens
+    // @media only screen and (max-height: $fixedHeightLimit) {
+    //   overflow-y: auto;
+    // }
+  }
+}
+.drawer__body--has-clock{
+  margin-top:6rem;
+}
+@include media-query($medium-up) {
+  .drawer__body{
+    margin-top: 5rem;
+  }
+  .drawer__body--has-clock{
+    margin-top:6rem;
+  }
+  .drawer__inner--wrapper{
+    padding-left:40px;
+    padding-right:40px;
+  }
+  #drawer__countdown-timer{
+    font-family: Avalon;
+    font-weight: 600;
+    font-size:15px;
+    letter-spacing: 0.04em;
+    line-height:20px;
+    text-align:left;
+    color: red;
+  }
+  .drawer-clock__header{
+    font-family: Avalon;
+    font-weight: 600;
+    font-size:15px;
+    letter-spacing: 0.04em;
+    line-height:20px;
+    text-align:left;
+    color: #202020;
+  }
+  .drawer-clock__text{
+    font-family: Avalon;
+    font-weight: 500;
+    font-size:12px;
+    letter-spacing: 0.04em;
+    line-height:19px;
+    text-align:left;
+    color: #202020;   
+  }
+}
 
 // Drawer content with fixed footer
 
 .drawer__inner--has-fixed-footer {
-  margin-top: 10rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -2743,8 +2811,7 @@ symbol {
   -webkit-overflow-scrolling: touch;
 
   @include media-query($medium-up) {
-    margin-top: 3rem;
-    padding: ($gutter / 1.35) $gutter 0;
+    padding: ($gutter / 1.35) 0 0 0;
   }
 
   // Enable to prevent fixed footer on short screens
