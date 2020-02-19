@@ -2600,11 +2600,12 @@ symbol {
   display: table;
   height: $drawerHeaderHeight;
   width: 100%;
-  padding: ($gutter / 2.6) 0;
+  padding: 20px 0;
   margin-bottom: 0;
   border-bottom: 1px solid $colorDrawerBorder; 
   @include media-query($medium-up) {
     height: $drawerHeaderHeightLarge;
+    padding: 24px 0;
   }
 }
 
@@ -2734,7 +2735,8 @@ symbol {
   letter-spacing: 0.04em;
   line-height:19px;
   text-align:left;
-  color: #202020;   
+  color: #202020;
+  margin-bottom: 0;  
 }
 .drawer__body {
   position: absolute;
