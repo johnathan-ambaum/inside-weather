@@ -549,7 +549,7 @@ export default {
           id: this.activeProduct.id,
           quantity,
           properties: {
-            'Estimated time to ship': this.fulfillmentTime,
+            'Estimated time to ship': this.emailFulfillmentTime,
           },
         }),
       })
