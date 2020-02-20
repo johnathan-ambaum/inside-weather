@@ -34,43 +34,52 @@ export function loadProductImages({ dispatch, commit, state }) {
   }
 
   if (!state.filters.attributes.every(attribute => state.selectedOptions[attribute.parameter])) {
+    console.error('Option selections missing, aborting image population');
     return;
   }
 
-  const features = [
-    'OTTOMAN', 'ON',
-    'BASE', 'BEVELED.WOOD.WOODLEGS.LATTE',
-    'UPHOLSTERY', 'UPHOLSTERY.NAPLES.BLUSH',
-    'PILLOW SHAPE', 'SNUG',
-    'PILLOW DETAIL', 'NO BUTTONS',
-    'ARMREST TYPE', 'ASHER',
-    'WOOD ARMREST FINISH', 'ESPRESSO',
-  ];
-  // Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
-  //   const { values } = state.filters.attributes.find(att => att.parameter === parameter);
-  //   const selected = values.find(item => item.value === value);
-  //   return selected.feature_id || null;
-  // }).filter(feature => feature !== null);
+  // fall back to IW API for images if cylindo parameters not set in the filter definitions
+  // for now always pulling from both sources because some components still use productImages array
+  // TODO: figure out how we want to handle the multiple image viewers on the page and uncomment this condition
+  // if (!state.filters.cylindo_sku) {
+  apiClient
+    .getImages({
+      type: state.category,
+      attributes: state.selectedOptions,
+    })
+    .then((images) => {
+      commit('setProductImages', images);
+    });
+  //   return;
+  // }
+
+  let features = [];
+  Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
+    const { values } = state.filters.attributes.find(att => att.parameter === parameter);
+    const selected = values.find(item => item.value === value);
+    features = features.concat(selected.cylindo_features || []);
+  });
+
+  // console.log({ features, baseSKU: state.filters.cylindo_sku });
 
   if (cylindoViewer) {
     cylindoViewer.setFeatures(features);
     return;
   }
-  console.log({ features, baseSKU: state.filters.cylindo_sku });
 
   window.cylindo.on('ready', () => {
     cylindoViewer = window.cylindo.viewer.create({
       debug: true,
       accountID: 4931,
-      SKU: 'ANA_ARM', // state.filters.cylindo_sku || '',
+      SKU: state.filters.cylindo_sku,
       features,
       country: 'us',
       containerID: 'cylindo-viewer',
       viewerType: 2,
+      thumbs: true,
+      ...(state.filters.cylindo_overrides || {}),
     });
   });
-
-  // commit('setProductImages', images);
 }
 
 export function populateSelected({ state, dispatch, commit }, { selectedOptions, exists = false }) {
@@ -87,7 +96,7 @@ export function populateSelected({ state, dispatch, commit }, { selectedOptions,
     Object.entries(selectedOptions || {}).forEach(([parameter, value]) => {
       const attribute = state.filters.attributes.find(item => item.parameter === parameter);
       if (!attribute) {
-        console.error(`Attribute "${parameter}" not found`);
+        console.warn(`Attribute "${parameter}" not found`);
         return;
       }
       let selected = attribute.values.find(item => item.value === value);

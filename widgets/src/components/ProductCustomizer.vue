@@ -18,7 +18,10 @@
           <font-awesome-icon :icon="favoriteIcon"/>
         </span>
       </div>
-      <product-detail-slider v-if="isMobile" />
+      <product-detail-slider
+        v-if="isMobile"
+        :cylindo="useCylindo"
+      />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
         <span
@@ -83,7 +86,7 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider />
+        <product-detail-slider :cylindo="false" />
         <button
           v-if="!isMobile"
           class="ProductCustomizer__Close"
@@ -247,6 +250,11 @@ export default {
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
     }),
+
+    useCylindo() {
+      // double ! to cast truthy/falsy values to boolean
+      return !!this.filters.cylindo_sku;
+    },
 
     inStock() {
       if (!this.filters.track_inventory) {

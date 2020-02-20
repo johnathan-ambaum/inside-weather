@@ -3,6 +3,7 @@
     <product-gallery
       v-if="!isMobile"
       :images="productImages"
+      :cylindo="useCylindo"
     />
     <template v-if="!isDecor">
       <h2 class="ProductDetail__Heading">Dimensions</h2>
@@ -78,6 +79,11 @@ export default {
       filters: state => state.filters,
       productImages: state => state.productImages,
     }),
+
+    useCylindo() {
+      // double ! to cast truthy/falsy values to boolean
+      return !!this.filters.cylindo_sku;
+    },
 
     isDecor() {
       return this.filters.configurator_type === 'small';

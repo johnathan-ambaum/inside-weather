@@ -1,17 +1,24 @@
 <template>
   <div>
     <arrow-button
+      v-if="!cylindo"
       class="ProductDetailSlider__Arrow"
       direction="left"
       @click.native="prevImage"
     />
     <arrow-button
+      v-if="!cylindo"
       class="ProductDetailSlider__Arrow"
       direction="right"
       @click.native="nextImage"
     />
     <div class="ProductDetailSlider">
       <div
+        v-if="cylindo"
+        id="cylindo-viewer"
+      />
+      <div
+        v-else
         ref="slider"
         class="glide"
       >
@@ -60,7 +67,7 @@
     </div>
     <transition name="fade">
       <zoom-gallery
-        v-if="showZoom"
+        v-if="!cylindo && showZoom"
         :images="productImages"
         :is-mobile="true"
         :start-at="currentImage"
@@ -93,6 +100,10 @@ export default {
     interpolator,
   ],
 
+  props: {
+    cylindo: { type: Boolean, default: false },
+  },
+
   data() {
     return {
       showZoom: false,
@@ -112,7 +123,7 @@ export default {
     productImages: {
       immediate: true,
       handler(newImages) {
-        if (!newImages || !newImages.length) {
+        if (this.cylindo || !newImages || !newImages.length) {
           return;
         }
 

@@ -4,13 +4,20 @@
       class="ProductGallery__FeaturedImage"
       @click="showZoom = true"
     >
-      <!-- <responsive-image
+      <div
+        v-if="cylindo"
+        id="cylindo-viewer"
+      />
+      <responsive-image
+        v-else
         :images="images[galleryImage] || {}"
         :initial-spinner="true"
-      /> -->
-      <div id="cylindo-viewer"/>
+      />
     </div>
-    <nav class="ProductGallery__Nav">
+    <nav
+      v-if="!cylindo"
+      class="ProductGallery__Nav"
+    >
       <div
         v-for="(image, index) in images"
         :key="index"
@@ -31,7 +38,7 @@
     </nav>
     <transition name="fade">
       <zoom-gallery
-        v-if="showZoom"
+        v-if="!cylindo && showZoom"
         :images="images"
         :start-at="galleryImage"
         @close="showZoom = false"
@@ -54,6 +61,7 @@ export default {
 
   props: {
     images: { type: Array, default: () => [] },
+    cylindo: { type: Boolean, default: false },
   },
 
   data() {
