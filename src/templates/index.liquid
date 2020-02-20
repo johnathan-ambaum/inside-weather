@@ -1,16 +1,23 @@
 <div id="app">
-  {% comment %} {% assign hasImage = true %}
-  {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_1-min.jpg?1657929',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_1-min.jpg?1657932', 'heading':'RE-THINK YOUR SOFA','description':'Custom sofas starting at $898','linkText':'Shop Sofas','url':'https://insideweather.com/pages/sofas'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_2-min.jpg?1657929',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_2-min.jpg?1657932', 'heading':'HAVE AN IDEA? MAKE IT FLY','description':'Custom dining chairs starting at $118','linkText':'SHOP DINING CHAIRS','url':'https://insideweather.com/pages/dining-chairs'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_d_3-min.jpg?1657929','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_TB_m_3-min.jpg?1657932', 'heading':'Let’s Get Personal','description':'Customize your storage needs with 400+ finish options','linkText':'SHOP SIDEBOARDS','url':'https://insideweather.com/pages/sideboards'}]}"%}
+  {% assign hasImage = true %}
+  {% assign disableSlideContent = true %}
+  {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_d_v1.jpg?v=1581653966',  'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_m_v1.jpg?v=1581653966', 'url':'https://insideweather.com/pages/feb-2020-sale'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_d_flw.jpg?v=1581639944','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/021420_hp-tb_m_flw.jpg?v=1581639944','url':'https://insideweather.com/pages/franklloydwright'}]}"%}
 
-  <banner-carousel
+  {% comment %}
+  <div class="--clip-header">
+    <banner-carousel
     :has-image="{{hasImage}}"
-    :banner-content="{{bannerContent}}">
-  </banner-carousel> {% endcomment %}
+    :banner-content="{{bannerContent}}"
+    :disable-slide-content="{{disableSlideContent}}"
+    >
+    </banner-carousel>
+  </div>
+  {% endcomment %}
 
   <div class="staticBannerWrapper --clip-header">
     <static-banner
-      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/020620_hp-tb_d_v1.jpg?v=1580940189"
-      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/020620_hp-tb_m_v1.jpg?v=1580940189"
+      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_d_v1.jpg?v=1581653966"
+      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_m_v1.jpg?v=1581653966"
       responsive-point="840px"
       banner-link="https://insideweather.com/pages/feb-2020-sale"
     >
@@ -154,23 +161,6 @@
       triggerElement: '.CarouselBanner',
       reverse: false
     }).setTween(bannerCarouselTimeline).addTo(controller);
-
-    const catTimeline = new TimelineLite()
-    catTimeline.fromTo($('._category-lists'), 0.9, {opacity:0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
-    const catTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner',
-      reverse: false,
-      triggerHook: 'onEnter',
-      offset: 25,
-    }).setTween(catTimeline).addTo(controller);
-
-    const valuePropsTimeline = new TimelineLite()
-    valuePropsTimeline.fromTo($('.ValueProps .image_wrapper'), 0.9, {opacity: 0, y: 20, ease: Circ.easeOut}, {opacity: 1, y: 0})
-      .fromTo($('.ValueProps .descriptions h2'), 0.9, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-    const valuePropsTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.CategoryList ._button-wrapper',
-      reverse: false
-    }).setTween(valuePropsTimeline).addTo(controller);
 
     $(window).on('load', function () {
       if($(window).width() < 768) {

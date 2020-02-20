@@ -34,6 +34,7 @@
           </h3>
           <span
             :class="animationElementClass"
+            :data-type="[item.linkText.length > 10 ? animationElementClass : 'limittedText']"
           >
             {{item.linkText}}
           </span>
@@ -82,7 +83,6 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
-
 .CtegoryCollections--itemWrapper {
   align-content: center;
   display: flex;
@@ -213,6 +213,10 @@ export default {
       }
       span {
         font-size: 9px;
+        
+        &[data-type="limittedText"] {
+          font-size: 10px;
+        }
       }
     }
   }
@@ -281,6 +285,16 @@ export default {
       span {
         font-size: 8px;
       }
+    }
+  }
+}
+
+.productCollection {
+  &:not([class^="--pd-t-"]) {
+    padding-top: 75px;
+    
+    @include at-query('max-width: 767px') {  
+      padding-top: 35px;
     }
   }
 }
