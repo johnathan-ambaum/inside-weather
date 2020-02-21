@@ -388,13 +388,21 @@ export default {
       updateAffirm();
     });
 
-    if (window.theme.settings.mulberry && window.theme.settings.mulberry.active) {
+    const setupMulberry = () => {
+      if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
+        return;
+      }
+      if (!window.mulberry) {
+        setTimeout(setupMulberry, 200);
+        return;
+      }
       document.addEventListener('mulberry-shopify:loaded', async () => {
-        await mulberry.core.init({
+        await window.mulberry.core.init({
           publicToken: '6oMVIT3bWc-8sWgS12eToRhzV8I',
         });
       });
-    }
+    };
+    setupMulberry();
   },
 
   methods: {
@@ -416,19 +424,19 @@ export default {
     async initializeMulberry(quantity = 1) {
       const { id } = this.activeProduct;
       const { name: title, price } = this.fullProduct;
-      const offer = await mulberry.core.getWarrantyOffer({ id, title, price });
+      const offer = await window.mulberry.core.getWarrantyOffer({ id, title, price });
 
-      mulberry.modal.init({
+      window.mulberry.modal.init({
         offers: offer,
-        settings: mulberry.core.settings,
+        settings: window.mulberry.core.settings,
         onWarrantySelect: async (warranty) => {
-          const result = await mulberryShop.addToProductCatalog(warranty);
-          await mulberryShop.addWarrantyToCart(result)
-          mulberry.modal.close();
+          const result = await window.mulberryShop.addToProductCatalog(warranty);
+          await window.mulberryShop.addWarrantyToCart(result)
+          window.mulberry.modal.close();
           this.addToCart(quantity, true);
         },
         onWarrantyDecline: () => {
-          mulberry.modal.close();
+          window.mulberry.modal.close();
           this.addToCart(quantity, true);
         },
       });
