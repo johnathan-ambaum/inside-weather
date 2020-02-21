@@ -41,7 +41,7 @@
           FREE Shipping | Ships in
         </template>
         <template v-else>
-          FREE Shipping | Made in the USA<br>
+          FREE Shipping | Custom made in the USA<br>
           Estimated to ship in
         </template>
         <info-popup
