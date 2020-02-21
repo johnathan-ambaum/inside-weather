@@ -9,6 +9,39 @@
     <title>{{ page_title }}</title>
     <!-- Google Tag Manager -->
     <script>
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      };
+      function getCJCookie() {
+        var name = "CJEVENT" + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+      function SetCJCookie() {
+        var url = window.location.search;
+        if(url.indexOf('?CJEVENT=') !== -1){
+          var d=new Date();
+          d.setTime(d.getTime()+(1*24*60*60*1000));//Replace 1 with vwo variable
+          var expires = "; expires="+d.toGMTString();
+          document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires;
+        }
+      }
+      SetCJCookie();
+    </script>
+    <script>
       dataLayer = [{
         totalPrice: {{ checkout.total_price | divided_by: 100 | json }},
         cartCount: {{ checkout.line_items.size }},

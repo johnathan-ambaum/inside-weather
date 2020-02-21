@@ -329,6 +329,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   </style>
   <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=3aebd5a7-95db-462f-a80a-b30633da7997"> </script>
+  <script>
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+    function getCJCookie() {
+      var name = "CJEVENT" + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+    function SetCJCookie() {
+      var url = window.location.search;
+      if(url.indexOf('?CJEVENT=') !== -1){
+        var d=new Date();
+        d.setTime(d.getTime()+(1*24*60*60*1000));//Replace 1 with vwo variable
+        var expires = "; expires="+d.toGMTString();
+        document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires;
+      }
+    }
+    SetCJCookie();
+    
+  </script>
   <!-- End of insideweatherhelp Zendesk Widget script -->
 
   {% comment %} <!--OLD ZENDESK-->
