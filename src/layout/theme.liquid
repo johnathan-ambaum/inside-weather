@@ -111,9 +111,20 @@
       themeVersion: "3.2.4",
       mulberry: {
         active: false
+      },
+      vwo:{
+        countdown:{
+          countdownActive: false,
+          initialTextHeader: "Maker's Promise",
+          initialTextContent: "Your items are in the queue! You have a limited time to reserve your spot.",
+          expirationTextHeader: "Last chance!",
+          expirationTextContent: "Checkout now to confirm your reservation.",
+          timerDurationInMinutes: 10
+        }
       }
     };
   </script>
+
 
   {{ '//code.jquery.com/jquery-3.1.0.min.js' | script_tag }}
   <script>theme.jQuery = jQuery;</script>
