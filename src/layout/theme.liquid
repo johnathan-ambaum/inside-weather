@@ -355,7 +355,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var url = window.location.search;
       if(url.indexOf('?CJEVENT=') !== -1){
         var d=new Date();
-        d.setTime(d.getTime()+(1*24*60*60*1000));//Replace 1 with vwo variable
+        d.setTime(d.getTime()+(45*24*60*60*1000));
         var expires = "; expires="+d.toGMTString();
         document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires;
       }
