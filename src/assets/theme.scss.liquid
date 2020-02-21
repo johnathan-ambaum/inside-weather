@@ -10990,7 +10990,7 @@ div[data-section-type="fading-images"] {
   }
 }
 
-.product-customizer__modal {
+.product-customizer-modal {
   position: fixed; /* Stay in place */
   z-index: 1000; /* Sit on top */
   left: 0;
@@ -11005,7 +11005,8 @@ div[data-section-type="fading-images"] {
 }
 
 /* Modal Content/Box */
-.product-customizer__modal-content {
+.product-customizer-modal__inner {
+  position: relative;
   text-align:center;
   background-color: #fff;
   margin: 20vh auto; /* 15% from the top and centered */
@@ -11013,8 +11014,51 @@ div[data-section-type="fading-images"] {
   border: 1px solid #888;
   max-width: 500px; /* Could be more or less, depending on screen size */
 }
+.product-customizer-modal__title{
+  font-family:Avalon;
+  font-weight:600;
+  font-size:28px;
+}
+.product-customizer-modal__content{
+  font-family:Avalon;
+  font-weight:500;
+  font-size:16px;
+}
+.product-customizer-modal__img{
+  margin-bottom:1rem;
+}
+.product-customizer-modal__add{
+  display: inline-block;
+  font-family:Avalon;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 400;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background-color: #202020;
+  width: 90%;
+  margin: 0 auto;
+}
+.product-customizer-modal__close{
+  margin:10px;
+  font-family:Avalon;
+  font-weight:normal;
+  font-size:16px;
+  text-decoration: underline;
+  color: #000;
+  font-weight: 400;
+}
+.product-customizer-modal__close-btn{
+  position: absolute;
+  top:10px;
+  right:15px;
+  font-weight:600;
 
-
+}
 /*================ New Header Menu ================*/
 
 html body.MobileNav--Active {
