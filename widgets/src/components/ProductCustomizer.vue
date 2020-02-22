@@ -177,7 +177,7 @@
         @click.native.prevent="close(true)"
       />
     </div>
-    <customizer-product-modal ref="modal" ></customizer-product-modal>
+    <customizer-product-modal @photoshoot="photoShootHandler" ref="modal" ></customizer-product-modal>
   </div>
 </template>
 
@@ -456,6 +456,11 @@ export default {
     openModal() { 
       console.log("open modal")
       this.$refs.modal.show() 
+    },
+    photoShootHandler(){
+      console.log('received the event!');
+      this.addToCart(1);
+      // Add Photoshoot product
     },
     showPanel(parameter) {
       this.selectPanel(parameter);
