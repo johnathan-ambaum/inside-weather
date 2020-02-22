@@ -332,7 +332,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     function getUrlParameter(name) {
       name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)',  "i");
       var results = regex.exec(location.search);
       return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
@@ -353,7 +353,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     function SetCJCookie() {
       var url = window.location.search;
-      if(url.indexOf('?CJEVENT=') !== -1){
+      if(url.match(/CJEVENT/i)){
         var d=new Date();
         d.setTime(d.getTime()+(45*24*60*60*1000));
         var expires = "; expires="+d.toGMTString();
