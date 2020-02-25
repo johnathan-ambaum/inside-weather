@@ -212,8 +212,26 @@
           shippingBody.querySelector('form').submit();
         }
 
-        document.addEventListener('page:load', hideShippingStep);
-        document.addEventListener('page:change', hideShippingStep);
+        function hideEmailProperties() {
+          var lineItemProperties = document.querySelectorAll('.order-summary__section__content .product__description__property');
+          lineItemProperties.forEach(function (item) {
+            if (item.innerText.indexOf('Estimated time to ship') !== -1) {
+              return item.remove();
+            }
+            if (item.innerText.indexOf('User Fulfillment Display') !== -1) {
+              item.innerText = item.innerText.replace('User Fulfillment Display', 'Estimated time to ship');
+            }
+          });
+        }
+
+        document.addEventListener('page:load', function () {
+          hideShippingStep()
+          hideEmailProperties();
+        });
+        document.addEventListener('page:change', function () {
+          hideShippingStep();
+          hideEmailProperties();
+        });
       })();
     </script>
   </body>

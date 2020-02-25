@@ -554,6 +554,7 @@ export default {
           quantity,
           properties: {
             'Estimated time to ship': this.emailFulfillmentTime,
+            'User Fulfillment Display': this.fulfillmentTime,
           },
         }),
       })
