@@ -1144,6 +1144,12 @@ lazySizesConfig.expFactor = 4;
       this.drawer = new theme.Drawers('CartDrawer', 'cart');
 
       // Prep handlebars template
+      Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+        return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+      });
+      Handlebars.registerHelper('unlessEquals', function(arg1, arg2, options) {
+        return arg1 != arg2 ? options.fn(this) : options.inverse(this);
+      });
       var source = $(selectors.template).html();
       this.template = Handlebars.compile(source);
 

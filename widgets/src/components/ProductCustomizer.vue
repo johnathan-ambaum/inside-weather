@@ -37,9 +37,13 @@
         </info-popup>
       </div>
       <div class="ProductCustomizer__ShippingDays">
-        FREE Shipping |
-        <template v-if="isDecor">Ships in</template>
-        <template v-else>Custom made in</template>
+        <template v-if="isDecor">
+          FREE Shipping | Ships in
+        </template>
+        <template v-else>
+          FREE Shipping | Custom made in the USA<br>
+          Estimated to ship in
+        </template>
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
@@ -557,7 +561,8 @@ export default {
           id: this.activeProduct.id,
           quantity,
           properties: {
-            'Estimated time to ship': this.fulfillmentTime,
+            'Estimated time to ship': this.emailFulfillmentTime,
+            'User Fulfillment Display': this.fulfillmentTime,
           },
         }),
       })
@@ -745,15 +750,18 @@ html.ProductCustomizer--Open {
   }
 
   &__ShippingDays {
+    color: #202020;
     margin: 25px 0;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: .075em;
-    line-height: 15px;
+    line-height: 19px;
 
     @include at-query($breakpoint-small) {
+      font-family: $font-stack-avalon;
       font-size: 11px;
-      line-height: 14px;
+      letter-spacing: .08em;
+      line-height: 15px;
       margin: 12px 0 20px;
       text-align: center;
     }

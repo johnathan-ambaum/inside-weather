@@ -4,11 +4,32 @@
     <div class="drawer__inner drawer__inner--has-fixed-footer">
       <div class ="drawer__inner--wrapper">
       {{#items}}
-        <div class="ajaxcart__product appear-animation appear-delay-{{animationRow}}">
-          <div class="ajaxcart__row">
-            <div class="grid">
-              <div class="grid__item one-third">
-                <a href="{{url}}" class="ajaxcart__product-image"><img src="{{img}}" alt="{{name}}"></a>
+      <div class="ajaxcart__product appear-animation appear-delay-{{animationRow}}">
+        <div class="ajaxcart__row">
+          <div class="grid">
+            <div class="grid__item one-third">
+              <a href="{{url}}" class="ajaxcart__product-image"><img src="{{img}}" alt="{{name}}"></a>
+            </div>
+            <div class="grid__item two-thirds">
+              <div class="ajaxcart__product-name--wrapper">
+                <a href="{{url}}" class="ajaxcart__product-name">{{{name}}}</a>
+                {{#if variation}}
+                  <span class="ajaxcart__product-meta">{{variation}}</span>
+                {{/if}}
+                {{#properties}}
+                  {{#each this}}
+                    {{#if this}}
+                      {{#ifEquals @key 'User Fulfillment Display'}}
+                        <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
+                      {{/ifEquals}}
+                      {{#unlessEquals @key 'User Fulfillment Display'}}
+                        {{#unlessEquals @key 'Estimated time to ship'}}
+                          <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                        {{/unlessEquals}}
+                      {{/unlessEquals}}
+                    {{/if}}
+                  {{/each}}
+                {{/properties}}
               </div>
               <div class="grid__item two-thirds">
                 <div class="ajaxcart__product-name--wrapper">
