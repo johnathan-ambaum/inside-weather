@@ -4,11 +4,11 @@
     <div id="modal" class="product-customizer-modal">
       <div class="product-customizer-modal__inner">
         <close-button class="product-customizer-modal__close-btn"  @click.native.prevent="hide" :size=15></close-button>
-        <h3 class="product-customizer-modal__title">Looking Good </h3>
-        <p class="product-customizer-modal__content">Nice Design! You are the first person to create this combination. We'd love to feature your item in a photoshoot!</p>
+        <h3 class="product-customizer-modal__title">{{modalTitle}}</h3>
+        <p class="product-customizer-modal__content">{{modalContent}}</p>
         <img class="product-customizer-modal__img" :src="productImages[0].thumbnail">
-        <button class="product-customizer-modal__add" @click="acceptBtn">COUNT ME IN</button>
-        <button class="product-customizer-modal__close" @click="hide">NO THANKS</button>
+        <button class="product-customizer-modal__add" @click="acceptBtn">{{acceptBtnText}}</button>
+        <button class="product-customizer-modal__close" @click="hide">{{declineBtnText}}</button>
       </div>
     </div> 
   </div>
@@ -25,7 +25,11 @@ import CloseButton from './CloseButton.vue'
   },
    data() {
      return {
-      showModal: false
+      showModal: false,
+      modalTitle: theme.settings.vwo.photoshootModal.modalTitle,
+      modalContent: theme.settings.vwo.photoshootModal.modalContent,
+      acceptBtnText: theme.settings.vwo.photoshootModal.acceptBtnText,
+      declineBtnText: theme.settings.vwo.photoshootModal.declineBtnText,
      }
    },
   computed: {
@@ -36,16 +40,13 @@ import CloseButton from './CloseButton.vue'
   },
    methods: {
      show() {
-      this.showModal = true
-      
-      console.log(this.productImages[0].thumbnail);
+      this.showModal = true;
      },
      hide(){
-      this.showModal = false
+      this.showModal = false;
      },
      acceptBtn(){
       this.$emit('photoshoot');
-      console.log("event emmited")
       this.hide();
      }
    }

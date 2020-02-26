@@ -3,7 +3,7 @@
   <form action="/cart" method="post" novalidate class="cart ajaxcart">
     <div class="drawer__inner drawer__inner--has-fixed-footer">
       {{#items}}
-      <div class="ajaxcart__product appear-animation appear-delay-{{animationRow}}">
+      <div class="ajaxcart__product appear-animation appear-delay-{{animationRow}} {{#if isPhotoshoot}} ajaxcart__product--fixed-qty {{/if}}">
         <div class="ajaxcart__row">
           <div class="grid">
             <div class="grid__item one-third">
@@ -23,15 +23,16 @@
                   {{/each}}
                 {{/properties}}
               </div>
-
               <div class="grid grid--full display-table">
+                {{#unless isPhotoshoot }}
                 <div class="grid__item display-table-cell one-half">
                   <div class="ajaxcart__quantity js-qty">
                     <label for="updates_{{key}}" class="visually-hidden">{% endraw %}{{ 'products.product.quantity' | t }}{% raw %}</label>
                     <input type="number" id="updates_{{key}}" name="updates[]" value="{{itemQty}}" min="0" class="js-qty__fallback" data-id="{{key}}">
                   </div>
                 </div>
-                <div class="grid__item display-table-cell one-half text-right">
+                {{/unless}}
+                <div class="grid__item display-table-cell one-half text-right ajaxcart__product-price">
                   {{#if discountsApplied}}
                     <small class="ajaxcart__price--strikethrough">{{{price}}}</small>
                     <span class="ajaxcart__price">
