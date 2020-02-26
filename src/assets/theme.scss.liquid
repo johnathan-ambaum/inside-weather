@@ -2602,7 +2602,7 @@ symbol {
   width: 100%;
   padding: 20px 0;
   margin-bottom: 0;
-  border-bottom: 1px solid $colorDrawerBorder; 
+  border-bottom: 1px solid $colorDrawerBorder;
   @include media-query($medium-up) {
     height: $drawerHeaderHeightLarge;
     padding: 24px 0;
@@ -2707,6 +2707,19 @@ symbol {
     // }
   }
 }
+.drawer__inner--wrapper {
+  bottom: 0;
+  left: 0;
+  padding: ($gutter / 2) ($gutter / 2) 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  @include media-query($medium-up) {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+}
 .drawer-clock__container{
   margin-top:0.5rem;
 }
@@ -2736,7 +2749,7 @@ symbol {
   line-height:19px;
   text-align:left;
   color: #202020;
-  margin-bottom: 0;  
+  margin-bottom: 0;
 }
 .drawer__body {
   position: absolute;
@@ -2796,7 +2809,7 @@ symbol {
     letter-spacing: 0.04em;
     line-height:19px;
     text-align:left;
-    color: #202020;   
+    color: #202020;
   }
 }
 
@@ -2808,7 +2821,7 @@ symbol {
   left: 0;
   right: 0;
   padding: ($gutter / 2) ($gutter / 2) 0;
-  bottom: $drawerCartFooterHeight; // overwritten with JS
+  bottom: 0; // overwritten with JS
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 

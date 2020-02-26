@@ -1164,13 +1164,13 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.initQtySelectors.bind(this));
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
-        $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));  
+        $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
         $(".add-to-cart").on("click", function(){
           localStorage.removeItem('pdp-countdown-timer');
           clearInterval(PDPCountdownTimeInterval);
           if(theme.settings.vwo.countdown.countdownActive){
             CartDrawer.prototype.cartDrawerClockHandler();
-          }  
+          }
         });
 
 
@@ -1350,7 +1350,7 @@ lazySizesConfig.expFactor = 4;
         } else {
           $(selectors.cartBubble).removeClass('cart-link__bubble--visible');
         }
-      },  
+      },
       cartDrawerClockHandler: function(){
         if(theme.settings.vwo.countdown.countdownActive){
           var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
@@ -1385,7 +1385,7 @@ lazySizesConfig.expFactor = 4;
         var current_time = Date.parse(new Date());
         var endtime;
         var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
-      
+
         if(is_done){
           CartDrawer.prototype.countdownComplete(id);
         }else if(localStorage.getItem('pdp-countdown-timer')){
@@ -1407,7 +1407,7 @@ lazySizesConfig.expFactor = 4;
               clock.innerHTML = t.minutes+':'+t.seconds;
             }
           }
-          if(t.total<=0){ 
+          if(t.total<=0){
             clearInterval(PDPCountdownTimeInterval);
             CartDrawer.prototype.countdownComplete(id);
           }
