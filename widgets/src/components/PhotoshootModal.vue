@@ -1,5 +1,5 @@
 
-<template>
+<template v-if="photoshootActive">
   <div v-if="showModal">
     <div id="modal" class="product-customizer-modal">
       <div class="product-customizer-modal__inner">
@@ -26,6 +26,7 @@ import CloseButton from './CloseButton.vue'
    data() {
      return {
       showModal: false,
+      photoshootActive: theme.settings.vwo.photoshootModal.photoshootActive,
       modalTitle: theme.settings.vwo.photoshootModal.modalTitle,
       modalContent: theme.settings.vwo.photoshootModal.modalContent,
       acceptBtnText: theme.settings.vwo.photoshootModal.acceptBtnText,

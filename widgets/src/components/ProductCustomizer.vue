@@ -455,22 +455,25 @@ export default {
       });
     },
     openModal() { 
-      if(this.closedNum > 1){
-        if(localStorage.getItem("PDPModalTimestamp")){
-          const PDPModalTimestamp = JSON.parse(localStorage.getItem("PDPModalTimestamp"));
-          const is_in_past = new Date() > Date.parse(PDPModalTimestamp);
-          if(is_in_past){
+      if(theme.settings.vwo.photoshootModal.photoshootActive){
+        this.closedNum = this.closedNum + 1; 
+        if(this.closedNum > 1){
+          if(localStorage.getItem("PDPModalTimestamp")){
+            const PDPModalTimestamp = JSON.parse(localStorage.getItem("PDPModalTimestamp"));
+            const is_in_past = new Date() > Date.parse(PDPModalTimestamp);
+            if(is_in_past){
+              this.$refs.modal.show();
+              PDPModalTimestamp = new Date();
+              PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
+              localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
+            }
+          }else{
             this.$refs.modal.show();
-            PDPModalTimestamp = new Date();
+            const PDPModalTimestamp = new Date();
             PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
             localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
-          }
-        }else{
-          this.$refs.modal.show();
-          const PDPModalTimestamp = new Date();
-          PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
-          localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
-        } 
+          } 
+        }
       }
     },
     photoShootHandler(){
@@ -511,7 +514,6 @@ export default {
     },
 
     close(closeAll) {
-      this.closedNum = this.closedNum + 1; 
       this.openModal();
       if (this.openPanel && !closeAll) {
         this.selectPanel('');
