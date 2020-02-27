@@ -225,6 +225,51 @@
               "image": "shopify:\/\/shop_images\/nav_seating_sofette-sectional_1.png",
               "hover_image": "shopify:\/\/shop_images\/nav_seating_sofette-sectional_2.png"
             }
+          },
+          "1581477791929": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-organization",
+              "image": "shopify:\/\/shop_images\/nav_decor_organization_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_organization_1.png"
+            }
+          },
+          "1581477836976": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-kitchen",
+              "image": "shopify:\/\/shop_images\/nav_decor_kitchen_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_kitchen_1.png"
+            }
+          },
+          "1581477861824": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-bath",
+              "image": "shopify:\/\/shop_images\/nav_decor_bath_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_bath_1.png"
+            }
+          },
+          "1581477892671": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-bedroom",
+              "image": "shopify:\/\/shop_images\/nav_decor_bedroom_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_bedroom_1.png"
+            }
+          },
+          "1581477919579": {
+            "type": "collection_hover_image",
+            "settings": {
+              "collection": "",
+              "url": "shopify:\/\/pages\/decor-accessories",
+              "image": "shopify:\/\/shop_images\/nav_decor_accessories_0.png",
+              "hover_image": "shopify:\/\/shop_images\/nav_decor_accessories_1.png"
+            }
           }
         },
         "block_order": [
@@ -239,7 +284,12 @@
           "1546537970185",
           "1546537987645",
           "1576013173810",
-          "1576013203143"
+          "1576013203143",
+          "1581477791929",
+          "1581477836976",
+          "1581477861824",
+          "1581477892671",
+          "1581477919579"
         ],
         "settings": {
           "Logo": "shopify:\/\/shop_images\/logo_0061561f-e478-495d-b96b-803216dd2749.png",
@@ -788,10 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#437683",
-          "font_color": "#ffffff",
-          "text": "<p>Brighten up Winter | Save up to <strong>15% OFF<\/strong> EVERYTHING!&nbsp; <strong><a href=\"\/pages\/feb-2020-sale\" title=\"February 2020 Sale\">SHOP NOW<\/a><\/strong><\/p>",
-          "mobile_text": "<p>Brighten up Winter | Save up to&nbsp;<strong>15% OFF!<\/strong>&nbsp;&nbsp;<strong><a href=\"\/pages\/feb-2020-sale\" title=\"February 2020 Sale\">SHOP NOW<\/a><\/strong><\/p>"
+          "background_color": "#f5eeea",
+          "font_color": "#202020",
+          "text": "<p>Free Shipping on Every Order | 365 Day Home Trial<\/p>",
+          "mobile_text": "<p>Free Shipping on Every Order | 365 Day Home Trial<\/p>"
         }
       }
     },

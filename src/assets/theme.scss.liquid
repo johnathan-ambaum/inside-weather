@@ -2602,11 +2602,12 @@ symbol {
   display: table;
   height: $drawerHeaderHeight;
   width: 100%;
-  padding: ($gutter / 2.6) 0;
+  padding: 20px 0;
   margin-bottom: 0;
   border-bottom: 1px solid $colorDrawerBorder;
   @include media-query($medium-up) {
     height: $drawerHeaderHeightLarge;
+    padding: 24px 0;
   }
 }
 
@@ -2681,7 +2682,7 @@ symbol {
 }
 
 /*================ Drawer content ================*/
-
+.drawer__body,
 .drawer__inner {
   position: absolute;
   top: $drawerHeaderHeight;
@@ -2708,6 +2709,111 @@ symbol {
     // }
   }
 }
+.drawer__inner--wrapper {
+  bottom: 0;
+  left: 0;
+  padding: ($gutter / 2) ($gutter / 2) 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  @include media-query($medium-up) {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+}
+.drawer-clock__container{
+  margin-top:0.5rem;
+}
+#drawer__countdown-timer{
+  font-family: Avalon;
+  font-weight: 600;
+  font-size:13px;
+  letter-spacing: 0.04em;
+  line-height:20px;
+  text-align:left;
+  color: red;
+}
+.drawer-clock__header{
+  font-family: Avalon;
+  font-weight: 600;
+  font-size:13px;
+  letter-spacing: 0.04em;
+  line-height:20px;
+  text-align:left;
+  color: #202020;
+}
+.drawer-clock__text{
+  font-family: Avalon;
+  font-weight: 500;
+  font-size:11px;
+  letter-spacing: 0.04em;
+  line-height:19px;
+  text-align:left;
+  color: #202020;
+  margin-bottom: 0;
+}
+.drawer__body {
+  position: absolute;
+  top: $drawerHeaderHeight;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: ($gutter / 2) ($gutter / 2) 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  .drawer--has-fixed-footer & {
+    overflow-y: auto; // remove if uncommenting below media query
+
+    // Enable to prevent fixed footer on short screens
+    // @media only screen and (max-height: $fixedHeightLimit) {
+    //   overflow-y: auto;
+    // }
+  }
+}
+.drawer__body--has-clock{
+  margin-top:6rem;
+}
+@include media-query($medium-up) {
+  .drawer__body{
+    margin-top: 5rem;
+  }
+  .drawer__body--has-clock{
+    margin-top:6rem;
+  }
+  .drawer__inner--wrapper{
+    padding-left:40px;
+    padding-right:40px;
+  }
+  #drawer__countdown-timer{
+    font-family: Avalon;
+    font-weight: 600;
+    font-size:15px;
+    letter-spacing: 0.04em;
+    line-height:20px;
+    text-align:left;
+    color: red;
+  }
+  .drawer-clock__header{
+    font-family: Avalon;
+    font-weight: 600;
+    font-size:15px;
+    letter-spacing: 0.04em;
+    line-height:20px;
+    text-align:left;
+    color: #202020;
+  }
+  .drawer-clock__text{
+    font-family: Avalon;
+    font-weight: 500;
+    font-size:12px;
+    letter-spacing: 0.04em;
+    line-height:19px;
+    text-align:left;
+    color: #202020;
+  }
+}
 
 // Drawer content with fixed footer
 
@@ -2716,14 +2822,13 @@ symbol {
   top: 0;
   left: 0;
   right: 0;
-  margin: 0;
   padding: ($gutter / 2) ($gutter / 2) 0;
-  bottom: $drawerCartFooterHeight; // overwritten with JS
+  bottom: 0; // overwritten with JS
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 
   @include media-query($medium-up) {
-    padding: ($gutter / 1.35) $gutter 0;
+    padding: ($gutter / 1.35) 0 0 0;
   }
 
   // Enable to prevent fixed footer on short screens

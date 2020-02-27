@@ -40,6 +40,7 @@
         <div 
           class="CategoryBanner--content"
           v-if="hasBannerContent"
+          :class="[hasBannerAccoridon ? '' : 'large-content-frame']"
         >
           <h2 
             class="--caps"
@@ -220,6 +221,11 @@ export default {
       top: 36px;
       margin: 0 auto;
       z-index: 8;
+
+      &.large-content-frame {
+        max-width: calc(100% - 30px);
+      }
+
       h2 {
         display: block;
         font-family: $font-stack-avalon;
@@ -421,7 +427,10 @@ export default {
   }
   @include at-query('max-width: 480px') {
     .CategoryBanner--items .CategoryBanner--content {
-      max-width: calc(100% - 100px);
+      max-width: calc(100% - 30px);
+      h2 {
+        font-size: 22px;
+      }
     }
   }
 }
