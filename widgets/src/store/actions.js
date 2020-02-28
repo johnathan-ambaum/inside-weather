@@ -3,7 +3,7 @@ import FilterStorage from '../util/FilterStorage';
 // import interpolator from '../mixins/interpolator';
 
 const apiClient = new ApiClient();
-let cylindoViewer;
+let cylindoViewers = [];
 
 /**
  * Set up filter definition for category
@@ -60,24 +60,41 @@ export function loadProductImages({ dispatch, commit, state }) {
     features = features.concat(selected.cylindo_features || []);
   });
 
-  // console.log({ features, baseSKU: state.filters.cylindo_sku });
+  console.log({ features, baseSKU: state.filters.cylindo_sku });
 
-  if (cylindoViewer) {
-    cylindoViewer.setFeatures(features);
-    return;
+  if (cylindoViewers.length > 0) {
+    cylindoViewers.forEach((viewer) => {
+      viewer.setFeatures(features);
+    });
   }
 
   window.cylindo.on('ready', () => {
-    cylindoViewer = window.cylindo.viewer.create({
-      debug: true,
-      accountID: 4931,
-      SKU: state.filters.cylindo_sku,
-      features,
-      country: 'us',
-      containerID: 'cylindo-viewer',
-      viewerType: 2,
-      thumbs: true,
-      ...(state.filters.cylindo_overrides || {}),
+    const containerIds = ['cylindo-main'];
+    // const containerIds = ['cylindo-main', 'cylindo-customizer'];
+    cylindoViewers = containerIds.map((containerID) => {
+      console.log(containerID, document.querySelector(`#${containerID}`));
+      console.log(containerID, {
+        debug: true,
+        accountID: 4931,
+        SKU: state.filters.cylindo_sku,
+        features,
+        country: 'us',
+        containerID,
+        viewerType: 2,
+        thumbs: true,
+        ...(state.filters.cylindo_overrides || {}),
+      });
+      return window.cylindo.viewer.create({
+        debug: true,
+        accountID: 4931,
+        SKU: state.filters.cylindo_sku,
+        features,
+        country: 'us',
+        containerID,
+        viewerType: 2,
+        thumbs: true,
+        ...(state.filters.cylindo_overrides || {}),
+      });
     });
   });
 }

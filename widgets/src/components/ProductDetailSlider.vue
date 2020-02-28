@@ -14,11 +14,11 @@
     />
     <div class="ProductDetailSlider">
       <div
-        v-if="cylindo"
-        id="cylindo-viewer"
+        v-show="cylindo"
+        id="cylindo-secondary"
       />
       <div
-        v-else
+        v-if="!cylindo"
         ref="slider"
         class="glide"
       >

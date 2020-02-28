@@ -81,6 +81,9 @@ export default {
     }),
 
     useCylindo() {
+      if (!this.filters) {
+        return false;
+      }
       // double ! to cast truthy/falsy values to boolean
       return !!this.filters.cylindo_sku;
     },

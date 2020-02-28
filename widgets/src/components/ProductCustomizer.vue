@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider :cylindo="false" />
+        <product-detail-slider :cylindo="useCylindo" />
         <button
           v-if="!isMobile"
           class="ProductCustomizer__Close"
@@ -299,11 +299,16 @@ export default {
   watch: {
     active(isActive) {
       const openClass = 'ProductCustomizer--Open';
+      const cylindoEl = document.querySelector('#cylindo-main');
       if (isActive) {
         document.documentElement.classList.add(openClass);
+        const customizerGallery = document.querySelector('.ProductCustomizer .ProductDetailSlider')
+        customizerGallery.appendChild(cylindoEl);
         return;
       }
 
+      const mainGallery = document.querySelector('.ProductDetail .ProductGallery__FeaturedImage');
+      mainGallery.appendChild(cylindoEl);
       document.documentElement.classList.remove(openClass);
       const zendesk = document.querySelector('.zEWidget-launcher');
       if (zendesk) {

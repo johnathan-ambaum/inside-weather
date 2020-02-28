@@ -5,11 +5,11 @@
       @click="showZoom = true"
     >
       <div
-        v-if="cylindo"
-        id="cylindo-viewer"
+        v-show="cylindo"
+        id="cylindo-main"
       />
       <responsive-image
-        v-else
+        v-if="!cylindo"
         :images="images[galleryImage] || {}"
         :initial-spinner="true"
       />
