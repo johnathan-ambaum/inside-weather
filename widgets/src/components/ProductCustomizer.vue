@@ -40,9 +40,13 @@
         </info-popup>
       </div>
       <div class="ProductCustomizer__ShippingDays">
-        FREE Shipping |
-        <template v-if="isDecor">Ships in</template>
-        <template v-else>Custom made in</template>
+        <template v-if="isDecor">
+          FREE Shipping | Ships in
+        </template>
+        <template v-else>
+          FREE Shipping | Custom made in the USA<br>
+          Estimated to ship in
+        </template>
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
@@ -401,13 +405,21 @@ export default {
       updateAffirm();
     });
 
-    if (window.theme.settings.mulberry && window.theme.settings.mulberry.active) {
+    const setupMulberry = () => {
+      if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
+        return;
+      }
+      if (!window.mulberry) {
+        setTimeout(setupMulberry, 200);
+        return;
+      }
       document.addEventListener('mulberry-shopify:loaded', async () => {
-        await mulberry.core.init({
+        await window.mulberry.core.init({
           publicToken: '6oMVIT3bWc-8sWgS12eToRhzV8I',
         });
       });
-    }
+    };
+    setupMulberry();
   },
 
   methods: {
@@ -429,19 +441,19 @@ export default {
     async initializeMulberry(quantity = 1) {
       const { id } = this.activeProduct;
       const { name: title, price } = this.fullProduct;
-      const offer = await mulberry.core.getWarrantyOffer({ id, title, price });
+      const offer = await window.mulberry.core.getWarrantyOffer({ id, title, price });
 
-      mulberry.modal.init({
+      window.mulberry.modal.init({
         offers: offer,
-        settings: mulberry.core.settings,
+        settings: window.mulberry.core.settings,
         onWarrantySelect: async (warranty) => {
-          const result = await mulberryShop.addToProductCatalog(warranty);
-          await mulberryShop.addWarrantyToCart(result)
-          mulberry.modal.close();
+          const result = await window.mulberryShop.addToProductCatalog(warranty);
+          await window.mulberryShop.addWarrantyToCart(result)
+          window.mulberry.modal.close();
           this.addToCart(quantity, true);
         },
         onWarrantyDecline: () => {
-          mulberry.modal.close();
+          window.mulberry.modal.close();
           this.addToCart(quantity, true);
         },
       });
@@ -562,7 +574,8 @@ export default {
           id: this.activeProduct.id,
           quantity,
           properties: {
-            'Estimated time to ship': this.fulfillmentTime,
+            'Estimated time to ship': this.emailFulfillmentTime,
+            'User Fulfillment Display': this.fulfillmentTime,
           },
         }),
       })
@@ -750,15 +763,18 @@ html.ProductCustomizer--Open {
   }
 
   &__ShippingDays {
+    color: #202020;
     margin: 25px 0;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: .075em;
-    line-height: 15px;
+    line-height: 19px;
 
     @include at-query($breakpoint-small) {
+      font-family: $font-stack-avalon;
       font-size: 11px;
-      line-height: 14px;
+      letter-spacing: .08em;
+      line-height: 15px;
       margin: 12px 0 20px;
       text-align: center;
     }

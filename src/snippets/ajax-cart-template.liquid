@@ -2,6 +2,7 @@
 {% raw %}
   <form action="/cart" method="post" novalidate class="cart ajaxcart">
     <div class="drawer__inner drawer__inner--has-fixed-footer">
+      <div class ="drawer__inner--wrapper">
       {{#items}}
       <div class="ajaxcart__product appear-animation appear-delay-{{animationRow}}">
         <div class="ajaxcart__row">
@@ -18,12 +19,18 @@
                 {{#properties}}
                   {{#each this}}
                     {{#if this}}
-                      <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                      {{#ifEquals @key 'User Fulfillment Display'}}
+                        <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
+                      {{/ifEquals}}
+                      {{#unlessEquals @key 'User Fulfillment Display'}}
+                        {{#unlessEquals @key 'Estimated time to ship'}}
+                          <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                        {{/unlessEquals}}
+                      {{/unlessEquals}}
                     {{/if}}
                   {{/each}}
                 {{/properties}}
               </div>
-
               <div class="grid grid--full display-table">
                 <div class="grid__item display-table-cell one-half">
                   <div class="ajaxcart__quantity js-qty">
@@ -56,15 +63,16 @@
             </div>
           </div>
         </div>
-      </div>
-      {{/items}}
-
-      {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
-        <div class="appear-animation appear-delay-{{lastAnimationRow}}">
-          <label for="CartSpecialInstructions" class="ajaxcart__note">{% endraw %}{{ 'cart.general.note' | t }}{% raw %}</label>
-          <textarea name="note" class="input-full" id="CartSpecialInstructions">{{note}}</textarea>
         </div>
-      {% endraw %}{% endif %}{% raw %}
+        {{/items}}
+
+        {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
+          <div class="appear-animation appear-delay-{{lastAnimationRow}}">
+            <label for="CartSpecialInstructions" class="ajaxcart__note">{% endraw %}{{ 'cart.general.note' | t }}{% raw %}</label>
+            <textarea name="note" class="input-full" id="CartSpecialInstructions">{{note}}</textarea>
+          </div>
+        {% endraw %}{% endif %}{% raw %}
+      </div>
     </div>
     <div class="drawer__footer drawer__footer--fixed appear-animation appear-delay-{{lastAnimationRow}}">
       <div class="grid grid--full">

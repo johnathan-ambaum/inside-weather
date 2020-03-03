@@ -1144,6 +1144,12 @@ lazySizesConfig.expFactor = 4;
       this.drawer = new theme.Drawers('CartDrawer', 'cart');
 
       // Prep handlebars template
+      Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+        return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+      });
+      Handlebars.registerHelper('unlessEquals', function(arg1, arg2, options) {
+        return arg1 != arg2 ? options.fn(this) : options.inverse(this);
+      });
       var source = $(selectors.template).html();
       this.template = Handlebars.compile(source);
 
@@ -1152,13 +1158,21 @@ lazySizesConfig.expFactor = 4;
 
       this.initEventListeners();
     };
-
+    var PDPCountdownTimeInterval;
     CartDrawer.prototype = $.extend({}, CartDrawer.prototype, {
       initEventListeners: function() {
         $('body').on('updateCart' + config.namespace, this.initQtySelectors.bind(this));
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
         $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
+        $(".add-to-cart").on("click", function(){
+          localStorage.removeItem('pdp-countdown-timer');
+          clearInterval(PDPCountdownTimeInterval);
+          if(theme.settings.vwo.countdown.countdownActive){
+            CartDrawer.prototype.cartDrawerClockHandler();
+          }
+        });
+
 
         $(window).on('resize' + config.namespace, $.debounce(150, this.sizeFooter.bind(this)));
 
@@ -1336,12 +1350,74 @@ lazySizesConfig.expFactor = 4;
         } else {
           $(selectors.cartBubble).removeClass('cart-link__bubble--visible');
         }
+      },
+      cartDrawerClockHandler: function(){
+        if(theme.settings.vwo.countdown.countdownActive){
+          var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
+          $('.drawer__close').css('vertical-align', 'top' );
+          $('.drawer__close-button').css('height', 'auto');
+          $('.drawer__body').addClass('drawer__body--has-clock');
+          CartDrawer.prototype.run_clock('drawer__countdown-timer', theme.settings.vwo.countdown.timerDurationInMinutes);
+          if(is_done){
+            $(".drawer-clock__header").text(theme.settings.vwo.countdown.expirationTextHeader);
+            $(".drawer-clock__text").text(theme.settings.vwo.countdown.expirationTextContent);
+          }else{
+            $(".drawer-clock__header").text(theme.settings.vwo.countdown.initialTextHeader);
+            $(".drawer-clock__text").text(theme.settings.vwo.countdown.initialTextContent);
+          }
+          $(".drawer-clock__container").show();
+        }
+      },
+      countdownComplete: function(id){
+        localStorage.setItem('pdp-countdown-timer',JSON.stringify('DONE'));
+        $('#'+ id).text('0:00');
+        $(".drawer-clock__header").text(theme.settings.vwo.countdown.expirationTextHeader);
+        $(".drawer-clock__text").text(theme.settings.vwo.countdown.expirationTextContent);
+      },
+      time_remaining: function(endtime){
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor( (t/1000) % 60 );
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        return {'total':t, 'minutes':minutes, 'seconds':seconds};
+      },
+      run_clock(id, time_in_minutes){
+        var clock = document.getElementById(id);
+        var current_time = Date.parse(new Date());
+        var endtime;
+        var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
+
+        if(is_done){
+          CartDrawer.prototype.countdownComplete(id);
+        }else if(localStorage.getItem('pdp-countdown-timer')){
+          endtime = JSON.parse(localStorage.getItem('pdp-countdown-timer'));
+        }else{
+          endtime = new Date(current_time + time_in_minutes*60*1000);
+          localStorage.setItem('pdp-countdown-timer', JSON.stringify(endtime));
+        }
+        function update_clock(){
+          var t =  CartDrawer.prototype.time_remaining(endtime);
+          if(!is_done){
+            if(t.minutes < 10 && t.seconds < 10){
+              clock.innerHTML = t.minutes +':0'+t.seconds;
+            }else if(t.minutes < 10 && !t.seconds < 10){
+              clock.innerHTML = t.minutes +':'+t.seconds;
+            }else if(!t.minutes < 10 && t.seconds < 10){
+              clock.innerHTML = t.minutes +':0'+t.seconds;
+            }else if(!t.minutes < 10 && !t.seconds < 10){
+              clock.innerHTML = t.minutes+':'+t.seconds;
+            }
+          }
+          if(t.total<=0){
+            clearInterval(PDPCountdownTimeInterval);
+            CartDrawer.prototype.countdownComplete(id);
+          }
+        }
+        update_clock();
+        PDPCountdownTimeInterval = setInterval(update_clock,1000);
       }
     });
-
     return CartDrawer;
   })();
-
   theme.AjaxProduct = (function() {
     var status = {
       loading: false

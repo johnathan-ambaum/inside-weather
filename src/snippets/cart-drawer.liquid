@@ -2,7 +2,14 @@
   <div id="CartDrawer" class="drawer drawer--right drawer--has-fixed-footer">
     <div class="drawer__fixed-header">
       <div class="drawer__header appear-animation appear-delay-1">
-        <div class="drawer__title">{{ 'cart.general.title' | t }}</div>
+        <div class="drawer__title">
+          {{ 'cart.general.title' | t }}
+            <div class="drawer-clock__container" style="display:none;">
+              <span id="drawer__countdown-timer"></span> 
+              <span class="drawer-clock__header"></span>
+              <p class="drawer-clock__text"></p>
+            </div>
+        </div>
         <div class="drawer__close">
           <button type="button" class="drawer__close-button js-drawer-close">
             {% include 'icon-close' %}
@@ -11,8 +18,11 @@
         </div>
       </div>
     </div>
-    <div class="drawer__inner">
+    <div class="drawer__body">
       <div id="CartContainer" class="drawer__cart"></div>
     </div>
   </div>
 {% endif %}
+
+
+  
