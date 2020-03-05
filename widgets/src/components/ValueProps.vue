@@ -75,7 +75,7 @@ export default {
   &::before {
     content: "";
     background: #f2f2f2;
-    height: calc(100% - 70px);
+    height: calc(100% - 50px);
     position: absolute;
     left: 0;
     right: 0;
@@ -107,6 +107,7 @@ export default {
         @include block(100%);
         @include transition();
         @include translate(0,100%);
+
         img{
           height: 100%;
           display: block;
@@ -143,7 +144,7 @@ export default {
         margin: 0;
         position: absolute;
         text-transform: capitalize;
-        top: 163px;
+        top: 143px;
         @include fonts(34px,#202020,1.2,0.04em);
       }
       .details {
@@ -170,6 +171,9 @@ export default {
     }
   }
   @include at-query('max-width: 1199px') {
+    &::before {
+      height: calc(100% - 40px)
+    }
     .content {
       .image_wrapper {
         padding-bottom: 42.5%;
@@ -185,6 +189,10 @@ export default {
   }
   @include at-query('max-width: 991px') {
     padding: 0 0 53px;    
+    &::before {
+      height: calc(100% - 70px);
+    }
+
     .content {
       flex-wrap: wrap;
       .image_wrapper {

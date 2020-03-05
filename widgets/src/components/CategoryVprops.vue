@@ -140,6 +140,8 @@ export default {
     }
   }
   @include at-query('max-width: 767px') {
+    padding: 38px 0;
+    
     .category-value-props {
       display: block;
       margin: 0;

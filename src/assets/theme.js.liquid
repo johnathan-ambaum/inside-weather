@@ -1144,6 +1144,12 @@ lazySizesConfig.expFactor = 4;
       this.drawer = new theme.Drawers('CartDrawer', 'cart');
 
       // Prep handlebars template
+      Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+        return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+      });
+      Handlebars.registerHelper('unlessEquals', function(arg1, arg2, options) {
+        return arg1 != arg2 ? options.fn(this) : options.inverse(this);
+      });
       var source = $(selectors.template).html();
       this.template = Handlebars.compile(source);
 
@@ -1354,7 +1360,6 @@ lazySizesConfig.expFactor = 4;
         var cartTotal = Math.round(cart.original_total_price/100);
         var VWOMinTotal = theme.settings.vwo.countdown.minimumCartTotalUSD;
         var isGreater = cartTotal > VWOMinTotal;
-        console.log(cartTotal,isGreater);
         if(theme.settings.vwo.countdown.countdownActive && isGreater){
           var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
           $('.drawer__close').css('vertical-align', 'top' );
@@ -1388,7 +1393,7 @@ lazySizesConfig.expFactor = 4;
         var current_time = Date.parse(new Date());
         var endtime;
         var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
-      
+
         if(is_done){
           CartDrawer.prototype.countdownComplete(id);
         }else if(localStorage.getItem('pdp-countdown-timer')){
@@ -1410,7 +1415,7 @@ lazySizesConfig.expFactor = 4;
               clock.innerHTML = t.minutes+':'+t.seconds;
             }
           }
-          if(t.total<=0){ 
+          if(t.total<=0){
             clearInterval(PDPCountdownTimeInterval);
             CartDrawer.prototype.countdownComplete(id);
           }
