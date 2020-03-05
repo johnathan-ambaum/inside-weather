@@ -1,13 +1,21 @@
 <template>
-  <div class="ProductGallery">
+  <div
+    :class="{ 'ProductGallery--Cylindo': cylindo }"
+    class="ProductGallery"
+  >
     <div
       class="ProductGallery__FeaturedImage"
       @click="showZoom = true"
     >
       <div
         v-show="cylindo"
-        id="cylindo-main"
-      />
+        class="cylindo-wrap"
+      >
+        <div
+          id="cylindo-main"
+          class="cylindo-frame"
+        />
+      </div>
       <responsive-image
         v-if="!cylindo"
         :images="images[galleryImage] || {}"
@@ -92,6 +100,43 @@ export default {
   @include at-query($breakpoint-large) {
     margin-bottom: 30px;
   }
+
+  // CYLINDO
+  &--Cylindo {
+    .cylindo-viewer-container {
+      z-index: 0;
+    }
+
+    .cylindo-wrap {
+      height: 0;
+      padding-top: 100%;
+      position: relative;
+      width: 100%;
+    }
+
+    .cylindo-frame {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .cylindo-action-button-group {
+      &.left, &.right {
+        top: 50px;
+      }
+    }
+
+    .cylindo-drag-tooltip.cylindo-drag-to-rotate-tooltip {
+      bottom: 120px;
+    }
+
+    .cylindo-thumbnail-wrapper.thumb-location-bottom.has-thumbs {
+      bottom: 120px;
+    }
+  }
+  // END CYLINDO
 
   &__FeaturedImage {
     cursor: zoom-in;

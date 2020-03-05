@@ -39,19 +39,17 @@ export function loadProductImages({ dispatch, commit, state }) {
   }
 
   // fall back to IW API for images if cylindo parameters not set in the filter definitions
-  // for now always pulling from both sources because some components still use productImages array
-  // TODO: figure out how we want to handle the multiple image viewers on the page and uncomment this condition
-  // if (!state.filters.cylindo_sku) {
-  apiClient
-    .getImages({
-      type: state.category,
-      attributes: state.selectedOptions,
-    })
-    .then((images) => {
-      commit('setProductImages', images);
-    });
-  //   return;
-  // }
+  if (!state.filters.cylindo_sku) {
+    apiClient
+      .getImages({
+        type: state.category,
+        attributes: state.selectedOptions,
+      })
+      .then((images) => {
+        commit('setProductImages', images);
+      });
+    return;
+  }
 
   let features = [];
   Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
@@ -60,42 +58,33 @@ export function loadProductImages({ dispatch, commit, state }) {
     features = features.concat(selected.cylindo_features || []);
   });
 
-  console.log({ features, baseSKU: state.filters.cylindo_sku });
+  // console.log({ SKU: state.filters.cylindo_sku, features });
 
   if (cylindoViewers.length > 0) {
     cylindoViewers.forEach((viewer) => {
+      console.log({ viewer });
       viewer.setFeatures(features);
     });
+    return;
   }
 
   window.cylindo.on('ready', () => {
-    const containerIds = ['cylindo-main'];
-    // const containerIds = ['cylindo-main', 'cylindo-customizer'];
-    cylindoViewers = containerIds.map((containerID) => {
-      console.log(containerID, document.querySelector(`#${containerID}`));
-      console.log(containerID, {
-        debug: true,
-        accountID: 4931,
-        SKU: state.filters.cylindo_sku,
-        features,
-        country: 'us',
-        containerID,
-        viewerType: 2,
-        thumbs: true,
-        ...(state.filters.cylindo_overrides || {}),
-      });
-      return window.cylindo.viewer.create({
-        debug: true,
-        accountID: 4931,
-        SKU: state.filters.cylindo_sku,
-        features,
-        country: 'us',
-        containerID,
-        viewerType: 2,
-        thumbs: true,
-        ...(state.filters.cylindo_overrides || {}),
-      });
-    });
+    const containerIds = ['cylindo-main', 'cylindo-secondary'];
+    const globalDefaults = {
+      debug: true,
+      accountID: 4931,
+      SKU: state.filters.cylindo_sku,
+      features,
+      country: 'us',
+      viewerType: 2,
+      thumbs: true,
+    };
+
+    cylindoViewers = containerIds.map(containerID => window.cylindo.viewer.create({
+      ...globalDefaults,
+      ...(state.filters.cylindo_overrides || {}),
+      containerID,
+    }));
   });
 }
 

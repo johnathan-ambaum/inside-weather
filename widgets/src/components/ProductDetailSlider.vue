@@ -12,10 +12,14 @@
       direction="right"
       @click.native="nextImage"
     />
-    <div class="ProductDetailSlider">
+    <div
+      :class="{ 'ProductDetailSlider--Cylindo': cylindo }"
+      class="ProductDetailSlider"
+    >
       <div
         v-show="cylindo"
         id="cylindo-secondary"
+        class="cylindo-frame"
       />
       <div
         v-if="!cylindo"
@@ -60,7 +64,7 @@
         </div>
       </div>
       <zoom-button
-        v-if="!isMobile"
+        v-if="!cylindo && !isMobile"
         class="ProductDetailSlider__Zoom"
         @click.native.prevent="triggerZoom()"
       />
@@ -195,6 +199,27 @@ $tile-size-desktop: 100%;
     top: 55px;
     width: 100%;
   }
+
+  // CYLINDO
+  &--Cylindo {
+    .cylindo-frame {
+      height: 100%;
+    }
+
+    .cylindo-thumbnail-wrapper.thumb-location-bottom.has-thumbs {
+      bottom: 10px;
+    }
+
+    @include at-query($breakpoint-small) {
+      height: 100vw;
+
+      .cylindo-action-button-group.right {
+        right: 4px;
+        top: 32px;
+      }
+    }
+  }
+  // END CYLINDO
 
   &__Arrow {
     align-items: center;

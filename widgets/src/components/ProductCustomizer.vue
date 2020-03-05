@@ -78,7 +78,7 @@
     <swatch-browser v-if="!isDecor" />
     <div
       v-if="!isDecor"
-      :class="{ 'ProductCustomizer--Active': active }"
+      :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
       class="ProductCustomizer"
     >
       <div class="ProductCustomizer__NameOverlay">
@@ -303,16 +303,11 @@ export default {
   watch: {
     active(isActive) {
       const openClass = 'ProductCustomizer--Open';
-      const cylindoEl = document.querySelector('#cylindo-main');
       if (isActive) {
         document.documentElement.classList.add(openClass);
-        const customizerGallery = document.querySelector('.ProductCustomizer .ProductDetailSlider')
-        customizerGallery.appendChild(cylindoEl);
         return;
       }
 
-      const mainGallery = document.querySelector('.ProductDetail .ProductGallery__FeaturedImage');
-      mainGallery.appendChild(cylindoEl);
       document.documentElement.classList.remove(openClass);
       const zendesk = document.querySelector('.zEWidget-launcher');
       if (zendesk) {
@@ -1114,6 +1109,12 @@ html.ProductCustomizer--Open {
       position: absolute;
       right: 0;
       width: 324px;
+    }
+  }
+
+  &--Cylindo &__Close {
+    @include at-query($breakpoint-large) {
+      bottom: 30px;
     }
   }
 
