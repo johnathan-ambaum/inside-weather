@@ -226,7 +226,7 @@ export default {
       a {
         padding: 10px 10px 25px;
         figure {
-          padding-bottom: 66.66%;
+          padding-bottom: 85%;
         }
       }
       &:nth-of-type(3) {
