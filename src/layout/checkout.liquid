@@ -225,7 +225,27 @@
     {{ tracking_code }}
 
     <script>
+      
       (function () {
+        var lastStep = null;
+        var currentStep = null;
+        var isPayment = document.getElementById("main-header").innerHTML.trim() == 'Payment';
+        if (window.location.search.indexOf('step=') === -1 && !isPayment ) {
+          currentStep = 1;
+        } else if (window.location.search.indexOf('?step=shipping_method') !== -1) {
+          currentStep = 2;
+        } else if (window.location.search.indexOf('&step=payment_method') !== -1 || isPayment) {
+          currentStep = 3;
+        }
+        lastStep = sessionStorage.getItem('last_step');
+        sessionStorage.setItem('last_step', currentStep);
+        function renamePreviousLinkStep() {
+          var link = document.querySelector('.step__footer__previous-link-content');
+          if (!link || link.innerHTML == 'Return to cart') {
+            return;
+          }
+          link.innerHTML = 'Return to Information';     
+        }
         function renameContinueButtonOnInfoStep() {
           var button = document.querySelector('.step[data-step="contact_information"] .step__footer .btn__content');
           if (!button) {
@@ -236,13 +256,19 @@
 
         function hideShippingStep() {
           renameContinueButtonOnInfoStep();
+          renamePreviousLinkStep();
           var shippingBody = document.querySelector('.step[data-step="shipping_method"]');
           var spinner = document.querySelector('.main__content .GlyphLoading');
           if (!shippingBody || !spinner) {
             return;
           }
           spinner.style.display = 'block';
-          shippingBody.querySelector('form').submit();
+          if(lastStep == 3){
+            document.querySelector('a[data-trekkie-id="breadcrumb_contact_information_link"]').click();
+          }else{
+            shippingBody.querySelector('form').submit();
+          }
+          
         }
 
         function hideEmailProperties() {
@@ -256,7 +282,6 @@
             }
           });
         }
-
         document.addEventListener('page:load', function () {
           hideShippingStep()
           hideEmailProperties();
