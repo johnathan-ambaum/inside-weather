@@ -838,10 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#f5eeea",
-          "font_color": "#202020",
-          "text": "<p>Free Shipping on Every Order | 365 Day Home Trial<\/p>",
-          "mobile_text": "<p>Free Shipping on Every Order | 365 Day Home Trial<\/p>"
+          "background_color": "#cad9de",
+          "font_color": "#394448",
+          "text": "<p>The sale you&rsquo;ve been dreaming of! Save up to <strong>20% OFF!<\/strong> <a href=\"\/pages\/2020-march-sale\" title=\"2020 March Sale\">SHOP NOW<\/a><\/p>",
+          "mobile_text": "<p>Don&rsquo;t hit snooze on this sale. Save up to <strong>20% OFF!<\/strong>&nbsp;<a href=\"\/pages\/2020-march-sale\" title=\"2020 March Sale\">SHOP NOW<\/a><\/p>"
         }
       }
     },
