@@ -229,7 +229,7 @@
       (function () {
         var lastStep = null;
         var currentStep = null;
-        var isPayment = document.getElementById("main-header").innerHTML.trim() == 'Payment';
+        var isPayment = Shopify.Checkout.step == 'payment_method';
         if (window.location.search.indexOf('step=') === -1 && !isPayment ) {
           currentStep = 1;
         } else if (window.location.search.indexOf('?step=shipping_method') !== -1) {
