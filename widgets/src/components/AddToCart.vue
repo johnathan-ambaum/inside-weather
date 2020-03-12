@@ -54,7 +54,6 @@ export default {
     outOfStock: {
       immediate: true,
       handler(outOfStock) {
-        console.log({ outOfStock });
         if (outOfStock) {
           this.quantity = 0;
           return;
