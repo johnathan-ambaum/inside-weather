@@ -435,8 +435,8 @@ export default {
 
     async initializeMulberry(quantity = 1) {
       const { id } = this.activeProduct;
-      const { name: title, price } = this.fullProduct;
-      const offer = await window.mulberry.core.getWarrantyOffer({ id, title, price });
+      const { name: title, price, sku } = this.fullProduct;
+      const offer = await window.mulberry.core.getWarrantyOffer({ id, title, price, sku });
 
       window.mulberry.modal.init({
         offers: offer,

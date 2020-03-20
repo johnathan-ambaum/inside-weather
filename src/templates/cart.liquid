@@ -35,9 +35,9 @@
 
                     <div class="grid__item one-quarter">
                       <a href="{{ item.url | within: collections.all }}" class="cart__image">
-                        {%- assign img_url = item | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                        <img class="lazyload"
-                            data-src="{{ img_url }}"
+                        {%- assign img_url = item | img_url: '1x1' | replace: '_1x1.', '_medium.' -%}
+                        <img
+                            src="{{ img_url }}"
                             data-widths="[180, 360, 540]"
                             data-aspectratio="{{ item.aspect_ratio }}"
                             data-sizes="auto"
@@ -79,7 +79,7 @@
                       {% endif %}
 
                       <p class="cart__product-meta">
-                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn--small">
+                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn--secondary btn--small">
                           {{ 'cart.general.remove' | t }}
                         </a>
                       </p>
@@ -175,7 +175,7 @@
                 <button type="submit" name="update" class="btn--secondary update-cart">
                   {{ 'cart.general.update' | t }}
                 </button>
-                <button type="submit" name="checkout" class="btn cart__checkout{% if settings.cart_terms_conditions_enable %} cart__checkout--page{% endif %}">
+                <button type="submit" name="checkout" class="btn--secondary cart__checkout{% if settings.cart_terms_conditions_enable %} cart__checkout--page{% endif %}">
                   {{ 'cart.general.checkout' | t }}
                 </button>
               </div>

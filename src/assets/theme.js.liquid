@@ -1164,13 +1164,15 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.initQtySelectors.bind(this));
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
-        $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
-        $(".add-to-cart").on("click", function(){
+        $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));  
+        $(".js-cart-count").on("click", function(){
           localStorage.removeItem('pdp-countdown-timer');
           clearInterval(PDPCountdownTimeInterval);
           if(theme.settings.vwo.countdown.countdownActive){
-            CartDrawer.prototype.cartDrawerClockHandler();
-          }
+            theme.cart.getCart().then(function(cart){
+              CartDrawer.prototype.buildCart(cart, true);
+            }.bind(this));
+          }  
         });
 
 
@@ -1185,6 +1187,9 @@ lazySizesConfig.expFactor = 4;
 
       buildCart: function(cart, openDrawer) {
         $('.js-cart-count').text(cart.item_count);
+        if(theme.settings.vwo.countdown.countdownActive){
+          CartDrawer.prototype.cartDrawerClockHandler(cart);
+        }
 
         this.loading(true);
         this.emptyCart();
@@ -1350,9 +1355,12 @@ lazySizesConfig.expFactor = 4;
         } else {
           $(selectors.cartBubble).removeClass('cart-link__bubble--visible');
         }
-      },
-      cartDrawerClockHandler: function(){
-        if(theme.settings.vwo.countdown.countdownActive){
+      },  
+      cartDrawerClockHandler: function(cart){
+        var cartTotal = Math.round(cart.original_total_price/100);
+        var VWOMinTotal = theme.settings.vwo.countdown.minimumCartTotalUSD;
+        var isGreater = cartTotal > VWOMinTotal;
+        if(theme.settings.vwo.countdown.countdownActive && isGreater){
           var is_done = JSON.parse(localStorage.getItem('pdp-countdown-timer')) == 'DONE';
           $('.drawer__close').css('vertical-align', 'top' );
           $('.drawer__close-button').css('height', 'auto');
