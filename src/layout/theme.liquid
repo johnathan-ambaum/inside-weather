@@ -361,6 +361,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires;
       }
     }
+    function eraseCookie(name) {   
+      document.cookie = name+'=; Max-Age=-99999999;';  
+    }
+    eraseCookie('CJEVENT');
     SetCJCookie();
     
   </script>
