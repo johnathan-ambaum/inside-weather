@@ -495,6 +495,7 @@ export default {
       }
 
       this.createProduct();
+      this.$bus.$emit('customizer-close');
       this.active = false;
     },
 

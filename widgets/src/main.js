@@ -12,6 +12,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 
 import ProductGrid from './components/ProductGrid.vue';
 import ProductCustomizer from './components/ProductCustomizer.vue';
+import RelatedProducts from './components/RelatedProducts.vue';
 import ProductDetail from './components/ProductDetail.vue';
 import ProductFamily from './components/ProductFamily.vue';
 import ProductDetailSlider from './components/ProductDetailSlider.vue';
@@ -80,6 +81,7 @@ import store from './store';
       CategoryVprops,
       LifeStylePhotos,
       BootstrapVue,
+      RelatedProducts
     },
 
     mixins: [

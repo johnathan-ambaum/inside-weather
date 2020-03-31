@@ -10679,7 +10679,50 @@ div[data-section-type="fading-images"] {
 .product__quantity--dropdown {
   display: inline-block;
 }
-
+// Related products component styles 
+.related-products__wrapper{
+  margin-bottom:3rem;
+}
+.related-products__main-title{
+  font-size:34px;
+  text-align:center;
+  font-family:Avalon;
+  line-height:30px;
+}
+.related-products__cards{
+  display:flex;
+  justify-content: center;
+  flex-wrap:wrap;
+}
+.related-products__card{
+  padding:20px;
+  flex-basis:50%;
+  @include media-query($medium-up) {
+    flex-basis:220px;
+  }
+}
+.related-products__image{
+  display:block;
+  margin: 0 auto;
+  width: 164px;
+  height:auto;
+  @include media-query($medium-up) {
+    width: 180px;
+  }
+}
+.related-products__title{
+  font-family: Avalon;
+  text-align: center;
+  font-size:12px;
+  line-height: 16px;
+  width:80%;
+  margin: 0 auto;
+  @include media-query($medium-up) {
+    font-size:14px;
+    line-height: 20px;
+    width:100%;
+  }
+}
 // Review app styles if included
 
 #shopify-product-reviews {
