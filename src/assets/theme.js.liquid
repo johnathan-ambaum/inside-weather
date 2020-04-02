@@ -1180,6 +1180,8 @@ lazySizesConfig.expFactor = 4;
 
         $('body').on('added.ajaxProduct', function() {
           theme.cart.getCart().then(function(cart) {
+            window.VWO = window.VWO || [];
+            window.VWO.push(['tag', 'CartValue', cart.original_total_price.toString(), 'session']);
             this.buildCart(cart, true);
           }.bind(this));
         }.bind(this));
