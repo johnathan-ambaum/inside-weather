@@ -1536,7 +1536,9 @@ h6 {
 .cart__savings {
   font-size: em(20px);
 }
-
+.ajaxcart__product--fixed-qty .ajaxcart__product-price{
+  float:right;
+}
 /*================ Misc typography ================*/
 
 .skrim__title {
@@ -11094,6 +11096,105 @@ div[data-section-type="fading-images"] {
   }
 }
 
+.product-customizer-modal {
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: hidden;
+  -webkit-animation: modal-open 0.5s forwards;
+  animation: modal-open 0.5s forwards;
+}
+
+/* Modal Content/Box */
+.product-customizer-modal__inner {
+  position: relative;
+  text-align:center;
+  background-color: #fff;
+  margin: 20vh auto; 
+  padding: 34px 66px;
+  border: 1px solid #888;
+  max-width: 428px;
+}
+.product-customizer-modal__title{
+  font-family:Avalon;
+  font-weight:600;
+  font-size:34px;
+  letter-spacing:0.04em;
+  text-align:center;
+  color:#202020;
+  margin-bottom:16px;
+}
+.product-customizer-modal__content{
+  font-family:Avalon;
+  font-weight:500;
+  font-size:16px;
+  letter-spacing:0.04em;
+  line-height:24px;
+  text-align:center;
+  color:#202020;
+  margin-bottom:20px;
+}
+.product-customizer-modal__img{
+  margin-bottom:24px;
+}
+.product-customizer-modal__add{
+  display: inline-block;
+  font-family:Avalon;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background-color: #202020;
+  width: 100%;
+  height:42px;
+  margin: 0 auto;
+  letter-spacing:0.12em;
+}
+.product-customizer-modal__close{
+  margin:10px 10px 0 10px;
+  font-family:Avalon;
+  font-weight:normal;
+  font-size:14px;
+  text-decoration: underline;
+  color: #202020;
+  font-weight: 500;
+  letter-spacing:0.12em;
+}
+.product-customizer-modal__close-btn{
+  position: absolute;
+  top:10px;
+  right:15px;
+  font-weight:600;
+
+}
+@media only screen and (max-width: 1024px) {
+  .product-customizer-modal__inner {
+    margin: 13vh 20px; 
+    padding: 42px 38px;
+    max-width: 428px;
+  }
+  .product-customizer-modal__title{
+    font-size:27px;
+  }
+  .product-customizer-modal__content{
+    font-size:14px;
+    line-height:20px;
+    margin-bottom:16px;
+  }
+  .product-customizer-modal__img{
+    margin-bottom:16px;
+  }
+
+}
 /*================ New Header Menu ================*/
 
 html body.MobileNav--Active {
