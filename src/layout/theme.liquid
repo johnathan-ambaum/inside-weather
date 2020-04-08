@@ -130,6 +130,10 @@
           timerDurationInMinutes: 10,
           minimumCartTotalUSD: 100
         }
+      },
+      swatchBrowser: {
+        thankYouMessage: 'Your swatches will arrive at your door within 3-5 days. If you need help deciding, our team of design specialists is here for you.',
+        maxSwatches: 15
       }
     };
   </script>
@@ -368,10 +372,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var expires = "; expires="+d.toGMTString();
         document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires + ';path=/';
       }
-      
+
     }
-    function eraseCookie(name) {   
-      document.cookie = name+'=; Max-Age=-99999999;';  
+    function eraseCookie(name) {
+      document.cookie = name+'=; Max-Age=-99999999;';
     }
     eraseCookie('CJEVENT');
     SetCJCookie();
