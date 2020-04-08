@@ -40,19 +40,58 @@
               :key="swatch.variantId"
               class="SwatchBrowser__Swatch"
             >
-              <img
-                :src="swatch.image_url"
-                :alt="`${swatch.name} sample`"
-                class="SwatchBrowser__SwatchImage"
+              <button @click="toggleInfo(swatch.variantId)">info</button>
+              <div
+                v-if="!infoActive(swatch.variantId)"
+                class="SwatchBrowser__SwatchSample"
               >
-              <span>{{ swatch.name }}</span>
-              <span>{{ swatch.type }}</span>
+                <img
+                  :src="swatch.image_url"
+                  :alt="`${swatch.name} sample`"
+                  class="SwatchBrowser__SwatchImage"
+                >
+                <div>{{ swatch.name }}</div>
+                <div>{{ swatch.swatch_type }}</div>
+              </div>
+              <div
+                v-if="infoActive(swatch.variantId)"
+                class="SwatchBrowser__SwatchInfo"
+              >
+                <close-button @click.native="toggleInfo(swatch.variantId)" />
+                <div>{{ swatch.name }}</div>
+                <div>{{ swatch.swatch_type }}</div>
+                <div v-html="swatch.description" />
+              </div>
+              <div
+                v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
+                class="SwatchBrowser__Badges"
+              >
+                <img
+                  v-if="swatch.easy_clean"
+                  src=""
+                  alt="Easy clean icon"
+                >
+                <img
+                  v-if="swatch.performance"
+                  src=""
+                  alt="Performance icon"
+                >
+                <img
+                  v-if="swatch.pet_friendly"
+                  src=""
+                  alt="Pet friendly icon"
+                >
+              </div>
               <button
-                @click="toggleSwatch(swatch)"
+                @click="toggleLineItem(swatch)"
               >
                 <span v-if="!inCart(swatch.variantId)">+ ADD</span>
                 <span v-else>REMOVE</span>
               </button>
+              <div
+                v-if="hasError(swatch.variantId)"
+                class="SwatchBrowser__Alert"
+              >Oops! You already have {{ maxSwatches }} in your cart!</div>
             </div>
           </div>
         </div>
@@ -69,9 +108,11 @@
             >
               <img
                 :src="item.image_url"
-                :alt="`${item.name} sample`">
-              <span>{{ item.name }} {{ item.type }}</span>
-              <button @click="toggleSwatch(item)">remove</button>
+                :alt="`${item.name} sample`"
+                class="SwatchBrowser__LineImage"
+              >
+              <span>{{ item.name }} {{ item.swatch_type }}</span>
+              <button @click="toggleLineItem(item)">remove</button>
             </div>
           </div>
           <div class="SwatchBrowser__CartFooter">
@@ -113,6 +154,8 @@ export default {
     return {
       active: false,
       cart: [],
+      activeInfos: [],
+      errorOn: null,
     };
   },
 
@@ -136,6 +179,14 @@ export default {
       return '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/free-swatches.jpg?1668478';
     },
 
+    infoActive() {
+      return variantId => this.activeInfos.includes(variantId);
+    },
+
+    hasError() {
+      return variantId => this.errorOn === variantId;
+    },
+
     inCart() {
       return variantId => this.cart.some(item => item.variantId === variantId);
     },
@@ -150,10 +201,23 @@ export default {
       'pullSwatches',
     ]),
 
-    toggleSwatch(swatch) {
+    toggleInfo(variantId) {
+      const index = this.activeInfos.findIndex(item => item === variantId);
+      if (index !== -1) {
+        this.activeInfos.splice(index, 1);
+        return;
+      }
+      this.activeInfos.push(variantId);
+    },
+
+    toggleLineItem(swatch) {
       const index = this.cart.findIndex(item => item.variantId === swatch.variantId);
       if (index !== -1) {
         this.cart.splice(index, 1);
+        return;
+      }
+      if (this.cart.length >= this.maxSwatches) {
+        this.errorOn = swatch.variantId;
         return;
       }
       this.cart.push(swatch);
