@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'ProductDetailSlider--Cylindo': cylindo }">
     <arrow-button
       v-if="!cylindo"
       class="ProductDetailSlider__Arrow"
@@ -12,15 +12,34 @@
       direction="right"
       @click.native="nextImage"
     />
-    <div
-      :class="{ 'ProductDetailSlider--Cylindo': cylindo }"
-      class="ProductDetailSlider"
-    >
+    <div class="ProductDetailSlider">
       <div
         v-show="cylindo"
-        id="cylindo-secondary"
+        :id="cylindoId"
         class="cylindo-frame"
       />
+      <div
+        v-if="cylindo"
+        class="Viewer__360Icons"
+      >
+        <div class="Viewer__RotateIcon">
+          <img
+            src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/360-rotate-ico.png?v=3363465804650087788"
+            alt="Drag to rotate"
+          >
+          <span>Rotate</span>
+        </div>
+        <div
+          class="Viewer__ZoomIcon"
+          @click.stop
+        >
+          <img
+            src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/zoom-ico.png?v=17440287001448815818"
+            alt="Click to zoom"
+          >
+          <span>Zoom</span>
+        </div>
+      </div>
       <div
         v-if="!cylindo"
         ref="slider"
@@ -77,6 +96,19 @@
         :start-at="currentImage"
         @close="showZoom = false"
       />
+      <div
+        v-show="cylindo"
+        :id="`${cylindoId}-zoom`"
+        :class="{ 'is-active': showZoom }"
+        class="cylindo-zoom-target"
+      >
+        <close-button
+          :size="32"
+          stroke="semibold"
+          class="ZoomGallery__Close"
+          @click.native.prevent="showZoom = false"
+        />
+      </div>
     </transition>
   </div>
 </template>
@@ -88,6 +120,7 @@ import ZoomGallery from './ZoomGallery.vue';
 import ResponsiveImage from './ResponsiveImage.vue';
 import ArrowButton from './ArrowButton.vue';
 import ZoomButton from './ZoomButton.vue';
+import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 
@@ -97,6 +130,7 @@ export default {
     ArrowButton,
     ZoomButton,
     ZoomGallery,
+    CloseButton,
   },
 
   mixins: [
@@ -106,6 +140,7 @@ export default {
 
   props: {
     cylindo: { type: Boolean, default: false },
+    cylindoId: { type: String, default: 'cylindo-secondary' },
   },
 
   data() {
@@ -120,7 +155,12 @@ export default {
       productImages: state => state.productImages,
       filters: state => state.filters,
       favorites: state => state.favorites,
+      cylindoViewers: state => state.cylindoViewers,
     }),
+
+    viewer() {
+      return this.cylindoViewers.find(viewer => viewer.containerID === this.cylindoId);
+    },
   },
 
   watch: {
@@ -151,7 +191,26 @@ export default {
     },
   },
 
+  mounted() {
+    this.listenForZoom();
+  },
+
   methods: {
+    listenForZoom() {
+      if (!this.viewer) {
+        setTimeout(() => {
+          this.listenForZoom();
+        }, 200);
+        return;
+      }
+      this.viewer.instance.on(this.viewer.instance.events.ZOOM_ENTER, () => {
+        this.showZoom = true;
+      });
+      this.viewer.instance.on(this.viewer.instance.events.ZOOM_EXIT, () => {
+        this.showZoom = false;
+      });
+    },
+
     getCurrentIndex() {
       return this.glide.index;
     },
@@ -206,12 +265,87 @@ $tile-size-desktop: 100%;
       height: 100%;
     }
 
+    .cylindo-drag-tooltip,
+    .cylindo-drag-to-rotate-tooltip,
+    .cylindo-icon-zoom-on {
+      display: none !important;
+    }
+
     .cylindo-thumbnail-wrapper.thumb-location-bottom.has-thumbs {
       bottom: 10px;
     }
 
+    .cylindo-zoom-target {
+      display: none;
+      height: 100%;
+      left: 0;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 99999;
+
+      &.is-active {
+        display: block;
+      }
+
+      .ZoomGallery__Close {
+        z-index: 999999;
+      }
+    }
+
+    .Viewer__360Icons {
+      align-items: center;
+      bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 18px;
+      pointer-events: none;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      z-index: 10;
+
+      @include at-query($breakpoint-large) {
+        bottom: 25px;
+        justify-content: center;
+      }
+
+      img {
+        display: inline-block;
+        height: auto;
+        width: 14px;
+
+        @include at-query($breakpoint-large) {
+          width: 16px;
+        }
+      }
+
+      span {
+        color: #202020;
+        display: block;
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: .05em;
+
+        @include at-query($breakpoint-large) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .Viewer__RotateIcon {
+      margin-right: 31px;
+    }
+
+    .Viewer__ZoomIcon {
+      margin-left: 31px;
+    }
+
     @include at-query($breakpoint-small) {
-      height: 100vw;
+      .ProductDetailSlider {
+        height: 100vw;
+      }
 
       .cylindo-action-button-group.right {
         right: 4px;

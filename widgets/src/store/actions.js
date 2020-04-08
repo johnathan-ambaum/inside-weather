@@ -1,9 +1,8 @@
+import Vue from 'vue';
 import ApiClient from '../util/ApiClient';
 import FilterStorage from '../util/FilterStorage';
-// import interpolator from '../mixins/interpolator';
 
 const apiClient = new ApiClient();
-let cylindoViewers = [];
 
 /**
  * Set up filter definition for category
@@ -60,31 +59,37 @@ export function loadProductImages({ dispatch, commit, state }) {
 
   // console.log({ SKU: state.filters.cylindo_sku, features });
 
-  if (cylindoViewers.length > 0) {
-    cylindoViewers.forEach((viewer) => {
-      console.log({ viewer });
-      viewer.setFeatures(features);
+  if (state.cylindoViewers.length > 0) {
+    state.cylindoViewers.forEach(({ instance }) => {
+      instance.setFeatures(features);
     });
     return;
   }
 
   window.cylindo.on('ready', () => {
-    const containerIds = ['cylindo-main', 'cylindo-secondary'];
+    const containerIds = ['cylindo-main', 'cylindo-secondary'].filter(id => document.getElementById(id) !== null);
     const globalDefaults = {
-      debug: true,
+      debug: false,
       accountID: 4931,
       SKU: state.filters.cylindo_sku,
       features,
       country: 'us',
       viewerType: 2,
-      thumbs: true,
+      thumbs: false,
+      zoomButton: false,
+      fullscreen: false,
     };
 
-    cylindoViewers = containerIds.map(containerID => window.cylindo.viewer.create({
-      ...globalDefaults,
-      ...(state.filters.cylindo_overrides || {}),
+    const cylindoViewers = containerIds.map(containerID => ({
       containerID,
+      instance: window.cylindo.viewer.create({
+        ...globalDefaults,
+        ...(state.filters.cylindo_overrides || {}),
+        customZoomContainer: `${containerID}-zoom`,
+        containerID,
+      }),
     }));
+    Vue.set(state, 'cylindoViewers', cylindoViewers);
   });
 }
 
@@ -205,7 +210,6 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
       product: state.activeProduct,
       attributes: state.selectedOptions,
     };
-    // const title = interpolator.computed.productName();
     const { title } = document;
 
     if (replace && window.history.replaceState) {

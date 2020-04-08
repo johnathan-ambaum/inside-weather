@@ -23,6 +23,7 @@ export default new Vuex.Store({
     totalReviews: 0,
     productReviews: [],
     productImages: [],
+    cylindoViewers: [],
   },
   mutations,
   actions,

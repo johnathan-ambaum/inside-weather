@@ -5,7 +5,7 @@
   >
     <div
       class="ProductGallery__FeaturedImage"
-      @click="showZoom = true"
+      @click="triggerZoom"
     >
       <div
         v-show="cylindo"
@@ -15,6 +15,22 @@
           id="cylindo-main"
           class="cylindo-frame"
         />
+        <div class="Viewer__360Icons">
+          <div class="Viewer__RotateIcon">
+            <img
+              src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/360-rotate-ico.png?v=3363465804650087788"
+              alt="Drag to rotate"
+            >
+            <span>Rotate</span>
+          </div>
+          <div class="Viewer__ZoomIcon">
+            <img
+              src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/zoom-ico.png?v=17440287001448815818"
+              alt="Click to zoom"
+            >
+            <span>Zoom</span>
+          </div>
+        </div>
       </div>
       <responsive-image
         v-if="!cylindo"
@@ -23,7 +39,7 @@
       />
     </div>
     <nav
-      v-if="!cylindo"
+      v-if="images.length > 0 && !cylindo"
       class="ProductGallery__Nav"
     >
       <div
@@ -51,20 +67,35 @@
         :start-at="galleryImage"
         @close="showZoom = false"
       />
+      <div
+        v-if="cylindo"
+        id="cylindo-main-zoom"
+        :class="{ 'is-active': showZoom }"
+      >
+        <close-button
+          :size="32"
+          stroke="semibold"
+          class="ZoomGallery__Close"
+          @click.native.prevent="showZoom = false"
+        />
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import ResponsiveImage from './ResponsiveImage.vue';
 import ZoomButton from './ZoomButton.vue';
 import ZoomGallery from './ZoomGallery.vue';
+import CloseButton from './CloseButton.vue';
 
 export default {
   components: {
     ResponsiveImage,
     ZoomButton,
     ZoomGallery,
+    CloseButton,
   },
 
   props: {
@@ -79,7 +110,38 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState({
+      viewer: state => state.cylindoViewers.find(viewer => viewer.containerID === 'cylindo-main'),
+    }),
+  },
+
+  mounted() {
+    this.listenForZoom();
+  },
+
   methods: {
+    listenForZoom() {
+      if (!this.viewer) {
+        setTimeout(() => {
+          this.listenForZoom();
+        }, 200);
+        return;
+      }
+      this.viewer.instance.on(this.viewer.instance.events.ZOOM_ENTER, () => {
+        this.showZoom = true;
+      });
+      this.viewer.instance.on(this.viewer.instance.events.ZOOM_EXIT, () => {
+        this.showZoom = false;
+      });
+    },
+
+    triggerZoom() {
+      if (!this.cylindo) {
+        this.showZoom = true;
+      }
+    },
+
     swapImage(index) {
       this.galleryImage = index;
     },
@@ -129,18 +191,73 @@ export default {
     }
 
     .cylindo-drag-tooltip.cylindo-drag-to-rotate-tooltip {
-      bottom: 120px;
+      display: none !important;
     }
 
     .cylindo-thumbnail-wrapper.thumb-location-bottom.has-thumbs {
       bottom: 120px;
     }
+
+    .Viewer__360Icons {
+      align-items: center;
+      bottom: 75px;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+
+      img {
+        display: inline-block;
+        height: auto;
+        width: 16px;
+      }
+
+      span {
+        color: #202020;
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: .05em;
+      }
+    }
+
+    .Viewer__RotateIcon {
+      margin-right: 31px;
+    }
+
+    .Viewer__ZoomIcon {
+      margin-left: 31px;
+    }
+
+    #cylindo-main-zoom {
+      display: none;
+      height: 100%;
+      left: 0;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 99999;
+
+      &.is-active {
+        display: block;
+      }
+
+      .ZoomGallery__Close {
+        z-index: 999999;
+      }
+    }
   }
   // END CYLINDO
 
   &__FeaturedImage {
-    cursor: zoom-in;
     flex: 0 1 775px;
+  }
+
+  &:not(&--Cylindo) &__FeaturedImage {
+    cursor: zoom-in;
   }
 
   &__Nav {

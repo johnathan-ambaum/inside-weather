@@ -160,7 +160,18 @@ export default {
   }
 
   .ProductGallery {
-    top: -40px;
+    top: -30px;
+
+    &--Cylindo {
+      justify-content: flex-start;
+      margin-left: 110px;
+
+      @include at-query($breakpoint-large) {
+        .ProductGallery__FeaturedImage {
+          flex: 0 1 900px;
+        }
+      }
+    }
   }
 
   &__Heading {

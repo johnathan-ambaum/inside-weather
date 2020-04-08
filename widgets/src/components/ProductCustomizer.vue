@@ -21,6 +21,7 @@
       <product-detail-slider
         v-if="isMobile"
         :cylindo="useCylindo"
+        cylindo-id="cylindo-main"
       />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
@@ -705,6 +706,7 @@ html.ProductCustomizer--Open {
       justify-content: center;
       margin-top: -20px;
       position: relative;
+      z-index: 10;
     }
 
     @include at-query($breakpoint-large) {
@@ -868,6 +870,7 @@ html.ProductCustomizer--Open {
     position: absolute;
     right: 18px;
     top: 18px;
+    z-index: 999;
 
     svg {
       @include at-query($breakpoint-small) {
