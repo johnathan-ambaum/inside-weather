@@ -4,34 +4,124 @@
       <div>
         <h3>Stop drooling over your keyboard.</h3>
         <p>Have your favorites delivered to you in less than 3 days, for free.</p>
-        <a
+        <button
           v-if="isMobile"
           :class="triggerClasses"
-          href="/pages/free-swatches"
-        >Get Free Swatches</a>
+          @click="active = true"
+        >Get Free Swatches</button>
       </div>
       <div>
-        <img :src="triggerImage">
-        <a
+        <img
+          :src="triggerImage"
+          @click="active = true"
+        >
+        <button
           v-if="!isMobile"
-          href="/pages/free-swatches"
           class="SwatchBrowser__TriggerButton"
-        >Get Free Swatches</a>
+          @click="active = true"
+        >Get Free Swatches</button>
       </div>
     </div>
-    <div class="SwatchBrowser" />
+    <transition
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+    >
+      <div
+        v-show="active"
+        class="SwatchBrowser"
+      >
+        <div class="SwatchBrowser__Main">
+          <div class="SwatchBrowser__Header">
+            <h3>{{ category }} Swatches</h3>
+          </div>
+          <div class="SwatchBrowser__Swatches">
+            <div
+              v-for="swatch in swatches"
+              :key="swatch.variantId"
+              class="SwatchBrowser__Swatch"
+            >
+              <img
+                :src="swatch.image_url"
+                :alt="`${swatch.name} sample`"
+                class="SwatchBrowser__SwatchImage"
+              >
+              <span>{{ swatch.name }}</span>
+              <span>{{ swatch.type }}</span>
+              <button
+                @click="toggleSwatch(swatch)"
+              >
+                <span v-if="!inCart(swatch.variantId)">+ ADD</span>
+                <span v-else>REMOVE</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="SwatchBrowser__Cart">
+          <div class="SwatchBrowser__CartHeader">
+            <h2>Your Cart</h2>
+            <close-button @click.native="active = false" />
+          </div>
+          <div class="SwatchBrowser__CartItems">
+            <div
+              v-for="item in cart"
+              :key="item.variantId"
+              class="SwatchBrowser__CartItem"
+            >
+              <img
+                :src="item.image_url"
+                :alt="`${item.name} sample`">
+              <span>{{ item.name }} {{ item.type }}</span>
+              <button @click="toggleSwatch(item)">remove</button>
+            </div>
+          </div>
+          <div class="SwatchBrowser__CartFooter">
+            <div class="SwatchBrowser__CartCounter">
+              <div class="SwatchBrowser__CounterLabel">Total Swatches:</div>
+              <div class="SwatchBrowser__CartCount">{{ cart.length }}/15</div>
+            </div>
+            <button
+              class="SwatchBrowser__OrderButton"
+              @click="startOrder"
+            >ORDER NOW</button>
+            <a
+              href="#"
+              class="SwatchBrowser__ContinueLink"
+              @click.prevent="active = false"
+            >CONTINUE SHOPPING</a>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 
 export default {
+  components: {
+    CloseButton,
+  },
+
   mixins: [
     screenMonitor,
   ],
 
+  data() {
+    return {
+      active: false,
+      cart: [],
+    };
+  },
+
   computed: {
+    ...mapState({
+      category: state => state.category,
+      swatches: state => state.swatches,
+    }),
+
     triggerClasses() {
       return {
         SwatchBrowser__TriggerLink: this.screenWidth < 768,
@@ -45,6 +135,33 @@ export default {
       }
       return '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/free-swatches.jpg?1668478';
     },
+
+    inCart() {
+      return variantId => this.cart.some(item => item.variantId === variantId);
+    },
+  },
+
+  mounted() {
+    this.pullSwatches();
+  },
+
+  methods: {
+    ...mapActions([
+      'pullSwatches',
+    ]),
+
+    toggleSwatch(swatch) {
+      const index = this.cart.findIndex(item => item.variantId === swatch.variantId);
+      if (index !== -1) {
+        this.cart.splice(index, 1);
+        return;
+      }
+      this.cart.push(swatch);
+    },
+
+    startOrder() {
+
+    },
   },
 };
 </script>
@@ -54,6 +171,16 @@ export default {
 @import '../scss/mixins';
 
 .SwatchBrowser {
+  animation-duration: .3s;
+  background: #fff;
+  display: flex;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9999;
+
   &__Trigger {
     align-items: center;
     background: #f2f4f4;
@@ -177,6 +304,38 @@ export default {
         }
       }
     }
+  }
+
+  &__Main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &__Header {
+    flex: 0 0 auto;
+  }
+
+  &__Swatches {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__Swatch {
+    flex: 0 0 20%;
+
+    #{&}Image {
+      border-radius: 50%;
+      height: auto;
+      width: 150px;
+    }
+  }
+
+  &__Cart {
+    flex: 0 0 445px;
   }
 }
 </style>
