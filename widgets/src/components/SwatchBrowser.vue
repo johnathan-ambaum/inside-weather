@@ -118,7 +118,7 @@
           <div class="SwatchBrowser__CartFooter">
             <div class="SwatchBrowser__CartCounter">
               <div class="SwatchBrowser__CounterLabel">Total Swatches:</div>
-              <div class="SwatchBrowser__CartCount">{{ cart.length }}/15</div>
+              <div class="SwatchBrowser__CartCount">{{ cart.length }}/{{ maxSwatches }}</div>
             </div>
             <button
               class="SwatchBrowser__OrderButton"
@@ -156,6 +156,7 @@ export default {
       cart: [],
       activeInfos: [],
       errorOn: null,
+      maxSwatches: 15,
     };
   },
 
@@ -190,6 +191,11 @@ export default {
     inCart() {
       return variantId => this.cart.some(item => item.variantId === variantId);
     },
+  },
+
+
+  created() {
+    this.maxSwatches = window.theme.settings.swatchBrowser.maxSwatches || 15;
   },
 
   mounted() {
