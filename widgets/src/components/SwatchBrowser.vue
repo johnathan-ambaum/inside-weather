@@ -124,11 +124,10 @@
               class="SwatchBrowser__OrderButton"
               @click="startOrder"
             >ORDER NOW</button>
-            <a
-              href="#"
-              class="SwatchBrowser__ContinueLink"
+            <button
+              class="SwatchBrowser__ContinueButton"
               @click.prevent="active = false"
-            >CONTINUE SHOPPING</a>
+            >CONTINUE SHOPPING</button>
           </div>
         </div>
       </div>
@@ -193,6 +192,11 @@ export default {
     },
   },
 
+  watch: {
+    active(isActive) {
+      document.documentElement.style.overflow = isActive ? 'hidden' : 'auto';
+    },
+  },
 
   created() {
     this.maxSwatches = window.theme.settings.swatchBrowser.maxSwatches || 15;
@@ -396,6 +400,7 @@ export default {
 
   &__Swatch {
     flex: 0 0 20%;
+    text-align: center;
 
     #{&}Image {
       border-radius: 50%;
@@ -404,8 +409,42 @@ export default {
     }
   }
 
+  &__LineImage {
+    border-radius: 50%;
+    height: auto;
+    width: 60px;
+  }
+
   &__Cart {
     flex: 0 0 445px;
+
+    #{&}Footer {
+      background: #f2f0ed;
+      padding: 0 40px 10px 40px;
+
+      button {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    #{&}Counter {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+  }
+
+  &__OrderButton {
+    background: #202020;
+    color: #fff;
+  }
+
+  &__ContinueButton {
+    margin-top: 10px;
+    text-decoration: underline;
   }
 }
 </style>
