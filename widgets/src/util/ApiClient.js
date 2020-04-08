@@ -12,7 +12,7 @@ export default class ApiClient {
     this.filters = [];
 
     // eslint-disable-next-line
-    this.sendRequest = ({ method, url, body, resolve, reject }) => {
+    this.sendRequest = ({ method = 'GET', url, body, resolve, reject }) => {
       const fetchOptions = {
         method,
         mode: 'cors',
