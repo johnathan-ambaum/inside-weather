@@ -175,6 +175,21 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
   }
 }
 
+export function pullSwatches({ state, dispatch, commit }) {
+  if (!state.category) {
+    setTimeout(() => {
+      dispatch('pullSwatches');
+    }, 200);
+    return;
+  }
+
+  apiClient
+    .getSwatches(state.category)
+    .then((swatches) => {
+      commit('setSwatches', swatches);
+    });
+}
+
 export default {
   loadProductImages,
   pullFilter,
@@ -183,4 +198,5 @@ export default {
   getProductReviews,
   createProductFromSelected,
   updateUrl,
+  pullSwatches,
 };

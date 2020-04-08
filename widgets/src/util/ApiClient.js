@@ -149,4 +149,9 @@ export default class ApiClient {
       method: 'POST', url, body, resolve, reject,
     }));
   }
+
+  getSwatches(category) {
+    const url = `https://iw-content.herokuapp.com/api/v1/product_swatches/${category}`;
+    return new Promise((resolve, reject) => this.sendRequest({ url, resolve, reject }));
+  }
 }
