@@ -235,14 +235,19 @@ export default {
   }
   .owl-theme {
     .owl-nav {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      margin: 0;
-      text-align: unset;
-      @include block();
-      @include translate(0,-50%);
+      div {
+        top: 50%;
+        margin: 0;
+        @include translate(0,-50%);
+        &.owl-prev {
+          position: absolute;
+          left: 0;
+        }
+        &.owl-next {
+          position: absolute;
+          right: 0;
+        }
+      }
     }
     &:hover {
       .owl-nav {
@@ -251,8 +256,8 @@ export default {
           pointer-events: all;
           visibility: visible;
   
-          &.owl-prev, &.owl-next{
-            @include translate(0,0);
+          &.owl-prev, &.owl-next {
+            @include translate(0, -50%);
           }
         }
       }
@@ -407,7 +412,6 @@ export default {
       outline: none;
       opacity: 0;
       padding: 0;
-      position: relative;
       pointer-events: none;
       visibility: hidden;
       width: 70px;
