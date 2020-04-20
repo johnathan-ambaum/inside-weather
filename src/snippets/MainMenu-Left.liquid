@@ -1,5 +1,5 @@
 <!-- MAINMENU NAV LEFT SIDE -->
-
+{% render 'header-images' %}
 <ul class="NavBlock__List">
     <!-- MOBILE NAV TOGGLER -->
     <li class="Mobile-Item MobileNav--Toggler">
@@ -8,43 +8,84 @@
         </button>
     </li>
 
-    {%- for parentLink in linklists.main-menu.links -%}
+    {%- for parentLink in linklists.redesigned-main-menu-left.links -%}
         {%- if parentLink.links != blank -%}
             <li class="NavBlock__List__Item--Dropdown {% if forloop.index == 1 %}NavBlock__List__Item--First{% endif %}">
-                <a href="#" class="js-no-transition">{{ parentLink.title }}</a>
-                <div class="Dropdown__Content">
+                <a href="{{parentLink.link}}" class="js-no-transition">{{ parentLink.title }}</a>
+                <div class="Dropdown__Content" {% if parentLink.links[0].links == blank %}style="justify-content:center;" {% endif%}>
                     {% assign currentLink = parentLink.title | downcase | strip %}
-                    <ul class="Dropdown__Content--MultiColumn">
-                        {%- for dropdownLink in parentLink.links-%}
-                            <li class="Dropdown__Content__Item">
-                                {%- assign main_image = false -%}
-                                {%- assign hover_image = false -%}
-                                {%- for block in section.blocks -%}
-                                    {%- if block.type == 'collection_hover_image' -%}
-                                        {% comment %} Remove this conditional once migrated to new settings {% endcomment %}
-                                        {%- if block.settings.collection != blank and block.settings.collection == dropdownLink.object.handle -%}
-                                            {%- assign hover_image = block.settings.hover_image -%}
-                                        {%- endif -%}
-                                        {%- if block.settings.url == dropdownLink.url -%}
-                                            {%- assign main_image = block.settings.image -%}
-                                            {%- assign hover_image = block.settings.hover_image -%}
-                                        {%- endif -%}
-                                    {%- endif -%}
-                                {%- endfor -%}
-                                {% comment %} Remove this conditional once migrated to new settings {% endcomment %}
-                                {%- unless main_image -%}
-                                    {%- assign main_image = dropdownLink.object.image -%}
-                                {%- endunless -%}
-                                <a class="Dropdown__Content__Link {% if hover_image %}has-hover{% endif %}" href="{{ dropdownLink.url }}">
-                                    <img class="Dropdown__Content__DefaultImage" src="{{ main_image | img_url: '500x' }}">
-                                    {%- if hover_image -%}
-                                        <img class="Dropdown__Content__HoverImage" src="{{ hover_image | img_url: '500x' }}" alt="{{ hover_image.alt }}">
-                                    {%- endif -%}
-                                    <span>{{ dropdownLink.title }}</span>
-                                </a>
-                            </li>
+										<div class="NavBlocks__Container" {% if parentLink.links[0].links == blank %}style="width:auto;" {% endif%}>
+											<ul class="NavBlock__flex-list" >
+												{%- for dropdownLink in parentLink.links-%}
+													{% unless forloop.last %}
+													{%- if dropdownLink.links != blank -%}
+													<ul >
+														<li class="NavBlock__List-Item-Heading">
+															{% if dropdownLink.url != blank and dropdownLink.url != '#' %}
+																<a class=" NavBlock__List-Item-Heading--underline " href="{{ dropdownLink.url }}">
+																	<span>{{ dropdownLink.title }}</span>
+																</a>
+															{% else %}
+															<span style="cursor:default;">{{ dropdownLink.title }}</span>
+															{% endif %}
+														</li>
+														{% for grandchildLink in dropdownLink.links %}
+															<li class="NavBlock__List-Item">
+																<a class="" href="{{ grandchildLink.url }}">
+																	<span>{{ grandchildLink.title }}</span>
+																</a>
+															</li>
+														{% endfor %}
+													</ul>
+													{% else %}
+														<li class="NavBlock__List-Item">
+															<a class="" href="{{ dropdownLink.url }}">
+																<span>{{ dropdownLink.title }}</span>
+															</a>
+														</li>
+													{% endif %}
+													{% endunless %}
                         {%- endfor -%}
-                    </ul>
+											</ul>            
+										</div>
+										<div >
+											<ul class="NavBlock__flex-list" >
+												{%- for dropdownLink in parentLink.links-%}
+													{% if forloop.last %} <!-- For collections linklist-->
+													{%- if dropdownLink.links != blank -%}
+													<ul >
+														<li class="NavBlock__List-Item-Heading">
+															{% if dropdownLink.url != blank and dropdownLink.url != '#' %}
+																<a class=" NavBlock__List-Item-Heading--underline " href="{{ dropdownLink.url }}">
+																	<span>{{ dropdownLink.title }}</span>
+																</a>
+															{% else %}
+															<span style="cursor:default;">{{ dropdownLink.title }}</span>
+															{% endif %}
+														</li>
+														{% for grandchildLink in dropdownLink.links %}
+															<li class="NavBlock__List-Item">
+																<a class="" href="{{ grandchildLink.url }}">
+																	<span>{{ grandchildLink.title }}</span>
+																</a>
+															</li>
+														{% endfor %}
+													</ul>
+													{% else %}
+														<li class="NavBlock__List-Item">
+															<a class="" href="{{ dropdownLink.url }}">
+																<span>{{ dropdownLink.title }}</span>
+															</a>
+														</li>
+													{% endif %}
+													{% endif %}
+												{%- endfor -%}
+												<li class = "header-images-wrapper">
+													<img class="header-default-image"/>'
+													<div class="header-image-caption" ></div>
+												</li>
+											</ul>            
+										</div>       
                 </div>
             </li>
         {% else %}
@@ -52,3 +93,26 @@
         {% endif %}
     {%- endfor -%}
 </ul>
+<script>
+	$('.header-default-image').attr('src', headerImages['default']['src']);
+	$('.header-image-caption').text(headerImages['default']['caption']);	
+	$('.NavBlock__List-Item a').each(function (i, el) {
+		if(headerImages[$(this).attr('href')] !== undefined ){
+			var img = $('<img class="header-image" />');
+			img.attr('src', headerImages[$(this).attr('href')]['src']);
+			img.prependTo($(this).closest('.Dropdown__Content').find('.header-images-wrapper'));
+		}
+	});
+	$('.NavBlock__List-Item a').mouseenter(function(){	
+		if(headerImages[$(this).attr('href')] !== undefined){
+			var newImage = headerImages[$(this).attr('href')]['src'];
+			var newCaption = headerImages[$(this).attr('href')]['caption'];
+		}
+		if(newImage !== undefined){
+			$(this).closest('.Dropdown__Content').find('.header-images-wrapper img').hide();
+			$(`.header-images-wrapper img[src='${newImage}']`).show();
+			$(this).closest('.Dropdown__Content').find('.header-images-wrapper .header-image-caption').text(newCaption || '');	
+		}
+
+	})
+</script>

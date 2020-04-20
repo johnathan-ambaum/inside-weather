@@ -11443,17 +11443,10 @@ html body.MobileNav--Active {
   }
 
   li {
-    display:-webkit-inline-box;
-    display:-ms-inline-flexbox;
-    display:inline-flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    height: 100%;
     padding: 10px 20px 0 20px;
 
     @media only screen and (max-width: 1200px) {
-      padding: 15px 12px;
+      // padding: 15px 12px;
     }
 
     a {
@@ -11464,14 +11457,13 @@ html body.MobileNav--Active {
 
 .Dropdown__Content {
  /* box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1); */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display:flex;
   position: absolute;
   left:0;
   top:90px;
   min-height:320px;
-  padding: 3% 30px 5.5% 30px;
+  height:465px;
+  padding: 25px 30px 78px 30px;
   width:100%;
   background-color:white;
   border-top:1px solid #d3d3d3;
@@ -11482,17 +11474,6 @@ html body.MobileNav--Active {
   visibility: hidden;
   opacity:0;
 
-  ul {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    width:100%;
-    height:100%;
-    padding: 0;
-  }
 }
 
 .NavBlock__List__Item,
@@ -11594,6 +11575,28 @@ a.Dropdown__Content__Link.has-hover span {
     white-space: normal;
   }
 }
+.header-image-caption{
+  margin-top:14px;
+  font-family: Avalon;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: #202020;
+  text-align:center;
+}
+.header-image{
+  display:none; 
+  width:100%; 
+  max-width: 417px; 
+  height:auto; 
+  margin:0 auto;
+}
+.header-default-image{
+  width:100%; 
+  max-width: 417px; 
+  height:auto; 
+  margin:0 auto;
+}
 
 /* FREE SWATCHES DROPDOWN */
 .Dropdown__Content--SplitHalfColumn {
@@ -11617,6 +11620,35 @@ a.Dropdown__Content__Link.has-hover span {
     padding-right: 30px;
   }
 }
+.NavBlock__List-Item-Heading{
+  font-family:Avalon;
+  font-weight:600;
+  font-size:16px;
+  letter-spacing:0.08em;
+  color: #202020;
+}
+.NavBlock__List-Item-Heading--underline:hover{
+  text-decoration:underline;
+}
+.NavBlock__List-Item{
+  font-family:Avalon;
+  font-weight:500;
+  font-size:14px;
+  letter-spacing:0.08em;
+  color: #202020;
+}
+.NavBlock__List-Item:hover{
+  text-decoration:underline;
+}
+.NavBlock__flex-list{
+  height:100%;
+  display:flex;
+  flex-wrap:wrap;
+  flex-basis:50%;
+  flex-direction:column;
+  flex:1;
+  margin-top:20px;
+}
 
 .Item__Icon {
   align-items: center;
@@ -11626,6 +11658,20 @@ a.Dropdown__Content__Link.has-hover span {
 
   img {
     max-height: 75px;
+  }
+}
+.NavBlocks__Container{
+  height:100%; 
+  width:50%; 
+  border-right:1px solid #ebebeb;
+}
+
+@media only screen and ( max-width: 1325px ){
+  .header-images-wrapper{
+    display:none;
+  }
+  .NavBlocks__Container{
+    width:70%;
   }
 }
 
@@ -11839,14 +11885,14 @@ a.Dropdown__Content__Link.has-hover span {
   overflow: auto;
   width:100%;
   list-style: none;
-  padding:0 4.5%;
+  padding:40px 40px;
   margin:0;
 
   & > li {
     width:100%;
-    text-align: center;
-    padding:5%;
-    border-bottom: 1px solid;
+    text-align: left;
+    border-bottom: 1px solid #d2d3d2;
+    padding: 22px 0;
 
     &:hover {
       cursor: pointer;
@@ -11860,7 +11906,15 @@ a.Dropdown__Content__Link.has-hover span {
 
 .MobileContent__Dropdown {
   display:none;
-  margin-top:3%;
+  margin-top:40px;
+  width:100%;
+
+  ul {
+    list-style: none;
+  }
+}
+.MobileContent__Dropdown-grandchild {
+  display:none;
   width:100%;
 
   ul {
@@ -11868,12 +11922,30 @@ a.Dropdown__Content__Link.has-hover span {
   }
 }
 
-.MainNav--Mobile__List li a,
+.MainNav--Mobile__List li a:not(.MobileContent__Dropdown__Title-grandchild),
 .Mobile__List__Item--DropDown .MobileContent__Dropdown__Title {
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight: 600;
-  letter-spacing: .05em;
-  font-size: 14px
+  letter-spacing: .08em;
+  font-size: 14px;
+  color:#202020;
+  text-transform: uppercase;
+}
+.MobileContent__Dropdown__Title-child{
+  font-weight:600;
+  font-size:14px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  color:#202020;
+  text-transform: none;
+}
+.MobileContent__Dropdown__Title-grandchild{
+  font-weight:500;
+  font-size:14px;
+  letter-spacing: 0.08em;
+  text-align: left;
+  color:#202020;
+  text-transform: none;
 }
 
 .MobileDropDown__Toggler {
@@ -11890,19 +11962,27 @@ a.Dropdown__Content__Link.has-hover span {
   }
 }
 
-.MobileContent__Dropdown--MultiColumn {
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+.MobileDropDown__Toggler-grandchild {
+  position:absolute;
+  font-size:18px;
+  right:10%;
 
+  &::after {
+    content:"+";
+  }
+
+  &.MobileDropDown__Toggler-grandchild--Toggled::after {
+    content:"-";
+  }
+}
+
+.MobileContent__Dropdown--MultiColumn {
+  margin:0;
+  margin-left:34px; 
+
+  li{
+    margin:40px 0;
+  }
   .MobileDropdown__Content__Item {
     padding:20px 10px;
 
@@ -11912,7 +11992,38 @@ a.Dropdown__Content__Link.has-hover span {
     }
   }
 }
+.MobileContent__grandchild-Dropdown--MultiColumn {
+  margin:0;
+  margin-left:26px; 
+  li{
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    letter-spacing: .08em;
+    font-size: 14px;
+    color:#202020;
+    margin:32px 0;
+  }
+  
+  .MobileDropdown__Content__Item {
+    padding:20px 10px;
 
+    img {
+      height:auto;
+      width:100%;
+    }
+  }
+}
+.mobile-slider-slot{
+  margin-bottom:40px;
+}
+.mobile-slider__caption{
+  text-align: center;
+  font-weight:500;
+  font-size:14px;
+  letter-spacing: 0.08em;
+  color:#202020;
+  margin:18px 0 15px 0;
+}
 .MobileContent__Dropdown--SplitHalfColumn {
   display:-webkit-box;
   display:-ms-flexbox;
@@ -11997,7 +12108,8 @@ a.Dropdown__Content__Link.has-hover span {
   letter-spacing: .05em;
   padding-left: 3px;
   position: absolute;
-  top: 0;
+  top: 22px;
+  left: 20px;
   width: 100%;
 }
 
