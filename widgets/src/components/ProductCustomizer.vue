@@ -423,6 +423,7 @@ export default {
       'pullFilter',
       'populateSelected',
       'createProductFromSelected',
+      'getCylindoImage',
     ]),
 
     ...mapMutations([
@@ -455,13 +456,21 @@ export default {
       });
     },
 
-    createProduct() {
+    createProduct(refreshImages = true) {
+      if (this.useCylindo && refreshImages) {
+        this.getCylindoImage().then(() => {
+          this.createProduct(false);
+        });
+        return;
+      }
+
       if (!this.productImages.length) {
         setTimeout(() => {
           this.createProduct();
         }, 200);
         return;
       }
+
       this.createProductFromSelected({
         name: this.productName,
         model: this.modelNumber,

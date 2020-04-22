@@ -93,6 +93,25 @@ export function loadProductImages({ dispatch, commit, state }) {
   });
 }
 
+export function getCylindoImage({ state, commit }) {
+  return new Promise((resolve, reject) => {
+    if (state.cylindoViewers.length < 1) {
+      // if cylindo failed to initialize, no point in throwing more errors
+      resolve();
+      return;
+    }
+    const cylindo = state.cylindoViewers[0].instance;
+    cylindo.getFrameUrl(1, 2000, (url, errorMessage) => {
+      if (errorMessage) {
+        reject(errorMessage);
+        return;
+      }
+      commit('setProductImages', [{ full: url }]);
+      resolve();
+    });
+  });
+}
+
 export function populateSelected({ state, dispatch, commit }, { selectedOptions, exists = false }) {
   return new Promise((resolve) => {
     if (!state.filters.attributes) {
@@ -223,6 +242,7 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
 
 export default {
   loadProductImages,
+  getCylindoImage,
   pullFilter,
   populateSelected,
   getReviews,
