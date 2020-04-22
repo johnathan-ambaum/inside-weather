@@ -168,7 +168,7 @@ export default {
 
       @include at-query($breakpoint-large) {
         .ProductGallery__FeaturedImage {
-          flex: 0 1 900px;
+          flex: 0 1 775px;
         }
       }
     }

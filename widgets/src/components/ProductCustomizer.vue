@@ -1048,6 +1048,11 @@ html.ProductCustomizer--Open {
     position: relative;
     text-transform: uppercase;
 
+    @include at-query($breakpoint-large) {
+      background: #f2f0ed;
+      color: #202020;
+    }
+
     &.slideOutDown {
       animation-delay: 0s;
     }
@@ -1061,6 +1066,11 @@ html.ProductCustomizer--Open {
       margin-right: 5px;
       transform: rotate(-45deg);
       width: 7px;
+
+      @include at-query($breakpoint-large) {
+        border-left-color: #202020;
+        border-top-color: #202020;
+      }
     }
 
     & + & {
@@ -1075,6 +1085,11 @@ html.ProductCustomizer--Open {
         margin-left: 5px;
         transform: rotate(45deg);
         width: 7px;
+
+        @include at-query($breakpoint-large) {
+          border-right-color: #202020;
+          border-top-color: #202020;
+        }
       }
 
       @include at-query($breakpoint-large) {
@@ -1106,7 +1121,7 @@ html.ProductCustomizer--Open {
 
     @include at-query($breakpoint-large) {
       bottom: 80px;
-      height: 58px;
+      height: 50px;
       left: 0;
       margin: auto;
       position: absolute;
