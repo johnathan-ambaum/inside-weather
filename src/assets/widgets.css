@@ -1115,7 +1115,10 @@
 .InspirationOptions__Item {
     padding: 0;
 }
-}.SwatchBrowser__Trigger {
+}.SwatchBrowser {
+  margin-bottom: 130px;
+}
+.SwatchBrowser__Trigger {
   align-items: center;
   background: #f2f4f4;
   display: flex;
@@ -1130,7 +1133,7 @@
 }
 @media only screen and (min-width: 1025px) {
 .SwatchBrowser__Trigger {
-    display: block;
+    display: flex;
     margin: 0;
     padding: 48px 20px 50px;
     position: -webkit-sticky;
@@ -1139,14 +1142,20 @@
 }
 }
 .SwatchBrowser__Trigger h3 {
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
+  letter-spacing: 0.05em;
+  line-height: 39px;
+  text-align: left;
+  color: #202020;
+  margin-bottom: 16px;
 }
 @media only screen and (min-width: 768px) {
 .SwatchBrowser__Trigger h3 {
-    font-size: 32px;
-    line-height: 32px;
+    font-size: 34px;
+    line-height: 34px;
 }
 }
 @media only screen and (min-width: 1025px) {
@@ -1160,6 +1169,10 @@
   font-weight: 500;
   line-height: 22px;
   margin: 0;
+  margin-bottom: 16px;
+  letter-spacing: 0.04em;
+  text-align: left;
+  color: #202020;
 }
 @media only screen and (min-width: 768px) {
 .SwatchBrowser__Trigger p {
@@ -1169,11 +1182,9 @@
 }
 .SwatchBrowser__Trigger img {
   display: block;
-}
-@media only screen and (min-width: 1025px) {
-.SwatchBrowser__Trigger img {
-    margin: 35px 0;
-}
+  width: 240px;
+  height: 196px;
+  margin: 18px 25px 18px auto;
 }
 .SwatchBrowser__Trigger .SwatchBrowser__TriggerButton,
 .SwatchBrowser__Trigger .SwatchBrowser__TriggerLink {
@@ -1183,6 +1194,7 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-align: center;
 }
 .SwatchBrowser__Trigger .SwatchBrowser__TriggerLink {
   display: block;
@@ -1194,6 +1206,13 @@
   border: 1px solid #202020;
   margin-top: 30px;
   padding: 12px 0;
+  display: block;
+  margin-top: 0;
+  width: 100%;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: #202020;
 }
 .SwatchBrowser__Trigger .SwatchBrowser__TriggerButton:hover, .SwatchBrowser__Trigger .SwatchBrowser__TriggerButton:active {
   background: #202020;
@@ -1201,42 +1220,138 @@
   color: #fff;
   text-decoration: none;
 }
+.SwatchBrowser__Trigger > div:first-child {
+  margin-left: auto;
+  max-width: 282px;
+}
+.SwatchBrowser__Trigger > div:last-child {
+  flex: 0 0 35%;
+  margin-right: auto;
+  margin-left: 25px;
+  max-width: 284px;
+}
+.SwatchMobile__Trigger {
+  align-items: center;
+  background: #f2f4f4;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding: 34px;
+}
 @media only screen and (min-width: 768px) {
-.SwatchBrowser__Trigger .SwatchBrowser__TriggerButton {
+.SwatchMobile__Trigger {
+    padding: 36px;
+}
+}
+@media only screen and (min-width: 1025px) {
+.SwatchMobile__Trigger {
+    display: block;
+    margin: 0;
+    padding: 48px 20px 50px;
+    position: -webkit-sticky;
+    position: sticky;
+    text-align: center;
+}
+}
+.SwatchMobile__Trigger h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+@media only screen and (min-width: 768px) {
+.SwatchMobile__Trigger h3 {
+    font-size: 32px;
+    line-height: 32px;
+}
+}
+@media only screen and (min-width: 1025px) {
+.SwatchMobile__Trigger h3 {
+    font-size: 28px;
+}
+}
+.SwatchMobile__Trigger p {
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  margin: 0;
+}
+@media only screen and (min-width: 768px) {
+.SwatchMobile__Trigger p {
+    font-size: 15px;
+    letter-spacing: 0.035em;
+}
+}
+.SwatchMobile__Trigger img {
+  display: block;
+}
+@media only screen and (min-width: 1025px) {
+.SwatchMobile__Trigger img {
+    margin: 35px 0;
+}
+}
+.SwatchMobile__Trigger .SwatchMobile__TriggerButton,
+.SwatchMobile__Trigger .SwatchMobile__TriggerLink {
+  display: block;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.SwatchMobile__Trigger .SwatchMobile__TriggerLink {
+  display: block;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+.SwatchMobile__Trigger .SwatchMobile__TriggerButton {
+  background: #fff;
+  border: 1px solid #202020;
+  margin-top: 30px;
+  padding: 12px 0;
+}
+.SwatchMobile__Trigger .SwatchMobile__TriggerButton:hover, .SwatchMobile__Trigger .SwatchMobile__TriggerButton:active {
+  background: #202020;
+  border-color: transparent;
+  color: #fff;
+  text-decoration: none;
+}
+@media only screen and (min-width: 768px) {
+.SwatchMobile__Trigger .SwatchMobile__TriggerButton {
     display: inline-block;
     padding: 12px 30px;
 }
 }
 @media only screen and (min-width: 1025px) {
-.SwatchBrowser__Trigger .SwatchBrowser__TriggerButton {
+.SwatchMobile__Trigger .SwatchMobile__TriggerButton {
     display: block;
     margin-top: 0;
     width: 100%;
 }
 }
 @media only screen and (max-width: 1024px) {
-.SwatchBrowser__Trigger > div:first-child {
+.SwatchMobile__Trigger > div:first-child {
     padding-right: 20px;
 }
 }
 @media only screen and (min-width: 1025px) {
-.SwatchBrowser__Trigger > div:first-child {
+.SwatchMobile__Trigger > div:first-child {
     margin: 0 auto;
     max-width: 282px;
 }
 }
-.SwatchBrowser__Trigger > div:last-child {
+.SwatchMobile__Trigger > div:last-child {
   flex: 0 0 35%;
 }
 @media only screen and (min-width: 768px) {
-.SwatchBrowser__Trigger > div:last-child {
+.SwatchMobile__Trigger > div:last-child {
     display: flex;
     flex: 0 0 45%;
     justify-content: flex-end;
 }
 }
 @media only screen and (min-width: 1025px) {
-.SwatchBrowser__Trigger > div:last-child {
+.SwatchMobile__Trigger > div:last-child {
     display: inline-block;
 }
 }[v-cloak] {

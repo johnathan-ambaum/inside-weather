@@ -72,7 +72,7 @@
     </div>
     <hr>
     <inspiration-options :products="filters.featured_products || []" />
-    <swatch-browser v-if="!isDecor" />
+    <!-- <swatch-browser v-if="!isDecor" /> -->
     <div
       v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active }"
