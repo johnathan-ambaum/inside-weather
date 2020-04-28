@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div v-if="isMobile">
+      <div class="ProductDetail__Headings" v-if="isMobile">
         <h2 class="ProductDetail__Heading">Dimensions</h2>
         <div class="ProductDetail__Dimensions">
           <img
@@ -50,6 +50,10 @@
     </template>
     <related-products></related-products>
     <swatch-browser v-if="!isDecor && !isMobile" />
+    <h2
+      v-if="isDecor || filters.contents"
+      class="ProductDetail__Heading-details"
+    >Details</h2>
     <div
       v-if="isDecor"
       class="ProductDetail__Description --custom-container"
@@ -188,6 +192,9 @@ export default {
   .ProductGallery {
     top: -40px;
   }
+  &__Headings{
+    margin-top:58px;
+  }
   &__Heading {
     font-size: 24px;
     font-weight: 600;
@@ -222,7 +229,7 @@ export default {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    margin-bottom: 58px;
     img {
       flex: 0 0 auto;
       margin-bottom: 50px;
@@ -239,7 +246,7 @@ export default {
   }
   &__SplitBlocks {
     display: flex;
-    margin-bottom: 80px;
+    margin-bottom: 58px;
     @include at-query($breakpoint-small) {
       flex-direction: column;
       & > div:first-child {
@@ -272,6 +279,24 @@ export default {
         line-height: 22px;
       }
     }
+  }
+  .ProductDetail-information-tabs__heading{
+    font-weight: 500;
+    font-size:15px;
+    letter-spacing: 0.08em;
+    color: #202020;
+    text-transform: uppercase;
+  }
+  .ProductDetail-information-tabs__heading--active{
+    font-weight: 600;
+  }
+  @include at-query($breakpoint-small) {
+    .\--custom-container {
+      padding: 0;
+    }
+  }
+  .ProductDetail__Heading-details{
+
   }
 }
 </style>

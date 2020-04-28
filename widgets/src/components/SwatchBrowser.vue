@@ -68,7 +68,7 @@ export default {
       if (this.isTablet) {
         return '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/free-swatches-tablet.jpg?1668478';
       }
-      return '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/free-swatches.jpg?1668478';
+      return 'https://cdn.shopify.com/s/files/1/2994/0144/files/free-swatch_bnr_m_x2_d5eb0690-b50a-4554-81d8-e8f46257701c.png?v=1588099414';
     },
   },
 };
@@ -79,7 +79,10 @@ export default {
 @import '../scss/mixins';
 
 .SwatchBrowser{
-  margin-bottom:130px;
+  margin-bottom:0px;
+  @include at-query($breakpoint-mlarge) {
+    margin-bottom:130px;
+  }
   &__Trigger {
     align-items: center;
     background: #f2f4f4;
@@ -208,7 +211,7 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
-    padding: 34px;
+    padding: 30px 26px;
     @include at-query($breakpoint-mlarge) {
       padding: 36px;
     }
@@ -222,6 +225,7 @@ export default {
     h3 {
       font-size: 18px;
       font-weight: 600;
+      margin-bottom:16px;
       line-height: 24px;
       @include at-query($breakpoint-mlarge) {
         font-size: 32px;
@@ -259,7 +263,7 @@ export default {
     }
     #{&}Link {
       display: block;
-      margin-top: 10px;
+      margin-top: 20px;
       text-decoration: underline;
     }
     #{&}Button {
@@ -286,7 +290,7 @@ export default {
     & > div {
       &:first-child {
         @include at-query($breakpoint-small) {
-          padding-right: 20px;
+          padding-right: 22px;
         }
         @include at-query($breakpoint-large) {
           margin: 0 auto;
