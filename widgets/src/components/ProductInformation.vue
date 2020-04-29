@@ -50,17 +50,19 @@
     </template>
     <related-products></related-products>
     <swatch-browser v-if="!isDecor && !isMobile" />
-    <h2
-      v-if="isDecor || filters.contents"
-      class="ProductDetail__Heading-details"
-    >Details</h2>
+    <div class="--custom-container">
+      <h2
+        v-if="(isDecor || filters.contents) && isMobile"
+        class="ProductDetail__Heading-details"
+      >Details</h2>
+    </div>
     <div
       v-if="isDecor"
       class="ProductDetail__Description --custom-container"
     >
       <p>{{ interpolatedDescription }}</p>
     </div>
-    <div class="--custom-container">
+    <div class="--custom-container desktop-spacing">
       <template-block
         v-for="(block, index) in filters.contents"
         :key="index"
@@ -234,6 +236,9 @@ export default {
       flex: 0 0 auto;
       margin-bottom: 50px;
     }
+    :last-child{
+      margin-bottom: 0px;
+    }
     @include at-query($breakpoint-small) {
       padding: 0 $horizontal-wrapper-padding;
     }
@@ -296,7 +301,24 @@ export default {
     }
   }
   .ProductDetail__Heading-details{
-
+    letter-spacing: 0.05em;
+    color: #202020;
+    font-family: Avalon;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 58px;
+    margin-bottom:32px;
+    padding: 0 18px;
+    @include at-query($breakpoint-large) {
+      font-size: 34px;
+      margin-bottom: 60px;
+      padding: 0;
+    }
+  }
+  .desktop-spacing{
+    @include at-query($breakpoint-large) {
+      margin-top:130px;
+    }
   }
 }
 </style>

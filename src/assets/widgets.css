@@ -1118,11 +1118,6 @@
 }.SwatchBrowser {
   margin-bottom: 0px;
 }
-@media only screen and (min-width: 768px) {
-.SwatchBrowser {
-    margin-bottom: 130px;
-}
-}
 .SwatchBrowser__Trigger {
   align-items: center;
   background: #f2f4f4;
@@ -1347,7 +1342,7 @@
 }
 }
 .SwatchMobile__Trigger > div:last-child {
-  flex: 0 0 35%;
+  flex: 0 0 135px;
 }
 @media only screen and (min-width: 768px) {
 .SwatchMobile__Trigger > div:last-child {
@@ -2101,6 +2096,9 @@ html.ProductCustomizer--Open .zEWidget-launcher {
   flex: 0 0 auto;
   margin-bottom: 50px;
 }
+.ProductDetail__Dimensions :last-child {
+  margin-bottom: 0px;
+}
 @media only screen and (max-width: 1024px) {
 .ProductDetail__Dimensions {
     padding: 0 18px;
@@ -2169,6 +2167,28 @@ html.ProductCustomizer--Open .zEWidget-launcher {
 @media only screen and (max-width: 1024px) {
 .ProductDetail .\--custom-container {
     padding: 0;
+}
+}
+.ProductDetail .ProductDetail__Heading-details {
+  letter-spacing: 0.05em;
+  color: #202020;
+  font-family: Avalon;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 58px;
+  margin-bottom: 32px;
+  padding: 0 18px;
+}
+@media only screen and (min-width: 1025px) {
+.ProductDetail .ProductDetail__Heading-details {
+    font-size: 34px;
+    margin-bottom: 60px;
+    padding: 0;
+}
+}
+@media only screen and (min-width: 1025px) {
+.ProductDetail .desktop-spacing {
+    margin-top: 130px;
 }
 }.StaticBanner a {
   height: auto;

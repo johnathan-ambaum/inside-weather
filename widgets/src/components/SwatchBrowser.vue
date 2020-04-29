@@ -80,9 +80,6 @@ export default {
 
 .SwatchBrowser{
   margin-bottom:0px;
-  @include at-query($breakpoint-mlarge) {
-    margin-bottom:130px;
-  }
   &__Trigger {
     align-items: center;
     background: #f2f4f4;
@@ -298,7 +295,7 @@ export default {
         }
       }
       &:last-child {
-        flex: 0 0 35%;
+        flex: 0 0 135px;
         @include at-query($breakpoint-mlarge) {
           display: flex;
           flex: 0 0 45%;
