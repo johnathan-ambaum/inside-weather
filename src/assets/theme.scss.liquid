@@ -11302,7 +11302,6 @@ html body.MobileNav--Active {
 
     a {
       text-decoration: none;
-      text-transform: uppercase;
     }
   }
 
@@ -11463,7 +11462,7 @@ html body.MobileNav--Active {
   top:90px;
   min-height:320px;
   height:465px;
-  padding: 25px 30px 78px 30px;
+  padding: 22px 30px 78px 30px;
   width:100%;
   background-color:white;
   border-top:1px solid #d3d3d3;
@@ -11473,6 +11472,14 @@ html body.MobileNav--Active {
   -o-transition: opacity .3s linear, visibility 0s linear .3s;
   visibility: hidden;
   opacity:0;
+
+}
+.Dropdown__Content-Wrapper{
+  display:flex;
+  min-height:320px;
+  height:400px;
+  width:100%;
+  margin: 0 auto;
 
 }
 
@@ -11579,10 +11586,12 @@ a.Dropdown__Content__Link.has-hover span {
   margin-top:14px;
   font-family: Avalon;
   font-weight: 500;
+  max-width: 417px;
   font-size: 14px;
   letter-spacing: 0.08em;
   color: #202020;
   text-align:center;
+  text-transform: capitalize;
 }
 .header-image{
   display:none; 
@@ -11626,6 +11635,7 @@ a.Dropdown__Content__Link.has-hover span {
   font-size:16px;
   letter-spacing:0.08em;
   color: #202020;
+  margin-top:30px;
 }
 .NavBlock__List-Item-Heading--underline:hover{
   text-decoration:underline;
@@ -11636,6 +11646,7 @@ a.Dropdown__Content__Link.has-hover span {
   font-size:14px;
   letter-spacing:0.08em;
   color: #202020;
+  text-transform: capitalize;
 }
 .NavBlock__List-Item:hover{
   text-decoration:underline;
@@ -11647,8 +11658,36 @@ a.Dropdown__Content__Link.has-hover span {
   flex-basis:50%;
   flex-direction:column;
   flex:1;
-  margin-top:20px;
+
+  ul{
+    margin:0 15px;
+  }
+  ul:first-child{
+    margin-left:0;
+    .NavBlock__List-Item-Heading,
+    .NavBlock__List-Item{
+      padding-left:0;
+    }
+  }
+  ul:last-child{
+    margin-right:35px;
+  }
+  .NavBlock__collections-list{
+    margin: 0 35px;
+  }
 }
+.NavBlock__flex-list--collections{
+  height:100%;
+  display:flex;
+  flex-wrap:wrap;
+  flex-basis:50%;
+  flex-direction:column;
+  flex:1;
+  ul{
+    margin-right:50px;
+  }
+}
+
 
 .Item__Icon {
   align-items: center;
@@ -11665,7 +11704,11 @@ a.Dropdown__Content__Link.has-hover span {
   width:50%; 
   border-right:1px solid #ebebeb;
 }
-
+@media only screen and ( min-width: 1325px ){
+  .header-images-wrapper{
+    margin-top:30px;
+  }
+}
 @media only screen and ( max-width: 1325px ){
   .header-images-wrapper{
     display:none;
@@ -11885,7 +11928,7 @@ a.Dropdown__Content__Link.has-hover span {
   overflow: auto;
   width:100%;
   list-style: none;
-  padding:40px 40px;
+  padding:40px 28px;
   margin:0;
 
   & > li {
@@ -11897,10 +11940,10 @@ a.Dropdown__Content__Link.has-hover span {
     &:hover {
       cursor: pointer;
     }
-
-    &:last-child {
-      border:none;
+    &:first-child {
+      padding-top:0;
     }
+
   }
 }
 
@@ -11930,8 +11973,10 @@ a.Dropdown__Content__Link.has-hover span {
   font-size: 14px;
   color:#202020;
   text-transform: uppercase;
+  margin-left:18px;
 }
 .MobileContent__Dropdown__Title-child{
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight:600;
   font-size:14px;
   letter-spacing: 0.05em;
@@ -11940,6 +11985,7 @@ a.Dropdown__Content__Link.has-hover span {
   text-transform: none;
 }
 .MobileContent__Dropdown__Title-grandchild{
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight:500;
   font-size:14px;
   letter-spacing: 0.08em;
@@ -11955,10 +12001,12 @@ a.Dropdown__Content__Link.has-hover span {
 
   &::after {
     content:"+";
+    margin-right: 10px;
   }
 
   &.MobileDropDown__Toggler--Toggled::after {
     content:"-";
+    margin-right: 10px;
   }
 }
 
@@ -11969,19 +12017,24 @@ a.Dropdown__Content__Link.has-hover span {
 
   &::after {
     content:"+";
+    margin-right: 10px;
   }
 
   &.MobileDropDown__Toggler-grandchild--Toggled::after {
     content:"-";
+    margin-right: 10px;
   }
 }
 
 .MobileContent__Dropdown--MultiColumn {
   margin:0;
-  margin-left:34px; 
+  margin-left:46px; 
 
   li{
     margin:40px 0;
+  }
+  .Mobile__List__Item-no-children{
+    margin: 32px 0;
   }
   .MobileDropdown__Content__Item {
     padding:20px 10px;
@@ -12014,7 +12067,7 @@ a.Dropdown__Content__Link.has-hover span {
   }
 }
 .mobile-slider-slot{
-  margin-bottom:40px;
+  margin-bottom:18px;
 }
 .mobile-slider__caption{
   text-align: center;
@@ -12111,6 +12164,11 @@ a.Dropdown__Content__Link.has-hover span {
   top: 22px;
   left: 20px;
   width: 100%;
+  @media only screen and (max-width: 1024px) {
+    top: -1px;
+    left: 0px;
+  }
+
 }
 
 .TopBar {

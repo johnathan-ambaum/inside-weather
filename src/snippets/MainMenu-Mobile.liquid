@@ -7,6 +7,7 @@
         LOOP THROUGH LEFT MENU
     ==============================================================={% endcomment %}
     {%- for leftParentLink in linklists.redesigned-main-menu-left.links -%}
+        {% assign parentLinkIndex = forloop.index%}
         {%- if leftParentLink.links != blank -%}
             <li class="Mobile__List__Item--DropDown">
                 <span class="MobileContent__Dropdown__Title">{{ leftParentLink.title }}<span class="MobileDropDown__Toggler"></span></span>
@@ -39,9 +40,9 @@
                                                 </div>
                                             </li>                                    
                                         {% else %}
-                                        <li class="MobileDropdown__Content__Item">
+                                        <li class="Mobile__List__Item-no-children">
                                             <a href="{{ dropdownLink.url }}"> 
-                                                <span class="MobileContent__Dropdown__Title-child">{{  dropdownLink.title }}</span>
+                                                <span class="MobileContent__Dropdown__Title-grandchild">{{  dropdownLink.title }}</span>
                                             </a>
                                         </li>
                                         {% endif %}
@@ -49,9 +50,23 @@
                                 {%- endfor -%}
                             </ul>
                         {%- endif -%}
-                        <div class = "mobile-slider-slot owl-carousel owl-theme">
-                                            
+                        <div style="width:100%; padding:0 7px;">
+                        <div class = "mobile-slider-slot--{{parentLinkIndex}} mobile-slider-slot owl-carousel owl-theme" >
+                        </div>
                         </div> 
+                        {%- for dropdownLink in leftParentLink.links-%}
+                            {% if forloop.last and dropdownLink.links != blank  %}
+                            {% for grandchildLink in dropdownLink.links %}
+                                <script> 
+                                    var image = "{{grandchildLink.url}}";
+                                    if(headerImages[image]){
+                                        var slide = $(`<div class="mobile-slider__slide"><img class="mobile-slider__image" src="${headerImages[image]['src']}" /> <div class="mobile-slider__caption">${headerImages[image]['caption']}</div> </div>`);
+                                        slide.appendTo($(".mobile-slider-slot--{{parentLinkIndex}}"));
+                                    }              
+                                </script>
+                            {% endfor %}
+                            {% endif %}
+                        {% endfor %}
                 </div>
             </li>
 
@@ -85,12 +100,6 @@
 {{ 'owl.carousel.min.js'  | asset_url | script_tag     }}
 
 <script>
-    for (var image of Object.keys(headerImages)) {
-        if (headerImages[image]['showOnMobile']) {
-            var slide = $(`<div class="mobile-slider__slide"><img class="mobile-slider__image" src="${headerImages[image]['src']}" /> <div class="mobile-slider__caption">${headerImages[image]['caption']}</div> </div>`);
-            slide.appendTo($('.mobile-slider-slot')[headerImages[image]['mobileMenu']]);
-        }
-    }
     $('.mobile-slider-slot').owlCarousel({
         loop:true,
         margin:10,
@@ -100,3 +109,8 @@
         dots: true
     })
 </script>
+<style>
+    .mobile-slider-slot .owl-dot span{
+        margin:5px 2px !important;
+    }
+</style>
