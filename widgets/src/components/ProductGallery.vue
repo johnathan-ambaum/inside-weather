@@ -23,7 +23,10 @@
             >
             <span>Rotate</span>
           </div>
-          <div class="Viewer__ZoomIcon">
+          <div
+            class="Viewer__ZoomIcon"
+            @click.stop="triggerZoom"
+          >
             <img
               src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/zoom-ico.png?v=17440287001448815818"
               alt="Click to zoom"
@@ -76,7 +79,8 @@
           :size="32"
           stroke="semibold"
           class="ZoomGallery__Close"
-          @click.native.prevent="showZoom = false"
+          @click.native.capture.prevent="closeZoom()"
+          @touchstart.native.capture.prevent="closeZoom()" 
         />
       </div>
     </transition>
@@ -137,9 +141,17 @@ export default {
     },
 
     triggerZoom() {
-      if (!this.cylindo) {
-        this.showZoom = true;
+      if (this.cylindo) {
+        this.viewer.instance.zoom(0.5, 0.5);
+        return;
       }
+      this.showZoom = true;
+    },
+    closeZoom() {
+      if (this.cylindo) {
+        this.viewer.instance.exitZoom();
+      }
+      this.showZoom = false;
     },
 
     swapImage(index) {
@@ -229,6 +241,10 @@ export default {
 
     .Viewer__ZoomIcon {
       margin-left: 31px;
+    }
+
+    @include at-query($breakpoint-small) {
+      pointer-events: auto;
     }
 
     #cylindo-main-zoom {
