@@ -36,9 +36,14 @@
         var d=new Date();
         d.setTime(d.getTime()+(45*24*60*60*1000));
         var expires = "; expires="+d.toGMTString();
-        document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires;
+        document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires + ';path=/';;
       }
+      
     }
+    function eraseCookie(name) {   
+      document.cookie = name+'=; Max-Age=-99999999;';  
+    }
+    eraseCookie('CJEVENT');
     SetCJCookie();
     </script>
     <script>
@@ -120,8 +125,8 @@
     })(window,document,'script','dataLayer','GTM-N6SBKJC');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Start VWO Async Smartcode -->
-    <script type='text/javascript'>
+  <!-- Start VWO Async Smartcode -->
+  <script type='text/javascript'>
     window._vwo_code = window._vwo_code || (function(){
     var account_id=411520,
     settings_tolerance=2000,

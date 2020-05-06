@@ -181,6 +181,7 @@
         @click.native.prevent="close(true)"
       />
     </div>
+    <photoshoot-modal @photoshoot="photoShootHandler" ref="modal" ></photoshoot-modal>
   </div>
 </template>
 
@@ -201,6 +202,7 @@ import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
+import PhotoshootModal from './PhotoshootModal.vue';
 
 library.add(faHeart);
 
@@ -216,6 +218,7 @@ export default {
     SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
+    PhotoshootModal
   },
 
   mixins: [
@@ -237,6 +240,7 @@ export default {
       active: false,
       optionsChanged: false,
       addToCartProcessing: false,
+      closedNum: 0
     };
   },
 
@@ -462,7 +466,40 @@ export default {
         this.optionsChanged = false;
       });
     },
-
+    openModal() { 
+      if(theme.settings.vwo.photoshootModal.photoshootActive){
+        this.closedNum = this.closedNum + 1; 
+        if(this.closedNum > 1){
+          if(localStorage.getItem("PDPModalTimestamp")){
+            const PDPModalTimestamp = JSON.parse(localStorage.getItem("PDPModalTimestamp"));
+            const is_in_past = new Date() > Date.parse(PDPModalTimestamp);
+            if(is_in_past){
+              this.$refs.modal.show();
+              PDPModalTimestamp = new Date();
+              PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
+              localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
+            }
+          }else{
+            this.$refs.modal.show();
+            const PDPModalTimestamp = new Date();
+            PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
+            localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
+          } 
+        }
+      }
+    },
+    photoShootHandler(){
+      this.addToCart(1);
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: {
+          id: theme.settings.vwo.photoshootModal.photoshootProductID,
+          quantity: 1
+        },
+        dataType: 'json'
+      });
+    },
     showPanel(parameter) {
       this.selectPanel(parameter);
       this.$bus.$emit('panel:show', parameter);
@@ -489,6 +526,7 @@ export default {
     },
 
     close(closeAll) {
+      this.openModal();
       if (this.openPanel && !closeAll) {
         this.selectPanel('');
         return;

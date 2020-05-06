@@ -6,11 +6,12 @@
         :key="item.$id"
         v-bind:class="['press-list-' + (index + 1)]"
         >
-        <figure>
-          <img :src="item.image">
-          
-        </figure>
-        <span>{{item.description}}</span>
+        <a :href="item.linkTo">
+          <figure>
+            <img :src="item.image">
+          </figure>
+          <span>{{item.description}}</span>
+        </a>
       </li>
     </ul>
   </div>
@@ -34,7 +35,7 @@ export default {
 @import '../scss/variables';
 
 .PressContainer {
-  padding: 173px 0;
+  padding: 165px 0;
   @include block();
   .press--container {
     max-width: calc(100% - (136px * 2));
@@ -54,7 +55,9 @@ export default {
       padding: 0 35px;
       margin: 0;
       figure {
-        margin: 0 auto 18px;
+        display: flex;
+        margin: 0 auto 20px;
+        min-height: 25px;
         img {
           display: block;
           height: auto;
@@ -69,7 +72,7 @@ export default {
         font-weight: 500;
         font-style: italic;
         text-align: center;
-        @include fonts(16px,#98958F,22px, 0.04em);
+        @include fonts(15px,#98958F, 22px, 0.04em);
       }
     }
   }
