@@ -31,69 +31,90 @@
         class="SwatchBrowser"
       >
         <div class="SwatchBrowser__Main">
-          <div class="SwatchBrowser__Header">
-            <h3>{{ category }} Swatches</h3>
-          </div>
-          <div class="SwatchBrowser__Swatches">
+          <transition
+            enter-active-class="animated fadeInLeft"
+            leave-active-class="animated fadeOutLeft"
+          >
             <div
-              v-for="swatch in swatches"
-              :key="swatch.variantId"
-              class="SwatchBrowser__Swatch"
+              v-if="!showOrderForm"
+              class="SwatchBrowser__Browse"
             >
-              <button @click="toggleInfo(swatch.variantId)">info</button>
-              <div
-                v-if="!infoActive(swatch.variantId)"
-                class="SwatchBrowser__SwatchSample"
-              >
-                <img
-                  :src="swatch.image_url"
-                  :alt="`${swatch.name} sample`"
-                  class="SwatchBrowser__SwatchImage"
-                >
-                <div>{{ swatch.name }}</div>
-                <div>{{ swatch.swatch_type }}</div>
+              <div class="SwatchBrowser__Header">
+                <h3>{{ category }} Swatches</h3>
               </div>
-              <div
-                v-if="infoActive(swatch.variantId)"
-                class="SwatchBrowser__SwatchInfo"
-              >
-                <close-button @click.native="toggleInfo(swatch.variantId)" />
-                <div>{{ swatch.name }}</div>
-                <div>{{ swatch.swatch_type }}</div>
-                <div v-html="swatch.description" />
+              <div class="SwatchBrowser__Swatches">
+                <div
+                  v-for="swatch in swatches"
+                  :key="swatch.variantId"
+                  class="SwatchBrowser__Swatch"
+                >
+                  <button @click="toggleInfo(swatch.variantId)">info</button>
+                  <div
+                    v-if="!infoActive(swatch.variantId)"
+                    class="SwatchBrowser__SwatchSample"
+                  >
+                    <img
+                      :src="swatch.image_url"
+                      :alt="`${swatch.name} sample`"
+                      class="SwatchBrowser__SwatchImage"
+                    >
+                    <div>{{ swatch.name }}</div>
+                    <div>{{ swatch.swatch_type }}</div>
+                  </div>
+                  <div
+                    v-if="infoActive(swatch.variantId)"
+                    class="SwatchBrowser__SwatchInfo"
+                  >
+                    <close-button @click.native="toggleInfo(swatch.variantId)" />
+                    <div>{{ swatch.name }}</div>
+                    <div>{{ swatch.swatch_type }}</div>
+                    <div v-html="swatch.description" />
+                  </div>
+                  <div
+                    v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
+                    class="SwatchBrowser__Badges"
+                  >
+                    <img
+                      v-if="swatch.easy_clean"
+                      src=""
+                      alt="Easy clean icon"
+                    >
+                    <img
+                      v-if="swatch.performance"
+                      src=""
+                      alt="Performance icon"
+                    >
+                    <img
+                      v-if="swatch.pet_friendly"
+                      src="https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/ico/pet-friendly.png"
+                      alt="Pet friendly icon"
+                    >
+                  </div>
+                  <button
+                    @click="toggleLineItem(swatch)"
+                  >
+                    <span v-if="!inCart(swatch.variantId)">+ ADD</span>
+                    <span v-else>REMOVE</span>
+                  </button>
+                  <div
+                    v-if="hasError(swatch.variantId)"
+                    class="SwatchBrowser__Alert"
+                  >Oops! You already have {{ maxSwatches }} in your cart!</div>
+                </div>
               </div>
-              <div
-                v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
-                class="SwatchBrowser__Badges"
-              >
-                <img
-                  v-if="swatch.easy_clean"
-                  src=""
-                  alt="Easy clean icon"
-                >
-                <img
-                  v-if="swatch.performance"
-                  src=""
-                  alt="Performance icon"
-                >
-                <img
-                  v-if="swatch.pet_friendly"
-                  src=""
-                  alt="Pet friendly icon"
-                >
-              </div>
-              <button
-                @click="toggleLineItem(swatch)"
-              >
-                <span v-if="!inCart(swatch.variantId)">+ ADD</span>
-                <span v-else>REMOVE</span>
-              </button>
-              <div
-                v-if="hasError(swatch.variantId)"
-                class="SwatchBrowser__Alert"
-              >Oops! You already have {{ maxSwatches }} in your cart!</div>
             </div>
-          </div>
+          </transition>
+          <transition
+            enter-active-class="animated fadeInRight"
+            leave-active-class="animated fadeOutRight"
+          >
+            <swatches-order-form
+              v-show="showOrderForm"
+              :cart="cart"
+              @close="showOrderForm = false"
+              @exit="active = false"
+            />
+          </transition>
         </div>
         <div class="SwatchBrowser__Cart">
           <div class="SwatchBrowser__CartHeader">
@@ -137,11 +158,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import SwatchesOrderForm from './SwatchesOrderForm.vue';
 import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 
 export default {
   components: {
+    SwatchesOrderForm,
     CloseButton,
   },
 
@@ -156,6 +179,7 @@ export default {
       activeInfos: [],
       errorOn: null,
       maxSwatches: 15,
+      showOrderForm: false,
     };
   },
 
@@ -224,6 +248,9 @@ export default {
       const index = this.cart.findIndex(item => item.variantId === swatch.variantId);
       if (index !== -1) {
         this.cart.splice(index, 1);
+        if (this.cart.length < 1) {
+          this.showOrderForm = false;
+        }
         return;
       }
       if (this.cart.length >= this.maxSwatches) {
@@ -234,7 +261,10 @@ export default {
     },
 
     startOrder() {
-
+      if (this.cart.length < 1) {
+        return;
+      }
+      this.showOrderForm = true;
     },
   },
 };
@@ -381,8 +411,12 @@ export default {
   }
 
   &__Main {
-    display: flex;
     flex: 1;
+    overflow-y: auto;
+  }
+
+  &__Browse {
+    display: flex;
     flex-direction: column;
   }
 
@@ -434,6 +468,12 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: 20px 0;
+    }
+  }
+
+  &__CartItem {
+    button {
+      text-decoration: underline;
     }
   }
 

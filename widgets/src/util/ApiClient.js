@@ -154,4 +154,20 @@ export default class ApiClient {
     const url = `https://iw-content.herokuapp.com/api/v1/product_swatches/${category}`;
     return new Promise((resolve, reject) => this.sendRequest({ url, resolve, reject }));
   }
+
+  submitSwatchOrder({ items, email, address }) {
+    const url = 'https://iw-content.herokuapp.com/api/v1/swatch_order';
+    const body = {
+      line_items: items.map(variantId => ({
+        variant_id: variantId,
+        quantity: 1,
+      })),
+      email,
+      shipping_address: address,
+    };
+
+    return new Promise((resolve, reject) => this.sendRequest({
+      method: 'POST', url, resolve, reject, body,
+    }));
+  }
 }
