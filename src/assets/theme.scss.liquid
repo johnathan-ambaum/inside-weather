@@ -11636,6 +11636,7 @@ a.Dropdown__Content__Link.has-hover span {
   letter-spacing:0.08em;
   color: #202020;
   margin-top:30px;
+  text-transform:capitalize;
 }
 .NavBlock__List-Item-Heading--underline:hover{
   text-decoration:underline;
@@ -11658,12 +11659,14 @@ a.Dropdown__Content__Link.has-hover span {
   flex-basis:50%;
   flex-direction:column;
   flex:1;
+  position: relative;
 
   ul{
     margin:0 15px;
   }
   ul:first-child{
     margin-left:0;
+    
     .NavBlock__List-Item-Heading,
     .NavBlock__List-Item{
       padding-left:0;
@@ -11674,6 +11677,16 @@ a.Dropdown__Content__Link.has-hover span {
   }
   .NavBlock__collections-list{
     margin: 0 35px;
+  }
+  ::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    top: 2%;
+    width: 1px;
+    height: 95%;
+    background: #ebebeb;
   }
 }
 .NavBlock__flex-list--collections{
@@ -11702,7 +11715,7 @@ a.Dropdown__Content__Link.has-hover span {
 .NavBlocks__Container{
   height:100%; 
   width:50%; 
-  border-right:1px solid #ebebeb;
+  // border-right:1px solid #ebebeb;
 }
 @media only screen and ( min-width: 1325px ){
   .header-images-wrapper{
@@ -11930,12 +11943,13 @@ a.Dropdown__Content__Link.has-hover span {
   list-style: none;
   padding:40px 28px;
   margin:0;
+  border-top: 1px solid #d2d3d2;
 
   & > li {
     width:100%;
     text-align: left;
     border-bottom: 1px solid #d2d3d2;
-    padding: 22px 0;
+    padding: 19px 0;
 
     &:hover {
       cursor: pointer;
@@ -12031,7 +12045,7 @@ a.Dropdown__Content__Link.has-hover span {
   margin-left:46px; 
 
   li{
-    margin:40px 0;
+    margin:32px 0;
   }
   .Mobile__List__Item-no-children{
     margin: 32px 0;
@@ -12054,7 +12068,7 @@ a.Dropdown__Content__Link.has-hover span {
     letter-spacing: .08em;
     font-size: 14px;
     color:#202020;
-    margin:32px 0;
+    margin:28px 0;
   }
   
   .MobileDropdown__Content__Item {
@@ -12067,9 +12081,10 @@ a.Dropdown__Content__Link.has-hover span {
   }
 }
 .mobile-slider-slot{
-  margin-bottom:18px;
+  margin-bottom:8px;
 }
 .mobile-slider__caption{
+  font-family:Avalon;
   text-align: center;
   font-weight:500;
   font-size:14px;
