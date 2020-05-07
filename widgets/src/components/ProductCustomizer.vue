@@ -72,7 +72,7 @@
     </div>
     <hr>
     <inspiration-options :products="filters.featured_products || []" />
-    <swatch-browser v-if="!isDecor" />
+    <!-- <swatch-browser v-if="!isDecor" /> -->
     <div
       v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active }"
@@ -533,6 +533,7 @@ export default {
       }
 
       this.createProduct();
+      this.$bus.$emit('customizer-close');
       this.active = false;
     },
 
@@ -658,7 +659,7 @@ html.ProductCustomizer--Open {
 
   &__DetailWrapper {
     @include at-query($breakpoint-small) {
-      margin-bottom: 80px;
+      margin-bottom: 68px;
       padding: 0 $horizontal-wrapper-padding;
     }
 

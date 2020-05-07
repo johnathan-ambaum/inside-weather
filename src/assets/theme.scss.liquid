@@ -10681,7 +10681,130 @@ div[data-section-type="fading-images"] {
 .product__quantity--dropdown {
   display: inline-block;
 }
+// Related products component styles 
+.related-products__wrapper{
+  margin-top:58px;
+  margin-bottom:58px;
+  @include media-query($medium-up) {
+    margin-top:76px;
+    margin-bottom:76px;
+  }
+}
+.related-products__main-title{
+  font-size:24px;
+  text-align:left;
+  font-family:Avalon;
+  font-weight:600;
+  letter-spacing:0.05em;
+  color:#202020;
+  line-height:30px;
+  margin-bottom:25px;
+  padding: 0 18px;
+  @include media-query($medium-up) {
+    margin-bottom:45px;
+    font-size:34px;
+    text-align:center;
+    padding: 0;
+  }
+}
+.related-products__cards{
+  display:flex;
+  justify-content: center;
+  flex-wrap:wrap;
+}
+.related-products__card{
+  padding:0 16px;
+  flex-basis:50%;
+  @include media-query($medium-up) {
+    flex-basis:220px;
+    padding:0 27px;
+  }
+  a:hover{
+    text-decoration:none;
+  }
+}
+.related-products__image{
+  display:block;
+  margin: 0 auto 15px auto;
+  width: 164px;
+  height:auto;
+  @include media-query($medium-up) {
+    width: 180px;
+  }
+}
+.related-products__title{
+  font-family: Avalon;
+  font-weight:500;
+  letter-spacing: 0.04em;
+  color:#202020;
+  text-align: center;
+  font-size:12px;
+  line-height: 16px;
+  width:100%;
+  margin: 0 auto 32px auto;
+  @include media-query($medium-up) {
+    font-size:14px;
+    line-height: 20px;
+  }
+}
+.ProductDetail-information-tabs__wrapper{
+  margin-bottom: 76px;
+}
+.ProductDetail-information-tabs__headings{
+  display:flex;
+  justify-content: center;
 
+  .ProductDetail-information-tabs__heading{
+    flex-basis: 168px;
+    margin-bottom: 22px;
+    text-align: center;
+    cursor: pointer;
+
+    p{
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color:#202020;
+    }
+  }
+  .ProductDetail-information-tabs__heading--active{
+    span{
+      border-bottom:1px solid #202020;
+      font-weight: 600;
+    }
+
+
+  }
+}
+.ProductDetail-information-tabs__bg{
+  height:294px;
+  background-color:#F2F4F4;
+  overflow:auto;
+
+  .ProductDetail-information-tabs__tab{
+    .ProductDetail-information-tabs__images-tab{
+      display:flex;
+      justify-content: center;
+    }
+    img{
+      display:block;
+      height:180px;
+      width:auto;
+      margin:56px 25px;
+    }
+    p{
+      font-family: Avalon;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      line-height: 22px;
+      text-align: center;
+      color:#202020;
+      width:50%;
+      margin: 78px auto 0 auto; 
+    }
+  }
+}
 // Review app styles if included
 
 #shopify-product-reviews {
