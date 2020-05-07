@@ -32,7 +32,6 @@
             <star
               :star-count="starRating"
               class-name="CarouselItem__Right--Star" />
-            <div class="CarouselItem__Right--Date">{{ reviewDate }}</div>
           </div>
           <div class="CarouselItem__Right--Title">{{ reviewTitle }}</div>
 
