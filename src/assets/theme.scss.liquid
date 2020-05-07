@@ -11462,7 +11462,7 @@ html body.MobileNav--Active {
   top:90px;
   min-height:320px;
   height:465px;
-  padding: 22px 30px 78px 30px;
+  padding: 22px 30px 45px 30px;
   width:100%;
   background-color:white;
   border-top:1px solid #d3d3d3;
@@ -11648,6 +11648,10 @@ a.Dropdown__Content__Link.has-hover span {
   letter-spacing:0.08em;
   color: #202020;
   text-transform: capitalize;
+  a{
+    white-space: normal;
+    line-height:18px;
+  }
 }
 .NavBlock__List-Item:hover{
   text-decoration:underline;
@@ -11660,9 +11664,11 @@ a.Dropdown__Content__Link.has-hover span {
   flex-direction:column;
   flex:1;
   position: relative;
+  margin-top:0;
 
   ul{
     margin:0 15px;
+    max-width: 156px;
   }
   ul:first-child{
     margin-left:0;
@@ -11683,7 +11689,7 @@ a.Dropdown__Content__Link.has-hover span {
     position: absolute;
     right: 0;
     z-index: 100;
-    top: 2%;
+    top: 15px;
     width: 1px;
     height: 95%;
     background: #ebebeb;
@@ -11696,8 +11702,10 @@ a.Dropdown__Content__Link.has-hover span {
   flex-basis:50%;
   flex-direction:column;
   flex:1;
+  margin-top: 0;
   ul{
     margin-right:50px;
+    margin-top: 0;
   }
 }
 
@@ -11949,7 +11957,7 @@ a.Dropdown__Content__Link.has-hover span {
     width:100%;
     text-align: left;
     border-bottom: 1px solid #d2d3d2;
-    padding: 19px 0;
+    padding: 18px 0 22px 0;
 
     &:hover {
       cursor: pointer;
@@ -11973,6 +11981,8 @@ a.Dropdown__Content__Link.has-hover span {
 .MobileContent__Dropdown-grandchild {
   display:none;
   width:100%;
+  max-width: 250px;
+  line-height:18px;
 
   ul {
     list-style: none;
@@ -12091,6 +12101,7 @@ a.Dropdown__Content__Link.has-hover span {
   letter-spacing: 0.08em;
   color:#202020;
   margin:18px 0 15px 0;
+  text-transform:capitalize;
 }
 .MobileContent__Dropdown--SplitHalfColumn {
   display:-webkit-box;
