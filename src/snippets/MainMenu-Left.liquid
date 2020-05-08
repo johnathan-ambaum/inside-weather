@@ -112,7 +112,7 @@
 		}
 		if(newImage !== undefined){
 			$(this).closest('.Dropdown__Content').find('.header-images-wrapper img').hide();
-			$(`.header-images-wrapper img[src='${newImage}']`).first().show();
+			$(this).closest('.Dropdown__Content').find(`.header-images-wrapper img[src='${newImage}']`).first().show();
 			$(this).closest('.Dropdown__Content').find('.header-images-wrapper .header-image-caption').text(newCaption || '');	
 		}
 
