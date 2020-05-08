@@ -13,7 +13,7 @@
             <li class="NavBlock__List__Item--Dropdown {% if forloop.index == 1 %}NavBlock__List__Item--First{% endif %}">
                 <a href="{{parentLink.link}}" class="js-no-transition">{{ parentLink.title }}</a>
 								<div class="Dropdown__Content" >
-									<div class="Dropdown__Content-Wrapper" {% if parentLink.links[0].links == blank %}style="justify-content:center; " {% else %} style="max-width: 1600px;"{% endif%}>
+									<div class="Dropdown__Content-Wrapper" {% if parentLink.links[0].links == blank %}style="justify-content:center; " {% else %} style="max-width: 1440px;"{% endif%}>
                     {% assign currentLink = parentLink.title | downcase | strip %}
 										<div class="NavBlocks__Container" {% if parentLink.links[0].links == blank %}style="width:auto;" {% endif%}>
 											<ul class="NavBlock__flex-list" {%- if parentLink.links[0].links == blank -%} style="padding-top: 34px; padding-right: 40px; margin-top: 0;" {% endif %} >
