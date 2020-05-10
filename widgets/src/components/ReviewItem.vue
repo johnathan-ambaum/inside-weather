@@ -32,7 +32,6 @@
         <div class="ReviewItem__Right--Rectangle">
           <div class="ReviewItem__Right--Top">
             <star :star-count="starRating" />
-            <div class="ReviewItem__Right--Date">{{ convertedReviewDate }}</div>
           </div>
           <div class="ReviewItem__Right--Title">{{ reviewData.title }}</div>
           <div class="ReviewItem__Right--Content">{{ reviewData.body }}</div>

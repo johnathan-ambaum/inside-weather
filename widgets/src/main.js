@@ -13,6 +13,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import ProductGrid from './components/ProductGrid.vue';
 import ProductCustomizer from './components/ProductCustomizer.vue';
 import ProductDetail from './components/ProductDetail.vue';
+import ProductInformation from './components/ProductInformation.vue';
 import ProductFamily from './components/ProductFamily.vue';
 import ProductDetailSlider from './components/ProductDetailSlider.vue';
 import GlyphLoading from './components/GlyphLoading.vue';
@@ -58,6 +59,7 @@ import store from './store';
       ProductGrid,
       ProductCustomizer,
       ProductDetail,
+      ProductInformation,
       ProductFamily,
       ProductDetailSlider,
       GlyphLoading,
