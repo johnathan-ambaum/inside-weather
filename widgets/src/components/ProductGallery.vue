@@ -5,7 +5,7 @@
   >
     <div
       class="ProductGallery__FeaturedImage"
-      @click="triggerZoom"
+      @click="triggerZoom(false)"
     >
       <div
         v-show="cylindo"
@@ -80,7 +80,7 @@
           stroke="semibold"
           class="ZoomGallery__Close"
           @click.native.capture.prevent="closeZoom()"
-          @touchstart.native.capture.prevent="closeZoom()" 
+          @touchstart.native.capture.prevent="closeZoom()"
         />
       </div>
     </transition>
@@ -140,7 +140,10 @@ export default {
       });
     },
 
-    triggerZoom() {
+    triggerZoom(includeCylindo = false) {
+      if (this.cylindo && !includeCylindo) {
+        return;
+      }
       if (this.cylindo) {
         this.viewer.instance.zoom(0.5, 0.5);
         return;
@@ -202,7 +205,8 @@ export default {
       }
     }
 
-    .cylindo-drag-tooltip.cylindo-drag-to-rotate-tooltip {
+    .cylindo-drag-tooltip.cylindo-drag-to-rotate-tooltip,
+    .cylindo-tooltip.cylindo-drag-tooltip {
       display: none !important;
     }
 
