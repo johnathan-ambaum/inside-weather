@@ -418,6 +418,7 @@ export default {
   &__Browse {
     display: flex;
     flex-direction: column;
+    margin: 0 67px 40px 73px;
   }
 
   &__Header {
@@ -434,6 +435,7 @@ export default {
 
   &__Swatch {
     flex: 0 0 20%;
+    box-shadow: .9px .9px .4px 0 rgba(139,137,134,.5);
     text-align: center;
 
     #{&}Image {
