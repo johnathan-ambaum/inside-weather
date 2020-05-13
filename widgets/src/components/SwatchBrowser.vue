@@ -45,12 +45,16 @@
               <div class="SwatchBrowser__Swatches">
                 <div
                   v-for="swatch in swatches"
-                  :key="swatch.variantId"
+                  :key="swatch.variant_id"
                   class="SwatchBrowser__Swatch"
                 >
-                  <button @click="toggleInfo(swatch.variantId)">info</button>
+                  <button
+                    v-if="!infoActive(swatch.variant_id)"
+                    class="SwatchBrowser__SwatchInfoToggle"
+                    @click="toggleInfo(swatch.variant_id)"
+                  >info</button>
                   <div
-                    v-if="!infoActive(swatch.variantId)"
+                    v-if="!infoActive(swatch.variant_id)"
                     class="SwatchBrowser__SwatchSample"
                   >
                     <img
@@ -62,13 +66,19 @@
                     <div>{{ swatch.swatch_type }}</div>
                   </div>
                   <div
-                    v-if="infoActive(swatch.variantId)"
+                    v-if="infoActive(swatch.variant_id)"
                     class="SwatchBrowser__SwatchInfo"
                   >
-                    <close-button @click.native="toggleInfo(swatch.variantId)" />
+                    <close-button
+                      class="SwatchBrowser__SwatchInfoToggle"
+                      @click.native="toggleInfo(swatch.variant_id)"
+                    />
                     <div>{{ swatch.name }}</div>
                     <div>{{ swatch.swatch_type }}</div>
-                    <div v-html="swatch.description" />
+                    <div
+                      class="SwatchBrowser__SwatchDescription"
+                      v-html="swatch.description"
+                    />
                   </div>
                   <div
                     v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
@@ -76,12 +86,12 @@
                   >
                     <img
                       v-if="swatch.easy_clean"
-                      src=""
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png"
                       alt="Easy clean icon"
                     >
                     <img
                       v-if="swatch.performance"
-                      src=""
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png"
                       alt="Performance icon"
                     >
                     <img
@@ -93,11 +103,11 @@
                   <button
                     @click="toggleLineItem(swatch)"
                   >
-                    <span v-if="!inCart(swatch.variantId)">+ ADD</span>
+                    <span v-if="!inCart(swatch.variant_id)">+ ADD</span>
                     <span v-else>REMOVE</span>
                   </button>
                   <div
-                    v-if="hasError(swatch.variantId)"
+                    v-if="hasError(swatch.variant_id)"
                     class="SwatchBrowser__Alert"
                   >Oops! You already have {{ maxSwatches }} in your cart!</div>
                 </div>
@@ -124,7 +134,7 @@
           <div class="SwatchBrowser__CartItems">
             <div
               v-for="item in cart"
-              :key="item.variantId"
+              :key="item.variant_id"
               class="SwatchBrowser__CartItem"
             >
               <img
@@ -132,7 +142,7 @@
                 :alt="`${item.name} sample`"
                 class="SwatchBrowser__LineImage"
               >
-              <span>{{ item.name }} {{ item.swatch_type }}</span>
+              <span class="SwatchBrowser__LineDescription">{{ item.name }} {{ item.swatch_type }}</span>
               <button @click="toggleLineItem(item)">remove</button>
             </div>
           </div>
@@ -186,7 +196,8 @@ export default {
   computed: {
     ...mapState({
       category: state => state.category,
-      swatches: state => state.swatches,
+      swatches: state => state.swatches.swatches || [],
+      groups: state => state.swatches.groups || [],
     }),
 
     triggerClasses() {
@@ -212,7 +223,7 @@ export default {
     },
 
     inCart() {
-      return variantId => this.cart.some(item => item.variantId === variantId);
+      return variantId => this.cart.some(item => item.variant_id === variantId);
     },
   },
 
@@ -245,7 +256,7 @@ export default {
     },
 
     toggleLineItem(swatch) {
-      const index = this.cart.findIndex(item => item.variantId === swatch.variantId);
+      const index = this.cart.findIndex(item => item.variant_id === swatch.variant_id);
       if (index !== -1) {
         this.cart.splice(index, 1);
         if (this.cart.length < 1) {
@@ -254,9 +265,10 @@ export default {
         return;
       }
       if (this.cart.length >= this.maxSwatches) {
-        this.errorOn = swatch.variantId;
+        this.errorOn = swatch.variant_id;
         return;
       }
+      this.errorOn = null;
       this.cart.push(swatch);
     },
 
@@ -434,25 +446,99 @@ export default {
   }
 
   &__Swatch {
-    flex: 0 0 20%;
+    align-items: center;
     box-shadow: .9px .9px .4px 0 rgba(139,137,134,.5);
+    display: flex;
+    flex: 0 0 20%;
+    padding: 15px;
+    position: relative;
+    flex-direction: column;
     text-align: center;
+
+    #{&}InfoToggle {
+      align-self: flex-end;
+    }
+
+    #{&}Info {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
 
     #{&}Image {
       border-radius: 50%;
       height: auto;
       width: 150px;
     }
+
+    #{&}Description {
+      margin: 15px 0;
+    }
+  }
+
+  &__SwatchSample,
+  &__SwatchInfo {
+    flex: 1;
+  }
+
+  &__Badges {
+    margin: 15px 0;
+
+    img {
+      height: 24px;
+      width: auto;
+    }
+  }
+
+  &__Alert {
+    background: #e4baa9;
+    top: -100%;
+    padding: 10px 35px 20px;
+    position: absolute;
+    right: 10%;
+    width: 225px;
+    z-index: 10;
+
+    &::before {
+      border: solid transparent;
+      bottom: 100%;
+      content: '';
+      height: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 30%;
+      width: 0;
+    }
+
+    &::before {
+      border-bottom-color: #e4baa9;
+      border-width: 0 7px 12px 7px;
+      margin-left: -12px;
+    }
   }
 
   &__LineImage {
     border-radius: 50%;
-    height: auto;
-    width: 60px;
+    flex: 0 0 60px;
+    margin-right: 30px;
+  }
+
+  &__LineDescription {
+    flex: 1;
   }
 
   &__Cart {
+    display: flex;
     flex: 0 0 445px;
+    flex-direction: column;
+    overflow: auto;
+
+    #{&}Header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
 
     #{&}Footer {
       background: #f2f0ed;
@@ -474,7 +560,13 @@ export default {
   }
 
   &__CartItem {
+    align-items: center;
+    display: flex;
+    padding: 10px 30px;
+
     button {
+      flex: 0;
+      margin-left: 30px;
       text-decoration: underline;
     }
   }
