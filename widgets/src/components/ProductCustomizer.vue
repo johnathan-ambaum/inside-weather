@@ -18,7 +18,11 @@
           <font-awesome-icon :icon="favoriteIcon"/>
         </span>
       </div>
-      <product-detail-slider v-if="isMobile" />
+      <product-detail-slider
+        v-if="isMobile"
+        :cylindo="useCylindo"
+        cylindo-id="cylindo-main"
+      />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
         <span
@@ -75,7 +79,7 @@
     <!-- <swatch-browser v-if="!isDecor" /> -->
     <div
       v-if="!isDecor"
-      :class="{ 'ProductCustomizer--Active': active }"
+      :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
       class="ProductCustomizer"
     >
       <div class="ProductCustomizer__NameOverlay">
@@ -87,7 +91,7 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider />
+        <product-detail-slider :cylindo="useCylindo" />
         <button
           v-if="!isMobile"
           class="ProductCustomizer__Close"
@@ -256,6 +260,11 @@ export default {
       favorites: state => state.favorites,
     }),
 
+    useCylindo() {
+      // double ! to cast truthy/falsy values to boolean
+      return !!this.filters.cylindo_sku;
+    },
+
     inStock() {
       if (!this.filters.track_inventory) {
         return true;
@@ -418,6 +427,7 @@ export default {
       'pullFilter',
       'populateSelected',
       'createProductFromSelected',
+      'getCylindoImage',
     ]),
 
     ...mapMutations([
@@ -450,13 +460,21 @@ export default {
       });
     },
 
-    createProduct() {
+    createProduct(refreshImages = true) {
+      if (this.useCylindo && refreshImages) {
+        this.getCylindoImage().then(() => {
+          this.createProduct(false);
+        });
+        return;
+      }
+
       if (!this.productImages.length) {
         setTimeout(() => {
           this.createProduct();
         }, 200);
         return;
       }
+
       this.createProductFromSelected({
         name: this.productName,
         model: this.modelNumber,
@@ -736,6 +754,7 @@ html.ProductCustomizer--Open {
       justify-content: center;
       margin-top: -20px;
       position: relative;
+      z-index: 10;
     }
 
     @include at-query($breakpoint-large) {
@@ -899,6 +918,7 @@ html.ProductCustomizer--Open {
     position: absolute;
     right: 18px;
     top: 18px;
+    z-index: 999;
 
     svg {
       @include at-query($breakpoint-small) {
@@ -1076,6 +1096,11 @@ html.ProductCustomizer--Open {
     position: relative;
     text-transform: uppercase;
 
+    @include at-query($breakpoint-large) {
+      background: #f2f0ed;
+      color: #202020;
+    }
+
     &.slideOutDown {
       animation-delay: 0s;
     }
@@ -1089,6 +1114,11 @@ html.ProductCustomizer--Open {
       margin-right: 5px;
       transform: rotate(-45deg);
       width: 7px;
+
+      @include at-query($breakpoint-large) {
+        border-left-color: #202020;
+        border-top-color: #202020;
+      }
     }
 
     & + & {
@@ -1103,6 +1133,11 @@ html.ProductCustomizer--Open {
         margin-left: 5px;
         transform: rotate(45deg);
         width: 7px;
+
+        @include at-query($breakpoint-large) {
+          border-right-color: #202020;
+          border-top-color: #202020;
+        }
       }
 
       @include at-query($breakpoint-large) {
@@ -1134,12 +1169,18 @@ html.ProductCustomizer--Open {
 
     @include at-query($breakpoint-large) {
       bottom: 80px;
-      height: 58px;
+      height: 50px;
       left: 0;
       margin: auto;
       position: absolute;
       right: 0;
       width: 324px;
+    }
+  }
+
+  &--Cylindo &__Close {
+    @include at-query($breakpoint-large) {
+      bottom: 30px;
     }
   }
 
