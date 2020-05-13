@@ -52,6 +52,12 @@
     $("#MobileToggler").click(function(){
         $mobileNav.slideToggle();
         $body.toggleClass("MobileNav--Active");
+        const zendesk = document.querySelector('.zEWidget-launcher');
+        if ($(zendesk).is(":visible")) {
+            $(zendesk).fadeOut(250);
+        }else{
+            $(zendesk).fadeIn(250);
+        }
     });
 
     $('.js-drawer-open-cart').on('click', function () {
@@ -62,8 +68,14 @@
     });
 
     $(".Mobile__List__Item--DropDown").click(function(){
-       $(this).find(".MobileContent__Dropdown").slideToggle();
-       $(this).find(".MobileDropDown__Toggler").toggleClass("MobileDropDown__Toggler--Toggled");
+        $(this).find(".MobileContent__Dropdown").slideToggle();
+        $(this).find(".MobileDropDown__Toggler").toggleClass("MobileDropDown__Toggler--Toggled");
+    });
+
+    $(".Mobile__List__Item--DropDown-grandchild").click(function(event){
+       event.stopPropagation();
+       $(this).find(".MobileContent__Dropdown-grandchild").slideToggle();
+       $(this).find(".MobileDropDown__Toggler-grandchild").toggleClass("MobileDropDown__Toggler-grandchild--Toggled");
     });
 
     var activeClass = 'NavBlock__List__Item--Dropdown--Active';
