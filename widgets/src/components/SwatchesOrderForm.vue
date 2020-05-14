@@ -1,16 +1,17 @@
 <template>
   <div class="SwatchesOrderForm">
-    <transition
-      enter-active-class="animated fadeInLeft"
-      leave-active-class="animated fadeOutLeft"
+    <transition-group
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
     >
       <form
         v-if="!completed"
+        key="form"
         class="SwatchesOrderForm__Form"
         @submit.prevent="submit"
       >
         <button
-          class="SwatchesOrderForm__Back"
+          class="SwatchesOrderForm__Back SwatchBrowser__Button"
           @click.prevent.stop="$emit('close')"
         >BACK TO SWATCHES</button>
         <h2 class="SwatchesOrderForm__Heading">Your Information</h2>
@@ -45,28 +46,24 @@
             </select>
           </div>
           <button
-            class="SwatchesOrderForm__Submit"
+            class="SwatchesOrderForm__Submit SwatchBrowser__Button SwatchBrowser__Button--Black"
             type="submit"
           >SUBMIT SWATCH ORDER</button>
         </div>
       </form>
-    </transition>
-    <transition
-      enter-active-class="animated fadeInRight"
-      leave-active-class="animated fadeOutRight"
-    >
       <div
-        v-if="completed"
+        v-else
+        key="thank-you"
         class="SwatchesOrderForm__ThankYou"
       >
         <h2 class="SwatchesOrderForm__Heading">Thank You!</h2>
-        <p>{{ thankYouMessage }}</p>
+        <p class="SwatchesOrderForm__Body">{{ thankYouMessage }}</p>
         <button
-          class="btn"
+          class="SwatchBrowser__Button SwatchBrowser__Button--Black"
           @click="$emit('exit')"
         >CONTINUE SHOPPING</button>
       </div>
-    </transition>
+    </transition-group>
   </div>
 </template>
 
@@ -205,18 +202,19 @@ export default {
 
 .SwatchesOrderForm {
   &__Back {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #202020;
-    color: #202020;
-    line-height: 1;
-    padding: 5px 2px;
+
   }
 
   &__Heading {
+    font-size: 18px;
+    font-weight: 600;
     margin: 40px 0 30px;
     text-align: center;
     width: 100%;
+
+    @include at-query($breakpoint-large) {
+      font-size: 28px;
+    }
   }
 
   &__Fields {
@@ -238,6 +236,11 @@ export default {
 
     label {
       display: block;
+      font-family: $font-stack-avalon;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .12em;
+      line-height: 30px;
     }
 
     &--Full {
@@ -246,11 +249,7 @@ export default {
   }
 
   &__Submit {
-    background: #202020;
-    color: #fff;
     margin: 20px 0;
-    padding: 10px;
-    text-align: center;
     width: 100%;
   }
 
@@ -258,11 +257,23 @@ export default {
     text-align: center;
 
     h2 {
-
+      font-size: 41px;
+      font-weight: 600;
+      line-height: 44px;
     }
 
     p {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .035em;
+      line-height: 20px;
+    }
 
+    @include at-query($breakpoint-large) {
+      h2 {
+        font-size: 28px;
+        line-height: 30px;
+      }
     }
   }
 }

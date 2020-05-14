@@ -31,20 +31,78 @@
         class="SwatchBrowser"
       >
         <div class="SwatchBrowser__Main">
-          <transition
-            enter-active-class="animated fadeInLeft"
-            leave-active-class="animated fadeOutLeft"
+          <transition-group
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
           >
+            <swatches-order-form
+              v-if="showOrderForm"
+              key="order-form"
+              :cart="cart"
+              @close="showOrderForm = false"
+              @exit="active = false"
+            />
             <div
-              v-if="!showOrderForm"
+              v-else
+              key="browser"
               class="SwatchBrowser__Browse"
             >
               <div class="SwatchBrowser__Header">
-                <h3>{{ category }} Swatches</h3>
+                <div class="SwatchBrowser__Description">
+                  <h3>{{ category }} Swatches</h3>
+                  <p>Select up to {{ maxSwatches }} of your favorites and we'll send &amp; ship them to your doorstep for free!</p>
+                </div>
+                <div class="SwatchBrowser__BadgeKeys">
+                  <div class="SwatchBrowser__BadgeKey">
+                    <img
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png"
+                      alt="Easy clean icon"
+                    >
+                    <span>EZ Clean</span>
+                  </div>
+                  <div class="SwatchBrowser__BadgeKey">
+                    <img
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png"
+                      alt="Performance icon"
+                    >
+                    <span>Performance</span>
+                  </div>
+                  <div class="SwatchBrowser__BadgeKey">
+                    <img
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png"
+                      alt="Pet friendly icon"
+                    >
+                    <span>Pet Friendly</span>
+                  </div>
+                </div>
+                <div
+                  v-if="groups.length > 0"
+                  class="SwatchBrowser__Filter"
+                >
+                  <select
+                    v-if="isMobile"
+                    :value="group.name"
+                    class="FilterPanel__GroupSelect"
+                    @change="e => setGroup(e.target.value)"
+                  >
+                    <option
+                      v-for="option in groupOptions"
+                      :key="option.value"
+                      :value="option.value"
+                    >{{ option.display }}</option>
+                  </select>
+                  <styled-select
+                    v-else
+                    :options="groupOptions"
+                    :value="group.name"
+                    class="FilterPanel__GroupSelect"
+                    @input="setGroup"
+                  />
+                </div>
               </div>
               <div class="SwatchBrowser__Swatches">
                 <div
-                  v-for="swatch in swatches"
+                  v-for="swatch in filteredSwatches"
                   :key="swatch.variant_id"
                   class="SwatchBrowser__Swatch"
                 >
@@ -52,30 +110,29 @@
                     v-if="!infoActive(swatch.variant_id)"
                     class="SwatchBrowser__SwatchInfoToggle"
                     @click="toggleInfo(swatch.variant_id)"
-                  >info</button>
-                  <div
-                    v-if="!infoActive(swatch.variant_id)"
-                    class="SwatchBrowser__SwatchSample"
                   >
                     <img
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-info.png"
+                      alt="info"
+                    >
+                  </button>
+                  <close-button
+                    v-else
+                    size="16"
+                    class="SwatchBrowser__SwatchInfoToggle"
+                    @click.native="toggleInfo(swatch.variant_id)"
+                  />
+                  <div class="SwatchBrowser__SwatchDetail">
+                    <img
+                      v-if="!infoActive(swatch.variant_id)"
                       :src="swatch.image_url"
                       :alt="`${swatch.name} sample`"
                       class="SwatchBrowser__SwatchImage"
                     >
-                    <div>{{ swatch.name }}</div>
-                    <div>{{ swatch.swatch_type }}</div>
-                  </div>
-                  <div
-                    v-if="infoActive(swatch.variant_id)"
-                    class="SwatchBrowser__SwatchInfo"
-                  >
-                    <close-button
-                      class="SwatchBrowser__SwatchInfoToggle"
-                      @click.native="toggleInfo(swatch.variant_id)"
-                    />
-                    <div>{{ swatch.name }}</div>
-                    <div>{{ swatch.swatch_type }}</div>
+                    <div class="SwatchBrowser__SwatchName">{{ swatch.name }}</div>
+                    <div class="SwatchBrowser__SwatchSubName">{{ swatch.swatch_type }}</div>
                     <div
+                      v-if="infoActive(swatch.variant_id)"
                       class="SwatchBrowser__SwatchDescription"
                       v-html="swatch.description"
                     />
@@ -96,11 +153,13 @@
                     >
                     <img
                       v-if="swatch.pet_friendly"
-                      src="https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/ico/pet-friendly.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png"
                       alt="Pet friendly icon"
                     >
                   </div>
                   <button
+                    :class="{ 'SwatchBrowser__SwatchToggle--InCart': inCart(swatch.variant_id) }"
+                    class="SwatchBrowser__SwatchToggle SwatchBrowser__Button"
                     @click="toggleLineItem(swatch)"
                   >
                     <span v-if="!inCart(swatch.variant_id)">+ ADD</span>
@@ -113,18 +172,7 @@
                 </div>
               </div>
             </div>
-          </transition>
-          <transition
-            enter-active-class="animated fadeInRight"
-            leave-active-class="animated fadeOutRight"
-          >
-            <swatches-order-form
-              v-show="showOrderForm"
-              :cart="cart"
-              @close="showOrderForm = false"
-              @exit="active = false"
-            />
-          </transition>
+          </transition-group>
         </div>
         <div class="SwatchBrowser__Cart">
           <div class="SwatchBrowser__CartHeader">
@@ -152,11 +200,11 @@
               <div class="SwatchBrowser__CartCount">{{ cart.length }}/{{ maxSwatches }}</div>
             </div>
             <button
-              class="SwatchBrowser__OrderButton"
+              class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
               @click="startOrder"
             >ORDER NOW</button>
             <button
-              class="SwatchBrowser__ContinueButton"
+              class="SwatchBrowser__ContinueButton SwatchBrowser__Button"
               @click.prevent="active = false"
             >CONTINUE SHOPPING</button>
           </div>
@@ -170,12 +218,14 @@
 import { mapState, mapActions } from 'vuex';
 import SwatchesOrderForm from './SwatchesOrderForm.vue';
 import CloseButton from './CloseButton.vue';
+import StyledSelect from './StyledSelect.vue';
 import screenMonitor from '../mixins/screenMonitor';
 
 export default {
   components: {
     SwatchesOrderForm,
     CloseButton,
+    StyledSelect,
   },
 
   mixins: [
@@ -190,6 +240,7 @@ export default {
       errorOn: null,
       maxSwatches: 15,
       showOrderForm: false,
+      group: '',
     };
   },
 
@@ -199,6 +250,31 @@ export default {
       swatches: state => state.swatches.swatches || [],
       groups: state => state.swatches.groups || [],
     }),
+
+    groupOptions() {
+      return this.groups.map((group) => {
+        let display = this.isMobile ? group.name : `<strong>${group.name}</strong>`;
+        if (group.group_type === 'sort') {
+          display = `SORT: ${display}`;
+        }
+        return {
+          value: group.name,
+          display,
+        };
+      });
+    },
+
+    filteredSwatches() {
+      if (!this.group) {
+        return this.swatches;
+      }
+
+      if (this.group.group_type === 'sort') {
+        return [...this.swatches].sort((a, b) => (a[this.group.reference] < b[this.group.reference] ? -1 : 1));
+      }
+
+      return this.swatches.filter(swatch => swatch[this.group.reference]);
+    },
 
     triggerClasses() {
       return {
@@ -231,6 +307,12 @@ export default {
     active(isActive) {
       document.documentElement.style.overflow = isActive ? 'hidden' : 'auto';
     },
+
+    groups(groups) {
+      if (groups && groups.length > 0) {
+        [this.group] = groups;
+      }
+    },
   },
 
   created() {
@@ -246,6 +328,13 @@ export default {
       'pullSwatches',
     ]),
 
+    setGroup(selectedName) {
+      const selected = this.groups.find(group => group.name == selectedName);
+      if (selected) {
+        this.group = selected;
+      }
+    },
+
     toggleInfo(variantId) {
       const index = this.activeInfos.findIndex(item => item === variantId);
       if (index !== -1) {
@@ -256,6 +345,7 @@ export default {
     },
 
     toggleLineItem(swatch) {
+      this.errorOn = null;
       const index = this.cart.findIndex(item => item.variant_id === swatch.variant_id);
       if (index !== -1) {
         this.cart.splice(index, 1);
@@ -268,7 +358,6 @@ export default {
         this.errorOn = swatch.variant_id;
         return;
       }
-      this.errorOn = null;
       this.cart.push(swatch);
     },
 
@@ -296,6 +385,34 @@ export default {
   top: 0;
   width: 100vw;
   z-index: 9999;
+
+  &__Button {
+    background: transparent;
+    border: none;
+    color: #202020;
+    display: block;
+    font-family: $font-stack-avalon;
+    font-size: 14px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: .12em;
+    padding: 0;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+    transition: background-color .15s ease-in-out;
+    width: 100%;
+  }
+
+  &__Button--Black {
+    background: #202020;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #3B3B3B;
+    }
+  }
 
   &__Trigger {
     align-items: center;
@@ -434,7 +551,69 @@ export default {
   }
 
   &__Header {
+    align-items: center;
+    display: flex;
     flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 30px 0;
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 30px;
+
+    }
+
+    p {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .035em;
+      line-height: 20px;
+    }
+
+    @include at-query($breakpoint-large) {
+      h2 {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__Description {
+    @include at-query($breakpoint-large) {
+      margin-left: 30px;
+      margin-right: 100px;
+      max-width: 300px;
+    }
+  }
+
+  &__BadgeKey {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .035em;
+
+    @include at-query($breakpoint-large) {
+      font-size: 14px;
+    }
+
+    img {
+      height: 24px;
+      width: auto;
+    }
+  }
+
+  &__Filter {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+
+    @include at-query($breakpoint-large) {
+      justify-content: flex-end;
+    }
   }
 
   &__Swatches {
@@ -457,9 +636,15 @@ export default {
 
     #{&}InfoToggle {
       align-self: flex-end;
+      padding: 0;
+
+      img {
+        display: block;
+        width: 20px;
+      }
     }
 
-    #{&}Info {
+    #{&}Detail {
       align-items: center;
       display: flex;
       flex-direction: column;
@@ -472,14 +657,46 @@ export default {
       width: 150px;
     }
 
-    #{&}Description {
-      margin: 15px 0;
-    }
-  }
+    #{&}Name {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      line-height: 1;
 
-  &__SwatchSample,
-  &__SwatchInfo {
-    flex: 1;
+      @include at-query($breakpoint-large) {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+
+    #{&}SubName {
+      font-family: $font-stack-roboto;
+      font-size: 8px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+
+      @include at-query($breakpoint-large) {
+        font-size: 10px;
+      }
+    }
+
+    #{&}Description {
+      font-family: $font-stack-roboto;
+      font-size: 10px;
+      letter-spacing: .15em;
+      line-height: 13px;
+      margin: 15px 0;
+
+      @include at-query($breakpoint-large) {
+        font-size: 12px;
+        letter-spacing: .25em;
+        line-height: 16px;
+      }
+    }
+
+    #{&}Toggle--InCart {
+      text-decoration: none;
+    }
   }
 
   &__Badges {
@@ -493,7 +710,10 @@ export default {
 
   &__Alert {
     background: #e4baa9;
-    top: -100%;
+    font-size: 14px;
+    letter-spacing: .035em;
+    line-height: 20px;
+    top: 100%;
     padding: 10px 35px 20px;
     position: absolute;
     right: 10%;
@@ -532,53 +752,92 @@ export default {
     display: flex;
     flex: 0 0 445px;
     flex-direction: column;
-    overflow: auto;
 
     #{&}Header {
       display: flex;
       justify-content: space-between;
       padding: 20px 40px;
+
+      h2 {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 0;
+
+        @include at-query($breakpoint-large) {
+          font-size: 28px;
+        }
+      }
     }
 
     #{&}Footer {
       background: #f2f0ed;
       padding: 0 40px 10px 40px;
-
-      button {
-        display: block;
-        padding: 10px;
-        text-align: center;
-        width: 100%;
-      }
     }
 
     #{&}Counter {
       display: flex;
+      font-size: 13px;
+      font-weight: 500;
       justify-content: space-between;
+      letter-spacing: .05em;
       padding: 20px 0;
+
+      @include at-query($breakpoint-large) {
+        font-size: 16px;
+      }
     }
+
+  }
+
+  &__CartCount {
+    color: #c98975;
+  }
+
+  &__CartItems {
+    flex: 1;
+    padding: 20px 0;
+    overflow: auto;
   }
 
   &__CartItem {
     align-items: center;
     display: flex;
+    font-size: 12px;
+    letter-spacing: .05em;
+    line-height: 18px;
     padding: 10px 30px;
 
+    @include at-query($breakpoint-large) {
+      font-size: 14px;
+    }
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
+
     button {
+      background: none;
+      border: none;
+      color: #202020;
       flex: 0;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .05em;
       margin-left: 30px;
       text-decoration: underline;
     }
   }
 
   &__OrderButton {
-    background: #202020;
-    color: #fff;
+
   }
 
   &__ContinueButton {
     margin-top: 10px;
-    text-decoration: underline;
+
+    @include at-query($breakpoint-small) {
+      display: none;
+    }
   }
 }
 </style>
