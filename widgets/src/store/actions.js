@@ -101,7 +101,11 @@ export function getCylindoImage({ state, commit }) {
       return;
     }
     const cylindo = state.cylindoViewers[0].instance;
-    cylindo.getFrameUrl(1, 2000, (url, errorMessage) => {
+    let frame = 1;
+    if (state.filters && state.filters.cylindo_overrides && state.filters.cylindo_overrides.startFrame) {
+      frame = state.filters.cylindo_overrides.startFrame;
+    }
+    cylindo.getFrameUrl(frame, 2000, (url, errorMessage) => {
       if (errorMessage) {
         reject(errorMessage);
         return;
