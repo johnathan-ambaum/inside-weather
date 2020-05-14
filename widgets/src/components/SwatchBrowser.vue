@@ -30,20 +30,24 @@
         v-show="active"
         class="SwatchBrowser"
       >
-        <div class="SwatchBrowser__Main">
+        <div
+          ref="scrollContainer"
+          class="SwatchBrowser__Main"
+        >
           <transition-group
-            enter-active-class="animated fadeIn"
-            leave-active-class="animated fadeOut"
+            enter-active-class="animated fadeInRight"
+            leave-active-class="animated fadeOutRight"
           >
             <swatches-order-form
-              v-if="showOrderForm"
+              v-show="showOrderForm"
               key="order-form"
               :cart="cart"
+              class="SwatchBrowser__Form"
               @close="showOrderForm = false"
               @exit="active = false"
             />
             <div
-              v-else
+              v-show="!showOrderForm"
               key="browser"
               class="SwatchBrowser__Browse"
             >
@@ -104,6 +108,7 @@
                 <div
                   v-for="swatch in filteredSwatches"
                   :key="swatch.variant_id"
+                  :class="{ 'is-selected': inCart(swatch.variant_id) }"
                   class="SwatchBrowser__Swatch"
                 >
                   <button
@@ -306,12 +311,17 @@ export default {
   watch: {
     active(isActive) {
       document.documentElement.style.overflow = isActive ? 'hidden' : 'auto';
+      document.documentElement.classList.toggle('ProductCustomizer--Open', isActive);
     },
 
     groups(groups) {
       if (groups && groups.length > 0) {
         [this.group] = groups;
       }
+    },
+
+    showOrderForm() {
+      this.$refs.scrollContainer.scrollTop = 0;
     },
   },
 
@@ -542,12 +552,23 @@ export default {
   &__Main {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
   }
 
   &__Browse {
     display: flex;
     flex-direction: column;
-    margin: 0 67px 40px 73px;
+    padding: 0 60px 40px;
+  }
+
+  &__Browse,
+  &__Form {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 
   &__Header {
@@ -555,13 +576,12 @@ export default {
     display: flex;
     flex: 0 0 auto;
     justify-content: space-between;
-    padding: 30px 0;
+    padding: 40px 0;
 
     h2 {
       font-size: 18px;
       font-weight: 600;
       line-height: 30px;
-
     }
 
     p {
@@ -569,6 +589,7 @@ export default {
       font-weight: 500;
       letter-spacing: .035em;
       line-height: 20px;
+      margin: 0;
     }
 
     @include at-query($breakpoint-large) {
@@ -584,7 +605,7 @@ export default {
 
   &__Description {
     @include at-query($breakpoint-large) {
-      margin-left: 30px;
+      margin-left: 40px;
       margin-right: 100px;
       max-width: 300px;
     }
@@ -594,6 +615,7 @@ export default {
     font-size: 12px;
     font-weight: 500;
     letter-spacing: .035em;
+    padding: 2px;
 
     @include at-query($breakpoint-large) {
       font-size: 14px;
@@ -617,22 +639,47 @@ export default {
   }
 
   &__Swatches {
+    box-shadow: -1.3px 0 .4px -1px rgba(139, 137, 134, 1),
+                0 -1.3px 0.4px -1px rgba(139, 137, 134, 1);
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+
+    @include at-query($breakpoint-large) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
   }
 
   &__Swatch {
     align-items: center;
-    box-shadow: .9px .9px .4px 0 rgba(139,137,134,.5);
+    border: 1px solid transparent;
+    box-shadow: 0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
     display: flex;
-    flex: 0 0 20%;
+    flex: 0 0 50%;
     padding: 15px;
     position: relative;
     flex-direction: column;
     text-align: center;
+
+    @include at-query($breakpoint-large) {
+      flex: 0 0 200px;
+    }
+
+    &:last-child {
+      box-shadow: 0 0.9px 0.4px 0 rgba(139, 137, 134, 0.5),
+                  0.9px 0 0.4px 0 rgba(139, 137, 134, 0.5);
+    }
+
+    &.is-selected {
+      background: #f2f0ed;
+      border-color: #202020;
+      box-shadow: none;
+
+      & + .is-selected {
+        border-left-color: rgba(32, 32, 32, .2);
+      }
+    }
 
     #{&}InfoToggle {
       align-self: flex-end;
@@ -662,6 +709,7 @@ export default {
       font-weight: 500;
       letter-spacing: .05em;
       line-height: 1;
+      margin-top: 15px;
 
       @include at-query($breakpoint-large) {
         font-size: 14px;
@@ -683,15 +731,21 @@ export default {
     #{&}Description {
       font-family: $font-stack-roboto;
       font-size: 10px;
-      letter-spacing: .15em;
+      letter-spacing: .015em;
       line-height: 13px;
       margin: 15px 0;
 
       @include at-query($breakpoint-large) {
         font-size: 12px;
-        letter-spacing: .25em;
+        letter-spacing: .025em;
         line-height: 16px;
       }
+    }
+
+    #{&}Toggle {
+      height: auto;
+      padding: 15px 15px 0 15px;
+      width: auto;
     }
 
     #{&}Toggle--InCart {
@@ -700,7 +754,7 @@ export default {
   }
 
   &__Badges {
-    margin: 15px 0;
+    margin-top: 15px;
 
     img {
       height: 24px;
@@ -752,6 +806,10 @@ export default {
     display: flex;
     flex: 0 0 445px;
     flex-direction: column;
+
+    @include at-query($breakpoint-large) {
+      border-left: 1px solid #dedede;
+    }
 
     #{&}Header {
       display: flex;
