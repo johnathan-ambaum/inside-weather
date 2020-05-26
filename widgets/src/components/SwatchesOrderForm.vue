@@ -1,54 +1,81 @@
 <template>
   <div class="SwatchesOrderForm">
     <transition-group
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
+      enter-active-class="animated fadeInRight"
+      leave-active-class="animated fadeOutRight"
     >
       <form
         v-if="!completed"
+        ref="form"
         key="form"
         class="SwatchesOrderForm__Form"
         @submit.prevent="submit"
       >
-        <button
-          class="SwatchesOrderForm__Back SwatchBrowser__Button"
-          @click.prevent.stop="$emit('close')"
-        >BACK TO SWATCHES</button>
-        <h2 class="SwatchesOrderForm__Heading">Your Information</h2>
-        <div class="SwatchesOrderForm__Fields">
+        <div class="SwatchesOrderForm__Wrapper">
           <div
-            v-for="field in fields"
-            :key="field.name"
-            :class="{ 'SwatchesOrderForm__Field--Full': field.fullWidth }"
-            class="SwatchesOrderForm__Field"
+            v-if="!isMobile"
+            class="SwatchesOrderForm__Back"
           >
-            <label>
-              {{ field.label }}:
-              <span v-if="!field.required">(OPTIONAL)</span>
-            </label>
-            <input
-              v-if="field.type == 'text'"
-              v-model="address[field.name]"
-              :name="field.name"
-              :required="field.required"
-              type="text">
-            <select
-              v-if="field.type == 'state'"
-              v-model="address[field.name]"
-              :name="field.name"
-              :required="field.required"
-            >
-              <option
-                v-for="state in states"
-                :key="state.abbreviation"
-                :value="state.abbreviation"
-              >{{ state.name }}</option>
-            </select>
+            <arrow-button @click.native.prevent.stop="$emit('close')" />
+            <button
+              class="SwatchBrowser__Button"
+              @click.prevent.stop="$emit('close')"
+            >BACK TO SWATCHES</button>
           </div>
-          <button
-            class="SwatchesOrderForm__Submit SwatchBrowser__Button SwatchBrowser__Button--Black"
-            type="submit"
-          >SUBMIT SWATCH ORDER</button>
+          <h2 class="SwatchesOrderForm__Heading">
+            Your Information
+            <close-button
+              v-if="isMobile"
+              :size="20"
+              @click.native.prevent.stop="$emit('close')"
+            />
+          </h2>
+          <p
+            v-if="hasErrors"
+            class="SwatchesOrderForm__Error"
+          >Please correct the errors below and resubmit.</p>
+          <div class="SwatchesOrderForm__Fields">
+            <div
+              v-for="field in fields"
+              :key="field.name"
+              :class="{ 'SwatchesOrderForm__Field--Full': field.fullWidth }"
+              class="SwatchesOrderForm__Field"
+            >
+              <label>
+                {{ field.label }}:
+                <span v-if="!field.required">(OPTIONAL)</span>
+              </label>
+              <input
+                v-if="field.type == 'text'"
+                v-model="address[field.name]"
+                :name="field.name"
+                :required="field.required"
+                :class="{ 'has-error': hasError(field.name) }"
+                type="text">
+              <select
+                v-if="field.type == 'state'"
+                v-model="address[field.name]"
+                :name="field.name"
+                :required="field.required"
+                :class="{ 'has-error': hasError(field.name) }"
+              >
+                <option
+                  v-for="state in states"
+                  :key="state.abbreviation"
+                  :value="state.abbreviation"
+                >{{ state.name }}</option>
+              </select>
+              <p
+                v-if="hasError(field.name)"
+                class="SwatchesOrderForm__Error"
+              >{{ errorFor(field.name) }}</p>
+            </div>
+            <button
+              v-if="!isMobile"
+              class="SwatchesOrderForm__Submit SwatchBrowser__Button SwatchBrowser__Button--Black"
+              type="submit"
+            >SUBMIT SWATCH ORDER</button>
+          </div>
         </div>
       </form>
       <div
@@ -56,12 +83,14 @@
         key="thank-you"
         class="SwatchesOrderForm__ThankYou"
       >
-        <h2 class="SwatchesOrderForm__Heading">Thank You!</h2>
-        <p class="SwatchesOrderForm__Body">{{ thankYouMessage }}</p>
-        <button
-          class="SwatchBrowser__Button SwatchBrowser__Button--Black"
-          @click="$emit('exit')"
-        >CONTINUE SHOPPING</button>
+        <div class="SwatchesOrderForm__Wrapper">
+          <h2 class="SwatchesOrderForm__Heading">Thank You!</h2>
+          <p class="SwatchesOrderForm__Body">{{ thankYouMessage }}</p>
+          <button
+            class="SwatchBrowser__Button SwatchBrowser__Button--Black"
+            @click="$emit('exit')"
+          >CONTINUE SHOPPING</button>
+        </div>
       </div>
     </transition-group>
   </div>
@@ -70,12 +99,20 @@
 <script>
 import states from '../static/STATE';
 import ApiClient from '../util/ApiClient';
+import ArrowButton from './ArrowButton.vue';
+import CloseButton from './CloseButton.vue';
 
 const apiClient = new ApiClient();
 
 export default {
+  components: {
+    ArrowButton,
+    CloseButton,
+  },
+
   props: {
     cart: { type: Array, default: () => ([]) },
+    isMobile: { type: Boolean, default: false },
   },
 
   data() {
@@ -93,12 +130,24 @@ export default {
         email: '',
       },
       completed: false,
-      error: null,
+      errors: [],
       thankYouMessage: '',
     };
   },
 
   computed: {
+    hasErrors() {
+      return this.errors.length > 0;
+    },
+
+    hasError() {
+      return field => this.errors.some(error => error.key === field);
+    },
+
+    errorFor() {
+      return field => (this.errors.find(error => error.key === field) || {}).message || '';
+    },
+
     fields() {
       return [
         {
@@ -174,22 +223,29 @@ export default {
 
   created() {
     this.thankYouMessage = window.theme.settings.swatchBrowser.thankYouMessage || '';
+    this.$bus.$on('swatch-browser:submit-order', () => {
+      if (this.$refs.form.reportValidity()) {
+        this.submit();
+      }
+    });
   },
 
   methods: {
     submit() {
       const { email, ...address } = this.address;
+      this.errors = [];
       // send order to API for creation
       apiClient.submitSwatchOrder({
         items: this.cart.map(swatch => swatch.variant_id),
         email,
         address,
-      }).then(() => {
+      }).then(({ status, errors }) => {
+        if (status === 'error') {
+          this.errors = errors;
+          return;
+        }
         // show thank you page
         this.completed = true;
-      }).catch((err) => {
-        this.error = err;
-        console.log({ err });
       });
     },
   },
@@ -201,38 +257,102 @@ export default {
 @import '../scss/mixins';
 
 .SwatchesOrderForm {
-  &__Back {
+  &__Wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    width: 100%;
 
+    @include at-query($breakpoint-small) {
+      padding-bottom: 100px;
+      padding-top: 0;
+    }
+  }
+
+  &__Back {
+    display: flex;
+    align-items: center;
+
+    @media (min-width: 1400px) {
+      justify-content: flex-end;
+      transform: translateX(-100%);
+
+      button {
+        display: inline-block;
+      }
+    }
+
+    .ArrowButton {
+      height: 48px;
+      overflow: hidden;
+      padding: 0;
+      width: 40px;
+
+      svg.ArrowButton__Icon {
+        transform: translate(-18px, -11px) rotate(180deg);
+      }
+    }
+
+    .SwatchBrowser__Button {
+      font-size: 13px;
+      width: auto;
+
+      @include at-query($breakpoint-large) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__Form,
+  &__ThankYou {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   &__Heading {
     font-size: 18px;
     font-weight: 600;
-    margin: 40px 0 30px;
-    text-align: center;
+    margin: 20px 0 30px;
     width: 100%;
 
     @include at-query($breakpoint-large) {
       font-size: 28px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .CloseButton {
+      right: 15px;
+      position: absolute;
+      top: 15px;
     }
   }
 
+  &__Error {
+    color: #df1818;
+    margin: 5px 0;
+  }
+
   &__Fields {
-    align-items: flex-end;
+    align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 30px;
-    width: 100%;
+    margin-top: 30px;
   }
 
   &__Field {
     display: flex;
-    flex: 0 0 calc(50% - 15px);
+    flex: 1;
     flex-direction: column;
     margin-bottom: 25px;
+
+    @include at-query($breakpoint-large) {
+      flex: 0 0 calc(50% - 15px);
+    }
 
     label {
       display: block;
@@ -241,6 +361,10 @@ export default {
       font-weight: 500;
       letter-spacing: .12em;
       line-height: 30px;
+    }
+
+    .has-error {
+      border-color: #df1818;
     }
 
     &--Full {
@@ -255,6 +379,10 @@ export default {
 
   &__ThankYou {
     text-align: center;
+
+    .SwatchesOrderForm__Wrapper {
+      max-width: 480px;
+    }
 
     h2 {
       font-size: 41px;
@@ -273,6 +401,11 @@ export default {
       h2 {
         font-size: 28px;
         line-height: 30px;
+      }
+
+      .SwatchBrowser__Button {
+        margin: 40px auto;
+        max-width: 425px;
       }
     }
   }

@@ -42,6 +42,7 @@
               v-show="showOrderForm"
               key="order-form"
               :cart="cart"
+              :is-mobile="isMobile"
               class="SwatchBrowser__Form"
               @close="showOrderForm = false"
               @exit="active = false"
@@ -52,6 +53,11 @@
               class="SwatchBrowser__Browse"
             >
               <div class="SwatchBrowser__Header">
+                <close-button
+                  v-if="isMobile"
+                  :size="20"
+                  @click.native.prevent="active = false"
+                />
                 <div class="SwatchBrowser__Description">
                   <h3>{{ category }} Swatches</h3>
                   <p>Select up to {{ maxSwatches }} of your favorites and we'll send &amp; ship them to your doorstep for free!</p>
@@ -173,42 +179,81 @@
                   <div
                     v-if="hasError(swatch.variant_id)"
                     class="SwatchBrowser__Alert"
-                  >Oops! You already have {{ maxSwatches }} in your cart!</div>
+                  >
+                    <close-button
+                      :size="14"
+                      @click.native.prevent="errorOn = null"
+                    />
+                    Oops! You already have {{ maxSwatches }} swatches in your cart!
+                  </div>
                 </div>
               </div>
             </div>
           </transition-group>
         </div>
         <div class="SwatchBrowser__Cart">
-          <div class="SwatchBrowser__CartHeader">
-            <h2>Your Cart</h2>
-            <close-button @click.native="active = false" />
-          </div>
-          <div class="SwatchBrowser__CartItems">
+          <transition
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideOutDown"
+          >
             <div
-              v-for="item in cart"
-              :key="item.variant_id"
-              class="SwatchBrowser__CartItem"
+              v-show="showCart"
+              class="SwatchBrowser__CartBody"
             >
-              <img
-                :src="item.image_url"
-                :alt="`${item.name} sample`"
-                class="SwatchBrowser__LineImage"
-              >
-              <span class="SwatchBrowser__LineDescription">{{ item.name }} {{ item.swatch_type }}</span>
-              <button @click="toggleLineItem(item)">remove</button>
+              <div class="SwatchBrowser__CartHeader">
+                <h2>Your Cart</h2>
+                <close-button
+                  :size="isMobile ? 20 : 32"
+                  @click.native="closeFromCart"
+                />
+              </div>
+              <div class="SwatchBrowser__CartItems">
+                <div
+                  v-for="item in cart"
+                  :key="item.variant_id"
+                  class="SwatchBrowser__CartItem"
+                >
+                  <img
+                    :src="item.image_url"
+                    :alt="`${item.name} sample`"
+                    class="SwatchBrowser__LineImage"
+                  >
+                  <span class="SwatchBrowser__LineDescription">{{ item.name }} {{ item.swatch_type }}</span>
+                  <button @click="toggleLineItem(item)">remove</button>
+                </div>
+              </div>
             </div>
-          </div>
+          </transition>
           <div class="SwatchBrowser__CartFooter">
             <div class="SwatchBrowser__CartCounter">
               <div class="SwatchBrowser__CounterLabel">Total Swatches:</div>
-              <div class="SwatchBrowser__CartCount">{{ cart.length }}/{{ maxSwatches }}</div>
+              <div
+                :class="{ 'is-full': cart.length >= maxSwatches }"
+                class="SwatchBrowser__CartCount"
+              >{{ cart.length }}/{{ maxSwatches }}</div>
+              <button
+                v-if="isMobile && !showCart && showOrderForm"
+                class="SwatchBrowser__FooterLink"
+                @click.prevent="openCart"
+              >VIEW YOUR CART</button>
+              <button
+                v-if="isMobile && showCart"
+                class="SwatchBrowser__FooterLink"
+                @click.prevent="backToSwatches"
+              >BACK TO SWATCHES</button>
             </div>
             <button
-              class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
-              @click="startOrder"
-            >ORDER NOW</button>
+              v-show="!showCart && !showOrderForm"
+              class="SwatchBrowser__CartButton SwatchBrowser__Button SwatchBrowser__Button--Black"
+              @click.prevent="openCart"
+            >VIEW YOUR CART</button>
             <button
+              v-show="(showCart && !showOrderForm) || (isMobile && showOrderForm)"
+              class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
+              @click.prevent="submitFromCart"
+            >{{ showOrderForm ? 'SUBMIT SWATCH ORDER' : 'ORDER NOW' }}</button>
+            <button
+              v-show="!showOrderForm"
               class="SwatchBrowser__ContinueButton SwatchBrowser__Button"
               @click.prevent="active = false"
             >CONTINUE SHOPPING</button>
@@ -245,6 +290,7 @@ export default {
       errorOn: null,
       maxSwatches: 15,
       showOrderForm: false,
+      showCart: false,
       group: '',
     };
   },
@@ -312,6 +358,9 @@ export default {
     active(isActive) {
       document.documentElement.style.overflow = isActive ? 'hidden' : 'auto';
       document.documentElement.classList.toggle('ProductCustomizer--Open', isActive);
+      if (isActive) {
+        this.showCart = !this.isMobile;
+      }
     },
 
     groups(groups) {
@@ -371,11 +420,40 @@ export default {
       this.cart.push(swatch);
     },
 
+    openCart() {
+      this.errorOn = null;
+      this.showCart = true;
+    },
+
+    backToSwatches() {
+      this.showCart = false;
+      this.showOrderForm = false;
+    },
+
+    closeFromCart() {
+      if (this.isMobile) {
+        this.showCart = false;
+        return;
+      }
+      this.active = false;
+    },
+
+    submitFromCart() {
+      if (!this.showOrderForm) {
+        this.startOrder();
+        return;
+      }
+      this.$bus.$emit('swatch-browser:submit-order');
+    },
+
     startOrder() {
       if (this.cart.length < 1) {
         return;
       }
       this.showOrderForm = true;
+      if (this.isMobile) {
+        this.showCart = false;
+      }
     },
   },
 };
@@ -559,7 +637,10 @@ export default {
   &__Browse {
     display: flex;
     flex-direction: column;
-    padding: 0 60px 40px;
+
+    @include at-query($breakpoint-large) {
+      padding: 0 60px 40px;
+    }
   }
 
   &__Browse,
@@ -572,11 +653,13 @@ export default {
   }
 
   &__Header {
-    align-items: center;
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: space-between;
-    padding: 40px 0;
+    padding: 15px 20px 20px;
+
+    .CloseButton {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+    }
 
     h2 {
       font-size: 18px;
@@ -593,6 +676,12 @@ export default {
     }
 
     @include at-query($breakpoint-large) {
+      align-items: center;
+      display: flex;
+      flex: 0 0 auto;
+      justify-content: space-between;
+      padding: 40px 0;
+
       h2 {
         font-size: 28px;
       }
@@ -608,6 +697,14 @@ export default {
       margin-left: 40px;
       margin-right: 100px;
       max-width: 300px;
+    }
+  }
+
+  &__BadgeKeys {
+    @include at-query($breakpoint-small) {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
     }
   }
 
@@ -765,12 +862,14 @@ export default {
   &__Alert {
     background: #e4baa9;
     font-size: 14px;
+    font-weight: 500;
     letter-spacing: .035em;
     line-height: 20px;
     top: 100%;
-    padding: 10px 35px 20px;
+    padding: 10px 35px 15px 20px;
     position: absolute;
     right: 10%;
+    text-align: left;
     width: 225px;
     z-index: 10;
 
@@ -790,6 +889,12 @@ export default {
       border-width: 0 7px 12px 7px;
       margin-left: -12px;
     }
+
+    .CloseButton {
+      position: absolute;
+      right: 10px;
+      top: 6px;
+    }
   }
 
   &__LineImage {
@@ -807,6 +912,16 @@ export default {
     flex: 0 0 445px;
     flex-direction: column;
 
+    @include at-query($breakpoint-small) {
+      bottom: 0;
+      height: 100%;
+      justify-content: flex-end;
+      left: 0;
+      pointer-events: none;
+      position: fixed;
+      width: 100%;
+    }
+
     @include at-query($breakpoint-large) {
       border-left: 1px solid #dedede;
     }
@@ -814,7 +929,12 @@ export default {
     #{&}Header {
       display: flex;
       justify-content: space-between;
-      padding: 20px 40px;
+      padding: 20px;
+      pointer-events: all;
+
+      @include at-query($breakpoint-large) {
+        padding: 20px 40px;
+      }
 
       h2 {
         font-size: 22px;
@@ -829,7 +949,11 @@ export default {
 
     #{&}Footer {
       background: #f2f0ed;
-      padding: 0 40px 10px 40px;
+      pointer-events: all;
+
+      @include at-query($breakpoint-large) {
+        padding: 0 40px;
+      }
     }
 
     #{&}Counter {
@@ -838,17 +962,41 @@ export default {
       font-weight: 500;
       justify-content: space-between;
       letter-spacing: .05em;
-      padding: 20px 0;
+      padding: 15px;
 
       @include at-query($breakpoint-large) {
         font-size: 16px;
+        padding: 20px 0;
       }
     }
 
   }
 
   &__CartCount {
-    color: #c98975;
+    margin-left: 15px;
+
+    &.is-full {
+      color: #c98975;
+    }
+  }
+
+  &__FooterLink {
+    flex: 1;
+    font-weight: 500;
+    letter-spacing: .12em;
+    padding: 0;
+    text-align: right;
+    text-decoration: underline;
+  }
+
+  &__CartBody {
+    animation-duration: .3s;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    pointer-events: all;
   }
 
   &__CartItems {
@@ -891,7 +1039,7 @@ export default {
   }
 
   &__ContinueButton {
-    margin-top: 10px;
+    margin: 10px 0;
 
     @include at-query($breakpoint-small) {
       display: none;

@@ -168,6 +168,6 @@ export default class ApiClient {
 
     return new Promise((resolve, reject) => this.sendRequest({
       method: 'POST', url, resolve, reject, body,
-    }));
+    })).then(response => JSON.parse(response));
   }
 }
