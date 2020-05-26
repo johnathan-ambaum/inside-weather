@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="showReviews"
+    v-if="showReviews && reviewData.length > 0"
     class="ReviewCarousel"
   >
     <div class="ReviewCarousel__Title">Reviews</div>
@@ -17,7 +17,6 @@
 
     <!-- Review Items section -->
     <div
-      v-if="reviewData.length > 0"
       class="ReviewCarousel__Category"
     >
       <div

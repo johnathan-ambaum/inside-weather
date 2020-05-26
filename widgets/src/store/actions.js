@@ -1,6 +1,6 @@
+import Vue from 'vue';
 import ApiClient from '../util/ApiClient';
 import FilterStorage from '../util/FilterStorage';
-// import interpolator from '../mixins/interpolator';
 
 const apiClient = new ApiClient();
 
@@ -24,7 +24,7 @@ export function pullFilter({ dispatch, commit, state }) {
  * Retrieves product images for selected options
  */
 export function loadProductImages({ dispatch, commit, state }) {
-  if (!state.filters.attributes) {
+  if (!state.filters.attributes || !window.cylindo) {
     // keep retrying if still waiting on filter retrieval
     setTimeout(() => {
       dispatch('loadProductImages');
@@ -33,17 +33,87 @@ export function loadProductImages({ dispatch, commit, state }) {
   }
 
   if (!state.filters.attributes.every(attribute => state.selectedOptions[attribute.parameter])) {
+    console.error('Option selections missing, aborting image population');
     return;
   }
 
-  apiClient
-    .getImages({
-      type: state.category,
-      attributes: state.selectedOptions,
-    })
-    .then((images) => {
-      commit('setProductImages', images);
+  // fall back to IW API for images if cylindo parameters not set in the filter definitions
+  if (!state.filters.cylindo_sku) {
+    apiClient
+      .getImages({
+        type: state.category,
+        attributes: state.selectedOptions,
+      })
+      .then((images) => {
+        commit('setProductImages', images);
+      });
+    return;
+  }
+
+  let features = [];
+  Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
+    const { values } = state.filters.attributes.find(att => att.parameter === parameter);
+    const selected = values.find(item => item.value === value);
+    features = features.concat(selected.cylindo_features || []);
+  });
+
+  // console.log({ SKU: state.filters.cylindo_sku, features });
+
+  if (state.cylindoViewers.length > 0) {
+    state.cylindoViewers.forEach(({ instance }) => {
+      instance.setFeatures(features);
     });
+    return;
+  }
+
+  window.cylindo.on('ready', () => {
+    const containerIds = ['cylindo-main', 'cylindo-secondary'].filter(id => document.getElementById(id) !== null);
+    const globalDefaults = {
+      debug: false,
+      accountID: 4931,
+      SKU: state.filters.cylindo_sku,
+      features,
+      country: 'us',
+      viewerType: 2,
+      thumbs: false,
+      zoomButton: false,
+      fullscreen: false,
+    };
+
+    const cylindoViewers = containerIds.map(containerID => ({
+      containerID,
+      instance: window.cylindo.viewer.create({
+        ...globalDefaults,
+        ...(state.filters.cylindo_overrides || {}),
+        customZoomContainer: `${containerID}-zoom`,
+        containerID,
+      }),
+    }));
+    Vue.set(state, 'cylindoViewers', cylindoViewers);
+  });
+}
+
+export function getCylindoImage({ state, commit }) {
+  return new Promise((resolve, reject) => {
+    if (state.cylindoViewers.length < 1) {
+      // if cylindo failed to initialize, no point in throwing more errors
+      resolve();
+      return;
+    }
+    const cylindo = state.cylindoViewers[0].instance;
+    let frame = 1;
+    if (state.filters && state.filters.cylindo_overrides && state.filters.cylindo_overrides.startFrame) {
+      frame = state.filters.cylindo_overrides.startFrame;
+    }
+    cylindo.getFrameUrl(frame, 2000, (url, errorMessage) => {
+      if (errorMessage) {
+        reject(errorMessage);
+        return;
+      }
+      commit('setProductImages', [{ full: url }]);
+      resolve();
+    });
+  });
 }
 
 export function populateSelected({ state, dispatch, commit }, { selectedOptions, exists = false }) {
@@ -60,7 +130,7 @@ export function populateSelected({ state, dispatch, commit }, { selectedOptions,
     Object.entries(selectedOptions || {}).forEach(([parameter, value]) => {
       const attribute = state.filters.attributes.find(item => item.parameter === parameter);
       if (!attribute) {
-        console.error(`Attribute "${parameter}" not found`);
+        console.warn(`Attribute "${parameter}" not found`);
         return;
       }
       let selected = attribute.values.find(item => item.value === value);
@@ -163,7 +233,6 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
       product: state.activeProduct,
       attributes: state.selectedOptions,
     };
-    // const title = interpolator.computed.productName();
     const { title } = document;
 
     if (replace && window.history.replaceState) {
@@ -192,6 +261,7 @@ export function pullSwatches({ state, dispatch, commit }) {
 
 export default {
   loadProductImages,
+  getCylindoImage,
   pullFilter,
   populateSelected,
   getReviews,

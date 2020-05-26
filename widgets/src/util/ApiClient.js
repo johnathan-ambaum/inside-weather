@@ -124,11 +124,11 @@ export default class ApiClient {
     });
   }
 
-  getImages({ type, attributes }) {
+  getImages({ type, attributes, debounce = true }) {
     const attributeString = Object.entries(attributes).map(([parameter, value]) => `${parameter}:${value}`).join(',');
     const url = `https://iw-images.herokuapp.com/api/v1/images?product_type=${type}&attributes=${attributeString}`;
-
-    return new Promise((resolve, reject) => this.debouncedImagesRequest({
+    const request = debounce ? this.debouncedImagesRequest : this.sendRequest;
+    return new Promise((resolve, reject) => request({
       method: 'GET', url, resolve, reject,
     }));
   }

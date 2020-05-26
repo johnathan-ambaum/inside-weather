@@ -1,0 +1,169 @@
+<!--
+
+headerImages = [obj1, obj2]
+headerImages1 = {}
+headerImages2 = {}
+[headerImages1, headerImages2]
+
+
+ -->
+<script>
+  var headerImages = {
+    'default':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_default.jpg?v=1588974152',
+      'caption': 'Create your climate.'
+    },
+    '/pages/armchairs':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_armchairs.jpg?v=1588887917',
+      'caption': 'Customizable Armchairs starting at $348'
+    },
+    '/pages/coffee-tables':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_coffee-tables.jpg?v=1588881783',
+      'caption': 'Customizable Coffee Tables starting at $148'
+    },
+    '/pages/credenzas':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_credenzas.jpg?v=1588882444',
+      'caption': 'Customizable Credenzas starting at $518'
+    },
+    '/pages/decor-accessories':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_decor-accessories.jpg?v=1588881783',
+      'caption': 'Must-have sidekicks starting at $29'
+    },
+    '/pages/decor-bath':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_decor-bath.jpg?v=1588881783',
+      'caption': 'Much-loved essentials starting at $29'
+    },
+    '/pages/decor-bedroom':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_decor-bedroom.jpg?v=1588881783',
+      'caption': 'Much-loved essentials starting at $29'
+    },
+    '/pages/decor-kitchen':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_decor-kitchen.jpg?v=1588881784',
+      'caption': 'Must-have home ingredients starting at $29'
+    },
+    '/pages/decor-organization':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_decor-organization.jpg?v=1588881784',
+      'caption': 'Creative solutions starting at $29'
+    },
+    '/pages/dining-chairs':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_dining-chairs.jpg?v=1588888682',
+      'caption': 'Customize starting at $138'
+    },
+    '/pages/dining-tables':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_dining-tables.jpg?v=1588887917',
+      'caption': 'Customizable Dining Tables starting at $518'
+    },
+    '/pages/franklloydwright':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_flw.jpg?v=1588881783',
+      'caption': 'Inside Weather x Frank Lloyd Wright'
+    },
+    '/pages/lounge-chairs':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_lounge-chairs.jpg?v=1588881953',
+      'caption': 'Customizable Lounge Chairs starting at $398'
+    },
+    '/pages/side-tables':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_side-tables.jpg?v=1588891985',
+      'caption': 'Customizable Side Tables starting at $98'
+    },
+    '/pages/sideboards':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_sideboards.jpg?v=1588883388',
+      'caption': 'Customize starting at $718'
+    },
+    '/pages/sofa-sectionals':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_sectionals.jpg?v=1588888896',
+      'caption': 'Modular Sectionals starting at $1198'
+    },
+    '/pages/sofas':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_sofas.jpg?v=1588889431',
+      'caption': 'Customizable Sofas starting at $898'
+    },
+    '/pages/sofette-sectionals':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_sofette-sectionals.jpg?v=1588890677',
+      'caption': 'Customizable Sofas starting at $898'
+    },
+    '/pages/sofettes':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_sofette.jpg?v=1588891012',
+      'caption': 'Modular Sectionals starting at $948'
+    },
+    '/pages/the-wfh-desk':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_media-desk.jpg?v=1588891517',
+      'caption': 'The Modular Jorn Desk'
+    },
+    'https://insideweather.com/products/al10af-latte-ace-lounge-chair-in-cloud':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_ace.jpg?v=1588890554',
+      'caption': 'Customize starting at $598'
+    },
+    'https://insideweather.com/products/cd101112ht12-latte-polk-side-chair-in-cloud':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_polk-chair.jpg?v=1588889894',
+      'caption': 'Customize starting at $158'
+    },
+    'https://insideweather.com/products/cd121112ht12-latte-luna-side-chair-in-cloud':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_luna-chair.jpg?v=1588882250',
+      'caption': 'Customize starting at $138'
+    },
+    'https://insideweather.com/products/cd141112ht12-latte-kobe-side-chair-in-cloud':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_kobe-chair.jpg?v=1588889636',
+      'caption': 'Customize starting at $148'
+    },
+    'https://insideweather.com/products/cr10aa1114-latte-sloan-credenza-in-latte-wood':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_custom-surface-credenza.jpg?v=1588883615',
+      'caption': 'Customize starting at $518'
+    },
+    'https://insideweather.com/products/cr10cf1414-latte-sloan-credenza-in-white-marble':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_custom-storage-solutions.jpg?v=1588891167',
+      'caption': 'Customize starting at $518'
+    },
+    'https://insideweather.com/products/ct12ac12-latte-round-coffee-table-in-white-marble':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_custom-surface-table.jpg?v=1588888708',
+      'caption': 'Custom Coffee Tables starting at $148'
+    },
+    'https://insideweather.com/products/dt13fy13-espresso-round-dining-table-in-espresso-wood':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_custom-dining-table.jpg?v=1588891232',
+      'caption': 'Customize starting at $328'
+    },
+    'https://insideweather.com/products/dt14fi13-latte-rectangle-dining-table-in-latte-wood':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_work-table.jpg?v=1588882934',
+      'caption': 'Customize starting at $328'
+    },
+    'https://insideweather.com/products/hd117f-mia-mug-wood-saucer-set-in-white':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_the-mug.jpg?v=1588884632',
+      'caption': 'The Mia Mug & Wood Saucer Set'
+    },
+    'https://insideweather.com/products/hd125-nordic-coat-rack':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_nordic-coat-rack.jpg?v=1588886316',
+      'caption': 'The Nordic Coat Rack'
+    },
+    'https://insideweather.com/products/jorn-desk?variant=32015458205780':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_the-wfh-desk.jpg?v=1588891672',
+      'caption': 'The Modular Jorn Desk'
+    },
+    'https://insideweather.com/products/nd10as12-nola-side-chair-in-cloud':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_nola-chair.jpg?v=1588889740',
+      'caption': 'Customize starting at $138'
+    },
+    'https://insideweather.com/products/sb10aa1114-latte-voss-sideboard-in-latte-wood':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_custom-sideboard.jpg?v=1588890133',
+      'caption': 'Customize starting at $718'
+    },
+    'https://insideweather.com/products/vl11af-latte-vita-lounge-chair-in-cloud':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_vita.jpg?v=1588890426',
+      'caption': 'Customize starting at $398'
+    },
+    '/pages/pillows':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_pillows.jpg?v=1589493558',
+      'caption': 'Customize starting at $19'
+    },
+    'https://insideweather.com/products/pq11nkcw-16-x-16-accent-pillow-cover-only':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_square-pillows.jpg?v=1589496264',
+      'caption': 'Customize starting at $22'
+    },
+    'https://insideweather.com/products/pq11omcw-16-x-16-accent-pillow-cover-only':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_square-pillows.jpg?v=1589496264',
+      'caption': 'Customize starting at $22'
+    },
+    'https://insideweather.com/products/py11dn-small-pyramid-pillow-in-alabaster-cover-only':{
+      'src': 'https://cdn.shopify.com/s/files/1/2994/0144/files/header_pyramid-pillows.jpg?v=1589496263',
+      'caption': 'Customize starting at $19'
+    }
+  };
+</script>

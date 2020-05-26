@@ -3,45 +3,7 @@
     <product-gallery
       v-if="!isMobile"
       :images="productImages"
-    />
-    <template v-if="!isDecor">
-      <h2 class="ProductDetail__Heading">Dimensions</h2>
-      <div class="ProductDetail__Dimensions">
-        <img
-          v-for="image in dimensionImages"
-          :key="image"
-          :src="image">
-      </div>
-      <div class="ProductDetail__SplitBlocks">
-        <div>
-          <h2 class="ProductDetail__Heading">Assembly</h2>
-          <p>{{ interpolatedAssembly }}</p>
-        </div>
-        <div>
-          <h2 class="ProductDetail__Heading">Shipping</h2>
-          <p>{{ interpolatedShipping }}</p>
-        </div>
-      </div>
-    </template>
-    <h2
-      v-if="isDecor || filters.contents"
-      class="ProductDetail__Heading"
-    >Details</h2>
-    <div
-      v-if="isDecor"
-      class="ProductDetail__Description"
-    >
-      <p>{{ interpolatedDescription }}</p>
-    </div>
-    <template-block
-      v-for="(block, index) in filters.contents"
-      :key="index"
-      :image="block.image_template"
-      :mobile-image="block.mobile_image_template"
-      :heading="block.header_template"
-      :text="block.content_template"
-      :reverse="index % 2 !== 0"
-      :is-mobile="isMobile"
+      :cylindo="useCylindo"
     />
     <!-- <product-family
       v-if="'related_items' in product && product.related_items.length"
@@ -78,6 +40,14 @@ export default {
       filters: state => state.filters,
       productImages: state => state.productImages,
     }),
+
+    useCylindo() {
+      if (!this.filters) {
+        return false;
+      }
+      // double ! to cast truthy/falsy values to boolean
+      return !!this.filters.cylindo_sku;
+    },
 
     isDecor() {
       return this.filters.configurator_type === 'small';
@@ -151,7 +121,18 @@ export default {
   }
 
   .ProductGallery {
-    top: -40px;
+    top: -30px;
+
+    &--Cylindo {
+      justify-content: flex-start;
+      margin-left: 110px;
+
+      @include at-query($breakpoint-large) {
+        .ProductGallery__FeaturedImage {
+          flex: 0 1 775px;
+        }
+      }
+    }
   }
 
   &__Heading {

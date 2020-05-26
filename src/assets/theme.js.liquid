@@ -1164,7 +1164,7 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.initQtySelectors.bind(this));
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
-        $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));  
+        $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
         $(".js-cart-count").on("click", function(){
           localStorage.removeItem('pdp-countdown-timer');
           clearInterval(PDPCountdownTimeInterval);
@@ -1172,7 +1172,7 @@ lazySizesConfig.expFactor = 4;
             theme.cart.getCart().then(function(cart){
               CartDrawer.prototype.buildCart(cart, true);
             }.bind(this));
-          }  
+          }
         });
 
 
@@ -1181,7 +1181,7 @@ lazySizesConfig.expFactor = 4;
         $('body').on('added.ajaxProduct', function() {
           theme.cart.getCart().then(function(cart) {
             window.VWO = window.VWO || [];
-            window.VWO.push(['tag', 'CartValue', cart.original_total_price.toString(), 'session']);
+            window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
             this.buildCart(cart, true);
           }.bind(this));
         }.bind(this));
@@ -1358,7 +1358,7 @@ lazySizesConfig.expFactor = 4;
         } else {
           $(selectors.cartBubble).removeClass('cart-link__bubble--visible');
         }
-      },  
+      },
       cartDrawerClockHandler: function(cart){
         var cartTotal = Math.round(cart.original_total_price/100);
         var VWOMinTotal = theme.settings.vwo.countdown.minimumCartTotalUSD;
@@ -4253,6 +4253,12 @@ lazySizesConfig.expFactor = 4;
       this.cookieName = 'newsletter-' + sectionId;
 
       if (!$container.length) {
+        return;
+      }
+
+      // this was added 2020-03-22 as a hack to prevent this moda from popping up on certain pages
+      if (window.location.href.indexOf("opensource") > -1) {
+        console.log('newsletter modal supressed');
         return;
       }
 

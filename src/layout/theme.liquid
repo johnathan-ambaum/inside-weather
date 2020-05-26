@@ -116,8 +116,8 @@
         photoshootModal:{
           photoshootActive: false,
           photoshootProductID: 31921596301396,
-          modalTitle: "Looking Good",
-          modalContent: "Nice Design! You are the first person to create this combination. We'd love to feature your item in a photoshoot!",
+          modalTitle: "Nice Design!",
+          modalContent: "You are the first person to design this specific combination and we’d love to feature it on our Instagram!",
           acceptBtnText: "COUNT ME IN",
           declineBtnText: "NO THANKS"
         },
@@ -129,6 +129,9 @@
           expirationTextContent: "Checkout now to confirm your reservation.",
           timerDurationInMinutes: 10,
           minimumCartTotalUSD: 100
+        },
+        privyModals:{
+          privyModalOne: false
         }
       },
       swatchBrowser: {
@@ -146,7 +149,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js"></script>
 
   <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' or template.suffix == 'living-room' or template.suffix == 'dining-room' or template.suffix == 'office'  or template.suffix == 'category-sofettes'  or template.suffix == 'category-armchairs'  or template.suffix == 'category-diningchairs'  or template.suffix == 'category-loungechairs'  or template.suffix == 'category-coffeetables'  or template.suffix == 'category-diningtables'  or template.suffix == 'category-sidetables'  or template.suffix == 'category-credenzas'  or template.suffix == 'category-sideboards' or template.suffix == 'full-reviews' or template.suffix == 'category-organization' or template.suffix == 'category-kitchen' or template.suffix == 'category-bathroom' or template.suffix == 'category-bedroom' or template.suffix == 'category-accessories' -%}
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' or template.suffix == 'living-room' or template.suffix == 'dining-room' or template.suffix == 'office'  or template.suffix == 'category-sofettes'  or template.suffix == 'category-armchairs'  or template.suffix == 'category-diningchairs'  or template.suffix == 'category-loungechairs'  or template.suffix == 'category-coffeetables'  or template.suffix == 'category-diningtables'  or template.suffix == 'category-sidetables'  or template.suffix == 'category-credenzas'  or template.suffix == 'category-sideboards' or template.suffix == 'full-reviews' or template.suffix == 'category-organization' or template.suffix == 'category-kitchen' or template.suffix == 'category-bathroom' or template.suffix == 'category-bedroom' or template.suffix == 'category-accessories' or template.suffix == 'category-pillows' -%}
     {%- if customer -%}
       {%- if customer.metafields.global.v2-favorites -%}
         {%- assign favorites = customer.metafields.global.v2-favorites -%}
@@ -167,9 +170,13 @@
   <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
+  {% if template.name == 'product' %}
+    <link rel="stylesheet" href="//viewer.cylindo.com/3.x/v3.3.1/viewer.css">
+  {% endif %}
   <script src="{{ 'manifest.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+  <script src="//viewer.cylindo.com/3.x/v3.3.1/viewer.min.js" defer></script>
   <!-- end browse and product customizer widgets -->
 
   {{ content_for_header }}
@@ -204,7 +211,11 @@
   {% include 'minmaxify-head' %}
 
 {% include 'pagefly-header' %}
+
+{% render 'pagefly-header' %}
+ </head>
 </head>
+ </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
 

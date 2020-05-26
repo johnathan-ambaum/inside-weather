@@ -1,0 +1,173 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_d_00.jpg?v=1589224744','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_m_00.jpg?v=1589224744','heading':'Throw Pillows','description':'Start with a shape and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/products/pq11cwac-16-x-16-accent-pillow-cover-only', 'dataSource': 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_d_01.jpg?v=1589224745', 'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_m_01.jpg?v=1589224744','heading':'Size & Insert','description':'All the shapes & sizes you can dream of!','linkText':'Customize now','url':'https://insideweather.com/products/pq11cwac-16-x-16-accent-pillow-cover-only', 'dataSource': 'size-insert'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_d_02-03.jpg?v=1589224745','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_m_02-03.jpg?v=1589224744','heading':'Front Upholstery','description':'From velvet to suede, a rainbow of solid hues to trending motifs, child-proof to office-ready—you have 400+ upholsteries to choose from.','linkText':'Customize now','url':'https://insideweather.com/products/pq11cwac-16-x-16-accent-pillow-cover-only', 'dataSource': 'front-upholstery'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_d_02-03.jpg?v=1589224745', 'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_tb_m_02-03.jpg?v=1589224744','heading':'Back Upholstery','description':'Yup, you read that right! Each side is yours to create.','linkText':'Customize now','url':'https://insideweather.com/products/pq11cwac-16-x-16-accent-pillow-cover-only', 'dataSource': 'back-upholstery'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Size & Insert', 'accordionDescription': 'All the shapes & sizes you can dream of!', 'accordionTarget': 'size-insert'},{'accordionHead': 'Front Upholstery', 'accordionDescription': 'From velvet to suede, a rainbow of solid hues to trending motifs, child-proof to office-ready—you have 400+ upholsteries to choose from.', 'accordionTarget': 'front-upholstery'}, {'accordionHead': 'Back Upholstery', 'accordionDescription': 'Yup, you read that right! Each side is yours to create.', 'accordionTarget': 'back-upholstery'}]" %}
+
+    <category-banner 
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_col_01.jpg?v=1589420504', 'title': '22\&#34; Accent Pillow', 'linkText': 'Customize starting at $34', hyperLink: 'https://insideweather.com/products/pq17cyan-22-x-22-accent-pillow-cover-only'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_col_02.jpg?v=1589420504', 'title': '20\&#34; Accent Pillow', 'linkText': 'Customize starting at $30', hyperLink: 'https://insideweather.com/products/pq15lwac-20-x-20-accent-pillow-cover-only'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_col_03.jpg?v=1589420504', 'title': '18\&#34; Accent Pillow', 'linkText': 'Customize starting at $26', hyperLink: 'https://insideweather.com/products/pq13dicw-18-x-18-accent-pillow-cover-only'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_col_04.jpg?v=1589420504', 'title': '16\&#34; Accent Pillow', 'linkText': 'Customize starting at $22', hyperLink: 'https://insideweather.com/products/pq11njan-16-x-16-accent-pillow-cover-only'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_col_05.jpg?v=1589420504', 'title': 'Large Pyramid Pillow', 'linkText': 'Customize starting at $34', hyperLink: 'https://insideweather.com/products/py13bt-large-pyramid-pillow-in-butterscotch-cover-only'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_col_06.jpg?v=1589420504', 'title': 'Small Pyramid Pillow', 'linkText': 'Customize starting at $19', hyperLink: 'https://insideweather.com/products/py11da-small-pyramid-pillow-in-powder-pink-cover-only'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Shape"
+          section-description="Then choose between hundreds of upholsteries to make it yours!"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'true','objectUrl':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_01_d.mp4?v=1589240841','objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_01_m.mp4?v=1589240842','title': 'Made for You','description': 'A shape for every mood, a size for every sofa, a color for any look. Like everything else in your home, your pillows should be as custom as you are. From a lazy Sunday floor pillow to a perfectly fluffed accent pillow—this custom sidekick wants to kick it with you every step of the way.'},{'isVideo':'false', 'objectUrl':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_02_d.jpg?v=1589419608', 'objectUrlMob':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_02_m.jpg?v=1589419609', 'title': 'Custom Upholstery','description': 'Grab a snack—you have 400+ fabric options to choose from, all hand-stitched here in the US. Our square accent pillow even allows you to color in EACH side with your hue & design of choice! Dream up your ideal pillow pal in our 360° viewer.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_03_d.jpg?v=1589313085', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_03_m.jpg?v=1589313095', 'title': 'Life-Proof','description': 'Our pillows are designed to withstand whatever life throws at them. Choose from stain-resistant Performance Upholsteries, Pet-friendly possibilities, and even Commercial Grade selections to find one that\'s tailored to comfort your needs (& potential mischief). Every pillow features a concealed zipper for easy, practical removal & cleaning. P.S. Check out Wyzenbeek Test Method Rub Count Scores on each product page!'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_04_d.mp4?v=1589241493', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_details_04_m.mp4?v=1589241494', 'title': 'Sustainable Comfort','description': 'Each pillow insert is composed of 100% recycled down alternative composed of roughly 40 recycled plastic bottles. The disposable bottles that we upcycle are sterilized in hot water, ground into tiny flakes, re-melted and extruded to make polyester fiber. This process helps keep bottles out of our landfills & oceans and helps fill your home with comfortable, sustainable accents.'}]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}
+    <div class="categoryValuePropsWrapper">
+      <category-vprops 
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops> 
+    </div>
+
+    {% assign lifeStyleItems = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_01.jpg?v=1589412972','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866889&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Small Pyramid Pillow in Baltic Blue (With Insert)','price':'$37','productUrl':'https://insideweather.com/products/py10ag-small-pyramid-pillow-in-baltic-blue-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866935&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Large Pyramid Pillow in Blue Lagoon (With Insert)','price':'$62', 'productUrl':'https://insideweather.com/products/py12at-large-pyramid-pillow-in-blue-lagoon-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_02.jpg?v=1589412974','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4048971,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048491,4048886,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'}]}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_03_78d0e1db-7cbb-4462-9a9d-7affeee91f83.jpg?v=1589479609','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866870&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Small Pyramid Pillow in Aubergine (With Insert)','price':'$29', 'productUrl':'https://insideweather.com/products/py10al-small-pyramid-pillow-in-aubergine-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866905&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Large Pyramid Pillow in Silver Gray (With Insert)','price':'$62', 'productUrl':'https://insideweather.com/products/py12cg-large-pyramid-pillow-in-silver-gray-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866921&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Large Pyramid Pillow in Stone Blue (With Insert)','price':'$62', 'productUrl':'https://insideweather.com/products/py12ax-large-pyramid-pillow-in-stone-blue-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_04.jpg?v=1589412974','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048650,4049211,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'16\&#34; x 16\&#34; Accent Pillow (With Insert)','price':'$42', 'productUrl':'https://insideweather.com/products/pq10cece-16-x-16-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048491,4048886,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4048971,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_05.jpg?v=1589412974','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4048971,4049236&frame=4&size=720&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048827,4049086,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'16\&#34; x 16\&#34; Accent Pillow (With Insert)','price':'$42', 'productUrl':'https://insideweather.com/products/pq10cfcf-16-x-16-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048731,4048986,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$48', 'productUrl':'https://insideweather.com/products/pq12cqaj-18-x-18-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048512,4048884,4049236&frame=5&size=220&name=Throw%20Pillow5&color=FFFFFF&format=JPG','title':'22\&#34; x 22\&#34; Accent Pillow (With Insert)','price':'$55', 'productUrl':'https://insideweather.com/products/pq16akcr-22-x-22-accent-pillow-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_06.jpg?v=1589412975','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048784,4048885,4049236&frame=4&size=220&name=Throw%20Pillow5&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12atas-18-x-18-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4048971,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048580,4049053,4049236&frame=4&size=220&name=Throw%20Pillow5&color=FFFFFF&format=JPG','title':'22\&#34; x 22\&#34; Accent Pillow (With Insert)','price':'$60', 'productUrl':'https://insideweather.com/products/pq16avcl-22-x-22-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048555,4048960,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'16\&#34; x 16\&#34; Accent Pillow (With Insert)','price':'$42', 'productUrl':'https://insideweather.com/products/pq10cdcd-16-x-16-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048504,4049197,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nkni-20-x-20-accent-pillow-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_07.jpg?v=1589412974','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048504,4049062,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nknk-20-x-20-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048784,4048885,4049236&frame=4&size=220&name=Throw%20Pillow5&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12atas-18-x-18-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4048971,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048580,4049053,4049236&frame=4&size=220&name=Throw%20Pillow5&color=FFFFFF&format=JPG','title':'22\&#34; x 22\&#34; Accent Pillow (With Insert)','price':'$60', 'productUrl':'https://insideweather.com/products/pq16avcl-22-x-22-accent-pillow-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_08.jpg?v=1589412974','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866870&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Small Pyramid Pillow in Aubergine (With Insert)','price':'$29', 'productUrl':'https://insideweather.com/products/py10al-small-pyramid-pillow-in-aubergine-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14741&scene=sku&features=3849157,3866905&frame=4&size=220&name=Pyramid%20Pillow4&color=FFFFFF&format=JPG','title':'Large Pyramid Pillow in Silver Gray (With Insert)','price':'$62', 'productUrl':'https://insideweather.com/products/py12cg-large-pyramid-pillow-in-silver-gray-with-insert'}]},
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_10.jpg?v=1589412974','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048504,4049197,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nkni-20-x-20-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048491,4048886,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4048971,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048580,4049053,4049236&frame=4&size=220&name=Throw%20Pillow5&color=FFFFFF&format=JPG','title':'22\&#34; x 22\&#34; Accent Pillow (With Insert)','price':'$60', 'productUrl':'https://insideweather.com/products/pq16avcl-22-x-22-accent-pillow-with-insert'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_pillows_lg_09.jpg?v=1589412976','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048610,4049189,4049236&frame=20&size=220&name=Throw%20Pillow20&color=FFFFFF&format=JPG','title':'22\&#34; x 22\&#34; Accent Pillow (With Insert)','price':'$60', 'productUrl':'https://insideweather.com/products/pq16auau-22-x-22-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048703,4049144,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nxnx-20-x-20-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048491,4048886,4049236&frame=4&size=220&name=Throw%20Pillow4&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048602,4048925,4049236&frame=20&size=220&name=Throw%20Pillow20&color=FFFFFF&format=JPG','title':'16\&#34; x 16\&#34; Accent Pillow (With Insert)','price':'$42', 'productUrl':'https://insideweather.com/products/pq10chch-16-x-16-accent-pillow-with-insert'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get Inspired"
+        pop-up-heading="Get Inspired"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function (event){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter", 
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>
