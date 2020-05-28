@@ -72,6 +72,8 @@
             </div>
             <button
               v-if="!isMobile"
+              :class="{ 'btn--loading': isSubmitting }"
+              :disabled="isSubmitting"
               class="SwatchesOrderForm__Submit SwatchBrowser__Button SwatchBrowser__Button--Black"
               type="submit"
             >SUBMIT SWATCH ORDER</button>
@@ -113,6 +115,7 @@ export default {
   props: {
     cart: { type: Array, default: () => ([]) },
     isMobile: { type: Boolean, default: false },
+    isSubmitting: { type: Boolean, default: false },
   },
 
   data() {
@@ -232,6 +235,11 @@ export default {
 
   methods: {
     submit() {
+      if (this.isSubmitting) {
+        return;
+      }
+
+      this.$bus.$emit('swatch-browser:submission-in-progress', true);
       const { email, ...address } = this.address;
       this.errors = [];
       // send order to API for creation
@@ -239,13 +247,13 @@ export default {
         items: this.cart.map(swatch => swatch.variant_id),
         email,
         address,
-      }).then(({ status, errors }) => {
-        if (status === 'error') {
-          this.errors = errors;
-          return;
-        }
+      }).then((response) => {
         // show thank you page
         this.completed = true;
+      }).catch(({ errors = [] }) => {
+        this.errors = errors;
+      }).finally(() => {
+        this.$bus.$emit('swatch-browser:submission-in-progress', false);
       });
     },
   },

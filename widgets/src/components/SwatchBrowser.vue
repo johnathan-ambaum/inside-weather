@@ -54,6 +54,7 @@
               key="order-form"
               :cart="cart"
               :is-mobile="isMobile"
+              :is-submitting="isSubmitting"
               class="SwatchBrowser__Form"
               @close="showOrderForm = false"
               @exit="active = false"
@@ -260,6 +261,8 @@
             >VIEW YOUR CART</button>
             <button
               v-show="(showCart && !showOrderForm) || (isMobile && showOrderForm)"
+              :disabled="isSubmitting"
+              :class="{ 'btn--loading': isSubmitting }"
               class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
               @click.prevent="submitFromCart"
             >{{ showOrderForm ? 'SUBMIT SWATCH ORDER' : 'ORDER NOW' }}</button>
@@ -301,6 +304,7 @@ export default {
       errorOn: null,
       maxSwatches: 15,
       showOrderForm: false,
+      isSubmitting: false,
       showCart: false,
       group: '',
     };
@@ -394,6 +398,9 @@ export default {
 
   created() {
     this.maxSwatches = window.theme.settings.swatchBrowser.maxSwatches || 15;
+    this.$bus.$on('swatch-browser:submission-in-progress', (isSubmitting) => {
+      this.isSubmitting = isSubmitting;
+    });
   },
 
   mounted() {

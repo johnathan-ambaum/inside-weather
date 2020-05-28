@@ -27,7 +27,14 @@ export default class ApiClient {
       }
 
       return fetch(url, fetchOptions)
-        .then(response => response.json())
+        .then((response) => {
+          if ([200, 201].includes(response.status)) {
+            return response.json();
+          }
+          return response.json().then((errorResponse) => {
+            reject(errorResponse);
+          });
+        })
         .then(response => resolve(response))
         .catch(err => reject(err));
     };
@@ -168,6 +175,6 @@ export default class ApiClient {
 
     return new Promise((resolve, reject) => this.sendRequest({
       method: 'POST', url, resolve, reject, body,
-    })).then(response => JSON.parse(response));
+    }));
   }
 }
