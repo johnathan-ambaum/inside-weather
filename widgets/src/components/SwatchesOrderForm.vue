@@ -45,13 +45,6 @@
                 {{ field.label }}:
                 <span v-if="!field.required">(OPTIONAL)</span>
               </label>
-              <input
-                v-if="field.type == 'text'"
-                v-model="address[field.name]"
-                :name="field.name"
-                :required="field.required"
-                :class="{ 'has-error': hasError(field.name) }"
-                type="text">
               <select
                 v-if="field.type == 'state'"
                 v-model="address[field.name]"
@@ -65,6 +58,14 @@
                   :value="state.abbreviation"
                 >{{ state.name }}</option>
               </select>
+              <input
+                v-else
+                v-model="address[field.name]"
+                :name="field.name"
+                :required="field.required"
+                :class="{ 'has-error': hasError(field.name) }"
+                :type="field.type"
+              >
               <p
                 v-if="hasError(field.name)"
                 class="SwatchesOrderForm__Error"
@@ -205,14 +206,14 @@ export default {
         {
           name: 'zip',
           label: 'ZIP',
-          type: 'text',
+          type: 'number',
           required: true,
           fullWidth: false,
         },
         {
           name: 'phone',
           label: 'PHONE',
-          type: 'text',
+          type: 'number',
           required: true,
           fullWidth: true,
         },
@@ -369,6 +370,16 @@ export default {
       font-weight: 500;
       letter-spacing: .12em;
       line-height: 30px;
+    }
+
+    input[type="number"] {
+      -moz-appearance:textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
 
     .has-error {
