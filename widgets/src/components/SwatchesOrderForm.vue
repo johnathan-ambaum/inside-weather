@@ -49,7 +49,6 @@
                 v-if="field.type == 'state'"
                 v-model="address[field.name]"
                 :name="field.name"
-                :required="field.required"
                 :class="{ 'has-error': hasError(field.name) }"
               >
                 <option
@@ -62,7 +61,6 @@
                 v-else
                 v-model="address[field.name]"
                 :name="field.name"
-                :required="field.required"
                 :class="{ 'has-error': hasError(field.name) }"
                 :type="field.type"
               >
@@ -228,21 +226,32 @@ export default {
   created() {
     this.thankYouMessage = window.theme.settings.swatchBrowser.thankYouMessage || '';
     this.$bus.$on('swatch-browser:submit-order', () => {
-      if (this.$refs.form.reportValidity()) {
-        this.submit();
-      }
+      this.submit();
     });
   },
 
   methods: {
+    validate() {
+      this.errors = [];
+      this.fields.forEach(({ name, required }) => {
+        if (required && this.address[name].trim() === '') {
+          this.errors.push({ key: name, message: 'Required' });
+        }
+      });
+      return this.errors.length < 1;
+    },
+
     submit() {
       if (this.isSubmitting) {
         return;
       }
 
+      if (!this.validate()) {
+        return;
+      }
+
       this.$bus.$emit('swatch-browser:submission-in-progress', true);
       const { email, ...address } = this.address;
-      this.errors = [];
       // send order to API for creation
       apiClient.submitSwatchOrder({
         items: this.cart.map(swatch => swatch.variant_id),
