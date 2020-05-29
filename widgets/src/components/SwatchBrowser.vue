@@ -345,7 +345,7 @@ export default {
     triggerClasses() {
       return {
         SwatchBrowser__TriggerLink: this.screenWidth < 768,
-        SwatchBrowser__TriggerButton: this.isTablet,
+        SwatchBrowser__TriggerButton: this.isTablet || this.screenWidth > 768,
       };
     },
 
