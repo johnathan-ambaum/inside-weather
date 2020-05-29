@@ -18,7 +18,7 @@
           />
           <video 
             v-if="productDetail.isVideo === 'true'"
-            loop autoplay muted
+            loop autoplay muted playsinline
           >
             <source 
               :src="productDetail.objectUrl"
@@ -35,7 +35,7 @@
           />
           <video 
             v-if="productDetail.isVideo === 'true'"
-            loop autoplay muted
+            loop autoplay muted playsinline
           >
             <source 
               :src="productDetail.objectUrlMob"

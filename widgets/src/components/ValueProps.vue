@@ -19,7 +19,7 @@
             v-if="item.isVideo === 'true'"
             id="valuePropsVideoPlayer"
             class="valuePropsVideo"
-            loop
+            autoplay loop muted playsinline
           >
           <source 
             :src="item.url"
