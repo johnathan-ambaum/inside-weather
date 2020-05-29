@@ -265,7 +265,7 @@
               :class="{ 'btn--loading': isSubmitting }"
               class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
               @click.prevent="submitFromCart"
-            >{{ showOrderForm ? 'SUBMIT SWATCH ORDER' : 'ORDER NOW' }}</button>
+            >{{ showOrderForm && !showCart ? 'SUBMIT SWATCH ORDER' : 'ORDER NOW' }}</button>
             <button
               v-show="!showOrderForm"
               class="SwatchBrowser__ContinueButton SwatchBrowser__Button"
@@ -466,6 +466,10 @@ export default {
     submitFromCart() {
       if (!this.showOrderForm) {
         this.startOrder();
+        return;
+      }
+      if (this.isMobile && this.showCart) {
+        this.showCart = false;
         return;
       }
       this.$bus.$emit('swatch-browser:submit-order');
