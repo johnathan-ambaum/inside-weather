@@ -65,12 +65,12 @@
                           {% unless p.last == blank or first_character_in_key == '_' %}
                             {% if p.first == 'User Fulfillment Display' %}
                               Estimated time to ship:
-                            {% else %}
+                            {% elsif p.first != 'Estimated time to ship' %}
                               {{ p.first }}:
                             {% endif %}
                             {% if p.last contains '/uploads/' %}
                               <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
-                            {% else %}
+                            {% elsif p.first != 'Estimated time to ship' %}
                               {{ p.last }}
                             {% endif %}
                             <br>
