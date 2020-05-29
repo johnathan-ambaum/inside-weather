@@ -213,9 +213,8 @@
 {% include 'pagefly-header' %}
 
 {% render 'pagefly-header' %}
- </head>
+{% include 'hulkcode_common' %}{% if template contains 'product' or template contains 'cart' %}<script src='https://volumediscount.hulkapps.com/hulkcode.js' defer='defer'></script>{% endif %}
 </head>
- </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
 

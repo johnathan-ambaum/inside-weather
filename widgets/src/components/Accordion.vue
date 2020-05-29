@@ -47,8 +47,8 @@ export default {
     @include fonts(18px,#202020,1.2,0.05em);
     &::before, &::after{
       content: "";
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       background-position: center;
       background-repeat: no-repeat;
       position: absolute;

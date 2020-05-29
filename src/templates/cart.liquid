@@ -56,26 +56,33 @@
                       {% endunless %}
 
                       {% assign property_size = item.properties | size %}
+                      <div class='hulkapps-reminder' data-key='{{item.key}}'></div>
                       {% if property_size > 0 %}
-                        {% for p in item.properties %}
-                          {% if p.first == 'Estimated time to ship' %}
+                        {%- for p in item.properties -%}
+                          {% if p.first == 'Estimated time to ship' or p.last == blank %}
                             {% continue %}
                           {% endif %}
-                          {% assign first_character_in_key = p.first | truncate: 1, '' %}
-                          {% unless p.last == blank or first_character_in_key == '_' %}
-                            {% if p.first == 'User Fulfillment Display' %}
-                              Estimated time to ship:
-                            {% else %}
-                              {{ p.first }}:
-                            {% endif %}
-                            {% if p.last contains '/uploads/' %}
-                              <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
-                            {% else %}
-                              {{ p.last }}
-                            {% endif %}
-                            <br>
-                          {% endunless %}
-                        {% endfor %}
+                          <li class="product-details__item product-details__item--property{%if property_size == 0%} hide{% endif %}" data-cart-item-property>
+                            <span class="product-details__item-label" data-cart-item-property-name>
+                              {% if p.first == 'User Fulfillment Display' %}
+                                Estimated time to ship:
+                              {% else %}
+                                {{ p.first }}:
+                              {% endif %}
+                            </span>
+                            {%- comment -%}
+                              Check if there was an uploaded file associated
+                            {%- endcomment -%}
+                            <span data-cart-item-property-value>
+                              {%- if p.last contains "uploads" -%}
+                                <a href="{{ p.last }}">Uploaded File</a>
+                              {%- else -%}
+                                {{ p.last }}
+                              {%- endif -%}
+                            </span>
+                          </li>
+                        {%- endfor -%}
+                        <button type="button" class="edit_cart_option btn btn--primary button" data-product_id="{{item.product_id}}" data-key="{{item.key}}" data-variant_id="{{item.variant_id}}" data-quantity="{{item.quantity}}">Edit Options</button>
                       {% endif %}
 
                       <p class="cart__product-meta">
@@ -100,10 +107,10 @@
 
                     <div class="grid__item two-thirds text-right">
                       {% if item.original_line_price != item.line_price %}
-                        <small class="cart__price cart__price--strikethrough">{{ item.original_line_price | money }}</small>
+                        <small class="cart__price cart__price--strikethrough"><span class='hulkapps-cart-item-line-price' data-key='{{item.key}}'>{{ item.original_line_price | money }}</span></small>
                       {% endif %}
 
-                      <span class="cart__price">{{ item.price | money }}</span>
+                      <span class="cart__price"><span class='hulkapps-cart-item-price' data-key='{{item.key}}'>{{ item.price | money }}</span></span>
 
                       {% assign discounts_size = item.discounts | size %}
                       {% if discounts_size > 0 %}
@@ -140,7 +147,7 @@
                     <p class="h4 cart__subtotal">{{ 'cart.general.subtotal' | t }}</p>
                   </div>
                   <div class="grid__item one-half medium-up--one-third">
-                    <p class="h4 cart__subtotal">{{ cart.total_price | money }}</p>
+                    <p class="h4 cart__subtotal"><span class='hulkapps-cart-original-total'>{{ cart.total_price | money }}</span></p>
                     <p class="affirm-as-low-as" data-page-type="cart" data-amount="{{ cart.total_price }}"></p>
                   </div>
                 </div>
@@ -195,3 +202,5 @@
     </div>
   </div>
 </div>
+
+<script src="https://cdn.pagefly.io/static/assets/pf-custom-shopify-cart.min.js" defer></script>
