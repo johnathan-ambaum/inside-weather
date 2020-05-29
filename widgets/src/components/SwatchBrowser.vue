@@ -77,21 +77,21 @@
                 <div class="SwatchBrowser__BadgeKeys">
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?1111111111111"
                       alt="Easy clean icon"
                     >
                     <span>EZ Clean</span>
                   </div>
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png?1111111111111"
                       alt="Performance icon"
                     >
                     <span>Performance</span>
                   </div>
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?1111111111111"
                       alt="Pet friendly icon"
                     >
                     <span>Pet Friendly</span>
@@ -166,17 +166,17 @@
                   >
                     <img
                       v-if="swatch.easy_clean"
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?111111111111"
                       alt="Easy clean icon"
                     >
                     <img
                       v-if="swatch.performance"
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png?111111111111"
                       alt="Performance icon"
                     >
                     <img
                       v-if="swatch.pet_friendly"
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?111111111111"
                       alt="Pet friendly icon"
                     >
                   </div>
