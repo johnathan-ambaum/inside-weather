@@ -1128,7 +1128,11 @@ export default {
     #{&}Link {
       display: block;
       margin-top: 20px;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: left;
       text-decoration: underline;
+      white-space: nowrap;
     }
     #{&}Button {
       background: #fff;
