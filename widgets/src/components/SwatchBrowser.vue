@@ -405,6 +405,15 @@ export default {
 
   mounted() {
     this.pullSwatches();
+    this.$bus.$on('swatch-browser:focus-field', (e) => {
+      if (!this.isMobile) {
+        return;
+      }
+      setTimeout(() => {
+        const { top, height } = e.target.parentNode.getBoundingClientRect();
+        this.$refs.scrollContainer.scrollTop = this.$refs.scrollContainer.scrollTop + top - height;
+      }, 100);
+    });
   },
 
   methods: {

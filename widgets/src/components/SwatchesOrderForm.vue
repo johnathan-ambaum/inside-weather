@@ -6,7 +6,6 @@
     >
       <form
         v-if="!completed"
-        ref="form"
         key="form"
         class="SwatchesOrderForm__Form"
         @submit.prevent="submit"
@@ -50,6 +49,7 @@
                 v-model="address[field.name]"
                 :name="field.name"
                 :class="{ 'has-error': hasError(field.name) }"
+                @focus="e => $bus.$emit('swatch-browser:focus-field', e)"
               >
                 <option
                   v-for="state in states"
@@ -63,6 +63,7 @@
                 :name="field.name"
                 :class="{ 'has-error': hasError(field.name) }"
                 :type="field.type"
+                @focus="e => $bus.$emit('swatch-browser:focus-field', e)"
               >
               <p
                 v-if="hasError(field.name)"
