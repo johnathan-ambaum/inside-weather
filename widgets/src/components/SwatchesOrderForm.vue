@@ -364,7 +364,7 @@ export default {
 
   &__Field {
     display: flex;
-    flex: 1;
+    flex: 1 0 100%;
     flex-direction: column;
     margin-bottom: 25px;
 
@@ -383,6 +383,7 @@ export default {
 
     input[type="number"] {
       -moz-appearance:textfield;
+      width: 100%;
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
