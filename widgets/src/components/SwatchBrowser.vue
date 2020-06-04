@@ -42,7 +42,7 @@
         class="SwatchBrowser"
       >
         <div
-          ref="scrollContainer"
+          ref="mainContainer"
           class="SwatchBrowser__Main"
         >
           <transition-group
@@ -55,6 +55,7 @@
               :cart="cart"
               :is-mobile="isMobile"
               :is-submitting="isSubmitting"
+              :completed="completed"
               class="SwatchBrowser__Form"
               @close="showOrderForm = false"
               @exit="active = false"
@@ -71,16 +72,19 @@
                   @click.native.prevent="active = false"
                 />
                 <div class="SwatchBrowser__Description">
-                  <h3>{{ category }} Swatches</h3>
-                  <p>Select up to {{ maxSwatches }} of your favorites and we'll send &amp; ship them to your doorstep for free!</p>
+                  <h2>{{ category }} Swatches</h2>
+                  <p ref="description">Select up to {{ maxSwatches }} of your favorites and we'll send &amp; ship them to your doorstep for free!</p>
                 </div>
-                <div class="SwatchBrowser__BadgeKeys">
+                <div
+                  ref="legend"
+                  class="SwatchBrowser__BadgeKeys"
+                >
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?1111111111111"
-                      alt="Easy clean icon"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?1111111111111"
+                      alt="Pet friendly icon"
                     >
-                    <span>EZ Clean</span>
+                    <span>Pet Friendly</span>
                   </div>
                   <div class="SwatchBrowser__BadgeKey">
                     <img
@@ -91,10 +95,10 @@
                   </div>
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?1111111111111"
-                      alt="Pet friendly icon"
+                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?1111111111111"
+                      alt="Commercial icon"
                     >
-                    <span>Pet Friendly</span>
+                    <span>Commercial</span>
                   </div>
                 </div>
                 <div
@@ -122,81 +126,87 @@
                   />
                 </div>
               </div>
-              <div class="SwatchBrowser__Swatches">
-                <div
-                  v-for="swatch in filteredSwatches"
-                  :key="swatch.variant_id"
-                  :class="{ 'is-selected': inCart(swatch.variant_id) }"
-                  class="SwatchBrowser__Swatch"
-                >
-                  <button
-                    v-if="!infoActive(swatch.variant_id)"
-                    class="SwatchBrowser__SwatchInfoToggle"
-                    @click="toggleInfo(swatch.variant_id)"
+              <div
+                ref="swatchContainer"
+                class="SwatchBrowser__SwatchContainer"
+                @scroll="onScroll"
+              >
+                <div class="SwatchBrowser__Swatches">
+                  <div
+                    v-for="swatch in filteredSwatches"
+                    :key="swatch.variant_id"
+                    :class="{ 'is-selected': inCart(swatch.variant_id) }"
+                    class="SwatchBrowser__Swatch"
                   >
-                    <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-info.png"
-                      alt="info"
-                    >
-                  </button>
-                  <close-button
-                    v-else
-                    size="16"
-                    class="SwatchBrowser__SwatchInfoToggle"
-                    @click.native="toggleInfo(swatch.variant_id)"
-                  />
-                  <div class="SwatchBrowser__SwatchDetail">
-                    <img
+                    <button
                       v-if="!infoActive(swatch.variant_id)"
-                      :src="swatch.image_url"
-                      :alt="`${swatch.name} sample`"
-                      class="SwatchBrowser__SwatchImage"
+                      class="SwatchBrowser__SwatchInfoToggle"
+                      @click="toggleInfo(swatch.variant_id)"
                     >
-                    <div class="SwatchBrowser__SwatchName">{{ swatch.name }}</div>
-                    <div class="SwatchBrowser__SwatchSubName">{{ swatch.swatch_type }}</div>
-                    <div
-                      v-if="infoActive(swatch.variant_id)"
-                      class="SwatchBrowser__SwatchDescription"
-                      v-html="swatch.description"
-                    />
-                  </div>
-                  <div
-                    v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
-                    class="SwatchBrowser__Badges"
-                  >
-                    <img
-                      v-if="swatch.easy_clean"
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?111111111111"
-                      alt="Easy clean icon"
-                    >
-                    <img
-                      v-if="swatch.performance"
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png?111111111111"
-                      alt="Performance icon"
-                    >
-                    <img
-                      v-if="swatch.pet_friendly"
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?111111111111"
-                      alt="Pet friendly icon"
-                    >
-                  </div>
-                  <button
-                    :class="{ 'SwatchBrowser__SwatchToggle--InCart': inCart(swatch.variant_id) }"
-                    class="SwatchBrowser__SwatchToggle SwatchBrowser__Button"
-                    @click="toggleLineItem(swatch)"
-                  >
-                    <span v-if="!inCart(swatch.variant_id)">+ ADD</span>
-                    <span v-else>REMOVE</span>
-                  </button>
-                  <div
-                    v-if="hasError(swatch.variant_id)"
-                    class="SwatchBrowser__Alert"
-                  >
+                      <img
+                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-info.png"
+                        alt="info"
+                      >
+                    </button>
                     <close-button
-                      :size="14"
-                      @click.native.prevent="errorOn = null"
+                      v-else
+                      size="16"
+                      class="SwatchBrowser__SwatchInfoToggle"
+                      @click.native="toggleInfo(swatch.variant_id)"
                     />
-                    Oops! You already have {{ maxSwatches }} swatches in your cart!
+                    <div class="SwatchBrowser__SwatchDetail">
+                      <img
+                        v-if="!infoActive(swatch.variant_id)"
+                        :src="swatch.image_url"
+                        :alt="`${swatch.name} sample`"
+                        class="SwatchBrowser__SwatchImage"
+                      >
+                      <div class="SwatchBrowser__SwatchName">{{ swatch.name }}</div>
+                      <div class="SwatchBrowser__SwatchSubName">{{ swatch.swatch_type }}</div>
+                      <div
+                        v-if="infoActive(swatch.variant_id)"
+                        class="SwatchBrowser__SwatchDescription"
+                        v-html="swatch.description"
+                      />
+                    </div>
+                    <div
+                      v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
+                      class="SwatchBrowser__Badges"
+                    >
+                      <img
+                        v-if="swatch.pet_friendly"
+                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?111111111111"
+                        alt="Pet friendly icon"
+                      >
+                      <img
+                        v-if="swatch.performance"
+                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png?111111111111"
+                        alt="Performance icon"
+                      >
+                      <img
+                        v-if="swatch.easy_clean"
+                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?111111111111"
+                        alt="Commercial icon"
+                      >
+                    </div>
+                    <button
+                      :class="{ 'SwatchBrowser__SwatchToggle--InCart': inCart(swatch.variant_id) }"
+                      class="SwatchBrowser__SwatchToggle SwatchBrowser__Button"
+                      @click="toggleLineItem(swatch)"
+                    >
+                      <span v-if="!inCart(swatch.variant_id)">+ ADD</span>
+                      <span v-else>REMOVE</span>
+                    </button>
+                    <div
+                      v-if="hasError(swatch.variant_id)"
+                      class="SwatchBrowser__Alert"
+                    >
+                      <close-button
+                        :size="14"
+                        @click.native.prevent="errorOn = null"
+                      />
+                      Oops! You already have {{ maxSwatches }} swatches in your cart!
+                    </div>
                   </div>
                 </div>
               </div>
@@ -215,7 +225,7 @@
               <div class="SwatchBrowser__CartHeader">
                 <h2>Your Cart</h2>
                 <close-button
-                  :size="isMobile ? 20 : 32"
+                  :size="isMobile ? 20 : 24"
                   @click.native="closeFromCart"
                 />
               </div>
@@ -231,12 +241,18 @@
                     class="SwatchBrowser__LineImage"
                   >
                   <span class="SwatchBrowser__LineDescription">{{ item.name }} {{ item.swatch_type }}</span>
-                  <button @click="toggleLineItem(item)">remove</button>
+                  <button
+                    v-if="!completed"
+                    @click="toggleLineItem(item)"
+                  >remove</button>
                 </div>
               </div>
             </div>
           </transition>
-          <div class="SwatchBrowser__CartFooter">
+          <div
+            v-if="!completed"
+            class="SwatchBrowser__CartFooter"
+          >
             <div class="SwatchBrowser__CartCounter">
               <div class="SwatchBrowser__CounterLabel">Total Swatches:</div>
               <div
@@ -305,6 +321,7 @@ export default {
       maxSwatches: 15,
       showOrderForm: false,
       isSubmitting: false,
+      completed: false,
       showCart: false,
       group: '',
     };
@@ -390,16 +407,16 @@ export default {
         [this.group] = groups;
       }
     },
-
-    showOrderForm() {
-      this.$refs.scrollContainer.scrollTop = 0;
-    },
   },
 
   created() {
     this.maxSwatches = window.theme.settings.swatchBrowser.maxSwatches || 15;
     this.$bus.$on('swatch-browser:submission-in-progress', (isSubmitting) => {
       this.isSubmitting = isSubmitting;
+    });
+    this.$bus.$on('swatch-browser:order-complete', () => {
+      this.completed = true;
+      this.$refs.mainContainer.scrollTop = 0;
     });
   },
 
@@ -411,7 +428,7 @@ export default {
       }
       setTimeout(() => {
         const { top, height } = e.target.parentNode.getBoundingClientRect();
-        this.$refs.scrollContainer.scrollTop = this.$refs.scrollContainer.scrollTop + top - height;
+        this.$refs.mainContainer.scrollTop = this.$refs.mainContainer.scrollTop + top - height;
       }, 100);
     });
   },
@@ -420,6 +437,15 @@ export default {
     ...mapActions([
       'pullSwatches',
     ]),
+
+    onScroll() {
+      if (!this.active || !this.isMobile) {
+        return;
+      }
+      const newState = this.$refs.swatchContainer.scrollTop > 50;
+      this.$refs.description.classList.toggle('is-scrolled', newState);
+      this.$refs.legend.classList.toggle('is-scrolled', newState);
+    },
 
     setGroup(selectedName) {
       const selected = this.groups.find(group => group.name == selectedName);
@@ -671,10 +697,6 @@ export default {
   &__Browse {
     display: flex;
     flex-direction: column;
-
-    @include at-query($breakpoint-large) {
-      padding: 0 60px 40px;
-    }
   }
 
   &__Browse,
@@ -687,7 +709,8 @@ export default {
   }
 
   &__Header {
-    padding: 15px 20px 20px;
+    color: #202020;
+    padding: 15px 20px;
 
     .CloseButton {
       position: absolute;
@@ -707,6 +730,26 @@ export default {
       letter-spacing: .035em;
       line-height: 20px;
       margin: 0;
+
+      @include at-query($breakpoint-small) {
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height .2s ease-in-out;
+
+        &.is-scrolled {
+          max-height: 0;
+        }
+      }
+    }
+
+    .FilterPanel__GroupSelect {
+      @include at-query($breakpoint-small) {
+        font-size: 11px;
+        height: 30px;
+        line-height: 30px;
+        padding-bottom: 0;
+        padding-top: 0;
+      }
     }
 
     @include at-query($breakpoint-large) {
@@ -714,7 +757,7 @@ export default {
       display: flex;
       flex: 0 0 auto;
       justify-content: space-between;
-      padding: 40px 0;
+      padding: 40px 60px;
 
       h2 {
         font-size: 28px;
@@ -728,8 +771,7 @@ export default {
 
   &__Description {
     @include at-query($breakpoint-large) {
-      margin-left: 40px;
-      margin-right: 100px;
+      margin-right: 40px;
       max-width: 300px;
     }
   }
@@ -738,7 +780,20 @@ export default {
     @include at-query($breakpoint-small) {
       display: flex;
       justify-content: space-between;
-      margin: 20px 0;
+      margin: 18px 0;
+      transition: margin-top .2s ease-in-out;
+
+      &.is-scrolled {
+        margin-top: 0;
+      }
+    }
+
+    @include at-query($breakpoint-large) {
+      margin-right: 40px;
+    }
+
+    @media only screen and (min-width: 1025px) and (max-width: 1320px) {
+      text-align: center;
     }
   }
 
@@ -756,6 +811,12 @@ export default {
       height: 24px;
       width: auto;
     }
+
+    span {
+      @media only screen and (min-width: 1025px) and (max-width: 1320px) {
+        display: block;
+      }
+    }
   }
 
   &__Filter {
@@ -769,16 +830,28 @@ export default {
     }
   }
 
+  &__SwatchContainer {
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 5px;
+
+    @include at-query($breakpoint-large) {
+      padding: 5px 60px;
+    }
+  }
+
   &__Swatches {
     box-shadow: -1.3px 0 .4px -1px rgba(139, 137, 134, 1),
                 0 -1.3px 0.4px -1px rgba(139, 137, 134, 1);
     display: flex;
     flex: 1;
     flex-wrap: wrap;
+    padding-bottom: 92px;
 
     @include at-query($breakpoint-large) {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      margin-bottom: 40px;
     }
   }
 
@@ -788,7 +861,7 @@ export default {
     box-shadow: 0.9px 0.9px 0.4px 0 rgba(139, 137, 134, 0.5);
     display: flex;
     flex: 0 0 50%;
-    padding: 15px;
+    padding: 15px 15px 10px 15px;
     position: relative;
     flex-direction: column;
     text-align: center;
@@ -832,7 +905,11 @@ export default {
     #{&}Image {
       border-radius: 50%;
       height: auto;
-      width: 150px;
+      width: 134px;
+
+      @include at-query($breakpoint-large) {
+        width: 150px;
+      }
     }
 
     #{&}Name {
@@ -875,7 +952,7 @@ export default {
 
     #{&}Toggle {
       height: auto;
-      padding: 15px 15px 0 15px;
+      padding: 18px 15px 0 15px;
       width: auto;
     }
 
@@ -885,7 +962,7 @@ export default {
   }
 
   &__Badges {
-    margin-top: 15px;
+    margin-top: 10px;
 
     img {
       height: 24px;
@@ -933,12 +1010,19 @@ export default {
 
   &__LineImage {
     border-radius: 50%;
-    flex: 0 0 60px;
-    margin-right: 30px;
+    flex: 0 0 56px;
+    margin-right: 18px;
+
+    @include at-query($breakpoint-large) {
+      flex-basis: 64px;
+      margin-right: 28px;
+    }
   }
 
   &__LineDescription {
+    color: #202020;
     flex: 1;
+    font-weight: 500;
   }
 
   &__Cart {
@@ -961,13 +1045,14 @@ export default {
     }
 
     #{&}Header {
+      color: #202020;
       display: flex;
       justify-content: space-between;
       padding: 20px;
       pointer-events: all;
 
       @include at-query($breakpoint-large) {
-        padding: 20px 40px;
+        padding: 35px 20px 20px 44px;
       }
 
       h2 {
@@ -996,6 +1081,7 @@ export default {
       font-weight: 500;
       justify-content: space-between;
       letter-spacing: .05em;
+      line-height: 14px;
       padding: 15px;
 
       @include at-query($breakpoint-large) {
@@ -1035,7 +1121,7 @@ export default {
 
   &__CartItems {
     flex: 1;
-    padding: 20px 0;
+    padding: 0 0 20px 0;
     overflow: auto;
   }
 
@@ -1045,10 +1131,17 @@ export default {
     font-size: 12px;
     letter-spacing: .05em;
     line-height: 18px;
-    padding: 10px 30px;
+    padding: 10px 18px 10px 24px;
 
     @include at-query($breakpoint-large) {
       font-size: 14px;
+      padding: 10px 28px 10px 44px;
+    }
+
+    @include at-query($breakpoint-small) {
+      &:first-child {
+        padding-top: 5px;
+      }
     }
 
     &:last-child {
@@ -1063,13 +1156,20 @@ export default {
       font-size: 11px;
       font-weight: 500;
       letter-spacing: .05em;
-      margin-left: 30px;
+      margin-left: 22px;
+      padding: 0;
       text-decoration: underline;
+
+      @include at-query($breakpoint-large) {
+        margin-left: 24px;
+      }
     }
   }
 
   &__ContinueButton {
-    margin: 10px 0;
+    height: auto;
+    margin: 8px 0 10px;
+    padding: 4px 0 10px;
 
     @include at-query($breakpoint-small) {
       display: none;

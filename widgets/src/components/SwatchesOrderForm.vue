@@ -116,6 +116,7 @@ export default {
     cart: { type: Array, default: () => ([]) },
     isMobile: { type: Boolean, default: false },
     isSubmitting: { type: Boolean, default: false },
+    completed: { type: Boolean, default: false },
   },
 
   data() {
@@ -132,7 +133,6 @@ export default {
         zip: '',
         email: '',
       },
-      completed: false,
       errors: [],
       thankYouMessage: '',
     };
@@ -259,8 +259,7 @@ export default {
         email,
         address,
       }).then((response) => {
-        // show thank you page
-        this.completed = true;
+        this.$bus.$emit('swatch-browser:order-complete');
       }).catch(({ errors = [] }) => {
         this.errors = errors;
       }).finally(() => {
