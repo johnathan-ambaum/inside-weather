@@ -838,10 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#b1c8cd",
+          "background_color": "#becbc5",
           "font_color": "#ffffff",
-          "text": "<p><strong><a href=\"\/pages\/opensource\" title=\"Project Open Source\">COVID-19 Project Open Source<\/a>&nbsp;<\/strong>| Join us in an effort to provide more protective equipment for our communities.&nbsp;<\/p>",
-          "mobile_text": "<p>Please help share PPE resources | <strong><a href=\"\/pages\/opensource\" title=\"Project Open Source\">COVID-19 Project Open Source<\/a><\/strong><\/p>"
+          "text": "<p><a href=\"\/pages\/ido-collection\" title=\"The Ido Collection\">Introducing the NEW Ido Collection<\/a> | Only 150 units available at <strong>20% OFF<\/strong> | Enter <strong>PRESALE<\/strong> at checkout<\/p>",
+          "mobile_text": "<p><a href=\"\/pages\/ido-collection\" title=\"The Ido Collection\">Introducing the Ido Collection<\/a> | <strong>20% OFF<\/strong> w\/code <strong>PRESALE<\/strong><\/p>"
         }
       }
     },
