@@ -165,6 +165,10 @@
                       <div class="SwatchBrowser__SwatchSubName">{{ swatch.swatch_type }}</div>
                       <div
                         v-if="infoActive(swatch.variant_id)"
+                        class="SwatchBrowser__SwatchComposition"
+                      >{{ swatch.composition }}</div>
+                      <div
+                        v-if="infoActive(swatch.variant_id)"
                         class="SwatchBrowser__SwatchDescription"
                         v-html="swatch.description"
                       />
@@ -841,8 +845,8 @@ export default {
   }
 
   &__Swatches {
-    box-shadow: -1.3px 0 .4px -1px rgba(139, 137, 134, 1),
-                0 -1.3px 0.4px -1px rgba(139, 137, 134, 1);
+    box-shadow: -1.4px 0 0.5px 0px rgba(139, 137, 134, .6),
+                0 -1.4px 0.5px 0px rgba(139, 137, 134, .6);
     display: flex;
     flex: 1;
     flex-wrap: wrap;
@@ -852,6 +856,7 @@ export default {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       margin-bottom: 40px;
+      padding-bottom: 0;
     }
   }
 
@@ -936,7 +941,8 @@ export default {
       }
     }
 
-    #{&}Description {
+    #{&}Description,
+    #{&}Composition {
       font-family: $font-stack-roboto;
       font-size: 10px;
       letter-spacing: .015em;
@@ -948,6 +954,10 @@ export default {
         letter-spacing: .025em;
         line-height: 16px;
       }
+    }
+
+    #{&}Composition {
+      margin-bottom: 0;
     }
 
     #{&}Toggle {
@@ -1012,10 +1022,12 @@ export default {
     border-radius: 50%;
     flex: 0 0 56px;
     margin-right: 18px;
+    width: 56px;
 
     @include at-query($breakpoint-large) {
       flex-basis: 64px;
       margin-right: 28px;
+      width: 64px;
     }
   }
 
