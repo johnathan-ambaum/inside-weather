@@ -414,6 +414,7 @@ export default {
   },
 
   created() {
+    this.loadCart();
     this.maxSwatches = window.theme.settings.swatchBrowser.maxSwatches || 15;
     this.$bus.$on('swatch-browser:submission-in-progress', (isSubmitting) => {
       this.isSubmitting = isSubmitting;
@@ -475,6 +476,7 @@ export default {
         if (this.cart.length < 1) {
           this.showOrderForm = false;
         }
+        this.saveCart();
         return;
       }
       if (this.cart.length >= this.maxSwatches) {
@@ -482,6 +484,18 @@ export default {
         return;
       }
       this.cart.push(swatch);
+      this.saveCart();
+    },
+
+    loadCart() {
+      const cart = localStorage.getItem('swatches.cart');
+      if (cart) {
+        this.cart = JSON.parse(cart);
+      }
+    },
+
+    saveCart() {
+      localStorage.setItem('swatches.cart', JSON.stringify(this.cart));
     },
 
     openCart() {
