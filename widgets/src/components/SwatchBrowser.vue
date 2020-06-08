@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="enable">
     <div
       v-if="!isMobile"
       class="SwatchBrowser__Trigger">
@@ -333,6 +333,7 @@ export default {
 
   computed: {
     ...mapState({
+      enable: state => state.filters && state.filters.enable_swatches === true,
       category: state => state.category,
       swatches: state => state.swatches.swatches || [],
       groups: state => state.swatches.groups || [],
@@ -422,6 +423,7 @@ export default {
     this.$bus.$on('swatch-browser:order-complete', () => {
       this.completed = true;
       this.$refs.mainContainer.scrollTop = 0;
+      localStorage.removeItem('swatches.cart');
     });
   },
 
