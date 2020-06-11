@@ -185,6 +185,10 @@ export function setActiveProduct(state, product) {
   Vue.set(state, 'activeProduct', product);
 }
 
+export function setSwatches(state, swatches) {
+  Vue.set(state, 'swatches', swatches);
+}
+
 export default {
   saveProducts,
   defineFilter,
@@ -200,4 +204,5 @@ export default {
   setProductReviews,
   setProductCreationInProgress,
   setActiveProduct,
+  setSwatches,
 };

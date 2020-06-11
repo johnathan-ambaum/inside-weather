@@ -12,7 +12,7 @@ export default class ApiClient {
     this.filters = [];
 
     // eslint-disable-next-line
-    this.sendRequest = ({ method, url, body, resolve, reject }) => {
+    this.sendRequest = ({ method = 'GET', url, body, resolve, reject }) => {
       const fetchOptions = {
         method,
         mode: 'cors',
@@ -27,7 +27,14 @@ export default class ApiClient {
       }
 
       return fetch(url, fetchOptions)
-        .then(response => response.json())
+        .then((response) => {
+          if ([200, 201].includes(response.status)) {
+            return response.json();
+          }
+          return response.json().then((errorResponse) => {
+            reject(errorResponse);
+          });
+        })
         .then(response => resolve(response))
         .catch(err => reject(err));
     };
@@ -147,6 +154,27 @@ export default class ApiClient {
 
     return new Promise((resolve, reject) => this.debouncedProductRequest({
       method: 'POST', url, body, resolve, reject,
+    }));
+  }
+
+  getSwatches(category) {
+    const url = `https://iw-content.herokuapp.com/api/v1/product_swatches/${category}`;
+    return new Promise((resolve, reject) => this.sendRequest({ url, resolve, reject }));
+  }
+
+  submitSwatchOrder({ items, email, address }) {
+    const url = 'https://iw-content.herokuapp.com/api/v1/swatch_order';
+    const body = {
+      line_items: items.map(variantId => ({
+        variant_id: variantId,
+        quantity: 1,
+      })),
+      email,
+      shipping_address: address,
+    };
+
+    return new Promise((resolve, reject) => this.sendRequest({
+      method: 'POST', url, resolve, reject, body,
     }));
   }
 }
