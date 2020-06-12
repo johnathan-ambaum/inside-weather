@@ -719,7 +719,7 @@ html.ProductCustomizer--Open {
     margin: 15px 15px 13px 0;
 
     @include at-query($breakpoint-large) {
-      margin: 0 0 8px 0;
+      margin: 0 0 13px 0;
     }
   }
 
