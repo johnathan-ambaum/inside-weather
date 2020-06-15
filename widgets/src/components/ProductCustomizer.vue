@@ -87,7 +87,7 @@
           {{ productName }}
         </div>
         <div class="ProductCustomizer__PriceRow">
-          <span class="ProductCustomizer__Price">${{ productPrice }}</span>
+          <span class="ProductCustomizer__Price--mt">${{ productPrice }}</span>
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
@@ -782,6 +782,16 @@ html.ProductCustomizer--Open {
   }
 
   &__Price {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    line-height: 1;
+
+    @include at-query($breakpoint-large) {
+      font-size: 22px;
+    }
+  }
+  &__Price--mt{
     font-size: 18px;
     font-weight: 600;
     letter-spacing: .05em;
