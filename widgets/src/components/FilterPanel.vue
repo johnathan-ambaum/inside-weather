@@ -155,7 +155,8 @@ export default {
     @include at-query($breakpoint-small) {
       border-top: 1px solid #D4D0CA;
       flex-direction: row;
-      padding: 20px $horizontal-wrapper-padding;
+      padding: 11px $horizontal-wrapper-padding;
+      font-size: 16px;
     }
 
     @include at-query($breakpoint-large) {
@@ -173,6 +174,7 @@ export default {
 
     @include at-query($breakpoint-small) {
       padding: 6px 30px 6px 0;
+      font-size: 15px;
     }
 
     @include at-query($breakpoint-large) {
@@ -193,6 +195,7 @@ export default {
     font-weight: 400;
     max-width: 195px;
     width: 100%;
+    font-size:10px;
 
     strong {
       font-weight: 500;

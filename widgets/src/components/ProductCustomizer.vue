@@ -484,9 +484,9 @@ export default {
         this.optionsChanged = false;
       });
     },
-    openModal() { 
+    openModal() {
       if(theme.settings.vwo.photoshootModal.photoshootActive){
-        this.closedNum = this.closedNum + 1; 
+        this.closedNum = this.closedNum + 1;
         if(this.closedNum > 1){
           if(localStorage.getItem("PDPModalTimestamp")){
             const PDPModalTimestamp = JSON.parse(localStorage.getItem("PDPModalTimestamp"));
@@ -502,7 +502,7 @@ export default {
             const PDPModalTimestamp = new Date();
             PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
             localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
-          } 
+          }
         }
       }
     },
@@ -790,6 +790,9 @@ html.ProductCustomizer--Open {
     @include at-query($breakpoint-large) {
       font-size: 22px;
     }
+    @include at-query($breakpoint-small) {
+      margin-top:14px;
+    }
   }
 
   &__MSRP {
@@ -982,6 +985,8 @@ html.ProductCustomizer--Open {
     text-align: center;
 
     @include at-query($breakpoint-small) {
+      padding: 18px 0;
+      font-size: 16px;
       border-top: 1px solid #D4D0CA;
     }
 
@@ -1022,7 +1027,7 @@ html.ProductCustomizer--Open {
     }
 
     @include at-query($breakpoint-small) {
-      padding: 24px 18px;
+      padding: 22px 18px;
 
       & + & {
         border-left: 1px solid #D4D0CA;
