@@ -1,6 +1,14 @@
 <template>
   <div>
     <div class="ProductCustomizer__DetailWrapper">
+      <div
+        v-for="flag in flags"
+        :key="flag.title"
+        class="ProductCustomizer__FlagRow"
+      >
+        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">{{ flag.title }}</div>
+        <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
+      </div>
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
@@ -191,6 +199,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import DOMPurify from 'dompurify';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -258,6 +267,17 @@ export default {
       productCreationInProgress: state => state.productCreationInProgress,
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
+      flags: (state) => {
+        if (!state.filters || !state.filters.flags) {
+          return [];
+        }
+        return state.filters.flags.map(({title, title_color, title_background_color, body}) => ({
+          title,
+          titleColor: title_color || '#fff',
+          titleBackground: title_background_color || '#202020',
+          body: DOMPurify.sanitize(body),
+        }));
+      },
     }),
 
     useCylindo() {
@@ -484,9 +504,9 @@ export default {
         this.optionsChanged = false;
       });
     },
-    openModal() { 
+    openModal() {
       if(theme.settings.vwo.photoshootModal.photoshootActive){
-        this.closedNum = this.closedNum + 1; 
+        this.closedNum = this.closedNum + 1;
         if(this.closedNum > 1){
           if(localStorage.getItem("PDPModalTimestamp")){
             const PDPModalTimestamp = JSON.parse(localStorage.getItem("PDPModalTimestamp"));
@@ -502,7 +522,7 @@ export default {
             const PDPModalTimestamp = new Date();
             PDPModalTimestamp.setDate(PDPModalTimestamp.getDate()+1);
             localStorage.setItem("PDPModalTimestamp", JSON.stringify(PDPModalTimestamp));
-          } 
+          }
         }
       }
     },
@@ -688,6 +708,44 @@ html.ProductCustomizer--Open {
         display: block;
         margin-bottom: 30px;
       }
+    }
+  }
+
+  &__FlagRow {
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+    letter-spacing: .12em;
+    margin: 15px 15px 13px 0;
+
+    @include at-query($breakpoint-large) {
+      margin: 0 0 13px 0;
+    }
+  }
+
+  &__Flag {
+    font-size: 11px;
+    line-height: 1;
+    margin-right: 15px;
+    padding: 9px 12px;
+
+    @include at-query($breakpoint-large) {
+      padding: 7px 16px;
+    }
+  }
+
+  &__FlagBody {
+    font-size: 12px;
+
+    b, strong {
+      font-weight: 700;
+    }
+  }
+
+  &__Flag,
+  &__FlagBody {
+    @include at-query($breakpoint-large) {
+      font-size: 13px;
     }
   }
 
