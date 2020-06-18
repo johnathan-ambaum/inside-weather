@@ -838,10 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#becbc5",
-          "font_color": "#ffffff",
-          "text": "<p><a href=\"\/pages\/ido-collection\" title=\"The Ido Collection\">Introducing the NEW Ido Collection<\/a> | Only 150 units available at <strong>20% OFF<\/strong> | Enter <strong>PRESALE<\/strong> at checkout<\/p>",
-          "mobile_text": "<p><a href=\"\/pages\/ido-collection\" title=\"The Ido Collection\">Introducing the Ido Collection<\/a> | <strong>20% OFF<\/strong> w\/code <strong>PRESALE<\/strong><\/p>"
+          "background_color": "#6a604c",
+          "font_color": "#f4f0e9",
+          "text": "<p>Up to <strong>20% OFF<\/strong>&nbsp;All Sofas &amp; Sectionals |&nbsp;<a href=\"\/pages\/2020-sofa-sectional-sale\" title=\"2020 Sofas &amp; Sectional Sale\"><u>Shop SALE Now!<\/u><\/a><\/p>",
+          "mobile_text": "<p>Up to&nbsp;<strong>20% OFF<\/strong>&nbsp;All Sofas &amp; Sectionals |&nbsp;<a href=\"\/pages\/2020-sofa-sectional-sale\" title=\"2020 Sofas &amp; Sectional Sale\"><u>Shop SALE Now!<\/u><\/a><\/p>"
         }
       }
     },
