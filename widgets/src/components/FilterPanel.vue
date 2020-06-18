@@ -90,8 +90,8 @@ export default {
     groupOptions() {
       return this.groups.map((group) => {
         let display = this.isMobile ? group.name : `<strong>${group.name}</strong>`;
-        if (group.group_type === 'sort') {
-          display = `SORT: ${display}`;
+        if (group.prefix) {
+          display = `${group.prefix} ${display}`;
         }
         return {
           value: group.id,

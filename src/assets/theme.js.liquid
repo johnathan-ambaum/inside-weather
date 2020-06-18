@@ -1166,8 +1166,6 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
         $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
         $(".js-cart-count").on("click", function(){
-          localStorage.removeItem('pdp-countdown-timer');
-          clearInterval(PDPCountdownTimeInterval);
           if(theme.settings.vwo.countdown.countdownActive){
             theme.cart.getCart().then(function(cart){
               CartDrawer.prototype.buildCart(cart, true);
@@ -1360,6 +1358,27 @@ lazySizesConfig.expFactor = 4;
         }
       },
       cartDrawerClockHandler: function(cart){
+        function getCookie(cname) {
+          var name = cname + "=";
+          var decodedCookie = decodeURIComponent(document.cookie);
+          var ca = decodedCookie.split(';');
+          for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+            }
+          }
+          return "";
+        }
+        if(getCookie('PDP-COUNTDOWN-COMPLETED')){
+          localStorage.removeItem('pdp-countdown-timer');
+          clearInterval(PDPCountdownTimeInterval);
+          $(".drawer-clock__container").hide();
+          return
+        }
         var cartTotal = Math.round(cart.original_total_price/100);
         var VWOMinTotal = theme.settings.vwo.countdown.minimumCartTotalUSD;
         var isGreater = cartTotal > VWOMinTotal;
@@ -1380,7 +1399,14 @@ lazySizesConfig.expFactor = 4;
         }
       },
       countdownComplete: function(id){
+        function setCookie(cname, cvalue, exdays) {
+          var d = new Date();
+          d.setTime(d.getTime() + (exdays*24*60*60*1000));
+          var expires = "expires="+ d.toUTCString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
         localStorage.setItem('pdp-countdown-timer',JSON.stringify('DONE'));
+        setCookie('PDP-COUNTDOWN-COMPLETED', true, 1);
         $('#'+ id).text('0:00');
         $(".drawer-clock__header").text(theme.settings.vwo.countdown.expirationTextHeader);
         $(".drawer-clock__text").text(theme.settings.vwo.countdown.expirationTextContent);
