@@ -3,7 +3,9 @@
     class="CtegoryCollections"  
     ref="CtegoryCollections"
   >
-    <div class="CtegoryCollections--heading">
+    <div 
+      class="CtegoryCollections--heading"
+      >
       <heading-with-description>
         <h2>
           {{sectionHeading}}
@@ -12,6 +14,9 @@
           {{sectionDescription}}
         </p>
       </heading-with-description>
+      <figure v-if="isWallArt">
+        <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_col_finishes.png?v=1593038202"/>
+      </figure>
     </div>
     <ul 
       class="CtegoryCollections--itemWrapper"
@@ -56,7 +61,8 @@ export default {
     sectionHeading: String,
     sectionDescription: String,
     isScrollAnimationRequire: {type: Boolean, default: true},
-    collectionCustomImageStyle:{type: Boolean, default: false}
+    collectionCustomImageStyle:{type: Boolean, default: false},
+    isWallArt: {type: Boolean, default: false},
   },
   computed: {
     animationElementClass() {
@@ -67,7 +73,8 @@ export default {
     catCollectionClasses() {
       return {
         '--hasAnimation': this.isScrollAnimationRequire,
-        '--alignCenter': this.productCollections.length < 4
+        '--alignCenter': this.productCollections.length < 4,
+        'wall-art': this.isWallArt,
       }
     },
     customImageClass() {
@@ -83,6 +90,16 @@ export default {
 <style lang="scss">
 @import '../scss/mixins';
 @import '../scss/variables';
+
+.CtegoryCollections--heading {
+  figure {
+    text-align: center;
+    padding: 20px 0 40px;
+    @include at-query('max-width: 991px') {
+      padding: 22px 0 40px;
+    }
+  }
+}
 .CtegoryCollections--itemWrapper {
   align-content: center;
   display: flex;
@@ -90,6 +107,11 @@ export default {
   justify-content: left;
   padding: 75px 0 50px;
   width: 100%;
+  
+  &.wall-art {
+    padding: 0 0 50px 0;
+  }
+
   li {
     flex-basis: 25%;
     text-align: center;
@@ -253,6 +275,7 @@ export default {
     }
   }
 }
+
 @include at-query('max-width: 640px') {
   .CtegoryCollections--itemWrapper{
     padding: 50px 0 22px;
@@ -291,11 +314,14 @@ export default {
 
 .productCollection {
   &:not([class^="--pd-t-"]) {
-    padding-top: 75px;
+    padding-top: 70px;
     
     @include at-query('max-width: 767px') {  
       padding-top: 35px;
     }
+  }
+  &.no-padding {
+    padding: 0;
   }
 }
 

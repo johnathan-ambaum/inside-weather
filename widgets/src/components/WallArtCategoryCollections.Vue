@@ -136,6 +136,7 @@ export default {
 
   @include at-query('max-width: 991px') {
     li {
+      flex-basis: 50%;
       padding-bottom: 35px;
       a figure {
         margin: 0 0 1.1rem;
