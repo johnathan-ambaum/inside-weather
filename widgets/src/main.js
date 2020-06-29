@@ -28,6 +28,7 @@ import BannerReviewCarousel from './components/BannerReviewCarousel.vue';
 import CategoryBanner from './components/CategoryBanner.vue';
 import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import CategoryCollections from './components/CategoryCollections.vue';
+import WallArtCategoryCollections from './components/wallArtCategoryCollections';
 import CategoryDetails from './components/CategoryDetails.vue';
 import CategoryVideo from './components/CategoryVideo.vue';
 import CategoryVprops from './components/CategoryVprops.vue';
@@ -77,6 +78,7 @@ import store from './store';
       RecentlySoldProducts,
       CategoryBanner,
       CategoryCollections,
+      WallArtCategoryCollections,
       CategoryDetails,
       CategoryVideo,
       CategoryVprops,
