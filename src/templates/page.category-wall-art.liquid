@@ -1,0 +1,198 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_d_00.jpg?v=1592953417','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_m_00.jpg?v=1592953417','heading':'Wall Art','description':'Start with a size and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/products/wa1010bl-venn-art-print-with-natural-frame-8-x-10', 'dataSource': 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_d_01.jpg?v=1592953417', 'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_m_01.jpg?v=1592953417','heading':'Size','description':'From mini to large, you\&apos;re in charge!','linkText':'Customize now','url':'https://insideweather.com/products/wa1010bl-venn-art-print-with-natural-frame-8-x-10', 'dataSource': 'size'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_d_02.jpg?v=1592953417','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_m_02.jpg?v=1592953417','heading':'Frame Finish','description':'Choose from 6 different wood stains to find the perfect match.','linkText':'Customize now','url':'https://insideweather.com/products/wa1010bl-venn-art-print-with-natural-frame-8-x-10', 'dataSource': 'frame-finish'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_d_03.jpg?v=1592953417', 'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_tb_m_03.jpg?v=1592953417','heading':'Artwork','description':'From tropical graphics to delicate lineart—browse the gallery to meet your mood.','linkText':'Customize now','url':'https://insideweather.com/products/wa1010bl-venn-art-print-with-natural-frame-8-x-10', 'dataSource': 'artwork'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Size', 'accordionDescription': 'From mini to large, you\&apos;re in charge!', 'accordionTarget': 'size'},{'accordionHead': 'Frame Finish', 'accordionDescription': 'Choose from 6 different wood stains to find the perfect match.', 'accordionTarget': 'frame-finish'}, {'accordionHead': 'Artwork', 'accordionDescription': 'From tropical graphics to delicate lineart—browse the gallery to meet your mood.', 'accordionTarget': 'artwork'}]" %}
+
+    <category-banner
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign wallArtProductCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_col_08X10_2x_14f12e37-0b5b-4a3e-8e30-1f67ef29dfe6.png?v=1593038202', 'title': '8\&#34; x 10\&#34;', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bd-pebble-play-art-print-with-natural-frame-8-x-10'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_col_16x20_2x_d84bb43c-f9a9-47f0-9539-79671cf7590f.png?v=1593038202', 'title': '16\&#34; x 20\&#34;', 'linkText': 'Customize starting at $63', hyperLink: 'https://insideweather.com/products/wa1110bd-pebble-play-art-print-with-natural-frame-16-x-20'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_col_20x30_2x_1eb1a635-d5cd-4528-9cb1-a07b9356cba0.png?v=1593038202', 'title': '20\&#34; x 30\&#34;', 'linkText': 'Customize starting at $80', hyperLink: 'https://insideweather.com/products/wa1210bd-pebble-play-art-print-with-natural-frame-20-x-30'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_col_24x36_2x_b6dad72a-925f-442f-834a-a56fdf64517d.png?v=1593038202', 'title': '24\&#34; x 36\&#34;', 'linkText': 'Customize starting at $90', hyperLink: 'https://insideweather.com/products/wa1310bd-pebble-play-art-print-with-natural-frame-24-x-36'}]"%}
+
+
+    <div class="wallArtproductCollection">
+      <div class="category-collection-main-wrapper">
+        <wall-art-category-collections
+          :wall-art-product-collections="{{wallArtProductCollections}}"
+          section-heading="Start with a Size"
+          section-description="Then select the frame finish you fancy and your fave artwork from our gallery!"
+        >
+        </wall-art-category-collections>
+      </div>
+    </div>
+
+    {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BD/WA1010BD-0_medium.jpg', 'title': 'Pebble Play Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bd-pebble-play-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BK/WA1010BK-0_medium.jpg', 'title': 'Warm Convergence Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bk-warm-convergence-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BL/WA1010BL-0_medium.jpg', 'title': 'Venn Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bl-venn-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BS/WA1010BS-0_medium.jpg', 'title': 'Playhouse Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bs-playhouse-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BR/WA1010BR-0_medium.jpg', 'title': 'Sedona Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010br-sedona-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BP/WA1010BP-0_medium.jpg', 'title': 'Pueblo Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bp-pueblo-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BO/WA1010BO-0_medium.jpg', 'title': 'Adobe Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bo-adobe-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BQ/WA1010BQ-0_medium.jpg', 'title': 'Cool Calder Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bq-cool-calder-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BM/WA1010BM-0_medium.jpg', 'title': 'Pheonix Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bm-pheonix-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BN/WA1010BN-0_medium.jpg', 'title': 'Contiguous Clay Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bn-contiguous-clay-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BH/WA1010BH-0_medium.jpg', 'title': 'Cool Botanical Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bh-cool-botanical-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BI/WA1010BI-0_medium.jpg', 'title': 'Shore Thing Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bi-shore-thing-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BJ/WA1010BJ-0_medium.jpg', 'title': 'Sub-Saharan Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bj-sub-saharan-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BE/WA1010BE-0_medium.jpg', 'title': 'Sunrise Strokes Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010be-sunrise-strokes-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BF/WA1010BF-0_medium.jpg', 'title': 'Half dome Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bf-half-dome-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BG/WA1010BG-0_medium.jpg', 'title': 'Abstract Noir Art Pri', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bg-abstract-noir-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BT/WA1010BT-0_medium.jpg', 'title': 'Fast Lane Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bt-fast-lane-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BU/WA1010BU-0_medium.jpg', 'title': 'Graphite Galore Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bu-graphite-galore-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BV/WA1010BV-0_medium.jpg', 'title': 'Groovy Graphite Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bv-groovy-graphite-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BW/WA1010BW-0_medium.jpg', 'title': 'Bold Tangle Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bw-bold-tangle-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BX/WA1010BX-0_medium.jpg', 'title': 'Delicate Doodle Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bx-delicate-doodle-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BY/WA1010BY-0_medium.jpg', 'title': 'Femme Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010by-femme-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CC/WA1010CC-0_medium.jpg', 'title': 'Third Eye Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010cc-third-eye-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CG/WA1010CG-0_medium.jpg', 'title': 'Breathe Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010cg-breathe-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BZ/WA1010BZ-0_medium.jpg', 'title': 'Fresh Foliage Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bz-fresh-foliage-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CA/WA1010CA-0_medium.jpg', 'title': 'Neutral Nature Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ca-neutral-nature-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CB/WA1010CB-0_medium.jpg', 'title': 'Floret Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010cb-floret-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AA/WA1010AA-0_medium.jpg', 'title': 'Classic Monstera Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010aa-classic-monstera-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CH/WA1010CH-0_medium.jpg', 'title': 'Enjoy Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ch-enjoy-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CF/WA1010CF-0_medium.jpg', 'title': 'Imperfection Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010cf-imperfection-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CE/WA1010CE-0_medium.jpg', 'title': 'Good Day Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ce-good-day-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CD/WA1010CD-0_medium.jpg', 'title': 'Now or Never Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010cd-now-or-never-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BA/WA1010BA-0_medium.jpg', 'title': 'Garden Variety Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ba-garden-variety-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BB/WA1010BB-0_medium.jpg', 'title': 'Acacia Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bb-acacia-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AT/WA1010AT-0_medium.jpg', 'title': 'Primary Paint Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010at-primary-paint-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AU/WA1010AU-0_medium.jpg', 'title': 'Palm Springs Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010au-palm-springs-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AS/WA1010AS-0_medium.jpg', 'title': 'Frond of You Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010as-frond-of-you-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AV/WA1010AV-0_medium.jpg', 'title': 'Pacific Heights Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010av-pacific-heights-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AW/WA1010AW-0_medium.jpg', 'title': 'Nob Hill Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010aw-nob-hill-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AX/WA1010AX-0_medium.jpg', 'title': 'Excelsior Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ax-excelsior-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AZ/WA1010AZ-0_medium.jpg', 'title': 'Sea Cliff Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010az-sea-cliff-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AR/WA1010AR-0_medium.jpg', 'title': 'River Map Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ar-river-map-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AY/WA1010AY-0_medium.jpg', 'title': 'Marina Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ay-marina-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AP/WA1010AP-0_medium.jpg', 'title': 'Neapolitan Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ap-neapolitan-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AQ/WA1010AQ-0_medium.jpg', 'title': 'Custard Cream Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010aq-custard-cream-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BC/WA1010BC-0_medium.jpg', 'title': 'Caramel Sherbet Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010bc-caramel-sherbet-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AF/WA1010AF-0_medium.jpg', 'title': 'Retro Watercolor Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010af-retro-watercolor-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AG/WA1010AG-0_medium.jpg', 'title': 'Nordic Watercolor Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ag-nordic-watercolor-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AB/WA1010AB-0_medium.jpg', 'title': 'Sunset Strokes Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ab-sunset-strokes-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AJ/WA1010AJ-0_medium.jpg', 'title': 'Electric Ink Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010aj-electric-ink-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AK/WA1010AK-0_medium.jpg', 'title': 'Geode Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ak-geode-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AL/WA1010AL-0_medium.jpg', 'title': 'Peachy Keen Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010al-peachy-keen-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AH/WA1010AH-0_medium.jpg', 'title': 'Terrazzo Summer Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ah-terrazzo-summer-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AI/WA1010AI-0_medium.jpg', 'title': 'Terrazzo Stone Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ai-terrazzo-stone-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AD/WA1010AD-0_medium.jpg', 'title': 'Marble & Gold Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ad-marble-gold-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AC/WA1010AC-0_medium.jpg', 'title': 'Dusk Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ac-dusk-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AM/WA1010AM-0_medium.jpg', 'title': 'Imperial Waves Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010am-imperial-waves-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AN/WA1010AN-0_medium.jpg', 'title': 'Koi Pond Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010an-koi-pond-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AO/WA1010AO-0_medium.jpg', 'title': 'Night Bamboo Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ao-night-bamboo-art-print-with-natural-frame-8-x-10'},{'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010AE/WA1010AE-0_medium.jpg', 'title': 'Rosy Geometry Art Print', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/products/wa1010ae-rosy-geometry-art-print-with-natural-frame-8-x-10'}]" %}
+
+    {% assign isWallArt = true %}
+    <div class="productCollection">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="The Curated Collection"
+          section-description="Peruse through are assorted designs and then customize the frame to your liking!"
+          :is-wall-art="{{isWallArt}}"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'true','objectUrl':'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/artful-craftsmanship/artful-craftsmanship_d.mp4','objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/artful-craftsmanship/artful-craftsmanship_m.mp4','title': 'Artful Craftsmanship','description': 'We\&apos;ve partnered with a US-based small business to deliver our first wall art collection! All of the artwork is designed by our designers here at Inside Weather in California and the frames are designed and manufactured by the Hanger Frames™ team in Utah. Each piece is handcrafted in their studio and made to order on demand by their team of artisans.'},{'isVideo':'true', 'objectUrl':'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/lifeproof/lifeproof_d.mp4', 'objectUrlMob':'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/lifeproof/lifeproof_m.mp4', 'title': 'Life-Proof','description': 'Each frame set includes four wood panels: two that clamp the top of the canvas and two that clamp the bottom. Strong neodymium magnets are embedded into each stick, which securely grip your artwork, but allow you to easily change out the art whenever you want! Not that you ever change your mind...'},{'isVideo':'false', 'objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/custom-hanging/custom-hanging_d.jpg', 'objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/custom-hanging/custom-hanging_m.jpg', 'title': 'Custom Hanging Options','description': 'Three different string options are included with each order! You\&apos;ll receive lengthy pieces of faux-leather cord, jute twine, and white cotton twine all for you to choose from to hang your frame. You can set your cord long or short depending on the look you\&apos;re going for. We even send you a nail!'},{'isVideo':'false', 'objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/quality-materials/materials_d.jpg', 'objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/hanger-frame-wall-art/quality-materials/materials_m.jpg', 'title': 'Quality Materials','description': 'Made from durable oak hardwood, the frame is available in six wood stain options. Super strong rare earth magnets called Neodymium Magnets are embedded into each wood piece creating a durable and secure frame for your artwork. Each piece of art is professionally printed on 100% cotton fine art canvas using archival inks.'}]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}
+
+    <div class="categoryValuePropsWrapper">
+      <category-vprops
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_01.jpg?v=1593112321','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1311BS/WA1311BS-0_small.jpg','title':'Playhouse Art Print with Aged Oak Frame (24\&#34; x 36\&#34;)','price':'$90','productUrl':'https://insideweather.com/products/wa1311bs-playhouse-art-print-with-aged-oak-frame-24-x-36'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/250S92EF3088/250S92EF3088-0_small.jpg','title':'Linen Weave Issa Sectional in Dijon','price':'$1,448', 'productUrl':'https://insideweather.com/products/sc18bi10111110-linen-weave-issa-sectional-in-dijon'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14745&scene=sku&features=4055092,4054658,4054879,4055093,4055086,4055094,4055091,4055095&frame=1&size=400&name=Hanna%20Side%20Table1&color=FFFFFF&format=JPG','title':'Latte Hanna Side Table','price':'$218', 'productUrl':'https://insideweather.com/products/hs10fifi-latte-hanna-side-table'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_02.jpg?v=1593112322','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BK/WA1113BK-0_small.jpg','title':'Warm Convergence Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bk-warm-convergence-art-print-with-whitewash-frame-16-x-20'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BH/WA1113BH-0_small.jpg','title':'Cool Botanical Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bh-cool-botanical-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BL/WA1113BL-0_small.jpg','title':'Venn Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bl-venn-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'}]}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_03.jpg?v=1593112322','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1110AZ/WA1110AZ-0_small.jpg','title':'Sea Cliff Art Print with Natural Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1110az-sea-cliff-art-print-with-natural-frame-16-x-20'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_04.jpg?v=1593112321','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1110BE/WA1110BE-0_small.jpg','title':'Sunrise Strokes Art Print with Natural Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1110be-sunrise-strokes-art-print-with-natural-frame-16-x-20'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_05.jpg?v=1593112321','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BQ/WA1111BQ-0_small.jpg','title':'Cool Calder Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bq-cool-calder-art-print-with-aged-oak-frame-16-x-20'},
+    {'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BJ/WA1111BJ-0_small.jpg','title':'Sub-Saharan Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bj-sub-saharan-art-print-with-aged-oak-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BL/WA1111BL-0_small.jpg','title':'Venn Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bl-venn-art-print-with-aged-oak-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/250S92EF3088/250S92EF3088-0_small.jpg','title':'Linen Weave Issa Sectional in Dijon','price':'$1,448', 'productUrl':'https://insideweather.com/products/sc18bi10111110-linen-weave-issa-sectional-in-dijon'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14745&scene=sku&features=4055092,4054658,4054879,4055093,4055086,4055094,4055091,4055095&frame=1&size=400&name=Hanna%20Side%20Table1&color=FFFFFF&format=JPG','title':'Latte Hanna Side Table','price':'$218', 'productUrl':'https://insideweather.com/products/hs10fifi-latte-hanna-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD125/HD125-0_small.jpg','title':'Nordic Coat Rack','price':'$149', 'productUrl':'https://insideweather.com/products/hd125-nordic-coat-rack'}]}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_06.jpg?v=1593112322','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1212BM/WA1212BM-0_small.jpg','title':'Pheonix Art Print with Walnut Frame (20\&#34; x 30\&#34;)','price':'$80', 'productUrl':'https://insideweather.com/products/wa1212bm-pheonix-art-print-with-walnut-frame-20-x-30'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1212BN/WA1212BN-0_small.jpg','title':'Contiguous Clay Art Print with Walnut Frame (20\&#34; x 30\&#34;)','price':'$80', 'productUrl':'https://insideweather.com/products/wa1212bn-contiguous-clay-art-print-with-walnut-frame-20-x-30'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/249SAB2AF7E0/249SAB2AF7E0-0_small.jpg','title':'Linen Weave Brooklyn Sofette Sectional in Fog','price':'$1,248', 'productUrl':'https://insideweather.com/products/ss19bg10101016-linen-weave-brooklyn-sofette-sectional-in-fog'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S7600861F/47S7600861F-0_small.jpg','title':'Espresso Round Side Table in Espresso Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st13fy13-espresso-round-side-table-in-espresso-wood'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_07.jpg?v=1593112321','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BW/WA1111BW-0_small.jpg','title':'Bold Tangle Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bw-bold-tangle-art-print-with-aged-oak-frame-16-x-20'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_08.jpg?v=1593112321','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1310AS/WA1310AS-0_small.jpg','title':'Frond of You Art Print with Natural Frame (24\&#34; x 36\&#34;)','price':'$90', 'productUrl':'https://insideweather.com/products/wa1310as-frond-of-you-art-print-with-natural-frame-24-x-36'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SC2C760F9/195SC2C760F9-1_small.jpg','title':'Latte Sloan Credenza in Latte Wood','price':'$518', 'productUrl':'https://insideweather.com/products/cr10aa1115-latte-sloan-credenza-in-latte-wood'}]},
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_10.jpg?v=1593112320','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1010BF/WA1010BF-0_small.jpg','title':'Half dome Art Print with Natural Frame (8\&#34; x 10\&#34;)','price':'$35', 'productUrl':'https://insideweather.com/products/wa1010bf-half-dome-art-print-with-natural-frame-8-x-10'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1010BI/WA1010BI-0_small.jpg','title':'Shore Thing Art Print with Natural Frame (8\&#34; x 10\&#34;)','price':'$35', 'productUrl':'https://insideweather.com/products/wa1010bi-shore-thing-art-print-with-natural-frame-8-x-10'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1010BG/WA1010BG-0_small.jpg','title':'Abstract Noir Art Print with Natural Frame (8\&#34; x 10\&#34;)','price':'$35', 'productUrl':'https://insideweather.com/products/wa1010bg-abstract-noir-art-print-with-natural-frame-8-x-10'}]},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_lg_09.jpg?v=1593112323','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1110AP/WA1110AP-0_small.jpg','title':'Neapolitan Art Print with Natural Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1110ap-neapolitan-art-print-with-natural-frame-16-x-20'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get Inspired"
+        pop-up-heading="Get Inspired"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) {
+
+  $('.CategoryBanner--clasification .point').click(function (event){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter",
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>
+
+<style>
+  .wallArtproductCollection {
+    background: #f2f2f2;
+  }
+</style>
