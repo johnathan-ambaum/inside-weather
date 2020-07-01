@@ -838,10 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#6a604c",
-          "font_color": "#f4f0e9",
-          "text": "<p>Up to <strong>20% OFF<\/strong>&nbsp;All Sofas &amp; Sectionals |&nbsp;<a href=\"\/pages\/2020-sofa-sectional-sale\" title=\"2020 Sofas &amp; Sectional Sale\"><u>Shop SALE Now!<\/u><\/a><\/p>",
-          "mobile_text": "<p>Up to&nbsp;<strong>20% OFF<\/strong>&nbsp;All Sofas &amp; Sectionals |&nbsp;<a href=\"\/pages\/2020-sofa-sectional-sale\" title=\"2020 Sofas &amp; Sectional Sale\"><u>Shop SALE Now!<\/u><\/a><\/p>"
+          "background_color": "#869391",
+          "font_color": "#ffffff",
+          "text": "<p>SUMMER SALE | Save up to&nbsp;<strong>20% OFF<\/strong>&nbsp;Sitewide |&nbsp;<a href=\"\/pages\/2020-summer-sale\" title=\"2020 Summer Sale\"><u><strong>SHOP NOW<\/strong><\/u><\/a><\/p>",
+          "mobile_text": "<p>SUMMER SALE | Save up to&nbsp;<strong>20% OFF<\/strong>&nbsp;Sitewide |&nbsp;<a href=\"\/pages\/2020-summer-sale\" title=\"2020 Summer Sale\"><u><strong>SHOP NOW<\/strong><\/u><\/a><\/p>"
         }
       }
     },
