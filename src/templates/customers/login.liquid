@@ -4,7 +4,7 @@
     <div class="grid__item medium-up--one-third medium-up--push-one-third">
 
       <header class="section-header">
-        <h1 class="section-header__title">{{ 'customer.login.title' | t }}</h1>
+        <h1 class="login-section-header__title section-header__title">{{ 'customer.login.title' | t }}</h1>
       </header>
 
       <div class="note note--success hide" id="ResetSuccess">
@@ -73,7 +73,7 @@
       {% if shop.checkout.guest_login %}
         <hr class="hr--clear">
 
-        <h1>{{ 'customer.login.guest_title' | t }}</h1>
+        <h1 class="login-section-header__title">{{ 'customer.login.guest_title' | t }}</h1>
         <hr class="hr--small">
 
         {% form 'guest_login' %}
