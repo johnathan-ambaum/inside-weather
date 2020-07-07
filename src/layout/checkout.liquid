@@ -38,10 +38,10 @@
         var expires = "; expires="+d.toGMTString();
         document.cookie =  "CJEVENT=" + getUrlParameter("CJEVENT") + expires + ';path=/';;
       }
-      
+
     }
-    function eraseCookie(name) {   
-      document.cookie = name+'=; Max-Age=-99999999;';  
+    function eraseCookie(name) {
+      document.cookie = name+'=; Max-Age=-99999999;';
     }
     eraseCookie('CJEVENT');
     SetCJCookie();
@@ -230,7 +230,9 @@
     {{ tracking_code }}
 
     <script>
-      
+      if(document.title.includes("Inventory issues")){
+        document.getElementsByClassName('sidebar__content')[0].style.visibility = 'hidden';
+      }
       (function () {
         var lastStep = null;
         var currentStep = null;
@@ -249,7 +251,7 @@
           if (!link || link.innerHTML == 'Return to cart') {
             return;
           }
-          link.innerHTML = 'Return to Information';     
+          link.innerHTML = 'Return to Information';
         }
         function renameContinueButtonOnInfoStep() {
           var button = document.querySelector('.step[data-step="contact_information"] .step__footer .btn__content');
@@ -273,7 +275,7 @@
           }else{
             shippingBody.querySelector('form').submit();
           }
-          
+
         }
 
         function hideEmailProperties() {
