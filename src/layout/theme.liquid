@@ -136,7 +136,7 @@
       },
       swatchBrowser: {
         thankYouMessage: 'Your swatches will arrive at your door within 3-5 days. If you need help deciding, our team of design specialists is here for you.',
-        maxSwatches: 15
+        maxSwatches: 10
       }
     };
   </script>
@@ -171,12 +171,12 @@
   <link rel="stylesheet" href="{{ 'widgets.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'product.scss.css' | asset_url }}">
   {% if template.name == 'product' %}
-    <link rel="stylesheet" href="//viewer.cylindo.com/3.x/v3.3.1/viewer.css">
+    <link rel="stylesheet" href="//viewer.cylindo.com/v4/viewer.css">
   {% endif %}
   <script src="{{ 'manifest.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.js' | asset_url }}" defer></script>
-  <script src="//viewer.cylindo.com/3.x/v3.3.1/viewer.min.js" defer></script>
+  <script src="//viewer.cylindo.com/v4/viewer.min.js" defer></script>
   <!-- end browse and product customizer widgets -->
 
   {{ content_for_header }}
