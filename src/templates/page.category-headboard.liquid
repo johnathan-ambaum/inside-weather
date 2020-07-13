@@ -1,0 +1,199 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_tb_d_00.jpg?v=1593647209','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_tb_m_00.jpg?v=1593647209','heading':'HEADBOARDS','description':'Start with a size and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/products/hq14af-queen-oslo-headboard-in-cloud-5-x-2', 'dataSource': 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_tb_d_01.jpg?v=1593647210', 'imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_tb_m_01.jpg?v=1593647210','heading':'Configuration','description':'Opt for a sleek, low profile layout or a more expansive option to really make a statement.','linkText':'Customize now','url':'https://insideweather.com/products/hq14af-queen-oslo-headboard-in-cloud-5-x-2', 'dataSource': 'configuration'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_tb_d_02.jpg?v=1593647210','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_tb_m_02.jpg?v=1593647210','heading':'Upholstery','description':'From velvet to suede, pet-friendly to commercial grade—you have 100+ upholsteries to choose from.','linkText':'Customize now','url':'https://insideweather.com/products/hq14af-queen-oslo-headboard-in-cloud-5-x-2', 'dataSource': 'upholstery'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'Configuration', 'accordionDescription': 'Opt for a sleek, low profile layout or a more expansive option to really make a statement.', 'accordionTarget': 'configuration'},{'accordionHead': 'Upholstery', 'accordionDescription': 'From velvet to suede, pet-friendly to commercial grade—you have 100+ upholsteries to choose from.', 'accordionTarget': 'upholstery'}]" %}
+
+    <category-banner
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14743&scene=sku&features=4210609,4210396,4046370,4210622,4046371,4210623&frame=1&size=400&name=Headboard%20-%20Twin1&color=FFFFFF&format=JPG', 'title': 'Twin Headboard', 'linkText': 'Customize starting at $160', hyperLink: 'https://insideweather.com/products/ht10af-twin-oslo-headboard-in-cloud-2-x-2'},{'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14744&scene=sku&features=4209750,4209500,4028317,4209764,4028318,4209765&frame=1&size=400&name=Headboard%20-%20Full1&color=FFFFFF&format=JPG', 'title': 'Full Headboard', 'linkText': 'Customize starting at $240', hyperLink: 'https://insideweather.com/products/hf10af-full-oslo-headboard-in-cloud-3-x-2'},{'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196721,4196497,4028386,4196734,4028387,4196735&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG', 'title': 'Queen Headboard', 'linkText': 'Customize starting at $240', hyperLink: 'https://insideweather.com/products/hq10af-queen-oslo-headboard-in-cloud-3-x-2'},{'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14774&scene=sku&features=4194441,4194158,4045448,4194454,4045449,4194455&frame=1&size=400&name=Headboard%20-%20King1&color=FFFFFF&format=JPG', 'title': 'King Headboard', 'linkText': 'Customize starting at $300', hyperLink: 'https://insideweather.com/products/hk10af-king-oslo-headboard-in-cloud-3-x-2'},{'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14775&scene=sku&features=4193617,4193403,4045526,4193630,4045527,4193631&frame=1&size=400&name=Headboard%20-%20Cal%20King1&color=FFFFFF&format=JPG', 'title': 'Cal King Headboard', 'linkText': 'Customize starting at $300', hyperLink: 'https://insideweather.com/products/hc10af-cal-king-oslo-headboard-in-cloud-3-x-2'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Size"
+          section-description="Then choose your ideal layout and between 100+ upholsteries to make it yours!"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'true','objectUrl':'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/collection/collection_d.mp4','objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/collection/collection_m.mp4','title': 'The Collection','description': 'This sleek, modern headboard is designed to bring style to your bedroom with ease. Each panel is composed of high-density polyurethane foam and backed with a proprietary nonobstructive wall mount design of commercial durability providing you with a customizable, modular headboard. Each piece of upholstery is hand cut and carefully drawn around each plush, padded panel for crisp, refined edges.'},{'isVideo':'true', 'objectUrl':'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/configuration/configuration_d.mp4', 'objectUrlMob':'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/configuration/configuration_m.mp4', 'title': 'Custom Configuration','description': 'Opt for a sleek, low profile layout or a more expansive option to really make a statement in the room. Where on the wall is best to mount the first row of panels? In truth, you can start anywhere but we recommend beginning just a few inches below the top of your mattress or right above the baseboard if you prefer a completely flush look with no bare wall visible.'},{'isVideo':'true', 'objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/modular/modular_d.mp4', 'objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/modular/modular_m.mp4', 'title': 'Modular','description': 'Change your mind a lot? Join the club. Our proprietary removable, nonobstructive wall mount design allows you to switch up your configuration as you please! Because well, we know how you are.'},{'isVideo':'true', 'objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/lifeproof/lifeproof_d.mp4', 'objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/pdp/details/headboard/lifeproof/lifeproof_m.mp4', 'title': 'Snappy Setup','description': 'Our proprietary nonobstructive wall mount panels are designed to be removable, non damaging, and simple to set up—all you need is a clean, sealed wall. The high performance contract grade adhesives included to be used with each panel are designed to hold up 16x the weight of the panel itself.'}]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}
+
+    <div class="categoryValuePropsWrapper">
+      <category-vprops
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_01.jpg?v=1593651584','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480','productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298','productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_02.jpg?v=1593651587','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/47S23BB1B8A/47S23BB1B8A-0_small.jpg','title':'Latte Rectangle Side Table in Retro Light Gray','price':'$98', 'productUrl':'https://insideweather.com/products/st14cf12-latte-rectangle-side-table-in-retro-light-gray'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117E/HD117E-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Pink','price':'$29', 'productUrl':'https://insideweather.com/products/hd117e-mia-mug-wood-saucer-set-in-pink'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048504,4049197,4049236&frame=6&size=400&name=Throw%20Pillow6&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nkni-20-x-20-accent-pillow-with-insert'}]}, 
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_03.jpg?v=1593651587','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196717,4196100,4028386,4196726,4028387,4196727&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 3)','price':'$360', 'productUrl':'https://insideweather.com/products/hq11af-queen-oslo-headboard-in-cloud-3-x-3'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BG/WA1111BG-0_small.jpg','title':'Abstract Noir Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bg-abstract-noir-art-print-with-aged-oak-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BQ/WA1111BQ-0_small.jpg','title':'Cool Calder Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bq-cool-calder-art-print-with-aged-oak-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1111BF/WA1111BF-0_small.jpg','title':'Half dome Art Print with Aged Oak Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1111bf-half-dome-art-print-with-aged-oak-frame-16-x-20'},]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_04.jpg?v=1593651587','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196716,4196014,4028386,4196724,4028387,4196725&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Powder Pink (3 x 2)','price':'$365', 'productUrl':'https://insideweather.com/products/hq10dg-queen-oslo-headboard-in-powder-pink-3-x-2'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_05.jpg?v=1593651586','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048504,4049197,4049236&frame=6&size=400&name=Throw%20Pillow6&color=FFFFFF&format=JPG','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nkni-20-x-20-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048491,4048886,4049236&frame=6&size=400&name=Throw%20Pillow6&color=FFFFFF&format=JPG','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_06.jpg?v=1593651587','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196226,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Powder Pink (3 x 4)','price':'$605', 'productUrl':'https://insideweather.com/products/hq12dg-queen-oslo-headboard-in-powder-pink-3-x-4'}, {'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_07.jpg?v=1593651586','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117F/HD117F-0_small.jpg','title':'Mia Mug & Wood Saucer Set in White','price':'$29', 'productUrl':'https://insideweather.com/products/hd117f-mia-mug-wood-saucer-set-in-white'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_08.jpg?v=1593651586','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_10.jpg?v=1593651586','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196717,4196075,4028386,4196726,4028387,4196727&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Powder Pink (3 x 3)','price':'$485', 'productUrl':'https://insideweather.com/products/hq11dg-queen-oslo-headboard-in-powder-pink-3-x-3'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_headboard_lg_09.jpg?v=1593651587','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BK/WA1113BK-0_small.jpg','title':'Warm Convergence Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bk-warm-convergence-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BH/WA1113BH-0_small.jpg','title':'Cool Botanical Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bh-cool-botanical-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BL/WA1113BL-0_small.jpg','title':'Venn Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bl-venn-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'},]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get Inspired"
+        pop-up-heading="Get Inspired"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) {
+
+  $('.CategoryBanner--clasification .point').click(function (event){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter",
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>
