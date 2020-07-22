@@ -6,19 +6,21 @@
       class="SimpleCustomizer__Row"
     >
       <label class="SimpleCustomizer__Label">{{ attribute.name }}:</label>
-      <div
-        v-for="option in attribute.values"
-        :key="option.value"
-        :class="optionClasses(attribute, option)"
-        class="SimpleCustomizer__Option"
-        @click="toggleOption(attribute.parameter, option.value)"
-      >
-        <img
-          v-if="isSwatch(attribute.swatch_type)"
-          :src="option.swatch_url"
-          :alt="option.name"
-          class="SimpleCustomizer__Swatch">
-        <div v-else>{{ option.name }}</div>
+      <div class="SimpleCustomizer__Options">
+        <div
+          v-for="option in attribute.values"
+          :key="option.value"
+          :class="optionClasses(attribute, option)"
+          class="SimpleCustomizer__Option"
+          @click="toggleOption(attribute.parameter, option.value)"
+        >
+          <img
+            v-if="isSwatch(attribute.swatch_type)"
+            :src="option.swatch_url"
+            :alt="option.name"
+            class="SimpleCustomizer__Swatch">
+          <div v-else>{{ option.name }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -72,7 +74,6 @@ export default {
   }
 
   &__Row {
-    align-items: center;
     display: flex;
 
     & + & {
@@ -88,7 +89,14 @@ export default {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .1em;
+    padding: 9px 0;
     text-transform: uppercase;
+  }
+
+  &__Options {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   &__Option {
@@ -97,7 +105,7 @@ export default {
     display: flex;
     font-family: $font-stack-avalon;
     justify-content: center;
-    margin-left: 12px;
+    margin: 0 0 12px 12px;
     text-align: center;
     user-select: none;
   }
