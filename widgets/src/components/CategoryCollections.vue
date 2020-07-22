@@ -25,6 +25,8 @@
       <li
         v-for="item in productCollections"
         :key="item.id"
+        class="categoryListItem"
+        :class="categoryCollectionsListItemClasses"
       >
         <a :href="item.hyperLink">
           <figure
@@ -63,6 +65,7 @@ export default {
     isScrollAnimationRequire: {type: Boolean, default: true},
     collectionCustomImageStyle:{type: Boolean, default: false},
     isWallArt: {type: Boolean, default: false},
+    isWorkDesk: {type: Boolean, default: false}
   },
   computed: {
     animationElementClass() {
@@ -80,6 +83,11 @@ export default {
     customImageClass() {
       return {
         '--customImageStyle': this.collectionCustomImageStyle
+      }
+    },
+    categoryCollectionsListItemClasses() {
+      return {
+        'onlythreecategories': this.isWorkDesk
       }
     }
   },
@@ -118,6 +126,9 @@ export default {
     margin: 0;
     box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
     -webkit-box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
+    &.onlythreecategories {
+      flex-basis: 33.3%;
+    }
     .--animElement {
       opacity: 0;
     }
