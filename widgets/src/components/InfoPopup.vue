@@ -53,7 +53,8 @@ export default {
 
 .InfoPopup {
   cursor: pointer;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   position: relative;
 
   &__Dialog {

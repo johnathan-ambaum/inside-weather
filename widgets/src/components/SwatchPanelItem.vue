@@ -99,7 +99,7 @@ export default {
   text-align: center;
 
   &--square {
-    padding: 18px 32px;
+    padding: 11px 32px;
   }
 
   @include at-query($breakpoint-large) {
@@ -161,7 +161,7 @@ export default {
   }
 
   &__Icons {
-    margin-top: 8px;
+    // margin-top: 8px;
   }
 
   &__Icon {

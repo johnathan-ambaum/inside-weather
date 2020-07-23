@@ -838,10 +838,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#869391",
+          "background_color": "#b1c8cd",
           "font_color": "#ffffff",
-          "text": "<p>SUMMER SALE | Save up to&nbsp;<strong>20% OFF<\/strong>&nbsp;Sitewide |&nbsp;<a href=\"\/pages\/2020-summer-sale\" title=\"2020 Summer Sale\"><u><strong>SHOP NOW<\/strong><\/u><\/a><\/p>",
-          "mobile_text": "<p>SUMMER SALE | Save up to&nbsp;<strong>20% OFF<\/strong>&nbsp;Sitewide |&nbsp;<a href=\"\/pages\/2020-summer-sale\" title=\"2020 Summer Sale\"><u><strong>SHOP NOW<\/strong><\/u><\/a><\/p>"
+          "text": "<p><a href=\"\/pages\/headboard\" title=\"Headboards\">NEW Modular Headboards are here!<\/a> |&nbsp;Use code <strong>PRESALE<\/strong> for <strong>30% OFF<\/strong><\/p>",
+          "mobile_text": "<p><a href=\"\/pages\/headboard\" title=\"Headboards\">NEW&nbsp;Modular Headboards!<\/a>&nbsp;|&nbsp;Use code&nbsp;<strong>PRESALE<\/strong>&nbsp;for&nbsp;<strong>30% OFF<\/strong><\/p>"
         }
       }
     },

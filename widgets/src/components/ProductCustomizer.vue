@@ -95,7 +95,7 @@
           {{ productName }}
         </div>
         <div class="ProductCustomizer__PriceRow">
-          <span class="ProductCustomizer__Price">${{ productPrice }}</span>
+          <span class="ProductCustomizer__Price--mt">${{ productPrice }}</span>
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
@@ -849,6 +849,19 @@ html.ProductCustomizer--Open {
       font-size: 22px;
     }
   }
+  &__Price--mt{
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    line-height: 1;
+
+    @include at-query($breakpoint-large) {
+      font-size: 22px;
+    }
+    @include at-query($breakpoint-small) {
+      margin-top:14px;
+    }
+  }
 
   &__MSRP {
     color: #959595;
@@ -1040,6 +1053,8 @@ html.ProductCustomizer--Open {
     text-align: center;
 
     @include at-query($breakpoint-small) {
+      padding: 18px 0;
+      font-size: 16px;
       border-top: 1px solid #D4D0CA;
     }
 
@@ -1080,7 +1095,7 @@ html.ProductCustomizer--Open {
     }
 
     @include at-query($breakpoint-small) {
-      padding: 24px 18px;
+      padding: 22px 18px;
 
       & + & {
         border-left: 1px solid #D4D0CA;
