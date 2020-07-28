@@ -1,71 +1,74 @@
 <template>
   <div class="ProductDetail">
     <swatch-browser v-if="!isDecor && isMobile" />
-    <template v-if="!isDecor">
-
-      <div class="ProductDetail-information-tabs__wrapper" v-if="!isMobile">
-        <div class="ProductDetail-information-tabs__headings">
-          <p
-            v-for="tab in detailTabs"
-            :key="tab.title"
-            :class="{ 'ProductDetail-information-tabs__heading--active': tab.title === activeTab.title }"
-            class="ProductDetail-information-tabs__heading"
-            @click="openTab(tab)"
-          ><span>{{ tab.title }}</span></p>
-        </div>
-        <div class="ProductDetail-information-tabs__bg">
-          <div class="ProductDetail-information-tabs__tabs">
-            <transition-group
-              enter-active-class="animated fadeInUp"
-              leave-active-class="animated fadeOutDown"
+    <div
+      v-if="!isMobile && detailTabs.length"
+      class="ProductDetail-information-tabs__wrapper"
+    >
+      <div class="ProductDetail-information-tabs__headings">
+        <p
+          v-for="tab in detailTabs"
+          :key="tab.title"
+          :class="{ 'ProductDetail-information-tabs__heading--active': tab.title === activeTab.title }"
+          class="ProductDetail-information-tabs__heading"
+          @click="openTab(tab)"
+        ><span>{{ tab.title }}</span></p>
+      </div>
+      <div class="ProductDetail-information-tabs__bg">
+        <div class="ProductDetail-information-tabs__tabs">
+          <transition-group
+            enter-active-class="animated fadeInUp"
+            leave-active-class="animated fadeOutDown"
+          >
+            <div
+              v-for="tab in detailTabs"
+              v-if="tab.title === activeTab.title /* eslint-disable-line */"
+              :key="tab.title"
+              class="ProductDetail-information-tabs__tab"
             >
               <div
-                v-for="tab in detailTabs"
-                v-if="tab.title === activeTab.title /* eslint-disable-line */"
-                :key="tab.title"
-                class="ProductDetail-information-tabs__tab"
+                v-if="tab.title === 'Dimensions'"
+                class="ProductDetail-information-tabs__images-tab"
               >
-                <div
-                  v-if="tab.title === 'Dimensions'"
-                  class="ProductDetail-information-tabs__images-tab"
-                >
-                  <img v-for="image in dimensionImages"
-                    :key="image"
-                    :src="image">
-                </div>
-                <p v-else>
-                  {{ interpolate(tab.template) }}
-                </p>
+                <img v-for="image in dimensionImages"
+                  :key="image"
+                  :src="image">
               </div>
-            </transition-group>
-            <div
-              v-if="!detailTabs.length"
-              class="ProductDetail-information-tabs__tab"
-            ><p>{{ interpolatedDescription }}</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="ProductDetail__Headings" v-if="isMobile">
-        <template v-if="detailTabs.some(tab => tab.title === 'Dimensions')">
-          <h2 class="ProductDetail__Heading">Dimensions</h2>
-          <div class="ProductDetail__Dimensions">
-            <img
-              v-for="image in dimensionImages"
-              :key="image"
-              :src="image">
-          </div>
-        </template>
-        <div class="ProductDetail__SplitBlocks">
+              <p v-else>
+                {{ interpolate(tab.template) }}
+              </p>
+            </div>
+          </transition-group>
           <div
-            v-for="tab in detailTabs.filter(tab => tab.title !== 'Dimensions')"
-            :key="tab.title"
-          >
-            <h2 class="ProductDetail__Heading">{{ tab.title }}</h2>
-            <p>{{ interpolate(tab.template) }}</p>
-          </div>
+            v-if="!detailTabs.length"
+            class="ProductDetail-information-tabs__tab"
+          ><p>{{ interpolatedDescription }}</p></div>
         </div>
       </div>
-    </template>
+    </div>
+    <div
+      v-if="isMobile && detailTabs.length"
+      class="ProductDetail__Headings"
+    >
+      <template v-if="detailTabs.some(tab => tab.title === 'Dimensions')">
+        <h2 class="ProductDetail__Heading">Dimensions</h2>
+        <div class="ProductDetail__Dimensions">
+          <img
+            v-for="image in dimensionImages"
+            :key="image"
+            :src="image">
+        </div>
+      </template>
+      <div class="ProductDetail__SplitBlocks">
+        <div
+          v-for="tab in detailTabs.filter(tab => tab.title !== 'Dimensions')"
+          :key="tab.title"
+        >
+          <h2 class="ProductDetail__Heading">{{ tab.title }}</h2>
+          <p>{{ interpolate(tab.template) }}</p>
+        </div>
+      </div>
+    </div>
     <related-products></related-products>
     <swatch-browser v-if="!isDecor && !isMobile" />
     <div class="--custom-container">
@@ -75,7 +78,7 @@
       >Details</h2>
     </div>
     <div
-      v-if="isDecor"
+      v-if="isDecor && interpolatedDescription.length"
       class="ProductDetail__Description --custom-container"
     >
       <p>{{ interpolatedDescription }}</p>
