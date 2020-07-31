@@ -44,6 +44,18 @@
             :data-type="[item.linkText.length > 10 ? animationElementClass : 'limittedText']"
           >
             {{item.linkText}}
+            <span
+              v-if="isOriginalPrice"
+              class="original-price"
+            >
+              {{item.originalPrice}}
+            </span>
+            <span
+              v-if="isDiscountPrice"
+              class="discount-price"
+            >
+              {{item.discountPrice}}
+            </span>
           </span>
         </a>
       </li>
@@ -65,7 +77,9 @@ export default {
     isScrollAnimationRequire: {type: Boolean, default: true},
     collectionCustomImageStyle:{type: Boolean, default: false},
     isWallArt: {type: Boolean, default: false},
-    isWorkDesk: {type: Boolean, default: false}
+    isWorkDesk: {type: Boolean, default: false},
+    isOriginalPrice: {type: Boolean, default: false},
+    isDiscountPrice: {type: Boolean, default: false}
   },
   computed: {
     animationElementClass() {
@@ -136,6 +150,10 @@ export default {
       text-decoration: none;
       padding: 2px 44px 32px;
       @include block();
+
+      .original-price {
+        text-decoration: line-through;
+      }
     }
     &:nth-of-type(-n+4) {
       a {

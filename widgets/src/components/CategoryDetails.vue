@@ -231,8 +231,8 @@ export default {
         p {
           font-weight: 500;
           font-size: 14px;
-          letter-spacing: 0.04em;
           line-height: 22px;
+          letter-spacing: 0.04em;
           text-align: center;
           color: #202020;
           padding-bottom: 44px;
@@ -259,7 +259,8 @@ export default {
             text-align: center;
           }
           p {
-            font-size: 12px;
+            font-size: 13px;
+            line-height: 18px;
             padding-bottom: 34px;
           }        
         }
@@ -323,7 +324,8 @@ export default {
                 }
               }
               p {
-                font-size: 14px;
+                font-size: 13px;
+                line-height: 18px;
                 text-align: left;
                 padding-left: 15px;
                 padding-top: 0;
@@ -405,7 +407,8 @@ export default {
             text-align: center;
           }
           p {
-            font-size: 12px; 
+            font-size: 13px;
+            line-height: 18px;
             padding-bottom: 15px;
           }
         }

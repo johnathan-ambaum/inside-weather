@@ -19,7 +19,10 @@
       >
     </category-banner>
 
-    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_ST/frames/4/CNV_JORN_ST.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Jorn Side Table', 'linkText': 'CUSTOMIZE STARTING AT $198', hyperLink: 'https://insideweather.com/products/js11fi-latte-jorn-side-table'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_CNS/frames/4/CNV_JORN_CNS.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20SETUP:LARGE-LARGE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Jorn Console', 'linkText': 'Customize starting at $319', hyperLink: 'https://insideweather.com/products/jc1113fi-latte-jorn-console'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_DK/frames/1/CNV_JORN_DK.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&size=400', 'title': 'Jorn Writing Desk', 'linkText': 'Customize starting at $559', hyperLink: 'https://insideweather.com/products/jw11-latte-jorn-writing-desk'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_DK/frames/1/CNV_JORN_DK.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=CONFIGURATION:MONITOR%20STAND%20AND%202%20PEDESTALS&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Jorn Media Desk', 'linkText': 'Customize starting at $599', hyperLink: 'https://insideweather.com/products/jm1110fi-latte-jorn-media-desk'}]" %}
+    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_ST/frames/4/CNV_JORN_ST.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Jorn Side Table', 'linkText': 'CUSTOMIZE STARTING AT ', 'originalPrice': '$248', 'discountPrice': '$198', hyperLink: 'https://insideweather.com/products/js11fi-latte-jorn-side-table'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_CNS/frames/4/CNV_JORN_CNS.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20SETUP:LARGE-LARGE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Jorn Console', 'linkText': 'Customize starting at', 'originalPrice': '$399', 'discountPrice': '$319', hyperLink: 'https://insideweather.com/products/jc1113fi-latte-jorn-console'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_DK/frames/1/CNV_JORN_DK.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&size=400', 'title': 'Jorn Writing Desk', 'linkText': 'Customize starting at', 'originalPrice': '$699', 'discountPrice': '$559', hyperLink: 'https://insideweather.com/products/jw11-latte-jorn-writing-desk'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_DK/frames/1/CNV_JORN_DK.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=CONFIGURATION:MONITOR%20STAND%20AND%202%20PEDESTALS&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Jorn Media Desk', 'linkText': 'Customize starting at', 'originalPrice': '$749', 'discountPrice': '$599', hyperLink: 'https://insideweather.com/products/jm1110fi-latte-jorn-media-desk'}]" %}
+
+    {% assign isOriginalPrice = true %}
+    {% assign isDiscountPrice = true %}
 
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
@@ -27,6 +30,8 @@
           :product-collections="{{productCollections}}"
           section-heading="Meet the Jorn Family"
           section-description="Get 20% OFF the brand new Jorn Collection! Enter code JUSTDROPPED at checkout."
+          :is-original-price="{{isOriginalPrice}}"
+          :is-discount-price="{{isDiscountPrice}}"
         >
         </category-collections>
       </div>
