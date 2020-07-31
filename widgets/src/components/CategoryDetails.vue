@@ -227,7 +227,6 @@ export default {
           text-align: center;
           color: #202020;
           margin: 0 0 34px;
-          text-align: left;
         }
         p {
           font-weight: 500;
@@ -373,7 +372,7 @@ export default {
           font-weight: 600;
           font-size: 34px;
           letter-spacing: 0.05em;
-          text-align: left;
+          text-align: center;
           color: #202020;
           margin: 0 0 34px;
         }
