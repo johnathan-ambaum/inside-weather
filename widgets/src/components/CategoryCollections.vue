@@ -155,6 +155,12 @@ export default {
         text-decoration: line-through;
         display: inline-block;
         line-height: 16px;
+        @include at-query('max-width: 768px') {
+          line-height: 10px;
+        }
+        @include at-query('max-width: 767px') {
+          line-height: 9px;
+        }
       }
     }
     &:nth-of-type(-n+4) {
