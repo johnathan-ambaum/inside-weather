@@ -232,7 +232,7 @@ export default {
         font-weight: $demi;
         text-align: center;
         margin: 0 0 7px;
-        @include fonts(52px,#202020,1,0.05em);
+        @include fonts(37px,#202020,1,0.05em);
       }
       p {
         display: block;

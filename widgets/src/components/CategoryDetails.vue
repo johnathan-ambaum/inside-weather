@@ -291,6 +291,7 @@ export default {
               font-weight: 600;
               font-size: 16px;
               letter-spacing: 0.1em;
+              font-family: $font-stack-avalon;
               line-height: 25px;
               text-align: center;
               color: #202020;
