@@ -153,6 +153,8 @@ export default {
 
       .original-price {
         text-decoration: line-through;
+        display: inline-block;
+        line-height: 16px;
       }
     }
     &:nth-of-type(-n+4) {
