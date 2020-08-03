@@ -503,7 +503,6 @@ export default {
     },
 
     openCart() {
-      console.log('open')
       this.errorOn = null;
       this.showCart = true;
     },
