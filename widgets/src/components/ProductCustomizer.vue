@@ -573,11 +573,15 @@ export default {
       this.createProduct();
       this.$bus.$emit('customizer-close');
       this.active = false;
+      const zendesk = document.querySelector('#launcher');
+      zendesk.style.visibility = "visible";
     },
 
     showCustomizer() {
       this.selectPanel('');
       this.active = true;
+      const zendesk = document.querySelector('#launcher');
+      zendesk.style.visibility = "hidden";
     },
 
     favoriteCurrentProduct() {
