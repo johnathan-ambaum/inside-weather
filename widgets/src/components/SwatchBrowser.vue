@@ -400,6 +400,8 @@ export default {
 
   watch: {
     active(isActive) {
+      const zendesk = document.querySelector('#launcher');
+      zendesk.style.visibility = isActive ? "hidden" : "visible";
       document.documentElement.style.overflow = isActive ? 'hidden' : 'auto';
       document.documentElement.classList.toggle('ProductCustomizer--Open', isActive);
       if (isActive) {
