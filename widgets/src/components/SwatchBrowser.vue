@@ -342,7 +342,7 @@ export default {
     groupOptions() {
       return this.groups.map((group) => {
         let display = this.isMobile ? group.name : `<strong>${group.name}</strong>`;
-        if (group.group_type === 'sort') {
+        if (group.prefix) {
           display = `${group.prefix} ${display}`;
         }
         return {
@@ -400,8 +400,6 @@ export default {
 
   watch: {
     active(isActive) {
-      const zendesk = document.querySelector('#launcher');
-      zendesk.style.visibility = isActive ? "hidden" : "visible";
       document.documentElement.style.overflow = isActive ? 'hidden' : 'auto';
       document.documentElement.classList.toggle('ProductCustomizer--Open', isActive);
       if (isActive) {
