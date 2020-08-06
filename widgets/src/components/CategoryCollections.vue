@@ -152,14 +152,16 @@ export default {
       @include block();
 
       .original-price {
-        text-decoration: line-through;
+        position: relative;
         display: inline-block;
-        line-height: 16px;
-        @include at-query('max-width: 768px') {
-          line-height: 10px;
-        }
-        @include at-query('max-width: 767px') {
-          line-height: 9px;
+        line-height: 1.2;
+        &:before {
+          content: '';
+          border-bottom: 1px solid #202020;
+          width: 100%;
+          position: absolute;
+          right: 0;
+          top: 50%;
         }
       }
     }
