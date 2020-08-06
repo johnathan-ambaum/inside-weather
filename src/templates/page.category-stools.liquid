@@ -1,0 +1,215 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_d_00.jpg?v=1596584554', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_m_00.jpg?v=1596584553','heading':'Stools','description':'Start with a silhouette and color in the rest.','linkText':'Customize now','url':'https://insideweather.com/products/el11ao-latte-edgar-lounge-chair-in-olive-green', dataSource: 'default'}, 
+    
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_d_01.jpg?v=1596584554', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_m_01.jpg?v=1596584554','heading':'Style','description':'Seat yourself as you wish with a variety of different seat shapes & base styles.','linkText':'Customize now','url':'https://insideweather.com/products/br10ao11-latte-burnham-stool-in-olive-green', dataSource: 'style'},
+    
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_d_02.jpg?v=1596584555','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_m_02.jpg?v=1596584554','heading':'Upholstery','description':'Make it 100% yours with over 400 unique, quality upholsteries to choose from.','linkText':'Customize now','url':'https://insideweather.com/products/el11ao-latte-edgar-lounge-chair-in-olive-green', dataSource: 'upholstery'},
+    
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_d_03.jpg?v=1596584554','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_stools_tb_m_03.jpg?v=1596584554','heading':'Base Finish','description':'Choose between rich wood finishes to find what perfectly accents your space.','linkText':'Customize now','url':'https://insideweather.com/products/br10ao11-latte-burnham-stool-in-olive-green', dataSource: 'base-finish'}
+    ]}"%}
+
+    {% assign categoryBannerAccordion = "[
+      {'accordionHead': 'Style', 'accordionDescription': 'Seat yourself as you wish with a variety of different seat shapes & base styles.', 'accordionTarget': 'style'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Make it 100% yours with over 400 unique, quality upholsteries to choose from.', 'accordionTarget': 'upholstery'},{'accordionHead': 'Base Finish', 'accordionDescription': 'Choose between rich wood finishes to find what perfectly accents your space.', 'accordionTarget': 'base-finish'}]" %}
+
+    <category-banner
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/3/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:CORDOVA%20FLAX&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400', 'title': 'Round Seat | Quad Base', 'linkText': 'Customize starting at','originalPrice': '$168', 'discountPrice': '$134', hyperLink: 'https://insideweather.com/products/br11ca11-latte-burnham-stool-in-flax'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/17/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:CURIOUS%20ECLIPSE&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400', 'title': 'Triangular Seat | Tri Base', 'linkText': 'Customize starting at','originalPrice': '$168', 'discountPrice': '$134', hyperLink: 'https://insideweather.com/products/br13bs11-latte-burnham-stool-in-arctic-navy'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/3/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:SQUARE&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:LINEN%20WEAVE%20FOG&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400', 'title': 'Square Seat | Quad Base', 'linkText': 'Customize starting at','originalPrice': '$168', 'discountPrice': '$134', hyperLink: 'https://insideweather.com/products/br12av11-latte-burnham-stool-in-fog'},{'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/17/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:LINEN%20WEAVE%20DIJON&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400', 'title': 'Round Seat | Tri Base', 'linkText': 'Customize starting at','originalPrice': '$168', 'discountPrice': '$134', hyperLink: 'https://insideweather.com/products/br10au11-latte-burnham-stool-in-dijon'}]" %}
+
+    {% assign isOriginalPrice = true %}
+    {% assign isDiscountPrice = true %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Start with a Silhouette"
+          section-description="Then choose between hundreds of colors & finishes to make it yours!"
+          :is-original-price="{{isOriginalPrice}}"
+          :is-discount-price="{{isDiscountPrice}}"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'true','objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/details/custom-upholstery/custom-upholstery_d.mp4', 'objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/details/custom-upholstery/custom-upholstery_m.mp4', 'title': 'Custom Upholstery','description': 'Grab a snack—you have 400+ fabric options to choose from, all hand-stitched here in the US. Play around and flip through all the colors and patterns! Once you’ve narrowed it down to your favs, order some swatches for that IRL buzz. Next thing you know you’ll be sitting plop right on top of your custom-made throne.'},{'isVideo':'false', 'objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/details/lifeproof/stools_lifeproof_d.jpg', 'objectUrlMob': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/details/lifeproof/stools_lifeproof_m.jpg', 'title': 'Life-Proof','description': 'These stools are designed to withstand whatever life throws at them. Choose from stain-resistant Performance Upholsteries, Pet-friendly possibilities, and even Commercial Grade selections to find one that’s tailored to comfort your needs (& potential mischief). P.S. Look out for stain test results & Wyzenbeek Fabric Rub Count Scores on each product page!'},{'isVideo':'true', 'objectUrl': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/details/versatile/versatile_d.mp4', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_lounge-chairs_details_03_m-min.jpg?1662188', 'title': 'Versatile Function','description': 'This versatile piece is a stunner no matter where you place it. The perfect way to add unique flair to your dining setting, a lovely sculptural addition to the living for additional seating, and the perfect sidekick for an entryway (and best greeting upon arrival of course).'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/sustainable_d_67fb9464-91da-401c-870a-9937d5becc17.jpg?v=1595288230', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/sustainable_m_26b81da5-15b8-4566-a244-18772ec25acf.jpg?v=1595288230', 'title': 'Sustainable Style','description': 'Every material that we use is selected with intention. Look out for certifications that meet the following standards: FSC, SFC, Oeko-Tex, & Bluesign. In our Crafthouse, we recycle any excess from each wood sheet we cut, in fact certain designs are even intended to absorb such “waste.” And as always, for every order placed with us one tree is planted via the National Forest Foundation.'}
+    ]" %}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details :product-details="{{productDetails}}"></category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}
+
+    <div class="categoryValuePropsWrapper">
+      <category-vprops
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_01.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:PEBBLE%20WEAVE%20AVOCCADO&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Avocado','price':'$848', 'productUrl':'https://insideweather.com/products/br10cr11-latte-burnham-stool-in-avocado'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_SLOAN/frames/1/CNV_SLOAN.JPG?background=FFFFFF&feature=BASE%20TYPES:BEVELED&feature=BASE%20FINISHES:LATTE&feature=HANDLES%20TYPES:CARVED&feature=HANDLE%20FINISH:LATTE&feature=PRIMARY%20SURFACE%20OPTION:LATTE&feature=BODY%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&size=400','title':'Latte Sloan Credenza in Latte Wood','price':'$848', 'productUrl':'https://insideweather.com/products/cr10aa1115-latte-sloan-credenza-in-latte-wood'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1310AS/WA1310AS-0_small.jpg','title':'Frond of You Art Print with Natural Frame (24\&#34; x 36\&#34;)','price':'$848', 'productUrl':'https://insideweather.com/products/wa1310as-frond-of-you-art-print-with-natural-frame-24-x-36'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_02.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:VEGAN%20LEATHER%20OAT&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Oat','price':'$208', 'productUrl':'https://insideweather.com/products/br13dl11-latte-burnham-stool-in-oat'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:DS1045&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE','title':'Espresso Burnham Stool in Usonia™ Design 705 Bermuda Sunrise','price':'$238', 'productUrl':'https://insideweather.com/products/br13ll10-espresso-burnham-stool-in-usonia-design-705-bermuda-sunrise'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S2E69C8E2/48S2E69C8E2-0_small.jpg','title':'Latte Square Dining Table in Latte Wood','price':'$408', 'productUrl':'https://insideweather.com/products/dt10fi15-latte-square-dining-table-in-latte-wood'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_CNS/frames/4/CNV_JORN_CNS.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20SETUP:SMALL-%20LARGE&feature=SHELF%20PATTERN:LATTE&size=400','title':'Latte Jorn Console','price':'$399', 'productUrl':'https://insideweather.com/products/jc1111fi-latte-jorn-console'}]}, 
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_03.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:VEGAN%20LEATHER%20OAT&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE&size=400','title':'Espresso Burnham Stool in Oat','price':'$238', 'productUrl':'https://insideweather.com/products/br13dl10-espresso-burnham-stool-in-oat'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:SQUARE&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:CROSS%20WEAVE%20AUBERGINE&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE&size=400','title':'Espresso Burnham Stool in Aubergine','price':'$198', 'productUrl':'https://insideweather.com/products/br12al10-espresso-burnham-stool-in-aubergine'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:LINEN%20WEAVE%20BLUE%20LAGOON&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Blue Lagoon','price':'$183', 'productUrl':'https://insideweather.com/products/br13at11-latte-burnham-stool-in-blue-lagoon'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:PEBBLE%20WEAVE%20AVOCCADO&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Avocado','price':'$183', 'productUrl':'https://insideweather.com/products/br11cr11-latte-burnham-stool-in-avocado'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S79B9ACBC/48S79B9ACBC-0_small.jpg','title':'Latte Round Dining Table in White Marble','price':'$408', 'productUrl':'https://insideweather.com/products/dt12ac10-latte-round-dining-table-in-white-marble'}]}, 
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_04.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:LINEN%20WEAVE%20BLUE%20LAGOON&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Blue Lagoon','price':'$183', 'productUrl':'https://insideweather.com/products/br13at11-latte-burnham-stool-in-blue-lagoon'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:DS1045&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE','title':'Espresso Burnham Stool in Usonia™ Design 705 Bermuda Sunrise','price':'$238', 'productUrl':'https://insideweather.com/products/br13ll10-espresso-burnham-stool-in-usonia-design-705-bermuda-sunrise'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_VOSS/frames/1/CNV_VOSS.JPG?background=FFFFFF&feature=BASE%20TYPES:BEVELED&feature=BASE%20FINISHES:LATTE&feature=HANDLE%20TYPES:BEAM&feature=HANDLE%20FINISH:METAL%20LEGS%20SILVER&feature=PRIMARY%20SURFACE%20OPTION:SOLID%20LAMINATE%20WHITE&feature=BODY%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=BACK%20PANEL:NO%20HOLES&size=400','title':'Latte Voss Sideboard in White','price':'$793', 'productUrl':'https://insideweather.com/products/sb10ac1015-latte-voss-sideboard-in-white'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S6261A431/48S6261A431-0_small.jpg','title':'Latte Round Dining Table in White','price':'$408', 'productUrl':'https://insideweather.com/products/dt12ad11-latte-round-dining-table-in-white'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_05.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:DS1048&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Usonia™ Design 706 Spanish Moss','price':'$208', 'productUrl':'https://insideweather.com/products/br10lo11-latte-burnham-stool-in-usonia-design-706-spanish-moss'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:DS1045&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE','title':'Espresso Burnham Stool in Usonia™ Design 705 Bermuda Sunrise','price':'$238', 'productUrl':'https://insideweather.com/products/br13ll10-espresso-burnham-stool-in-usonia-design-705-bermuda-sunrise'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:SQUARE&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:DS1036&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE&size=400','title':'Espresso Burnham Stool in Usonia™ Design 102 Retro Jungle','price':'$238', 'productUrl':'https://insideweather.com/products/br12lc10-espresso-burnham-stool-in-usonia-design-102-retro-jungle'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_06.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:LINEN%20WEAVE%20BLUE%20LAGOON&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Blue Lagoon','price':'$183', 'productUrl':'https://insideweather.com/products/br13at11-latte-burnham-stool-in-blue-lagoon'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:PEBBLE%20WEAVE%20AVOCCADO&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Avocado','price':'$183', 'productUrl':'https://insideweather.com/products/br11cr11-latte-burnham-stool-in-avocado'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_VOSS/frames/1/CNV_VOSS.JPG?background=FFFFFF&feature=BASE%20TYPES:BEVELED&feature=BASE%20FINISHES:LATTE&feature=HANDLE%20TYPES:BEAM&feature=HANDLE%20FINISH:METAL%20LEGS%20SILVER&feature=PRIMARY%20SURFACE%20OPTION:SOLID%20LAMINATE%20WHITE&feature=BODY%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=BACK%20PANEL:NO%20HOLES&size=400','title':'Latte Voss Sideboard in White','price':'$793', 'productUrl':'https://insideweather.com/products/sb10ac1015-latte-voss-sideboard-in-white'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S6261A431/48S6261A431-0_small.jpg','title':'Latte Round Dining Table in White','price':'$408', 'productUrl':'https://insideweather.com/products/dt12ad11-latte-round-dining-table-in-white'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AVA/frames/3/CNV_AVA.JPG?background=FFFFFF&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&feature=UPHOLSTERY:DS1095&size=400','title':'Latte Arcadia Lounge Chair in Custard Cream','price':'$848', 'productUrl':'https://insideweather.com/products/ar11nj-latte-arcadia-lounge-chair-in-custard-cream'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/AVA_OTT/frames/4/AVA_OTT.JPG?background=FFFFFF&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&feature=UPHOLSTERY:DS1095&size=400','title':'Latte Spring Ottoman in Custard Cream','price':'$258', 'productUrl':'https://insideweather.com/products/sp11nj-latte-spring-ottoman-in-custard-cream'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_FLW_HEX/frames/1/CNV_FLW_HEX.JPG?background=FFFFFF&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=EDGE%20FINISH:LATTE&feature=TOP%20SHELF:LIGHT%20ESPRESSO&feature=BOTTOM%20SHELF:LIGHT%20ESPRESSO&size=400','title':'Espresso Hanna Side Table','price':'$248', 'productUrl':'https://insideweather.com/products/hs11fyfy-espresso-hanna-side-table'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_07.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:VEGAN%20LEATHER%20OAT&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE&size=400','title':'Espresso Burnham Stool in Oat','price':'$238', 'productUrl':'https://insideweather.com/products/br13dl10-espresso-burnham-stool-in-oat'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_08.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:SQUARE&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:CROSS%20WEAVE%20AUBERGINE&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Aubergine','price':'$168', 'productUrl':'https://insideweather.com/products/br12al11-latte-burnham-stool-in-aubergine'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:PEBBLE%20WEAVE%20AVOCCADO&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Avocado','price':'$183', 'productUrl':'https://insideweather.com/products/br11cr11-latte-burnham-stool-in-avocado'}]}, 
+    
+    
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:LINEN%20WEAVE%20BLUE%20LAGOON&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AVA/frames/4/CNV_AVA.JPG?background=FFFFFF&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&feature=UPHOLSTERY:PEBBLE%20WEAVE%20SEASHELL&size=400','title':'Latte Burnham Stool in Blue Lagoon','price':'$183', 'productUrl':'https://insideweather.com/products/br13at11-latte-burnham-stool-in-blue-lagoon'}]}, 
+    
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat/stools/lifestyle-grid/3.0_cat_stools_lg_09.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:VEGAN%20LEATHER%20OAT&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400','title':'Latte Burnham Stool in Oat','price':'$208', 'productUrl':'https://insideweather.com/products/br13dl11-latte-burnham-stool-in-oat'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:TRIANGULAR&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:DS1045&feature=BASE%20FINISHES:LIGHT%20ESPRESSO&feature=EDGE%20FINISHES:LATTE','title':'Espresso Burnham Stool in Usonia™ Design 705 Bermuda Sunrise','price':'$238', 'productUrl':'https://insideweather.com/products/br13ll10-espresso-burnham-stool-in-usonia-design-705-bermuda-sunrise'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S2E69C8E2/48S2E69C8E2-0_small.jpg','title':'Latte Square Dining Table in Latte Wood','price':'$408', 'productUrl':'https://insideweather.com/products/dt10fi15-latte-square-dining-table-in-latte-wood'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get Inspired"
+        section-description="From the living room to the dining room, check out the Burnham Stool in action."
+        pop-up-heading="Get Inspired"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) {
+
+  $('.CategoryBanner--clasification .point').click(function(){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter",
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>
