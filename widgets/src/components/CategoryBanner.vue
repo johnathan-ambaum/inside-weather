@@ -257,7 +257,7 @@ export default {
       .CategoryBanner--imageWrapper {
         height: 0;
         overflow: hidden;
-        padding-bottom: 33.333%;
+        padding-bottom: 27.5%;
         position: relative;
         figure {
           position: absolute;
