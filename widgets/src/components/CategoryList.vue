@@ -18,10 +18,13 @@
           v-for="item in categoryListItems"
           :key="item.id"
         >
-          <img :src="item.image "/>
+          <a :href="item.link">
+            <img :src="item.image "/>
+          </a>
           <link-button
             :btnText="item.buttonText"
             :linkTo="item.link"
+            :categoryListItem="true"
           />
           <p v-if="item.desc">
             {{item.desc}}
@@ -48,7 +51,7 @@ export default {
     return {
       categoryListItems: this.listItems,
       sliderProps: {
-        items: 3,
+        items: 4,
         margin: 0,
         loop: false,
         nav: false,
@@ -56,7 +59,7 @@ export default {
         dots: false,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
-        responsive: {0:{loop: true, mouseDrag: true, touchDrag: true, pullDrag: true, items: 1, dots: true},768:{items: 3, loop: false, mouseDrag: false, touchDrag: false, pullDrag: false, dots: false}}
+        responsive: {0:{loop: true, mouseDrag: true, touchDrag: true, pullDrag: true, items: 1, dots: true},768:{items: 4, loop: false, mouseDrag: false, touchDrag: false, pullDrag: false, dots: false}}
       }
     }
   }
@@ -68,6 +71,14 @@ export default {
 @import '../scss/variables';
 @import '../scss/base-layout';
 
+@include at-query('min-width: 1599px') {
+  .category-list-container {
+    width: 100%;
+    max-width: calc(100vw - 408px);
+    margin: 0 auto;
+  }
+}
+
 .CategoryList {
   @include at-query('max-width: 640px') {
     margin: 0 -15px;
@@ -78,11 +89,11 @@ export default {
   ._category-lists {
     .category-list-item {
       width: 100%;
-      padding: 0 23px;
+      padding: 0 20px;
       text-align: center;
       
       img {
-        margin: 0 0 28.5px;
+        margin: 0 0 46px;
         @include block();
       }
     }
@@ -125,7 +136,6 @@ export default {
       }
     }
   }
-
   @include at-query('max-width: 767px') {
     .owl-carousel {
       padding: 0 75px;
@@ -146,5 +156,4 @@ export default {
     }
   }
 }
-
 </style>

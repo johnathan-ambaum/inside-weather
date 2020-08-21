@@ -15,6 +15,7 @@ export default {
   props: {
     btnText: String,
     linkTo: String,
+    categoryListItem: {type: Boolean, default: false},
     stroke: {type: String, default: 'normal'},
     fill: {type: Boolean, default: false},
     border: {type: Boolean, default: true},
@@ -26,7 +27,8 @@ export default {
         'linkButton--fill': this.fill,
         'linkButton--white': this.stroke === 'white',
         'linkButton--noBorder': !this.border,
-        'linkButton--noHover': !this.hoverAction
+        'linkButton--noHover': !this.hoverAction,
+        'category-list-item-btn': this.categoryListItem
       }
     }
   }
@@ -78,6 +80,11 @@ export default {
   &.linkButton--noHover {
     &::after {
       display: none;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 875px) {
+    &.category-list-item-btn {
+      width: 160px;
     }
   }
   @include at-query('max-width: 1199px') {
