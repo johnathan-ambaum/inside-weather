@@ -1,0 +1,154 @@
+<div id="app">
+  <div class="livingRoom">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = true %}
+    {% assign isScrollAnimationRequire = false %}
+    {% assign hasBannerContent = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/tb/cat_bedroom_tb_d.jpg', 'imageSm': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/tb/cat_bedroom_tb_m.jpg'}]}"%}
+    <category-banner
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-content="{{hasBannerContent}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_HB_KG/frames/1/ANA_HB_KG.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:5X5&feature=UPHOLSTERY:ELIOT%20SUNFLOWER&size=400', 'title': 'Headboards', 'linkText': 'Customize starting at $160', hyperLink: 'https://insideweather.com/pages/headboard'},
+
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/SH10AA/SH10AA-0_small.jpg', 'title': 'Bedding', 'linkText': 'Customize starting at $120', hyperLink: 'https://insideweather.com/pages/bed-sheets'},
+
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/MT10/MT10-0_small.jpg', 'title': 'The Hybrid Plush Cooling Mattress', 'linkText': 'Customize starting at $592', hyperLink: 'https://insideweather.com/pages/mattress'},
+    
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:ROYALE%20CLOUD&feature=BACK:ROYALE%20CLOUD&size=400', 'title': 'Accent Pillows', 'linkText': 'Customize starting at $19', hyperLink: 'https://insideweather.com/pages/pillows'},
+  
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_ST/frames/3/CNV_JORN_ST.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Bedside Tables', 'linkText': 'Customize starting at $98', hyperLink: 'https://insideweather.com/pages/side-tables'},
+    
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_SLOAN/frames/1/CNV_SLOAN.JPG?background=FFFFFF&feature=BASE%20TYPES:DOWEL&feature=BASE%20FINISHES:LATTE&feature=HANDLES%20TYPES:CARVED&feature=HANDLE%20FINISH:LATTE&feature=PRIMARY%20SURFACE%20OPTION:SOLID%20LAMINATE%20WHITE&feature=BODY%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&size=400', 'title': 'Credenzas', 'linkText': 'Customize starting at $518', hyperLink: 'https://insideweather.com/pages/credenzas'},
+    
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_VOSS/frames/1/CNV_VOSS.JPG?background=FFFFFF&feature=BASE%20TYPES:DOWEL&feature=BASE%20FINISHES:LATTE&feature=HANDLE%20TYPES:CARVED&feature=HANDLE%20FINISH:LATTE&feature=PRIMARY%20SURFACE%20OPTION:LATTE&feature=BODY%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=BACK%20PANEL:NO%20HOLES&size=400', 'title': 'Sideboards', 'linkText': 'Customize starting at $718', hyperLink: 'https://insideweather.com/pages/sideboards'},
+    
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_CNS/frames/4/CNV_JORN_CNS.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20SETUP:LARGE-LARGE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Consoles', 'linkText': 'Customize starting at $399', hyperLink: 'https://insideweather.com/pages/console'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/138SEA2E8F6A/138SEA2E8F6A-0_small.jpg', 'title': 'Armchairs', 'linkText': 'Customize starting at $399', hyperLink: 'https://insideweather.com/pages/armchairs'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/WA1013BD/WA1013BD-0_small.jpg', 'title': 'Wall Art', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/pages/wall-art'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/HD111B/HD111B-0_small.jpg', 'title': 'Decor', 'linkText': 'Customize starting at $29', hyperLink: 'https://insideweather.com/pages/decor-bedroom'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Bedroom"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_01.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196716,4196014,4028386,4196724,4028387,4196725&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Powder Pink (3 x 2)','price':'$365', 'productUrl':'https://insideweather.com/products/hq10dg-queen-oslo-headboard-in-powder-pink-3-x-2'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_02.jpg','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/SH13AC/SH13AC-0_small.jpg','title':'Queen Bamboo Twill Sheet Set in Sand','price':'$156', 'productUrl':'https://insideweather.com/products/sh13ac-queen-bamboo-twill-sheet-set-in-sand'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117E/HD117E-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Pink','price':'$29', 'productUrl':'https://insideweather.com/products/hd117e-mia-mug-wood-saucer-set-in-pink'}]}, 
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_03.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BK/WA1113BK-0_small.jpg','title':'Warm Convergence Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bk-warm-convergence-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BH/WA1113BH-0_small.jpg','title':'Cool Botanical Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bh-cool-botanical-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/WA1113BL/WA1113BL-0_small.jpg','title':'Venn Art Print with Whitewash Frame (16\&#34; x 20\&#34;)','price':'$63', 'productUrl':'https://insideweather.com/products/wa1113bl-venn-art-print-with-whitewash-frame-16-x-20'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]}, 
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_04.jpg','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/SH13AC/SH13AC-0_small.jpg','title':'Queen Bamboo Twill Sheet Set in Sand','price':'$156', 'productUrl':'https://insideweather.com/products/sh13ac-queen-bamboo-twill-sheet-set-in-sand'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/4/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:CROSS%20WEAVE%20YALE%20BLUE&feature=BACK:LINEN%20WEAVE%20BLUE%20LAGOON&size=400','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117E/HD117E-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Pink','price':'$29', 'productUrl':'https://insideweather.com/products/hd117e-mia-mug-wood-saucer-set-in-pink'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/4/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:LINEN%20WEAVE%20FOG&feature=BACK:OXFORD%20WEAVE%20GRAPHITE&size=400','title':'22\&#34; x 22\&#34; Accent Pillow (With Insert)','price':'$60', 'productUrl':'https://insideweather.com/products/pq16avcl-22-x-22-accent-pillow-with-insert'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_05.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_ST/frames/3/CNV_JORN_ST.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20PATTERN:DS1106','title':'Latte Jorn Side Table','price':'$268', 'productUrl':'https://insideweather.com/products/js11ke-latte-jorn-side-table'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196718,4196168,4028386,4196728,4028387,4196729&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117F/HD117F-0_small.jpg','title':'Mia Mug & Wood Saucer Set in White','price':'$29', 'productUrl':'https://insideweather.com/products/hd117f-mia-mug-wood-saucer-set-in-white'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_06.jpg','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/SH13AA/SH13AA-0_small.jpg','title':'Queen Bamboo Twill Sheet Set in White','price':'$156', 'productUrl':'https://insideweather.com/products/sh13aa-queen-bamboo-twill-sheet-set-in-white'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/2/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1096&feature=BACK:DS1094&size=400','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$64', 'productUrl':'https://insideweather.com/products/pq14nkni-20-x-20-accent-pillow-with-insert'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SD45ADC1D/47SD45ADC1D-0_small.jpg','title':'Latte Square Side Table in Latte Wood','price':'$118', 'productUrl':'https://insideweather.com/products/st10fi12-latte-square-side-table-in-latte-wood'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117E/HD117E-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Pink','price':'$29', 'productUrl':'https://insideweather.com/products/hd117e-mia-mug-wood-saucer-set-in-pink'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_07.jpg','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'}]},
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_08.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14773&scene=sku&features=4196717,4196075,4028386,4196726,4028387,4196727&frame=1&size=400&name=Headboard%20-%20Queen1&color=FFFFFF&format=JPG','title':'Queen Oslo Headboard in Powder Pink (3 x 3)','price':'$485', 'productUrl':'https://insideweather.com/products/hq11dg-queen-oslo-headboard-in-powder-pink-3-x-3'},{'productImage':'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099977,4100035,4100000,4100036,4100004,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG','title':'Latte Ido Side Table','price':'$298', 'productUrl':'https://insideweather.com/products/is10aaaaaaaa-latte-ido-side-table'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD114B/HD114B-0_small.jpg','title':'Digital Marble Alarm Clock in Black','price':'$39', 'productUrl':'https://insideweather.com/products/hd114b-digital-marble-alarm-clock-in-black'}]}, 
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_10.jpg','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/SH13AD/SH13AD-0_small.jpg','title':'Queen Bamboo Twill Sheet Set in Cocoa','price':'$156', 'productUrl':'https://insideweather.com/products/sh13ad-queen-bamboo-twill-sheet-set-in-cocoa'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SD45ADC1D/47SD45ADC1D-0_small.jpg','title':'Latte Square Side Table in Latte Wood','price':'$118', 'productUrl':'https://insideweather.com/products/st10fi12-latte-square-side-table-in-latte-wood'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117B/HD117B-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Blue','price':'$29', 'productUrl':'https://insideweather.com/products/hd117b-mia-mug-wood-saucer-set-in-blue'}]}, 
+    
+    
+    
+    {'image': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/bedroom/lifestyles/cat-room_bed_lg_09.jpg','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'}]}]"%}
+
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get Inspired"
+        section-description="Design the custom bedroom of your dreams."
+        pop-up-heading="Get Inspired"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) {
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter",
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+</script>

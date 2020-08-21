@@ -10,9 +10,9 @@
     :banner-content="{{bannerContent}}">
   </banner-carousel>
 
-  {% assign listItems= "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_1-min.jpg?1657935','buttonText':'Shop Living','link':'https://insideweather.com/pages/living-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_2-min.jpg?1657935','buttonText':'Shop Dining','link':'https://insideweather.com/pages/dining-room'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_cat_3-min.jpg?1657935','buttonText':'Shop Office','link':'https://insideweather.com/pages/office'}]"%}
+  {% assign listItems= "[{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_living.jpg','buttonText':'SHOP LIVING','link':'https://insideweather.com/pages/living-room'},{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_dining.jpg','buttonText':'SHOP DINING','link':'https://insideweather.com/pages/dining-room'},{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_office.jpg','buttonText':'SHOP OFFICE','link':'https://insideweather.com/pages/office'},{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_bed.jpg','buttonText':'SHOP BEDROOM','link':'https://insideweather.com/pages/bedroom'},]"%}
 
-  <div class="--custom-container category-list-container">
+  <div class="category-list-container">
     <category-list
       class="--pd-t-130 --pd-b-130"
       :list-items="{{listItems}}"
@@ -283,3 +283,4 @@
     jQuery(item).slideDown();
   }
 </script>
+
