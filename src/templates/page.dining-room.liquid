@@ -38,9 +38,11 @@
     
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_dining_col_v2_10.jpg?1661421', 'title': 'Credenzas', 'linkText': 'Customize starting at $518', hyperLink: 'https://insideweather.com/pages/credenzas'}]" %}
 
+    {% assign removeAnimation = true %}
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
+          :remove-animation="{{removeAnimation}}"
           :product-collections="{{productCollections}}"
           section-heading="Dining Room"
         >
@@ -118,11 +120,11 @@ jQuery(function ($) {
 
   const collectionTween = new TimelineLite()
   collectionTween.call(function () {
-    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+    $('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
         TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+        if($('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').length === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
       }, 200 * i);

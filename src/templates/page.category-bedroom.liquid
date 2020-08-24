@@ -51,9 +51,11 @@
     {'image': 'https://banksy-images.s3.amazonaws.com/items/HD106B4/HD106B4-0_small.jpg', 'title': 'Chet Wall Hook Set in Espresso, Mixed', 'linkText': '$29', hyperLink: 'https://insideweather.com/products/hd106b4-chet-wall-hook-set-in-espresso'}
     ]" %}
     {% assign collectionCustomImageStyle = true %}
+    {% assign removeAnimation = true %}
     <div class="productCollection">
       <div class="category-collection-main-wrapper">
         <category-collections
+          :remove-animation="{{removeAnimation}}"
           :product-collections="{{productCollections}}"
           :collection-custom-image-style="{{collectionCustomImageStyle}}"
           section-description="While furniture is our bread & butter, we all know that the right decor is the frosting on every room. In an effort to deliver you a complete custom home (w/sprinkles on top), we’ve partnered with various makers to present our first line of accessories! This curated selection brings modern design elements to a space in the home that demands thoughtful organization solutions in colors & finishes that bring you joy. Bon Appétit!"
@@ -101,11 +103,11 @@ jQuery(function ($) {
 
   const collectionTween = new TimelineLite()
   collectionTween.call(function () {
-    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+    $('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
         TweenMax.staggerFromTo(row, 0.6, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if(parseInt(($('.CtegoryCollections--itemWrapper li').length / 2)) === (i + 1)) {
+        if(parseInt(($('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').length / 2)) === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
       }, 100 * i);
