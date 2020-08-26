@@ -38,9 +38,11 @@
     
     {'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010CD/WA1010CD-0_small.jpg', 'title': 'Wall Art', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/pages/wall-art'}]"%}
 
+    {% assign removeAnimation = true %}
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
+          :remove-animation="{{removeAnimation}}"
           :product-collections="{{productCollections}}"
           section-heading="Office"
         >
@@ -134,11 +136,11 @@ jQuery(function ($) {
 
   const collectionTween = new TimelineLite()
   collectionTween.call(function () {
-    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+    $('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
         TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+        if($('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').length === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
       }, 200 * i);

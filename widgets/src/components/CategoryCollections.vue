@@ -23,11 +23,11 @@
       :class="catCollectionClasses"
     >
       <li
-        v-for="item in productCollections"
-        :key="item.id"
+        v-for="(item, index) in productCollections"
+        :key="item.key"
         class="categoryListItem"
-        :class="categoryCollectionsListItemClasses"
-      >
+        :class="categoryCollectionsListItemClasses(index)"
+        >
         <a :href="item.hyperLink">
           <figure
             :class="animationElementClass"
@@ -76,10 +76,38 @@ export default {
     sectionDescription: String,
     isScrollAnimationRequire: {type: Boolean, default: true},
     collectionCustomImageStyle:{type: Boolean, default: false},
+    removeAnimation:{type: Boolean, default: false},
     isWallArt: {type: Boolean, default: false},
     isWorkDesk: {type: Boolean, default: false},
     isOriginalPrice: {type: Boolean, default: false},
     isDiscountPrice: {type: Boolean, default: false}
+  },
+  data() {
+    return {
+      numberOfElements: Number
+    }
+  },
+  created: function () {
+    if (window.innerWidth >= 768) {
+      this.numberOfElements = 4;
+    } else {
+      this.numberOfElements = 2;
+    }
+  },
+  methods: {
+    categoryCollectionsListItemClasses: function (index) {
+      if(index < this.numberOfElements) {
+        return {
+          'removeAnimation': this.removeAnimation,
+          'onlythreecategories': this.isWorkDesk
+        }
+      } else {
+        return {
+          '': this.removeAnimation,
+          'onlythreecategories': this.isWorkDesk
+        };
+      }
+    }
   },
   computed: {
     animationElementClass() {
@@ -97,11 +125,6 @@ export default {
     customImageClass() {
       return {
         '--customImageStyle': this.collectionCustomImageStyle
-      }
-    },
-    categoryCollectionsListItemClasses() {
-      return {
-        'onlythreecategories': this.isWorkDesk
       }
     }
   },
@@ -142,6 +165,11 @@ export default {
     -webkit-box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
     &.onlythreecategories {
       flex-basis: 33.3%;
+    }
+    &.removeAnimation {
+      .--animElement {
+        opacity: 1;
+      }  
     }
     .--animElement {
       opacity: 0;
