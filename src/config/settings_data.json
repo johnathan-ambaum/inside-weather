@@ -848,10 +848,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#b1c8cd",
+          "background_color": "#e9cf9a",
           "font_color": "#ffffff",
-          "text": "<p>The NEW Jorn Collection, now <strong>20% OFF<\/strong>! Use code <strong>JUSTDROPPED<\/strong> at checkout<\/p>",
-          "mobile_text": "<p>The NEW Jorn Collection&nbsp;is <strong>20% OFF<\/strong>! Use code<strong> JUSTDROPPED<\/strong><\/p>"
+          "text": "<p><a href=\"\/pages\/2020-end-of-summer-sale\" title=\"2020 End of Summer Sale\">Exclusive&nbsp;Early Access to Labor Day Savings<\/a>&nbsp;|&nbsp;Up to&nbsp;<strong>20% OFF<\/strong>&nbsp;SITEWIDE<\/p>",
+          "mobile_text": "<p><a href=\"\/pages\/2020-end-of-summer-sale\" title=\"2020 End of Summer Sale\">Early Access to Labor Day Savings<\/a>&nbsp;|&nbsp;Up to&nbsp;<strong>20% OFF<\/strong>&nbsp;SITEWIDE<\/p>"
         }
       }
     },
