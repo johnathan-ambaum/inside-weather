@@ -297,6 +297,20 @@
           hideShippingStep();
           hideEmailProperties();
         });
+        // no po boxes allowed!!!!!
+        document.getElementsByTagName("form")[0].addEventListener('submit', function (e) {
+          var address1 = document.getElementById("checkout_shipping_address_address1")
+          var address2 = document.getElementById("checkout_shipping_address_address2")
+          if (address1.value.includes("PO Box")) {
+            e.preventDefault();
+            alert("NO");
+            setTimeout(function() {
+              document.getElementById("continue_button").classList.remove("btn--loading");
+              document.getElementById("continue_button").setAttribute("disabled", false)
+              document.getElementById("continue_button").setAttribute("aria-busy", false)
+            }, 200)
+          }
+        });
       })();
     </script>
   </body>
