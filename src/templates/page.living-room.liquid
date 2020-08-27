@@ -45,7 +45,7 @@
     {'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048626,4049038,4049236&frame=1&size=400&name=Throw%20Pillow32&color=FFFFFF&format=JPG', 'title': 'Accent Pillows', 'linkText': 'Customize starting at $19', hyperLink: 'https://insideweather.com/pages/pillows'},
     
     {'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BS/WA1010BS-0_small.jpg', 'title': 'Wall Art', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/pages/wall-art'}]" %}
-
+    
     {% assign removeAnimation = true %}
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
@@ -124,6 +124,7 @@ function fadeIn(a, t) {
 }
 
 jQuery(function ($) {
+
   fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
 
   const collectionTween = new TimelineLite()
@@ -135,7 +136,7 @@ jQuery(function ($) {
         if($('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').length === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
-      }, 200 * i);
+      }, 400 * i);
     });
   });
 
