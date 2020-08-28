@@ -1072,8 +1072,7 @@
 }
 @media only screen and (min-width: 1201px) {
 .InfoPopup__Dialog--AlwaysOnTop {
-    left: auto;
-    right: -60px;
+    left: 0;
 }
 }
 .InfoPopup__Dialog::after, .InfoPopup__Dialog::before {
@@ -1109,8 +1108,7 @@
 }
 @media only screen and (min-width: 1201px) {
 .InfoPopup__Dialog--AlwaysOnTop::after, .InfoPopup__Dialog--AlwaysOnTop::before {
-    left: auto;
-    right: 70px;
+    left: 69px;
 }
 }
 .InfoPopup__Dialog::after {
@@ -1155,7 +1153,7 @@
 }
 @media only screen and (min-width: 1025px) {
 .InfoPopup__Dialog--AlwaysOnTop::before {
-    right: 69px;
+    left: 69px;
 }
 }
 .InfoPopup__Dialog p {
