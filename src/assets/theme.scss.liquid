@@ -245,6 +245,8 @@ $gutter: 40px;
 
 $page-width: 1300px;
 
+$main-breakpoint: 1145px;
+
 $input-radius: 0;
 
 $page-width-gutter-small: 20px;
@@ -619,7 +621,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 .hide--small {
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: $main-breakpoint) {
     display: none;
   }
 }
@@ -6702,7 +6704,7 @@ a.pswp__share--download:hover {
   background: none;
   margin: 0; }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: $main-breakpoint) {
   .pswp__preloader {
     position: relative;
     left: auto;
@@ -10786,9 +10788,7 @@ div[data-section-type="fading-images"] {
   }
 }
 .ProductDetail-information-tabs__bg{
-  height:294px;
-  background-color:#F2F4F4;
-  overflow:auto;
+  background-color: #F2F4F4;
 
   .ProductDetail-information-tabs__tab{
     .ProductDetail-information-tabs__images-tab{
@@ -10797,8 +10797,6 @@ div[data-section-type="fading-images"] {
     }
     img{
       display:block;
-      height:180px;
-      width:auto;
       margin:56px 25px;
     }
     p{
@@ -10809,8 +10807,9 @@ div[data-section-type="fading-images"] {
       line-height: 22px;
       text-align: center;
       color:#202020;
-      width:50%;
-      margin: 78px auto 0 auto;
+      padding: 5%;
+      width: 50%;
+      margin: 0 auto;
     }
   }
 }
@@ -11308,7 +11307,7 @@ div[data-section-type="fading-images"] {
   font-weight:600;
 
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: $main-breakpoint) {
   .product-customizer-modal__inner {
     margin: 13vh 20px;
     padding: 42px 38px;
@@ -11334,7 +11333,7 @@ html body.MobileNav--Active {
   overflow: hidden !important;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: $main-breakpoint) {
   body:not(.template-index) main {
     margin-top: 122px;
   }
@@ -11379,7 +11378,7 @@ html body.MobileNav--Active {
     background: #ffffff;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     background: #fff;
   }
 
@@ -11395,7 +11394,7 @@ html body.MobileNav--Active {
     color: #000;
   }
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: $main-breakpoint) {
     .template-index & a {
       color: #ffffff;
       -webkit-transition: color .3s ease-out;
@@ -11410,7 +11409,7 @@ html body.MobileNav--Active {
     color:#000;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     padding: 0;
   }
 
@@ -11424,7 +11423,7 @@ html body.MobileNav--Active {
     height: 70px;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     height: 70px;
   }
 
@@ -11437,7 +11436,7 @@ html body.MobileNav--Active {
     }
   }
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: $main-breakpoint) {
     .template-index & .MainNav__Logo {
       -webkit-filter: brightness(100);
               filter: brightness(100);
@@ -11464,7 +11463,7 @@ html body.MobileNav--Active {
   visibility: hidden;
   z-index: 900;
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: $main-breakpoint) {
     .MainNav--Active & {
       background: #202020;
       opacity: .65;
@@ -11483,7 +11482,7 @@ html body.MobileNav--Active {
     top:70px;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     top: 102px;
   }
 }
@@ -11506,7 +11505,7 @@ html body.MobileNav--Active {
       -ms-flex-pack: start;
           justify-content: flex-start;
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     -webkit-box-ordinal-group: 1;
         -ms-flex-order: 0;
             order: 0;
@@ -11519,11 +11518,10 @@ html body.MobileNav--Active {
           justify-content: center;
   margin-right: 20px;
   -webkit-box-flex: 0;
-  flex-shrink: 1;
   -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     margin-right: 0;
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
@@ -11531,7 +11529,8 @@ html body.MobileNav--Active {
   }
 
   img {
-    max-height: 26px;
+    // max-height: 26px;
+    width: 148px;
   }
 
   h1 {
@@ -11547,7 +11546,7 @@ html body.MobileNav--Active {
       -ms-flex-pack: end;
           justify-content: flex-end;
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     -webkit-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2;
@@ -12012,7 +12011,7 @@ a.Dropdown__Content__Link.has-hover span {
     }
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     &.MobileNav--Toggler button {
         font-size: 1.5rem;
     }
@@ -12044,7 +12043,7 @@ a.Dropdown__Content__Link.has-hover span {
   text-transform: uppercase;
   overflow: auto;
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: $main-breakpoint) {
     top: 102px;
 
     .MobileNav--Active & {
@@ -12056,7 +12055,7 @@ a.Dropdown__Content__Link.has-hover span {
     top:102px;
   }
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: $main-breakpoint) {
     display: none !important;
   }
 
@@ -12268,7 +12267,7 @@ a.Dropdown__Content__Link.has-hover span {
   }
 }
 
-@media screen and (max-width: 1023px)  {
+@media screen and (max-width: $main-breakpoint)  {
   .MobileNav--Toggler {
     display:block;
   }
@@ -12323,7 +12322,7 @@ a.Dropdown__Content__Link.has-hover span {
   top: 0;
   left: 0;
   width: 100%;
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: $main-breakpoint) {
     top: -1px;
     left: 0px;
   }
@@ -12363,7 +12362,7 @@ a.Dropdown__Content__Link.has-hover span {
     text-decoration: underline;
   }
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: $main-breakpoint) {
     font-size: 13px;
   }
 }
