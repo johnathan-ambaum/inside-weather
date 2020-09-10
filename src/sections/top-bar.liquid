@@ -8,7 +8,45 @@
 <div class="TopBar">
   <span class="hide--small">{{ section.settings.text }}</span>
   <span class="hide--large">{{ section.settings.mobile_text }}</span>
+  {% if section.settings.promo_countdown_enabled %}
+  <span id="TopBar__countdown"></span>
+  {% endif %}
 </div>
+
+{% if section.settings.promo_countdown_enabled %}
+<script type="text/javascript">
+  var end = new Date('{{ section.settings.promo_countdown_end_date }}');
+  
+  var _second = 1000;
+  var _minute = _second * 60;
+  var _hour = _minute * 60;
+  var _day = _hour * 24;
+  var timer;
+  
+  var endDate = document.getElementById('TopBar__countdown');
+  
+  function showRemaining() {
+      var now = new Date();
+      var distance = end - now;
+      if (distance < 0) {
+          clearInterval(timer);
+          endDate.innerHTML = 'TIME IS UP';
+          return;
+      }
+      var days = Math.floor(distance / _day);
+      var hours = Math.floor((distance % _day) / _hour);
+      var minutes = Math.floor((distance % _hour) / _minute);
+      var seconds = Math.floor((distance % _minute) / _second);
+  
+      endDate.innerHTML = days + ' : ';
+      endDate.innerHTML += hours + ' : ';
+      endDate.innerHTML += minutes + ' : ';
+      endDate.innerHTML += seconds;
+  }
+  
+  timer = setInterval(showRemaining, 1000);
+  </script>
+{% endif %}
 
 {% schema %}
   {
@@ -37,6 +75,18 @@
         "type": "richtext",
         "label": "Text (mobile)",
         "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
+      },
+      {
+        "id": "promo_countdown_enabled",
+        "type": "checkbox",
+        "label": "Enable promo countdown?",
+        "default": false
+      },
+      {
+        "id": "promo_countdown_end_date",
+        "type": "text",
+        "label": "Pick Date for promo to end",
+        "default": "hi"
       }
     ]
   }
