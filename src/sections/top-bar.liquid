@@ -9,7 +9,7 @@
   {% assign topBars = section.settings.text_range %}
   {% for i in (1..topBars) %}
   {% capture textIndex %}text_{{ i }}{% endcapture %}
-    <div class="TopBar__bar TopBar-{{i}} {% if section.settings.text_range == 1%}active-bar{% endif %}">
+    <div class="TopBar__bar TopBar-{{i}} {% if section.settings.text_range == 1 or forloop.index == 1%}active-bar{% endif %}">
       <span class="hide--small">{{ section.settings[textIndex] }}</span>
       <span class="hide--large">{{ section.settings.mobile_[textIndex] }}</span>
       {% if section.settings.promo_countdown_enabled %}
