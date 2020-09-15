@@ -6,17 +6,23 @@
 </style>
 
 <div class="TopBar">
-  <span class="hide--small">{{ section.settings.text }}</span>
-  <span class="hide--large">{{ section.settings.mobile_text }}</span>
-  {% if section.settings.promo_countdown_enabled %}
-  <span id="TopBar__countdown"></span>
-  {% endif %}
+  {% assign topBars = section.settings.text_range %}
+  {% for i in (1..topBars) %}
+  {% capture textIndex %}text_{{ i }}{% endcapture %}
+    <div class="TopBar-{{i}}">
+      <span class="hide--small">{{ section.settings[textIndex] }}</span>
+      <span class="hide--large">{{ section.settings.mobile_[textIndex] }}</span>
+      {% if section.settings.promo_countdown_enabled %}
+        <span id="TopBar__countdown"></span>
+      {% endif %}
+    </div>
+  {% endfor %}
 </div>
 
 {% if section.settings.promo_countdown_enabled %}
 <script type="text/javascript">
   var end = new Date('{{ section.settings.promo_countdown_end_date }}');
-  
+
   var _second = 1000;
   var _minute = _second * 60;
   var _hour = _minute * 60;
@@ -65,15 +71,48 @@
         "default": "#202020"
       },
       {
-        "id": "text",
+        "id": "text_range",
+        "type": "range",
+        "label": "How many top bars should be shown on site?",
+        "default": 1,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },
+      {
+        "id": "text_1",
         "type": "richtext",
-        "label": "Text",
+        "label": "First Text",
         "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
       },
       {
-        "id": "mobile_text",
+        "id": "mobile_text_1",
         "type": "richtext",
-        "label": "Text (mobile)",
+        "label": "First Text (mobile)",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
+      },
+      {
+        "id": "text_2",
+        "type": "richtext",
+        "label": "Second Text",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
+      },
+      {
+        "id": "mobile_text_2",
+        "type": "richtext",
+        "label": "Second Text (mobile)",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
+      },
+      {
+        "id": "text_3",
+        "type": "richtext",
+        "label": "Third Text",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
+      },
+      {
+        "id": "mobile_text_3",
+        "type": "richtext",
+        "label": "Third Text (mobile)",
         "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
       },
       {
