@@ -28,6 +28,7 @@
 <script>
   let topBars = document.querySelectorAll(".TopBar__bar");
   let activeBarIndex = 0;
+  let topBarSpeed = {{ section.settings.text_range_speed | times: 1000 }}
   function cycleBars() {
     topBars[activeBarIndex].classList.remove('active-bar');
     ++activeBarIndex;
@@ -38,7 +39,7 @@
   }
 
   if (topBars.length > 1) {
-    setInterval(cycleBars, 5000);
+    setInterval(cycleBars, topBarSpeed);
   }
 </script>
 
@@ -100,6 +101,15 @@
         "default": 1,
         "min": 1,
         "max": 3,
+        "step": 1
+      },
+      {
+        "id": "text_range_speed",
+        "type": "range",
+        "label": "How fast should the speed be between bars (in seconds)",
+        "default": 5,
+        "min": 3,
+        "max": 30,
         "step": 1
       },
       {
