@@ -95,7 +95,7 @@
         :accordionTriggerElement="accItem.accordionTarget"
         :anchorTageRequire="anchorTageRequire"
       />
-    </div>
+    </div>    
   </div>  
 </template>
 
@@ -207,7 +207,7 @@ export default {
         @include block(100%);
       }
       @include at-query('min-width: 1601px'){
-        height: 768px;
+        height: 660px;
       }
     }
     .CategoryBanner--content {
@@ -218,7 +218,7 @@ export default {
       position: absolute;
       left: 0;
       right: 0;
-      top: 36px;
+      top: 35px;
       margin: 0 auto;
       z-index: 8;
 
@@ -231,26 +231,30 @@ export default {
         font-family: $font-stack-avalon;
         font-weight: $demi;
         text-align: center;
-        margin: 0 0 7px;
-        @include fonts(37px,#202020,1,0.05em);
+        font-weight: 600;
+        margin: 0 0 18px;
+        @include fonts(45px,#202020,1,0.05em);
       }
       p {
         display: block;
-        font-family: $font-stack-roboto;
+        max-width: 650px;
+        font-family: $font-stack-avalon;
         font-weight: 500;
-        margin: 0 0 12px;
+        margin: 0 0 28px;
         text-align: center;
-        @include fonts(15px,#202020,1.46,0.035em);
+        @include fonts(15px,#202020,1.46,0.05em);
       }
       a {
-        border-bottom: 1px solid;
         box-shadow: none;
         display: inline-block;
         font-family: $font-stack-avalon;
         font-weight: 500;
         outline: none;
         text-decoration: none;
-        @include fonts(14px,#202020,1.21,0.12em);
+        text-transform: uppercase;
+        background-color: black;
+        padding: 18px 72px;
+        @include fonts(14px,#ffffff,1.21,0.12em);
       }
     }
     &.--simpleBanner {
@@ -266,6 +270,10 @@ export default {
           top: 0;
           bottom: 0;
           margin: auto;
+        }
+      
+        &.is-category-page {
+          padding-bottom: 34.4%;
         }
       }
     }
@@ -314,17 +322,20 @@ export default {
     .CategoryBanner--items {
       .CategoryBanner--content {
         h2 {
-          font-size: 30px;
+          font-size: 34px;
+          margin: 0 0 12px;
         }
         p {
-          font-size: 14px;
+          font-size: 13px;
+          margin: 0 0 18px;
         }
         a {
-          font-size: 13px;
+          font-size: 14px;
+          padding: 18px 45px;
         }
       }
       .CategoryBanner--imageWrapper {
-        height: 500px;
+        height: 448px;
       }
     }
   }
@@ -409,17 +420,25 @@ export default {
   @include at-query('max-width: 767px') {
     .CategoryBanner--items .CategoryBanner--content {
       max-width: 75%;
+      height: calc(100% - 35px);
       h2 {
         font-size: 28px;
       }
       p {
         font-size: 11px;
       }
+      .CarouselBannerAction {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        right: 0;
+      }
     }
   }
   @include at-query('max-width: 640px') {
     .CategoryBanner--items .CategoryBanner--content {
       max-width: 90%;
+      // padding: 0 75px;
     }
     .CategoryBanner--items .CategoryBanner--imageWrapper {
       height: calc(100vh - 220px);

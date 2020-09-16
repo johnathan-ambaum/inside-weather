@@ -74,6 +74,22 @@ html, body {
   }
 }
 
+.--pd-t-110 {
+
+  @include at-query('max-width: 767px') {  
+    padding-top: 50px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-top: 70px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-top: 90px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-top: 110px;
+  }
+}
+
 .--pd-b-130 {
 
   @include at-query('max-width: 767px') {  

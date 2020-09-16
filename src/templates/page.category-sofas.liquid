@@ -1,17 +1,20 @@
 <div id="app">
   <div class="categorySofas">
     {% assign hideDesktopSlider = true %}
-    {% assign hideMobileSlider = false %}
-    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_00-min.jpg?1661458', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_00-min.jpg?1661465','heading':'Sofas','description':'Start with a silhouette and customize every detail to make it your own.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_01-min.jpg?1661458', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_01-min.jpg?1661465','heading':'Arm Style','description':'Everything from tall & thin, to short & stout. Select from 10+ styles.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'arm-style'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_02-min.jpg?1661458','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_02-min.jpg?1661465','heading':'Upholstery','description':'Where nice colors and fine textures come to party. 45+ Options to explore.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'upholstery'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_03-min.jpg?1661458', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_03-min.jpg?1661465','heading':'Pillow & Cushion Shape','description':'Choose either Plush or Snug and give your sofa the perfect sit.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'pillow-cushion-shape'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_04-min.jpg?1661458','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_04-min.jpg?1661465','heading':'Configuration','description':'Design any combination of split and 3-seater cushion options.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'configuration'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_05-min.jpg?1664672', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_05-min.jpg?1664672','heading':'Pillow Detail','description':'Button ‘em, tuft ‘em, stitch ‘em, or leave ‘em bare: anything goes.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'pillow-detail'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_06-min.jpg?1664672','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_06-min.jpg?1664672','heading':'Cushion Detail','description':'Tuft ‘em, stitch ‘em, or leave ‘em bare: whatever you want.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'cushion-detail'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_d_07-min.jpg?1661458','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_tb_m_07-min.jpg?1661465','heading':'Base Style','description':'From Retro to this-century modern, choose the base that fits your style.','linkText':'Customize now','url':'https://insideweather.com/products/sf15ap1113131014-pebble-weave-levi-sofa-in-poppy-orange', dataSource: 'base-style'}]}"%}
-
-    {% assign categoryBannerAccordion = "[{'accordionHead': 'Arm Style', 'accordionDescription': 'Everything from tall & thin, to short & stout. Select from 10+ styles.', 'accordionTarget': 'arm-style'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Where nice colors and fine textures come to party. 45+ Options to explore.', 'accordionTarget': 'upholstery'}, {'accordionHead': 'Pillow & Cushion Shape', 'accordionDescription': 'Choose either Plush or Snug and give your sofa the perfect sit.', 'accordionTarget': 'pillow-cushion-shape'},{'accordionHead': 'Configuration', 'accordionDescription': 'Design any combination of split and 3-seater cushion options.', 'accordionTarget': 'configuration'},{'accordionHead': 'Pillow Detail', 'accordionDescription': 'Button ‘em, tuft ‘em, stitch ‘em, or leave ‘em bare: anything goes.', 'accordionTarget': 'pillow-detail'}, {'accordionHead': 'Cushion Detail', 'accordionDescription': 'Tuft ‘em, stitch ‘em, or leave ‘em bare: whatever you want.', 'accordionTarget': 'cushion-detail'}, {'accordionHead': 'Base Style', 'accordionDescription': 'From Retro to this-century modern, choose the base that fits your style.', 'accordionTarget': 'base-style'}]" %}
+    {% assign hideMobileSlider = true %}
+    {% assign hasBannerContent = true %}
+    {% assign bannerContent = "{'items':[{'image':'http://cdn.insideweather.com/cat/sofa-line/tb/cat_sofa_tb_d_v2.jpg', 'imageSm': 'http://cdn.insideweather.com/cat/sofa-line/tb/cat_sofa_tb_m_v2.jpg','heading':'CUSTOM SOFAS','description':'Made-to-order sustainably, quickly custom-built from scratch here in the U.S., and ships free to you in a manageable box.','linkText':'Customize now','url':'https://insideweather.com/products/sf17an101010171010-custom-issa-sofa-in-cloud'}]}"%}
 
     <category-banner 
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
-      :category-banner-accordion="{{categoryBannerAccordion}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-content="{{hasBannerContent}}"
+
       >
     </category-banner>
+
+    <hiw-props></hiw-props>
 
     {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_01.jpg?1661503', 'title': 'Issa Sofa', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/products/sf18bd1110101019-pebble-weave-issa-sofa-in-heathered-slate'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_02.jpg?1661503', 'title': 'Levi Sofa', 'linkText': 'Customize starting at $1,148', hyperLink: 'https://insideweather.com/products/sf15bc1113101017-pebble-weave-levi-sofa-in-heathered-taupe'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_03.jpg?1661503', 'title': 'Powell Sofa', 'linkText': 'Customize starting at $998', hyperLink: 'https://insideweather.com/products/sf12ar1110101013-oxford-weave-powell-sofa-in-pebble'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_04.jpg?1661503', 'title': 'Brooklyn Sofa', 'linkText': 'Customize starting at $998', hyperLink: 'https://insideweather.com/products/sf19bl1110101010-cross-weave-brooklyn-sofa-in-cloud'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_05.jpg?1661503', 'title': 'Asher Sofa', 'linkText': 'Customize starting at $1,298', hyperLink: 'https://insideweather.com/products/sf22bd1113101014-pebble-weave-asher-sofa-in-heathered-slate'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_06.jpg?1661503', 'title': 'Nox Sofa', 'linkText': 'Customize starting at $998', hyperLink: 'https://insideweather.com/products/sf13bc1112101021-pebble-weave-nox-sofa-in-heathered-taupe'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_07.jpg?1661503', 'title': 'Jett Sofa', 'linkText': 'Customize starting at $1,248', hyperLink: 'https://insideweather.com/products/sf17ar1113101015-oxford-weave-jett-sofa-in-pebble'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa_col_08.jpg?1661503', 'title': 'Milo Sofa', 'linkText': 'Customize starting at $1,048', hyperLink: 'https://insideweather.com/products/sf14bl1111101023-cross-weave-milo-sofa-in-cloud'}]" %}
 
@@ -23,6 +26,34 @@
           section-description="Choose your favorite collection and make it your own."
         >
         </category-collections>
+      </div>
+    </div>
+
+    {% assign listItems = "[{'image':'http://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_m_01.png'},{'image':'http://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_m_02.png'}]"%}
+    
+    <div class="customizable-category --pd-t-110">
+      <div class="customizable-wrapper">
+        <customizable-category
+          :list-items="{{listItems}}"
+          desktop-image="http://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_d_01.png"
+          section-heading="The Most Customizable Sofa on the Internet"
+          section-description="When we say custom, we mean it. Explore all the ways in which you can manipulate our sofa to make it truly yours. Each one is made to order—per your specs—at our California Crafthouse and ships FREE to your doorstep months faster than any other &ldquo;custom&rdquo; maker out there."
+        >
+        </customizable-category>
+      </div>
+    </div>
+
+
+    {% assign options = "[{'dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_m.png','heading': 'CLASSIC BLEND','desc': 'Supportive Comfort | Firm yet cushy sit','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_01.png','description': 'A medium density, high resilience foam topped with a plush layer of our signature, 100% ,recycled down alternative. The perfect balance of support, squish and a little bit of bounce.'},{'dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_m.png','heading': 'MEMORY FOAM BLEND','desc': 'Sink-in Comfort | Plush contouring layers','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_02.png','description': 'A smooth, transitional layer of temperature-regulating memory foam sits atop medium density, high resiliency foam and is wrapped in a lush layer of our sustainable, recycled down alternative.'}]"%}
+    
+    <div class="custom-comfort-detail-category --pd-t-110">
+      <div class="custom-comfort-wrapper">
+        <custom-comfort
+          :options="{{options}}"
+          section-heading="Custom Comfort"
+          section-description="We believe that one size does not fit all which is why we've decided to hand over all comfort control to you—the actual sofa snuggler. Choose between various layers of domestically sourced insert options to find the custom formula that's truly right for you."
+        >
+        </custom-comfort>
       </div>
     </div>
 

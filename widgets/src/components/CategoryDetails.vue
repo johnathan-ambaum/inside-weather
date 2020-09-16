@@ -13,6 +13,7 @@
           (isMattress && index == 4) ? 'mattressfifthDetailSection' : ' ',
         ]" 
       >
+        
         <div 
           v-if="isMattress && index == 2"
           class="number-details-section"
