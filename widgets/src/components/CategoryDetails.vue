@@ -139,7 +139,7 @@ export default {
     .detail-img {
 			figure.descImg {
 				margin-top: 6px;
-				padding-bottom: 40  %;
+				padding-bottom: 40%;
 			}
 		}
     figure {
