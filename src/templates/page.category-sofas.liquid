@@ -31,10 +31,11 @@
 
     {% assign listItems = "[{'image':'http://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_m_01.png'},{'image':'http://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_m_02.png'}]"%}
     
-    <div class="customizable-category --pd-t-110">
-      <div class="customizable-wrapper">
+    <div class="customizable-category --pd-t-110 --pd-b-130">
+      <div class="customizable-wrapper" style="background-color: #BFD4D7">
         <customizable-category
           :list-items="{{listItems}}"
+          destination-url="https://insideweather.com/products/sf17an101010171010-custom-issa-sofa-in-cloud"
           desktop-image="http://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_d_01.png"
           section-heading="The Most Customizable Sofa on the Internet"
           section-description="When we say custom, we mean it. Explore all the ways in which you can manipulate our sofa to make it truly yours. Each one is made to order—per your specs—at our California Crafthouse and ships FREE to your doorstep months faster than any other &ldquo;custom&rdquo; maker out there."
@@ -44,9 +45,33 @@
     </div>
 
 
-    {% assign options = "[{'dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_m.png','heading': 'CLASSIC BLEND','desc': 'Supportive Comfort | Firm yet cushy sit','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_01.png','description': 'A medium density, high resilience foam topped with a plush layer of our signature, 100% ,recycled down alternative. The perfect balance of support, squish and a little bit of bounce.'},{'dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_m.png','heading': 'MEMORY FOAM BLEND','desc': 'Sink-in Comfort | Plush contouring layers','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_02.png','description': 'A smooth, transitional layer of temperature-regulating memory foam sits atop medium density, high resiliency foam and is wrapped in a lush layer of our sustainable, recycled down alternative.'}]"%}
-    
-    <div class="custom-comfort-detail-category --pd-t-110">
+    {% assign options = "[{'index': '1','dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_m.png','heading': 'CLASSIC BLEND','desc': 'Supportive Comfort | Firm yet cushy sit','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_01.png','description': 'A medium density, high resilience foam topped with a plush layer of our signature, 100% ,recycled down alternative. The perfect balance of support, squish and a little bit of bounce.'},{'index': '2','dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_m.png','heading': 'MEMORY FOAM BLEND','desc': 'Sink-in Comfort | Plush contouring layers','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_02.png','description': 'A smooth, transitional layer of temperature-regulating memory foam sits atop medium density, high resiliency foam and is wrapped in a lush layer of our sustainable, recycled down alternative.'}]"%}
+
+    {% assign categoryDetails = "[{'isVideo':'true','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery_d.mp4', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery_m.mp4', 'title': 'Upholsteries Galore','description': 'The mecca of fabric libraries if you will. Choose from 100+ choices than span the rainbow, all of which are hand-stitched here in California. We’re talkin’ stain-resistant Performance Upholsteries, Pet-friendly possibilities, and even Commercial Grade selections so find one that’s truly tailored to comfort your needs (& potential mischief). Your match is here, you just have to find it!'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = true %}
+
+    <div class="categoryDetails">
+      <category-detail 
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        desktop-image="http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_d.png"
+        mobile-image="http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_m.png"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_d.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_m.jpg', 'title': 'The Life-Proof Sofa','description': 'Our sofas are designed to withstand whatever life throws at them. All upholstered components of each sofa frame are enclosed in a water-resistant nylon casing for the ultimate protection against, well, you. This means even the back panel, the arms, and—of course—the pillows & cushions have this added layer of protection. Additionally, every cushion & pillow features a concealed zipper for easy, practical removal & cleaning. P.S. For fabric specific info on durability, check out Wyzenbeek Test Method Rub Count Scores on each product page!'}]" %}
+    {% assign isReverse = true %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail 
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    <div class="custom-comfort-detail-category --pd-t-110 --pd-b-110">
       <div class="custom-comfort-wrapper">
         <custom-comfort
           :options="{{options}}"
@@ -57,10 +82,15 @@
       </div>
     </div>
 
-    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_01_d.jpg?1661520', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_01_m.jpg?1661520', 'title': 'Custom Upholstery','description': 'Play around and flip through all the colors and textures! When you’ve narrowed it down to your favs, order some free swatches for that IRL buzz. Next thing you know you’ll be sitting pretty on top of your custom made throne.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_02_d.jpg?1661520', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_02_m.jpg?1661520', 'title': 'Life-Proof','description': 'Our sofas are designed to withstand whatever life throws at them. Like to eat on the couch? No problem, our fabrics are easy to clean. Have a fuzzy friend? No worries, they’re pet-friendly too! And if you have to move? Sofas can be put together, and taken apart with ease.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_03_d.mp4?1664668', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_03_m.mp4?1661520', 'title': 'The Composition of Comfort','description': 'After extensive research & user testing we’ve perfected a combination that yields the perfect balance of support, squish and a little bit of bounce. Our domestically sourced, medium density, high resilience foam cushions are topped with a plush layer of our signature, 100% recycled down alternative topper. Recycled? Oh yes. This synthetic down upcycles hundreds of plastic water bottles to add that cloud-like touch to your lounging experience. For reference, just one of our sofas contains over 200 upcycled plastic bottles.'},]" %}
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_d.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_m.jpg', 'title': 'The Sofa of 200 Plastic Bottles','description': 'Every upholstered portion of our sofa (yes, even the back) is wrapped in a layer of our Signature Synthetic Down and the pillows are full of it. This cushy, cloud-like material is 100% recycled down alternative and one sofa = roughly 200 recycled plastic bottles. The disposable bottles that we upcycle are sterilized in hot water, ground into tiny flakes, re-melted and extruded to make a polyester fiber. This material helps keep plastics out of our landfills & oceans and helps fill your home with comfortable, sustainable products as we believe both Mother Earth and your comfort are both uncompromisable.'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = false %}
 
-    <div class="productDetails --pd-t-130 --pd-b-130">
-      <category-details :product-details="{{productDetails}}"></category-details>
+    <div class="categoryDetails --pd-b-110">
+      <category-detail 
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
     </div>
 
     {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}

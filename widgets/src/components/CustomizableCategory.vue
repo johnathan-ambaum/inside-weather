@@ -10,9 +10,11 @@
         </p>
       </heading-with-description>
 			<div class="image-wrapper --show-in-desktop">
-				<figure>
-					<img :src="desktopImage"/>
-				</figure>
+				<a :href="destinationUrl">
+					<figure>
+						<img :src="desktopImage"/>
+					</figure>
+				</a>
 			</div>
 			<div class="image-wrapper --show-in-mobile">
 				<slider 
@@ -32,14 +34,15 @@
 						v-for="item in categoryListItems"
 						:key="item.id"
 					>
-						<figure>
-							<img :src="item.image "/>
-						</figure>
+						<a :href="destinationUrl">
+							<figure>
+								<img :src="item.image "/>
+							</figure>
+						</a>
 					</div>
 				</slider>
 			</div>
 		</div>
-		
 	</div>
 </template>
 
@@ -56,7 +59,8 @@ export default {
     sectionHeading: String,
 		sectionDescription: String,
 		desktopImage: String,
-		listItems: Array
+		listItems: Array,
+		destinationUrl: String
 	},
 	data() {
     return {
@@ -86,6 +90,10 @@ export default {
 		@include at-query('max-width: 768px') {
 			display: none;
 		}
+		&.image-wrapper {
+			display: flex;
+			justify-content: center;
+		}
 	}
 	
 	.--show-in-mobile {
@@ -95,7 +103,6 @@ export default {
 		}
 	}
 	.customizable-wrapper {
-		background: #bfd4d7;
 		padding: 68px 0;
 		@include at-query('max-width: 768px') {
 			padding: 36px 0;

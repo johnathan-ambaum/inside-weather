@@ -9,7 +9,43 @@
           {{sectionDescription}}
         </p>
       </heading-with-description>
-			<div class="image-wrapper options">
+			<div class="--show-in-desktop">
+				<div class="options">
+					<div 
+						v-for="(option, index) in options"
+						:key="index"
+						class="option"
+						:class="[
+							(index == 0) ? 'one' : ' ',
+							(index == 1) ? 'two' : ' ',
+						]" 
+					>
+						<figure
+							v-if="isBigScreen"
+						>
+							<img :src="option.dImage">
+						</figure>
+						<figure
+							v-if="!isBigScreen"
+						>
+							<img :src="option.mImage">
+						</figure>
+						<h2 class="title">
+							{{option.heading}}
+						</h2>
+						<p class="desc">
+							{{option.desc}}
+						</p>
+						<div class="comfort-icon">
+							<img :src="option.icon">
+						</div>	
+						<p class="description">
+							{{option.description}}
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="image-wrapper options --show-in-mobile">
 				<slider 
 					class="_category-lists --clearfix" 
 					:items="sliderProps.items"
@@ -37,10 +73,9 @@
 						>
 							<img :src="option.mImage">
 						</figure>
-						<span
-							v-if="!isBigScreen"
-							class="option-index"
-						>option #{{index}}</span>
+						<span class="option-index">
+							option #{{option.index}}
+						</span>
 						<h2 class="title">
 							{{option.heading}}
 						</h2>
@@ -79,15 +114,13 @@ export default {
     return {
       categoryListItems: this.options,
       sliderProps: {
-        items: 2,
         loop: false,
         nav: false,
         autoplay: false,
-        dots: false,
         smartSpeed: 1200,
         navText: ['<span class="prev"></span> <span class="prev-hidden"></span>', '<span class="next"></span> <span class="next-hidden"></span>'],
 				responsive: {0:{loop: true, margin: 20, mouseDrag: true, touchDrag: true, pullDrag: true, items: 1, dots: true},
-				768:{items: 2, margin: 0, loop: false, mouseDrag: false, touchDrag: false, pullDrag: false, dots: false}}
+				769:{items: 2, margin: 0, loop: false, mouseDrag: false, touchDrag: false, pullDrag: false, dots: false}}
 			},
 			isBigScreen: Boolean,
     }
@@ -106,6 +139,20 @@ export default {
 @import '../scss/mixins';
 @import '../scss/variables';
 
+	.--show-in-desktop {
+		display: block;
+		@include at-query('max-width: 768px') {
+			display: none !important;
+		}
+	}
+	
+	.image-wrapper.options.--show-in-mobile {
+		display: none;
+		@include at-query('max-width: 768px') {
+			display: block;
+		}
+	}
+
 	.custom-comfort-category-wrapper {
 		background: #f2f2f2;
 		padding: 68px 0;
@@ -117,6 +164,12 @@ export default {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				&.one {
+					margin-right: 10px;
+				}
+				&.two {
+					margin-left: 10px;
+				}
 				figure {
 					margin: 0;
 				}
@@ -170,6 +223,7 @@ export default {
 						margin-top: 10px;
 						font-size: 18px;
 						letter-spacing: 0.12em;
+						margin-bottom: 0;
 					}
 					.desc {
 						font-size: 13px;
@@ -184,7 +238,7 @@ export default {
 						}
 					}
 					.option-index {
-						margin-bottom: 24px;
+						margin-top: 24px;
 						font-family: $font-stack-avalon;
 						font-weight: 500;
 						font-size: 12px;
@@ -200,6 +254,8 @@ export default {
 						line-height: 22px;
 						text-align: center;
 						color: #202020;
+						margin-bottom: 0;
+						padding: 0 24px;
 					}
 				}
 			}

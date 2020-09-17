@@ -106,6 +106,22 @@ html, body {
   }
 }
 
+.--pd-b-110 {
+
+  @include at-query('max-width: 767px') {  
+    padding-bottom: 50px;
+  }
+  @include at-query('min-width: 768px') {  
+    padding-bottom: 70px;
+  }
+  @include at-query('min-width: 992px') {  
+    padding-bottom: 90px;
+  }
+  @include at-query('min-width: 1200px') {  
+    padding-bottom: 110px;
+  }
+}
+
 .--pd-t-100 {
   
   @include at-query('max-width: 767px') {  
