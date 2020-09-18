@@ -252,7 +252,7 @@ export default {
         outline: none;
         text-decoration: none;
         text-transform: uppercase;
-        background-color: black;
+        background-color: #202020;
         padding: 18px 72px;
         @include fonts(14px,#ffffff,1.21,0.12em);
       }
@@ -330,8 +330,8 @@ export default {
           margin: 0 0 18px;
         }
         a {
-          font-size: 14px;
-          padding: 18px 45px;
+          font-size: 12px;
+          padding: 14px 45px;
         }
       }
       .CategoryBanner--imageWrapper {
@@ -426,6 +426,9 @@ export default {
       }
       p {
         font-size: 11px;
+      }
+      a {
+        padding: 12px 45px;
       }
       .CarouselBannerAction {
         position: absolute;

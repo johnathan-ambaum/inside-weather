@@ -73,7 +73,7 @@
 						>
 							<img :src="option.mImage">
 						</figure>
-						<span class="option-index">
+						<span class="option-index --caps">
 							option #{{option.index}}
 						</span>
 						<h2 class="title">

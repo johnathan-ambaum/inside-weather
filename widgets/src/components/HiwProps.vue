@@ -93,6 +93,15 @@
 				}
 			}
 		}
+		@include at-query('max-width: 360px') {
+			padding: 11px 32px;
+			margin-bottom: 15px;
+			ul {
+				li {
+					align-items: center;
+				}
+			}
+		}
 	}
 
 </style>
