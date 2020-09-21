@@ -61,7 +61,7 @@
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
-          text="Heads up! This design's lead time is longer than usual since we are temporarily out of a few materials needed to get started right away."
+          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!"
         >
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
