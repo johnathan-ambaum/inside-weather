@@ -57,7 +57,10 @@
           </p>
           <h2 
             class="--caps"
-            :class="animationClass"
+            :class="[
+              (animationClass),
+              (newButton ? 'new-button' : '')
+            ]"
             v-if="!isBigScreen"
           >
             {{item.heading}}
@@ -70,12 +73,16 @@
           </p>
           <div
             class="CarouselBannerAction"
-            :class="animationClass"
+            :class="[
+              (animationClass),
+              (newButton ? 'new-button' : '')
+            ]"
           >
             <a 
               :href="item.url" 
               class="--caps"
               v-if="item.linkText.length > 0"
+              :class="[newButton ? 'new-button' : '']"
             >
               {{item.linkText}}
             </a>
@@ -116,7 +123,8 @@ export default {
     isScrollAnimationRequire: {type: Boolean, default: true},
     hasBannerContent: {type: Boolean, default: true},
     hasBannerAccoridon: {type: Boolean, default: true},
-    enableMediumHeight: {type: Boolean, default: false}
+    enableMediumHeight: {type: Boolean, default: false},
+    newButton: {type: Boolean, default: false },
   },
   data() {
     return {
@@ -245,16 +253,21 @@ export default {
         @include fonts(15px,#202020,1.46,0.05em);
       }
       a {
+        border-bottom: 1px solid;
         box-shadow: none;
         display: inline-block;
         font-family: $font-stack-avalon;
         font-weight: 500;
         outline: none;
         text-decoration: none;
-        text-transform: uppercase;
-        background-color: #202020;
-        padding: 18px 72px;
-        @include fonts(14px,#ffffff,1.21,0.12em);
+        @include fonts(14px,#202020,1.21,0.12em);
+        &.new-button {
+          border: 0 none;
+          background-color: #202020;
+          text-decoration: none;
+          padding: 18px 72px;
+          @include fonts(14px,#ffffff,1.21,0.12em);
+        }
       }
     }
     &.--simpleBanner {
@@ -331,7 +344,9 @@ export default {
         }
         a {
           font-size: 12px;
-          padding: 14px 45px;
+          &.new-button {
+            padding: 14px 45px;
+          }
         }
       }
       .CategoryBanner--imageWrapper {
@@ -428,13 +443,17 @@ export default {
         font-size: 11px;
       }
       a {
-        padding: 12px 45px;
+        &.new-button {
+          padding: 12px 45px;
+        }
       }
       .CarouselBannerAction {
-        position: absolute;
-        bottom: 40px;
-        left: 0;
-        right: 0;
+        &.new-button {
+          position: absolute;
+          bottom: 40px;
+          left: 0;
+          right: 0;
+        }
       }
     }
   }

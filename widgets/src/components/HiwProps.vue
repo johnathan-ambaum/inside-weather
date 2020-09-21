@@ -94,11 +94,27 @@
 			}
 		}
 		@include at-query('max-width: 360px') {
-			padding: 11px 32px;
+			padding: 11px 20px;
 			margin-bottom: 15px;
 			ul {
+				justify-content: flex-start;
 				li {
+					width: auto;
 					align-items: center;
+					&:nth-child(odd) {
+						margin-right: 24px;
+						min-width: 130.8px;
+					}
+				}
+			}
+		}
+		@include at-query('max-width: 340px') {
+			padding: 11px 13px;
+			ul {
+				li {
+					&:nth-child(odd) {
+						margin-right: 12px;
+					}
 				}
 			}
 		}

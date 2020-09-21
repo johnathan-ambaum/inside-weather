@@ -107,7 +107,6 @@ html, body {
 }
 
 .--pd-b-110 {
-
   @include at-query('max-width: 767px') {  
     padding-bottom: 50px;
   }
@@ -165,6 +164,18 @@ html, body {
   }
   @include at-query('min-width: 1200px') {  
     padding-top: 90px;
+  }
+}
+
+.--pd-m-t-0 {
+  @include at-query('max-width: 767px') {  
+    padding-top: 0px !important;
+  }
+}
+
+.--pd-m-b-0 {
+  @include at-query('max-width: 767px') {  
+    padding-bottom: 0px !important;
   }
 }
 
