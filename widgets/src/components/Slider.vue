@@ -36,6 +36,7 @@ export default {
     loop: {type: Boolean, default: false},
     nav: {type: Boolean, default: true},
     autoplay: {type: Boolean, default: false},
+    autoplaySpeed: {type: Number, default: 5000},
     dots: {type: Boolean, default: true},
     smartSpeed: {type: Number, default: 1000},
     navText: Array,

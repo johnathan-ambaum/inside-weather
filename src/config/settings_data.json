@@ -314,7 +314,7 @@
             "settings": {
               "logo": "shopify:\/\/shop_images\/INSIDEWEATHER_WHITE_3x_11bbd248-0d4d-4f7e-87c4-3b6b0d0a24d0.png",
               "desktop_logo_height": 23,
-              "container_width": 22
+              "container_width": 16
             }
           },
           "1538073629251": {
@@ -340,13 +340,23 @@
               "menu": "design",
               "container_width": 18
             }
+          },
+          "1597270052102": {
+            "type": "newsletter",
+            "settings": {
+              "show_footer_title": true,
+              "title": "Stay Inside",
+              "richtext": "<p>Experience all that the weather has to offer: Sign up for sneak peaks, product leaks, and tantalizing discounts.<\/p>",
+              "container_width": 20
+            }
           }
         },
         "block_order": [
           "1539295834374",
           "1538073629251",
           "1494301487049",
-          "1538073606495"
+          "1538073606495",
+          "1597270052102"
         ],
         "settings": {
           "show_payment_icons": false
@@ -838,10 +848,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#869391",
+          "background_color": "#e9cf9a",
           "font_color": "#ffffff",
-          "text": "<p>SUMMER SALE | Save up to&nbsp;<strong>20% OFF<\/strong>&nbsp;Sitewide |&nbsp;<a href=\"\/pages\/2020-summer-sale\" title=\"2020 Summer Sale\"><u><strong>SHOP NOW<\/strong><\/u><\/a><\/p>",
-          "mobile_text": "<p>SUMMER SALE | Save up to&nbsp;<strong>20% OFF<\/strong>&nbsp;Sitewide |&nbsp;<a href=\"\/pages\/2020-summer-sale\" title=\"2020 Summer Sale\"><u><strong>SHOP NOW<\/strong><\/u><\/a><\/p>"
+          "text": "<p><a href=\"\/pages\/2020-end-of-summer-sale\" title=\"2020 End of Summer Sale\">Exclusive&nbsp;Early Access to Labor Day Savings<\/a>&nbsp;|&nbsp;Up to&nbsp;<strong>20% OFF<\/strong>&nbsp;SITEWIDE<\/p>",
+          "mobile_text": "<p><a href=\"\/pages\/2020-end-of-summer-sale\" title=\"2020 End of Summer Sale\">Early Access to Labor Day Savings<\/a>&nbsp;|&nbsp;Up to&nbsp;<strong>20% OFF<\/strong>&nbsp;SITEWIDE<\/p>"
         }
       }
     },

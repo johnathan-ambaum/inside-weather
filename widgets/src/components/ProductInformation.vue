@@ -339,6 +339,9 @@ export default {
     color: #202020;
     text-transform: uppercase;
   }
+  .ProductDetail-information-tabs__tabs {
+    height: 100%;
+  }
   .ProductDetail-information-tabs__heading--active{
     font-weight: 600;
   }

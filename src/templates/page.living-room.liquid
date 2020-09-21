@@ -4,7 +4,7 @@
     {% assign hideMobileSlider = true %}
     {% assign isScrollAnimationRequire = false %}
     {% assign hasBannerContent = false %}
-    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_tb-min.jpg?1660796', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_tb_m.jpg?1661298'}]}"%}
+    {% assign bannerContent = "{'items':[{'image':'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/living-room/tb/cat_living_tb_d.jpg', 'imageSm': 'https://inside-weather-assets.s3.amazonaws.com/cat-rooms/living-room/tb/cat_living_tb_m.jpg'}]}"%}
     <category-banner
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
@@ -14,11 +14,43 @@
       >
     </category-banner>
 
-    {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/250SED4C3B56/250SED4C3B56-0_small.jpg', 'title': 'Sofa Sectionals', 'linkText': 'Customize starting at $1198', hyperLink: 'https://insideweather.com/pages/sofa-sectionals'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/150S6A32C962/150S6A32C962-0_small.jpg', 'title': 'Sofas', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/pages/sofas'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/249S6FC97673/249S6FC97673-0_small.jpg', 'title': 'Sofette Sectionals', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/pages/sofette-sectionals'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/141SCDF07204/141SCDF07204-0_small.jpg', 'title': 'Sofettes', 'linkText': 'Customize starting at $648', hyperLink: 'https://insideweather.com/pages/sofettes'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/138SCCB51100/138SCCB51100-0_small.jpg', 'title': 'Armchairs', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/pages/armchairs'}, {'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=12081&scene=sku&features=4082068,4100675,4100678,4082069,4081858,4082070&frame=4&size=400&name=Lounge%20Chair%2001%20-%20Nels5&color=FFFFFF&format=JPG', 'title': 'Lounge Chairs', 'linkText': 'Customize starting at $398', hyperLink: 'https://insideweather.com/pages/lounge-chairs'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/47S3238AF84/47S3238AF84-0_small.jpg', 'title': 'Coffee Tables', 'linkText': 'Customize starting at $148', hyperLink: 'https://insideweather.com/pages/coffee-tables'}, {'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14746&scene=sku&features=4100034,4099974,4099988,4100035,4100000,4100036,4100013,4100037,4100022,4100038,4100031,4100039&frame=3&size=400&name=Ido%20Side%20Table3&color=FFFFFF&format=JPG', 'title': 'Side & Accent Tables', 'linkText': 'Customize starting at $98', hyperLink: 'https://insideweather.com/pages/side-tables'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_07.jpg?1661410', 'title': 'Credenzas', 'linkText': 'Customize starting at $518', hyperLink: 'https://insideweather.com/pages/credenzas'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_08.jpg?1661410', 'title': 'Sideboards', 'linkText': 'Customize starting at $718', hyperLink: 'https://insideweather.com/pages/sideboards'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_09.jpg?1661410', 'title': 'Nola Accent Chair', 'linkText': 'Customize starting at $138', hyperLink: 'https://insideweather.com/products/nd11as12-nola-armchair-in-cloud'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_11.jpg?1661410', 'title': 'Polk Accent Chair', 'linkText': 'Customize starting at $138', hyperLink: 'https://insideweather.com/products/cd111112ht12-latte-polk-armchair-in-cloud'}, {'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048626,4049038,4049236&frame=1&size=400&name=Throw%20Pillow32&color=FFFFFF&format=JPG', 'title': 'Accent Pillows', 'linkText': 'Customize starting at $19', hyperLink: 'https://insideweather.com/pages/pillows'}, {'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BS/WA1010BS-0_small.jpg', 'title': 'Wall Art', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/pages/wall-art'}]" %}
+    {% assign productCollections = "[{'image': 'https://banksy-images.s3.amazonaws.com/items/250SED4C3B56/250SED4C3B56-0_small.jpg', 'title': 'Sofa Sectionals', 'linkText': 'Customize starting at $1198', hyperLink: 'https://insideweather.com/pages/sofa-sectionals'}, 
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/150S6A32C962/150S6A32C962-0_small.jpg', 'title': 'Sofas', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/pages/sofas'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/249S6FC97673/249S6FC97673-0_small.jpg', 'title': 'Sofette Sectionals', 'linkText': 'Customize starting at $898', hyperLink: 'https://insideweather.com/pages/sofette-sectionals'}, 
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/141SCDF07204/141SCDF07204-0_small.jpg', 'title': 'Sofettes', 'linkText': 'Customize starting at $648', hyperLink: 'https://insideweather.com/pages/sofettes'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/138SCCB51100/138SCCB51100-0_small.jpg', 'title': 'Armchairs', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/pages/armchairs'},
+    
+    {'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=12081&scene=sku&features=4082068,4100675,4100678,4082069,4081858,4082070&frame=4&size=400&name=Lounge%20Chair%2001%20-%20Nels5&color=FFFFFF&format=JPG', 'title': 'Lounge Chairs', 'linkText': 'Customize starting at $398', hyperLink: 'https://insideweather.com/pages/lounge-chairs'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/47S3238AF84/47S3238AF84-0_small.jpg', 'title': 'Coffee Tables', 'linkText': 'Customize starting at $148', hyperLink: 'https://insideweather.com/pages/coffee-tables'},
+    
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_FLW_HEX/frames/1/CNV_FLW_HEX.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=TOP%20SHELF:LATTE&feature=BOTTOM%20SHELF:LATTE&size=400', 'title': 'Side & Accent Tables', 'linkText': 'Customize starting at $98', hyperLink: 'https://insideweather.com/pages/side-tables'},
 
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_CNS/frames/4/CNV_JORN_CNS.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20SETUP:LARGE-LARGE&feature=SHELF%20PATTERN:LATTE&size=400', 'title': 'Consoles', 'linkText': 'Customize starting at $399', hyperLink: 'https://insideweather.com/pages/console'},
+    
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_07.jpg?1661410', 'title': 'Credenzas', 'linkText': 'Customize starting at $518', hyperLink: 'https://insideweather.com/pages/credenzas'},
+    
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_08.jpg?1661410', 'title': 'Sideboards', 'linkText': 'Customize starting at $718', hyperLink: 'https://insideweather.com/pages/sideboards'},
+
+    {'image': 'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/6/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:3%20LEG&feature=UPHOLSTERY:ROYALE%20CLOUD&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=400', 'title': 'Stools', 'linkText': 'Customize starting at $168', hyperLink: 'https://insideweather.com/pages/stools'},
+
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_09.jpg?1661410', 'title': 'Nola Accent Chair', 'linkText': 'Customize starting at $138', hyperLink: 'https://insideweather.com/products/nd11as12-nola-armchair-in-cloud'},
+    
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_living_col_v2_11.jpg?1661410', 'title': 'Polk Accent Chair', 'linkText': 'Customize starting at $138', hyperLink: 'https://insideweather.com/products/cd111112ht12-latte-polk-armchair-in-cloud'},
+    
+    {'image': 'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048626,4049038,4049236&frame=1&size=400&name=Throw%20Pillow32&color=FFFFFF&format=JPG', 'title': 'Accent Pillows', 'linkText': 'Customize starting at $19', hyperLink: 'https://insideweather.com/pages/pillows'},
+    
+    {'image': 'https://banksy-images.s3.amazonaws.com/items/WA1010BS/WA1010BS-0_small.jpg', 'title': 'Wall Art', 'linkText': 'Customize starting at $35', hyperLink: 'https://insideweather.com/pages/wall-art'}]" %}
+    
+    {% assign removeAnimation = true %}
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
+          :remove-animation="{{removeAnimation}}"
           :product-collections="{{productCollections}}"
           section-heading="Living Room"
         >
@@ -95,17 +127,16 @@ jQuery(function ($) {
 
   fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
 
-  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
   const collectionTween = new TimelineLite()
   collectionTween.call(function () {
-    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+    $('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
         TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+        if($('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').length === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
-      }, 200 * i);
+      }, 400 * i);
     });
   });
 

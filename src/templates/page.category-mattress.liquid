@@ -1,0 +1,227 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = false %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_d_00.jpg?v=1596076819', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_m_00.jpg?v=1596076819','heading':'THE INSIDE WEATHER MATTRESS','description':'An all-around crowd-pleaser with a non-ripoff price tag.','linkText':'Shop now','url':'https://insideweather.com/products/mt10-the-twin-hybrid-plush-cooling-mattress', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_d_00.jpg?v=1596076819', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_m_00.jpg?v=1596076819','heading':'The First, Affordable Hybrid','description':'Our price is 40% below retail because our priority = furniture and our goal is to allow you to build a home you love at a fair price point.','linkText':'Shop now','url':'https://insideweather.com/products/mt10-the-twin-hybrid-plush-cooling-mattress', dataSource: 'first-affordable-hybrid'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_d_00.jpg?v=1596076819', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_m_00.jpg?v=1596076819','heading':'Temperature Regulating','description':'Internal coils allow end to end airflow, paired with a custom, quilted cooling top layer that keeps your dreams cool as can be.','linkText':'Shop now','url':'https://insideweather.com/products/mt10-the-twin-hybrid-plush-cooling-mattress', dataSource: 'temperature-regulating'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_d_00.jpg?v=1596076819', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_m_00.jpg?v=1596076819','heading':'Smooth Support','description':'By blending spring and breathable foam technologies, our Hybrid delivers the right balance of softness and support.','linkText':'Shop now','url':'https://insideweather.com/products/mt10-the-twin-hybrid-plush-cooling-mattress', dataSource: 'smooth-support'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_d_00.jpg?v=1596076819', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_mattress_tb_m_00.jpg?v=1596076819','heading':'Non-Toxic','description':'Sleep easy knowing your mattress is CertiPur-US Certified and free of common allergenic material treatments often found in the industry.','linkText':'Customize now','url':'https://insideweather.com/products/mt10-the-twin-hybrid-plush-cooling-mattress', dataSource: 'non-toxic'}]}"%}
+
+    {% assign categoryBannerAccordion = "[{'accordionHead': 'The First, Affordable Hybrid', 'accordionDescription': 'Our price is 40% below retail because our priority = furniture and our goal is to allow you to build a home you love at a fair price point.', 'accordionTarget': 'first-affordable-hybrid'},{'accordionHead': 'Temperature Regulating', 'accordionDescription': 'Internal coils allow end to end airflow, paired with a custom, quilted cooling top layer that keeps your dreams cool as can be.', 'accordionTarget': 'temperature-regulating'},{'accordionHead': 'Smooth Support', 'accordionDescription': 'By blending spring and breathable foam technologies, our Hybrid delivers the right balance of softness and support.', 'accordionTarget': 'smooth-support'},{'accordionHead': 'Non-Toxic', 'accordionDescription': 'Sleep easy knowing your mattress is CertiPur-US Certified and free of common allergenic material treatments often found in the industry.', 'accordionTarget': 'non-toxic'}]" %}
+
+    <category-banner
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :category-banner-accordion="{{categoryBannerAccordion}}"
+      >
+    </category-banner>
+
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/twin-twinxl_2x_bbbefbe6-6adf-428b-af4b-d5e34615d1c9.png?v=1596077022', 'title': 'Twin & Twin XL', 'linkText': 'Customize starting at', 'originalPrice': '$986', 'discountPrice': '$592', hyperLink: 'https://insideweather.com/products/mt10-the-twin-hybrid-plush-cooling-mattress'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/full_2x_661f1df6-0d4a-449b-bec2-2089b4a15ed0.png?v=1596077022', 'title': 'Full', 'linkText': 'Customize starting at', 'originalPrice': '$1616', 'discountPrice': '$969', hyperLink: 'https://insideweather.com/products/mt12-the-full-hybrid-plush-cooling-mattress'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/queen_2x_ba2e33cd-3324-4b91-a771-d77c8098073c.png?v=1596077022', 'title': 'Queen', 'linkText': 'Customize starting at', 'originalPrice': '$1796', 'discountPrice': '$1078', hyperLink: 'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/king-calking_2x_4a8e2b91-3424-49cc-8cef-f125233de146.png?v=1596077022', 'title': 'King & Cal King', 'linkText': 'Customize starting at', 'originalPrice': '$2066', 'discountPrice': '$1239', hyperLink: 'https://insideweather.com/products/mt14-the-king-hybrid-plush-cooling-mattress'}]" %}
+
+    {% assign isOriginalPrice = true %}
+    {% assign isDiscountPrice = true %}
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Shop by Size"
+          section-description="At 40% off retail, this could actually be the Hybrid Mattress of your dreams."
+          :is-original-price="{{isOriginalPrice}}"
+          :is-discount-price="{{isDiscountPrice}}"
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign productDetails = "[{'isVideo':'false', 'objectUrl':'https://cdn.shopify.com/s/files/1/2994/0144/files/philosophy_d.jpg?v=1596082308', 'objectUrlMob':'https://cdn.shopify.com/s/files/1/2994/0144/files/philosophy_m.jpg?v=1596082308','title': 'Our Mattress Philosophy','description': 'The truth is, we’re in the furniture biz, not the mattress biz, and our dream is seeing you customize your home with our products. That said, we’re also all about convenience and what’s a beautiful bed set without a good mattress? So we did our research, vetted the manufactures of the big players in the dreaming biz and chose a partner to make what we felt was the ultimate crowd pleaser at a no-nonsense price. Our Hybrid Plush Cooling Mattress is literally 40% below standard retail because our priority = furniture and our goal is to allow you to build a home you love at a fair price point.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/cool_d_e7a817d2-b26d-40e8-95f4-0e5d4461a031.jpg?v=1596077712', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/cool_m_7ddcdb78-82fa-4955-910c-0bb4a046b03b.jpg?v=1596077712', 'title': 'The Cool Factor','description': 'The heart of the mattress, composed of individually encased coils, allows airflow from end to end, continuously allowing heat to be released with the changing temperatures keeping your sanctuary temperate (unlike memory foam alternatives). Additionally, the 1.5” quilted cooling top features a high-end knit weave that delivers cooling benefits on contact. Pretty cool, huh?'},
+    
+    {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/comfort_d.png?v=1596071859', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/comfort_m.png?v=1596071859', 'title': 'The Composition of Comfort','description': 'The Hybrid Plush Cooling Mattress offers the ideal blend of temperature regulation, plush pressure-relief, and customized support. The two top layers lend a contouring effect, relieving pressure upon contact. The individually encased coils’ responsive nature offers localized support to each unique snuggler it encounters. A formula both snoozers & bothered backs will be fond of.'},
+
+    {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/motion_d.jpg?v=1596080700', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/motion_m.jpg?v=1596080700', 'title': 'Motion Isolation','description': 'A 6” layer of over 900 individually encased coils topped with 3.5” of breathable foam & a quilted top, allows for exceptional reactivity and motion isolation while still offering a comfortable amount of bounce upon contact. Why is motion isolation important (said no one ever)? Just because your partner tosses & turns, doesn’t mean you have to.'},
+
+    {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/compare_d_2x_fad7ad52-9ec3-4a53-8bb1-cb86ed1b0ab5.png?v=1596072842', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/compare_m_2x_974355ee-357d-428e-8e46-a8f5eb8ec6df.png?v=1596072841', 'title': 'How It Compares','description': 'By blending spring and foam technologies, Hybrid Mattresses are praised for providing the right balance of softness and support. Whether you’re a Side, Back, or Stomach Sleeper, the Hybrid actually works well for all dreaming breeds! You get the conforming comfort & pressure point relief of memory foam in addition to the dynamic support of the individually encased coils. Its quilted top layer also provides an additional plush element to softly send you into your dreams.'},
+
+    {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/non-toxic_m.jpg?v=1596081441', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/non-toxic_m.jpg?v=1596081441', 'title': 'A Non-Toxic Relationship','description': 'Each mattress is manufactured locally here in the U.S. with both the sleeper & the environment in mind. The materials that make up this sanctuary are selected with intention and have undergone rigorous testing. Sleep easy knowing your mattress is CertiPur-US Certified, free of common allergenic dyes, and its frame retardant materials are a silica-rayon bamboo fiber, treated with only non-toxic sprays. Wooosaa.'},
+
+
+    {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/quality-value_d_2x_afe1a35a-6814-41c0-8a1a-b1cd600a25d7.png?v=1596137563', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/quality-value_m_2x_292fb7d3-5f45-43e5-aac2-7ba671031988.png?v=1596137563', 'title': 'Quality & Value','description': 'When purchasing a mattress from blockbuster brands, you’re paying half for a mattress, half for the name brand. Alternatively, the cost of the Inside Weather Mattress = the cost of the mattress. Our passion is furniture but we love nothing more than a solid snooze which is why we went to those same manufacturers and created what we thought was the best one stop shop for you. No tricks, just a lovable mattress at an honest price.'},
+
+    ]" %}
+
+    {% assign isMattress = true %}
+    {% assign listItems = "[{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/1-circle_2x_1d256dfe-8385-4a43-9ffa-9a6a61d3254b.png?v=1596071858', 'title': '1.5” QUILTED COOLING TOP'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/2-circle_2x_3fbfee94-6acb-43a8-8e5c-d09e01b100c2.png?v=1596071858', 'title': '1” PREMIUM BREATHABLE FOAM TOP'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3-circle_2x_ee51eaab-6a32-4910-b79c-1c905eaef362.png?v=1596071858', 'title': '6” ASCENSION ENCASED COILS'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/4-circle_2x_5d130aad-8a2f-46c1-9d63-d320a0ad9a16.png?v=1596071858', 'title': '2” HIGH-DENSITY REINFORCEMENT BASE'}]"%}
+
+    <div class="productDetails --pd-t-130 --pd-b-130">
+      <category-details 
+        :product-details="{{productDetails}}"
+        :is-mattress="{{isMattress}}"
+        :list-items="{{listItems}}"
+      >
+      </category-details>
+    </div>
+
+    {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new design. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}
+
+    <div class="categoryValuePropsWrapper">
+      <category-vprops
+      :category-value-props="{{categoryValueProps}}"
+      background-color="#F2F2F2"
+      >
+      </category-vprops>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_01.jpg?v=1596155711','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078','productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_02.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117B/HD117B-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Blue','price':'$29', 'productUrl':'https://insideweather.com/products/hd117b-mia-mug-wood-saucer-set-in-blue'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/5/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1109&feature=BACK:CROSS%20WEAVE%20SUNFLOWER&size=400','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'}]},
+
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_03.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_04.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_05.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/5/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1109&feature=BACK:CROSS%20WEAVE%20SUNFLOWER&size=400','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/5/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:CROSS%20WEAVE%20YALE%20BLUE&feature=BACK:LINEN%20WEAVE%20BLUE%20LAGOON&size=400','title':'18\&#34; x 18\&#34; Accent Pillow (With Insert)','price':'$43', 'productUrl':'https://insideweather.com/products/pq12asat-18-x-18-accent-pillow-with-insert'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_06.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/5/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1109&feature=BACK:CROSS%20WEAVE%20SUNFLOWER&size=400','title':'20\&#34; x 20\&#34; Accent Pillow (With Insert)','price':'$54', 'productUrl':'https://insideweather.com/products/pq14nxar-20-x-20-accent-pillow-with-insert'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/HD117B/HD117B-0_small.jpg','title':'Mia Mug & Wood Saucer Set in Blue','price':'$29', 'productUrl':'https://insideweather.com/products/hd117b-mia-mug-wood-saucer-set-in-blue'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_07.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_08.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_HB_QN/frames/1/ANA_HB_QN.JPG?background=FFFFFF&feature=HEADBOARD%20OPTION:3X4&feature=UPHOLSTERY:CROSS%20WEAVE%20CLOUD&size=400','title':'Queen Oslo Headboard in Cloud (3 x 4)','price':'$480', 'productUrl':'https://insideweather.com/products/hq12af-queen-oslo-headboard-in-cloud-3-x-4'}]},
+
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_10.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'}]},
+
+
+    {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/cat_mattress_lg_09.jpg?v=1596155712','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/MT13/MT13-0_small.jpg','title':'The Queen Hybrid Plush Cooling Mattress','price':'$1,078', 'productUrl':'https://insideweather.com/products/mt13-the-queen-hybrid-plush-cooling-mattress'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S96869A42/48S96869A42-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$138', 'productUrl':'https://insideweather.com/products/st12fi17-latte-round-side-table-in-latte-wood'}]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Let's Get Cozy"
+        pop-up-heading="Let's Get Cozy"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) {
+
+  $('.CategoryBanner--clasification .point').click(function (event){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter",
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>

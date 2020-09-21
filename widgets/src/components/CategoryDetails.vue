@@ -5,10 +5,33 @@
   >
     <div class="--custom-container">
       <div 
-        v-for="productDetail in productDetails"
-        :key="productDetail.id"
+        v-for="(productDetail, index) in productDetails"
+        :key="index"
         class="image-content-box"
+        :class="[
+          (isMattress && index == 2) ? 'mattressthirdDetailSection' : ' ',
+          (isMattress && index == 4) ? 'mattressfifthDetailSection' : ' ',
+        ]" 
       >
+        <div 
+          v-if="isMattress && index == 2"
+          class="number-details-section"
+        >
+          <ul class="list-items">
+            <li 
+              class="list-item"
+              v-for="listItem in listItems"
+              :key="listItem.id"
+            >
+              <figure>
+                <img 
+                  :src="listItem.imageUrl" 
+                />
+              </figure>
+              <p>{{listItem.title}}</p>
+            </li>
+          </ul>
+        </div>
         <figure
           v-if="isBigScreen"
         >
@@ -60,7 +83,9 @@ export default {
     HeadingWithDescription,
   },
   props: {
-    productDetails: Array
+    productDetails: Array,
+    listItems: Array,
+    isMattress: {type: Boolean, default: false}
   },
   data() {
     return {
@@ -132,6 +157,262 @@ export default {
       .HeadingWithDescription {
         padding: 0 77px 0 85px;
         flex-basis: 57%
+      }
+    }
+    &.mattressthirdDetailSection,
+    &.mattressfifthDetailSection {
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        width: 100vw;
+        height: 100%;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        pointer-events: none;
+      }
+      @include at-query('max-width: 767px') {
+        &:after {
+          display: none;
+        }
+        figure {
+          img {
+            max-width: 100%;
+          }
+        }
+        .HeadingWithDescription {
+          top: auto;
+          background: transparent;
+        }
+      }
+    }
+
+    &.mattressthirdDetailSection {
+      align-items: center;
+      display: flex;
+      flex-direction: column-reverse;
+      padding-top: 66px;
+      padding-bottom: 66px;
+      background: #d5e4e6;
+
+      &:after {
+        background: #d5e4e6;
+      }
+
+      &:nth-child(even) {
+        figure {
+          padding-bottom: 0;
+        }
+      }
+      figure {
+        position: static;
+        padding: 0;
+        flex-basis: 100%;
+        height: 100%;
+        img {
+          max-width: 1168px;
+          position: static;
+          margin-bottom: 2px;
+        }
+      }
+      .HeadingWithDescription {
+        margin: auto 0;
+        padding: 0;
+        flex-basis: 100%;
+        h2 {
+          font-weight: 600;
+          font-size: 34px;
+          letter-spacing: 0.05em;
+          text-align: center;
+          color: #202020;
+          margin: 0 0 34px;
+        }
+        p {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+          letter-spacing: 0.04em;
+          text-align: center;
+          color: #202020;
+          padding-bottom: 44px;
+        }        
+      }
+      @include at-query('max-width: 767px') {
+        padding-top: 34px;
+        padding-bottom: 42px;
+
+        figure {
+          position: static;
+          padding: 0;
+          flex-basis: 100%;
+          height: 100%;
+          img {
+            max-width: 100%;
+            margin-bottom: 20px;
+          }
+        }
+        .HeadingWithDescription {
+          h2 {
+            font-size: 20px;
+            margin: 0 0 13px;
+            text-align: center;
+          }
+          p {
+            font-size: 13px;
+            line-height: 18px;
+            padding-bottom: 34px;
+          }        
+        }
+      }
+      .number-details-section {
+        ul {
+          align-items: baseline;
+          display: flex;
+          justify-content: space-between;
+          margin: 0;
+          max-width: 70%;
+          margin: 0 auto;
+          li {
+            flex-basis: 25%;
+            padding: 0 10px;
+            figure {
+              width: auto;
+              height: auto;
+              img {
+                width: 32px;
+                height: 32px;
+                max-width: 100%;
+                object-fit: contain;
+                margin-bottom: 0;
+              }
+            }
+            p {
+              font-weight: 600;
+              font-size: 16px;
+              letter-spacing: 0.1em;
+              font-family: $font-stack-avalon;
+              line-height: 25px;
+              text-align: center;
+              color: #202020;
+              text-transform: uppercase;
+              padding-top: 20px;
+            }
+          }
+        }
+        @include at-query('max-width: 767px') {
+          ul {
+            flex-wrap: wrap;
+            max-width: 90%;
+            margin: 0 auto;
+            li {
+              display: flex;
+              flex-basis: 100%;
+              width: 100%;
+              flex-direction: row;
+              align-items: center;
+              margin: 0;
+              &:not(last-child) {
+                padding-bottom: 13px;
+              }
+              figure {
+                width: 26px;
+                height: 26px;
+                flex-basis: 26px;
+                img {
+                  width: 26px;
+                  height: 26px;
+                }
+              }
+              p {
+                font-size: 13px;
+                line-height: 18px;
+                text-align: left;
+                padding-left: 15px;
+                padding-top: 0;
+                margin-bottom: 0;
+                @include at-query('max-width: 640px') {
+                  font-size: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.mattressfifthDetailSection {
+      align-items: center;
+      display: flex;
+      flex-direction: column-reverse;
+      padding-top: 60px;
+      padding-bottom: 34px;
+      background: #f2f2f2;
+      
+      &:after {
+        background: #f2f2f2;
+      }
+      
+      &:nth-child(even) {
+        figure {
+          padding-bottom: 0;
+        }
+      }
+      figure {
+        position: static;
+        padding: 0;
+        flex-basis: 100%;
+        height: 100%;
+        img {
+          max-width: 950px;
+          position: static;
+        }
+      }
+      .HeadingWithDescription {
+        margin: auto 0;
+        padding: 0;
+        flex-basis: 100%;
+        h2 {
+          font-weight: 600;
+          font-size: 34px;
+          letter-spacing: 0.05em;
+          text-align: center;
+          color: #202020;
+          margin: 0 0 34px;
+        }
+        p {
+          font-weight: 500;
+          font-size: 14px;
+          letter-spacing: 0.04em;
+          line-height: 22px;
+          text-align: center;
+          color: #202020;
+          padding-bottom: 30px;
+        }
+      }
+      @include at-query('max-width: 767px') {
+        padding-top: 34px;
+        padding-bottom: 15px;
+        
+        figure {
+          img {
+            max-width: 100%;
+          }
+        }
+        .HeadingWithDescription {
+          margin: auto 0;
+          padding: 0;
+          flex-basis: 100%;
+          h2 {
+            font-size: 20px;
+            margin: 0 0 15px;
+            text-align: center;
+          }
+          p {
+            font-size: 13px;
+            line-height: 18px;
+            padding-bottom: 15px;
+          }
+        }
       }
     }
   }
@@ -257,6 +538,3 @@ export default {
   }
 }
 </style>
-
-
-

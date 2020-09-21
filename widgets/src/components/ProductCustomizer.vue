@@ -59,7 +59,7 @@
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
-          text="Heads up! This design's lead time is longer than usual since we are temporarily out of a few materials needed to get started right away."
+          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!"
         >
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
@@ -95,7 +95,7 @@
           {{ productName }}
         </div>
         <div class="ProductCustomizer__PriceRow">
-          <span class="ProductCustomizer__Price">${{ productPrice }}</span>
+          <span class="ProductCustomizer__Price--mt">${{ productPrice }}</span>
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
@@ -573,11 +573,15 @@ export default {
       this.createProduct();
       this.$bus.$emit('customizer-close');
       this.active = false;
+      const zendesk = document.querySelector('#launcher');
+      zendesk.style.visibility = "visible";
     },
 
     showCustomizer() {
       this.selectPanel('');
       this.active = true;
+      const zendesk = document.querySelector('#launcher');
+      zendesk.style.visibility = "hidden";
     },
 
     favoriteCurrentProduct() {
@@ -849,6 +853,19 @@ html.ProductCustomizer--Open {
       font-size: 22px;
     }
   }
+  &__Price--mt{
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    line-height: 1;
+
+    @include at-query($breakpoint-large) {
+      font-size: 22px;
+    }
+    @include at-query($breakpoint-small) {
+      margin-top:14px;
+    }
+  }
 
   &__MSRP {
     color: #959595;
@@ -1040,6 +1057,8 @@ html.ProductCustomizer--Open {
     text-align: center;
 
     @include at-query($breakpoint-small) {
+      padding: 18px 0;
+      font-size: 16px;
       border-top: 1px solid #D4D0CA;
     }
 
@@ -1080,7 +1099,7 @@ html.ProductCustomizer--Open {
     }
 
     @include at-query($breakpoint-small) {
-      padding: 24px 18px;
+      padding: 22px 18px;
 
       & + & {
         border-left: 1px solid #D4D0CA;

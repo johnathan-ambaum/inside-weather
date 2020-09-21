@@ -23,9 +23,11 @@
       :class="catCollectionClasses"
     >
       <li
-        v-for="item in productCollections"
-        :key="item.id"
-      >
+        v-for="(item, index) in productCollections"
+        :key="item.key"
+        class="categoryListItem"
+        :class="categoryCollectionsListItemClasses(index)"
+        >
         <a :href="item.hyperLink">
           <figure
             :class="animationElementClass"
@@ -42,6 +44,18 @@
             :data-type="[item.linkText.length > 10 ? animationElementClass : 'limittedText']"
           >
             {{item.linkText}}
+            <span
+              v-if="isOriginalPrice"
+              class="original-price"
+            >
+              {{item.originalPrice}}
+            </span>
+            <span
+              v-if="isDiscountPrice"
+              class="discount-price"
+            >
+              {{item.discountPrice}}
+            </span>
           </span>
         </a>
       </li>
@@ -62,7 +76,38 @@ export default {
     sectionDescription: String,
     isScrollAnimationRequire: {type: Boolean, default: true},
     collectionCustomImageStyle:{type: Boolean, default: false},
+    removeAnimation:{type: Boolean, default: false},
     isWallArt: {type: Boolean, default: false},
+    isWorkDesk: {type: Boolean, default: false},
+    isOriginalPrice: {type: Boolean, default: false},
+    isDiscountPrice: {type: Boolean, default: false}
+  },
+  data() {
+    return {
+      numberOfElements: Number
+    }
+  },
+  created: function () {
+    if (window.innerWidth >= 768) {
+      this.numberOfElements = 4;
+    } else {
+      this.numberOfElements = 2;
+    }
+  },
+  methods: {
+    categoryCollectionsListItemClasses: function (index) {
+      if(index < this.numberOfElements) {
+        return {
+          'removeAnimation': this.removeAnimation,
+          'onlythreecategories': this.isWorkDesk
+        }
+      } else {
+        return {
+          '': this.removeAnimation,
+          'onlythreecategories': this.isWorkDesk
+        };
+      }
+    }
   },
   computed: {
     animationElementClass() {
@@ -118,6 +163,14 @@ export default {
     margin: 0;
     box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
     -webkit-box-shadow: inset -0.25px -0.25px 0 0 #8B8986;
+    &.onlythreecategories {
+      flex-basis: 33.3%;
+    }
+    &.removeAnimation {
+      .--animElement {
+        opacity: 1;
+      }  
+    }
     .--animElement {
       opacity: 0;
     }
@@ -125,6 +178,20 @@ export default {
       text-decoration: none;
       padding: 2px 44px 32px;
       @include block();
+
+      .original-price {
+        position: relative;
+        display: inline-block;
+        line-height: 1.2;
+        &:before {
+          content: '';
+          border-bottom: 1px solid #202020;
+          width: 100%;
+          position: absolute;
+          right: 0;
+          top: 50%;
+        }
+      }
     }
     &:nth-of-type(-n+4) {
       a {

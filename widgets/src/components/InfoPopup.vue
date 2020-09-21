@@ -53,7 +53,8 @@ export default {
 
 .InfoPopup {
   cursor: pointer;
-  display: inline-block;
+  display: inline;
+  align-items: center;
   position: relative;
 
   &__Dialog {
@@ -92,8 +93,7 @@ export default {
       }
 
       @media only screen and (min-width: 1201px) {
-        left: auto;
-        right: -60px;
+        left: 0;
       }
     }
 
@@ -130,8 +130,7 @@ export default {
         }
 
         @media only screen and (min-width: 1201px) {
-          left: auto;
-          right: 70px;
+          left: 69px;
         }
       }
     }
@@ -178,7 +177,7 @@ export default {
         right: 19px;
 
         @include at-query($breakpoint-large) {
-          right: 69px;
+          left: 69px;
         }
       }
     }
