@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="ProductCustomizer__DetailWrapper">
+    <div
+      v-if="!disabled" 
+      class="ProductCustomizer__DetailWrapper">
       <div
         v-for="flag in flags"
         :key="flag.title"
@@ -82,9 +84,37 @@
         class="affirm-as-low-as"
       />
     </div>
-    <hr>
-    <inspiration-options :products="filters.featured_products || []" />
-    <!-- <swatch-browser v-if="!isDecor" /> -->
+    <div 
+    v-else
+    class="ProductCustomizer__404">
+      <div class="ProductCustomizer__404-notice">404 Error</div>
+      <div class="ProductCustomizer__HeaderRow">
+        <div class="ProductCustomizer__Name">
+          {{ productName }}
+          <div
+            v-if="modelNumber"
+            class="ProductCustomizer__Model"
+          >Model No&deg; {{ modelNumber }}</div>
+        </div>
+        <span
+          :class="{ isFavorite }"
+          role="button"
+          class="ProductCustomizer__Favorite"
+          @click.stop.prevent="favoriteCurrentProduct"
+        >
+          <font-awesome-icon :icon="favoriteIcon"/>
+        </span>
+      </div>
+      <div class="ProductCustomizer__404-content">
+        <h2>{{ disabledInfo.disabled_title }}</h2>
+        <p>{{ disabledInfo.disabled_content }}</p>
+        <a v-bind:href="disabledInfo.disabled_button_url">{{ disabledInfo.disabled_button_content }}</a>
+      </div>
+    </div>
+    <div v-if="!disabled">
+      <hr>
+      <inspiration-options :products="filters.featured_products || []" />
+    </div>
     <div
       v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
@@ -278,6 +308,15 @@ export default {
           body: DOMPurify.sanitize(body),
         }));
       },
+      disabled: state => state.filters.disabled,
+      disabledInfo: state => {
+        return {
+          disabled_title: state.filters.disabled_title,
+          disabled_content: state.filters.disabled_content,
+          disabled_button_content: state.filters.disabled_button_content,
+          disabled_button_url: state.filters.disabled_button_url
+        }
+      }
     }),
 
     useCylindo() {
@@ -413,6 +452,7 @@ export default {
   },
 
   mounted() {
+    console.log(state.filters.disabled)
     const updateAffirm = () => {
       if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
         setTimeout(updateAffirm, 200);
@@ -1117,12 +1157,40 @@ html.ProductCustomizer--Open {
     }
   }
 
-  &__Panel {
-    // height: 100%;
+  &__404-notice {
+    display: inline-block;
+    background-color: #202020;
+    color: #fff;
+    font-size: 14px;
+    padding: 3px 15px;
+    margin-bottom: 15px;
+  }
 
-    // &:not(#{&}--Active) {
-    //   display: none;
-    // }
+  &__404-content {
+    h2 {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 30px;
+      color: #202020;
+    }
+    p {
+      font-family: Avalon, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    a {
+      display: block;
+      background-color: #202020;
+      color: #fff;
+      text-align: center;
+      padding: 8px 15px;
+      font-size: 16px;
+      font-weight: 500;
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 
   &__Footer {
