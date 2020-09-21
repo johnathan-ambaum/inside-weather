@@ -1,6 +1,6 @@
 <template>
   <div class="ProductDetail">
-    <swatch-browser v-if="!isDecor && isMobile" />
+    <swatch-browser v-if="!isDecor && isMobile && !disabled" />
     <template v-if="!isDecor">
 
       <div class="ProductDetail-information-tabs__wrapper" v-if="!isMobile">
@@ -17,7 +17,7 @@
                   :key="image"
                   :src="image">
               </div>
-              
+
             </div>
             <div class="ProductDetail-information-tabs__tab" style="display:none;" data-tab="1">
               <p>{{ interpolatedAssembly }}</p>
@@ -48,8 +48,8 @@
         </div>
       </div>
     </template>
-    <related-products></related-products>
-    <swatch-browser v-if="!isDecor && !isMobile" />
+    <related-products v-if="!disabled"></related-products>
+    <swatch-browser v-if="!isDecor && !isMobile && !disabled" />
     <div class="--custom-container">
       <h2
         v-if="(isDecor || filters.contents) && isMobile"
@@ -112,6 +112,7 @@ export default {
     ...mapState({
       filters: state => state.filters,
       productImages: state => state.productImages,
+      disabled: state => state.filters.disabled,
     }),
 
     isDecor() {

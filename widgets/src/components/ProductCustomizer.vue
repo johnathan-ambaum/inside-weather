@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="!disabled" 
+      v-if="!disabled"
       class="ProductCustomizer__DetailWrapper">
       <div
         v-for="flag in flags"
@@ -84,11 +84,13 @@
         class="affirm-as-low-as"
       />
     </div>
-    <div 
+    <div
     v-else
-    class="ProductCustomizer__404">
-      <div class="ProductCustomizer__404-notice">404 Error</div>
-      <div class="ProductCustomizer__HeaderRow">
+    class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
+      <div class="ProductCustomizer__FlagRow">
+        <div class="ProductCustomizer__Flag ProductCustomizer__404-notice" >404 Error</div>
+      </div>
+      <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
           <div
@@ -97,6 +99,7 @@
           >Model No&deg; {{ modelNumber }}</div>
         </div>
         <span
+          v-if="!disabled"
           :class="{ isFavorite }"
           role="button"
           class="ProductCustomizer__Favorite"
@@ -104,6 +107,11 @@
         >
           <font-awesome-icon :icon="favoriteIcon"/>
         </span>
+        <product-detail-slider
+        v-if="isMobile"
+        :cylindo="useCylindo"
+        cylindo-id="cylindo-main"
+      />
       </div>
       <div class="ProductCustomizer__404-content">
         <h2>{{ disabledInfo.disabled_title }}</h2>
@@ -452,7 +460,6 @@ export default {
   },
 
   mounted() {
-    console.log(state.filters.disabled)
     const updateAffirm = () => {
       if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
         setTimeout(updateAffirm, 200);
@@ -821,7 +828,7 @@ html.ProductCustomizer--Open {
       font-size: 22px;
       letter-spacing: .025em;
       line-height: 30px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
   }
 
@@ -1158,35 +1165,48 @@ html.ProductCustomizer--Open {
   }
 
   &__404-notice {
-    display: inline-block;
-    background-color: #202020;
-    color: #fff;
-    font-size: 14px;
-    padding: 3px 15px;
-    margin-bottom: 15px;
+    color:#FFFFFF;
+    background: #202020
   }
 
   &__404-content {
     h2 {
+      font-family: Avalon;
       font-weight: bold;
       font-style: italic;
       font-size: 22px;
       line-height: 30px;
       color: #202020;
+
+      @include at-query($breakpoint-small) {
+        font-size: 18px;
+        letter-spacing: 0.05em;
+        text-align: center;
+        margin-bottom:18px;
+      }
     }
     p {
       font-family: Avalon, sans-serif;
       font-size: 14px;
       font-weight: 500;
+      margin-bottom:34px;
+      @include at-query($breakpoint-small) {
+        margin-bottom:32px;
+      }
     }
     a {
+      font-family: Avalon;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.12em;
       display: block;
       background-color: #202020;
       color: #fff;
       text-align: center;
-      padding: 8px 15px;
-      font-size: 16px;
-      font-weight: 500;
+      padding: 14.5px;
+      @include at-query($breakpoint-small) {
+        padding: 14px;
+      }
       &:hover {
         color: #fff;
       }
