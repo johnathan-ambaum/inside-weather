@@ -174,7 +174,7 @@
                       />
                     </div>
                     <div
-                      v-if="swatch.easy_clean || swatch.performance || swatch.pet_friendly"
+                      v-if="swatch.commercial || swatch.performance || swatch.pet_friendly"
                       class="SwatchBrowser__Badges"
                     >
                       <img
@@ -188,7 +188,7 @@
                         alt="Performance icon"
                       >
                       <img
-                        v-if="swatch.easy_clean"
+                        v-if="swatch.commercial"
                         src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?111111111111"
                         alt="Commercial icon"
                       >
