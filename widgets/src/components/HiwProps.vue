@@ -2,29 +2,15 @@
 	<div>
 		<div class="hiw-section">
 			<ul class="props">
-				<li class="prop">
+				<li 
+					v-for="valueProp in valueProps"
+        	:key="valueProp.$id"
+					class="prop"
+				>
 					<span class="hiw-icon">
-						<img src="http://cdn.insideweather.com/cat/sofa-line/vprop-small/usa-ico.png"/>
+						<img :src="valueProp.icon"/>
 					</span>
-					<p class="title">MADE IN THE USA</p>
-				</li>
-				<li class="prop">
-					<span class="hiw-icon">
-						<img src="http://cdn.insideweather.com/cat/sofa-line/vprop-small/home-trial-ico.png"/>
-					</span>
-					<p class="title">365 DAY HOME TRIAL</p>
-				</li>
-				<li class="prop">
-					<span class="hiw-icon">
-						<img src="http://cdn.insideweather.com/cat/sofa-line/vprop-small/free-ship-ico.png"/>
-					</span>
-					<p class="title">FREE SHIPPING</p>
-				</li>
-				<li class="prop">
-					<span class="hiw-icon">
-						<img src="http://cdn.insideweather.com/cat/sofa-line/vprop-small/sustainable-ico.png"/>
-					</span>
-					<p class="title">SUSTAINABLE</p>
+					<p class="title">{{valueProp.title}}</p>
 				</li>
 			</ul>
 		</div>
@@ -32,7 +18,11 @@
 </template>
 
 <script>
-
+	export default {
+		props: {
+			valueProps: Array
+		}
+	} 
 </script>
 
 <style lang="scss">
@@ -51,8 +41,10 @@
 			li {
 				display: flex;
 				align-items: baseline;
-				margin-right: 86px;
 				margin-bottom: 0;
+				&:not(:last-child) {
+					margin-right: 86px;
+				}
 				.hiw-icon {					
 					img {
 						width: 34px;

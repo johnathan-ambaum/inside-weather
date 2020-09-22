@@ -223,7 +223,7 @@ export default {
 			.detail-img {
 				figure {
 					margin-top: 2px;
-					padding-bottom: 32%;
+					padding-bottom: 28.6%;
 				}
 			}
       figure {

@@ -501,7 +501,7 @@ export default {
       .detail-img {
 				figure.descImg {
 					margin-top: 2px;
-					padding-bottom: 42%;
+					padding-bottom: 48%;
 				}
 			}
       figure {
