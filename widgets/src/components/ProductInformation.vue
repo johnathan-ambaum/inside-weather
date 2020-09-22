@@ -1,6 +1,6 @@
 <template>
   <div class="ProductDetail">
-    <swatch-browser v-if="!isDecor && isMobile" />
+    <swatch-browser v-if="!isDecor && isMobile && !disabled" />
     <div
       v-if="!isMobile && detailTabs.length"
       class="ProductDetail-information-tabs__wrapper"
@@ -69,8 +69,8 @@
         </div>
       </div>
     </div>
-    <related-products></related-products>
-    <swatch-browser v-if="!isDecor && !isMobile" />
+    <related-products v-if="!disabled"></related-products>
+    <swatch-browser v-if="!isDecor && !isMobile  && !disabled" />
     <div class="--custom-container">
       <h2
         v-if="(isDecor || filters.contents) && isMobile"
@@ -113,7 +113,6 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import SwatchBrowser from './SwatchBrowser.vue';
 import RelatedProducts from './RelatedProducts.vue';
-
 export default {
   components: {
     TemplateBlock,
@@ -123,36 +122,30 @@ export default {
     SwatchBrowser,
     RelatedProducts
   },
-
   mixins: [
     screenMonitor,
     interpolator,
   ],
-
   data() {
     return {
       activeTab: {},
     };
   },
-
   computed: {
     ...mapState({
       filters: state => state.filters,
       productImages: state => state.productImages,
       detailTabs: state => state.filters.details || [],
+      disabled: state => state.filters.disabled,
     }),
-
     isDecor() {
       return this.filters.configurator_type === 'small';
     },
-
     dimensionImages() {
       const images = [];
-
       if (!this.filters.templates) {
         return images;
       }
-
       let image;
       image = this.filters.templates.find(item => item.key === 'dimensions_image_1');
       image = this.interpolateString(image.template || '');
@@ -164,42 +157,33 @@ export default {
       if (image) {
         images.push(image);
       }
-
       return images;
     },
-
     interpolate() {
       return template => this.interpolateString(template);
     },
-
     interpolatedAssembly() {
       if (!this.filters.templates) {
         return '';
       }
-
       const { template } = this.filters.templates.find(item => item.key === 'assembly') || { template: '' };
       return this.interpolateString(template);
     },
-
     interpolatedShipping() {
       if (!this.filters.templates) {
         return '';
       }
-
       const { template } = this.filters.templates.find(item => item.key === 'shipping') || { template: '' };
       return this.interpolateString(template);
     },
-
     interpolatedDescription() {
       if (!this.filters.templates) {
         return '';
       }
-
       const { template } = this.filters.templates.find(item => item.key === 'description') || { template: '' };
       return this.interpolateString(template);
     },
   },
-
   watch: {
     detailTabs: {
       immediate: true,
@@ -210,7 +194,6 @@ export default {
       },
     },
   },
-
   methods: {
     openTab(tab) {
       this.activeTab = tab;
@@ -224,14 +207,12 @@ export default {
 @import '../scss/mixins';
 .ProductDetail {
   position: relative;
-
   .animated {
     animation-duration: .3s;
   }
   .animated.fadeInUp {
     animation-delay: .4s;
   }
-
   .ProductCustomizer--Simple & {
     padding-bottom: 80px;
   }
