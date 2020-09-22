@@ -26,10 +26,14 @@ import ReviewCarousel from './components/ReviewCarousel.vue';
 import Banner from './components/Banner.vue';
 import BannerReviewCarousel from './components/BannerReviewCarousel.vue';
 import CategoryBanner from './components/CategoryBanner.vue';
+import HiwProps from './components/HiwProps.vue';
+import CustomizableCategory from './components/CustomizableCategory.vue';
+import CustomComfort from './components/CustomComfort.vue';
 import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import CategoryCollections from './components/CategoryCollections.vue';
 import WallArtCategoryCollections from './components/WallArtCategoryCollections.vue';
 import CategoryDetails from './components/CategoryDetails.vue';
+import CategoryDetail from './components/CategoryDetail.vue';
 import CategoryVideo from './components/CategoryVideo.vue';
 import CategoryVprops from './components/CategoryVprops.vue';
 import LifeStylePhotos from './components/LifeStylePhotos.vue';
@@ -77,9 +81,13 @@ import store from './store';
       BannerReviewCarousel,
       RecentlySoldProducts,
       CategoryBanner,
+      HiwProps,
+      CustomizableCategory,
+      CustomComfort,
       CategoryCollections,
       WallArtCategoryCollections,
       CategoryDetails,
+      CategoryDetail,
       CategoryVideo,
       CategoryVprops,
       LifeStylePhotos,
