@@ -1,61 +1,143 @@
 <div id="app">
   <div class="categorySofas">
     {% assign hideDesktopSlider = true %}
-    {% assign hideMobileSlider = false %}
-    {% assign bannerContent = "{'items':[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_00-min.jpg?1661560', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_00-min.jpg?1661566','heading':'Armchairs','description':'Start with a silhouette and customize every detail to make it your own.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'default'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_01-min.jpg?1661560', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_01-min.jpg?1661566','heading':'Arm Style','description':'Everything from tall & thin, to short & stout. Select from 10+ styles.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'arm-style'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_02-min.jpg?1661560','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_02-min.jpg?1661566','heading':'Upholstery','description':'Where nice colors and fine textures come to party. 45+ Options to explore.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'upholstery'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_03-min.jpg?1661560', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_03-min.jpg?1661566','heading':'Pillow & Cushion Shape','description':'Choose either Plush or Snug and give your sofa the perfect sit.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'pillow-cushion-shape'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_04.jpg?1664680','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_04.jpg?1664680','heading':'Pillow Detail','description':'Button ‘em, tuft ‘em, stitch ‘em, or leave ‘em bare: anything goes.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'pillow-detail'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_05.jpg?1664680', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_05.jpg?1664680','heading':'Cushion Detail','description':'Tuft ‘em, stitch ‘em, or leave ‘em bare: whatever you want.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'cushion-detail'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_d_06-min.jpg?1661560','imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_tb_m_06-min.jpg?1661566','heading':'Base Style','description':'From Retro to this-century modern, choose the base that fits your style.','linkText':'Customize now','url':'https://insideweather.com/products/ac14bj11111013-oxford-weave-milo-armchair-in-daffodil', dataSource: 'base-style'}]}"%}
+    {% assign hideMobileSlider = true %}
+    {% assign hasBannerContent = true %}
+    {% assign newButton = true %}
+    {% assign bannerContent = "{'items':[{'image':'http://cdn.insideweather.com/cat/sofa-line/tb/cat_armchair_tb_d_v2.jpg', 'imageSm': 'http://cdn.insideweather.com/cat/sofa-line/tb/cat_armchair_tb_m_v2.jpg','heading':'CUSTOM ARMCHAIRS','description':'Made-to-order sustainably, quickly custom-built from scratch here in the U.S., and ships free to you in a manageable box.','linkText':'Customize now','url':'https://insideweather.com/products/ac17an1010171010-custom-issa-armchair-in-cloud'}]}"%}
 
-    {% assign categoryBannerAccordion = "[{'accordionHead': 'Arm Style', 'accordionDescription': 'Everything from tall & thin, to short & stout. Select from 10+ styles.', 'accordionTarget': 'arm-style'},{'accordionHead': 'Upholstery', 'accordionDescription': 'Where nice colors and fine textures come to party. 45+ Options to explore.', 'accordionTarget': 'upholstery'}, {'accordionHead': 'Pillow & Cushion Shape', 'accordionDescription': 'Choose either Plush or Snug and give your sofa the perfect sit.', 'accordionTarget': 'pillow-cushion-shape'},{'accordionHead': 'Pillow Detail', 'accordionDescription': 'Button ‘em, tuft ‘em, stitch ‘em, or leave ‘em bare: anything goes.', 'accordionTarget': 'pillow-detail'},{'accordionHead': 'Cushion Detail', 'accordionDescription': 'Tuft ‘em, stitch ‘em, or leave ‘em bare: whatever you want.', 'accordionTarget': 'cushion-detail'}, {'accordionHead': 'Base Style', 'accordionDescription': 'From Retro to this-century modern, choose the base that fits your style.', 'accordionTarget': 'base-style'}]" %}
-
-    <category-banner
+    <category-banner 
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
-      :category-banner-accordion="{{categoryBannerAccordion}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-content="{{hasBannerContent}}"
+      :new-button={{newButton}}
       >
     </category-banner>
 
-    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_01.jpg?1661574', 'title': 'Issa Armchair', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/products/ac18bd11101019-pebble-weave-issa-armchair-in-heathered-slate'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_02.jpg?1661574', 'title': 'Levi Armchair', 'linkText': 'Customize starting at $598', hyperLink: 'https://insideweather.com/products/ac15bc11101017-pebble-weave-levi-armchair-in-heathered-taupe'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_03.jpg?1661574', 'title': 'Soba Armchair', 'linkText': 'Customize starting at $798', hyperLink: 'https://insideweather.com/products/ac10ar11101013-oxford-weave-soba-armchair-in-pebble'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_04.jpg?1661574', 'title': 'Brooklyn Armchair', 'linkText': 'Customize starting at $548', hyperLink: 'https://insideweather.com/products/ac19bl11101010-cross-weave-brooklyn-armchair-in-cloud'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_05.jpg?1661574', 'title': 'Asher Armchair', 'linkText': 'Customize starting at $748', hyperLink: 'https://insideweather.com/products/ac22bd11101014-pebble-weave-asher-armchair-in-heathered-slate'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_06.jpg?1661574', 'title': 'Nox Armchair', 'linkText': 'Customize starting at $448', hyperLink: 'https://insideweather.com/products/ac13bc11101021-pebble-weave-nox-armchair-in-heathered-taupe'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_07.jpg?1661574', 'title': 'Milo Armchair', 'linkText': 'Customize starting at $498', hyperLink: 'https://insideweather.com/products/ac14ar11101023-oxford-weave-milo-armchair-in-pebble'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchair_col_08.jpg?1661574', 'title': 'Jett Armchair', 'linkText': 'Customize starting at $698', hyperLink: 'https://insideweather.com/products/ac17bl11101015-cross-weave-jett-armchair-in-cloud'}]" %}
+    {% assign valueProps = "[{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/usa-ico.png', 'title': 'MADE IN THE USA'},{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/home-trial-ico.png', 'title': '365 DAY HOME TRIAL'},{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/free-ship-ico.png', 'title': 'FREE SHIPPING'},{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/sustainable-ico.png', 'title': 'SUSTAINABLE'}]"%}
+
+    <hiw-props
+      :value-props="{{valueProps}}"
+    ></hiw-props>
+
+    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:ISSA%20(FABRIC)&feature=UPHOLSTERY:ELIOT%20DOVE&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:BEVELED&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:NONE&size=400', 'title': 'Issa Armchair', 'linkText': 'Customize starting at $348', hyperLink: 'https://insideweather.com/products/ac17bu1110171010-custom-issa-armchair-in-mist'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:LEVI%20(FABRIC)&feature=UPHOLSTERY:ELIOT%20SUNFLOWER&feature=PILLOW%20AND%20CUSHION%20SHAPE:WATERFALL&feature=PILLOW%20DETAIL:BUTTON%201&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20BRASS&feature=ADD%20ONS:NONE&size=400', 'title': 'Levi Armchair', 'linkText': 'Customize starting at $598', hyperLink: 'https://insideweather.com/products/ac14bt1011211010-custom-levi-armchair-in-butterscotch'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:ASHER%20(WOOD)&feature=ARM%20FINISH:LIGHT%20ESPRESSO&feature=UPHOLSTERY:ECLIPSE%20OLIVE&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:PILLOW%2020&size=400', 'title': 'Asher Armchair', 'linkText': 'Customize starting at $748', hyperLink: 'https://insideweather.com/products/ac22bm1110161310-custom-asher-armchair-in-moss'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:BROOKLYN%20(FABRIC)&feature=UPHOLSTERY:MONACO%20MONDO&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20SILVER&feature=ADD%20ONS:NONE&size=400', 'title': 'Brooklyn Armchair', 'linkText': 'Customize starting at $548', hyperLink: 'https://insideweather.com/products/ac18be1210111010-custom-brooklyn-armchair-in-oyster'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:JETT%20(WOOD)&feature=ARM%20FINISH:LATTE&feature=UPHOLSTERY:ROYALE%20COBALT&feature=PILLOW%20AND%20CUSHION%20SHAPE:WATERFALL&feature=PILLOW%20DETAIL:BUTTON%202&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400', 'title': 'Jett Armchair', 'linkText': 'Customize starting at $698', hyperLink: 'https://insideweather.com/products/ac15dc1012131010-custom-jett-armchair-in-sapphire'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:NOX%20(FABRIC)&feature=UPHOLSTERY:ROYALE%20BLUSH&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:PILLOW%2018&size=400', 'title': 'Nox Armchair', 'linkText': 'Customize starting at $448', hyperLink: 'https://insideweather.com/products/ac12da1110121210-custom-nox-armchair-in-powder-pink'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:MILO%20(FABRIC)&feature=UPHOLSTERY:MICRO%20SUEDE%20WHISKEY&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:BUTTON%201&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:BLACK&feature=ADD%20ONS:NONE&size=400', 'title': 'Milo Armchair', 'linkText': 'Customize starting at $498', hyperLink: 'https://insideweather.com/products/ac13br1111231010-custom-milo-armchair-in-whiskey'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:SOBA%20(WOOD)&feature=ARM%20FINISH:LIGHT%20ESPRESSO&feature=UPHOLSTERY:OXFORD%20WEAVE%20PEBBLE&feature=PILLOW%20AND%20CUSHION%20SHAPE:WATERFALL&feature=PILLOW%20DETAIL:BUTTON%203&feature=BASE%20STYLE:BEVELED&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:NONE&size=400', 'title': 'Soba Armchair', 'linkText': 'Customize starting at $748', hyperLink: 'https://insideweather.com/products/ac11co1013171010-custom-soba-armchair-in-pebble'}]" %}
 
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
           :product-collections="{{productCollections}}"
-          section-heading="Start with a Silhouette"
-          section-description="Choose your favorite collection and make it your own."
+          section-heading="Customize Our Best Sellers"
+          section-description="Start with a silhouette and make it your own."
         >
         </category-collections>
       </div>
     </div>
 
-    {% assign productDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_01_d.jpg?1661520', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_01_m.jpg?1661520', 'title': 'Custom Upholstery','description': 'Play around and flip through all the colors and textures! When you’ve narrowed it down to your favs, order some free swatches for that IRL buzz. Next thing you know you’ll be sitting pretty on top of your custom made throne.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_02_d.jpg?1661520', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_02_m.jpg?1661520', 'title': 'Life-Proof','description': 'Our armchairs are designed to withstand whatever life throws at them. Like to eat on the couch? No problem, our fabrics are easy to clean. Have a fuzzy friend? No worries, they’re pet-friendly too! And if you have to move? Armchairs can be put together, and taken apart with ease.'},{'isVideo':'true', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_03_d.mp4?1664668', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_sofa-sofette-arm_details_03_m.mp4?1661520', 'title': 'The Composition of Comfort', 'description': 'After extensive research & user testing we’ve perfected a combination that yields the perfect balance of support, squish and a little bit of bounce. Our domestically sourced, medium density, high resilience foam cushions are topped with a plush layer of our signature, 100% recycled down alternative topper. Recycled? Oh yes. This synthetic down upcycles hundreds of plastic water bottles to add that cloud-like touch to your lounging experience. For reference, just one of our sofas contains over 200 upcycled plastic bottles.'},]" %}
+    {% assign listItems = "[{'image':'http://cdn.insideweather.com/cat/sofa-line/customize/cat_armchair_customize-bnr_m_01_v1-min.png'},{'image':'http://cdn.insideweather.com/cat/sofa-line/customize/cat_armchair_customize-bnr_m_02_v1-min.png'}]"%}
+    
+    <div class="customizable-category --pd-t-110 --pd-b-130 --pd-m-b-0">
+      <div class="customizable-wrapper" style="background-color: #F7EBC2">
+        <customizable-category
+          :list-items="{{listItems}}"
+          destination-url="https://insideweather.com/products/ac17an1010171010-custom-issa-armchair-in-cloud"
+          desktop-image="http://cdn.insideweather.com/cat/sofa-line/customize/cat_armchair_customize-bnr_d_01_v1-min.png"
+          btn-text="Customize Now"
+          section-heading="The Most Customizable Armchair on the Internet"
+          section-description="When we say custom, we mean it. Explore all the ways you can modify our armchair to make it truly yours. Each one is made to order—per your specs—at our California Crafthouse and ships FREE to your doorstep months faster than any other &ldquo;custom&rdquo; maker out there."
+        >
+        </customizable-category>
+      </div>
+    </div>
 
-    <div class="productDetails --pd-t-130 --pd-b-130">
-      <category-details :product-details="{{productDetails}}"></category-details>
+    {% assign categoryDetails = "[{'isVideo':'true','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery_d.mp4', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery_m.mp4', 'title': 'Upholsteries Galore','description': 'The mecca of fabric libraries if you will. Select from 100+ choices that span the rainbow, all of which are hand-stitched here in California. We’re talkin’ stain-resistant Performance Upholsteries, Pet-friendly possibilities, and even Commercial Grade selections so find one that’s truly tailored to comfort your needs (& potential mischief). Your match is here, you just have to find it!'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = true %}
+
+    <div class="categoryDetails">
+      <category-detail 
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        desktop-image="http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_d_v3.png"
+        mobile-image="http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_m_v3.png"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_d_v2.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_m_v2.jpg', 'title': 'Life-Proof Seating','description': 'Our armchairs are designed to withstand whatever life throws at them. Every upholstered element of each frame is enclosed in a water-resistant nylon casing for the ultimate protection against, well, you. This means even the back panel, the arms, and—of course—the pillows & cushions have this added layer of protection. Additionally, every cushion & pillow features a concealed zipper for easy, practical removal & cleaning. P.S. For fabric specific info on durability, check out Wyzenbeek Test Method Rub Count Scores on each product page!'}]" %}
+    {% assign isReverse = true %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail 
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign options = "[{'index': '1','dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_01_m.png','heading': 'CLASSIC BLEND','desc': 'Supportive Comfort | Firm yet cushy sit','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_01.png','description': 'A medium density, high resilience foam topped with a plush layer of our signature, 100% recycled down alternative. The perfect balance of support, squish and a little bit of bounce.'},{'index': '2','dImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_d.png','mImage': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort_02_m.png','heading': 'MEMORY FOAM BLEND','desc': 'Sink-in Comfort | Plush contouring layers','icon': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_custom-comfort-icon_02.png','description': 'A smooth, transitional layer of temperature-regulating memory foam sits atop medium density, high resiliency foam and is wrapped in a lush layer of our sustainable, recycled down alternative.'}]"%}
+
+    <div class="custom-comfort-detail-category --pd-t-110 --pd-b-110 --pd-m-b-0">
+      <div class="custom-comfort-wrapper">
+        <custom-comfort
+          :options="{{options}}"
+          section-heading="Custom Comfort"
+          section-description="We believe that one size does not fit all which is why we've decided to hand over all comfort control to you—the actual sofa snuggler. Choose between various layers of domestically sourced insert options to find the custom formula that's truly right for you."
+        >
+        </custom-comfort>
+      </div>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_d.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_m.jpg', 'title': 'The Sofa of 200 Plastic Bottles','description': 'Every upholstered portion of our armchairs (yes, even the back) is wrapped in a layer of our Signature Synthetic Down and the pillows are full of it. This cushy, cloud-like material is 100% recycled down alternative and one sofa = roughly 200 recycled plastic bottles. The disposable bottles that we upcycle are sterilized in hot water, ground into tiny flakes, re-melted and extruded to make a polyester fiber. This material helps keep plastics out of our landfills & oceans and helps fill your home with comfortable, sustainable products as we believe both Mother Earth and your comfort are uncompromisable.'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-b-110 --pd-m-t-0">
+      <category-detail 
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
     </div>
 
     {% assign categoryValueProps = "[{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_01-ca-crafted_m_min.jpg?1661495', 'title':'California Crafted','description':'Every one of our pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_02-free-ship_m_min.jpg?1661495', 'title':'Quick Ship Custom','description':'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial-min.jpg?1661468', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_03-home-trial_m_min.jpg?1661495', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_d-min.png?v=1583278319', 'imageSm': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_vprop_04-sustainable_m-min.png?v=1583278319', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]"%}
-
     <div class="categoryValuePropsWrapper">
-      <category-vprops
+      <category-vprops 
       :category-value-props="{{categoryValueProps}}"
       background-color="#F2F2F2"
       >
-      </category-vprops>
+      </category-vprops> 
     </div>
 
-    {% assign lifeStyleItems = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_01-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S281A3661/138S281A3661-0_small.jpg','title':'Vegan Leather Nox Armchair in Ivory','price':'$723', 'productUrl':'https://insideweather.com/products/ac13bb10111019-vegan-leather-nox-armchair-in-ivory'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S753F88CC/47S753F88CC-0_small.jpg','title':'Espresso Rectangle Side Table in Green Marble','price':'$108', 'productUrl':'https://insideweather.com/products/st15fl13-espresso-rectangle-side-table-in-green-marble'}]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_02-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S4ED5876F/138S4ED5876F-0_small.jpg','title':'Cross Weave Asher Armchair in Yale Blue','price':'$748', 'productUrl':'https://insideweather.com/products/ac22aa11101013-cross-weave-asher-armchair-in-yale-blue'},]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_03-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138SE7FE1684/138SE7FE1684-0_small.jpg','title':'Cross Weave Issa Armchair in Olive Green','price':'$448', 'productUrl':'https://insideweather.com/products/ac18at11111116-cross-weave-issa-armchair-in-olive-green'},]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_04-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138SC3D2F4EA/138SC3D2F4EA-0_small.jpg','title':'Mod Velvet Milo Armchair in Jade Green','price':'$673', 'productUrl':'https://insideweather.com/products/ac14ba11131011-mod-velvet-milo-armchair-in-jade-green'},]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_05-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S74C219CA/138S74C219CA-0_small.jpg','title':'Micro Suede Milo Armchair in Charcoal','price':'$698', 'productUrl':'https://insideweather.com/products/ac14bn11121014-micro-suede-milo-armchair-in-charcoal'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$123', 'productUrl':'https://insideweather.com/products/st12fi12-latte-round-side-table-in-latte-wood'}]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_06-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S8F5F99CB/138S8F5F99CB-0_small.jpg','title':'Pebble Weave Brooklyn Armchair in Heathered Slate','price':'$648', 'productUrl':'https://insideweather.com/products/ac19bd10101012-pebble-weave-brooklyn-armchair-in-heathered-slate'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/138S5AA0FEF1/138S5AA0FEF1-0_small.jpg','title':'Pebble Weave Brooklyn Armchair in Heathered Slate','price':'$748', 'productUrl':'https://insideweather.com/products/ac19bd10121012-pebble-weave-brooklyn-armchair-in-heathered-slate'},]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_07-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S0AD4079E/138S0AD4079E-0_small.jpg','title':'Cross Weave Soba Armchair in Cayenne','price':'$898', 'productUrl':'https://insideweather.com/products/ac11bo11121117-cross-weave-soba-armchair-in-cayenne'},]},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_08-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S9393641F/138S9393641F-0_small.jpg','title':'Cross Weave Issa Armchair in Aubergine','price':'$398', 'productUrl':'https://insideweather.com/products/ac18bs11131021-cross-weave-issa-armchair-in-aubergine'},]},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_10-min.jpg?1661584','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S10006DA6/138S10006DA6-0_small.jpg','title':'Cross Weave Issa Armchair in Yale Blue','price':'$398', 'productUrl':'https://insideweather.com/collections/armchairs/products/138s10006da6-issa-armchair-344716'}]},{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_armchairs_lg_09-min.jpg?1661584',
-    'popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/138S9719A2AC/138S9719A2AC-0_small.jpg','title':'Mod Velvet Brooklyn Armchair in Midnight','price':'$448', 'productUrl':'https://insideweather.com/products/ac18aa10131013-cross-weave-issa-armchair-in-yale-blue'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$123', 'productUrl':'https://insideweather.com/products/st12fi12-latte-round-side-table-in-latte-wood'}]}]"%}
+    {% assign lifeStyleItems = "[{'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_01_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:BROOKLYN%20(FABRIC)&feature=UPHOLSTERY:MOD%20VELVET%20MIDNIGHT&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:BLACK&feature=ADD%20ONS:NONE&size=400','title':'Custom Brooklyn Armchair in Midnight','price':'$773', 'productUrl':'https://insideweather.com/products/ac18cf1210231011-custom-brooklyn-armchair-in-midnight'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$118', 'productUrl':'https://insideweather.com/products/st12fi12-latte-round-side-table-in-latte-wood'}]}, 
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_02_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:MILO%20(FABRIC)&feature=UPHOLSTERY:PEBBLE%20WEAVE%20SEASHELL&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:BUTTON%201&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400','title':'Custom Milo Armchair in Seashell','price':'$678', 'productUrl':'https://insideweather.com/products/ac13cw1111121011-custom-milo-armchair-in-seashell'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_SFT/frames/1/ANA_SFT.JPG?background=FFFFFF&feature=ARM%20STYLE:ISSA%20(FABRIC)&feature=UPHOLSTERY:ROYALE%20EVERGREEN&feature=CONFIGURATION:CLASSIC_FULL&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:NONE&size=400','title':'Custom Issa Sofette in Evergreen','price':'$848', 'productUrl':'https://insideweather.com/products/se17cx101210151010-custom-issa-sofette-in-evergreen'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/48S9812660E/48S9812660E-0_small.jpg','title':'Latte Square Coffee Table in Latte Wood','price':'$168', 'productUrl':'https://insideweather.com/products/ct10fi17-latte-square-coffee-table-in-latte-wood'}]}, 
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_03_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:NOX%20(FABRIC)&feature=UPHOLSTERY:CROSSWEAVE%20OLIVE%20GREEN&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:NONE&size=400','title':'Custom Nox Armchair in Olive Green','price':'$548', 'productUrl':'https://insideweather.com/products/ac12ao1210161011-custom-nox-armchair-in-olive-green'},]}, 
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_04_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:SOBA%20(WOOD)&feature=ARM%20FINISH:LIGHT%20ESPRESSO&feature=UPHOLSTERY:CROSS%20WEAVE%20CAYENNE&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:BEVELED&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:NONE&size=400','title':'Custom Soba Armchair in Cayenne','price':'$898', 'productUrl':'https://insideweather.com/products/ac11am1210171011-custom-soba-armchair-in-cayenne'}, ]}, 
+    
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_05_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:BROOKLYN%20(FABRIC)&feature=UPHOLSTERY:MICRO%20SUEDE%20CHARCOAL&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:BEVELED&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400','title':'Custom Brooklyn Armchair in Charcoal','price':'$798', 'productUrl':'https://insideweather.com/products/ac18bo1210141011-custom-brooklyn-armchair-in-charcoal'},{'productImage':'https://banksy-images.s3.amazonaws.com/items/47SA643C56D/47SA643C56D-0_small.jpg','title':'Latte Round Side Table in Latte Wood','price':'$118', 'productUrl':'https://insideweather.com/products/st12fi12-latte-round-side-table-in-latte-wood'}]}, 
+    
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_06_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:MILO%20(FABRIC)&feature=UPHOLSTERY:PEBBLE%20WEAVE%20SEASHELL&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400','title':'Custom Milo Armchair in Seashell','price':'$648', 'productUrl':'https://insideweather.com/products/ac13cw1110121011-custom-milo-armchair-in-seashell'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_JORN_ST/frames/4/CNV_JORN_ST.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=SHELF%20PATTERN:DS1106&size=400','title':'Latte Jorn Side Table','price':'$268', 'productUrl':'https://insideweather.com/products/js11ke-latte-jorn-side-table'}]}, 
+    
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_07_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:MILO%20(FABRIC)&feature=UPHOLSTERY:MERRIT%20HACIENDA&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400','title':'Custom Milo Armchair in Terracotta','price':'$698', 'productUrl':'https://insideweather.com/products/ac13bx1110121011-custom-milo-armchair-in-terracotta'},{'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_FLW_HEX/frames/1/CNV_FLW_HEX.JPG?background=FFFFFF&feature=BASE%20FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=TOP%20SHELF:LATTE&feature=BOTTOM%20SHELF:SOLID%20LAMINATE%20RETRO%20MINT&size=400','title':'Latte Hanna Side Table','price':'$233', 'productUrl':'https://insideweather.com/products/hs10ficd-latte-hanna-side-table'}]}, 
+    
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_08_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:MILO%20(FABRIC)&feature=UPHOLSTERY:PEBBLE%20WEAVE%20SEASHELL&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400','title':'Custom Milo Armchair in Seashell','price':'$648', 'productUrl':'https://insideweather.com/products/ac13cw1110121011-custom-milo-armchair-in-seashell'}]},  
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_10_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:ISSA%20(FABRIC)&feature=UPHOLSTERY:CROSS%20WEAVE%20YALE%20BLUE&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:BUTTON%201&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:NONE&size=400','title':'Custom Issa Armchair in Yale Blue','price':'$503', 'productUrl':'https://insideweather.com/products/ac17as1111131011-custom-issa-armchair-in-yale-blue'}]}, 
+    
+    
+    {'image': 'http://cdn.insideweather.com/cat/sofa-line/lifestyles/armchair/cat_armchairs_lg_09_v2.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/ANA_ARM/frames/1/ANA_ARM.JPG?background=FFFFFF&feature=ARM%20STYLE:ISSA%20(FABRIC)&feature=UPHOLSTERY:MOD%20VELVET%20BLUE%20TOPAZ&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:BUTTON%201&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20BRASS&feature=ADD%20ONS:NONE&size=400','title':'Custom Issa Armchair in Blue Topaz','price':'$603', 'productUrl':'https://insideweather.com/products/ac17cd1211211011-custom-issa-armchair-in-blue-topaz'}]}]"%}
 
     <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
       <life-style-photos
         :life-style-items="{{lifeStyleItems}}"
-        section-heading="Visualize the Possibilities"
-        section-description="Ask more from your furniture."
-        pop-up-heading="Visualize the Possibilities"
+        section-heading="Get Inspired"
+        section-description="Kick your feet up & visualize the possibilities."
+        pop-up-heading="Get Inspired"
       >
       </life-style-photos>
     </div>
@@ -93,15 +175,16 @@ function fadeIn(a, t) {
   ).setTween(setFade).addTo(controller);
 }
 
-jQuery(function ($) {
-
-  $('.CategoryBanner--clasification .point').click(function(){
+jQuery(function ($) { 
+  
+  $('.CategoryBanner--clasification .point').click(function (event){
     if($(this).hasClass('show-details')) {
       event.preventDefault();
       event.stopPropagation();
       $(this).find('p').slideToggle();
       $(this).removeClass('show-details');
       $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
     } else {
       $('.CategoryBanner--clasification .point p').slideUp();
       $(this).find('p').slideDown();
@@ -134,7 +217,7 @@ jQuery(function ($) {
   new ScrollMagic.Scene({
     triggerElement: '.CtegoryCollections--itemWrapper',
     reverse: false,
-    triggerHook: "onEnter",
+    triggerHook: "onEnter", 
     offset: 250
   }).setTween(collectionTween).addTo(controller);
 
@@ -144,13 +227,13 @@ jQuery(function ($) {
     var videoDetect = $(figureElement).find('video');
     var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
     new ScrollMagic.Scene( {
-      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
       reverse: false, triggerHook: "onEnter", offset: 250
     }).setTween(categoryDetailsTween).addTo(controller);
 
     var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
     new ScrollMagic.Scene( {
-      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
       reverse: false, triggerHook: "onEnter", offset: 250
     }).setTween(categoryDetailsContentTween).addTo(controller);
 

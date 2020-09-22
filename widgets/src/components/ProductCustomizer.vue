@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="ProductCustomizer__DetailWrapper">
+    <div
+      v-if="!disabled"
+      class="ProductCustomizer__DetailWrapper">
       <div
         v-for="flag in flags"
         :key="flag.title"
@@ -59,7 +61,7 @@
         <info-popup
           v-if="hasFulfillmentMarkup"
           always-on-top
-          text="Heads up! This design's lead time is longer than usual since we are temporarily out of a few materials needed to get started right away."
+          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!"
         >
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
@@ -82,9 +84,45 @@
         class="affirm-as-low-as"
       />
     </div>
-    <hr>
-    <inspiration-options :products="filters.featured_products || []" />
-    <!-- <swatch-browser v-if="!isDecor" /> -->
+    <div
+    v-else
+    class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
+      <div class="ProductCustomizer__FlagRow">
+        <div class="ProductCustomizer__Flag ProductCustomizer__404-notice" >404 Error</div>
+      </div>
+      <div>
+        <div class="ProductCustomizer__Name">
+          {{ productName }}
+          <div
+            v-if="modelNumber"
+            class="ProductCustomizer__Model"
+          >Model No&deg; {{ modelNumber }}</div>
+        </div>
+        <span
+          v-if="!disabled"
+          :class="{ isFavorite }"
+          role="button"
+          class="ProductCustomizer__Favorite"
+          @click.stop.prevent="favoriteCurrentProduct"
+        >
+          <font-awesome-icon :icon="favoriteIcon"/>
+        </span>
+        <product-detail-slider
+        v-if="isMobile"
+        :cylindo="useCylindo"
+        cylindo-id="cylindo-main"
+      />
+      </div>
+      <div class="ProductCustomizer__404-content">
+        <h2>{{ disabledInfo.disabled_title }}</h2>
+        <p>{{ disabledInfo.disabled_content }}</p>
+        <a v-bind:href="disabledInfo.disabled_button_url">{{ disabledInfo.disabled_button_content }}</a>
+      </div>
+    </div>
+    <div v-if="!disabled">
+      <hr>
+      <inspiration-options :products="filters.featured_products || []" />
+    </div>
     <div
       v-if="!isDecor"
       :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
@@ -278,6 +316,15 @@ export default {
           body: DOMPurify.sanitize(body),
         }));
       },
+      disabled: state => state.filters.disabled,
+      disabledInfo: state => {
+        return {
+          disabled_title: state.filters.disabled_title,
+          disabled_content: state.filters.disabled_content,
+          disabled_button_content: state.filters.disabled_button_content,
+          disabled_button_url: state.filters.disabled_button_url
+        }
+      }
     }),
 
     useCylindo() {
@@ -781,7 +828,7 @@ html.ProductCustomizer--Open {
       font-size: 22px;
       letter-spacing: .025em;
       line-height: 30px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
   }
 
@@ -1117,12 +1164,53 @@ html.ProductCustomizer--Open {
     }
   }
 
-  &__Panel {
-    // height: 100%;
+  &__404-notice {
+    color:#FFFFFF;
+    background: #202020
+  }
 
-    // &:not(#{&}--Active) {
-    //   display: none;
-    // }
+  &__404-content {
+    h2 {
+      font-family: Avalon;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 30px;
+      color: #202020;
+
+      @include at-query($breakpoint-small) {
+        font-size: 18px;
+        letter-spacing: 0.05em;
+        text-align: center;
+        margin-bottom:18px;
+      }
+    }
+    p {
+      font-family: Avalon, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom:34px;
+      @include at-query($breakpoint-small) {
+        margin-bottom:32px;
+      }
+    }
+    a {
+      font-family: Avalon;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      display: block;
+      background-color: #202020;
+      color: #fff;
+      text-align: center;
+      padding: 14.5px;
+      @include at-query($breakpoint-small) {
+        padding: 14px;
+      }
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 
   &__Footer {

@@ -1,34 +1,56 @@
 <template>
   <div class="ProductDetail">
-    <swatch-browser v-if="!isDecor && isMobile" />
-    <template v-if="!isDecor">
-
-      <div class="ProductDetail-information-tabs__wrapper" v-if="!isMobile">
-        <div class="ProductDetail-information-tabs__headings">
-          <p class="ProductDetail-information-tabs__heading ProductDetail-information-tabs__heading--active" data-tab="0" @click = "openTab(0)"><span>Dimensions</span></p>
-          <p class="ProductDetail-information-tabs__heading" data-tab="1" @click = "openTab(1)"><span>Assembly</span></p>
-          <p class="ProductDetail-information-tabs__heading" data-tab="2" @click = "openTab(2)"><span>Shipping</span></p>
-        </div>
-        <div class="ProductDetail-information-tabs__bg">
-          <div class="ProductDetail-information-tabs__tabs">
-            <div class="ProductDetail-information-tabs__tab" data-tab="0">
-              <div class="ProductDetail-information-tabs__images-tab">
+    <swatch-browser v-if="!isDecor && isMobile && !disabled" />
+    <div
+      v-if="!isMobile && detailTabs.length"
+      class="ProductDetail-information-tabs__wrapper"
+    >
+      <div class="ProductDetail-information-tabs__headings">
+        <p
+          v-for="tab in detailTabs"
+          :key="tab.title"
+          :class="{ 'ProductDetail-information-tabs__heading--active': tab.title === activeTab.title }"
+          class="ProductDetail-information-tabs__heading"
+          @click="openTab(tab)"
+        ><span>{{ tab.title }}</span></p>
+      </div>
+      <div class="ProductDetail-information-tabs__bg">
+        <div class="ProductDetail-information-tabs__tabs">
+          <transition-group
+            enter-active-class="animated fadeInUp"
+            leave-active-class="animated fadeOutDown"
+          >
+            <div
+              v-for="tab in detailTabs"
+              v-if="tab.title === activeTab.title /* eslint-disable-line */"
+              :key="tab.title"
+              class="ProductDetail-information-tabs__tab"
+            >
+              <div
+                v-if="tab.title === 'Dimensions'"
+                class="ProductDetail-information-tabs__images-tab"
+              >
                 <img v-for="image in dimensionImages"
                   :key="image"
                   :src="image">
               </div>
-              
+              <p v-else>
+                {{ interpolate(tab.template) }}
+              </p>
             </div>
-            <div class="ProductDetail-information-tabs__tab" style="display:none;" data-tab="1">
-              <p>{{ interpolatedAssembly }}</p>
-            </div>
-            <div class="ProductDetail-information-tabs__tab" style="display:none;" data-tab="2">
-              <p>{{ interpolatedShipping }}</p>
-            </div>
-          </div>
+          </transition-group>
+          <div
+            v-if="!detailTabs.length"
+            class="ProductDetail-information-tabs__tab"
+          ><p>{{ interpolatedDescription }}</p></div>
         </div>
       </div>
-      <div class="ProductDetail__Headings" v-if="isMobile">
+    </div>
+    <div
+      v-if="isMobile && detailTabs.length"
+      class="ProductDetail__Headings"
+    >
+      <template v-if="detailTabs.some(tab => tab.title === 'Dimensions')">
         <h2 class="ProductDetail__Heading">Dimensions</h2>
         <div class="ProductDetail__Dimensions">
           <img
@@ -36,20 +58,19 @@
             :key="image"
             :src="image">
         </div>
-        <div class="ProductDetail__SplitBlocks">
-          <div>
-            <h2 class="ProductDetail__Heading">Assembly</h2>
-            <p>{{ interpolatedAssembly }}</p>
-          </div>
-          <div>
-            <h2 class="ProductDetail__Heading">Shipping</h2>
-            <p>{{ interpolatedShipping }}</p>
-          </div>
+      </template>
+      <div class="ProductDetail__SplitBlocks">
+        <div
+          v-for="tab in detailTabs.filter(tab => tab.title !== 'Dimensions')"
+          :key="tab.title"
+        >
+          <h2 class="ProductDetail__Heading">{{ tab.title }}</h2>
+          <p>{{ interpolate(tab.template) }}</p>
         </div>
       </div>
-    </template>
-    <related-products></related-products>
-    <swatch-browser v-if="!isDecor && !isMobile" />
+    </div>
+    <related-products v-if="!disabled"></related-products>
+    <swatch-browser v-if="!isDecor && !isMobile  && !disabled" />
     <div class="--custom-container">
       <h2
         v-if="(isDecor || filters.contents) && isMobile"
@@ -57,7 +78,7 @@
       >Details</h2>
     </div>
     <div
-      v-if="isDecor"
+      v-if="isDecor && interpolatedDescription.length"
       class="ProductDetail__Description --custom-container"
     >
       <p>{{ interpolatedDescription }}</p>
@@ -92,7 +113,6 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import SwatchBrowser from './SwatchBrowser.vue';
 import RelatedProducts from './RelatedProducts.vue';
-
 export default {
   components: {
     TemplateBlock,
@@ -102,29 +122,30 @@ export default {
     SwatchBrowser,
     RelatedProducts
   },
-
   mixins: [
     screenMonitor,
     interpolator,
   ],
-
+  data() {
+    return {
+      activeTab: {},
+    };
+  },
   computed: {
     ...mapState({
       filters: state => state.filters,
       productImages: state => state.productImages,
+      detailTabs: state => state.filters.details || [],
+      disabled: state => state.filters.disabled,
     }),
-
     isDecor() {
       return this.filters.configurator_type === 'small';
     },
-
     dimensionImages() {
       const images = [];
-
       if (!this.filters.templates) {
         return images;
       }
-
       let image;
       image = this.filters.templates.find(item => item.key === 'dimensions_image_1');
       image = this.interpolateString(image.template || '');
@@ -136,45 +157,46 @@ export default {
       if (image) {
         images.push(image);
       }
-
       return images;
     },
-
+    interpolate() {
+      return template => this.interpolateString(template);
+    },
     interpolatedAssembly() {
       if (!this.filters.templates) {
         return '';
       }
-
       const { template } = this.filters.templates.find(item => item.key === 'assembly') || { template: '' };
       return this.interpolateString(template);
     },
-
     interpolatedShipping() {
       if (!this.filters.templates) {
         return '';
       }
-
       const { template } = this.filters.templates.find(item => item.key === 'shipping') || { template: '' };
       return this.interpolateString(template);
     },
-
     interpolatedDescription() {
       if (!this.filters.templates) {
         return '';
       }
-
       const { template } = this.filters.templates.find(item => item.key === 'description') || { template: '' };
       return this.interpolateString(template);
     },
   },
+  watch: {
+    detailTabs: {
+      immediate: true,
+      handler(newTabs) {
+        if (!this.activeTab.title && newTabs.length > 0) {
+          this.openTab(newTabs[0]);
+        }
+      },
+    },
+  },
   methods: {
-    openTab(tab){
-      if(! $(`.ProductDetail-information-tabs__tab[data-tab="${tab}"]`).is(':visible')){
-        $(".ProductDetail-information-tabs__heading").removeClass('ProductDetail-information-tabs__heading--active');
-        $(`.ProductDetail-information-tabs__heading[data-tab="${tab}"]`).addClass('ProductDetail-information-tabs__heading--active');
-        $(".ProductDetail-information-tabs__tab").slideUp();
-        $(`.ProductDetail-information-tabs__tab[data-tab="${tab}"]`).slideDown();
-      }
+    openTab(tab) {
+      this.activeTab = tab;
     }
   }
 };
@@ -185,6 +207,12 @@ export default {
 @import '../scss/mixins';
 .ProductDetail {
   position: relative;
+  .animated {
+    animation-duration: .3s;
+  }
+  .animated.fadeInUp {
+    animation-delay: .4s;
+  }
   .ProductCustomizer--Simple & {
     padding-bottom: 80px;
   }
