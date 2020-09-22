@@ -281,11 +281,10 @@
         function hideEmailProperties() {
           var lineItemProperties = document.querySelectorAll('.order-summary__section__content .product__description__property');
           lineItemProperties.forEach(function (item) {
-            if (item.innerText.indexOf('Estimated time to ship') !== -1) {
-              return item.remove();
-            }
-            if (item.innerText.indexOf('User Fulfillment Display') !== -1) {
-              item.innerText = item.innerText.replace('User Fulfillment Display', 'Estimated time to ship');
+            if (item.innerHTML.includes('User Fulfillment Display')) {
+              item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
+            } else {
+              item.remove();
             }
           });
         }
@@ -299,7 +298,7 @@
         });
       })();
     </script>
-    
+
     <script>
       function validateForm() {
         var isValid = true;
