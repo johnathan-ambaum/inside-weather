@@ -67,6 +67,9 @@
 				li {
 					margin-right: 0;
 					margin-right: 0;
+					&:not(:last-child) {
+						margin-right: 0;
+					}
 					width: 50%;
 					&:nth-child(3),					
 					&:nth-child(4) {
