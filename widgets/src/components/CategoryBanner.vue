@@ -50,7 +50,10 @@
             {{bannerContentItems[0].heading}}
           </h2>
           <p
-            :class="animationClass"
+            :class="[
+              (animationClass),
+              (newButton ? 'new-button' : '')
+            ]"
             v-if="isBigScreen"
           >
             {{bannerContentItems[0].description}}
@@ -245,12 +248,14 @@ export default {
       }
       p {
         display: block;
-        max-width: 650px;
         font-family: $font-stack-avalon;
         font-weight: 500;
         margin: 0 0 28px;
         text-align: center;
         @include fonts(15px,#202020,1.46,0.05em);
+        &.new-button {
+          max-width: 650px;
+        }
       }
       a {
         border-bottom: 1px solid;

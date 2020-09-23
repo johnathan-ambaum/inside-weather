@@ -53,16 +53,12 @@
 						v-if="isDescImg"
 						class="detail-img"
 					>
-						<figure 
-							v-if="isBigScreen"
-						>
-							<img :src="desktopImage"/>
-						</figure>
-						<figure 
-							v-if="!isBigScreen"
-						>
-							<img :src="mobileImage"/>
-						</figure>
+						<img 
+            v-if="isBigScreen"
+            :src="desktopImage"/>
+						<img 
+            v-if="!isBigScreen"
+            :src="mobileImage"/>
 					</div>
         </heading-with-description>
       </div>
@@ -110,12 +106,6 @@ export default {
     flex-direction: row;
     &:not(:last-child) {
       margin: 0 0 100px;
-		}
-		.detail-img {
-			figure {
-				margin-top: 6px;
-				padding-bottom: 28%;
-			}
 		}
     figure {
       margin: 0;
@@ -219,12 +209,6 @@ export default {
       }
       &:last-child {
         margin: 0 0 -51px;
-			}
-			.detail-img {
-				figure {
-					margin-top: 2px;
-					padding-bottom: 28.6%;
-				}
 			}
       figure {
         padding-bottom: 56.25%;

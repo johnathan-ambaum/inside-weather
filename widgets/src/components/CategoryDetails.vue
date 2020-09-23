@@ -73,22 +73,13 @@
             v-if="productDetail.isDescImg"
             class="detail-img"
           >
-            <figure 
-              v-if="isBigScreen"
-              :class="[
-                (productDetail.isDescImg) ? 'descImg' : ' ',
-              ]" 
-            >
-              <img :src="productDetail.desktopImg"/>
-            </figure>
-            <figure 
-              v-if="!isBigScreen"
-              :class="[
-                (productDetail.isDescImg) ? 'descImg' : ' ',
-              ]" 
-            >
-              <img :src="productDetail.mobileImg"/>
-            </figure>
+            <img 
+            v-if="isBigScreen"
+            :src="productDetail.desktopImg"/>
+            
+            <img 
+            v-if="!isBigScreen"
+            :src="productDetail.mobileImg"/>
           </div>
         </heading-with-description>
         
@@ -136,12 +127,6 @@ export default {
     &:not(:last-child) {
       margin: 0 0 100px;
     }
-    .detail-img {
-			figure.descImg {
-				margin-top: 6px;
-				padding-bottom: 40%;
-			}
-		}
     figure {
       margin: 0;
       flex-basis: 67%;
@@ -498,12 +483,6 @@ export default {
       &:last-child {
         margin: 0 0 -51px;
       }
-      .detail-img {
-				figure.descImg {
-					margin-top: 2px;
-					padding-bottom: 48%;
-				}
-			}
       figure {
         padding-bottom: 56.25%;
         height: 0;
