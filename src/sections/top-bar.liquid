@@ -1,32 +1,40 @@
 <style>
-  .TopBar {
-    background: {{ section.settings.background_color }};
-    color: {{ section.settings.font_color }};
+  .TopBar-1 {
+    background: {{ section.settings.background_color_1 }};
+    color: {{ section.settings.font_color_1 }};
+  }
+  .TopBar-2 {
+    background: {{ section.settings.background_color_2 }};
+    color: {{ section.settings.font_color_2 }};
+  }
+  .TopBar-3 {
+    background: {{ section.settings.background_color_3 }};
+    color: {{ section.settings.font_color_3 }};
   }
 </style>
 
-<div class="TopBar">
-  {% assign topBars = section.settings.text_range %}
-  {% for i in (1..topBars) %}
+{% assign topBars = section.settings.text_range %}
+{% for i in (1..topBars) %}
+<div class="TopBar TopBar-{{i}} {% if section.settings.text_range == 1 or forloop.index == 1%}active-bar{% endif %}">
   {% capture textIndex %}text_{{ i }}{% endcapture %}
-    <div class="TopBar__bar TopBar-{{i}} {% if section.settings.text_range == 1 or forloop.index == 1%}active-bar{% endif %}">
+    <div class="TopBar__bar">
       <span class="hide--small">{{ section.settings[textIndex] }}</span>
       <span class="hide--large">{{ section.settings.mobile_[textIndex] }}</span>
       {% if section.settings.promo_countdown_enabled %}
         <span id="TopBar__countdown"></span>
       {% endif %}
     </div>
-  {% endfor %}
 </div>
+{% endfor %}
 
 <style>
-  .TopBar__bar:not(.active-bar) {
+  .TopBar:not(.active-bar) {
     display: none;
   }
 </style>
 
 <script>
-  let topBars = document.querySelectorAll(".TopBar__bar");
+  let topBars = document.querySelectorAll(".TopBar");
   let activeBarIndex = 0;
   let topBarSpeed = {{ section.settings.text_range_speed | times: 1000 }}
   function cycleBars() {
@@ -83,15 +91,39 @@
     "name": "Top Bar",
     "settings": [
       {
-        "id": "background_color",
+        "id": "background_color_1",
         "type": "color",
-        "label": "Background Color",
+        "label": "Background Color 1",
         "default": "#f5eeea"
       },
       {
-        "id": "font_color",
+        "id": "background_color_2",
         "type": "color",
-        "label": "Font Color",
+        "label": "Background Color 2",
+        "default": "#f5eeea"
+      },
+      {
+        "id": "background_color_3",
+        "type": "color",
+        "label": "Background Color 3",
+        "default": "#f5eeea"
+      },
+      {
+        "id": "font_color_1",
+        "type": "color",
+        "label": "Font Color 1",
+        "default": "#202020"
+      },
+      {
+        "id": "font_color_2",
+        "type": "color",
+        "label": "Font Color 2",
+        "default": "#202020"
+      },
+      {
+        "id": "font_color_3",
+        "type": "color",
+        "label": "Font Color 3",
         "default": "#202020"
       },
       {
