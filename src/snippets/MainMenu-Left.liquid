@@ -47,7 +47,7 @@
 													{% endif %}
 													{% endunless %}
                         {%- endfor -%}
-											</ul>            
+											</ul>
 										</div>
 										<div style="width:50%"  >
 											<ul class="NavBlock__flex-list--collections" >
@@ -85,9 +85,9 @@
 													<img class="header-default-image"/>
 													<div class="header-image-caption" ></div>
 												</li>
-											</ul>            
+											</ul>
 										</div>
-									</div>       
+									</div>
                 </div>
             </li>
         {% else %}
@@ -96,24 +96,28 @@
     {%- endfor -%}
 </ul>
 <script>
+	var reveal = function (selector) {
+			var img = $(selector);
+			img[0].src = img.data("src");
+	}
 	$('.header-default-image').attr('src', headerImages['default']['src']);
-	$('.header-image-caption').text(headerImages['default']['caption']);	
+	$('.header-image-caption').text(headerImages['default']['caption']);
 	$('.NavBlock__List-Item a').each(function (i, el) {
 		if(headerImages[$(this).attr('href')] !== undefined ){
 			var img = $('<img class="header-image" />');
-			img.attr('src', headerImages[$(this).attr('href')]['src']);
+			img.attr('data-src', headerImages[$(this).attr('href')]['src']);
 			img.prependTo($(this).closest('.Dropdown__Content').find('.header-images-wrapper'));
 		}
 	});
-	$('.NavBlock__List-Item a').mouseenter(function(){	
+	$('.NavBlock__List-Item a').mouseenter(function(){
 		if(headerImages[$(this).attr('href')] !== undefined){
 			var newImage = headerImages[$(this).attr('href')]['src'];
 			var newCaption = headerImages[$(this).attr('href')]['caption'];
 		}
 		if(newImage !== undefined){
 			$(this).closest('.Dropdown__Content').find('.header-images-wrapper img').hide();
-			$(this).closest('.Dropdown__Content').find(`.header-images-wrapper img[src='${newImage}']`).first().show();
-			$(this).closest('.Dropdown__Content').find('.header-images-wrapper .header-image-caption').text(newCaption || '');	
+			reveal($(this).closest('.Dropdown__Content').find(`.header-images-wrapper img[data-src='${newImage}']`).first().show());
+			$(this).closest('.Dropdown__Content').find('.header-images-wrapper .header-image-caption').text(newCaption || '');
 		}
 
 	})
