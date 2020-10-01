@@ -298,13 +298,13 @@
           "FreeSwatchesText1": "<br>Nothing beats seeing the real thing in your home.",
           "FreeSwatchesText2": "Order your favorites and start working your imagination!",
           "FreeSwatchesCta": "START SWATCHING",
-          "HelpOption1Header": "",
+          "HelpOption1Header": "Text",
           "HelpOption1Icon": "shopify:\/\/shop_images\/chat-bubble.png",
           "HelpOption1Text": "415.802.0060",
-          "HelpOption2Header": "",
+          "HelpOption2Header": "Phone",
           "HelpOption2Icon": "shopify:\/\/shop_images\/phone.png",
           "HelpOption2Text": "888.908.3585",
-          "HelpOption3Header": "",
+          "HelpOption3Header": "Email",
           "HelpOption3Icon": "shopify:\/\/shop_images\/envelope.png",
           "HelpOption3Text": "support@insideweather.com"
         }
@@ -851,10 +851,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#b1c8cd",
+          "background_color": "#d4d5c4",
           "font_color": "#ffffff",
-          "text": "<p><a href=\"\/pages\/franklloydwright\" title=\"Frank Lloyd Wright&rsquo;s Usonia by Inside Weather\">NEW Designs in the Best Selling USONIA&trade; Collection!<\/a> Only a few units left available at <strong>20% OFF<\/strong><\/p>",
-          "mobile_text": "<p><a href=\"\/pages\/franklloydwright\" title=\"Frank Lloyd Wright&rsquo;s Usonia by Inside Weather\">NEW Designs &amp; Save <strong>20% OFF<\/strong> the USONIA&trade; Collection!<\/a><\/p>"
+          "text": "<p><a href=\"\/pages\/2020-new-custom-sofa-sale\" title=\"2020 New Custom Sofa Sale\">All NEW Custom Seating is&nbsp;<strong>15% OFF<\/strong>! Shop Sectionals, Sofas, Armchairs &amp; Ottomans<\/a><\/p>",
+          "mobile_text": "<p>All NEW Custom Seating is&nbsp;<strong>15% OFF<\/strong>!&nbsp;<a href=\"\/pages\/2020-new-custom-sofa-sale\" title=\"2020 New Custom Sofa Sale\"><strong>S<\/strong><strong>HOP THE SALE<\/strong><\/a><\/p>"
         }
       }
     },
