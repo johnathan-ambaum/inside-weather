@@ -3,34 +3,28 @@ development:
   theme_id: 12345
   store: loomandloft.myshopify.com
   ignore_files:
-    - page.*.liquid
-    - locales/*
+    # - page.*.liquid
+    # - locales/*
     - assets/gem*
     - assets/pagefly*
-    - snippets/icon-*
-    - templates/customers/*
-    - templates/index*
-    - templates/product.*
+    # - templates/customers/*
+    # - templates/product.*
     - templates/search*
     - sections/featured-*
-    - snippets/page-block*
-    - snippets/ssw*
-    - snippets/variant*
-    - snippets/Avalon*
 
 production:
   password:
   theme_id: "live"
   store: loomandloft.myshopify.com
   ignore_files:
-    - settings_data.json
-    - page.*.liquid
-    - locales/*
+    # - settings_data.json
+    # - page.*.liquid
+    # - locales/*
     - assets/gem*
     - assets/pagefly*
     - snippets/icon-*
     - templates/customers/*
-    - templates/index*
+    # - templates/index*
     - templates/product.*
     - templates/search*
     - sections/featured-*
