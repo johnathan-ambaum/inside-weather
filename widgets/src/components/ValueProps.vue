@@ -144,8 +144,8 @@ export default {
         margin: 0;
         position: absolute;
         text-transform: capitalize;
-        top: 124px;
-        @include fonts(34px,#202020,1.2,0.04em);
+        top: 143px;
+        @include fonts(28px,#202020,1.2,0.04em);
       }
       .details {
         .point{
@@ -164,7 +164,7 @@ export default {
         padding-left: 100px;
 
         h2 {
-          font-size: 34px;
+          font-size: 28px;
         }
       }
       
