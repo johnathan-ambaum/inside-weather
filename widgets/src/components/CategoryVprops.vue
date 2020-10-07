@@ -25,6 +25,7 @@
             <p
               :class="animationClass"
             >
+              <a :href=item.linkto>{{item.link}}</a>
               {{item.description}}
             </p>
           </div>
