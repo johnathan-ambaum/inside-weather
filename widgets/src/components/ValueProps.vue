@@ -144,7 +144,8 @@ export default {
         margin: 0;
         position: absolute;
         text-transform: capitalize;
-        top: 165px;
+        top: 135px;
+        max-width: 330px;
         @include fonts(28px,#202020,1.2,0.04em);
       }
       .details {
@@ -164,6 +165,7 @@ export default {
         padding-left: 100px;
 
         h2 {
+          top: 163px;
           font-size: 28px;
         }
       }
