@@ -144,7 +144,7 @@ export default {
         margin: 0;
         position: absolute;
         text-transform: capitalize;
-        top: 143px;
+        top: 124px;
         @include fonts(34px,#202020,1.2,0.04em);
       }
       .details {
