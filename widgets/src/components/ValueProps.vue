@@ -144,7 +144,7 @@ export default {
         margin: 0;
         position: absolute;
         text-transform: capitalize;
-        top: 143px;
+        top: 165px;
         @include fonts(28px,#202020,1.2,0.04em);
       }
       .details {
@@ -182,7 +182,8 @@ export default {
       .descriptions {
         padding-left: 75px;
         h2 {
-          font-size: 28px;
+          top: 110px;
+          max-width: 330px;
         }
       }
     }
@@ -216,7 +217,7 @@ export default {
           line-height: 32px;
           padding: 0 0 31px;
           position: static;
-
+          max-width: 570px;
         }
       }
     }
@@ -226,6 +227,19 @@ export default {
       .descriptions {
         p {
           padding: 14px 0 0 52px;
+        }
+        h2 {
+          top: 124px;
+          max-width: 290px;
+        }
+      }
+    }
+  }
+  @include at-query('max-width: 320px') {
+    .content {
+      .descriptions {
+        h2 {
+          font-size: 22px;
         }
       }
     }
