@@ -165,7 +165,6 @@ export default {
         padding-left: 100px;
 
         h2 {
-          top: 163px;
           font-size: 28px;
         }
       }
