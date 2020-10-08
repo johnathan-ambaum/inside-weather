@@ -63,6 +63,20 @@ export default class FilterStorage {
    * @param {String} category
    */
   static requestFilter(category) {
+    const keyIncludesExpires = RegExp('^filters\.[^.]+\.expires$');
+    const categoryTimestamps = [];
+    Object.entries(localStorage).forEach(([key, value]) => {
+      if(keyIncludesExpires.test(key)){
+        categoryTimestamps.push({key, value})
+      }
+    })
+    const OrderedCategoryTimestamps = categoryTimestamps.sort((a,b) => parseInt(a.value) - parseInt(b.value));
+    const maxAllowedFilters = 10;
+    if(OrderedCategoryTimestamps.length > maxAllowedFilters ){
+      const oldestFilter = OrderedCategoryTimestamps[0].key;
+      localStorage.removeItem(oldestFilter);
+      localStorage.removeItem(oldestFilter.replace('.expires',''));
+    }
     const urlParams = new URLSearchParams(window.location.search);
     const version = urlParams.get('version');
     let filterEndpoint = `https://iw-content.herokuapp.com/api/v1/product/${category}`;
