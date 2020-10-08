@@ -1,4 +1,11 @@
 <style>
+  .TopBar__bar {
+    display: flex;
+  }
+  #TopBar__countdown {
+    font-size: 12px;
+    margin-left: 10px;
+  }
   .TopBar-1 {
     background: {{ section.settings.background_color_1 }};
     color: {{ section.settings.font_color_1 }};
@@ -76,10 +83,10 @@
       var minutes = Math.floor((distance % _hour) / _minute);
       var seconds = Math.floor((distance % _minute) / _second);
   
-      endDate.innerHTML = days + ' : ';
-      endDate.innerHTML += hours + ' : ';
-      endDate.innerHTML += minutes + ' : ';
-      endDate.innerHTML += seconds;
+      endDate.innerHTML = days + ' DAYS, ';
+      endDate.innerHTML += hours + ' HOURS, ';
+      endDate.innerHTML += minutes + ' MINUTES, ';
+      endDate.innerHTML += seconds + ' SECONDS, ';
   }
   
   timer = setInterval(showRemaining, 1000);
