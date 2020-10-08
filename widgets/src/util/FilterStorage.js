@@ -10,7 +10,17 @@ export default class FilterStorage {
 
     const now = (new Date()).getTime();
     const expires = localStorage.getItem(`filters.${category}.expires`);
-
+    const keyIncludesExpires = RegExp('^filters\.[^.]+\.expires$');
+    Object.entries(localStorage).forEach(([key, value]) => {
+      if(keyIncludesExpires.test(key)){
+        const now = (new Date()).getTime();
+        const expires = localStorage.getItem(key);
+        if (expires < now) {
+          localStorage.removeItem(key);
+          localStorage.removeItem(key.replace('.expires',''));
+        }
+      }
+    });
     if (!expires || expires > now) {
       filters = localStorage.getItem(`filters.${category}`);
     }
