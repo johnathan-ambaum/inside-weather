@@ -52,12 +52,6 @@
     $("#MobileToggler").click(function(){
         $mobileNav.slideToggle();
         $body.toggleClass("MobileNav--Active");
-        const zendesk = document.querySelector('.zEWidget-launcher');
-        if ($(zendesk).is(":visible")) {
-            $(zendesk).fadeOut(250);
-        }else{
-            $(zendesk).fadeIn(250);
-        }
     });
 
     $('.js-drawer-open-cart').on('click', function () {
