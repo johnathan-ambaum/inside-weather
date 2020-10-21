@@ -28,6 +28,29 @@
   </div>
 </template>
 
+<script>
+export default {
+  created() {
+    // setTimeout(() => {
+    //   console.log(0);
+
+    //   var lifecycleEvent = {
+    //     "type": "meya.text.event.ask",
+    //     "data": {
+    //       text: "Hey! What can we help you with today?",
+    //       quick_replies: [
+    //         {
+    //           text: 'Get Started'
+    //         }
+    //       ],
+    //     }
+    //   }
+    //   orb.publishEvent(lifecycleEvent);
+    // }, 1000*30);
+  },
+}
+</script>
+
 <style lang="scss">
   @import '../scss/mixins';
   @import '../scss/variables';
