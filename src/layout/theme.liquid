@@ -365,6 +365,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       if (orbMountElement && $(orbMountElement).length) {
         orbConfigOptions.container = orbMountElement;
+      } else {
+        orbConfigOptions.connectionOptions.connect = false;
       }
 
       window.orbConfig = orbConfigOptions;
