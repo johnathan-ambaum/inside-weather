@@ -40,6 +40,36 @@
   @import '../scss/mixins';
   @import '../scss/variables';
 
+  .hero-section {
+    background: url('https://cdn.insideweather.com/chatbot/chatbot_banner_d.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 580px) {
+      background: url('https://cdn.insideweather.com/chatbot/chatbot_banner_m.jpg');
+      height: 338px;
+    }
+
+    h2 {
+      font-family: Avalon;
+      font-weight: 600;
+      font-size: 50px;
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin: 0;
+      align-self: center;
+
+      @media screen and (max-width: 580px) {
+        font-size: 28px;
+      }
+    }
+  }
+
   .help-section {
     max-width: 770px;
     margin: 50px auto 0;
