@@ -351,6 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           gridUrl: "https://grid.meya.ai",
           appId: "app-480903f657bc49538eacc2be6fccdbf6",
           integrationId: "integration.orb",
+          connect: false,
           pageContext: {
             "customer_id": {{ customer.id | json }},
             "customer_email": {{ customer.email | json }},
@@ -360,14 +361,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         theme: { "brandColor":"#202020" },
         windowApi: true,
       };
-
-      var orbMountElement = document.getElementById("orb-mount");
-
-      if (orbMountElement && $(orbMountElement).length) {
-        orbConfigOptions.container = orbMountElement;
-      } else {
-        orbConfigOptions.connectionOptions.connect = false;
-      }
 
       window.orbConfig = orbConfigOptions;
 
