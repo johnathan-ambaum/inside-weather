@@ -124,4 +124,12 @@
       }
     }
   }
+
+  .orb-chat-mount input:focus, .orb-chat-mount input:active {
+    border: none;
+  }
+
+  .orb-chat-mount button:focus, .orb-chat-mount button:active {
+    outline: none;
+  }
 </style>
