@@ -27,6 +27,7 @@
           </div>
 
           {% for item in cart.items %}
+            {% if item.product.type == 'Shipping Insurance'%} {% continue %}{% endif %}
             <div class="cart__row">
               <div class="grid grid--full cart__row--table-large">
 
