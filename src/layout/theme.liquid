@@ -375,6 +375,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         fontStyleSheet.href = "https://cdn.meya.ai/font/inter.css";
         document.body.appendChild(fontStyleSheet);
       })();
+
+      $(window).bind("beforeunload", function() {
+        console.log(0);
+        const closeEvent = orb.getEventStream().events
+          .find(event => (event.type === "meya.session.event.chat.close"));
+
+        if (!closeEvent) return;
+
+        var lifecycleEvent = {
+          "type": "meya.session.event.chat.close",
+          "data": {
+            "user_id": closeEvent.data.user_id,
+            "thread_id": closeEvent.data.thread_id,
+            "integration_id": closeEvent.data.integration_id
+          }
+        };
+
+        orb.publishEvent(lifecycleEvent);
+
+        return;
+      })
     });
   </script>
 
