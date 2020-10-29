@@ -1308,6 +1308,7 @@ lazySizesConfig.expFactor = 4;
             currentShippingInsurancePrice: currentShippingInsurancePrice,
             vwo:{
               shippingProtection:{
+                active: theme.settings.vwo.shippingProtection.active,
                 cartDrawer:{
                   shippingCostLabel: theme.settings.vwo.shippingProtection.cartDrawer.shippingCostLabel,
                   shippingCostPrice: theme.settings.vwo.shippingProtection.cartDrawer.shippingCostPrice,
@@ -1429,6 +1430,7 @@ lazySizesConfig.expFactor = 4;
         }
       },
       warrantyHandler: function(){
+        if(!theme.settings.vwo.shippingProtection.active){return}
         this.shippingProtectionLoading(true);
         let shippingProtection = document.getElementById('cartDrawerShippingProtection');
         if(shippingProtection.checked){
@@ -1443,6 +1445,7 @@ lazySizesConfig.expFactor = 4;
       },
 
       getWarrantyProduct: function(cart, addProduct = true){
+        if(!theme.settings.vwo.shippingProtection.active){return}
         let cartCategoryData = cart.items.map(function(item){ return {"product_type": item.product_type, "quantity": item.quantity}});
         let cartCategoryDataNoWarranty = cartCategoryData.filter(function(item){return item.product_type !== 'Shipping Insurance'});
         let postObj = {"cart_data": cartCategoryDataNoWarranty};
@@ -1466,6 +1469,7 @@ lazySizesConfig.expFactor = 4;
       },
 
       addWarrantyProduct: function(id){
+        if(!theme.settings.vwo.shippingProtection.active){return}
         fetch('/cart/add.js', {
           method: 'POST',
           headers: {
@@ -1494,6 +1498,10 @@ lazySizesConfig.expFactor = 4;
       },
 
       updateWarrantyHandler: function(cart){
+        if(!theme.settings.vwo.shippingProtection.active){
+          this.removeWarrantyProduct();
+          return
+        }
         let cartCategoryData = cart.items.map(function(item){ return {"product_type": item.product_type, "quantity": item.quantity}});
         let cartCategoryDataNoWarranty = cartCategoryData.filter(function(item){return item.product_type !== 'Shipping Insurance'});
         let cartCategoryDataLS =  JSON.parse(localStorage.getItem("cartCategoryData"));
@@ -1515,6 +1523,7 @@ lazySizesConfig.expFactor = 4;
       },
 
       updateWarrantyProduct: function(cart){
+        if(!theme.settings.vwo.shippingProtection.active){return}
         let cartCategoryData = cart.items.map(function(item){ return {"product_type": item.product_type, "quantity": item.quantity}});
         localStorage.setItem("cartCategoryData",JSON.stringify(cartCategoryData));
         this.removeWarrantyProduct().then(function(){

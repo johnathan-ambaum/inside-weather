@@ -80,6 +80,7 @@
     </div>
     <div class="drawer__footer drawer__footer--fixed appear-animation appear-delay-{{lastAnimationRow}}">
       <div class="grid grid--full">
+        {{#if vwo.shippingProtection.active}}
         <div class="grid__item two-thirds">
           <p class="free-shipping__title">{{vwo.shippingProtection.cartDrawer.shippingCostLabel}}</p>
         </div>
@@ -102,6 +103,7 @@
         <div class="grid__item">
           <p class="shipping-protection__caption">{{vwo.shippingProtection.cartDrawer.shippingProtectionCaption}}</p>
         </div>
+        {{/if}}
         <div class="grid__item two-thirds">
           <p class="ajaxcart__subtotal">{% endraw %}{{ 'cart.general.subtotal' | t }}{% raw %}</p>
         </div>
