@@ -5049,7 +5049,6 @@ lazySizesConfig.expFactor = 4;
         ;
 
       function loadImage (el, fn) {
-        console.log('loaded image')
         var img = new Image()
           , src = el.getAttribute('data-src');
         img.onload = function() {
@@ -5065,11 +5064,12 @@ lazySizesConfig.expFactor = 4;
 
       function elementInViewport(el) {
         var rect = el.getBoundingClientRect()
+        var viewportOffset = 200;
 
         return (
            rect.top    >= 0
         && rect.left   >= 0
-        && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        && rect.top <= (window.innerHeight + viewportOffset || document.documentElement.clientHeight + viewportOffset)
         )
       }
 
