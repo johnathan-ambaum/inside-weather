@@ -67,9 +67,9 @@
   var _hour = _minute * 60;
   var _day = _hour * 24;
   var timer;
-  
+
   var endDate = document.getElementById('TopBar__countdown');
-  
+
   function showRemaining() {
       var now = new Date();
       var distance = end - now;
@@ -82,13 +82,13 @@
       var hours = Math.floor((distance % _day) / _hour);
       var minutes = Math.floor((distance % _hour) / _minute);
       var seconds = Math.floor((distance % _minute) / _second);
-  
-      endDate.innerHTML = days + ' DAYS, ';
-      endDate.innerHTML += hours + ' HOURS, ';
-      endDate.innerHTML += minutes + ' MINUTES, ';
-      endDate.innerHTML += seconds + ' SECONDS, ';
+
+      endDate.innerHTML = days + ' days, ';
+      endDate.innerHTML += hours + ' hrs, ';
+      endDate.innerHTML += minutes + ' min, ';
+      endDate.innerHTML += seconds + ' sec ';
   }
-  
+
   timer = setInterval(showRemaining, 1000);
   </script>
 {% endif %}
@@ -197,7 +197,8 @@
         "id": "promo_countdown_end_date",
         "type": "text",
         "label": "Pick Date for promo to end",
-        "default": "hi"
+        "default": "1/1/2050",
+        "info": "MM/DD/YYYY"
       }
     ]
   }
