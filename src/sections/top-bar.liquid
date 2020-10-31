@@ -18,6 +18,17 @@
     background: {{ section.settings.background_color_3 }};
     color: {{ section.settings.font_color_3 }};
   }
+  .TopBar__countdown-number{
+    font-size:14px;
+    font-weight: 600;
+  }
+  .TopBar__countdown-label{
+    font-size: 12px;
+  }
+  .TopBar__bar-text{
+    line-height: 24px;
+  }
+
 </style>
 
 {% assign topBars = section.settings.text_range %}
@@ -25,7 +36,7 @@
 <div class="TopBar TopBar-{{i}} {% if section.settings.text_range == 1 or forloop.index == 1%}active-bar{% endif %}">
   {% capture textIndex %}text_{{ i }}{% endcapture %}
     <div class="TopBar__bar">
-      <span class="hide--small">{{ section.settings[textIndex] }}</span>
+      <span class="hide--small TopBar__bar-text">{{ section.settings[textIndex] }}</span>
       <span class="hide--large">{{ section.settings.mobile_[textIndex] }}</span>
       {% if section.settings.promo_countdown_enabled %}
         <span id="TopBar__countdown"></span>
@@ -83,10 +94,10 @@
       var minutes = Math.floor((distance % _hour) / _minute);
       var seconds = Math.floor((distance % _minute) / _second);
 
-      endDate.innerHTML = days + ' days, ';
-      endDate.innerHTML += hours + ' hrs, ';
-      endDate.innerHTML += minutes + ' min, ';
-      endDate.innerHTML += seconds + ' sec ';
+      endDate.innerHTML =  `<span class="TopBar__countdown-number">${days}</span>` + `<span class="TopBar__countdown-label"> days, </span>`;
+      endDate.innerHTML += `<span class="TopBar__countdown-number">${hours}</span>` + `<span class="TopBar__countdown-label"> hrs, </span>`;
+      endDate.innerHTML += `<span class="TopBar__countdown-number">${minutes}</span>` + `<span class="TopBar__countdown-label"> min, </span>`;
+      endDate.innerHTML += `<span class="TopBar__countdown-number">${seconds}</span>` + `<span class="TopBar__countdown-label"> sec </span>`;
   }
 
   timer = setInterval(showRemaining, 1000);
