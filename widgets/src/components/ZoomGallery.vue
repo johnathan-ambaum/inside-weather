@@ -74,9 +74,10 @@ export default {
 
   mounted() {
     document.body.style.overflow = 'hidden';
-    const zendesk = document.querySelector('.zEWidget-launcher');
-    if (zendesk) {
-      zendesk.style.display = 'none';
+    const orb = document.querySelector('.orb-chat-mount');
+
+    if (orb) {
+      orb.style.display = 'none';
     }
 
     const { height } = this.$refs.container.getBoundingClientRect();
@@ -110,11 +111,10 @@ export default {
 
   beforeDestroy() {
     document.body.style.overflow = '';
-    const zendesk = document.querySelector('.zEWidget-launcher');
-    if (zendesk) {
-      zendesk.style.display = '';
-      // fix bug causing widget to be set to 5px wide by some zendesk javascript after closing customizer
-      zendesk.style.width = '';
+
+    const orb = document.querySelector('.orb-chat-mount');
+    if (orb) {
+      orb.style.display = 'none';
     }
   },
 
