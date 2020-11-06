@@ -97,7 +97,7 @@ export default {
       display: block;
       font-family: $font-stack-avalon;
       height: auto;
-      max-width: 458px;
+      max-width: 600px;
       margin: 0 auto;
       padding: 145px 0;
       position: relative;

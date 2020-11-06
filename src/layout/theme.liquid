@@ -149,7 +149,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js"></script>
 
   <!-- Browse and product customizer widgets -->
-  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' or template.suffix == 'category-sofa-sectionals' or template.suffix == 'living-room' or template.suffix == 'dining-room' or template.suffix == 'office' or template.suffix == 'category-sofettes' or template.suffix == 'category-sofette-sectionals' or template.suffix == 'category-armchairs' or template.suffix == 'category-diningchairs'  or template.suffix == 'category-loungechairs' or template.suffix == 'category-coffeetables' or template.suffix == 'category-diningtables' or template.suffix == 'category-sidetables' or template.suffix == 'category-credenzas' or template.suffix == 'category-sideboards' or template.suffix == 'full-reviews' or template.suffix == 'category-organization' or template.suffix == 'category-kitchen' or template.suffix == 'category-bathroom' or template.suffix == 'category-bedroom' or template.suffix == 'category-accessories' or template.suffix == 'category-pillows' or template.suffix == 'category-wall-art' or template.suffix == 'category-headboard' or template.suffix == 'category-console' or template.suffix == 'category-bedsheets' or template.suffix == 'category-desks' or template.suffix == 'category-jorn-desk-collection' or template.suffix == 'category-mattress' or template.suffix == 'category-stools' or template.suffix == 'category-ottomans' -%}
+  {%- if template == 'product' or template == 'collection' or template.suffix == 'favorites' or template.suffix == 'free-swatches' or template.suffix == 'banner-carousel' or template.suffix == 'category-sofas' or template.suffix == 'category-sofa-sectionals' or template.suffix == 'living-room' or template.suffix == 'dining-room' or template.suffix == 'office' or template.suffix == 'category-sofettes' or template.suffix == 'category-sofette-sectionals' or template.suffix == 'category-armchairs' or template.suffix == 'category-diningchairs'  or template.suffix == 'category-loungechairs' or template.suffix == 'category-coffeetables' or template.suffix == 'category-diningtables' or template.suffix == 'category-sidetables' or template.suffix == 'category-credenzas' or template.suffix == 'category-sideboards' or template.suffix == 'full-reviews' or template.suffix == 'category-organization' or template.suffix == 'category-kitchen' or template.suffix == 'category-bathroom' or template.suffix == 'category-bedroom' or template.suffix == 'category-accessories' or template.suffix == 'category-pillows' or template.suffix == 'category-wall-art' or template.suffix == 'category-headboard' or template.suffix == 'category-console' or template.suffix == 'category-bedsheets' or template.suffix == 'category-desks' or template.suffix == 'category-jorn-desk-collection' or template.suffix == 'category-mattress' or template.suffix == 'category-stools' or template.suffix == 'category-ottomans' or template.suffix == 'help' -%}
     {%- if customer -%}
       {%- if customer.metafields.global.v2-favorites -%}
         {%- assign favorites = customer.metafields.global.v2-favorites -%}
@@ -342,16 +342,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       video.play();
     });
   </script>
-  <!--NEW-->
 
-  <!-- Start of insideweatherhelp Zendesk Widget script -->
-  <style>
-    /* force hide Zendesk when filters open */
-    .BrowseFilters--Open .zEWidget-launcher {
-      display: none !important;
-    }
-  </style>
-  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=3aebd5a7-95db-462f-a80a-b30633da7997"> </script>
+  <!-- MEYA Chatbot Integration -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var orbConfigOptions = {
+        connectionOptions: {
+          gridUrl: "https://grid.meya.ai",
+          appId: "app-480903f657bc49538eacc2be6fccdbf6",
+          integrationId: "integration.orb",
+          connect: false,
+          pageContext: {
+            "customer_id": {{ customer.id | json }},
+            "customer_email": {{ customer.email | json }},
+            "customer_first_name": {{ customer.first_name | json }},
+          },
+        },
+        theme: { "brandColor":"#202020" },
+        windowApi: true,
+      };
+
+      window.orbConfig = orbConfigOptions;
+
+      (function() {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.async = true;
+        script.src = "https://cdn.meya.ai/v2/orb.js";
+        document.body.appendChild(script);
+        var fontStyleSheet = document.createElement("link");
+        fontStyleSheet.rel = "stylesheet";
+        fontStyleSheet.href = "https://cdn.meya.ai/font/inter.css";
+        document.body.appendChild(fontStyleSheet);
+      })();
+
+      $(window).bind("beforeunload", function() {
+        console.log(0);
+        const closeEvent = orb.getEventStream().events
+          .find(event => (event.type === "meya.session.event.chat.close"));
+
+        if (!closeEvent) return;
+
+        var lifecycleEvent = {
+          "type": "meya.session.event.chat.close",
+          "data": {
+            "user_id": closeEvent.data.user_id,
+            "thread_id": closeEvent.data.thread_id,
+            "integration_id": closeEvent.data.integration_id
+          }
+        };
+
+        orb.publishEvent(lifecycleEvent);
+
+        return;
+      })
+    });
+  </script>
+
   <script>
     function getUrlParameter(name) {
       name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -389,21 +436,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     eraseCookie('CJEVENT');
     SetCJCookie();
-
   </script>
-  <!-- End of insideweatherhelp Zendesk Widget script -->
 
-  {% comment %} <!--OLD ZENDESK-->
-  <!--Start of Zendesk Chat Script-->
-   <script type="text/javascript">
-  window.$zopim||(function(d,s){var z=$zopim=function(c){
-  z._.push(c)},$=z.s=
-  d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-  _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-  $.src='https://v2.zopim.com/?AJiZPSJSeobpdaCOBCILNjBFOfWzOEnD';z.t=+new Date;$.
-  type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-  </script>
-  <!--End of Zendesk Chat Script--> {% endcomment %}
+  <!-- Attentive script -->
+  <script src="https://cdn.attn.tv/insideweather/dtag.js"></script>
 
 </body>
 </html>

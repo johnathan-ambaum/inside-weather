@@ -1,7 +1,7 @@
 <div id="app">
   {% assign hasImage = true %}
   {% assign disableSlideContent = true %}
-  {% assign bannerContent = "{'items':[{'image':'https://cdn.insideweather.com/hp/tb/092420_hp_sofa-sale-bnr_d.jpg',  'imageSm':'https://cdn.insideweather.com/hp/tb/092420_hp_sofa-sale-bnr_m.jpg', 'url':'https://insideweather.com/pages/2020-new-custom-sofa-sale'},{'image':'https://cdn.insideweather.com/hp/tb/092620_hp_desk-sale-bnr_d.jpg','imageSm':'https://cdn.insideweather.com/hp/tb/092620_hp_desk-sale-bnr_m.jpg','url':'https://insideweather.com/pages/2020-wfh-desk-sale'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/080620_hp_flw-bnr_d.jpg?v=1596755292','imageSm':'https://cdn.shopify.com/s/files/1/2994/0144/files/080620_hp_flw-bnr_m.jpg?v=1596755292','url':'https://insideweather.com/pages/franklloydwright'},{'image':'http://cdn.insideweather.com/hp/tb/091420_hp_bedroom-bnr_d.jpg','imageSm':'https://cdn.insideweather.com/hp/tb/091420_hp_bedroom-bnr_m.jpg','url':'https://insideweather.com/pages/bedroom'}]}"%}
+  {% assign bannerContent = "{'items':[{'image':'https://cdn.insideweather.com/hp/tb/101520_hp_autumn-sale-bnr_d.jpg', 'imageSm':'https://cdn.insideweather.com/hp/tb/101520_hp_autumn-sale-bnr_m.jpg', 'url':'https://insideweather.com/pages/2020-autumn-sale'},{'image':'https://cdn.insideweather.com/hp/tb/092620_hp_desk-sale-bnr_d.jpg','imageSm':'https://cdn.insideweather.com/hp/tb/092620_hp_desk-sale-bnr_m.jpg','url':'https://insideweather.com/pages/2020-wfh-desk-sale'},{'image':'https://cdn.insideweather.com/hp/tb/100820_hp_flw-bnr_d.jpg','imageSm':'https://cdn.insideweather.com/hp/tb/100820_hp_flw-bnr_m.jpg','url':'https://insideweather.com/pages/franklloydwright'}]}"%}
 
   <div class="--clip-header">
     <banner-carousel
@@ -35,14 +35,14 @@
     </category-list>
   </div>
 
-  {% assign valuePropsItems = "[{'isVideo':'false', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_02-ca-crafted-min.jpg?1657939', 'targetPoint': 'crafted', 'accordionHead': 'California Crafted', accordionDescription: 'Every one of our furniture pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!'}, {'isVideo':'true', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_03-free-shipping.mp4?1657939', 'targetPoint': 'quick-ship-custom', 'accordionHead': 'Quick Ship Custom', accordionDescription: 'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?'},{'isVideo':'false', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_04-home-trial-min.jpg?1657939', 'targetPoint': '365-day-home-trial', 'accordionHead': '365 Day Home Trial', accordionDescription: 'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'isVideo':'false', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_04-sustainable-min.jpg?v=1583277272', 'targetPoint': 'sustainable-furniture', 'accordionHead': 'Sustainable Furniture', accordionDescription: 'We believe that in order to design for the Inside, we must consider the Outside. All of our materials are selected with intention—take our sofa for example, which upcycles over 200 plastic water bottles. Additionally, for every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]" %}
+  {% assign valuePropsItems = "[{'isVideo':'false', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_02-ca-crafted-min.jpg?1657939', 'targetPoint': 'crafted', 'accordionHead': 'Made in the USA', accordionDescription: 'Every one of our pieces is made-to-order by our expert furniture makers in our workshop in California. Sawing, sewing, packaging, and shipping-we see every custom piece through from start to finish!'}, {'isVideo':'true', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_03-free-shipping.mp4?1657939', 'targetPoint': 'quick-ship-custom', 'accordionHead': 'Quick Ship Custom', accordionDescription: 'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free? Yep, even sofas.'},{'isVideo':'false', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_04-home-trial-min.jpg?1657939', 'targetPoint': '365-day-home-trial', 'accordionHead': '365 Day Home Trial', accordionDescription: 'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'}, {'isVideo':'false', 'url': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_04-sustainable-min.jpg?v=1583277272', 'targetPoint': 'sustainable-furniture', 'accordionHead': 'Sustainable Furniture', accordionDescription: 'We believe that in order to design for the Inside, we must consider the Outside. All of our materials are selected with intention—take our sofa for example, which upcycles over 200 plastic water bottles. Additionally, for every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.'}]" %}
 
   <div class="ValuePropsWrapper">
     <div class="--custom-container">
       <value-props
       :value-props-items="{{valuePropsItems}}"
       default-image="https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_01-default-min.jpg?1657939"
-      main-heading="Furniture shopping that puts you in charge."
+      main-heading="Online custom furniture shopping that puts you in charge."
       >
       </value-props>
     </div>
@@ -73,8 +73,8 @@
 
   <banner
     :banner-image="{{bannerSectionAssets}}"
-    banner-heading="Free Design Services"
-    banner-description="Our design experts are here to talk you through any dilemma."
+    banner-heading="Free Furniture Design Services"
+    banner-description="Our design experts are here to talk you through any dilemma. From custom furnishings that fit your tiny New York City living room and your personal style to that custom dining room table you've drawn up in your head."
     button-text="Send an sos"
     button-link="https://insideweather.com/pages/work-with-a-designer"
   >
@@ -87,7 +87,7 @@
   <recently-sold-products
     :recently-sold-products="{{recentlySoldProducts}}"
     section-heading="Recently Sold"
-    section-description="Take a look at what our factory crew is working on right now!"
+    section-description="Take a look at what our craftsmen and designers are working on right now!"
   >
   </recently-sold-products>
 </div>

@@ -41,6 +41,7 @@ import CategoryItem from './components/CategoryItem.vue';
 import FullReviews from './containers/FullReviews.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
+import Help from './components/Help.vue';
 
 (function init() {
   const rootEl = document.querySelector('#app');
@@ -92,6 +93,7 @@ import store from './store';
       CategoryVprops,
       LifeStylePhotos,
       BootstrapVue,
+      Help,
     },
 
     mixins: [
