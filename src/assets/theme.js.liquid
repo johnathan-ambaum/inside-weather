@@ -893,6 +893,8 @@ lazySizesConfig.expFactor = 4;
           namespace: 'drawer_focus'
         });
 
+        $('body').trigger('drawerClose.' + this.config.id);
+
         if (this.$activeSource && this.$activeSource.attr('aria-expanded')) {
           this.$activeSource.attr('aria-expanded', 'false');
         }
@@ -1170,6 +1172,8 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
         $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
+        $('body').on('drawerOpen.CartDrawer', this.disableChatWidget.bind(this));
+        $('body').on('drawerClose.CartDrawer', this.enableChatWidget.bind(this));
         $(".js-cart-count").on("click", function(){
           if(theme.settings.vwo.countdown.countdownActive){
             theme.cart.getCart().then(function(cart){
@@ -1353,6 +1357,18 @@ lazySizesConfig.expFactor = 4;
 
         $cartInner.css('bottom', cartFooterHeight);
         $cartFooter.css('height', cartFooterHeight);
+      },
+      disableChatWidget: function() {
+        console.log('open')
+        if($('#launcher').is(":visible")){
+          $('#launcher').hide();
+        }
+      },
+      enableChatWidget: function(){
+        console.log('close')
+        if(!$('#launcher').is(":visible")){
+          $('#launcher').show();
+        }
       },
 
       updateCartNotification: function(evt, cart) {
