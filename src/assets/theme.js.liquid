@@ -1359,14 +1359,14 @@ lazySizesConfig.expFactor = 4;
         $cartFooter.css('height', cartFooterHeight);
       },
       disableChatWidget: function() {
-        this.waitForElementToDisplay('#launcher',function(){
-          $('#launcher').css('margin-right', '10000px');
+        this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+          $('.orb-chat-mount>div').css('margin-right', '10000px');
         },100,9000);
 
       },
 
       enableChatWidget: function(){
-        $('#launcher').css('margin-right', '20px');
+        $('.orb-chat-mount>div').css('margin-right', '0px');
       },
 
       waitForElementToDisplay: function(selector, callback, checkFrequencyInMs, timeoutInMs) {
