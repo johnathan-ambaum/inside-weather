@@ -1359,16 +1359,32 @@ lazySizesConfig.expFactor = 4;
         $cartFooter.css('height', cartFooterHeight);
       },
       disableChatWidget: function() {
-        console.log('open')
-        if($('#launcher').is(":visible")){
-          $('#launcher').hide();
-        }
+        this.waitForElementToDisplay('#launcher',function(){
+          console.log('hide launcher')
+          $('#launcher').css('margin-right', '10000px');
+        },100,9000);
+
       },
+
       enableChatWidget: function(){
-        console.log('close')
-        if(!$('#launcher').is(":visible")){
-          $('#launcher').show();
-        }
+        $('#launcher').css('margin-right', '20px');
+      },
+
+      waitForElementToDisplay: function(selector, callback, checkFrequencyInMs, timeoutInMs) {
+        var startTimeInMs = Date.now();
+        (function loopSearch() {
+          if (document.querySelector(selector) != null) {
+            callback();
+            return;
+          }
+          else {
+            setTimeout(function () {
+              if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+                return;
+              loopSearch();
+            }, checkFrequencyInMs);
+          }
+        })();
       },
 
       updateCartNotification: function(evt, cart) {
