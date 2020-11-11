@@ -6,19 +6,19 @@
 
     {% assign categoryBannerAccordion = "[{'accordionHead': 'Wood Finish', 'accordionDescription': 'Hand waxed finishes come in robust Espresso or crisp Latte.', 'accordionTarget': 'wood-finish'},{'accordionHead': 'Surface Design', 'accordionDescription': 'Blast off with over 180+ custom solid colors and designs.', 'accordionTarget': 'surface-design'}, {'accordionHead': 'Handle Style', 'accordionDescription': 'Get a grip on the details. Pair the perfect handle.', 'accordionTarget': 'handle-style'}, {'accordionHead': 'Base Style', 'accordionDescription': 'Styles for miles: find your fav material, finish, and look.', 'accordionTarget': 'base-style'}]" %}
 
-    <category-banner 
+    <category-banner
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
       :category-banner-accordion="{{categoryBannerAccordion}}"
       >
     </category-banner>
 
-    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_01.jpg?1662653', 'title': 'Espresso Wood Grain', 'linkText': 'Customize starting at $618', hyperLink: 'https://insideweather.com/products/cr11ab1217-espresso-sloan-credenza-in-espresso-wood'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_02.jpg?1662653', 'title': 'Latte Wood Grain', 'linkText': 'Customize starting at $518', hyperLink: 'https://insideweather.com/products/cr10aa1114-latte-sloan-credenza-in-latte-wood'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_03.jpg?1662653', 'title': 'Custom Colors', 'linkText': 'Customize starting at $568', hyperLink: 'https://insideweather.com/products/cr10ac1114-latte-sloan-credenza-in-white'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_04.jpg?1662653', 'title': 'Custom Graphics', 'linkText': 'Customize starting at $568', hyperLink: 'https://insideweather.com/products/cr10cf1114-latte-sloan-credenza-in-white-marble'}]" %}
+    {% assign productCollections = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_01.jpg?1662653', 'title': 'Espresso Wood Grain', 'linkText': 'Customize starting at $648', hyperLink: 'https://insideweather.com/products/cr11ab1217-espresso-sloan-credenza-in-espresso-wood'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_02.jpg?1662653', 'title': 'Latte Wood Grain', 'linkText': 'Customize starting at $548', hyperLink: 'https://insideweather.com/products/cr10aa1114-latte-sloan-credenza-in-latte-wood'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_03.jpg?1662653', 'title': 'Custom Colors', 'linkText': 'Customize starting at $598', hyperLink: 'https://insideweather.com/products/cr10ac1114-latte-sloan-credenza-in-white'}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenza_col_04.jpg?1662653', 'title': 'Custom Graphics', 'linkText': 'Customize starting at $598', hyperLink: 'https://insideweather.com/products/cr10cf1114-latte-sloan-credenza-in-white-marble'}]" %}
 
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
-          :product-collections="{{productCollections}}" 
+          :product-collections="{{productCollections}}"
           section-heading="Start With The Look You Want"
           section-description="Customize the finish, then dial in the details."
         >
@@ -33,9 +33,9 @@
     </div>
 
     {% assign categoryValueProps = "[{'image':'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_01-ca-crafted_d.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_01-ca-crafted_m.jpg', 'title':'Made in the USA','description':'Every one of our furniture pieces is made-to-order from our workshop in California. Sawing, sewing, packaging, and shipping—we see it all through from start to finish!', 'link': '', 'linkto': ''},{'image':'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_02-free-ship_d.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_02-free-ship_m.jpg', 'title':'Quick Ship Custom','description':'no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days. Did we mention everything ships free?', 'link': 'Custom furniture', 'linkto': 'https://insideweather.com/'},{'image':'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_03-home-trial_d.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_03-home-trial_m.jpg', 'title':'365 Day Home Trial','description':'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.', 'link': '', 'linkto': ''}, {'image':'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_04-sustainable_d.png', 'imageSm': 'https://cdn.insideweather.com/cat/all/vprop/cat_vprop_04-sustainable_m.png', 'title':'One for One','description':'Inside for Outside. For every order placed with us, one tree is planted via the National Forest Foundation. Sleep easier knowing you’ve got the most sustainable furniture on the market.', 'link': '', 'linkto': ''}]"%}
-    
+
     <div class="categoryValuePropsWrapper">
-      <category-vprops 
+      <category-vprops
       :category-value-props="{{categoryValueProps}}"
       background-color="#F2F2F2"
       >
@@ -46,9 +46,9 @@
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_02-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SA487AA03/195SA487AA03-0_small.jpg','title':'Latte Sloan Credenza in White Marble','price':'$568', 'productUrl':'https://insideweather.com/products/cr10cf1014-latte-sloan-credenza-in-white-marble'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/253S0CB301B5/253S0CB301B5-0_small.jpg','title':'Espresso Kobe Side Chair in Oat','price':'$198', 'productUrl':'https://insideweather.com/products/cd141010dr13-espresso-kobe-side-chair-in-oat'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/48S8EF73EAF/48S8EF73EAF-0_small.jpg','title':'Latte Round Dining Table in White Marble','price':'$408', 'productUrl':'https://insideweather.com/products/dt12ac12-latte-round-dining-table-in-white-marble'}]},
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_03-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S818E7525/195S818E7525-0_small.jpg','title':'Espresso Sloan Credenza in Rosy Geometry','price':'$688', 'productUrl':'https://insideweather.com/products/cr11dj1321-espresso-sloan-credenza-in-rosy-geometry'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_04-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S84CAE066/195S84CAE066-0_small.jpg','title':'Latte Sloan Credenza in Green Marble','price':'$568', 'productUrl':'https://insideweather.com/products/cr10fq1014-latte-sloan-credenza-in-green-marble'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/47S753F88CC/47S753F88CC-0_small.jpg','title':'Espresso Rectangle Side Table in Green Marble','price':'$98', 'productUrl':'https://insideweather.com/products/st15fl13-espresso-rectangle-side-table-in-green-marble'}]},
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_05-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SAEA8A5C4/195SAEA8A5C4-0_small.jpg','title':'Latte Sloan Credenza in Latte Wood','price':'$518', 'productUrl':'https://insideweather.com/products/cr10aa1414-latte-sloan-credenza-in-latte-wood'}]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_06-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S2CA93635/195S2CA93635-0_small.jpg','title':'Latte Sloan Credenza in White','price':'$568', 'productUrl':'https://insideweather.com/products/cr1ac1113-latte-sloan-credenza-in-white'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S0DDBCC0E/195S0DDBCC0E-0_small.jpg','title':'Latte Voss Sideboard in Vivid Variety','price':'$793', 'productUrl':'https://insideweather.com/products/sb1cg1114-latte-voss-sideboard-in-vivid-variety'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S3036760B/195S3036760B-0_small.jpg','title':'Espresso Sloan Credenza in Pacific Waters','price':'$668', 'productUrl':'https://insideweather.com/products/cr2dz1217-espresso-sloan-credenza-in-pacific-waters'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_06-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S2CA93635/195S2CA93635-0_small.jpg','title':'Latte Sloan Credenza in White','price':'$568', 'productUrl':'https://insideweather.com/products/cr1ac1113-latte-sloan-credenza-in-white'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S0DDBCC0E/195S0DDBCC0E-0_small.jpg','title':'Latte Voss Sideboard in Vivid Variety','price':'$793', 'productUrl':'https://insideweather.com/products/sb1cg1114-latte-voss-sideboard-in-vivid-variety'}, {'productImage':'https://banksy-images.s3.amazonaws.com/items/195S3036760B/195S3036760B-0_small.jpg','title':'Espresso Sloan Credenza in Pacific Waters','price':'$668', 'productUrl':'https://insideweather.com/products/cr2dz1217-espresso-sloan-credenza-in-pacific-waters'}]},
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_07-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S2CA93635/195S2CA93635-0_small.jpg','title':'Latte Sloan Credenza in White','price':'$568', 'productUrl':'https://insideweather.com/products/cr1ac1113-latte-sloan-credenza-in-white'}]},
-    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_08-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S1ED453E5/195S1ED453E5-0_small.jpg','title':'Latte Sloan Credenza in Chilly Topography','price':'$568', 'productUrl':'https://insideweather.com/products/cr10gq1111-latte-sloan-credenza-in-chilly-topography'}]}, 
+    {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_08-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S1ED453E5/195S1ED453E5-0_small.jpg','title':'Latte Sloan Credenza in Chilly Topography','price':'$568', 'productUrl':'https://insideweather.com/products/cr10gq1111-latte-sloan-credenza-in-chilly-topography'}]},
     {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_10-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195S3DEA4E59/195S3DEA4E59-0_small.jpg','title':'Espresso Sloan Credenza in Sunset Stroke','price':'$668', 'productUrl':'https://insideweather.com/products/cr11cn1217-espresso-sloan-credenza-in-sunset-strokes'}]}, {'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_credenzas_lg_09-min.jpg?1662671','popUpList': [{'productImage':'https://banksy-images.s3.amazonaws.com/items/195SC1BB236D/195SC1BB236D-0_small.jpg','title':'Latte Sloan Credenza in Black Marble','price':'$568', 'productUrl':'https://insideweather.com/products/cr10hb1314-latte-sloan-credenza-in-black-marble'}]}]"%}
 
     <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
@@ -94,8 +94,8 @@ function fadeIn(a, t) {
   ).setTween(setFade).addTo(controller);
 }
 
-jQuery(function ($) { 
-  
+jQuery(function ($) {
+
   $('.CategoryBanner--clasification .point').click(function(){
     if($(this).hasClass('show-details')) {
       event.preventDefault();
@@ -135,7 +135,7 @@ jQuery(function ($) {
   new ScrollMagic.Scene({
     triggerElement: '.CtegoryCollections--itemWrapper',
     reverse: false,
-    triggerHook: "onEnter", 
+    triggerHook: "onEnter",
     offset: 250
   }).setTween(collectionTween).addTo(controller);
 
@@ -145,13 +145,13 @@ jQuery(function ($) {
     var videoDetect = $(figureElement).find('video');
     var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
     new ScrollMagic.Scene( {
-      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
       reverse: false, triggerHook: "onEnter", offset: 250
     }).setTween(categoryDetailsTween).addTo(controller);
 
     var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
     new ScrollMagic.Scene( {
-      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')', 
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
       reverse: false, triggerHook: "onEnter", offset: 250
     }).setTween(categoryDetailsContentTween).addTo(controller);
 
@@ -177,4 +177,4 @@ function toggleSlide(item) {
 function downSlide(item) {
   jQuery(item).slideDown();
 }
-</script> 
+</script>
