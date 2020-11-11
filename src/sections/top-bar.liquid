@@ -5,6 +5,7 @@
   #TopBar__countdown {
     font-size: 12px;
     margin-left: 10px;
+    font-family:Avalon;
   }
   .TopBar-1 {
     background: {{ section.settings.background_color_1 }};
@@ -35,9 +36,10 @@
 {% for i in (1..topBars) %}
 <div class="TopBar TopBar-{{i}} {% if section.settings.text_range == 1 or forloop.index == 1%}active-bar{% endif %}">
   {% capture textIndex %}text_{{ i }}{% endcapture %}
+    {% capture mobileTextIndex %}mobile_text_{{ i }}{% endcapture %}
     <div class="TopBar__bar">
       <span class="hide--small TopBar__bar-text">{{ section.settings[textIndex] }}</span>
-      <span class="hide--large">{{ section.settings.mobile_[textIndex] }}</span>
+      <span class="hide--large">{{ section.settings[mobileTextIndex] }}</span>
       {% if section.settings.promo_countdown_enabled %}
         <span id="TopBar__countdown"></span>
       {% endif %}
