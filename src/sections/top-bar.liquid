@@ -29,6 +29,31 @@
   .TopBar__bar-text{
     line-height: 24px;
   }
+  .TopBar:not(.active-bar) {
+    display: none;
+  }
+
+
+  {% if section.settings.promo_countdown_enabled %}
+    @media only screen and ( max-width: 1325px ){
+      .TopBar__bar{
+        flex-direction: column;
+        text-align: center;
+      }
+      .TopBar__bar .hide--large p {
+        padding:5px 0;
+      }
+      .TopBar{
+        height: 70px;
+      }
+      main{
+        margin-top:52px !important;
+      }
+      .MainNav{
+        margin-top:38px !important;
+      }
+    }
+  {% endif%}
 
 </style>
 
@@ -46,12 +71,6 @@
     </div>
 </div>
 {% endfor %}
-
-<style>
-  .TopBar:not(.active-bar) {
-    display: none;
-  }
-</style>
 
 <script>
   let topBars = document.querySelectorAll(".TopBar");
