@@ -1307,7 +1307,7 @@ lazySizesConfig.expFactor = 4;
 
           let currentShippingProtectionItem = JSON.parse(localStorage.getItem("currentShippingProtectionItem"));
           let currentShippingInsurancePrice = currentShippingProtectionItem ?  "+$" + JSON.parse(localStorage.getItem("currentShippingProtectionItem")).variant.price : null;
-          let cartHasShippingInsurance = JSON.parse(localStorage.getItem("cartHasShippingInsurance"));
+          let cartHasShippingInsurance = localStorage.getItem("cartHasShippingInsurance") ? JSON.parse(localStorage.getItem("cartHasShippingInsurance")) : true;
           data = {
             items: items,
             note: cart.note,
