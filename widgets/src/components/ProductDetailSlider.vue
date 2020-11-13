@@ -31,7 +31,7 @@
         </div>
         <div
           class="Viewer__ZoomIcon"
-          @click.stop="triggerZoom" 
+          @click.stop="triggerZoom"
         >
           <img
             src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/zoom-ico.png?v=17440287001448815818"
@@ -57,7 +57,6 @@
             >
               <responsive-image
                 :images="image"
-                :initial-spinner="true"
                 @click.native="triggerZoom(index)"
               />
             </li>
@@ -107,7 +106,7 @@
           stroke="semibold"
           class="ZoomGallery__Close"
           @click.native.capture.prevent="closeZoom()"
-          @touchstart.native.capture.prevent="closeZoom()" 
+          @touchstart.native.capture.prevent="closeZoom()"
         />
       </div>
     </transition>
