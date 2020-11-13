@@ -5,13 +5,13 @@
     </div>
     <div class="related-products__cards">
       <div class="related-products__card" v-for="relatedProduct in relatedProducts" :key="relatedProduct.title">
-        <a :href="relatedProduct.url"><img class="related-products__image" v-if="relatedProduct.image.medium" :src="relatedProduct.image.medium[0]"></a>
+        <a :href="relatedProduct.url"><img class="related-products__image" v-if="relatedProduct.image" :src="relatedProduct.image"></a>
         <a :href="relatedProduct.url"><p class="related-products__title">{{relatedProduct.title}}</p></a>
       </div>
     </div>
   </div>
 </template>
-  
+
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
 import ApiClient from '../util/ApiClient';
@@ -25,7 +25,7 @@ export default {
     ...mapState({
       filters: state => state.filters,
       activeProduct: state => state.activeProduct,
-      relatedProductsData: state => state.filters.related_products_data || [],
+      relatedProductsData: state => state.filters.new_related_products_data || [], //REMOVE new_ FOR PRODUCTION
       selectedOptions: state => state.selectedOptions
     })
   },
@@ -44,7 +44,7 @@ export default {
         return
       }
 
-      this.relatedProducts = []; 
+      this.relatedProducts = [];
       this.relatedProductsData.slice(0,4).forEach(element => {
         let relatedProduct = {
           title: "",
@@ -70,17 +70,30 @@ export default {
           const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
           const productURL = element.base_product_handle + '?attributes=' + attributeString;
           relatedProduct.url = productURL;
-          
-          apiClient.getImages({
-            type: element.product_type,
-            attributes: selectedOptions,
-            debounce: false
-          }).then((images) => {
-            relatedProduct.image = images;
-          });
 
+          const cylindo_sku = response.cylindo_sku;
+          const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/1/" + cylindo_sku + ".jpg";
+          var cylindoProductFeaturesArray = []
+          for(var option in selectedOptions){
+            var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
+            var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
+            if(foundValue.cylindo_features){
+              cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
+            }
+          }
+          var cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
+            if(index % 2 !== 0 ){
+              return false;
+            }
+            return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
+          });
+          cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
+          const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
+          const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
+          const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
+          relatedProduct.image = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
           this.relatedProducts.push(relatedProduct);
-          });           
+        });
       });
     }
   },

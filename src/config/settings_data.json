@@ -823,7 +823,6 @@
           "close_text": "",
           "enable_newsletter": true,
           "button_label": "",
-          "button_link": "",
           "enable_button": false
         }
       },
@@ -851,10 +850,10 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#c37f50",
-          "font_color": "#ebdfca",
-          "text": "<p><a href=\"\/pages\/2020-autumn-sale\" title=\"2020 Autumn Sale\">The Autumn Sale is here! Up to <strong>20% OFF<\/strong>&nbsp;SITEWIDE<\/a><\/p>",
-          "mobile_text": "<p><a href=\"\/pages\/2020-autumn-sale\" title=\"2020 Autumn Sale\">The Autumn Sale is here! Up to&nbsp;<strong>20%&nbsp;OFF<\/strong>&nbsp;SITEWIDE<\/a><\/p>"
+          "background_color": "#b1c8cd",
+          "font_color": "#ffffff",
+          "text": "<p><a title=\"Frank Lloyd Wright’s Usonia by Inside Weather\" href=\"\/pages\/franklloydwright\">LAST CHANCE! 20% off the Best Selling Usonia Collection ends in 48 HRS<\/a><\/p>",
+          "mobile_text": "<p><a title=\"Frank Lloyd Wright’s Usonia by Inside Weather\" href=\"\/pages\/franklloydwright\">LAST CHANCE! 20% off the Usonia Collection ends in 48 HRS<\/a><\/p>"
         }
       }
     },

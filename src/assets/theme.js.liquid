@@ -87,6 +87,11 @@ lazySizesConfig.expFactor = 4;
         options.$elementToFocus = options.$container;
       }
 
+      // Escape the tab focus for the news letter popup when the chatbot popup is in open state
+      if ($('#NewsletterPopup-newsletter-popup').length) {
+        return;
+      }
+
       options.$container.attr('tabindex', '-1');
       options.$elementToFocus.focus();
 
@@ -934,6 +939,8 @@ lazySizesConfig.expFactor = 4;
           namespace: 'drawer_focus'
         });
 
+        $('body').trigger('drawerClose.' + this.config.id);
+
         if (this.$activeSource && this.$activeSource.attr('aria-expanded')) {
           this.$activeSource.attr('aria-expanded', 'false');
         }
@@ -1211,6 +1218,8 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
         $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
+        $('body').on('drawerOpen.CartDrawer', this.disableChatWidget.bind(this));
+        $('body').on('drawerClose.CartDrawer', this.enableChatWidget.bind(this));
         $(".js-cart-count").on("click", function(){
           if(theme.settings.vwo.countdown.countdownActive){
             theme.cart.getCart().then(function(cart){
@@ -1421,6 +1430,33 @@ lazySizesConfig.expFactor = 4;
 
         $cartInner.css('bottom', cartFooterHeight);
         $cartFooter.css('height', cartFooterHeight);
+      },
+      disableChatWidget: function() {
+        this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+          $('.orb-chat-mount>div').css('margin-right', '10000px');
+        },100,9000);
+
+      },
+
+      enableChatWidget: function(){
+        $('.orb-chat-mount>div').css('margin-right', '0px');
+      },
+
+      waitForElementToDisplay: function(selector, callback, checkFrequencyInMs, timeoutInMs) {
+        var startTimeInMs = Date.now();
+        (function loopSearch() {
+          if (document.querySelector(selector) != null) {
+            callback();
+            return;
+          }
+          else {
+            setTimeout(function () {
+              if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+                return;
+              loopSearch();
+            }, checkFrequencyInMs);
+          }
+        })();
       },
 
       updateCartNotification: function(evt, cart) {
@@ -5077,6 +5113,7 @@ lazySizesConfig.expFactor = 4;
     theme.backButton.init();
     theme.customerTemplates.init();
     theme.collapsibles.init();
+    theme.initializeLazyLoadOnScroll();
 
     slate.rte.wrapTable();
     slate.rte.wrapVideo();
@@ -5219,7 +5256,84 @@ lazySizesConfig.expFactor = 4;
       });
     }
   };
+  theme.initializeLazyLoadOnScroll = function(){
+    //INTENDED TO BE USED WITH THE CLASS: .lazy-load-scroll
+    //Example usecase image: <img class="lazy-load-scroll" data-src="PATH-TO-YOUR-IMG.jpg" src="">
+    !function(window){
+      var $q = function(q, res){
+            if (document.querySelectorAll) {
+              res = document.querySelectorAll(q);
+            } else {
+              var d=document
+                , a=d.styleSheets[0] || d.createStyleSheet();
+              a.addRule(q,'f:b');
+              for(var l=d.all,b=0,c=[],f=l.length;b<f;b++)
+                l[b].currentStyle.f && c.push(l[b]);
 
+              a.removeRule(0);
+              res = c;
+            }
+            return res;
+          }
+        , addEventListener = function(evt, fn){
+            window.addEventListener
+              ? this.addEventListener(evt, fn, false)
+              : (window.attachEvent)
+                ? this.attachEvent('on' + evt, fn)
+                : this['on' + evt] = fn;
+          }
+        , _has = function(obj, key) {
+            return Object.prototype.hasOwnProperty.call(obj, key);
+          }
+        ;
+
+      function loadImage (el, fn) {
+        var img = new Image()
+          , src = el.getAttribute('data-src');
+        img.onload = function() {
+          if (!! el.parent)
+            el.parent.replaceChild(img, el)
+          else
+            el.src = src;
+
+          fn? fn() : null;
+        }
+        img.src = src;
+      }
+
+      function elementInViewport(el) {
+        var rect = el.getBoundingClientRect()
+        var viewportOffset = 200;
+
+        return (
+           rect.top    >= 0
+        && rect.left   >= 0
+        && rect.top <= (window.innerHeight + viewportOffset || document.documentElement.clientHeight + viewportOffset)
+        )
+      }
+
+        var images = new Array()
+          , query = $q('img.lazy-load-scroll')
+          , processScroll = function(){
+              for (var i = 0; i < images.length; i++) {
+                if (elementInViewport(images[i])) {
+                  loadImage(images[i], function () {
+                    images.splice(i, i);
+                  });
+                }
+              };
+            }
+          ;
+        // Array.prototype.slice.call is not callable under our lovely IE8
+        for (var i = 0; i < query.length; i++) {
+          images.push(query[i]);
+        };
+
+        processScroll();
+        addEventListener('scroll',processScroll);
+
+    }(this);
+  }
   window.onpageshow = function(evt) {
     // Removes unload class when returning to page via history
     if (evt.persisted) {

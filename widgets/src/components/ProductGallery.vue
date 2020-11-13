@@ -38,7 +38,6 @@
       <responsive-image
         v-if="!cylindo"
         :images="images[galleryImage] || {}"
-        :initial-spinner="true"
       />
     </div>
     <nav
