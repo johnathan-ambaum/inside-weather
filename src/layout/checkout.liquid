@@ -300,32 +300,32 @@
     </script>
 
     <script>
-      function validateForm() {
-        var isValid = true;
-            $(".field__message--error").remove();
-            // checks that shipping addresses aren't PO boxes
-            $("#checkout_shipping_address_company,#checkout_shipping_address_address1,#checkout_shipping_address_address2").each(function(){
-                var val = $.trim( $(this).val() );
-                var poBoxCheck = /((#\d+)|((box|bin)[-. \/\\]?\d+)|(.*p[ \.]? ?(o|0)[-. \/\\]? *-?((box|bin)|(#|num)?\d+))|(p(ost)? *(o(ff(ice)?)?)? *(box|bin)? *\d+)|(p *-?\/?(o)? *-?box)|post office box|(box|bin) *(number|num|#)? *\d+|(num|number|#) *\d+)/i;
-                if (poBoxCheck.test(val)){
-                    isValid = false;
-                    $(this).val(' ');
-                    $(this).parent().parent().addClass('field--error');
-                    $(this).parent().parent().append('<p class="field__message field__message--error">We are unable to deliver to PO Boxes, please use a physical address.</p>');
-                }
-            })
-      }
-      if(Shopify.Checkout.step == 'contact_information'){
-        $("[data-step=contact_information] form").submit(function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var isValid = validateForm();
-          if (isValid) {
-              $("[data-step=contact_information] form.edit_checkout").unbind().submit()
-              $("[data-step=contact_information] form.edit_checkout").submit()
-          }
-        });
-      }
+      // function validateForm() {
+      //   var isValid = true;
+      //       $(".field__message--error").remove();
+      //       // checks that shipping addresses aren't PO boxes
+      //       $("#checkout_shipping_address_company,#checkout_shipping_address_address1,#checkout_shipping_address_address2").each(function(){
+      //           var val = $.trim( $(this).val() );
+      //           var poBoxCheck = /((#\d+)|((box|bin)[-. \/\\]?\d+)|(.*p[ \.]? ?(o|0)[-. \/\\]? *-?((box|bin)|(#|num)?\d+))|(p(ost)? *(o(ff(ice)?)?)? *(box|bin)? *\d+)|(p *-?\/?(o)? *-?box)|post office box|(box|bin) *(number|num|#)? *\d+|(num|number|#) *\d+)/i;
+      //           if (poBoxCheck.test(val)){
+      //               isValid = false;
+      //               $(this).val(' ');
+      //               $(this).parent().parent().addClass('field--error');
+      //               $(this).parent().parent().append('<p class="field__message field__message--error">We are unable to deliver to PO Boxes, please use a physical address.</p>');
+      //           }
+      //       })
+      // }
+      // if(Shopify.Checkout.step == 'contact_information'){
+      //   $("[data-step=contact_information] form").submit(function(e) {
+      //     e.preventDefault();
+      //     e.stopPropagation();
+      //     var isValid = validateForm();
+      //     if (isValid || true) {
+      //         $("[data-step=contact_information] form.edit_checkout").unbind().submit()
+      //         $("[data-step=contact_information] form.edit_checkout").submit()
+      //     }
+      //   });
+      // }
     </script>
   </body>
 </html>
