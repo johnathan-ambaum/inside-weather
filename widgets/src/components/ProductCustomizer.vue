@@ -381,10 +381,10 @@ export default {
       }
 
       document.documentElement.classList.remove(openClass);
-      const zendesk = document.querySelector('.zEWidget-launcher');
-      if (zendesk) {
-        // fix bug causing widget to be set to 5px wide by some zendesk javascript after closing customizer
-        zendesk.style.width = '';
+
+      const orb = document.querySelector('.orb-chat-mount');
+      if (orb) {
+        orb.style.visibility = 'visible';
       }
     },
   },
@@ -620,15 +620,17 @@ export default {
       this.createProduct();
       this.$bus.$emit('customizer-close');
       this.active = false;
-      const zendesk = document.querySelector('#launcher');
-      zendesk.style.visibility = "visible";
+
+      const orb = document.querySelector('.orb-chat-mount');
+      orb.style.visibility = "visible";
     },
 
     showCustomizer() {
       this.selectPanel('');
       this.active = true;
-      const zendesk = document.querySelector('#launcher');
-      zendesk.style.visibility = "hidden";
+
+      const orb = document.querySelector('.orb-chat-mount');
+      orb.style.visibility = "hidden";
     },
 
     favoriteCurrentProduct() {
@@ -715,8 +717,7 @@ export default {
 html.ProductCustomizer--Open {
   overflow: hidden;
 
-  // zendesk widget
-  .zEWidget-launcher {
+  .orb-chat-mount {
     display: none !important;
   }
 }

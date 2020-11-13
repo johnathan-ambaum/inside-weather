@@ -87,6 +87,11 @@ lazySizesConfig.expFactor = 4;
         options.$elementToFocus = options.$container;
       }
 
+      // Escape the tab focus for the news letter popup when the chatbot popup is in open state
+      if ($('#NewsletterPopup-newsletter-popup').length) {
+        return;
+      }
+
       options.$container.attr('tabindex', '-1');
       options.$elementToFocus.focus();
 
@@ -888,6 +893,8 @@ lazySizesConfig.expFactor = 4;
           namespace: 'drawer_focus'
         });
 
+        $('body').trigger('drawerClose.' + this.config.id);
+
         if (this.$activeSource && this.$activeSource.attr('aria-expanded')) {
           this.$activeSource.attr('aria-expanded', 'false');
         }
@@ -1165,6 +1172,8 @@ lazySizesConfig.expFactor = 4;
         $('body').on('updateCart' + config.namespace, this.sizeFooter.bind(this));
         $('body').on('updateCart' + config.namespace, this.updateCartNotification.bind(this));
         $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
+        $('body').on('drawerOpen.CartDrawer', this.disableChatWidget.bind(this));
+        $('body').on('drawerClose.CartDrawer', this.enableChatWidget.bind(this));
         $(".js-cart-count").on("click", function(){
           if(theme.settings.vwo.countdown.countdownActive){
             theme.cart.getCart().then(function(cart){
@@ -1348,6 +1357,33 @@ lazySizesConfig.expFactor = 4;
 
         $cartInner.css('bottom', cartFooterHeight);
         $cartFooter.css('height', cartFooterHeight);
+      },
+      disableChatWidget: function() {
+        this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+          $('.orb-chat-mount>div').css('margin-right', '10000px');
+        },100,9000);
+
+      },
+
+      enableChatWidget: function(){
+        $('.orb-chat-mount>div').css('margin-right', '0px');
+      },
+
+      waitForElementToDisplay: function(selector, callback, checkFrequencyInMs, timeoutInMs) {
+        var startTimeInMs = Date.now();
+        (function loopSearch() {
+          if (document.querySelector(selector) != null) {
+            callback();
+            return;
+          }
+          else {
+            setTimeout(function () {
+              if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+                return;
+              loopSearch();
+            }, checkFrequencyInMs);
+          }
+        })();
       },
 
       updateCartNotification: function(evt, cart) {
