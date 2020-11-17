@@ -286,6 +286,52 @@ lazySizesConfig.expFactor = 4;
     }
   });
 
+  /**
+   * Helper Functions
+   * -----------------------------------------------------------------------------
+   * A collection of functions that help with basic operations.
+   *
+   */
+  theme.Helpers = (function() {
+    function isEqual(value, other) {// This is a helper function that determines if two given objects are equivalent
+      let type = Object.prototype.toString.call(value);
+      if (type !== Object.prototype.toString.call(other)) return false;
+      if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+      let valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
+      let otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
+      if (valueLen !== otherLen) return false;
+      let compare = function (item1, item2) {
+        let itemType = Object.prototype.toString.call(item1);
+        if (['[object Array]', '[object Object]'].indexOf(itemType) >= 0) {
+          if (!isEqual(item1, item2)) return false;
+        }
+        else {
+          if (itemType !== Object.prototype.toString.call(item2)) return false;
+          if (itemType === '[object Function]') {
+            if (item1.toString() !== item2.toString()) return false;
+          } else {
+            if (item1 !== item2) return false;
+          }
+
+        }
+      };
+        if (type === '[object Array]') {
+          for (let i = 0; i < valueLen; i++) {
+            if (compare(value[i], other[i]) === false) return false;
+          }
+        } else {
+          for (let key in value) {
+            if (value.hasOwnProperty(key)) {
+              if (compare(value[key], other[key]) === false) return false;
+            }
+          }
+        }
+        return true;
+      };
+      return {
+        isEqual: isEqual
+      }
+  })();
 
   /**
    * Currency Helpers
@@ -1181,6 +1227,7 @@ lazySizesConfig.expFactor = 4;
             }.bind(this));
           }
         });
+        $('body').on('change','#cartDrawerShippingProtection',this.warrantyHandler.bind(this));
 
 
         $(window).on('resize' + config.namespace, $.debounce(150, this.sizeFooter.bind(this)));
@@ -1189,19 +1236,24 @@ lazySizesConfig.expFactor = 4;
           theme.cart.getCart().then(function(cart) {
             window.VWO = window.VWO || [];
             window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
+            localStorage.setItem('recentlyAddedAjaxProduct', JSON.stringify(true));
             this.buildCart(cart, true);
           }.bind(this));
         }.bind(this));
       },
 
       buildCart: function(cart, openDrawer) {
-        $('.js-cart-count').text(cart.item_count);
+        let foundShippingInsurance = cart.items.find(function(item){
+          return item.product_type === 'Shipping Insurance'
+        });
+        foundShippingInsurance ? $('.js-cart-count').text(cart.item_count -1) : $('.js-cart-count').text(cart.item_count);
         if(theme.settings.vwo.countdown.countdownActive){
           CartDrawer.prototype.cartDrawerClockHandler(cart);
         }
 
         this.loading(true);
         this.emptyCart();
+        this.updateWarrantyHandler(cart);
 
         if (cart.item_count === 0) {
           $(selectors.container).append('<p class="appear-animation appear-delay-3">' + theme.strings.cartEmpty +'</p>');
@@ -1234,6 +1286,7 @@ lazySizesConfig.expFactor = 4;
               key: product.key,
               url: product.url,
               isPhotoshoot: product.variant_id == theme.settings.vwo.photoshootModal.photoshootProductID,
+              isShippingInsurance: product.product_type === 'Shipping Insurance',
               img: prodImg,
               animationRow: animation_row,
               name: product.product_title,
@@ -1252,12 +1305,32 @@ lazySizesConfig.expFactor = 4;
 
           animation_row+=2;
 
+          let currentShippingProtectionItem = JSON.parse(localStorage.getItem("currentShippingProtectionItem"));
+          let currentShippingInsurancePrice = currentShippingProtectionItem ?  "+$" + JSON.parse(localStorage.getItem("currentShippingProtectionItem")).variant.price : null;
+          let cartHasShippingInsurance = localStorage.getItem("cartHasShippingInsurance") ? JSON.parse(localStorage.getItem("cartHasShippingInsurance")) : true;
           data = {
             items: items,
             note: cart.note,
             lastAnimationRow: animation_row,
             totalPrice: theme.Currency.formatMoney(cart.total_price, theme.settings.moneyFormat),
-            totalCartDiscount: cart.total_discount === 0 ? 0 : theme.strings.cartSavings.replace('[savings]', theme.Currency.formatMoney(cart.total_discount, theme.settings.moneyFormat))
+            totalCartDiscount: cart.total_discount === 0 ? 0 : theme.strings.cartSavings.replace('[savings]', theme.Currency.formatMoney(cart.total_discount, theme.settings.moneyFormat)),
+            cartHasShippingInsurance: items.length > 0 && (cartHasShippingInsurance || cart.items.some(function(item){return item.product_type ===  'Shipping Insurance'})),
+            currentShippingInsurancePrice: currentShippingInsurancePrice,
+            vwo:{
+              shippingProtection:{
+                active: theme.settings.vwo.shippingProtection.active,
+                cartDrawer:{
+                  shippingCostLabel: theme.settings.vwo.shippingProtection.cartDrawer.shippingCostLabel,
+                  shippingCostPrice: theme.settings.vwo.shippingProtection.cartDrawer.shippingCostPrice,
+                  shippingProtectionLabel: theme.settings.vwo.shippingProtection.cartDrawer.shippingProtectionLabel,
+                  shippingProtectionCaption: theme.settings.vwo.shippingProtection.cartDrawer.shippingProtectionCaption
+                },
+                modal:{
+                  title: theme.settings.vwo.shippingProtection.modal.title,
+                  content: theme.settings.vwo.shippingProtection.modal.content
+                }
+              }
+            }
           };
 
           $(selectors.container).append(this.template(data));
@@ -1392,6 +1465,117 @@ lazySizesConfig.expFactor = 4;
         } else {
           $(selectors.cartBubble).removeClass('cart-link__bubble--visible');
         }
+      },
+      warrantyHandler: function(){
+        if(!theme.settings.vwo.shippingProtection.active){return}
+        this.shippingProtectionLoading(true);
+        let shippingProtection = document.getElementById('cartDrawerShippingProtection');
+        if(shippingProtection.checked){
+          localStorage.setItem("cartHasShippingInsurance", JSON.stringify(true));
+          theme.cart.getCart().then(function(cart){
+            this.getWarrantyProduct(cart);
+          }.bind(this));
+        }else{
+          localStorage.setItem("cartHasShippingInsurance", JSON.stringify(false));
+          this.removeWarrantyProduct();
+        }
+      },
+
+      getWarrantyProduct: function(cart, addProduct = true){
+        if(!cart.items.length){return}
+        if(!theme.settings.vwo.shippingProtection.active){return}
+        let cartCategoryData = cart.items.map(function(item){ return {"product_type": item.product_type, "quantity": item.quantity}});
+        let cartCategoryDataNoWarranty = cartCategoryData.filter(function(item){return item.product_type !== 'Shipping Insurance'});
+        let postObj = {"cart_data": cartCategoryDataNoWarranty};
+        return fetch("https://iw-content.herokuapp.com/api/v1/shipping_warranty", {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postObj),
+        })
+        .then(response => response.json())
+        .then(data => {
+          localStorage.setItem("cartCategoryData", JSON.stringify(cartCategoryData))
+          localStorage.setItem("cartCategoryDataNoWarranty", JSON.stringify(cartCategoryDataNoWarranty))
+          localStorage.setItem("currentShippingProtectionItem", JSON.stringify(data));
+          if(addProduct){
+            this.addWarrantyProduct(data.variant.id);
+          }
+        });
+      },
+
+      addWarrantyProduct: function(id){
+        if(!theme.settings.vwo.shippingProtection.active){return}
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({id: id, quantity: 1}),
+        }).then(response => response.json())
+        .then(data => {
+          theme.cart.getCart().then(function(cart) {
+            this.buildCart(cart, false);
+          }.bind(this));
+          this.shippingProtectionLoading(false);
+        });
+      },
+
+      removeWarrantyProduct: function(){
+        return theme.cart.getCart().then(function(cart){
+          cart.items.forEach(function(cartItem){
+            if(cartItem.product_type === 'Shipping Insurance'){
+              this.updateItem(null, cartItem.variant_id, 0)
+            }
+          }.bind(this))
+          this.shippingProtectionLoading(false);
+        }.bind(this));
+      },
+
+      updateWarrantyHandler: function(cart){
+        let cartCategoryData = cart.items.map(function(item){ return {"product_type": item.product_type, "quantity": item.quantity}});
+        let cartCategoryDataNoWarranty = cartCategoryData.filter(function(item){return item.product_type !== 'Shipping Insurance'});
+        let cartCategoryDataLS =  JSON.parse(localStorage.getItem("cartCategoryData"));
+        let cartCategoryDataNoWarrantyLS = JSON.parse(localStorage.getItem("cartCategoryDataNoWarranty"));
+        let shouldUpdate;
+        if(!cart.items.length){return}
+        if(!theme.settings.vwo.shippingProtection.active || !cartCategoryDataNoWarranty.length){
+          this.removeWarrantyProduct();
+          return
+        }
+        if(cartCategoryDataLS){
+          shouldUpdate = !theme.Helpers.isEqual(cartCategoryDataNoWarranty, cartCategoryDataNoWarrantyLS) && !theme.Helpers.isEqual(cartCategoryData, cartCategoryDataLS);
+        }else{
+          shouldUpdate = !theme.Helpers.isEqual(cartCategoryDataNoWarranty, cartCategoryDataNoWarrantyLS);
+        }
+
+        let recentlyAddedAjaxProduct = JSON.parse(localStorage.getItem("recentlyAddedAjaxProduct"));
+        let newShippingInsuranceUser = localStorage.getItem("cartHasShippingInsurance") === null;
+        if(shouldUpdate || newShippingInsuranceUser || recentlyAddedAjaxProduct){
+          localStorage.setItem("recentlyAddedAjaxProduct", JSON.stringify(false));
+          this.getWarrantyProduct(cart, false).then(function(){
+            this.updateWarrantyProduct(cart);
+            this.loading(false);
+          }.bind(this))
+        }
+      },
+
+      updateWarrantyProduct: function(cart){
+        if(!theme.settings.vwo.shippingProtection.active){return}
+        let cartCategoryData = cart.items.map(function(item){ return {"product_type": item.product_type, "quantity": item.quantity}});
+        localStorage.setItem("cartCategoryData",JSON.stringify(cartCategoryData));
+        this.removeWarrantyProduct().then(function(){
+          this.getWarrantyProduct(cart);
+          localStorage.setItem("cartHasShippingInsurance", JSON.stringify(true));
+          this.loading(false);
+        }.bind(this));
+      },
+
+      shippingProtectionLoading: function(state){
+        $("#cartDrawerShippingProtection").prop("disabled", state);
       },
       cartDrawerClockHandler: function(cart){
         function getCookie(cname) {
@@ -2451,7 +2635,25 @@ lazySizesConfig.expFactor = 4;
     }
   };
 
+  theme.shippingProtectionModal = function() {
+    var selectors = {
+      triggers: 'body'
+    };
 
+    if (!$(selectors.triggers).length) {
+      return;
+    }
+
+    var modal = new theme.Modals('shippingProtectionModal', 'shipping-protection-modal');
+
+    $(selectors.triggers).on('click',"#shippingProtectionModal--trigger",triggerSPModal);
+
+    function triggerSPModal(evt) {
+      $(".shippingProtectionModalContent__title").text(theme.settings.vwo.shippingProtection.modal.title);
+      $(".shippingProtectionModalContent__text").text(theme.settings.vwo.shippingProtection.modal.content);
+      modal.open();
+    }
+  };
 
   theme.customerTemplates = (function() {
 
@@ -4906,6 +5108,7 @@ lazySizesConfig.expFactor = 4;
     theme.pageTransitions();
     theme.initQuickShop();
     theme.videoModal();
+    theme.shippingProtectionModal();
     theme.articleImages.init();
     theme.backButton.init();
     theme.customerTemplates.init();

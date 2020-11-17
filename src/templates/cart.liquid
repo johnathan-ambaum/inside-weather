@@ -86,9 +86,11 @@
                       {% endif %}
 
                       <p class="cart__product-meta">
-                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn--secondary btn--small">
-                          {{ 'cart.general.remove' | t }}
-                        </a>
+                        {% unless item.product.type == 'Shipping Insurance'%}
+                          <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn--secondary btn--small">
+                            {{ 'cart.general.remove' | t }}
+                          </a>
+                        {% endunless %}
                       </p>
                     </div>
 
@@ -99,10 +101,10 @@
                   <div class="grid grid--full cart__row--table">
 
                     <div class="grid__item one-third text-center">
-
-                      <label for="updates_{{ item.key }}" class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
-                      <input type="number" name="updates[]" id="updates_{{ item.key }}" class="cart__product-qty" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
-
+                      {% unless item.product.type == 'Shipping Insurance'%}
+                        <label for="updates_{{ item.key }}" class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
+                        <input type="number" name="updates[]" id="updates_{{ item.key }}" class="cart__product-qty" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
+                    {% endunless %}
                     </div>
 
                     <div class="grid__item two-thirds text-right">

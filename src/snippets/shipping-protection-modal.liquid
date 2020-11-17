@@ -1,0 +1,18 @@
+<div id="shippingProtectionModal"  class="modal modal--dark">
+  <div class="modal__inner">
+    <div class="modal__centered page-width text-center">
+      <div class="modal__centered-content">
+        <div class="modal--square">
+          <div class="shippingProtectionModalContent__wrapper">
+            <h3 class="shippingProtectionModalContent__title"></h3>
+            <p class="shippingProtectionModalContent__text"></p>
+            <button type="button" class="modal__close js-modal-close text-link icon--large">
+              {% include 'icon-close' %}
+              <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
