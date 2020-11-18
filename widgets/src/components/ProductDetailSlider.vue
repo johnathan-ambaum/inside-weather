@@ -64,7 +64,6 @@
             >
               <responsive-image
                 :images="image"
-                :initial-spinner="true"
                 @click.native="triggerZoom(index)"
               />
             </li>
