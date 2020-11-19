@@ -246,6 +246,18 @@ export default {
     },
 
     triggerAR(){
+      var target = document.querySelector(".cylindo-button.cylindo-ar-button a");
+      var touch = new Touch({
+        identifier: new Date().getTime(),
+        target: target,
+      });
+      var touchEvent = new TouchEvent("touchend", {
+        touches: [touch],
+        view: window,
+        cancelable: true,
+        bubbles: true,
+      });
+      target.dispatchEvent(touchEvent);
       document.querySelector(".cylindo-button.cylindo-ar-button a div.ar-glyph-background").click();
     },
 
