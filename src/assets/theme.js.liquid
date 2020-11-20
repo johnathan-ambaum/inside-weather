@@ -1186,7 +1186,6 @@ lazySizesConfig.expFactor = 4;
         $(window).on('resize' + config.namespace, $.debounce(150, this.sizeFooter.bind(this)));
 
         $('body').on('added.ajaxProduct', function(event) {
-          console.log(event)
           theme.cart.getCart().then(function(cart) {
             window.VWO = window.VWO || [];
             window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
@@ -1523,27 +1522,40 @@ lazySizesConfig.expFactor = 4;
       },
 
       addonItemHandler: function(cart){
+        let currentCart = JSON.parse(localStorage.getItem("currentCart"));
+        // console.log(cart.items)
+        // console.log(currentCart.items)
+        console.log(JSON.stringify(cart) === JSON.stringify(currentCart));
+        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items)){
+          return
+        }
+        console.log(cart.items)
+        console.log(currentCart.items)
         let addonItems = cart.items.filter(function(item){return item.properties['PARENT_SKU']});
-        addonItems.forEach(function(addonItem){
-          let parentItem = cart.items.find(function(item){return item.sku === addonItem.properties['PARENT_SKU'] });
-          if(!parentItem){
-            this.updateItem({}, addonItem.variant_id, 0);
-            theme.cart.getCart().then(function(cart) {
-              this.buildCart(cart, false);
-            }.bind(this));
-          }else if(parentItem.quantity !== addonItem.quantity){
-            let childItems = cart.items.filter(function(item){return item.properties['PARENT_SKU'] === parentItem.sku});
-            if(childItems.length == 1){
-            this.updateItem({}, childItems[0].variant_id, parentItem.quantity);
-            theme.cart.getCart().then(function(cart) {
-              this.buildCart(cart, false);
-            }.bind(this));
-            }else if(childItems.length > 1){
-              console.log('Update multiple')
-            }
+        // addonItems.forEach(function(addonItem){
+        //   let parentItem = cart.items.find(function(item){return item.sku === addonItem.properties['PARENT_SKU'] });
+        //   if(!parentItem){
+        //     this.updateItem({}, addonItem.variant_id, 0);
+        //     theme.cart.getCart().then(function(cart) {
+        //       this.buildCart(cart, false);
+        //     }.bind(this));
+        //   }else if(parentItem.quantity !== addonItem.quantity){
+        //     let childItems = cart.items.filter(function(item){return item.properties['PARENT_SKU'] === parentItem.sku});
+        //     if(childItems.length == 1){
+        //       console.log('updating item',childItems[0].variant_id, parentItem.quantity)
+        //       this.updateItem({}, childItems[0].variant_id, parentItem.quantity);
+        //       theme.cart.getCart().then(function(cart) {
+        //         this.buildCart(cart, false);
+        //       }.bind(this));
+        //     }else if(childItems.length > 1){
+        //       console.log('Update multiple')
+        //     }
 
-          }
-        }.bind(this));
+        //   }
+        // }.bind(this));
+
+
+        localStorage.setItem('currentCart', JSON.stringify(cart));
       }
     });
     return CartDrawer;
@@ -2550,8 +2562,8 @@ lazySizesConfig.expFactor = 4;
         let template = `
           <div class="productProtectionModalContent__plan ${active}" data-addon-id="${protectionPlan.variant_id}">
             <h4 class="productProtectionModalContent__plan-frequency">${protectionPlan.title}</h4>
-            <p class="productProtectionModalContent__plan-label">PROTECTION PLAN</p>
-            <div>${protectionPlan.bonus_text}</div>
+            <div class="productProtectionModalContent__plan-label">PROTECTION PLAN</div>
+            <div class="productProtectionModalContent__plan-bonus-text">${protectionPlan.bonus_text}</div>
             <div class="productProtectionModalContent__plan-price">$${protectionPlan.price}</div>
             <div class="productProtectionModalContent__plan-icon">${fallbackIcon}</div>
           </div>

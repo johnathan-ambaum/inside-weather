@@ -7,8 +7,8 @@
             <h3 class="productProtectionModalContent__title">Protect Your Product</h3>
             <div class="productProtectionModalContent__plans"></div>
             <div class="productProtectionModalContent__selling-points"></div>
-            <button id="productProtectionModal-add-btn" type="button" class="btn btn--full add-to-cart">ADD TO CART</button>
-            <button type="button" class="js-modal-close">
+            <button id="productProtectionModal-add-btn" type="button">ADD TO CART</button>
+            <button type="button" class="js-modal-close productProtectionModal-close-btn">
               <p>I don't want to protect my purchase</p>
             </button>
             <button type="button" class="modal__close js-modal-close text-link icon--large">
@@ -27,12 +27,8 @@
   background-color: white;
   opacity: 1;
   color: black;
-  max-width: 600px;
+  max-width: 650px;
   padding: 16px 18px;
-
-  /* change later */
-  /* width:600px; */
-  height:500px;
 }
 .productProtectionModalContent__title{
   font-size:32px;
@@ -52,9 +48,10 @@
   outline: solid 1px black;
   cursor: pointer;
   user-select: none;
+  flex-basis:30%;
 }
 .productProtectionModalContent__plan--active{
-  outline: solid 2px black;
+  outline: solid 3px black;
   position:relative;
 }
 .productProtectionModalContent__plan p{
@@ -99,5 +96,26 @@
   font-weight: 500;
   font-size: 14px;
   font-family: Avalon;
+}
+.productProtectionModalContent__plan-bonus-text{
+  font-size: 12px;
+  font-weight: 900;
+  height:20px;
+  margin:15px;
+}
+.productProtectionModalContent__plan-label{
+  font-size: 14px;
+}
+#productProtectionModal-add-btn{
+  width:60%;
+  margin:0 auto;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+.productProtectionModal-close-btn{
+  padding:10px;
+  font-size:14px
 }
 </style>
