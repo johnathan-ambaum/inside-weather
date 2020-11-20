@@ -1,0 +1,103 @@
+<div id="productProtectionModal"  class="modal modal--dark">
+  <div class="modal__inner">
+    <div class="modal__centered page-width text-center">
+      <div class="modal__centered-content">
+        <div class="modal--square">
+          <div class="productProtectionModalContent__wrapper">
+            <h3 class="productProtectionModalContent__title">Protect Your Product</h3>
+            <div class="productProtectionModalContent__plans"></div>
+            <div class="productProtectionModalContent__selling-points"></div>
+            <button id="productProtectionModal-add-btn" type="button" class="btn btn--full add-to-cart">ADD TO CART</button>
+            <button type="button" class="js-modal-close">
+              <p>I don't want to protect my purchase</p>
+            </button>
+            <button type="button" class="modal__close js-modal-close text-link icon--large">
+              {% include 'icon-close' %}
+              <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+
+.productProtectionModalContent__wrapper {
+  background-color: white;
+  opacity: 1;
+  color: black;
+  max-width: 600px;
+  padding: 16px 18px;
+
+  /* change later */
+  /* width:600px; */
+  height:500px;
+}
+.productProtectionModalContent__title{
+  font-size:32px;
+  font-weight: 600;
+  text-align: center;
+  font-family: Avalon;
+  margin-top:20px;
+}
+.productProtectionModalContent__plans{
+  display: flex;
+  justify-content: center;
+}
+.productProtectionModalContent__plan{
+  margin: 10px;
+  padding:20px;
+  text-align: center;
+  outline: solid 1px black;
+  cursor: pointer;
+  user-select: none;
+}
+.productProtectionModalContent__plan--active{
+  outline: solid 2px black;
+  position:relative;
+}
+.productProtectionModalContent__plan p{
+  font-size: 12px;
+  font-weight: 500;
+}
+.productProtectionModalContent__plan-icon{
+  display:none;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height:30px;
+}
+.productProtectionModalContent__plan-icon svg{
+  width:20px;
+  margin-top: 3px;
+  color:white;
+}
+.productProtectionModalContent__plan--active .productProtectionModalContent__plan-icon{
+  display: block;
+}
+.productProtectionModalContent__selling-points{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width:85%;
+  margin:30px auto;
+}
+.productProtectionModalContent__selling-point{
+  flex-basis: 47%;
+  display: flex;
+  align-items: center;
+}
+.productProtectionModalContent__selling-point-icon{
+  width:22px;
+  margin: 5px;
+}
+.productProtectionModalContent__selling-point-text{
+  font-weight: 500;
+  font-size: 14px;
+  font-family: Avalon;
+}
+</style>

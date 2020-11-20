@@ -698,7 +698,9 @@ export default {
       })
         .then((cart) => {
           this.addToCartProcessing = false;
-          window.$('body').trigger('added.ajaxProduct');
+          var addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
+          addedAjaxProuct.modelNumber = this.modelNumber;
+          $('body').trigger(addedAjaxProuct);
           this.trackAddToCart(this.fullProduct);
         });
     },
