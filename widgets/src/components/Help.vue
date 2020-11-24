@@ -32,9 +32,47 @@
           </li>
         </ul>
       </div>
+
+      <div class="chat-now-section">
+        <button
+          v-on:click.stop="openChatbotMode"
+        >
+          Chat now
+        </button>
+      </div>
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        active: false,
+      }
+    },
+
+    mounted() {
+      const intervalId = setInterval(() => {
+        if (document.querySelector('.orb-chat-mount')) {
+          clearInterval(intervalId);
+
+          const outerOrb = document.querySelector('.orb-chat-mount .OuterOrbAvatarPanel-sc-q1idrp');
+
+          if (outerOrb) {
+            outerOrb.style.display = 'none';
+          }
+        }
+      }, 100);
+    },
+
+    methods: {
+      openChatbotMode: function() {
+        orb.openChat();
+      }
+    },
+  }
+</script>
 
 <style lang="scss">
   @import '../scss/mixins';
@@ -120,6 +158,25 @@
           color: #202020;
           text-transform: uppercase;
           text-decoration: underline;
+        }
+      }
+    }
+
+    .chat-now-section {
+      text-align: center;
+
+      button {
+        margin: 54px 0 106px;
+        width: 320px;
+        height: 48px;
+        background-color: #202020;
+        color: #FFFFFF;
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+
+        @media screen and (max-width: 580px) {
+          margin: 56px 42px 88px;
         }
       }
     }
