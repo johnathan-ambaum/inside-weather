@@ -850,10 +850,22 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color": "#526983",
-          "font_color": "#ffffff",
-          "text": "<p><a href=\"\/pages\/2020-black-friday\" title=\"2020 Black Friday\"><strong>BLACK FRIDAY STARTS NOW<\/strong><\/a> | Save up to <strong>25% OFF<\/strong><strong><em> <\/em><\/strong><em>everything!<\/em><\/p>",
-          "mobile_text": "<p><a href=\"\/pages\/2020-black-friday\" title=\"2020 Black Friday\"><strong>BLACK FRIDAY STARTS NOW<\/strong><\/a> | Save up to <strong>25% OFF<\/strong><strong><em> <\/em><\/strong><em>everything!<\/em><\/p>"
+          "background_color_1": "#526983",
+          "background_color_2": "#f5eeea",
+          "background_color_3": "#f5eeea",
+          "font_color_1": "#ffffff",
+          "font_color_2": "#202020",
+          "font_color_3": "#202020",
+          "text_range": 1,
+          "text_range_speed": 5,
+          "text_1": "<p><a href=\"https:\/\/insideweather.com\/pages\/2020-black-friday\" title=\"2020 Black Friday\"><strong>BLACK FRIDAY STARTS NOW<\/strong><\/a> | Save up to <strong>25% OFF<\/strong><strong><em> <\/em><\/strong><em>everything!<\/em><\/p>",
+          "mobile_text_1": "<p><a href=\"https:\/\/insideweather.com\/pages\/2020-black-friday\" title=\"2020 Black Friday\"><strong>BLACK FRIDAY STARTS NOW<\/strong><\/a> | Save up to <strong>25% OFF<\/strong><strong><em> <\/em><\/strong><em>everything!<\/em><\/p>",
+          "text_2": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
+          "mobile_text_2": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
+          "text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
+          "mobile_text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "12\/01\/2020"
         }
       }
     },
