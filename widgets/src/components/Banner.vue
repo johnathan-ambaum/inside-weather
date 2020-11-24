@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="Banner" 
+  <div
+    class="Banner"
     ref="Banner"
   >
     <div
@@ -11,7 +11,7 @@
       <div class="Banner__content">
         <h2>{{bannerHeading}}</h2>
         <p>{{bannerDescription}}</p>
-        <link-button :btnText="buttonText" :linkTo="buttonLink" stroke="white" />
+        <link-button :btnText="buttonText" :linkTo="buttonLink" :fill="true" :noBorder="false" />
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
       right: 0;
       top: 0;
       bottom: 0;
-      background: rgba($color: #202020, $alpha: 0.1);
+      background: rgba($color: #202020, $alpha: 0.25);
       width: 100%;
     }
     .Banner__content {
@@ -151,7 +151,7 @@ export default {
   @include at-query('max-width: 992px') {
     .Banner__wrapper {
       .Banner__content {
-        padding: 48px 15px 35px;
+        padding: 28px 15px 35px;
         h2 {
           font-size: 24px;
           margin: 0 0 6px;
@@ -163,6 +163,7 @@ export default {
         a {
           height: auto;
           border: none;
+          color: #ffffff;
           border-bottom: 1px solid #ffffff;
           font-size: 15px;
           letter-spacing: 0.12em;
