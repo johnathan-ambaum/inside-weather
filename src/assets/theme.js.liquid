@@ -1195,6 +1195,7 @@ lazySizesConfig.expFactor = 4;
             openProductProtectionModal.modelNumber = event.modelNumber;
             openProductProtectionModal.cart = cart;
             openProductProtectionModal.drawerContext = this;
+            localStorage.setItem('currentCart', JSON.stringify(cart));
             $('body').trigger(openProductProtectionModal);
             //else
             // this.buildCart(cart, true);
@@ -1499,8 +1500,24 @@ lazySizesConfig.expFactor = 4;
         PDPCountdownTimeInterval = setInterval(update_clock,1000);
       },
 
+      updateAndBuild: function(updateObj){
+        fetch('/cart/update.js', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({updates: updateObj}),
+        }).then(response => response.json())
+        .then(data => {
+          theme.cart.getCart().then(function(cart) {
+            this.buildCart(cart, false);
+          }.bind(this));
+        });
+      },
+
       addAddonProduct: function(variantID, parentSKU){
-        console.log(variantID, parentSKU);
+        console.log('adding addon product', variantID, parentSKU)
         fetch('/cart/add.js', {
           method: 'POST',
           headers: {
@@ -1523,38 +1540,67 @@ lazySizesConfig.expFactor = 4;
 
       addonItemHandler: function(cart){
         let currentCart = JSON.parse(localStorage.getItem("currentCart"));
-        // console.log(cart.items)
-        // console.log(currentCart.items)
-        console.log(JSON.stringify(cart) === JSON.stringify(currentCart));
-        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items)){
+        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items) ){
           return
         }
-        console.log(cart.items)
-        console.log(currentCart.items)
+        if(cart.item_count === 0 || currentCart.item_count === 0){
+          localStorage.setItem('currentCart', JSON.stringify(cart));
+          return
+        }
+        let parentItems = [];
+        let parentItemsLS = [];
         let addonItems = cart.items.filter(function(item){return item.properties['PARENT_SKU']});
-        // addonItems.forEach(function(addonItem){
-        //   let parentItem = cart.items.find(function(item){return item.sku === addonItem.properties['PARENT_SKU'] });
-        //   if(!parentItem){
-        //     this.updateItem({}, addonItem.variant_id, 0);
-        //     theme.cart.getCart().then(function(cart) {
-        //       this.buildCart(cart, false);
-        //     }.bind(this));
-        //   }else if(parentItem.quantity !== addonItem.quantity){
-        //     let childItems = cart.items.filter(function(item){return item.properties['PARENT_SKU'] === parentItem.sku});
-        //     if(childItems.length == 1){
-        //       console.log('updating item',childItems[0].variant_id, parentItem.quantity)
-        //       this.updateItem({}, childItems[0].variant_id, parentItem.quantity);
-        //       theme.cart.getCart().then(function(cart) {
-        //         this.buildCart(cart, false);
-        //       }.bind(this));
-        //     }else if(childItems.length > 1){
-        //       console.log('Update multiple')
-        //     }
-
-        //   }
-        // }.bind(this));
-
-
+        let addonItemsLS = currentCart.items.filter(function(item){return item.properties['PARENT_SKU']});
+        let parentSKUs = [... new Set(cart.items.map(function(item){return item.properties['PARENT_SKU']}).filter(Boolean))];
+        let parentSKUsLS = [... new Set(currentCart.items.map(function(item){return item.properties['PARENT_SKU']}).filter(Boolean))];
+        parentSKUs.forEach(function(parentSKU){
+          let foundItem = cart.items.find(function(item){return item.sku === parentSKU});
+          if(foundItem){
+            parentItems.push(foundItem);
+          }
+        });
+        parentSKUsLS.forEach(function(parentSKU){
+          let foundItem = currentCart.items.find(function(item){return item.sku === parentSKU});
+          if(foundItem){
+            parentItemsLS.push(foundItem);
+          }
+        });
+        let updates = {};
+        addonItems.forEach(function(addonItem){
+          //if parent item of addon item does not exist, remove addon item
+          let parentItem = parentItems.find(function(item){return item.sku === addonItem.properties['PARENT_SKU']});
+          if(!parentItem){
+            updates[addonItem.key] = 0;
+          }
+        });
+        if(!$.isEmptyObject(updates)){
+          this.updateAndBuild(updates);
+        }else{
+          parentItems.forEach(function(parentItem){
+            let parentItemLS = parentItemsLS.find(function(item){
+              console.log(item, parentItem)
+              return item.sku === parentItem.sku
+            });
+            let parentsAddonItems = addonItems.filter(function(addon){return addon.properties['PARENT_SKU'] === parentItem.sku});
+            let parentsAddonItemsSorted = parentsAddonItems.sort(function(a,b){return b.price - a.price;});
+            if(parentItemLS && parentItem.quantity !== parentItemLS.quantity){
+              let parentItemQty = parentItem.quantity;
+              let parentItemQtyLS = parentItemsLS.find(function(item){return item.sku === parentItem.sku}) ? parentItemsLS.find(function(item){return item.sku === parentItem.sku}).quantity : 0;
+              let qtyDifference = parentItemQty - parentItemQtyLS;
+              if(parentsAddonItems.length === 1){
+                updates[parentsAddonItems[0].key] = parentsAddonItems[0].quantity + qtyDifference;
+              }else if(qtyDifference > 0){
+                //increment highest cost plan
+                updates[parentsAddonItemsSorted[0].key] = parentsAddonItemsSorted[0].quantity + qtyDifference;
+              }else{
+                //decrement lowest cost plan
+                let last = parentsAddonItemsSorted.length - 1;
+                updates[parentsAddonItemsSorted[last].key] = parentsAddonItemsSorted[last].quantity + qtyDifference;
+              }
+            }
+          });
+          this.updateAndBuild(updates);
+        }
         localStorage.setItem('currentCart', JSON.stringify(cart));
       }
     });
@@ -2570,6 +2616,7 @@ lazySizesConfig.expFactor = 4;
         `;
         protectionPlansTemplate += template;
       });
+      $('.productProtectionModalContent__plan').unbind( "click" );
       $(".productProtectionModalContent__plans").empty().append(protectionPlansTemplate);
       $('.productProtectionModalContent__plan').bind('click', function(){
         $('.productProtectionModalContent__plan').removeClass('productProtectionModalContent__plan--active');
