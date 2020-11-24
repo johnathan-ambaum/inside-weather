@@ -161,6 +161,7 @@
                   :key="attribute.parameter"
                   class="ProductCustomizer__NavItem"
                   @click="showPanel(attribute.parameter)"
+                  v-show="!attribute.hidden"
                 >
                   <img
                     v-if="attribute.cover_image_url"
@@ -177,6 +178,7 @@
             v-for="(attribute, index) in attributes"
             :key="attribute.parameter"
             class="ProductCustomizer__Panel"
+            v-show="!attribute.hidden"
           >
             <transition
               enter-active-class="animated slideInRight"
@@ -356,7 +358,8 @@ export default {
     },
 
     hasNext() {
-      return this.openPanel !== '' && this.activeIndex < this.attributes.length - 1;
+      let numberOfHiddenAttributes = this.attributes.filter((attribute) => attribute.hidden === true).length;
+      return this.openPanel !== '' && this.activeIndex < this.attributes.length - numberOfHiddenAttributes - 1 ;
     },
 
     isFavorite() {
