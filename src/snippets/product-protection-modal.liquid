@@ -9,7 +9,7 @@
             <div class="productProtectionModalContent__selling-points"></div>
             <button id="productProtectionModal-add-btn" type="button">ADD TO CART</button>
             <button type="button" class="js-modal-close productProtectionModal-close-btn">
-              <p>I don't want to protect my purchase</p>
+              <p>I'm fine with the 30 day protection plan</p>
             </button>
             <button type="button" class="modal__close js-modal-close text-link icon--large">
               {% include 'icon-close' %}
@@ -21,101 +21,3 @@
     </div>
   </div>
 </div>
-<style>
-
-.productProtectionModalContent__wrapper {
-  background-color: white;
-  opacity: 1;
-  color: black;
-  max-width: 650px;
-  padding: 16px 18px;
-}
-.productProtectionModalContent__title{
-  font-size:32px;
-  font-weight: 600;
-  text-align: center;
-  font-family: Avalon;
-  margin-top:20px;
-}
-.productProtectionModalContent__plans{
-  display: flex;
-  justify-content: center;
-}
-.productProtectionModalContent__plan{
-  margin: 10px;
-  padding:20px;
-  text-align: center;
-  outline: solid 1px black;
-  cursor: pointer;
-  user-select: none;
-  flex-basis:30%;
-}
-.productProtectionModalContent__plan--active{
-  outline: solid 3px black;
-  position:relative;
-}
-.productProtectionModalContent__plan p{
-  font-size: 12px;
-  font-weight: 500;
-}
-.productProtectionModalContent__plan-icon{
-  display:none;
-  position: absolute;
-  background-color: black;
-  border-radius: 50%;
-  top: -15px;
-  right: -15px;
-  width: 30px;
-  height:30px;
-}
-.productProtectionModalContent__plan-icon svg{
-  width:20px;
-  margin-top: 3px;
-  color:white;
-}
-.productProtectionModalContent__plan--active .productProtectionModalContent__plan-icon{
-  display: block;
-}
-.productProtectionModalContent__selling-points{
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width:85%;
-  margin:30px auto;
-}
-.productProtectionModalContent__selling-point{
-  flex-basis: 47%;
-  display: flex;
-  align-items: center;
-}
-.productProtectionModalContent__selling-point-icon{
-  width:22px;
-  margin: 5px;
-}
-.productProtectionModalContent__selling-point-text{
-  font-weight: 500;
-  font-size: 14px;
-  font-family: Avalon;
-}
-.productProtectionModalContent__plan-bonus-text{
-  font-size: 12px;
-  font-weight: 900;
-  height:20px;
-  margin:15px;
-}
-.productProtectionModalContent__plan-label{
-  font-size: 14px;
-}
-#productProtectionModal-add-btn{
-  width:60%;
-  margin:0 auto;
-  background-color: black;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
-.productProtectionModal-close-btn{
-  padding:10px;
-  font-size:14px
-}
-</style>

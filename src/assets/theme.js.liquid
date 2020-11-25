@@ -1189,17 +1189,16 @@ lazySizesConfig.expFactor = 4;
           theme.cart.getCart().then(function(cart) {
             window.VWO = window.VWO || [];
             window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
-
-            //if vwo active
-            var openProductProtectionModal = jQuery.Event( "openProductProtectionModal" );
-            openProductProtectionModal.modelNumber = event.modelNumber;
-            openProductProtectionModal.cart = cart;
-            openProductProtectionModal.drawerContext = this;
-            localStorage.setItem('currentCart', JSON.stringify(cart));
-            $('body').trigger(openProductProtectionModal);
-            //else
-            // this.buildCart(cart, true);
-
+            if(theme.settings.vwo.productProtection.active){
+              var openProductProtectionModal = jQuery.Event( "openProductProtectionModal" );
+              openProductProtectionModal.modelNumber = event.modelNumber;
+              openProductProtectionModal.cart = cart;
+              openProductProtectionModal.drawerContext = this;
+              localStorage.setItem('currentCart', JSON.stringify(cart));
+              $('body').trigger(openProductProtectionModal);
+            }else{
+              this.buildCart(cart, true);
+            }
           }.bind(this));
         }.bind(this));
       },
@@ -1517,7 +1516,6 @@ lazySizesConfig.expFactor = 4;
       },
 
       addAddonProduct: function(variantID, parentSKU){
-        console.log('adding addon product', variantID, parentSKU)
         fetch('/cart/add.js', {
           method: 'POST',
           headers: {
@@ -1540,7 +1538,8 @@ lazySizesConfig.expFactor = 4;
 
       addonItemHandler: function(cart){
         let currentCart = JSON.parse(localStorage.getItem("currentCart"));
-        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items) ){
+        let itemInCartHasProtectionPlans = cart.items.filter(function(item){return item.protection_plans !== null}).length;
+        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items) || !itemInCartHasProtectionPlans){
           return
         }
         if(cart.item_count === 0 || currentCart.item_count === 0){
@@ -1578,7 +1577,6 @@ lazySizesConfig.expFactor = 4;
         }else{
           parentItems.forEach(function(parentItem){
             let parentItemLS = parentItemsLS.find(function(item){
-              console.log(item, parentItem)
               return item.sku === parentItem.sku
             });
             let parentsAddonItems = addonItems.filter(function(addon){return addon.properties['PARENT_SKU'] === parentItem.sku});
@@ -2588,8 +2586,18 @@ lazySizesConfig.expFactor = 4;
 
     function triggerPPModal(evt) {
       drawerContext = evt.drawerContext;
+      drawerContext.disableChatWidget();
       cart = evt.cart;
       modelNumber = evt.modelNumber;
+
+      let recentlyAddedItem = cart.items.find(function(item){return item.sku === modelNumber});
+      let category = recentlyAddedItem.product_type;
+      let filterDefs = JSON.parse(localStorage.getItem(`filters.${category}`));
+      let protectionPlans = filterDefs.protection_plans;
+      if(!protectionPlans){
+        drawerContext.buildCart(cart, true);
+        return
+      }
       populateModalData(cart);
       modal.open();
     }
@@ -2598,7 +2606,6 @@ lazySizesConfig.expFactor = 4;
       let recentlyAddedItem = cart.items.find(function(item){return item.sku === modelNumber});
       let category = recentlyAddedItem.product_type;
       let filterDefs = JSON.parse(localStorage.getItem(`filters.${category}`));
-      console.log(filterDefs);
       let protectionPlans = filterDefs.protection_plans;
       let protectionPlansTemplate = "";
       let defaultSelectedPlan = 1;
@@ -2607,9 +2614,11 @@ lazySizesConfig.expFactor = 4;
         let active = index === defaultSelectedPlan ? "productProtectionModalContent__plan--active":'';
         let template = `
           <div class="productProtectionModalContent__plan ${active}" data-addon-id="${protectionPlan.variant_id}">
-            <h4 class="productProtectionModalContent__plan-frequency">${protectionPlan.title}</h4>
-            <div class="productProtectionModalContent__plan-label">PROTECTION PLAN</div>
-            <div class="productProtectionModalContent__plan-bonus-text">${protectionPlan.bonus_text}</div>
+            <div>
+              <h4 class="productProtectionModalContent__plan-frequency">${protectionPlan.title}</h4>
+              <div class="productProtectionModalContent__plan-label">PROTECTION PLAN</div>
+              <div class="productProtectionModalContent__plan-bonus-text">${protectionPlan.bonus_text}</div>
+            </div>
             <div class="productProtectionModalContent__plan-price">$${protectionPlan.price}</div>
             <div class="productProtectionModalContent__plan-icon">${fallbackIcon}</div>
           </div>
@@ -2640,7 +2649,6 @@ lazySizesConfig.expFactor = 4;
     function handlePlanSelection(){
       let variantID = $('.productProtectionModalContent__plan--active').data('addon-id');
       if(variantID){
-        console.log(cart)
         let parentSku = cart.items.find(function(item){return item.sku === modelNumber}).sku;
         drawerContext.addAddonProduct(variantID, parentSku);
         modal.close();
@@ -2648,6 +2656,7 @@ lazySizesConfig.expFactor = 4;
         modal.close();
         openCartDrawer();
       }
+      drawerContext.enableChatWidget();
     }
 
     function openCartDrawer(){

@@ -12408,81 +12408,143 @@ a.Dropdown__Content__Link.has-hover span {
 .cylindo-loading-bar{
   display:none !important;
 }
-// Shipping Protection
-.shipping-protection__title,
-.shipping-protection__price,
-.free-shipping__title,
-.free-shipping__label{
-  @include media-query($medium-down) {
-    font-size:14px;
-  }
-}
-
-.shipping-protection__caption{
-  @include media-query($medium-down) {
-    font-size:13px;
-  }
-}
-
-#shippingProtectionModal--trigger{
-  margin: 0 8px 4px 8px;
-  cursor: pointer;
-}
-
-.shippingProtectionModalContent__wrapper{
+// Product Protection
+.productProtectionModalContent__wrapper {
   background-color: white;
   opacity: 1;
-  color:black;
-  max-width: 600px;
-  padding:16px 18px;
-  @include media-query($medium-up) {
-    padding:30px 32px;
-  }
+  color: black;
+  max-width: 650px;
+  padding: 16px 18px;
 }
-
-.shippingProtectionModalContent__title{
-  font-weight: bold;
-  text-align: left;
-  color:#202020;
-  margin-bottom:16px;
-  font-size:16px;
-  @include media-query($medium-up) {
-    margin-bottom:28px;
-    font-size:22px;
-  }
+.productProtectionModalContent__title{
+  font-size:32px;
+  font-weight: 600;
+  text-align: center;
+  font-family: Avalon;
+  margin-top:20px;
 }
-
-.shippingProtectionModalContent__text{
+.productProtectionModalContent__plans{
+  display: flex;
+  justify-content: center;
+}
+.productProtectionModalContent__plan{
+  margin: 10px;
+  padding:20px;
+  text-align: center;
+  outline: solid 1px black;
+  cursor: pointer;
+  user-select: none;
+  flex-basis:30%;
+}
+.productProtectionModalContent__plan--active{
+  outline: solid 3px black;
+  position:relative;
+}
+.productProtectionModalContent__plan p{
+  font-size: 12px;
   font-weight: 500;
-  line-height: 24px;
-  text-align: left;
-  color:#717076;
-  font-size:13px;
-  @include media-query($medium-up) {
-    font-size: 16px;
-  }
 }
-.shipping-protection{
+.productProtectionModalContent__plan-icon{
+  display:none;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height:30px;
+}
+.productProtectionModalContent__plan-icon svg{
+  width:20px;
+  margin-top: 3px;
+  color:white;
+}
+.productProtectionModalContent__plan--active .productProtectionModalContent__plan-icon{
+  display: block;
+}
+.productProtectionModalContent__selling-points{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width:85%;
+  margin:30px auto;
+}
+.productProtectionModalContent__selling-point{
+  flex-basis: 47%;
   display: flex;
   align-items: center;
 }
-.shipping-protection__title{
-  margin-bottom:0;
-  font-weight: 900;
-  line-height: 28px;
-  color: #535353;
+.productProtectionModalContent__selling-point-icon{
+  width:22px;
+  margin: 5px;
+  flex: 0 0 20px;
 }
-.shipping-protection__caption{
+.productProtectionModalContent__selling-point-text{
   font-weight: 500;
-  line-height: 24px;
   font-size: 14px;
-  color: #777c86;
+  font-family: Avalon;
 }
-.shipping-protection__price{
-  font-weight: bold;
-  line-height: 28px;
-  color: #202020
+.productProtectionModalContent__plan-bonus-text{
+  font-size: 12px;
+  font-weight: 900;
+  height:20px;
+  margin:15px;
 }
-.shipping-protection__price--inactive{
-  color:#c8c8c8;
+.productProtectionModalContent__plan-label{
+  font-size: 14px;
+}
+#productProtectionModal-add-btn{
+  width:60%;
+  margin:0 auto;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+.productProtectionModal-close-btn{
+  padding:10px;
+  font-size:14px;
+  text-decoration:underline;
+  font-weight:500;
+}
+@media only screen and (max-width: $main-breakpoint) {
+  .productProtectionModalContent__plans{
+    flex-direction:column;
+  }
+  .productProtectionModalContent__plan{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding:10px 20px;
+  }
+  .productProtectionModalContent__plan-bonus-text{
+    height: auto;
+    margin:0px;
+  }
+  #productProtectionModal-add-btn{
+    width:100%;
+  }
+  .productProtectionModalContent__selling-points{
+    width:100%;
+    font-size:12px;
+  }
+  .productProtectionModalContent__selling-point-text{
+    font-size: 11px;
+    font-family: Avalon;
+    text-align: left;
+    padding: 3px 0px;
+  }
+  .productProtectionModalContent__title{
+    font-size:24px;
+  }
+  .productProtectionModalContent__plan-frequency{
+    font-size: 20px;
+  }
+  .productProtectionModalContent__plan-label{
+    font-size:12px;
+    font-weight:500;
+  }
+  .productProtectionModal-close-btn p{
+    font-size:12px;
+  }
 }
