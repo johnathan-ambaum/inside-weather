@@ -16,30 +16,24 @@
       <div class="informational-pages">
         <ul>
           <li>
-            <a href="https://insideweather.com/pages/shipping">
-              Shipping
-            </a>
+            <a href="https://insideweather.com/pages/shipping">Shipping</a>
           </li>
           <li>
-            <a href="https://insideweather.com/pages/returns">
-              Returns
-            </a>
+            <a href="https://insideweather.com/pages/returns">Returns</a>
           </li>
           <li>
-            <a href="https://insideweather.com/pages/home-trial">
-              Home Trial
-            </a>
+            <a href="https://insideweather.com/pages/home-trial">Home Trial</a>
           </li>
         </ul>
       </div>
+    </div>
 
-      <div class="chat-now-section">
-        <button
-          v-on:click.stop="openChatbotMode"
-        >
-          Chat now
-        </button>
-      </div>
+    <div class="chat-now-section">
+      <button
+        v-on:click.stop="openChatbotMode"
+      >
+        Chat now
+      </button>
     </div>
   </div>
 </template>
@@ -161,23 +155,25 @@
         }
       }
     }
+  }
 
-    .chat-now-section {
-      text-align: center;
+  .chat-now-section {
+    text-align: center;
 
-      button {
-        margin: 54px 0 106px;
-        width: 320px;
-        height: 48px;
-        background-color: #202020;
-        color: #FFFFFF;
-        font-size: 14px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+    button {
+      margin: 54px 0 106px;
+      width: 320px;
+      height: 48px;
+      background-color: #202020;
+      color: #FFFFFF;
+      font-family: Avalon;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
 
-        @media screen and (max-width: 580px) {
-          margin: 56px 42px 88px;
-        }
+      @media screen and (max-width: 580px) {
+        margin: 56px 42px 88px;
+        width: 200px;
       }
     }
   }
