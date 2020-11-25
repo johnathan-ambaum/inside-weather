@@ -1,42 +1,240 @@
 <style>
-  .TopBar {
-    background: {{ section.settings.background_color }};
-    color: {{ section.settings.font_color }};
+  .TopBar__bar {
+    display: flex;
   }
+  #TopBar__countdown {
+    font-size: 12px;
+    margin-left: 10px;
+    font-family:Avalon;
+  }
+  .TopBar-1 {
+    background: {{ section.settings.background_color_1 }};
+    color: {{ section.settings.font_color_1 }};
+  }
+  .TopBar-2 {
+    background: {{ section.settings.background_color_2 }};
+    color: {{ section.settings.font_color_2 }};
+  }
+  .TopBar-3 {
+    background: {{ section.settings.background_color_3 }};
+    color: {{ section.settings.font_color_3 }};
+  }
+  .TopBar__countdown-number{
+    font-size:14px;
+    font-weight: 600;
+  }
+  .TopBar__countdown-label{
+    font-size: 12px;
+  }
+  .TopBar__bar-text{
+    line-height: 24px;
+  }
+  .TopBar:not(.active-bar) {
+    display: none;
+  }
+
+
+  {% if section.settings.promo_countdown_enabled %}
+    @media only screen and ( max-width: 1325px ){
+      .TopBar__bar{
+        flex-direction: column;
+        text-align: center;
+      }
+      .TopBar__bar .hide--large p {
+        padding:5px 0;
+      }
+      .TopBar{
+        height: 70px;
+      }
+      .MainNav, .MainNav--Small{
+        margin-top:38px !important;
+      }
+      body{
+        margin-top:40px !important;
+      }
+      .MainNav--Mobile {
+        top: 70px !important;
+        margin-top:70px !important;
+      }
+    }
+  {% endif%}
+
 </style>
 
-<div class="TopBar">
-  <span class="hide--small">{{ section.settings.text }}</span>
-  <span class="hide--large">{{ section.settings.mobile_text }}</span>
+{% assign topBars = section.settings.text_range %}
+{% for i in (1..topBars) %}
+<div class="TopBar TopBar-{{i}} {% if section.settings.text_range == 1 or forloop.index == 1%}active-bar{% endif %}">
+  {% capture textIndex %}text_{{ i }}{% endcapture %}
+    {% capture mobileTextIndex %}mobile_text_{{ i }}{% endcapture %}
+    <div class="TopBar__bar">
+      <span class="hide--small TopBar__bar-text">{{ section.settings[textIndex] }}</span>
+      <span class="hide--large">{{ section.settings[mobileTextIndex] }}</span>
+      {% if section.settings.promo_countdown_enabled %}
+        <span id="TopBar__countdown"></span>
+      {% endif %}
+    </div>
 </div>
+{% endfor %}
+
+<script>
+  let topBars = document.querySelectorAll(".TopBar");
+  let activeBarIndex = 0;
+  let topBarSpeed = {{ section.settings.text_range_speed | times: 1000 }}
+  function cycleBars() {
+    topBars[activeBarIndex].classList.remove('active-bar');
+    ++activeBarIndex;
+    if (activeBarIndex >= topBars.length) {
+      activeBarIndex = 0;
+    }
+    topBars[activeBarIndex].classList.add('active-bar');
+  }
+
+  if (topBars.length > 1) {
+    setInterval(cycleBars, topBarSpeed);
+  }
+</script>
+
+{% if section.settings.promo_countdown_enabled %}
+<script type="text/javascript">
+  var end = new Date('{{ section.settings.promo_countdown_end_date }}');
+
+  var _second = 1000;
+  var _minute = _second * 60;
+  var _hour = _minute * 60;
+  var _day = _hour * 24;
+  var timer;
+
+  var endDate = document.getElementById('TopBar__countdown');
+
+  function showRemaining() {
+      var now = new Date();
+      var distance = end - now;
+      if (distance < 0) {
+          clearInterval(timer);
+          endDate.innerHTML = 'TIME IS UP';
+          return;
+      }
+      var days = Math.floor(distance / _day);
+      var hours = Math.floor((distance % _day) / _hour);
+      var minutes = Math.floor((distance % _hour) / _minute);
+      var seconds = Math.floor((distance % _minute) / _second);
+
+      endDate.innerHTML =  `<span class="TopBar__countdown-number">${days}</span>` + `<span class="TopBar__countdown-label"> days, </span>`;
+      endDate.innerHTML += `<span class="TopBar__countdown-number">${hours}</span>` + `<span class="TopBar__countdown-label"> hrs, </span>`;
+      endDate.innerHTML += `<span class="TopBar__countdown-number">${minutes}</span>` + `<span class="TopBar__countdown-label"> min, </span>`;
+      endDate.innerHTML += `<span class="TopBar__countdown-number">${seconds}</span>` + `<span class="TopBar__countdown-label"> sec </span>`;
+  }
+
+  timer = setInterval(showRemaining, 1000);
+  </script>
+{% endif %}
 
 {% schema %}
   {
     "name": "Top Bar",
     "settings": [
       {
-        "id": "background_color",
+        "id": "background_color_1",
         "type": "color",
-        "label": "Background Color",
+        "label": "Background Color 1",
         "default": "#f5eeea"
       },
       {
-        "id": "font_color",
+        "id": "background_color_2",
         "type": "color",
-        "label": "Font Color",
+        "label": "Background Color 2",
+        "default": "#f5eeea"
+      },
+      {
+        "id": "background_color_3",
+        "type": "color",
+        "label": "Background Color 3",
+        "default": "#f5eeea"
+      },
+      {
+        "id": "font_color_1",
+        "type": "color",
+        "label": "Font Color 1",
         "default": "#202020"
       },
       {
-        "id": "text",
+        "id": "font_color_2",
+        "type": "color",
+        "label": "Font Color 2",
+        "default": "#202020"
+      },
+      {
+        "id": "font_color_3",
+        "type": "color",
+        "label": "Font Color 3",
+        "default": "#202020"
+      },
+      {
+        "id": "text_range",
+        "type": "range",
+        "label": "How many top bars should be shown on site?",
+        "default": 1,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },
+      {
+        "id": "text_range_speed",
+        "type": "range",
+        "label": "How fast should the speed be between bars (in seconds)",
+        "default": 5,
+        "min": 3,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "id": "text_1",
         "type": "richtext",
-        "label": "Text",
+        "label": "First Text",
         "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
       },
       {
-        "id": "mobile_text",
+        "id": "mobile_text_1",
         "type": "richtext",
-        "label": "Text (mobile)",
+        "label": "First Text (mobile)",
         "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
+      },
+      {
+        "id": "text_2",
+        "type": "richtext",
+        "label": "Second Text",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
+      },
+      {
+        "id": "mobile_text_2",
+        "type": "richtext",
+        "label": "Second Text (mobile)",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
+      },
+      {
+        "id": "text_3",
+        "type": "richtext",
+        "label": "Third Text",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial</p>"
+      },
+      {
+        "id": "mobile_text_3",
+        "type": "richtext",
+        "label": "Third Text (mobile)",
+        "default": "<p>FREE Shipping on Every Order | 365 Day Home Trial"
+      },
+      {
+        "id": "promo_countdown_enabled",
+        "type": "checkbox",
+        "label": "Enable promo countdown?",
+        "default": false
+      },
+      {
+        "id": "promo_countdown_end_date",
+        "type": "text",
+        "label": "Pick Date for promo to end",
+        "default": "1/1/2050",
+        "info": "MM/DD/YYYY"
       }
     ]
   }

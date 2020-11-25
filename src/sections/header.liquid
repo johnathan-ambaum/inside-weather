@@ -94,6 +94,7 @@
         var lastScroll = 0;
 
         window.addEventListener('scroll', () => {
+            if($mobileNav.is(":visible")){return}
             var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             if (screenWidth > 1024) {
                 return;

@@ -4,6 +4,7 @@
     <div class="drawer__inner drawer__inner--has-fixed-footer">
       <div class ="drawer__inner--wrapper">
       {{#items}}
+      {{#unless isShippingInsurance }}
       <div class="ajaxcart__product appear-animation appear-delay-{{animationRow}} {{#if isPhotoshoot}} ajaxcart__product--fixed-qty {{/if}}">
         <div class="ajaxcart__row">
           <div class="grid">
@@ -66,6 +67,7 @@
           </div>
         </div>
         </div>
+        {{/unless}}
         {{/items}}
 
         {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
@@ -78,6 +80,30 @@
     </div>
     <div class="drawer__footer drawer__footer--fixed appear-animation appear-delay-{{lastAnimationRow}}">
       <div class="grid grid--full">
+        {{#if vwo.shippingProtection.active}}
+        <div class="grid__item two-thirds">
+          <p class="free-shipping__title">{{vwo.shippingProtection.cartDrawer.shippingCostLabel}}</p>
+        </div>
+        <div class="grid__item one-third text-right free-shipping__label">{{vwo.shippingProtection.cartDrawer.shippingCostPrice}}</div>
+        <div class="grid__item four-fifths">
+          <div class="shipping-protection">
+            <p class="shipping-protection__title">{{vwo.shippingProtection.cartDrawer.shippingProtectionLabel}}</p>
+            {% endraw %}
+              <div id="shippingProtectionModal--trigger" class="js-modal-open-shipping-protection-modal">
+                {% render 'icon-question-mark-small' %}
+              </div>
+            {% raw %}
+            <label class="switch">
+              <input id="cartDrawerShippingProtection" type="checkbox" {{#if cartHasShippingInsurance}} checked {{/if}}>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="grid__item one-fifth text-right {{#unless cartHasShippingInsurance}} shipping-protection__price--inactive {{/unless}} shipping-protection__price">{{currentShippingInsurancePrice}}</div>
+        <div class="grid__item">
+          <p class="shipping-protection__caption">{{vwo.shippingProtection.cartDrawer.shippingProtectionCaption}}</p>
+        </div>
+        {{/if}}
         <div class="grid__item two-thirds">
           <p class="ajaxcart__subtotal">{% endraw %}{{ 'cart.general.subtotal' | t }}{% raw %}</p>
         </div>

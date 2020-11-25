@@ -67,7 +67,20 @@
         <a href="/cart" class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
             {%- include 'icon-cart-black' -%}
             <span class="MainNav__CartCount js-cart-count">
-                {{ cart.item_count }}
+                {% assign foundShippingInsurance = false %}
+                {% for item in cart.items %}
+                  {% if item.product.type == 'Shipping Insurance'%}
+                    {% assign foundShippingInsurance = true %}
+                    {% break %}
+                  {% endif%}
+                {% endfor %}
+
+                {% if foundShippingInsurance %}
+                    {{ cart.item_count | minus: 1}}
+                {% else %}
+                    {{ cart.item_count }}
+                {% endif %}
+
             </span>
         </a>
     </li>

@@ -29,9 +29,16 @@
           >
           <span>Rotate</span>
         </div>
+        <div v-show="showAR" class="Viewer__ARIcon" @click.stop="triggerAR">
+          <img
+            src="https://cdn.shopify.com/s/files/1/2994/0144/files/ar-ico.svg?v=1605141835"
+            alt="AR Button"
+          >
+          <span>View In AR</span>
+        </div>
         <div
           class="Viewer__ZoomIcon"
-          @click.stop="triggerZoom" 
+          @click.stop="triggerZoom"
         >
           <img
             src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/zoom-ico.png?v=17440287001448815818"
@@ -57,7 +64,6 @@
             >
               <responsive-image
                 :images="image"
-                :initial-spinner="true"
                 @click.native="triggerZoom(index)"
               />
             </li>
@@ -107,7 +113,7 @@
           stroke="semibold"
           class="ZoomGallery__Close"
           @click.native.capture.prevent="closeZoom()"
-          @touchstart.native.capture.prevent="closeZoom()" 
+          @touchstart.native.capture.prevent="closeZoom()"
         />
       </div>
     </transition>
@@ -147,6 +153,7 @@ export default {
   data() {
     return {
       showZoom: false,
+      showAR: false,
       currentImage: 0,
     };
   },
@@ -194,6 +201,7 @@ export default {
 
   mounted() {
     this.listenForZoom();
+    this.listenForAR();
   },
 
   methods: {
@@ -212,6 +220,18 @@ export default {
       });
     },
 
+    listenForAR(){
+      if (!this.viewer) {
+        setTimeout(() => {
+          this.listenForAR();
+        }, 200);
+        return;
+      }
+      this.viewer.instance.on(this.viewer.instance.events.AR_BUTTON_READY, () => {
+        this.showAR = true;
+      });
+    },
+
     getCurrentIndex() {
       return this.glide.index;
     },
@@ -224,6 +244,23 @@ export default {
       this.currentImage = index === null ? this.getCurrentIndex() : index;
       this.showZoom = true;
     },
+
+    triggerAR(){
+      var target = document.querySelector(".cylindo-button.cylindo-ar-button a");
+      var touch = new Touch({
+        identifier: new Date().getTime(),
+        target: target,
+      });
+      var touchEvent = new TouchEvent("touchend", {
+        touches: [touch],
+        view: window,
+        cancelable: true,
+        bubbles: true,
+      });
+      target.dispatchEvent(touchEvent);
+      document.querySelector(".cylindo-button.cylindo-ar-button a div.ar-glyph-background").click();
+    },
+
     closeZoom() {
       if (this.cylindo) {
         this.viewer.instance.exitZoom();
@@ -352,6 +389,9 @@ $tile-size-desktop: 100%;
     .Viewer__ZoomIcon {
       margin-left: 31px;
     }
+    .Viewer__ARIcon img{
+      width: 20px;
+    }
 
     @include at-query($breakpoint-small) {
       .ProductDetailSlider {
@@ -363,6 +403,7 @@ $tile-size-desktop: 100%;
         top: 32px;
       }
     }
+    .Viewer__ARIcon,
     .Viewer__ZoomIcon {
       pointer-events: auto;
     }
