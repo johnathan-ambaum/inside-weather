@@ -12422,23 +12422,23 @@ a.Dropdown__Content__Link.has-hover span {
   background-color: white;
   opacity: 1;
   color: black;
-  max-width: 650px;
-  padding: 16px 18px;
+  max-width: 750px;
+  padding: 38px 49px;
 }
 .productProtectionModalContent__title{
   font-size:32px;
   font-weight: 600;
   text-align: center;
   font-family: Avalon;
-  margin-top:20px;
+  margin-bottom: 16px;
 }
 .productProtectionModalContent__plans{
   display: flex;
   justify-content: center;
 }
 .productProtectionModalContent__plan{
-  margin: 10px;
-  padding:20px;
+  margin: 11px;
+  padding:16px;
   text-align: center;
   outline: solid 1px black;
   cursor: pointer;
@@ -12476,7 +12476,7 @@ a.Dropdown__Content__Link.has-hover span {
   flex-wrap: wrap;
   justify-content: center;
   width:85%;
-  margin:30px auto;
+  margin:28px auto 34px auto;
 }
 .productProtectionModalContent__selling-point{
   flex-basis: 47%;
@@ -12494,29 +12494,67 @@ a.Dropdown__Content__Link.has-hover span {
   font-family: Avalon;
 }
 .productProtectionModalContent__plan-bonus-text{
-  font-size: 12px;
-  font-weight: 900;
+  font-family:Avalon;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing:0.05em;
+  color:#202020;
   height:20px;
-  margin:15px;
+  margin:14px;
 }
 .productProtectionModalContent__plan-label{
-  font-size: 14px;
+  font-family:Avalon;
+  font-weight:500;
+  letter-spacing:0.12em;
+  color:#202020;
+  font-size: 12px;
 }
 #productProtectionModal-add-btn{
+  font-family:Avalon;
+  font-weight:500;
+  font-size:14px;
+  letter-spacing:0.12em;
   width:60%;
   margin:0 auto;
   background-color: black;
   color: white;
   padding: 10px;
   text-align: center;
+  display:block;
 }
 .productProtectionModal-close-btn{
-  padding:10px;
+  padding-top:10px;
   font-size:14px;
   text-decoration:underline;
   font-weight:500;
 }
+.productProtectionModal-close-btn p{
+  font-family:Avalon;
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:0.05em;
+  color:#202020;
+  margin:0;
+}
+.productProtectionModalContent__plan-frequency{
+  font-family:Avalon;
+  font-weight:600;
+  font-size:24px;
+  letter-spacing:0.05em;
+  color:#202020;
+  margin-bottom:6px;
+}
+.productProtectionModalContent__plan-price{
+  font-family:Avalon;
+  font-weight:500;
+  font-size:18px;
+  letter-spacing:0.05em;
+  color:#202020;
+}
 @media only screen and (max-width: $main-breakpoint) {
+  .productProtectionModalContent__wrapper{
+    padding: 42px 15px 15px 15px;
+  }
   .productProtectionModalContent__plans{
     flex-direction:column;
   }
@@ -12524,7 +12562,8 @@ a.Dropdown__Content__Link.has-hover span {
     display: flex;
     justify-content:space-between;
     align-items: center;
-    padding:10px 20px;
+    padding:16px 25px;
+    text-align:left;
   }
   .productProtectionModalContent__plan-bonus-text{
     height: auto;
@@ -12536,6 +12575,7 @@ a.Dropdown__Content__Link.has-hover span {
   .productProtectionModalContent__selling-points{
     width:100%;
     font-size:12px;
+    margin:14px auto 24px auto;
   }
   .productProtectionModalContent__selling-point-text{
     font-size: 11px;
@@ -12555,6 +12595,12 @@ a.Dropdown__Content__Link.has-hover span {
   }
   .productProtectionModal-close-btn p{
     font-size:12px;
+  }
+  .productProtectionModalContent__plan-icon svg{
+    margin-left:4px;
+  }
+  .productProtectionModalContent__selling-point-icon{
+    flex: 0 0 13px;
   }
 }
 
