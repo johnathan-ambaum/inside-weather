@@ -73,6 +73,11 @@ export default {
     }
   }
 
+  &.linkButton--fill {
+    background: #ffffff;
+    color: #202020;
+  }
+
   &.linkButton--noBorder {
     border: none;
   }
@@ -80,6 +85,11 @@ export default {
   &.linkButton--noHover {
     &::after {
       display: none;
+    }
+  }
+  @include at-query('max-width: 992px') {
+    &.linkButton--fill {
+      background: transparent;
     }
   }
   @media only screen and (min-width: 768px) and (max-width: 875px) {
