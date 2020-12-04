@@ -391,6 +391,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       })();
 
       $(window).bind("beforeunload", function() {
+        localStorage.clear();
+
         const closeEvent = orb.getEventStream().events
           .find(event => (event.type === "meya.session.event.chat.close"));
 
