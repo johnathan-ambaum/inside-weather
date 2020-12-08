@@ -16,13 +16,13 @@
       <div class="informational-pages">
         <ul>
           <li>
-            <a href="https://insideweather.com/pages/shipping">Shipping</a>
+            <a href="https://insideweather.com/pages/shipping" target="_blank">Shipping</a>
           </li>
           <li>
-            <a href="https://insideweather.com/pages/returns">Returns</a>
+            <a href="https://insideweather.com/pages/returns" target="_blank">Returns</a>
           </li>
           <li>
-            <a href="https://insideweather.com/pages/home-trial">Home Trial</a>
+            <a href="https://insideweather.com/pages/home-trial" target="_blank">Home Trial</a>
           </li>
         </ul>
       </div>
