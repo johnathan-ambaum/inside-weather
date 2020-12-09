@@ -6,11 +6,11 @@
 
     <div class="help-section">
       <p>
-        Need help pronto? The fastest assistance is via our AI Concierge. Simply chat whatever question or dilemma you might have below and our insider will provide you with ninja-quick responses or put you directly in touch with the correct live agent to service your needs
+        Need help pronto? The fastest assistance is via our AI Concierge. Simply chat whatever question or dilemma you might have below and our insider will provide you with ninja-quick responses or put you directly in touch with the correct live agent to service your needs.
       </p>
 
       <p>
-        Just want to read up on the into yourself? Feel free to check out the informational pages below
+        Just want to read up on the info yourself? Feel free to check out the informational pages below
       </p>
 
       <div class="informational-pages">
@@ -46,22 +46,8 @@
       }
     },
 
-    mounted() {
-      const intervalId = setInterval(() => {
-        if (document.querySelector('.orb-chat-mount')) {
-          clearInterval(intervalId);
-
-          const outerOrb = document.querySelector('.orb-chat-mount .OuterOrbAvatarPanel-sc-q1idrp');
-
-          if (outerOrb) {
-            outerOrb.style.display = 'none';
-          }
-        }
-      }, 100);
-    },
-
     methods: {
-      openChatbotMode: function() {
+      openChatbotMode() {
         orb.openChat();
       }
     },
