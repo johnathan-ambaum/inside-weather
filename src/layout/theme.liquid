@@ -375,7 +375,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         theme: { "brandColor":"#202020" },
         windowApi: true,
       };
-
       window.orbConfig = orbConfigOptions;
 
       (function() {
@@ -391,7 +390,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       })();
 
       $(window).bind("beforeunload", function() {
-        localStorage.clear();
+        const chatRelatedStorageItems = Object.keys(localStorage).filter(item => item.match(/grid.meya.ai/));
+
+        chatRelatedStorageItems.forEach(storageItem => localStorage.removeItem(storageItem));
 
         const closeEvent = orb.getEventStream().events
           .find(event => (event.type === "meya.session.event.chat.close"));
