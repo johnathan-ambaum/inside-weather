@@ -850,7 +850,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#0b1a2e",
+          "background_color_1": "#b1c8cd",
           "background_color_2": "#f5eeea",
           "background_color_3": "#f5eeea",
           "font_color_1": "#ffffff",
@@ -858,14 +858,22 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p><a title=\"2020 Black Friday\" href=\"\/pages\/2020-black-friday\"><strong>SALE EXTENDED: <\/strong>Cyber Monday Continues! | Up to <strong>25% OFF<\/strong> SITEWIDE<\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2020-black-friday\" title=\"2020 Black Friday\"><strong>SALE EXTENDED<\/strong> | Save Up to <strong>25% OFF<\/strong> SITEWIDE thru 12\/6<\/a><\/p>",
+          "text_1": "<p><a href=\"\/pages\/shelving\" title=\"Shelving\">Introducing: Atlas<\/a> | The NEW modular, adjustable shelving collection<\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/shelving\" title=\"Shelving\">Introducing: Atlas<\/a> | NEW modular, adjustable shelving<\/p>",
           "text_2": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
           "mobile_text_2": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
           "text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
           "mobile_text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
           "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "12\/01\/2020"
+          "promo_countdown_end_date": "12\/07\/2020"
+        }
+      },
+      "giftcard-header": {
+        "type": "giftcard-header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/IW_LOGO_BLACK_3x_5c19f553-103b-46d3-abdc-09f213fcadd2.png",
+          "desktop_logo_width": 200,
+          "mobile_logo_width": 140
         }
       }
     },
