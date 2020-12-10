@@ -344,7 +344,7 @@ $tile-size-desktop: 100%;
 
     .Viewer__360Icons {
       align-items: center;
-      bottom: 75px;
+      bottom: 55px;
       display: flex;
       justify-content: space-between;
       padding: 0 18px;
