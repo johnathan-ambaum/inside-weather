@@ -391,9 +391,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       })();
 
       $(window).bind("beforeunload", function() {
-        console.log(0);
-        const closeEvent = orb.getEventStream().events
-          .find(event => (event.type === "meya.session.event.chat.close"));
+        const chatRelatedStorageItems = Object.keys(localStorage).filter(item => item.match(/grid.meya.ai/));
+        chatRelatedStorageItems.forEach(storageItem => localStorage.removeItem(storageItem));
+
+        const closeEvent = orb.getEventStream().events.find(event => (event.type === "meya.session.event.chat.close"));
 
         if (!closeEvent) return;
 
@@ -405,7 +406,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             "integration_id": closeEvent.data.integration_id
           }
         };
-
         orb.publishEvent(lifecycleEvent);
 
         return;
