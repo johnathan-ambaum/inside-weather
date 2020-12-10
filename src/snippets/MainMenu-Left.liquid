@@ -18,10 +18,14 @@
 										<div class="NavBlocks__Container" {% if parentLink.links[0].links == blank %}style="width:auto;" {% endif%}>
 											<ul class="NavBlock__flex-list" {%- if parentLink.links[0].links == blank -%} style="padding-top: 34px; padding-right: 40px; margin-top: 0;" {% endif %} >
 												{%- for dropdownLink in parentLink.links-%}
+													{% assign isOfficeSeatingMenu = false %}
+													{% if currentLink == 'office' and forloop.index0 == 1%}
+														{% assign isOfficeSeatingMenu = true %}
+													{%endif%}
 													{% unless forloop.last %}
 													{%- if dropdownLink.links != blank -%}
-													<ul >
-														<li class="NavBlock__List-Item-Heading">
+													<ul {% if isOfficeSeatingMenu %} style="margin-left:0;padding-left:0" {% endif %}>
+														<li class="NavBlock__List-Item-Heading" {% if isOfficeSeatingMenu %} style="margin-left:0;padding-left:0" {% endif %}>
 															{% if dropdownLink.url != blank and dropdownLink.url != '#' %}
 																<a class=" NavBlock__List-Item-Heading--underline " href="{{ dropdownLink.url }}">
 																	<span>{{ dropdownLink.title }}</span>
@@ -31,7 +35,7 @@
 															{% endif %}
 														</li>
 														{% for grandchildLink in dropdownLink.links %}
-															<li class="NavBlock__List-Item">
+															<li class="NavBlock__List-Item"  {% if isOfficeSeatingMenu %} style="margin-left:0;padding-left:0" {% endif %}>
 																<a class="" href="{{ grandchildLink.url }}">
 																	<span>{{ grandchildLink.title }}</span>
 																</a>
