@@ -648,19 +648,35 @@ export default {
       if (!this.attributes) {
         return;
       }
-
-      this.toggleFavorite({
-        customerId: this.customerId,
-        sku: this.productSku,
-        product: {
-          ...this.activeProduct,
-          product_type: this.category,
-          name: this.productName,
-          price: this.productPrice,
-          cover_image_url: this.productImages[0].full,
-          attributes: this.selectedOptions,
-        },
-      });
+      if (this.useCylindo) {
+        this.getCylindoImage().then(() => {
+          this.toggleFavorite({
+            customerId: this.customerId,
+            sku: this.productSku,
+            product: {
+              ...this.activeProduct,
+              product_type: this.category,
+              name: this.productName,
+              price: this.productPrice,
+              cover_image_url: this.productImages[0].full,
+              attributes: this.selectedOptions,
+            },
+          });
+        });
+      }else{
+        this.toggleFavorite({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: this.productImages[0].full,
+            attributes: this.selectedOptions,
+          },
+        });
+      }
     },
 
     async addToCart(quantity, warrantySelected = false) {
