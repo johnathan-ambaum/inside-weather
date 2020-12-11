@@ -146,4 +146,8 @@
   @media only screen and (min-device-width: 414px) and (max-device-width: 896px) {
     @content;
   }
+  // iphone 7 plus
+  @media only screen and (min-device-width: 414px) and (max-device-width: 767px) {
+    @content;
+  }
 }
