@@ -6,40 +6,56 @@
 
     <div class="help-section">
       <p>
-        Need help pronto? The fastest assistance is via our AI Concierge. Simply chat whatever question or dilemma you might have below and our insider will provide you with ninja-quick responses or put you directly in touch with the correct live agent to service your needs
+        Need help pronto? The fastest assistance is via our AI Concierge. Simply chat whatever question or dilemma you might have below and our insider will provide you with ninja-quick responses or put you directly in touch with the correct live agent to service your needs.
       </p>
 
       <p>
-        Just want to read up on the into yourself? Feel free to check out the informational pages below
+        Just want to read up on the info yourself? Feel free to check out the informational pages below.
       </p>
 
       <div class="informational-pages">
         <ul>
           <li>
-            <a href="https://insideweather.com/pages/shipping">
-              Shipping
-            </a>
+            <a href="https://insideweather.com/pages/shipping" target="_blank">Shipping</a>
           </li>
           <li>
-            <a href="https://insideweather.com/pages/returns">
-              Returns
-            </a>
+            <a href="https://insideweather.com/pages/returns" target="_blank">Returns</a>
           </li>
           <li>
-            <a href="https://insideweather.com/pages/home-trial">
-              Home Trial
-            </a>
+            <a href="https://insideweather.com/pages/home-trial" target="_blank">Home Trial</a>
           </li>
         </ul>
       </div>
     </div>
+
+    <div class="chat-now-section">
+      <button
+        v-on:click.stop="openChatbotMode"
+      >
+        Chat now
+      </button>
+    </div>
   </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        active: false,
+      }
+    },
+    methods: {
+      openChatbotMode() {
+        orb.openChat();
+      }
+    },
+  }
+</script>
 
 <style lang="scss">
   @import '../scss/mixins';
   @import '../scss/variables';
-
   .hero-section {
     background: url('https://cdn.insideweather.com/chatbot/chatbot_banner_d.jpg');
     background-repeat: no-repeat;
@@ -49,12 +65,10 @@
     min-height: 100%;
     display: flex;
     justify-content: center;
-
     @media screen and (max-width: 580px) {
       background: url('https://cdn.insideweather.com/chatbot/chatbot_banner_m.jpg');
       height: 338px;
     }
-
     h2 {
       font-family: Avalon;
       font-weight: 600;
@@ -63,21 +77,17 @@
       color: #fff;
       margin: 0;
       align-self: center;
-
       @media screen and (max-width: 580px) {
         font-size: 28px;
       }
     }
   }
-
   .help-section {
     max-width: 770px;
     margin: 50px auto 0;
-
     @media screen and (max-width: 580px) {
       margin: 30px 20px 0;
     }
-
     p {
       font-family: Avalon;
       font-weight: 500;
@@ -86,32 +96,25 @@
       letter-spacing: 0.04em;
       color: #202020;
       text-align: center;
-
       @media screen and (max-width: 580px) {
         font-size: 14px;
         line-height: 20px;
       }
     }
-
     .informational-pages {
       text-align: center;
       margin-top: 26px;
-
       @media screen and (max-width: 580px) {
         margin-top: 30px;
       }
-
       ul li {
         display: inline;
-
         &:not(:last-child) {
           margin-right: 40px;
-
           @media screen and (max-width: 580px) {
             margin-right: 36px;
           }
         }
-
         a {
           font-family: Avalon;
           font-weight: 600;
@@ -124,11 +127,27 @@
       }
     }
   }
-
+  .chat-now-section {
+    text-align: center;
+    button {
+      margin: 54px 0 106px;
+      width: 320px;
+      height: 48px;
+      background-color: #202020;
+      color: #FFFFFF;
+      font-family: Avalon;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      @media screen and (max-width: 580px) {
+        margin: 56px 42px 88px;
+        width: 200px;
+      }
+    }
+  }
   .orb-chat-mount input:focus, .orb-chat-mount input:active {
     border: none;
   }
-
   .orb-chat-mount button:focus, .orb-chat-mount button:active {
     outline: none;
   }
