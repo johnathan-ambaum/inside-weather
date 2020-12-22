@@ -153,6 +153,7 @@
             <nav
               v-show="active && !openPanel"
               class="ProductCustomizer__Nav"
+              ref="productCustomizerNav"
             >
               <div class="ProductCustomizer__NavHeading">Customize</div>
               <div class="ProductCustomizer__NavBody">
@@ -161,6 +162,7 @@
                   :key="attribute.parameter"
                   class="ProductCustomizer__NavItem"
                   @click="showPanel(attribute.parameter)"
+                  v-show="!attribute.hidden"
                 >
                   <img
                     v-if="attribute.cover_image_url"
@@ -177,6 +179,7 @@
             v-for="(attribute, index) in attributes"
             :key="attribute.parameter"
             class="ProductCustomizer__Panel"
+            v-show="!attribute.hidden"
           >
             <transition
               enter-active-class="animated slideInRight"
@@ -191,7 +194,7 @@
             </transition>
           </div>
         </div>
-        <div class="ProductCustomizer__Footer">
+        <div class="ProductCustomizer__Footer" ref="productCustomizerFooter">
           <transition
             enter-active-class="animated slideInUp"
             leave-active-class="animated slideOutDown"
@@ -291,7 +294,8 @@ export default {
       active: false,
       optionsChanged: false,
       addToCartProcessing: false,
-      closedNum: 0
+      closedNum: 0,
+      actionBarOffset: 0,
     };
   },
 
@@ -356,7 +360,8 @@ export default {
     },
 
     hasNext() {
-      return this.openPanel !== '' && this.activeIndex < this.attributes.length - 1;
+      let numberOfHiddenAttributes = this.attributes.filter((attribute) => attribute.hidden === true).length;
+      return this.openPanel !== '' && this.activeIndex < this.attributes.length - numberOfHiddenAttributes - 1 ;
     },
 
     isFavorite() {
@@ -377,6 +382,7 @@ export default {
       const openClass = 'ProductCustomizer--Open';
       if (isActive) {
         document.documentElement.classList.add(openClass);
+        setTimeout(this.checkActionBar, 200);
         return;
       }
 
@@ -387,6 +393,10 @@ export default {
         orb.style.visibility = 'visible';
       }
     },
+    actionBarOffset(offset){
+      this.$refs.productCustomizerFooter.style.bottom = offset + 'px';
+      this.$refs.productCustomizerNav.style.bottom = offset + 56 + 'px';
+    }
   },
 
   created() {
@@ -595,6 +605,7 @@ export default {
     },
 
     nextPanel() {
+      this.checkActionBar();
       if (!this.hasNext) {
         this.close(true);
         return;
@@ -637,19 +648,35 @@ export default {
       if (!this.attributes) {
         return;
       }
-
-      this.toggleFavorite({
-        customerId: this.customerId,
-        sku: this.productSku,
-        product: {
-          ...this.activeProduct,
-          product_type: this.category,
-          name: this.productName,
-          price: this.productPrice,
-          cover_image_url: this.productImages[0].full,
-          attributes: this.selectedOptions,
-        },
-      });
+      if (this.useCylindo) {
+        this.getCylindoImage().then(() => {
+          this.toggleFavorite({
+            customerId: this.customerId,
+            sku: this.productSku,
+            product: {
+              ...this.activeProduct,
+              product_type: this.category,
+              name: this.productName,
+              price: this.productPrice,
+              cover_image_url: this.productImages[0].full,
+              attributes: this.selectedOptions,
+            },
+          });
+        });
+      }else{
+        this.toggleFavorite({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: this.productImages[0].full,
+            attributes: this.selectedOptions,
+          },
+        });
+      }
     },
 
     async addToCart(quantity, warrantySelected = false) {
@@ -704,6 +731,11 @@ export default {
           this.trackAddToCart(this.fullProduct);
         });
     },
+    checkActionBar() {
+      const productCustomizerFooterBottom = this.$refs.productCustomizerFooter.getBoundingClientRect().bottom;
+      const difference = Math.abs(window.innerHeight - productCustomizerFooterBottom);
+      this.actionBarOffset = difference;
+  },
   },
 };
 </script>
@@ -728,7 +760,7 @@ html.ProductCustomizer--Open {
   background: #fff;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   justify-content: space-between;
   left: 0;
   opacity: 0;

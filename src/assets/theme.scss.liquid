@@ -1751,10 +1751,8 @@ html input[disabled] {
   background: $colorBtnPrimary;
   transition: padding-right 0.3s, background 0.3s;
   @if ($animate_buttons) {
-    background: $colorBtnPrimary url({{ "button-arrow.png" | asset_url | split: '?' | first }}) no-repeat $btnBackgroundPosition;
     background-size: 29px;
     @media only screen and (-webkit-min-device-pixel-ratio: 2.0833333333333335), only screen and (min-resolution: 200dpi){
-      background-image: url({{ "button-arrow-2x.png" | asset_url | split: '?' | first }});
       background-size: 29px;
     }
   }
@@ -1805,7 +1803,7 @@ html input[disabled] {
   only screen and ( -webkit-min-device-pixel-ratio: 1.25),
   only screen and ( min-resolution: 1.25dppx) {
     .btn {
-      background-image: url({{ "button-arrow-2x.png" | asset_url | split: '?' | first }}) !important;
+
       background-size: 29px;
     }
   }

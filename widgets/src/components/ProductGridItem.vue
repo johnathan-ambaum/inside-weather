@@ -13,7 +13,6 @@
       <span class="ProductGridItem__TitleRow">
         <span class="ProductGridItem__Title">
           {{ product.name }}
-          <span class="ProductGridItem__Model">Model No&deg; {{ modelNumber }}</span>
         </span>
         <span class="ProductGridItem__Price">${{ dollarPrice }}</span>
       </span>

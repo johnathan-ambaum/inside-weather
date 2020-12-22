@@ -87,7 +87,7 @@
         $('.' + activeClass).removeClass(activeClass);
         $body.removeClass(bodyActiveClass);
     });
-
+    {%- unless template == 'product' %}
     (function () {
         var scrollUp = 'scroll-up';
         var scrollDown = 'scroll-down';
@@ -117,6 +117,8 @@
             lastScroll = currentScroll;
         });
     })();
+    {% endunless %}
+
 </script>
 
 {% schema %}

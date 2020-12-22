@@ -3,7 +3,7 @@
     v-if="products.length"
     class="InspirationOptions"
   >
-    <h3 class="InspirationOptions__Heading">Curator's Picks</h3>
+    <h3 class="InspirationOptions__Heading">Designer's Picks</h3>
     <div class="InspirationOptions__Body">
       <a
         v-for="product in products"
