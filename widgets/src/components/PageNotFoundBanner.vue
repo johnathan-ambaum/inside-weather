@@ -116,7 +116,7 @@ export default {
           font-size: 44px;
           font-weight: 600;
           line-height: 1.2;
-          letter-spacing: 0.05em;
+          letter-spacing: 0em;
           margin: 0 0 26px;
         }
         p {
@@ -126,7 +126,7 @@ export default {
           font-size: 20px;
           font-weight: 500;
           letter-spacing: 0.03em;
-          line-height: 22px;
+          line-height: 33px;
           margin: 0 0 46px;
         }
         span {
@@ -138,6 +138,11 @@ export default {
           letter-spacing: 0.08em;
           line-height: 22px;
           margin: 0 0 34px;
+        }
+        @include at-query('max-width: 1199px') {
+          .--btn {
+            width: 250px;
+          }
         }
       }
       &.Banner--darkColor {
@@ -192,8 +197,26 @@ export default {
             font-size: 14px;
             letter-spacing: 0.12em;
           }
+          .--btn {
+            width: 236px;
+          }
         }
       }
+    }
+  }
+}
+.page-not-found-container {
+  @include at-query('min-width: 768px') {
+    .--pd-t-90 {
+      padding-top: 82px;
+    }
+    .--pd-b-130 {
+      padding-bottom: 82px;
+    }
+  }
+  @include at-query('max-width: 767px') {
+    .--pd-b-130 {
+      padding-bottom: 100px;
     }
   }
 }
