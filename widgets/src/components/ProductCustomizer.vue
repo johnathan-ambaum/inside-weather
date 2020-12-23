@@ -727,6 +727,13 @@ export default {
           this.addToCartProcessing = false;
           var addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
           addedAjaxProuct.modelNumber = this.modelNumber;
+          addedAjaxProuct.currentProduct = {
+            name: this.productName,
+            model: this.modelNumber,
+            product_type: this.category,
+            // image: this.productImages[0].full,
+            attributes: this.selectedOptions,
+          }
           $('body').trigger(addedAjaxProuct);
           this.trackAddToCart(this.fullProduct);
         });

@@ -1238,6 +1238,7 @@ lazySizesConfig.expFactor = 4;
             window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
             if(theme.settings.vwo.productProtection.active){
               var openProductProtectionModal = jQuery.Event( "openProductProtectionModal" );
+              openProductProtectionModal.currentProduct = event.currentProduct;
               openProductProtectionModal.modelNumber = event.modelNumber;
               openProductProtectionModal.cart = cart;
               openProductProtectionModal.drawerContext = this;
@@ -2765,6 +2766,7 @@ lazySizesConfig.expFactor = 4;
     let drawerContext = null;
     let cart = null;
     let modelNumber = null;
+    let currentProduct = null
 
 
     function triggerPPModal(evt) {
@@ -2772,24 +2774,37 @@ lazySizesConfig.expFactor = 4;
       drawerContext.disableChatWidget();
       cart = evt.cart;
       modelNumber = evt.modelNumber;
-
+      currentProduct = evt.currentProduct;
       let recentlyAddedItem = cart.items.find(function(item){return item.sku === modelNumber});
       let category = recentlyAddedItem.product_type;
       let filterDefs = JSON.parse(localStorage.getItem(`filters.${category}`));
-      let protectionPlans = filterDefs.protection_plans;
+      let protectionPlans = filterDefs.protection_plans_enabled;
       if(!protectionPlans){
         drawerContext.buildCart(cart, true);
         return
       }
-      populateModalData(cart);
-      modal.open();
+      getPlans(`https://iw-content.herokuapp.com/api/v1/product/${currentProduct.product_type}/protection_plans`, currentProduct)
+      .then(data => {
+        populateModalData(cart, data);
+        modal.open();
+      });
     }
 
-    function populateModalData(cart){
+    async function getPlans(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
+    function populateModalData(cart, plans){
       let recentlyAddedItem = cart.items.find(function(item){return item.sku === modelNumber});
       let category = recentlyAddedItem.product_type;
       let filterDefs = JSON.parse(localStorage.getItem(`filters.${category}`));
-      let protectionPlans = filterDefs.protection_plans;
+      let protectionPlans = plans;
       let protectionPlansTemplate = "";
       let defaultSelectedPlan = 1;
       let fallbackIcon = '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"></path></svg>';
