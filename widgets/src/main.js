@@ -42,6 +42,8 @@ import FullReviews from './containers/FullReviews.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 import Help from './components/Help.vue';
+import PageNotFoundBanner from './components/PageNotFoundBanner.vue';
+import CategorySeoContent from './components/CategorySeoContent.vue';
 
 (function init() {
   const rootEl = document.querySelector('#app');
@@ -94,6 +96,8 @@ import Help from './components/Help.vue';
       LifeStylePhotos,
       BootstrapVue,
       Help,
+      PageNotFoundBanner,
+      CategorySeoContent,
     },
 
     mixins: [

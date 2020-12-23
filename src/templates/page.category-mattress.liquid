@@ -31,7 +31,7 @@
     </div>
 
     {% assign productDetails = "[{'isVideo':'false', 'objectUrl':'https://cdn.shopify.com/s/files/1/2994/0144/files/philosophy_d.jpg?v=1596082308', 'objectUrlMob':'https://cdn.shopify.com/s/files/1/2994/0144/files/philosophy_m.jpg?v=1596082308','title': 'Our Mattress Philosophy','description': 'The truth is, we’re in the furniture biz, not the mattress biz, and our dream is seeing you customize your home with our products. That said, we’re also all about convenience and what’s a beautiful bed set without a good mattress? So we did our research, vetted the manufactures of the big players in the dreaming biz and chose a partner to make what we felt was the ultimate crowd pleaser at a no-nonsense price. Our Hybrid Plush Cooling Mattress is literally 40% below standard retail because our priority = furniture and our goal is to allow you to build a home you love at a fair price point.'},{'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/cool_d_e7a817d2-b26d-40e8-95f4-0e5d4461a031.jpg?v=1596077712', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/cool_m_7ddcdb78-82fa-4955-910c-0bb4a046b03b.jpg?v=1596077712', 'title': 'The Cool Factor','description': 'The heart of the mattress, composed of individually encased coils, allows airflow from end to end, continuously allowing heat to be released with the changing temperatures keeping your sanctuary temperate (unlike memory foam alternatives). Additionally, the 1.5” quilted cooling top features a high-end knit weave that delivers cooling benefits on contact. Pretty cool, huh?'},
-    
+
     {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/comfort_d.png?v=1596071859', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/comfort_m.png?v=1596071859', 'title': 'The Composition of Comfort','description': 'The Hybrid Plush Cooling Mattress offers the ideal blend of temperature regulation, plush pressure-relief, and customized support. The two top layers lend a contouring effect, relieving pressure upon contact. The individually encased coils’ responsive nature offers localized support to each unique snuggler it encounters. A formula both snoozers & bothered backs will be fond of.'},
 
     {'isVideo':'false', 'objectUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/motion_d.jpg?v=1596080700', 'objectUrlMob': 'https://cdn.shopify.com/s/files/1/2994/0144/files/motion_m.jpg?v=1596080700', 'title': 'Motion Isolation','description': 'A 6” layer of over 900 individually encased coils topped with 3.5” of breathable foam & a quilted top, allows for exceptional reactivity and motion isolation while still offering a comfortable amount of bounce upon contact. Why is motion isolation important (said no one ever)? Just because your partner tosses & turns, doesn’t mean you have to.'},
@@ -49,7 +49,7 @@
     {% assign listItems = "[{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/1-circle_2x_1d256dfe-8385-4a43-9ffa-9a6a61d3254b.png?v=1596071858', 'title': '1.5” QUILTED COOLING TOP'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/2-circle_2x_3fbfee94-6acb-43a8-8e5c-d09e01b100c2.png?v=1596071858', 'title': '1” PREMIUM BREATHABLE FOAM TOP'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3-circle_2x_ee51eaab-6a32-4910-b79c-1c905eaef362.png?v=1596071858', 'title': '6” ASCENSION ENCASED COILS'},{'imageUrl': 'https://cdn.shopify.com/s/files/1/2994/0144/files/4-circle_2x_5d130aad-8a2f-46c1-9d63-d320a0ad9a16.png?v=1596071858', 'title': '2” HIGH-DENSITY REINFORCEMENT BASE'}]"%}
 
     <div class="productDetails --pd-t-130 --pd-b-130">
-      <category-details 
+      <category-details
         :product-details="{{productDetails}}"
         :is-mattress="{{isMattress}}"
         :list-items="{{listItems}}"
@@ -105,6 +105,15 @@
         pop-up-heading="Let's Get Cozy"
       >
       </life-style-photos>
+    </div>
+
+    {% assign seoContent = "[{'isTitle': 'false','copy_one': 'Your mattress isn’t like the rest of the furniture in your home. Why? Because you spend roughly 1/3rd of your life glued to your mattress! Without the right mattress, your sleep suffers, and everybody wants a good night’s sleep. At Inside Weather, we spent a lot of time and energy crafting the perfect mattress at the right price. The result? An affordable, non-toxic, hybrid mattress with a quilted cooling top and a supportive memory foam layer over 6 inches of individually-encased coils.','copy_two': 'In terms of firmness level, our mattress sits right about in the middle-- it’s more supportive than a pillow top or memory foam mattress, but more plush than a traditional innerspring mattress. Its inch and a half of quilted cooling top sucks away body heat so you have more ZZZs and fewer warm nights. Beneath that, the breathable memory foam ensures a comfortable sleeping surface while minimizing motion transfer. Plus, it’s manufactured in the USA and Certi-Pur certified, so you can rest easy knowing your new mattress is free and clear of allergenic chemicals.'}]" %}
+
+    <div class="section_seoContent">
+      <category-seo-content
+        :seo-content="{{seoContent}}"
+      >
+      </category-seo-content>
     </div>
   </div>
 </div>
