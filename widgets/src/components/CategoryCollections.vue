@@ -1,24 +1,25 @@
 <template>
-  <div 
-    class="CtegoryCollections"  
+  <div
+    class="CtegoryCollections"
     ref="CtegoryCollections"
   >
-    <div 
+    <div
       class="CtegoryCollections--heading"
       >
       <heading-with-description>
         <h2>
           {{sectionHeading}}
         </h2>
-        <p>
-          {{sectionDescription}}
+        <p :class="linkTextClass">{{sectionDescription}}
+          <a :href="sectionLinkto">{{sectionLinktext}}</a>
+          {{sectionDescriptiontwo}}
         </p>
       </heading-with-description>
       <figure v-if="isWallArt">
         <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_cat_wall-art_col_finishes.png?v=1593038202"/>
       </figure>
     </div>
-    <ul 
+    <ul
       class="CtegoryCollections--itemWrapper"
       :class="catCollectionClasses"
     >
@@ -74,9 +75,13 @@ export default {
     productCollections: Array,
     sectionHeading: String,
     sectionDescription: String,
+    sectionLinktext: String,
+    sectionLinkto: String,
+    sectionDescriptiontwo: String,
     isScrollAnimationRequire: {type: Boolean, default: true},
     collectionCustomImageStyle:{type: Boolean, default: false},
     removeAnimation:{type: Boolean, default: false},
+    isLinkText:{type: Boolean, default: false},
     isWallArt: {type: Boolean, default: false},
     isWorkDesk: {type: Boolean, default: false},
     isOriginalPrice: {type: Boolean, default: false},
@@ -126,9 +131,14 @@ export default {
       return {
         '--customImageStyle': this.collectionCustomImageStyle
       }
+    },
+    linkTextClass() {
+      return {
+        'link-text': this.isLinkText
+      }
     }
   },
-  
+
 }
 </script>
 
@@ -144,6 +154,19 @@ export default {
       padding: 22px 0 40px;
     }
   }
+  .HeadingWithDescription {
+    padding: 0 15px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+  .link-text {
+    display: inline;
+  }
+  a {
+    display: inline;
+    text-decoration: underline;
+  }
 }
 .CtegoryCollections--itemWrapper {
   align-content: center;
@@ -152,7 +175,7 @@ export default {
   justify-content: left;
   padding: 75px 0 50px;
   width: 100%;
-  
+
   &.wall-art {
     padding: 0 0 50px 0;
   }
@@ -169,7 +192,7 @@ export default {
     &.removeAnimation {
       .--animElement {
         opacity: 1;
-      }  
+      }
     }
     .--animElement {
       opacity: 0;
@@ -302,7 +325,7 @@ export default {
       }
       span {
         font-size: 9px;
-        
+
         &[data-type="limittedText"] {
           font-size: 10px;
         }
@@ -382,8 +405,8 @@ export default {
 .productCollection {
   &:not([class^="--pd-t-"]) {
     padding-top: 70px;
-    
-    @include at-query('max-width: 767px') {  
+
+    @include at-query('max-width: 767px') {
       padding-top: 35px;
     }
   }
@@ -403,7 +426,7 @@ export default {
           -webkit-box-shadow: inset 0px 1px 0 0 rgba($color: #8B8986, $alpha: 0.5);
         }
       }
-    } 
+    }
     &.--hasAnimation {
       li {
         box-shadow: none;

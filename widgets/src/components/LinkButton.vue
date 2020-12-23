@@ -18,6 +18,7 @@ export default {
     categoryListItem: {type: Boolean, default: false},
     stroke: {type: String, default: 'normal'},
     fill: {type: Boolean, default: false},
+    bgBlack: {type: Boolean, default: false},
     border: {type: Boolean, default: true},
     hoverAction: {type: Boolean, default: true}
   },
@@ -25,6 +26,7 @@ export default {
     buttonClass() {
       return {
         'linkButton--fill': this.fill,
+        'linkButton--fillBlack': this.bgBlack,
         'linkButton--white': this.stroke === 'white',
         'linkButton--noBorder': !this.border,
         'linkButton--noHover': !this.hoverAction,
@@ -76,6 +78,10 @@ export default {
   &.linkButton--fill {
     background: #ffffff;
     color: #202020;
+  }
+  &.linkButton--fillBlack {
+    background: #202020;
+    color: #ffffff;
   }
 
   &.linkButton--noBorder {

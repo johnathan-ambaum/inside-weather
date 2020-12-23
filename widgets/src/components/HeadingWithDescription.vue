@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="HeadingWithDescription" 
+  <div
+    class="HeadingWithDescription"
     ref="HeadingWithDescription">
     <slot></slot>
   </div>
@@ -11,7 +11,7 @@
 
 .HeadingWithDescription {
   padding: 0 15px;
-  
+
   h2 {
     display: block;
     font-family: $font-stack-avalon;
@@ -24,7 +24,7 @@
     text-align: center;
   }
 
-  p {
+  p, a {
     color: #202020;
     display: block;
     font-family: $font-stack-avalon;
@@ -35,7 +35,6 @@
     max-width: 765px;
     text-align: center;
     margin: 0 auto;
-    margin-bottom: 28px;
     width: 100%;
     max-width: 700px;
   }
