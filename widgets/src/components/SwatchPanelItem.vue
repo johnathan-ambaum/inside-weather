@@ -15,11 +15,9 @@
     >
     <div class="SwatchPanelItem__Title">{{ option.name }}</div>
     <div
-      v-if="option.subname"
       class="SwatchPanelItem__Subtitle"
     >{{ option.subname }}</div>
     <div
-      v-if="option.icons.length > 0"
       class="SwatchPanelItem__Icons"
     >
       <img
@@ -31,6 +29,7 @@
         class="SwatchPanelItem__Icon"
       >
     </div>
+    <div class="SwatchPanelItem__Price-Markup">{{ this.priceDifferential }}</div>
   </div>
 </template>
 
@@ -42,8 +41,8 @@ export default {
     value: { type: Boolean, default: false },
     load: { type: Boolean, default: false },
     isMobile: { type: Boolean, default: false },
+    priceDifferential: {type: String, default: false },
   },
-
   computed: {
     itemClasses() {
       return {
@@ -153,6 +152,7 @@ export default {
     font-size: 8px;
     letter-spacing: .075em;
     text-transform: uppercase;
+    height:12px;
 
     @include at-query($breakpoint-large) {
       font-size: 10px;
@@ -161,6 +161,7 @@ export default {
   }
 
   &__Icons {
+    height:24px;
     // margin-top: 8px;
   }
 
@@ -172,6 +173,17 @@ export default {
 
     @include at-query($breakpoint-large) {
       height: 20px;
+    }
+  }
+  &__Price-Markup {
+    font-family: Avalon;
+    font-weight: 400;
+    font-size:11px;
+    letter-spacing: 0.1em;
+    color:#202020;
+    padding-top:10px;
+    @include at-query($breakpoint-large) {
+      height: 11px;
     }
   }
 }
