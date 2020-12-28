@@ -178,12 +178,12 @@ export default {
   &__Price-Markup {
     font-family: Avalon;
     font-weight: 400;
-    font-size:11px;
+    font-size:10px;
     letter-spacing: 0.1em;
     color:#202020;
-    padding-top:10px;
+    padding-top:11px;
     @include at-query($breakpoint-large) {
-      height: 11px;
+      font-size: 11px;
     }
   }
 }
