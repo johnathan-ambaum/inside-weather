@@ -2775,6 +2775,7 @@ lazySizesConfig.expFactor = 4;
       cart = evt.cart;
       modelNumber = evt.modelNumber;
       currentProduct = evt.currentProduct;
+      currentProduct.modelNumber = modelNumber;
       let recentlyAddedItem = cart.items.find(function(item){return item.sku === modelNumber});
       let category = recentlyAddedItem.product_type;
       let filterDefs = JSON.parse(localStorage.getItem(`filters.${category}`));
