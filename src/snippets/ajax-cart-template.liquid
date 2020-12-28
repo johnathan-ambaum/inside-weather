@@ -20,12 +20,14 @@
                 {{#properties}}
                   {{#each this}}
                     {{#if this}}
-                      {{#ifEquals @key 'User Fulfillment Display'}}
-                        <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
-                      {{/ifEquals}}
-                      {{#unlessEquals @key 'User Fulfillment Display'}}
-                        {{#unlessEquals @key 'Estimated time to ship'}}
-                          <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                      {{#unlessEquals @key 'PARENT_SKU'}}
+                        {{#ifEquals @key 'User Fulfillment Display'}}
+                          <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
+                        {{/ifEquals}}
+                        {{#unlessEquals @key 'User Fulfillment Display'}}
+                          {{#unlessEquals @key 'Estimated time to ship'}}
+                            <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                          {{/unlessEquals}}
                         {{/unlessEquals}}
                       {{/unlessEquals}}
                     {{/if}}
