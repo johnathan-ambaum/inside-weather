@@ -1721,13 +1721,14 @@ lazySizesConfig.expFactor = 4;
       },
 
       addonItemHandler: function(cart){
+        if(!cart){return}
         let currentCart = JSON.parse(localStorage.getItem("currentCart"));
         let itemInCartHasProtectionPlans = cart.items.filter(function(item){return item.protection_plans !== null}).length;
-        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items) || !itemInCartHasProtectionPlans){
+        if(cart.item_count === 0 || (currentCart && currentCart.item_count === 0) || !currentCart){
+          localStorage.setItem('currentCart', JSON.stringify(cart));
           return
         }
-        if(cart.item_count === 0 || currentCart.item_count === 0){
-          localStorage.setItem('currentCart', JSON.stringify(cart));
+        if(JSON.stringify(cart.items) === JSON.stringify(currentCart.items) || !itemInCartHasProtectionPlans){
           return
         }
         let parentItems = [];
