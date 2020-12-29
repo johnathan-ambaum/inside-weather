@@ -2770,12 +2770,12 @@ lazySizesConfig.expFactor = 4;
 
 
     function triggerPPModal(evt) {
+      $('.add-to-cart').addClass('btn--loading');
       drawerContext = evt.drawerContext;
       drawerContext.disableChatWidget();
       cart = evt.cart;
       modelNumber = evt.modelNumber;
       currentProduct = evt.currentProduct;
-      currentProduct.modelNumber = modelNumber;
       let recentlyAddedItem = cart.items.find(function(item){return item.sku === modelNumber});
       let category = recentlyAddedItem.product_type;
       let filterDefs = JSON.parse(localStorage.getItem(`filters.${category}`));
@@ -2787,6 +2787,7 @@ lazySizesConfig.expFactor = 4;
       getPlans(`https://iw-content.herokuapp.com/api/v1/product/${currentProduct.product_type}/protection_plans`, currentProduct)
       .then(data => {
         populateModalData(cart, data);
+        $('.add-to-cart').removeClass('btn--loading');
         modal.open();
       });
     }

@@ -729,7 +729,7 @@ export default {
           addedAjaxProuct.modelNumber = this.modelNumber;
           addedAjaxProuct.currentProduct = {
             name: this.productName,
-            model: this.modelNumber,
+            model_number: this.modelNumber,
             product_type: this.category,
             // image: this.productImages[0].full,
             attributes: this.selectedOptions,
