@@ -15,9 +15,11 @@
     >
     <div class="SwatchPanelItem__Title">{{ option.name }}</div>
     <div
+      v-if="option.subname"
       class="SwatchPanelItem__Subtitle"
     >{{ option.subname }}</div>
     <div
+      v-if="option.icons.length > 0"
       class="SwatchPanelItem__Icons"
     >
       <img
@@ -99,6 +101,15 @@ export default {
 
   &--square {
     padding: 11px 32px;
+    @include at-query($breakpoint-large) {
+       padding: 18px 32px;
+    }
+  }
+  &--rectangle {
+    padding: 11px 32px;
+    @include at-query($breakpoint-large) {
+       padding: 20px 32px;
+    }
   }
 
   @include at-query($breakpoint-large) {
@@ -152,7 +163,6 @@ export default {
     font-size: 8px;
     letter-spacing: .075em;
     text-transform: uppercase;
-    height:12px;
 
     @include at-query($breakpoint-large) {
       font-size: 10px;
@@ -161,14 +171,16 @@ export default {
   }
 
   &__Icons {
-    height:24px;
-    // margin-top: 8px;
+    margin-top:8px;
+    @include at-query($breakpoint-large) {
+      margin-top: 11px;
+    }
   }
 
   &__Icon {
     display: inline-block;
-    height: 15px;
-    margin: 0 8px;
+    height: 17px;
+    margin: 0 2px;
     width: auto;
 
     @include at-query($breakpoint-large) {
@@ -181,8 +193,13 @@ export default {
     font-size:10px;
     letter-spacing: 0.1em;
     color:#202020;
-    padding-top:11px;
+    padding-top:8px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     @include at-query($breakpoint-large) {
+      padding-top:11px;
       font-size: 11px;
     }
   }
