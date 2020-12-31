@@ -14,10 +14,7 @@
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div
-            v-if="modelNumber"
-            class="ProductCustomizer__Model"
-          >Model No&deg; {{ modelNumber }}</div>
+          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count" :review_average="filters.review_average"></review-stars>
         </div>
         <span
           :class="{ isFavorite }"
@@ -93,10 +90,7 @@
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div
-            v-if="modelNumber"
-            class="ProductCustomizer__Model"
-          >Model No&deg; {{ modelNumber }}</div>
+          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count" :review_average="filters.review_average"></review-stars>
         </div>
         <span
           v-if="!disabled"
@@ -257,6 +251,7 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
+import ReviewStars from './ReviewStars.vue';
 
 library.add(faHeart);
 
@@ -272,7 +267,8 @@ export default {
     SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
-    PhotoshootModal
+    PhotoshootModal,
+    ReviewStars,
   },
 
   mixins: [
