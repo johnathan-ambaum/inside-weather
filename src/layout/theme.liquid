@@ -296,6 +296,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {% include 'video-modal' %}
   {% include 'product-protection-modal' %}
   {% include 'shipping-protection-modal' %}
+  {% include 'ajax-customer-onboard' %}
   {% include 'photoswipe-template' %}
   <!--Gem_Page_Footer_Script-->
   {% include 'gem-app-footer-scripts' %}
@@ -342,6 +343,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
         localStorage.removeItem('registrationStarted');
       }
+      window.customerId = "{{ customer.id }}";  
     </script>
   {% endif %}
   <script>

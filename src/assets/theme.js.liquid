@@ -2885,6 +2885,34 @@ lazySizesConfig.expFactor = 4;
     }
   };
 
+  theme.ajaxCustomerOnboard = function() {
+    var selectors = {
+      triggers: 'body'
+    };
+
+    if (!$(selectors.triggers).length) {
+      return;
+    }
+
+    var modal = new theme.Modals('ajaxCustomerOnboard', 'ajax-customer-onboard');
+
+    $(selectors.triggers).on('click',"#ajaxCustomerOnboard--trigger", triggerOnboard);
+
+    function triggerOnboard(evt){
+      console.log(evt)
+      evt.stopImmediatePropagation();
+      if(window.customerId){
+        return
+      }else{
+        modal.open();
+      }
+
+
+      return false;
+    }
+
+  };
+
   theme.customerTemplates = (function() {
 
     function initEventListeners() {
@@ -5340,6 +5368,7 @@ lazySizesConfig.expFactor = 4;
     theme.videoModal();
     theme.productProtectionModal();
     theme.shippingProtectionModal();
+    theme.ajaxCustomerOnboard();
     theme.articleImages.init();
     theme.backButton.init();
     theme.customerTemplates.init();
