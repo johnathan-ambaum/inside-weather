@@ -904,9 +904,6 @@ html.ProductCustomizer--Open {
       z-index: 10;
     }
 
-    @include at-query($breakpoint-large) {
-      margin-top: 15px;
-    }
 
     & > * {
       margin-right: 15px;
@@ -969,7 +966,7 @@ html.ProductCustomizer--Open {
 
   &__ShippingDays {
     color: #202020;
-    margin: 25px 0;
+    margin: 30px 0;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: .075em;
