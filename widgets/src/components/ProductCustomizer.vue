@@ -170,7 +170,7 @@
                     :src="attribute.cover_image_url"
                     :alt="attribute.name"
                   >
-                  <span class="ProductCustomizer__NavItemTitle">{{ index + 1 }}. {{ attribute.name }}</span>
+                  <span class="ProductCustomizer__NavItemTitle">{{ getAttributeIndex(attribute, attributes) }}. {{ attribute.name }}</span>
                 </div>
               </div>
             </nav>
@@ -742,7 +742,11 @@ export default {
       const productCustomizerFooterBottom = this.$refs.productCustomizerFooter.getBoundingClientRect().bottom;
       const difference = Math.abs(window.innerHeight - productCustomizerFooterBottom);
       this.actionBarOffset = difference;
-  },
+    },
+    getAttributeIndex(attribute, attributes){
+      const visibleAttributes = attributes.filter(a => a.hidden !== true);
+      return visibleAttributes.findIndex(a => a.name === attribute.name) + 1;
+    }
   },
 };
 </script>
