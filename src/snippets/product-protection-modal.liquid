@@ -1,0 +1,23 @@
+<div id="productProtectionModal"  class="modal modal--dark">
+  <div class="modal__inner">
+    <div class="modal__centered page-width text-center">
+      <div class="modal__centered-content">
+        <div class="modal--square">
+          <div class="productProtectionModalContent__wrapper">
+            <h3 class="productProtectionModalContent__title">Protect Your Product</h3>
+            <div class="productProtectionModalContent__plans"></div>
+            <div class="productProtectionModalContent__selling-points"></div>
+            <button id="productProtectionModal-add-btn" type="button">ADD TO CART</button>
+            <button type="button" class="js-modal-close productProtectionModal-close-btn">
+              <p>I'm fine with the 30 day protection plan</p>
+            </button>
+            <button type="button" class="modal__close js-modal-close text-link icon--large">
+              {% include 'icon-close' %}
+              <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

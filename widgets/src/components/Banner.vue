@@ -90,7 +90,7 @@ export default {
       right: 0;
       top: 0;
       bottom: 0;
-      background: rgba($color: #202020, $alpha: 0.25);
+      background: rgba($color: #202020, $alpha: 0.1);
       width: 100%;
     }
     .Banner__content {
@@ -151,7 +151,7 @@ export default {
   @include at-query('max-width: 992px') {
     .Banner__wrapper {
       .Banner__content {
-        padding: 28px 15px 35px;
+        padding: 48px 15px 35px;
         h2 {
           font-size: 24px;
           margin: 0 0 6px;

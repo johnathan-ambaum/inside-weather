@@ -1,31 +1,31 @@
 <template>
-  <div 
+  <div
     class="CategoryDetails image-content-wrapper"
     ref="CategoryDetails"
   >
     <div class="--custom-container">
-      <div 
+      <div
         v-for="(productDetail, index) in productDetails"
         :key="index"
         class="image-content-box"
         :class="[
           (isMattress && index == 2) ? 'mattressthirdDetailSection' : ' ',
           (isMattress && index == 4) ? 'mattressfifthDetailSection' : ' ',
-        ]" 
+        ]"
       >
-        <div 
+        <div
           v-if="isMattress && index == 2"
           class="number-details-section"
         >
           <ul class="list-items">
-            <li 
+            <li
               class="list-item"
               v-for="listItem in listItems"
               :key="listItem.id"
             >
               <figure>
-                <img 
-                  :src="listItem.imageUrl" 
+                <img
+                  :src="listItem.imageUrl"
                 />
               </figure>
               <p>{{listItem.title}}</p>
@@ -35,54 +35,57 @@
         <figure
           v-if="isBigScreen"
         >
-          <img 
-            :src="productDetail.objectUrl" 
+          <img
+            :src="productDetail.objectUrl"
             v-if="productDetail.isVideo === 'false'"
           />
-          <video 
+          <video
             v-if="productDetail.isVideo === 'true'"
             loop autoplay muted playsinline
           >
-            <source 
+            <source
               :src="productDetail.objectUrl"
               type="video/mp4"
-            /> 
+            />
           </video>
         </figure>
         <figure
           v-if="!isBigScreen"
         >
-          <img 
-            :src="productDetail.objectUrlMob" 
+          <img
+            :src="productDetail.objectUrlMob"
             v-if="productDetail.isVideo === 'false'"
           />
-          <video 
+          <video
             v-if="productDetail.isVideo === 'true'"
             loop autoplay muted playsinline
           >
-            <source 
+            <source
               :src="productDetail.objectUrlMob"
               type="video/mp4"
-            /> 
+            />
           </video>
         </figure>
         <heading-with-description>
           <h2>{{productDetail.title}}</h2>
-          <p>{{productDetail.description}}</p>
-          <div 
+          <p>{{productDetail.description}}
+            <a :href="productDetail.linkto">{{productDetail.linktext}}</a>
+            <p>{{productDetail.descriptiontwo}}</p>
+          </p>
+          <div
             v-if="productDetail.isDescImg"
             class="detail-img"
           >
-            <img 
+            <img
             v-if="isBigScreen"
             :src="productDetail.desktopImg"/>
-            
-            <img 
+
+            <img
             v-if="!isBigScreen"
             :src="productDetail.mobileImg"/>
           </div>
         </heading-with-description>
-        
+
       </div>
     </div>
   </div>
@@ -112,7 +115,7 @@ export default {
       this.isBigScreen = false
     }
   },
-} 
+}
 </script>
 
 <style lang="scss">
@@ -153,9 +156,13 @@ export default {
         margin: 0 0 32px;
         text-align: left;
       }
-      p {
+      a {
+        text-decoration: underline;
+      }
+      p, a {
         line-height: 1.57;
         text-align: left;
+        display: inline;
       }
     }
     &:nth-child(even) {
@@ -241,7 +248,7 @@ export default {
           color: #202020;
           margin: 0 0 34px;
         }
-        p {
+        p, a {
           font-weight: 500;
           font-size: 14px;
           line-height: 22px;
@@ -249,7 +256,7 @@ export default {
           text-align: center;
           color: #202020;
           padding-bottom: 44px;
-        }        
+        }
       }
       @include at-query('max-width: 767px') {
         padding-top: 34px;
@@ -271,11 +278,11 @@ export default {
             margin: 0 0 13px;
             text-align: center;
           }
-          p {
+          p, a {
             font-size: 13px;
             line-height: 18px;
             padding-bottom: 34px;
-          }        
+          }
         }
       }
       .number-details-section {
@@ -360,11 +367,11 @@ export default {
       padding-top: 60px;
       padding-bottom: 34px;
       background: #f2f2f2;
-      
+
       &:after {
         background: #f2f2f2;
       }
-      
+
       &:nth-child(even) {
         figure {
           padding-bottom: 0;
@@ -392,7 +399,7 @@ export default {
           color: #202020;
           margin: 0 0 34px;
         }
-        p {
+        p, a {
           font-weight: 500;
           font-size: 14px;
           letter-spacing: 0.04em;
@@ -405,7 +412,7 @@ export default {
       @include at-query('max-width: 767px') {
         padding-top: 34px;
         padding-bottom: 15px;
-        
+
         figure {
           img {
             max-width: 100%;
@@ -420,7 +427,7 @@ export default {
             margin: 0 0 15px;
             text-align: center;
           }
-          p {
+          p, a {
             font-size: 13px;
             line-height: 18px;
             padding-bottom: 15px;
@@ -508,7 +515,7 @@ export default {
           font-size: 20px;
           margin: 0 0 16px;
         }
-        p {
+        p, a {
           line-height: 1.4;
           padding: 0;
         }
@@ -521,7 +528,7 @@ export default {
         }
         figure,
         .HeadingWithDescription {
-          flex-basis: 100%;  
+          flex-basis: 100%;
         }
         .HeadingWithDescription {
           padding: 27px 23px;
@@ -539,7 +546,7 @@ export default {
       padding: 0;
     }
     .image-content-box {
-      &:nth-child(even) { 
+      &:nth-child(even) {
         figure {
           padding-bottom: 100%;
         }

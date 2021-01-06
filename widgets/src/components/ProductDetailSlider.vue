@@ -41,7 +41,7 @@
           @click.stop="triggerZoom"
         >
           <img
-            src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/zoom-ico.png?v=17440287001448815818"
+            src="//cdn.insideweather.com/temp_icons/zoom-ico.png"
             alt="Click to zoom"
           >
           <span>Zoom</span>
@@ -344,7 +344,7 @@ $tile-size-desktop: 100%;
 
     .Viewer__360Icons {
       align-items: center;
-      bottom: 30px;
+      bottom: 55px;
       display: flex;
       justify-content: space-between;
       padding: 0 18px;

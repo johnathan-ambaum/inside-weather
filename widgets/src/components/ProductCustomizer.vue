@@ -153,6 +153,7 @@
             <nav
               v-show="active && !openPanel"
               class="ProductCustomizer__Nav"
+              ref="productCustomizerNav"
             >
               <div class="ProductCustomizer__NavHeading">Customize</div>
               <div class="ProductCustomizer__NavBody">
@@ -193,7 +194,7 @@
             </transition>
           </div>
         </div>
-        <div class="ProductCustomizer__Footer">
+        <div class="ProductCustomizer__Footer" ref="productCustomizerFooter">
           <transition
             enter-active-class="animated slideInUp"
             leave-active-class="animated slideOutDown"
@@ -293,7 +294,8 @@ export default {
       active: false,
       optionsChanged: false,
       addToCartProcessing: false,
-      closedNum: 0
+      closedNum: 0,
+      actionBarOffset: 0,
     };
   },
 
@@ -380,6 +382,7 @@ export default {
       const openClass = 'ProductCustomizer--Open';
       if (isActive) {
         document.documentElement.classList.add(openClass);
+        setTimeout(this.checkActionBar, 200);
         return;
       }
 
@@ -390,6 +393,10 @@ export default {
         orb.style.visibility = 'visible';
       }
     },
+    actionBarOffset(offset){
+      this.$refs.productCustomizerFooter.style.bottom = offset + 'px';
+      this.$refs.productCustomizerNav.style.bottom = offset + 56 + 'px';
+    }
   },
 
   created() {
@@ -598,6 +605,7 @@ export default {
     },
 
     nextPanel() {
+      this.checkActionBar();
       if (!this.hasNext) {
         this.close(true);
         return;
@@ -640,19 +648,35 @@ export default {
       if (!this.attributes) {
         return;
       }
-
-      this.toggleFavorite({
-        customerId: this.customerId,
-        sku: this.productSku,
-        product: {
-          ...this.activeProduct,
-          product_type: this.category,
-          name: this.productName,
-          price: this.productPrice,
-          cover_image_url: this.productImages[0].full,
-          attributes: this.selectedOptions,
-        },
-      });
+      if (this.useCylindo) {
+        this.getCylindoImage().then(() => {
+          this.toggleFavorite({
+            customerId: this.customerId,
+            sku: this.productSku,
+            product: {
+              ...this.activeProduct,
+              product_type: this.category,
+              name: this.productName,
+              price: this.productPrice,
+              cover_image_url: this.productImages[0].full,
+              attributes: this.selectedOptions,
+            },
+          });
+        });
+      }else{
+        this.toggleFavorite({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: this.productImages[0].full,
+            attributes: this.selectedOptions,
+          },
+        });
+      }
     },
 
     async addToCart(quantity, warrantySelected = false) {
@@ -701,10 +725,24 @@ export default {
       })
         .then((cart) => {
           this.addToCartProcessing = false;
-          window.$('body').trigger('added.ajaxProduct');
+          var addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
+          addedAjaxProuct.modelNumber = this.modelNumber;
+          addedAjaxProuct.currentProduct = {
+            name: this.productName,
+            model_number: this.modelNumber,
+            product_type: this.category,
+            // image: this.productImages[0].full,
+            attributes: this.selectedOptions,
+          }
+          $('body').trigger(addedAjaxProuct);
           this.trackAddToCart(this.fullProduct);
         });
     },
+    checkActionBar() {
+      const productCustomizerFooterBottom = this.$refs.productCustomizerFooter.getBoundingClientRect().bottom;
+      const difference = Math.abs(window.innerHeight - productCustomizerFooterBottom);
+      this.actionBarOffset = difference;
+  },
   },
 };
 </script>
@@ -729,7 +767,7 @@ html.ProductCustomizer--Open {
   background: #fff;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   justify-content: space-between;
   left: 0;
   opacity: 0;
@@ -966,7 +1004,7 @@ html.ProductCustomizer--Open {
     font-weight: 500;
     height: 48px;
     letter-spacing: .12em;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     text-transform: uppercase;
     width: 100%;
 

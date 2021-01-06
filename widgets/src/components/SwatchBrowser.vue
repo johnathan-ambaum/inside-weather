@@ -81,21 +81,21 @@
                 >
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?1111111111111"
+                      src="//cdn.insideweather.com/pdp/customizer/ico/pet-friendly.png"
                       alt="Pet friendly icon"
                     >
                     <span>Pet Friendly</span>
                   </div>
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png?1111111111111"
+                      src="//cdn.insideweather.com/pdp/customizer/ico/performance.png"
                       alt="Performance icon"
                     >
                     <span>Performance</span>
                   </div>
                   <div class="SwatchBrowser__BadgeKey">
                     <img
-                      src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?1111111111111"
+                      src="//cdn.insideweather.com/pdp/customizer/ico/commercial.png"
                       alt="Commercial icon"
                     >
                     <span>Commercial</span>
@@ -179,17 +179,17 @@
                     >
                       <img
                         v-if="swatch.pet_friendly"
-                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-pet-friendly.png?111111111111"
+                        src="//cdn.insideweather.com/pdp/customizer/ico/pet-friendly.png"
                         alt="Pet friendly icon"
                       >
                       <img
                         v-if="swatch.performance"
-                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-performance.png?111111111111"
+                        src="//cdn.insideweather.com/pdp/customizer/ico/performance.png"
                         alt="Performance icon"
                       >
                       <img
                         v-if="swatch.commercial"
-                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-swatch-ez-clean.png?111111111111"
+                        src="//cdn.insideweather.com/pdp/customizer/ico/commercial.png"
                         alt="Commercial icon"
                       >
                     </div>
