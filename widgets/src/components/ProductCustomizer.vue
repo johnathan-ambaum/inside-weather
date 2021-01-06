@@ -1008,7 +1008,7 @@ html.ProductCustomizer--Open {
     font-weight: 500;
     height: 48px;
     letter-spacing: .12em;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     text-transform: uppercase;
     width: 100%;
 
