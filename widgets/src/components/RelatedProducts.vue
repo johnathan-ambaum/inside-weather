@@ -50,7 +50,8 @@ export default {
       }
 
       this.relatedProducts = [];
-      this.relatedProductsData.slice(0,4).forEach(element => {
+      const RELATED_PRODUCTS_NUM = 6;
+      this.relatedProductsData.slice(0,RELATED_PRODUCTS_NUM).forEach(element => {
         let relatedProduct = {
           title: "",
           url: "",
@@ -70,6 +71,13 @@ export default {
               selectedOptions[parameter] = this.selectedOptions[parameter];
             }
           });
+          for(var option in selectedOptions){
+            var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
+            var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
+            if(!foundValue){
+              selectedOptions[option] = foundAttribute.values[0].value;
+            }
+          }
           const productTitle = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
           relatedProduct.title = productTitle;
           const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
