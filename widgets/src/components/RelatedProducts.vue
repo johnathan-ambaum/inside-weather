@@ -86,7 +86,7 @@ export default {
               relatedProduct.image = images;
             });
           }else{
-            const startFrame = response.cylindo_overrides.startFrame || 1;
+            const startFrame = response && response.cylindo_overrides && response.cylindo_overrides.startFrame ? response.cylindo_overrides.startFrame : 1;
             const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/" + startFrame +"/"+ cylindo_sku + ".jpg";
             var cylindoProductFeaturesArray = []
             for(var option in selectedOptions){
