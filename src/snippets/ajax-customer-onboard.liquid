@@ -1,11 +1,143 @@
 <div id="ajaxCustomerOnboard"  class="modal modal--dark">
   <div class="modal__inner">
-    <div class="modal__centered page-width text-center">
+    <div class="modal__centered page-width">
       <div class="modal__centered-content">
-        <div class="modal--square">
-          <h1>Customer Onboard Modal</h1>
+        <div class="modal--white modal--square">
+          <div class="ajaxCustomerOnboard__wrapper">
+            <div class="ajaxCustomerOnboard__login ajaxCustomerOnboard__form">
+              <h1 class="ajaxCustomerOnboard__form-header">Login</h1>
+              <form method="post" action="/account/login" id="customer_login--modal" accept-charset="UTF-8">
+                <input type="hidden" name="form_type" value="customer_login">
+                <input type="hidden" name="utf8" value="✓">
+                <label for="CustomerEmail">{{ 'customer.register.email' | t }}</label>
+                <input type="email" name="customer[email]" id="CustomerEmail" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
+                <div class="grid">
+                  <div class="grid__item one-half">
+                    <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+                  </div>
+                  <div class="grid__item one-half text-right">
+                    <small class="label-info">
+                      <a href="#recover" id="RecoverPassword" class="ajaxCustomerOnboard--show-forgot js-no-transition">
+                        {{ 'customer.login.forgot_password' | t }}
+                      </a>
+                    </small>
+                  </div>
+                </div>
+                <input type="password" value="" name="customer[password]" id="CustomerPassword" class="ajaxCustomerOnboard__form-input input-full">
+                <input type="submit" value="{{ 'customer.login.sign_in' | t }}" class="btn btn--full ajaxCustomerOnboard__form-submit">
+              </form>
+              <a href="#" class="ajaxCustomerOnboard--show-register">Create Account</a>
+            </div>
+            <div class="ajaxCustomerOnboard__register ajaxCustomerOnboard__form">
+              <h1 class="ajaxCustomerOnboard__form-header">Create Account</h1>
+              <form method="post" action="/account" id="create_customer--modal" accept-charset="UTF-8">
+                <input class="input-full" type="hidden" name="form_type" value="create_customer">
+                <input class="input-full" type="hidden" name="utf8" value="✓">
+
+                <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+                <input type="text" name="customer[first_name]" id="FirstName" class="ajaxCustomerOnboard__form-input input-full" autocapitalize="words" autofocus>
+
+                <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
+                <input type="text" name="customer[last_name]" id="LastName" class="ajaxCustomerOnboard__form-input input-full" autocapitalize="words">
+
+                <label for="Email">{{ 'customer.register.email' | t }}</label>
+                <input type="email" name="customer[email]" id="Email" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
+
+                <label for="CreatePassword">{{ 'customer.register.password' | t }}</label>
+                <input type="password" name="customer[password]" id="CreatePassword" class="ajaxCustomerOnboard__form-input input-full">
+
+                <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn btn--full ajaxCustomerOnboard__form-submit">
+              </form>
+              <a href="#" class="ajaxCustomerOnboard--show-login">Log in</a>
+            </div>
+            <div class="ajaxCustomerOnboard__forgot-password ajaxCustomerOnboard__form">
+              <h2>{{ 'customer.recover_password.title' | t }}</h2>
+              <p>{{ 'customer.recover_password.subtext' | t }}</p>
+              <form method="post" action="/account/recover" id="recover-password--modal" accept-charset="UTF-8">
+                <input class="input-full" type="hidden" name="form_type" value="create_customer">
+                <input class="input-full" type="hidden" name="utf8" value="✓">
+                <label for="RecoverEmail">{{ 'customer.recover_password.email' | t }}</label>
+                <input type="email" value="" name="email" id="RecoverEmail" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
+                <input type="submit" class="btn btn--full ajaxCustomerOnboard__form-submit" value="{{ 'customer.recover_password.submit' | t }}">
+              </form>
+              <a href="#" class="ajaxCustomerOnboard--show-register">Create Account</a>
+              <a href="#" class="ajaxCustomerOnboard--show-login">Log in</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  (function() {
+    const urlIsExcluded = new RegExp(forceRedirectExclusions.join("|")).test(window.location.href);
+    if(!urlIsExcluded){
+      localStorage.setItem("lastNonChallengeURL","{{request.path}}" + window.location.search);
+    }
+
+    $('#create_customer--modal, #customer_login--modal').submit(function(e){
+      e.preventDefault();
+      const event = window.ajaxCustomerOnboardCurrentTrigger;
+      const returnToURL = event.currentTarget.attributes['data-return-to'] ? event.currentTarget.attributes['data-return-to'].nodeValue : false;
+      console.log(window.ajaxCustomerOnboardCurrentTrigger.currentTarget.attributes['data-return-to'].nodeValue)
+      if(!urlIsExcluded){
+        const redirectPath = returnToURL ? returnToURL : "{{request.path}}" + window.location.search;
+        localStorage.setItem("forceRedirect", redirectPath);
+      }
+      $(this).unbind();
+      $(this).submit();
+    });
+
+    $('.ajaxCustomerOnboard--show-login').click(function(){
+      $('.ajaxCustomerOnboard__form').hide();
+      $('.ajaxCustomerOnboard__login').show();
+    });
+
+    $('.ajaxCustomerOnboard--show-register').click(function(){
+      $('.ajaxCustomerOnboard__form').hide();
+      $('.ajaxCustomerOnboard__register').show();
+    });
+
+    $('.ajaxCustomerOnboard--show-forgot').click(function(){
+      $('.ajaxCustomerOnboard__form').hide();
+      $('.ajaxCustomerOnboard__forgot-password').show();
+    });
+
+  })();
+</script>
+
+<style>
+  .ajaxCustomerOnboard__wrapper{
+    background-color: white;
+    color:#202020;
+    width: 500px;
+    padding:30px;
+  }
+  .ajaxCustomerOnboard__login{
+    /* display:none; */
+  }
+  .ajaxCustomerOnboard__forgot-password{
+    display:none;
+  }
+  .ajaxCustomerOnboard__login-header{
+
+  }
+  .ajaxCustomerOnboard__register{
+
+    display:none;
+
+    width: 415px;
+    margin:0 auto;
+  }
+  .ajaxCustomerOnboard__form-header{
+    margin-bottom:50px;
+  }
+  .ajaxCustomerOnboard__form-input{
+    margin-bottom:30px;
+  }
+  .ajaxCustomerOnboard__form-submit{
+    margin-bottom:30px;
+  }
+</style>

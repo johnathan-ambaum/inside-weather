@@ -2896,7 +2896,7 @@ lazySizesConfig.expFactor = 4;
 
     var modal = new theme.Modals('ajaxCustomerOnboard', 'ajax-customer-onboard');
 
-    $(selectors.triggers).on('click',"#ajaxCustomerOnboard--trigger", triggerOnboard);
+    $(selectors.triggers).on('click','*[data-ajax-customer-onboard="true"]', triggerOnboard);
 
     function triggerOnboard(evt){
       console.log(evt)
@@ -2904,6 +2904,7 @@ lazySizesConfig.expFactor = 4;
       if(window.customerId){
         return
       }else{
+        window.ajaxCustomerOnboardCurrentTrigger = evt
         modal.open();
       }
 

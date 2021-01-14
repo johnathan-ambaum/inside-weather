@@ -6,7 +6,15 @@
       window.location.href = '/';
     </script>
   {% endif %}
-
+  <script>
+    const forceRedirect = localStorage.getItem('forceRedirect');
+    const forceRedirectExclusions = ['login', 'register', 'challenge'];
+    const urlIsExcluded = new RegExp(forceRedirectExclusions.join("|")).test(window.location.href);
+    if(forceRedirect && !urlIsExcluded){
+      localStorage.removeItem('forceRedirect');
+      window.location.href = forceRedirect;
+    }
+  </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -343,7 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
         localStorage.removeItem('registrationStarted');
       }
-      window.customerId = "{{ customer.id }}";  
+      window.customerId = "{{ customer.id }}";
     </script>
   {% endif %}
   <script>
