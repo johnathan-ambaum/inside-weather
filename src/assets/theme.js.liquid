@@ -2899,7 +2899,6 @@ lazySizesConfig.expFactor = 4;
     $(selectors.triggers).on('click','*[data-ajax-customer-onboard="true"]', triggerOnboard);
 
     function triggerOnboard(evt){
-      console.log(evt)
       evt.stopImmediatePropagation();
       if(window.customerId){
         return

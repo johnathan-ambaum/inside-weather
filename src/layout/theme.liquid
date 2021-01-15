@@ -12,6 +12,7 @@
     const urlIsExcluded = new RegExp(forceRedirectExclusions.join("|")).test(window.location.href);
     if(forceRedirect && !urlIsExcluded){
       localStorage.removeItem('forceRedirect');
+      localStorage.removeItem('forceRedirectTemp');
       window.location.href = forceRedirect;
     }
   </script>

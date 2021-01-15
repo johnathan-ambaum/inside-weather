@@ -9,11 +9,11 @@
               <form method="post" action="/account/login" id="customer_login--modal" accept-charset="UTF-8">
                 <input type="hidden" name="form_type" value="customer_login">
                 <input type="hidden" name="utf8" value="✓">
-                <label for="CustomerEmail">{{ 'customer.register.email' | t }}</label>
-                <input type="email" name="customer[email]" id="CustomerEmail" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
+                <label for="CustomerEmail--modal">{{ 'customer.register.email' | t }}</label>
+                <input type="email" name="customer[email]" id="CustomerEmail--modal" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
                 <div class="grid">
                   <div class="grid__item one-half">
-                    <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+                    <label for="CustomerPassword--modal">{{ 'customer.login.password' | t }}</label>
                   </div>
                   <div class="grid__item one-half text-right">
                     <small class="label-info">
@@ -23,7 +23,7 @@
                     </small>
                   </div>
                 </div>
-                <input type="password" value="" name="customer[password]" id="CustomerPassword" class="ajaxCustomerOnboard__form-input input-full">
+                <input type="password" value="" name="customer[password]" id="CustomerPassword--modal" class="ajaxCustomerOnboard__form-input input-full">
                 <input type="submit" value="{{ 'customer.login.sign_in' | t }}" class="btn btn--full ajaxCustomerOnboard__form-submit">
               </form>
               <a href="#" class="ajaxCustomerOnboard--show-register">Create Account</a>
@@ -56,8 +56,8 @@
               <form method="post" action="/account/recover" id="recover-password--modal" accept-charset="UTF-8">
                 <input class="input-full" type="hidden" name="form_type" value="create_customer">
                 <input class="input-full" type="hidden" name="utf8" value="✓">
-                <label for="RecoverEmail">{{ 'customer.recover_password.email' | t }}</label>
-                <input type="email" value="" name="email" id="RecoverEmail" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
+                <label for="RecoverEmail--modal">{{ 'customer.recover_password.email' | t }}</label>
+                <input type="email" value="" name="email" id="RecoverEmail--modal" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
                 <input type="submit" class="btn btn--full ajaxCustomerOnboard__form-submit" value="{{ 'customer.recover_password.submit' | t }}">
               </form>
               <a href="#" class="ajaxCustomerOnboard--show-register">Create Account</a>
@@ -81,7 +81,6 @@
       e.preventDefault();
       const event = window.ajaxCustomerOnboardCurrentTrigger;
       const returnToURL = event.currentTarget.attributes['data-return-to'] ? event.currentTarget.attributes['data-return-to'].nodeValue : false;
-      console.log(window.ajaxCustomerOnboardCurrentTrigger.currentTarget.attributes['data-return-to'].nodeValue)
       if(!urlIsExcluded){
         const redirectPath = returnToURL ? returnToURL : "{{request.path}}" + window.location.search;
         localStorage.setItem("forceRedirect", redirectPath);
