@@ -47,6 +47,8 @@ import CategorySeoContent from './components/CategorySeoContent.vue';
 
 (function init() {
   const rootEl = document.querySelector('#app');
+  window.updateThemeSettings = function(){store.commit('updateThemeSettings', window.theme.settings)};
+  window.updateThemeSettings();
 
   if (!rootEl) {
     return;
