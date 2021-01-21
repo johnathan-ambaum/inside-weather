@@ -69,8 +69,6 @@
         </div>
       </div>
     </div>
-    <related-products v-if="!disabled"></related-products>
-    <swatch-browser v-if="!isDecor && !isMobile  && !disabled" />
     <div class="--custom-container">
       <h2
         v-if="(isDecor || filters.contents) && isMobile"
@@ -83,6 +81,8 @@
     >
       <p>{{ interpolatedDescription }}</p>
     </div>
+    <related-products v-if="!disabled"></related-products>
+    <swatch-browser v-if="!isDecor && !isMobile  && !disabled" />
     <div class="--custom-container desktop-spacing">
       <template-block
         v-for="(block, index) in filters.contents"
@@ -244,6 +244,7 @@ export default {
       font-weight: 500;
       letter-spacing: .035em;
       line-height: 16px;
+      padding:0 18px;
       @include at-query($breakpoint-large) {
         font-family: $font-stack-avalon;
         font-size: 14px;

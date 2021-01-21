@@ -31,6 +31,7 @@
         class="SwatchPanelItem__Icon"
       >
     </div>
+    <div class="SwatchPanelItem__Price-Markup">{{ this.priceDifferential }}</div>
   </div>
 </template>
 
@@ -42,8 +43,8 @@ export default {
     value: { type: Boolean, default: false },
     load: { type: Boolean, default: false },
     isMobile: { type: Boolean, default: false },
+    priceDifferential: {type: String, default: false },
   },
-
   computed: {
     itemClasses() {
       return {
@@ -100,6 +101,15 @@ export default {
 
   &--square {
     padding: 11px 32px;
+    @include at-query($breakpoint-large) {
+       padding: 18px 32px;
+    }
+  }
+  &--rectangle {
+    padding: 11px 32px;
+    @include at-query($breakpoint-large) {
+       padding: 20px 32px;
+    }
   }
 
   @include at-query($breakpoint-large) {
@@ -161,17 +171,36 @@ export default {
   }
 
   &__Icons {
-    // margin-top: 8px;
+    margin-top:8px;
+    @include at-query($breakpoint-large) {
+      margin-top: 11px;
+    }
   }
 
   &__Icon {
     display: inline-block;
-    height: 15px;
-    margin: 0 8px;
+    height: 17px;
+    margin: 0 2px;
     width: auto;
 
     @include at-query($breakpoint-large) {
       height: 20px;
+    }
+  }
+  &__Price-Markup {
+    font-family: Avalon;
+    font-weight: 400;
+    font-size:10px;
+    letter-spacing: 0.1em;
+    color:#202020;
+    padding-top:8px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    @include at-query($breakpoint-large) {
+      padding-top:11px;
+      font-size: 11px;
     }
   }
 }

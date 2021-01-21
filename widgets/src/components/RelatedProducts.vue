@@ -5,7 +5,12 @@
     </div>
     <div class="related-products__cards">
       <div class="related-products__card" v-for="relatedProduct in relatedProducts" :key="relatedProduct.title">
-        <a :href="relatedProduct.url"><img class="related-products__image" v-if="relatedProduct.image" :src="relatedProduct.image"></a>
+        <template v-if="relatedProduct.image.medium">
+          <a :href="relatedProduct.url"><img class="related-products__image" :src="relatedProduct.image.medium[0]"></a>
+        </template>
+        <template v-else>
+          <a :href="relatedProduct.url"><img class="related-products__image" :src="relatedProduct.image"></a>
+        </template>
         <a :href="relatedProduct.url"><p class="related-products__title">{{relatedProduct.title}}</p></a>
       </div>
     </div>
@@ -45,7 +50,8 @@ export default {
       }
 
       this.relatedProducts = [];
-      this.relatedProductsData.slice(0,4).forEach(element => {
+      const RELATED_PRODUCTS_NUM = 6;
+      this.relatedProductsData.slice(0,RELATED_PRODUCTS_NUM).forEach(element => {
         let relatedProduct = {
           title: "",
           url: "",
@@ -65,6 +71,13 @@ export default {
               selectedOptions[parameter] = this.selectedOptions[parameter];
             }
           });
+          for(var option in selectedOptions){
+            var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
+            var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
+            if(!foundValue){
+              selectedOptions[option] = foundAttribute.values[0].value;
+            }
+          }
           const productTitle = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
           relatedProduct.title = productTitle;
           const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
@@ -72,26 +85,37 @@ export default {
           relatedProduct.url = productURL;
 
           const cylindo_sku = response.cylindo_sku;
-          const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/1/" + cylindo_sku + ".jpg";
-          var cylindoProductFeaturesArray = []
-          for(var option in selectedOptions){
-            var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
-            var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
-            if(foundValue.cylindo_features){
-              cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
+          if(!cylindo_sku){
+            apiClient.getImages({
+              type: element.product_type,
+              attributes: selectedOptions,
+              debounce: false
+            }).then((images) => {
+              relatedProduct.image = images;
+            });
+          }else{
+            const startFrame = response && response.cylindo_overrides && response.cylindo_overrides.startFrame ? response.cylindo_overrides.startFrame : 1;
+            const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/" + startFrame +"/"+ cylindo_sku + ".jpg";
+            var cylindoProductFeaturesArray = []
+            for(var option in selectedOptions){
+              var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
+              var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
+              if(foundValue.cylindo_features){
+                cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
+              }
             }
+            var cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
+              if(index % 2 !== 0 ){
+                return false;
+              }
+              return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
+            });
+            cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
+            const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
+            const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
+            const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
+            relatedProduct.image = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
           }
-          var cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
-            if(index % 2 !== 0 ){
-              return false;
-            }
-            return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
-          });
-          cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
-          const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
-          const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
-          const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
-          relatedProduct.image = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
           this.relatedProducts.push(relatedProduct);
         });
       });

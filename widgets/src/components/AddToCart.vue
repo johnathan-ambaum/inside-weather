@@ -79,6 +79,7 @@ export default {
   }
 
   .select-wrap {
+    display:none;
     select {
       background-position: right 15px center;
       border: 1px solid #D4D0CA;
