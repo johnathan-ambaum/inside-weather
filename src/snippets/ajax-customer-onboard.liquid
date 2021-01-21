@@ -23,10 +23,11 @@
                     </small>
                   </div>
                 </div>
-                <input type="password" value="" name="customer[password]" id="CustomerPassword--modal" class="ajaxCustomerOnboard__form-input input-full">
-                <input type="submit" value="{{ 'customer.login.sign_in' | t }}" class="btn btn--full ajaxCustomerOnboard__form-submit">
+                <input type="password" value="" name="customer[password]" id="CustomerPassword--modal" class="ajaxCustomerOnboard__form-input-password input-full">
+                <input type="submit" value="LOGIN" class="ajaxCustomerOnboard__form-submit">
               </form>
-              <a href="#" class="ajaxCustomerOnboard--show-register">Create Account</a>
+              <div class="ajaxCustomerOnboard__form-or">OR</div>
+              <div class="ajaxCustomerOnboard--show-register ajaxCustomerOnboard__form-btn--reversed">CREATE ACCOUNT</div>
             </div>
             <div class="ajaxCustomerOnboard__register ajaxCustomerOnboard__form">
               <h1 class="ajaxCustomerOnboard__form-header">Create Account</h1>
@@ -44,11 +45,12 @@
                 <input type="email" name="customer[email]" id="Email" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
 
                 <label for="CreatePassword">{{ 'customer.register.password' | t }}</label>
-                <input type="password" name="customer[password]" id="CreatePassword" class="ajaxCustomerOnboard__form-input input-full">
+                <input type="password" name="customer[password]" id="CreatePassword" class="ajaxCustomerOnboard__form-input-password input-full">
 
-                <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn btn--full ajaxCustomerOnboard__form-submit">
+                <input type="submit" value="{{ 'customer.register.submit' | t }}" class="ajaxCustomerOnboard__form-submit">
               </form>
-              <a href="#" class="ajaxCustomerOnboard--show-login">Log in</a>
+              <div class="ajaxCustomerOnboard__form-or">OR</div>
+              <div class="ajaxCustomerOnboard--show-login ajaxCustomerOnboard__form-btn--reversed">LOGIN</div>
             </div>
             <div class="ajaxCustomerOnboard__forgot-password ajaxCustomerOnboard__form">
               <h2>{{ 'customer.recover_password.title' | t }}</h2>
@@ -58,12 +60,17 @@
                 <input class="input-full" type="hidden" name="utf8" value="✓">
                 <label for="RecoverEmail--modal">{{ 'customer.recover_password.email' | t }}</label>
                 <input type="email" value="" name="email" id="RecoverEmail--modal" class="ajaxCustomerOnboard__form-input input-full" autocorrect="off" autocapitalize="off">
-                <input type="submit" class="btn btn--full ajaxCustomerOnboard__form-submit" value="{{ 'customer.recover_password.submit' | t }}">
+                <input type="submit" class="ajaxCustomerOnboard__form-submit" value="{{ 'customer.recover_password.submit' | t }}">
               </form>
-              <a href="#" class="ajaxCustomerOnboard--show-register">Create Account</a>
-              <a href="#" class="ajaxCustomerOnboard--show-login">Log in</a>
+              <div class="ajaxCustomerOnboard__form-or">OR</div>
+              <div class="ajaxCustomerOnboard--show-register ajaxCustomerOnboard__form-btn--reversed ajaxCustomerOnboard__btn-space">CREATE ACCOUNT</div>
+              <div class="ajaxCustomerOnboard--show-login ajaxCustomerOnboard__form-btn--reversed">LOGIN</div>
             </div>
           </div>
+          <button type="button" class="modal__close js-modal-close text-link">
+            {% include 'icon-close' %}
+            <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+          </button>
         </div>
       </div>
     </div>
@@ -111,8 +118,21 @@
   .ajaxCustomerOnboard__wrapper{
     background-color: white;
     color:#202020;
-    width: 500px;
-    padding:30px;
+    padding:38px 56px 45px 56px;
+    width:422px;
+  }
+  #ajaxCustomerOnboard .modal__close .icon{
+    width:32px;
+    height:32px;
+  }
+  #ajaxCustomerOnboard label{
+    margin-bottom: 8px;
+    font-family: Avalon;
+    font-weight: 600;
+    font-size:13px;
+    letter-spacing: 0.12em;
+    text-align: left;
+    color:#202020;
   }
   .ajaxCustomerOnboard__login{
     /* display:none; */
@@ -120,23 +140,83 @@
   .ajaxCustomerOnboard__forgot-password{
     display:none;
   }
-  .ajaxCustomerOnboard__login-header{
-
-  }
   .ajaxCustomerOnboard__register{
-
     display:none;
-
-    width: 415px;
     margin:0 auto;
   }
   .ajaxCustomerOnboard__form-header{
-    margin-bottom:50px;
+    margin-bottom:18px;
+    text-align: center;
+    font-size:28px;
   }
   .ajaxCustomerOnboard__form-input{
-    margin-bottom:30px;
+    margin-bottom:28px;
+    border:1px solid #d4d0ca;
+  }
+  .ajaxCustomerOnboard__form-input-password{
+    margin-bottom:24px;
+    border:1px solid #d4d0ca;
   }
   .ajaxCustomerOnboard__form-submit{
-    margin-bottom:30px;
+    width: 100%;
+    color:white;
+    background-color: black;
+    font-family: Avalon;
+    font-weight: 500;
+    font-size:14px;
+    letter-spacing: 0.12em;
+    padding: 15px 0;
+  }
+  .ajaxCustomerOnboard__form-or{
+    padding:20px;
+    font-family: Avalon;
+    font-weight: 500;
+    font-size:14px;
+    letter-spacing: 0.12em;
+    color:#202020;
+    text-align: center;
+    margin:0 auto;
+  }
+  .ajaxCustomerOnboard__form-btn--reversed{
+    width: 100%;
+    color:#202020;
+    background-color: white;
+    border:1px solid #202020;
+    font-family: Avalon;
+    font-weight: 500;
+    font-size:14px;
+    letter-spacing: 0.12em;
+    padding: 15px 0;
+    text-align: center;
+    cursor: pointer;
+  }
+  .ajaxCustomerOnboard__btn-space{
+    margin-bottom:10px;
+  }
+  .ajaxCustomerOnboard--show-forgot{
+    font-family: Avalon;
+    font-weight: 500;
+    text-decoration: underline;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color:#202020;
+  }
+  @media screen and (max-width: 800px) {
+    .ajaxCustomerOnboard__wrapper{
+      padding:38px 18px 38px 18px;
+      width:350px;
+    }
+    .ajaxCustomerOnboard__form-header{
+      font-size: 30px;
+    }
+    .ajaxCustomerOnboard__form-input{
+      margin-bottom: 20px;
+    }
+    .ajaxCustomerOnboard__form-input-password{
+      margin-bottom: 16px;
+    }
+    .ajaxCustomerOnboard__form-or{
+      padding:12px;
+    }
   }
 </style>

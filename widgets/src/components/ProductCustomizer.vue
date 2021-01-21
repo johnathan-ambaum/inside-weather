@@ -19,14 +19,26 @@
             class="ProductCustomizer__Model"
           >Model No&deg; {{ modelNumber }}</div>
         </div>
-        <span
-          :class="{ isFavorite }"
-          role="button"
-          class="ProductCustomizer__Favorite"
-          @click.stop.prevent="favoriteCurrentProduct"
-        >
-          <font-awesome-icon :icon="favoriteIcon"/>
-        </span>
+        <div v-if="isCustomer">
+          <span
+            :class="{ isFavorite }"
+            role="button"
+            class="ProductCustomizer__Favorite"
+            @click.stop.prevent="favoriteCurrentProduct"
+          >
+            <font-awesome-icon :icon="favoriteIcon"/>
+          </span>
+        </div>
+        <div v-else>
+          <span
+            :class="{ isFavorite }"
+            role="button"
+            class="ProductCustomizer__Favorite"
+            data-ajax-customer-onboard="true"
+          >
+            <font-awesome-icon :icon="favoriteIcon"/>
+          </span>
+        </div>
       </div>
       <product-detail-slider
         v-if="isMobile"
@@ -296,6 +308,7 @@ export default {
       addToCartProcessing: false,
       closedNum: 0,
       actionBarOffset: 0,
+      isCustomer: !!window.customerId
     };
   },
 
