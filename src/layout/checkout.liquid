@@ -183,6 +183,85 @@
         height: auto;
         width: 50px;
       }
+      .order-summary__section{
+        padding-bottom: 18px;
+      }
+      .checkout__custom-content{
+        border-top:1px solid rgba(175, 175, 175, 0.34);
+        padding:28px 14px;
+      }
+      .checkout__custom-content-icon-rows{
+        display:flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .checkout__custom-content-icon-row{
+        display:flex;
+        flex-basis: 50%;
+        padding: 12px 0;
+      }
+      .checkout__custom-content-icon-text{
+        font-family: Avalon;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        color:#202020;
+        display:flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+      .checkout__custom-content-icon{
+        width:34px;
+        height:23px;
+        margin-right:8px;
+      }
+      .checkout__custom-content-icon img{
+        display:block;
+        margin: 0 auto;
+        width:100%;
+        height:auto;
+      }
+      .checkout__custom-content-help{
+        margin-top:42px;
+      }
+      .flex-end{
+        justify-content: flex-end;
+      }
+      .sustainable-offset{
+        margin-right:33px;
+      }
+      .checkout__custom-content-help{
+        font-family: Avalon;
+        font-size:12px;
+        letter-spacing: 0.075em;
+        color:#202020;
+      }
+      .checkout__custom-content-help span{
+        font-weight: 500;
+      }
+      .checkout__custom-content-help a{
+        font-weight: 600;
+        text-decoration: underline;
+        margin-left:8px;
+      }
+      @media screen and (max-width: 1200px) {
+        .checkout__custom-content-icon-rows{
+          flex-direction: column;
+        }
+      }
+      @media screen and (max-width: 1000px) {
+        .checkout__custom-content-icon-rows{
+          flex-direction: row;
+        }
+      }
+      @media screen and (max-width: 580px) {
+        .flex-end{
+          justify-content: flex-start;
+        }
+        .checkout__custom-content-icon-text{
+          white-space:normal;
+        }
+      }
     </style>
   </head>
   <body>
@@ -226,9 +305,50 @@
         </div>
       </div>
     </div>
+    <div class="checkout__custom-content">
+      <div class="checkout__custom-content-icon-rows">
+        <div class="checkout__custom-content-icon-row">
+          <div class="checkout__custom-content-icon">
+            <img src="https://cdn.insideweather.com/cart-checkout/home-trial-ico.png" alt="365 Day Home Trial">
+          </div>
+          <div class="checkout__custom-content-icon-text">
+            365 DAY HOME TRIAL
+          </div>
+        </div>
+        <div class="checkout__custom-content-icon-row flex-end">
+          <div class="checkout__custom-content-icon">
+            <img src="https://cdn.insideweather.com/cart-checkout/usa-ico.png" alt="Made in the USA">
+          </div>
+          <div class="checkout__custom-content-icon-text">
+            MADE IN THE USA
+          </div>
+        </div>
+        <div class="checkout__custom-content-icon-row">
+          <div class="checkout__custom-content-icon">
+            <img src="https://cdn.insideweather.com/cart-checkout/free-ship-ico.png" alt="Free Shipping">
+          </div>
+          <div class="checkout__custom-content-icon-text">
+            FREE SHIPPING
+          </div>
+        </div>
+        <div class="checkout__custom-content-icon-row flex-end">
+          <div class="checkout__custom-content-icon">
+            <img src="https://cdn.insideweather.com/cart-checkout/sustainable-ico.png" alt="Sustainable">
+          </div>
+          <div class="checkout__custom-content-icon-text sustainable-offset">
+            SUSTAINABLE
+          </div>
+        </div>
+      </div>
+      <div class="checkout__custom-content-help">
+        <span>Need Help?</span><a href="/pages/help" target="_blank">Chat Now</a>
+      </div>
+    </div>
 
     {{ tracking_code }}
-
+    <script>
+      $('.order-summary__sections').append($('.checkout__custom-content'));
+    </script>
     <script>
       if(document.title.includes("Inventory issues")){
         document.getElementsByClassName('sidebar__content')[0].style.visibility = 'hidden';
