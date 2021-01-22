@@ -14,7 +14,12 @@
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count" :review_average="filters.review_average"></review-stars>
+          <review-stars
+            v-if="filters.review_count && filters.review_average"
+            :review_count="filters.review_count"
+            :review_average="filters.review_average"
+            review_link="#ReviewCarousel"
+          ></review-stars>
         </div>
         <span
           :class="{ isFavorite }"
@@ -90,7 +95,12 @@
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count" :review_average="filters.review_average"></review-stars>
+          <review-stars
+            v-if="filters.review_count && filters.review_average"
+            :review_count="filters.review_count"
+            :review_average="filters.review_average"
+            review_link="#ReviewCarousel"
+          ></review-stars>
         </div>
         <span
           v-if="!disabled"
