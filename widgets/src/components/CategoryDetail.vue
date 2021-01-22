@@ -1,62 +1,62 @@
 <template>
-  <div 
+  <div
     class="CategoryDetails image-content-wrapper"
     ref="CategoryDetails"
   >
     <div class="--custom-container">
-      <div 
+      <div
         v-for="(productDetail, index) in categoryDetails"
         :key="index"
-        class="image-content-box" 
+        class="image-content-box"
         :class="[
           (isReverse) ? 'reverse' : ' ',
-        ]" 
+        ]"
       >
         <figure
           v-if="isBigScreen"
         >
-          <img 
-            :src="productDetail.objectUrl" 
+          <img
+            :src="productDetail.objectUrl"
             v-if="productDetail.isVideo === 'false'"
           />
-          <video 
+          <video
             v-if="productDetail.isVideo === 'true'"
             loop autoplay muted playsinline
           >
-            <source 
+            <source
               :src="productDetail.objectUrl"
               type="video/mp4"
-            /> 
+            />
           </video>
         </figure>
         <figure
           v-if="!isBigScreen"
         >
-          <img 
-            :src="productDetail.objectUrlMob" 
+          <img
+            :src="productDetail.objectUrlMob"
             v-if="productDetail.isVideo === 'false'"
           />
-          <video 
+          <video
             v-if="productDetail.isVideo === 'true'"
             loop autoplay muted playsinline
           >
-            <source 
+            <source
               :src="productDetail.objectUrlMob"
               type="video/mp4"
-            /> 
+            />
           </video>
         </figure>
         <heading-with-description>
           <h2>{{productDetail.title}}</h2>
           <p>{{productDetail.description}}</p>
-					<div 
+					<div
 						v-if="isDescImg"
 						class="detail-img"
 					>
-						<img 
+						<img
             v-if="isBigScreen"
             :src="desktopImage"/>
-						<img 
+						<img
             v-if="!isBigScreen"
             :src="mobileImage"/>
 					</div>
@@ -92,7 +92,7 @@ export default {
       this.isBigScreen = false
     }
   },
-} 
+}
 </script>
 
 <style lang="scss">
@@ -125,6 +125,9 @@ export default {
         @include block(100%);
       }
     }
+    .detail-img {
+      margin-top: 16px;
+    }
     .HeadingWithDescription {
       margin: auto 0;
       padding: 0 0 0 77px;
@@ -138,7 +141,7 @@ export default {
         text-align: left;
       }
     }
-    
+
     &.reverse {
       flex-direction: row-reverse;
       figure {
@@ -159,7 +162,7 @@ export default {
       .HeadingWithDescription {
         padding: 0 0 0 67px;
       }
-      
+
 			&.reverse {
         .HeadingWithDescription {
           padding: 0 67px 0 75px;
@@ -188,7 +191,7 @@ export default {
           margin: 0 0 22px;
         }
       }
-      
+
 			&.reverse {
         figure {
           flex-basis: 50%;
@@ -240,7 +243,7 @@ export default {
           padding: 0;
         }
       }
-      
+
 			&.reverse {
         figure {
           img {
@@ -249,7 +252,7 @@ export default {
         }
         figure,
         .HeadingWithDescription {
-          flex-basis: 100%;  
+          flex-basis: 100%;
         }
         .HeadingWithDescription {
           padding: 27px 23px;

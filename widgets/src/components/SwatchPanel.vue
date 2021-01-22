@@ -12,6 +12,7 @@
       :type="swatchType"
       :load="load"
       :is-mobile="isMobile"
+      :price-differential="priceDifferential(option)"
       @input="toggleOption(option)"
     />
   </div>
@@ -37,15 +38,34 @@ export default {
     values: { type: Array, default: () => [] },
     load: { type: Boolean, default: false },
   },
-
   computed: {
     ...mapState({
       selectedOptions: state => state.selectedOptions,
+      priceMarkupsActive: state => state.themeSettings.vwo.optionPriceMarkups.active,
+      priceMarkupsNoDelta: state => state.themeSettings.vwo.optionPriceMarkups.noDelta,
+      priceMarkupsSelectedOption: state => state.themeSettings.vwo.optionPriceMarkups.selectedOption
     }),
 
     isSelected() {
       return option => this.selectedOptions[this.parameter] === option.value;
     },
+
+    priceDifferential() {
+      return (currentOption) => {
+        const selectedOption = this.values.find(item => this.selectedOptions[this.parameter] === item.value);
+        const selectedOptionPriceMarkup = selectedOption && selectedOption.price_markup ? parseFloat(selectedOption.price_markup) : 0;
+        const currentOptionPriceMarkup = parseFloat(currentOption.price_markup);
+        const priceDifferential = currentOptionPriceMarkup - selectedOptionPriceMarkup;
+        if(isNaN(priceDifferential) || selectedOption === undefined || !this.priceMarkupsActive){return ''}
+        if(currentOption.value === selectedOption.value){return this.priceMarkupsSelectedOption;}
+        if(priceDifferential == 0){return this.priceMarkupsNoDelta;}
+        if(priceDifferential >= 0){
+          return '+$' + priceDifferential;
+        }else{
+          return '-$' + Math.abs(priceDifferential);
+        }
+      };
+    }
   },
 
   watch: {
