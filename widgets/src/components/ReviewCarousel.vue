@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="showReviews && reviewData.length > 0"
+    id="ReviewCarousel"
     class="ReviewCarousel"
   >
     <div class="ReviewCarousel__Title">Reviews</div>

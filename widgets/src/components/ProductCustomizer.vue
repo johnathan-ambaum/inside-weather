@@ -14,10 +14,12 @@
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div
-            v-if="modelNumber"
-            class="ProductCustomizer__Model"
-          >Model No&deg; {{ modelNumber }}</div>
+          <review-stars
+            v-if="filters.review_count && filters.review_average"
+            :review_count="filters.review_count"
+            :review_average="filters.review_average"
+            review_link="#ReviewCarousel"
+          ></review-stars>
         </div>
         <span
           :class="{ isFavorite }"
@@ -93,10 +95,12 @@
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div
-            v-if="modelNumber"
-            class="ProductCustomizer__Model"
-          >Model No&deg; {{ modelNumber }}</div>
+          <review-stars
+            v-if="filters.review_count && filters.review_average"
+            :review_count="filters.review_count"
+            :review_average="filters.review_average"
+            review_link="#ReviewCarousel"
+          ></review-stars>
         </div>
         <span
           v-if="!disabled"
@@ -257,6 +261,7 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
+import ReviewStars from './ReviewStars.vue';
 
 library.add(faHeart);
 
@@ -272,7 +277,8 @@ export default {
     SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
-    PhotoshootModal
+    PhotoshootModal,
+    ReviewStars,
   },
 
   mixins: [
@@ -912,9 +918,6 @@ html.ProductCustomizer--Open {
       z-index: 10;
     }
 
-    @include at-query($breakpoint-large) {
-      margin-top: 15px;
-    }
 
     & > * {
       margin-right: 15px;
@@ -977,7 +980,7 @@ html.ProductCustomizer--Open {
 
   &__ShippingDays {
     color: #202020;
-    margin: 25px 0;
+    margin: 30px 0;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: .075em;
