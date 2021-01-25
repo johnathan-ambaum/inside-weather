@@ -162,7 +162,7 @@
               <div class="ProductCustomizer__NavHeading">Customize</div>
               <div class="ProductCustomizer__NavBody">
                 <div
-                  v-for="(attribute, index) in attributes"
+                  v-for="(attribute) in attributes"
                   :key="attribute.parameter"
                   class="ProductCustomizer__NavItem"
                   @click="showPanel(attribute.parameter)"
@@ -180,7 +180,7 @@
             </nav>
           </transition>
           <div
-            v-for="(attribute, index) in attributes"
+            v-for="(attribute) in attributes"
             :key="attribute.parameter"
             class="ProductCustomizer__Panel"
             v-show="!attribute.hidden"
@@ -192,7 +192,7 @@
               <filter-panel
                 v-show="isOpen(attribute.parameter)"
                 v-bind="attribute"
-                :index="index"
+                :index="getAttributeIndex(attribute, attributes)"
                 :load="true"
               />
             </transition>
@@ -356,6 +356,9 @@ export default {
     isOpen() {
       return panel => this.openPanel === panel;
     },
+    visibleAttributes(){
+      return this.attributes.filter((attribute) => attribute.hidden === false);
+    },
 
     activeIndex() {
       return this.attributes.findIndex(attribute => attribute.parameter === this.openPanel);
@@ -367,7 +370,7 @@ export default {
 
     hasNext() {
       let numberOfHiddenAttributes = this.attributes.filter((attribute) => attribute.hidden === true).length;
-      return this.openPanel !== '' && this.activeIndex < this.attributes.length - numberOfHiddenAttributes - 1 ;
+      return this.openPanel !== '' && this.activeIndex + 1 < this.attributes.length - numberOfHiddenAttributes;
     },
 
     isFavorite() {
@@ -400,8 +403,12 @@ export default {
       }
     },
     actionBarOffset(offset){
-      this.$refs.productCustomizerFooter.style.bottom = offset + 'px';
-      this.$refs.productCustomizerNav.style.bottom = offset + 56 + 'px';
+      if(this.$refs.productCustomizerFooter){
+        this.$refs.productCustomizerFooter.style.bottom = offset + 'px';
+      }
+      if(this.$refs.productCustomizerNav){
+        this.$refs.productCustomizerNav.style.bottom = offset + 56 + 'px';
+      }
     }
   },
 
@@ -621,8 +628,7 @@ export default {
         this.selectPanel('');
         return;
       }
-
-      const { parameter } = this.attributes[this.activeIndex + 1];
+      const { parameter } = this.visibleAttributes[this.activeIndex + 1];
       this.selectPanel(parameter);
       this.$bus.$emit('panel:show', parameter);
     },
@@ -639,7 +645,10 @@ export default {
       this.active = false;
 
       const orb = document.querySelector('.orb-chat-mount');
-      orb.style.visibility = "visible";
+      if(orb){
+        orb.style.visibility = "visible";
+      }
+
     },
 
     showCustomizer() {
@@ -647,7 +656,9 @@ export default {
       this.active = true;
 
       const orb = document.querySelector('.orb-chat-mount');
-      orb.style.visibility = "hidden";
+      if(orb){
+        orb.style.visibility = "hidden";
+      }
     },
 
     favoriteCurrentProduct() {
