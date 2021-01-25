@@ -369,8 +369,7 @@ export default {
     },
 
     hasNext() {
-      let numberOfHiddenAttributes = this.attributes.filter((attribute) => attribute.hidden === true).length;
-      return this.openPanel !== '' && this.activeIndex + 1 < this.attributes.length - numberOfHiddenAttributes;
+      return this.openPanel !== '' && this.activeIndex + 1 < this.visibleAttributes.length;
     },
 
     isFavorite() {
