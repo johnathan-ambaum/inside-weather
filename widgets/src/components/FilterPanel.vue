@@ -1,7 +1,7 @@
 <template>
   <div class="FilterPanel">
     <div class="FilterPanel__Header">
-      <div class="FilterPanel__Title">{{ index + 1 }}. {{ name }}</div>
+      <div class="FilterPanel__Title">{{ index }}. {{ name }}</div>
       <div
         v-if="groups.length > 0"
         class="FilterPanel__Filter"
