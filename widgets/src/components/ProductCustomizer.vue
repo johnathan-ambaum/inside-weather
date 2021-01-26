@@ -655,22 +655,14 @@ export default {
       this.createProduct();
       this.$bus.$emit('customizer-close');
       this.active = false;
-
-      const orb = document.querySelector('.orb-chat-mount');
-      if(orb){
-        orb.style.visibility = "visible";
-      }
+      this.showOnTopElements();
 
     },
 
     showCustomizer() {
       this.selectPanel('');
       this.active = true;
-
-      const orb = document.querySelector('.orb-chat-mount');
-      if(orb){
-        orb.style.visibility = "hidden";
-      }
+      this.hideOnTopElements();
     },
 
     favoriteCurrentProduct() {
@@ -775,7 +767,36 @@ export default {
     getAttributeIndex(attribute, attributes){
       const visibleAttributes = attributes.filter(a => a.hidden !== true);
       return visibleAttributes.findIndex(a => a.name === attribute.name) + 1;
-    }
+    },
+    waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+      var startTimeInMs = Date.now();
+      (function loopSearch() {
+        if (document.querySelector(selector) != null) {
+          callback();
+          return;
+        }
+        else {
+          setTimeout(function () {
+            if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+              return;
+            loopSearch();
+          }, checkFrequencyInMs);
+        }
+      })();
+    },
+    hideOnTopElements() {
+      this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+        $('.orb-chat-mount>div').css('margin-right', '10000px');
+      },100,9000);
+      this.waitForElementToDisplay('#attentive_overlay',function(){
+        $('#attentive_overlay').css('display', 'none');
+      },100,9000);
+
+    },
+    showOnTopElements(){
+      $('.orb-chat-mount>div').css('margin-right', '0px');
+      $('#attentive_overlay').css('display', 'initial');
+    },
   },
 };
 </script>
