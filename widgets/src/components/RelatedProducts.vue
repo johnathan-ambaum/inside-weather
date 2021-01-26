@@ -51,13 +51,13 @@ export default {
 
       this.relatedProducts = [];
       const RELATED_PRODUCTS_NUM = 6;
-      this.relatedProductsData.slice(0,RELATED_PRODUCTS_NUM).forEach(element => {
+      this.relatedProductsData.slice(0,RELATED_PRODUCTS_NUM).forEach(async element => {
         let relatedProduct = {
           title: "",
           url: "",
           image: []
         };
-        FilterStorage.getItem(element.product_type).then((response)=>{
+        await FilterStorage.getItem(element.product_type).then((response)=>{
           if (!response.templates) {
             return '';
           }
