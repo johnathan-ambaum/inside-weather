@@ -1782,7 +1782,9 @@ lazySizesConfig.expFactor = 4;
               }
             }
           });
-          this.updateAndBuild(updates);
+          if(!$.isEmptyObject(updates)){
+            this.updateAndBuild(updates);
+          }
         }
         localStorage.setItem('currentCart', JSON.stringify(cart));
       }

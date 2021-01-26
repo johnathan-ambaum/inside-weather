@@ -38,16 +38,12 @@ export default {
     values: { type: Array, default: () => [] },
     load: { type: Boolean, default: false },
   },
-  data() {
-    return {
-      priceMarkupsActive: theme.settings.vwo.optionPriceMarkups.active,
-      priceMarkupsNoDelta: theme.settings.vwo.optionPriceMarkups.noDelta,
-      priceMarkupsSelectedOption: theme.settings.vwo.optionPriceMarkups.selectedOption
-    }
-  },
   computed: {
     ...mapState({
       selectedOptions: state => state.selectedOptions,
+      priceMarkupsActive: state => state.themeSettings.vwo.optionPriceMarkups.active,
+      priceMarkupsNoDelta: state => state.themeSettings.vwo.optionPriceMarkups.noDelta,
+      priceMarkupsSelectedOption: state => state.themeSettings.vwo.optionPriceMarkups.selectedOption
     }),
 
     isSelected() {

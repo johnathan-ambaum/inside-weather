@@ -189,6 +189,13 @@ export function setSwatches(state, swatches) {
   Vue.set(state, 'swatches', swatches);
 }
 
+/**
+ * updates the state's theme.settings object to get changes from vwo
+ */
+export function updateThemeSettings(state, themeSettings) {
+  Vue.set(state, 'themeSettings', themeSettings);
+}
+
 export default {
   saveProducts,
   defineFilter,
@@ -205,4 +212,5 @@ export default {
   setProductCreationInProgress,
   setActiveProduct,
   setSwatches,
+  updateThemeSettings,
 };
