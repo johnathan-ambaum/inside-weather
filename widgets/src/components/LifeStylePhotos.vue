@@ -1,30 +1,31 @@
 <template>
-  <div 
+  <div
     class="LifeStylePhotos"
     ref="LifeStylePhotos"
   >
-    <div 
+    <div
       class="--custom-container"
     >
       <heading-with-description>
         <h2>{{sectionHeading}}</h2>
         <p>{{sectionDescription}}</p>
-      </heading-with-description> 
-      <div 
+      </heading-with-description>
+      <div
         class="LifeStylePhotos--gridContainer grid--container"
       >
-        <div 
+        <div
           v-for="(item, index) in lifeStyleItems"
           :key="item.$id"
           v-bind:class="['LifeStylePhotos--column column LifeStylePhotos--column-'+ (index + 1)]"
           v-on:click="showPopUp($event, index)"
         >
           <figure>
-            <img 
+            <img
               :src="item.image"
+              :alt="item.altText"
             >
           </figure>
-          <div 
+          <div
             class="more-info"
           >
             <i class="more-info-trigger-icons info-icon-plus">
@@ -130,7 +131,7 @@ export default {
     margin: 66px -8px 0;
     .LifeStylePhotos--column {
       position: relative;
-    }  
+    }
   }
   .LifeStylePhotos--column {
     cursor: pointer;
