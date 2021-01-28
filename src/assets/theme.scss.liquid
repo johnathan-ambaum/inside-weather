@@ -1462,7 +1462,7 @@ h6 {
   font-family:Avalon;
   font-weight:600;
   font-size:14px;
-  line-height:19px;
+  line-height:17px;
   letter-spacing:0.05em;
   color:#202020;
 
@@ -1491,11 +1491,12 @@ h6 {
   font-size:14px;
   letter-spacing:0.1em;
   color:#202020;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+  text-transform:uppercase;
 
   @include media-query($medium-up) {
     font-size:16px;
-    margin-bottom: 15px;
+    margin-bottom: 7px;
   }
 }
 
@@ -1517,6 +1518,7 @@ h6 {
   font-size:13px;
   letter-spacing:0.1em;
   color:#202020;
+  margin:0;
   @include media-query($medium-up) {
     font-size: 17px
   }
@@ -1527,9 +1529,9 @@ h6 {
   font-size:12px;
   letter-spacing:0.1em;
   color:#202020;
-  margin-bottom:12px;
+  margin-bottom:4px;
   @include media-query($medium-up) {
-    margin-bottom:15px;
+    margin-bottom:7px;
     font-size:15px;
   }
 }
@@ -1583,7 +1585,7 @@ h6 {
 .ajaxcart__note {
   font-family:Avalon;
   font-weight:normal;
-  font-size:10px;
+  font-size:9px;
   letter-spacing:0.05em;
   text-align:center;
   color:#202020;
@@ -2944,14 +2946,10 @@ symbol {
   min-height: $drawerCartFooterHeight; // overwritten by JS
   padding: 16px 15px 16px 15px;
   width:100%;
-  // @include media-query($small) {
-  //   padding-bottom: $gutter /2;
-  // }
 
-  // @include media-query($medium-up) {
-  //   left: $gutter;
-  //   right: $gutter;
-  // }
+  @include media-query($medium-up) {
+    padding: 30px 24px 26px 24px;
+  }
 
   // Enable to prevent fixed footer on short screens
   // @media only screen and (max-height: $fixedHeightLimit) {
@@ -3059,9 +3057,9 @@ symbol {
 }
 
 .ajaxcart__product-name + .ajaxcart__product-meta {
-  padding-top: 10px;
+  padding-top: 8px;
   @include media-query($medium-up) {
-    padding-top: 15px;
+    padding-top: 12px;
   }
 }
 
@@ -6002,11 +6000,14 @@ $z-index-page-overlay: 27;
 
 .js-qty__wrapper {
   position: relative;
-  max-width: 90px;
+  max-width: 75px;
   min-width: 75px;
   overflow: visible;
   background-color: $colorInputBg;
   color: color-control($colorInputBg, 1);
+  @include media-query($medium-up) {
+    max-width: 90px;
+  }
 }
 
 .js-qty__num {
@@ -10363,6 +10364,8 @@ div[data-section-type="fading-images"] {
     font-size:14px;
     letter-spacing:0.1em;
     color:#fff;
+    text-transform:uppercase;
+    height:45px;
   }
 }
 
