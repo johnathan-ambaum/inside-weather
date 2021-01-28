@@ -64,7 +64,7 @@
         </a>
     </li>
     <li class="Mobile-Item Mobile-Item__Cart">
-        <a href="/cart" class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
+        <div class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
             {%- include 'icon-cart-black' -%}
             <span class="MainNav__CartCount js-cart-count">
                 {% assign foundShippingInsurance = false %}
@@ -82,6 +82,6 @@
                 {% endif %}
 
             </span>
-        </a>
+        </div>
     </li>
 </ul>
