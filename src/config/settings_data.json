@@ -858,14 +858,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p>NEW! Modular, Adjustable Storage | <a title=\"Shelving\" href=\"\/pages\/shelving\">Shop the Atlas Shelving Collection<\/a><\/p>",
-          "mobile_text_1": "<p>NEW! Modular, Adjustable Storage | <a title=\"Shelving\" href=\"\/pages\/shelving\">Shop the Atlas Collection<\/a><\/p>",
+          "text_1": "<p>Have you redeemed your $225 off yet? | <a href=\"\/pages\/2021-new-year-refresh-sale\" title=\"2021 New Year Refresh Sale\">Shop the New Year Refresh Sale<\/a><\/p>",
+          "mobile_text_1": "<p>Have you redeemed your $225 off yet? | <a href=\"\/pages\/2021-new-year-refresh-sale\" title=\"2021 New Year Refresh Sale\">SHOP THE SALE<\/a><\/p>",
           "text_2": "<p>NEW! Modular, Adjustable Storage | Shop the Atlas Shelving Collection<\/p>",
           "mobile_text_2": "<p><a href=\"\/pages\/shelving\" title=\"Shelving\">Introducing: Atlas<\/a> | NEW modular, adjustable shelving<\/p>",
           "text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
           "mobile_text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "12\/07\/2020"
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "02\/01\/2021"
         }
       },
       "giftcard-header": {
