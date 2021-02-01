@@ -2887,6 +2887,36 @@ lazySizesConfig.expFactor = 4;
     }
   };
 
+  theme.fullPageTakeOver = function() {
+    var selectors = {
+      triggers: 'body'
+    };
+
+    if (!$(selectors.triggers).length) {
+      return;
+    }
+
+    var modal = new theme.Modals('fullPageTakeOver', 'full-page-takeover');
+
+    function urlHasOpenParam(){
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.has("fullPageTakeOver");
+    }
+    function modalShouldOpen(){
+      console.log('modal should open')
+      if(urlHasOpenParam()){
+        console.log('url has param')
+        triggerFPT();
+      }
+    }
+    function triggerFPT() {
+      modal.open();
+    }
+    modalShouldOpen();
+    console.log('fullPageTakeOver')
+
+  };
+
   theme.customerTemplates = (function() {
 
     function initEventListeners() {
@@ -5342,6 +5372,7 @@ lazySizesConfig.expFactor = 4;
     theme.videoModal();
     theme.productProtectionModal();
     theme.shippingProtectionModal();
+    theme.fullPageTakeOver();
     theme.articleImages.init();
     theme.backButton.init();
     theme.customerTemplates.init();
