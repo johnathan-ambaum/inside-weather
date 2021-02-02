@@ -15,6 +15,13 @@
         {% form 'customer_login' %}
 
           {{ form.errors | default_errors }}
+          {% if form.errors %}
+            <script>
+              const forceRedirectOnError = localStorage.getItem('forceRedirect');
+              localStorage.removeItem('forceRedirect');
+              localStorage.setItem('forceRedirectTemp', forceRedirectOnError);
+            </script>
+          {% endif %}
 
           <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
           <input type="email" name="customer[email]" id="CustomerEmail" class="input-full{% if form.errors contains 'email' %} error{% endif %}" autocorrect="off" autocapitalize="off" autofocus>
@@ -53,6 +60,13 @@
           {% form 'recover_customer_password' %}
 
             {{ form.errors | default_errors }}
+            {% if form.errors %}
+              <script>
+                const forceRedirectOnError = localStorage.getItem('forceRedirect');
+                localStorage.removeItem('forceRedirect');
+                localStorage.setItem('forceRedirectTemp', forceRedirectOnError);
+              </script>
+            {% endif %}
 
             {% if form.posted_successfully? %}
               <span class="hide reset-password-success"></span>
@@ -84,3 +98,13 @@
     </div>
   </div>
 </div>
+<script>
+  $('#customer_login, #recover_customer_password').submit( function(e){
+    e.preventDefault();
+    const forceRedirectTemp = localStorage.getItem('forceRedirectTemp');
+    localStorage.removeItem('forceRedirectTemp');
+    localStorage.setItem('forceRedirect', forceRedirectTemp);
+    $(this).unbind();
+    $(this).submit();
+  })
+</script>

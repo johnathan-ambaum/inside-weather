@@ -14,19 +14,33 @@
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div
-            v-if="modelNumber"
-            class="ProductCustomizer__Model"
-          >Model No&deg; {{ modelNumber }}</div>
+          <review-stars
+            v-if="filters.review_count && filters.review_average"
+            :review_count="filters.review_count"
+            :review_average="filters.review_average"
+            review_link="#ReviewCarousel"
+          ></review-stars>
         </div>
-        <span
-          :class="{ isFavorite }"
-          role="button"
-          class="ProductCustomizer__Favorite"
-          @click.stop.prevent="favoriteCurrentProduct"
-        >
-          <font-awesome-icon :icon="favoriteIcon"/>
-        </span>
+        <div v-if="isCustomer">
+          <span
+            :class="{ isFavorite }"
+            role="button"
+            class="ProductCustomizer__Favorite"
+            @click.stop.prevent="favoriteCurrentProduct"
+          >
+            <font-awesome-icon :icon="favoriteIcon"/>
+          </span>
+        </div>
+        <div v-else>
+          <span
+            :class="{ isFavorite }"
+            role="button"
+            class="ProductCustomizer__Favorite"
+            data-ajax-customer-onboard="true"
+          >
+            <font-awesome-icon :icon="favoriteIcon"/>
+          </span>
+        </div>
       </div>
       <product-detail-slider
         v-if="isMobile"
@@ -93,10 +107,12 @@
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <div
-            v-if="modelNumber"
-            class="ProductCustomizer__Model"
-          >Model No&deg; {{ modelNumber }}</div>
+          <review-stars
+            v-if="filters.review_count && filters.review_average"
+            :review_count="filters.review_count"
+            :review_average="filters.review_average"
+            review_link="#ReviewCarousel"
+          ></review-stars>
         </div>
         <span
           v-if="!disabled"
@@ -158,7 +174,7 @@
               <div class="ProductCustomizer__NavHeading">Customize</div>
               <div class="ProductCustomizer__NavBody">
                 <div
-                  v-for="(attribute, index) in attributes"
+                  v-for="(attribute) in attributes"
                   :key="attribute.parameter"
                   class="ProductCustomizer__NavItem"
                   @click="showPanel(attribute.parameter)"
@@ -176,7 +192,7 @@
             </nav>
           </transition>
           <div
-            v-for="(attribute, index) in attributes"
+            v-for="(attribute) in attributes"
             :key="attribute.parameter"
             class="ProductCustomizer__Panel"
             v-show="!attribute.hidden"
@@ -188,7 +204,7 @@
               <filter-panel
                 v-show="isOpen(attribute.parameter)"
                 v-bind="attribute"
-                :index="index"
+                :index="getAttributeIndex(attribute, attributes)"
                 :load="true"
               />
             </transition>
@@ -257,6 +273,7 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
+import ReviewStars from './ReviewStars.vue';
 
 library.add(faHeart);
 
@@ -272,7 +289,8 @@ export default {
     SimpleCustomizer,
     InspirationOptions,
     SwatchBrowser,
-    PhotoshootModal
+    PhotoshootModal,
+    ReviewStars,
   },
 
   mixins: [
@@ -296,6 +314,7 @@ export default {
       addToCartProcessing: false,
       closedNum: 0,
       actionBarOffset: 0,
+      isCustomer: !!window.customerId
     };
   },
 
@@ -350,6 +369,9 @@ export default {
     isOpen() {
       return panel => this.openPanel === panel;
     },
+    visibleAttributes(){
+      return this.attributes.filter((attribute) => attribute.hidden === false);
+    },
 
     activeIndex() {
       return this.attributes.findIndex(attribute => attribute.parameter === this.openPanel);
@@ -360,8 +382,7 @@ export default {
     },
 
     hasNext() {
-      let numberOfHiddenAttributes = this.attributes.filter((attribute) => attribute.hidden === true).length;
-      return this.openPanel !== '' && this.activeIndex < this.attributes.length - numberOfHiddenAttributes - 1 ;
+      return this.openPanel !== '' && this.activeIndex + 1 < this.visibleAttributes.length;
     },
 
     isFavorite() {
@@ -394,8 +415,12 @@ export default {
       }
     },
     actionBarOffset(offset){
-      this.$refs.productCustomizerFooter.style.bottom = offset + 'px';
-      this.$refs.productCustomizerNav.style.bottom = offset + 56 + 'px';
+      if(this.$refs.productCustomizerFooter){
+        this.$refs.productCustomizerFooter.style.bottom = offset + 'px';
+      }
+      if(this.$refs.productCustomizerNav){
+        this.$refs.productCustomizerNav.style.bottom = offset + 56 + 'px';
+      }
     }
   },
 
@@ -615,8 +640,7 @@ export default {
         this.selectPanel('');
         return;
       }
-
-      const { parameter } = this.attributes[this.activeIndex + 1];
+      const { parameter } = this.visibleAttributes[this.activeIndex + 1];
       this.selectPanel(parameter);
       this.$bus.$emit('panel:show', parameter);
     },
@@ -631,17 +655,14 @@ export default {
       this.createProduct();
       this.$bus.$emit('customizer-close');
       this.active = false;
+      this.showOnTopElements();
 
-      const orb = document.querySelector('.orb-chat-mount');
-      orb.style.visibility = "visible";
     },
 
     showCustomizer() {
       this.selectPanel('');
       this.active = true;
-
-      const orb = document.querySelector('.orb-chat-mount');
-      orb.style.visibility = "hidden";
+      this.hideOnTopElements();
     },
 
     favoriteCurrentProduct() {
@@ -746,7 +767,36 @@ export default {
     getAttributeIndex(attribute, attributes){
       const visibleAttributes = attributes.filter(a => a.hidden !== true);
       return visibleAttributes.findIndex(a => a.name === attribute.name) + 1;
-    }
+    },
+    waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+      var startTimeInMs = Date.now();
+      (function loopSearch() {
+        if (document.querySelector(selector) != null) {
+          callback();
+          return;
+        }
+        else {
+          setTimeout(function () {
+            if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+              return;
+            loopSearch();
+          }, checkFrequencyInMs);
+        }
+      })();
+    },
+    hideOnTopElements() {
+      this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+        $('.orb-chat-mount>div').css('margin-right', '10000px');
+      },100,9000);
+      this.waitForElementToDisplay('#attentive_overlay',function(){
+        $('#attentive_overlay').css('display', 'none');
+      },100,9000);
+
+    },
+    showOnTopElements(){
+      $('.orb-chat-mount>div').css('margin-right', '0px');
+      $('#attentive_overlay').css('display', 'initial');
+    },
   },
 };
 </script>
@@ -912,9 +962,6 @@ html.ProductCustomizer--Open {
       z-index: 10;
     }
 
-    @include at-query($breakpoint-large) {
-      margin-top: 15px;
-    }
 
     & > * {
       margin-right: 15px;
@@ -977,7 +1024,7 @@ html.ProductCustomizer--Open {
 
   &__ShippingDays {
     color: #202020;
-    margin: 25px 0;
+    margin: 30px 0;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: .075em;

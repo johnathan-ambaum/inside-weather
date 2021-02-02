@@ -38,6 +38,7 @@
           <img
             :src="productDetail.objectUrl"
             v-if="productDetail.isVideo === 'false'"
+            :alt="productDetail.altText"
           />
           <video
             v-if="productDetail.isVideo === 'true'"
@@ -55,6 +56,7 @@
           <img
             :src="productDetail.objectUrlMob"
             v-if="productDetail.isVideo === 'false'"
+            :alt="productDetail.altText"
           />
           <video
             v-if="productDetail.isVideo === 'true'"

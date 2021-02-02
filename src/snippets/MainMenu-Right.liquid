@@ -59,9 +59,15 @@
 
     {%- comment -%}====== NAV ICONS ====={%- endcomment -%}
     <li class="Mobile-Item Mobile-Item__Favorites">
-        <a href="/pages/favorites">
-            {% include 'icon-heart-filled' %}
-        </a>
+        {% if customer %}
+            <a id="ajaxCustomerOnboard--trigger" href="/pages/favorites">
+                {% include 'icon-heart-filled' %}
+            </a>
+        {% else %}
+            <div data-ajax-customer-onboard="true" data-return-to='/pages/favorites'>
+                {% include 'icon-heart-filled' %}
+            </div>
+        {% endif %}
     </li>
     <li class="Mobile-Item Mobile-Item__Cart">
         <div class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
