@@ -69,12 +69,6 @@
         </div>
       </div>
     </div>
-    <div class="--custom-container">
-      <h2
-        v-if="(isDecor || filters.contents) && isMobile"
-        class="ProductDetail__Heading-details"
-      >Details</h2>
-    </div>
     <div
       v-if="isDecor && interpolatedDescription.length"
       class="ProductDetail__Description --custom-container"
