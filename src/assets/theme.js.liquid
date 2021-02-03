@@ -2957,7 +2957,7 @@ lazySizesConfig.expFactor = 4;
       return;
     }
 
-    var modal = new theme.Modals('fullPageTakeOver', 'full-page-takeover');
+    var modal = new theme.Modals('fullPageTakeOver', 'full-page-takeover',{ closeOffContentClick: false});
     window.addEventListener('popstate', function(event) {
       showPage(event.state.page)
     });
