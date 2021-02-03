@@ -715,6 +715,37 @@ lazySizesConfig.expFactor = 4;
         this.close();
       }.bind(this));
     };
+    Modal.prototype.waitForElementToDisplay = function(selector, callback, checkFrequencyInMs, timeoutInMs) {
+      var startTimeInMs = Date.now();
+      (function loopSearch() {
+        if (document.querySelector(selector) != null) {
+          callback();
+          return;
+        }
+        else {
+          setTimeout(function () {
+            if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+              return;
+            loopSearch();
+          }, checkFrequencyInMs);
+        }
+      })();
+    },
+
+    Modal.prototype.disableChatWidget = function() {
+      this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+        $('.orb-chat-mount>div').css('margin-right', '10000px');
+      },100,9000);
+      this.waitForElementToDisplay('#attentive_overlay',function(){
+        $('#attentive_overlay').css('display', 'none');
+      },100,9000);
+
+    },
+
+    Modal.prototype.enableChatWidget =function(){
+      $('.orb-chat-mount>div').css('margin-right', '0px');
+      $('#attentive_overlay').css('display', 'initial');
+    },
 
     Modal.prototype.open = function(evt) {
       // Keep track if modal was opened from a click, or called by another function
@@ -724,6 +755,7 @@ lazySizesConfig.expFactor = 4;
       if (this.modalIsOpen) {
         return;
       }
+      this.disableChatWidget();
 
       // Prevent following href if link is clicked
       if (evt) {
@@ -775,6 +807,7 @@ lazySizesConfig.expFactor = 4;
       if (!this.modalIsOpen) {
         return;
       }
+      this.enableChatWidget();
 
       // deselect any focused form elements
       $(document.activeElement).trigger('blur');
@@ -2885,6 +2918,34 @@ lazySizesConfig.expFactor = 4;
       $(".shippingProtectionModalContent__text").text(theme.settings.vwo.shippingProtection.modal.content);
       modal.open();
     }
+  };
+
+  theme.ajaxCustomerOnboard = function() {
+    var selectors = {
+      triggers: 'body'
+    };
+
+    if (!$(selectors.triggers).length) {
+      return;
+    }
+
+    var modal = new theme.Modals('ajaxCustomerOnboard', 'ajax-customer-onboard');
+
+    $(selectors.triggers).on('click','*[data-ajax-customer-onboard="true"]', triggerOnboard);
+
+    function triggerOnboard(evt){
+      evt.stopImmediatePropagation();
+      if(window.customerId){
+        return
+      }else{
+        window.ajaxCustomerOnboardCurrentTrigger = evt
+        modal.open();
+      }
+
+
+      return false;
+    }
+
   };
 
   theme.fullPageTakeOver = function() {
@@ -5386,6 +5447,7 @@ lazySizesConfig.expFactor = 4;
     theme.productProtectionModal();
     theme.shippingProtectionModal();
     theme.fullPageTakeOver();
+    theme.ajaxCustomerOnboard();
     theme.articleImages.init();
     theme.backButton.init();
     theme.customerTemplates.init();
