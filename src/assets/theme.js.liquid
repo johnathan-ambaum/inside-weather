@@ -2897,24 +2897,37 @@ lazySizesConfig.expFactor = 4;
     }
 
     var modal = new theme.Modals('fullPageTakeOver', 'full-page-takeover');
+    window.addEventListener('popstate', function(event) {
+      showPage(event.state.page)
+    });
+    $("button[data-continue='true']").on('click', function(){
+      modal.close();
+    });
 
     function urlHasOpenParam(){
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.has("fullPageTakeOver");
     }
     function modalShouldOpen(){
-      console.log('modal should open')
       if(urlHasOpenParam()){
-        console.log('url has param')
         triggerFPT();
       }
     }
     function triggerFPT() {
+      history.pushState({page:99}, null, '?fullPageTakeOver=true&close=true');
+      history.pushState({page:2}, null, '?fullPageTakeOver=true&page=2');
+      history.pushState({page:1}, null, '?fullPageTakeOver=true&page=1');
       modal.open();
     }
-    modalShouldOpen();
-    console.log('fullPageTakeOver')
 
+    function showPage(page){
+      if(!urlHasOpenParam()){return;}
+      if(!page){page = 1}
+      if(page == 99){modal.close(); return;}
+      $('.fullPageTakeOver__page').hide();
+      $(`[data-page='${page}']`).show();
+    }
+    modalShouldOpen();
   };
 
   theme.customerTemplates = (function() {
