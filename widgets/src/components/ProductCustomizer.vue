@@ -46,6 +46,8 @@
         v-if="isMobile"
         :cylindo="useCylindo"
         cylindo-id="cylindo-main"
+        :customizer-active="active"
+        :favoriteIcon="favoriteIcon"
       />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
@@ -153,7 +155,11 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider :cylindo="useCylindo" />
+        <product-detail-slider
+        :cylindo="useCylindo"
+        :customizer-active="active"
+        :favoriteIcon="favoriteIcon"
+        />
         <button
           v-if="!isMobile"
           class="ProductCustomizer__Close"
@@ -484,6 +490,10 @@ export default {
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
+    });
+
+    this.$bus.$on('detailSlider:favorite', (payload) => {
+      this.favoriteCurrentProduct();
     });
 
     window.addEventListener('popstate', ({ state }) => {

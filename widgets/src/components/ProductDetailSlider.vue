@@ -29,12 +29,24 @@
           >
           <span>Rotate</span>
         </div>
-        <div v-show="showAR" class="Viewer__ARIcon" @click.stop="triggerAR">
+        <div v-show="showAR && !customizerActive" class="Viewer__ARIcon" @click.stop="triggerAR">
           <img
             src="https://cdn.shopify.com/s/files/1/2994/0144/files/ar-ico.svg?v=1605141835"
             alt="AR Button"
           >
           <span>View In AR</span>
+        </div>
+        <div v-if="isCustomer">
+          <div v-show="customizerActive" class="Viewer__favoritesIcon" @click.stop="triggerFavorite">
+            <font-awesome-icon :icon="favoriteIcon"/>
+            <span>Favorite</span>
+          </div>
+        </div>
+        <div v-else>
+          <div v-show="customizerActive" class="Viewer__favoritesIcon" data-ajax-customer-onboard="true" >
+            <font-awesome-icon :icon="favoriteIcon"/>
+            <span>Favorite</span>
+          </div>
         </div>
         <div
           class="Viewer__ZoomIcon"
@@ -130,6 +142,7 @@ import ZoomButton from './ZoomButton.vue';
 import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
   components: {
@@ -138,6 +151,7 @@ export default {
     ZoomButton,
     ZoomGallery,
     CloseButton,
+    FontAwesomeIcon
   },
 
   mixins: [
@@ -148,6 +162,8 @@ export default {
   props: {
     cylindo: { type: Boolean, default: false },
     cylindoId: { type: String, default: 'cylindo-secondary' },
+    customizerActive: {type:Boolean, default:false},
+    favoriteIcon: {type: Array, default: ['fal', 'heart']}
   },
 
   data() {
@@ -155,6 +171,7 @@ export default {
       showZoom: false,
       showAR: false,
       currentImage: 0,
+      isCustomer: !!window.customerId
     };
   },
 
@@ -260,6 +277,9 @@ export default {
       target.dispatchEvent(touchEvent);
       document.querySelector(".cylindo-button.cylindo-ar-button a div.ar-glyph-background").click();
     },
+    triggerFavorite(){
+      this.$bus.$emit('detailSlider:favorite')
+    },
 
     closeZoom() {
       if (this.cylindo) {
@@ -343,7 +363,7 @@ $tile-size-desktop: 100%;
     }
 
     .Viewer__360Icons {
-      align-items: center;
+      align-items: flex-end;
       bottom: 55px;
       display: flex;
       justify-content: space-between;
@@ -359,7 +379,7 @@ $tile-size-desktop: 100%;
         justify-content: center;
       }
 
-      img {
+      img, svg {
         display: inline-block;
         height: auto;
         width: 14px;
@@ -404,9 +424,21 @@ $tile-size-desktop: 100%;
       }
     }
     .Viewer__ARIcon,
+    .Viewer__favoritesIcon,
     .Viewer__ZoomIcon {
       pointer-events: auto;
     }
+    .Viewer__favoritesIcon{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      @include at-query($breakpoint-large) {
+        margin:0 41px;
+      }
+    }
+
   }
   // END CYLINDO
 
