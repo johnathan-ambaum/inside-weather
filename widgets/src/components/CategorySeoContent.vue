@@ -12,8 +12,22 @@
         <heading-with-description>
           <h2 v-if="content.isTitle === 'true'">{{content.title}}</h2>
           <p>{{content.copy_one}}</p>
-          <p>{{content.copy_two}}</p>
-          <p>{{content.copy_three}}</p>
+          <p :class="linkTextClass">{{content.copy_two}}
+            <a :href="content.copy_two_linkto_one">{{content.copy_two_linktext_one}}</a>
+            <span>{{content.copy_two_sub_one}}</span>
+            <a :href="content.copy_two_linkto_two">{{content.copy_two_linktext_two}}</a>
+            <span>{{content.copy_two_sub_two}}</span>
+            <a :href="content.copy_two_linkto_three">{{content.copy_two_linktext_three}}</a>
+            <span>{{content.copy_two_sub_three}}</span>
+          </p>
+          <p :class="linkTextClass">{{content.copy_three}}
+            <a :href="content.copy_three_linkto_one">{{content.copy_three_linktext_one}}</a>
+            <span>{{content.copy_three_sub_one}}</span>
+            <a :href="content.copy_three_linkto_two">{{content.copy_three_linktext_two}}</a>
+            <span>{{content.copy_three_sub_two}}</span>
+            <a :href="content.copy_three_linkto_three">{{content.copy_three_linktext_three}}</a>
+            <span>{{content.copy_three_sub_three}}</span>
+          </p>
           <p>{{content.copy_four}}</p>
         </heading-with-description>
       </div>
@@ -29,8 +43,16 @@ export default {
     HeadingWithDescription,
   },
   props: {
-    seoContent: Array
-  }
+    seoContent: Array,
+    isLinkText:{type: Boolean, default: false},
+  },
+  computed: {
+    linkTextClass() {
+      return {
+        'link-text': this.isLinkText
+      }
+    }
+  },
 }
 </script>
 
@@ -54,6 +76,11 @@ export default {
         max-width: 750px;
         margin-bottom: 20px;
       }
+    }
+
+    a {
+      display: inline;
+      text-decoration: underline;
     }
   }
   @include at-query('max-width: 767px') {
