@@ -29,7 +29,13 @@
           >
           <span>Rotate</span>
         </div>
-
+        <div v-show="showAR && !customizerActive" class="Viewer__ARIcon" @click.stop="triggerAR">
+          <img
+            src="https://cdn.shopify.com/s/files/1/2994/0144/files/ar-ico.svg?v=1605141835"
+            alt="AR Button"
+          >
+          <span>View In AR</span>
+        </div>
         <template v-if="isCustomer">
           <div v-show="customizerActive" class="Viewer__favoritesIcon" @click.stop="triggerFavorite">
             <font-awesome-icon :icon="favoriteIcon"/>
