@@ -29,25 +29,19 @@
           >
           <span>Rotate</span>
         </div>
-        <div v-show="showAR && !customizerActive" class="Viewer__ARIcon" @click.stop="triggerAR">
-          <img
-            src="https://cdn.shopify.com/s/files/1/2994/0144/files/ar-ico.svg?v=1605141835"
-            alt="AR Button"
-          >
-          <span>View In AR</span>
-        </div>
-        <div v-if="isCustomer">
+
+        <template v-if="isCustomer">
           <div v-show="customizerActive" class="Viewer__favoritesIcon" @click.stop="triggerFavorite">
             <font-awesome-icon :icon="favoriteIcon"/>
             <span>Favorite</span>
           </div>
-        </div>
-        <div v-else>
+        </template>
+        <template v-else>
           <div v-show="customizerActive" class="Viewer__favoritesIcon" data-ajax-customer-onboard="true" >
             <font-awesome-icon :icon="favoriteIcon"/>
             <span>Favorite</span>
           </div>
-        </div>
+        </template>
         <div
           class="Viewer__ZoomIcon"
           @click.stop="triggerZoom"
@@ -429,10 +423,6 @@ $tile-size-desktop: 100%;
       pointer-events: auto;
     }
     .Viewer__favoritesIcon{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       margin-top: 10px;
       @include at-query($breakpoint-large) {
         margin:0 41px;
