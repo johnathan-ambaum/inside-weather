@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     class="CategoryBanner CategoryBanner--sliderWrapper"
     ref="CategoryBanner--sliderWrapper"
     :class="hasAnimation"
@@ -11,38 +11,40 @@
       :navText="sliderProps.navText"
       :responsive="sliderProps.responsive"
     >
-      <div 
-        v-for="item in bannerContentItems" 
+      <div
+        v-for="item in bannerContentItems"
         :key="item.$id"
         :data-src="item.dataSource"
         :data-hash="item.dataSource"
         class="CategoryBanner--items"
         :class="bannerClass"
       >
-        <div 
+        <div
           class="CategoryBanner--imageWrapper"
           :class="bannerHeight"
           >
-          <figure 
+          <figure
             v-if="isBigScreen"
             v-bind:style="[{'background-image': 'url(' + item.image + ')'}]"
             :class="animationClass"
           >
+            <img :alt="item.altText" class="hiddenImage" />
           </figure>
 
-          <figure 
-            v-if="!isBigScreen" 
+          <figure
+            v-if="!isBigScreen"
             v-bind:style="[{'background-image': 'url(' + item.imageSm + ')'}]"
             :class="animationClass"
           >
+            <img :alt="item.altText" class="hiddenImage" />
           </figure>
         </div>
-        <div 
+        <div
           class="CategoryBanner--content"
           v-if="hasBannerContent"
           :class="[hasBannerAccoridon ? '' : 'large-content-frame']"
         >
-          <h2 
+          <h2
             class="--caps"
             :class="animationClass"
             v-if="isBigScreen"
@@ -58,7 +60,7 @@
           >
             {{bannerContentItems[0].description}}
           </p>
-          <h2 
+          <h2
             class="--caps"
             :class="[
               (animationClass),
@@ -81,8 +83,8 @@
               (newButton ? 'new-button' : '')
             ]"
           >
-            <a 
-              :href="item.url" 
+            <a
+              :href="item.url"
               class="--caps"
               v-if="item.linkText.length > 0"
               :class="[newButton ? 'new-button' : '']"
@@ -93,7 +95,7 @@
         </div>
       </div>
     </slider>
-    <div 
+    <div
       class="CategoryBanner--clasification"
       v-if="hasBannerContent || hasBannerAccoridon"
     >
@@ -105,8 +107,8 @@
         :accordionTriggerElement="accItem.accordionTarget"
         :anchorTageRequire="anchorTageRequire"
       />
-    </div>    
-  </div>  
+    </div>
+  </div>
 </template>
 
 <script>
@@ -180,7 +182,7 @@ export default {
         this.isBigScreen = false
       }
     };
-    
+
     window.addEventListener('resize', changeTheBanner);
   }
 }
@@ -219,6 +221,16 @@ export default {
       }
       @include at-query('min-width: 1601px'){
         height: 660px;
+      }
+
+      .hiddenImage {
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
       }
     }
     .CategoryBanner--content {
@@ -289,7 +301,7 @@ export default {
           bottom: 0;
           margin: auto;
         }
-      
+
         &.is-category-page {
           padding-bottom: 34.4%;
         }
@@ -373,7 +385,7 @@ export default {
       .CategoryBanner--imageWrapper {
         height: calc(100vh - 102px);
       }
-    } 
+    }
   }
   @include at-query('min-width: 992px') {
     .owl-theme {
