@@ -69,12 +69,6 @@
         </div>
       </div>
     </div>
-    <div class="--custom-container">
-      <h2
-        v-if="(isDecor || filters.contents) && isMobile"
-        class="ProductDetail__Heading-details"
-      >Details</h2>
-    </div>
     <div
       v-if="isDecor && interpolatedDescription.length"
       class="ProductDetail__Description --custom-container"
@@ -283,7 +277,7 @@ export default {
     margin-bottom: 58px;
     @include at-query($breakpoint-small) {
       flex-direction: column;
-      & > div:first-child {
+      & > div:not(:last-child) {
         margin-bottom: 50px;
       }
     }
