@@ -277,7 +277,7 @@ export default {
     margin-bottom: 58px;
     @include at-query($breakpoint-small) {
       flex-direction: column;
-      & > div:first-child {
+      & > div:not(:last-child) {
         margin-bottom: 50px;
       }
     }
