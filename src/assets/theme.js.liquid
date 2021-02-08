@@ -2949,6 +2949,28 @@ lazySizesConfig.expFactor = 4;
   };
 
   theme.fullPageTakeOver = function() {
+
+  function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
     var selectors = {
       triggers: 'body'
     };
@@ -2964,13 +2986,36 @@ lazySizesConfig.expFactor = 4;
     $("button[data-continue='true']").on('click', function(){
       modal.close();
     });
+    $('.fullPageTakeOver__page-cta-form').submit(function(event){
+      event.preventDefault();
+
+      const data = { email: $('.fullPageTakeOver__page-cta-input').val()};
+
+      fetch('http://iw-content.herokuapp.com/api/v1/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(data => {
+        setCookie('customerGaveEmail','true',31);
+        modal.close();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+
+    });
 
     function urlHasOpenParam(){
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.has("fullPageTakeOver");
     }
     function modalShouldOpen(){
-      if(urlHasOpenParam()){
+      if(urlHasOpenParam() && !getCookie('customerGaveEmail')){
         triggerFPT();
       }
     }
