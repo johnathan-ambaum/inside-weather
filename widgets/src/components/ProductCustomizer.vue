@@ -853,6 +853,9 @@ html.ProductCustomizer--Open {
   }
 
   &__DetailWrapper {
+    .btn.btn--full.add-to-cart{
+      border-radius: 24px;
+    }
     @include at-query($breakpoint-small) {
       margin-bottom: 68px;
       padding: 0 $horizontal-wrapper-padding;
@@ -1068,6 +1071,7 @@ html.ProductCustomizer--Open {
     margin-bottom: 24px;
     text-transform: uppercase;
     width: 100%;
+    border-radius: 24px;
 
     &:hover,
     &:active {
