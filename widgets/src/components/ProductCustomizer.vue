@@ -165,6 +165,11 @@
           class="ProductCustomizer__Close"
           @click.prevent="close(true)"
         >Save Customization</button>
+        <button
+          v-if="!isMobile"
+          class="ProductCustomizer__cancel-and-close"
+          @click.prevent="cancelAndClose(true)"
+        >CANCEL & CLOSE</button>
       </div>
       <div class="ProductCustomizer__Sidebar">
         <div class="ProductCustomizer__SidebarBody">
@@ -250,11 +255,12 @@
           </transition>
         </div>
       </div>
+      <div class="ProductCustomizer__Exit">
       <close-button
         v-if="isMobile"
-        class="ProductCustomizer__Exit"
-        @click.native.prevent="close(true)"
+        @click.native.prevent="cancelAndClose(true)"
       />
+      <span>CANCEL & CLOSE</span>
     </div>
     <photoshoot-modal @photoshoot="photoShootHandler" ref="modal" ></photoshoot-modal>
   </div>
@@ -331,6 +337,7 @@ export default {
       openPanel: state => state.openPanel,
       productImages: state => state.productImages,
       selectedOptions: state => state.selectedOptions,
+      revertConfiguration: state => state.revertConfiguration,
       productCreationInProgress: state => state.productCreationInProgress,
       activeProduct: state => state.activeProduct,
       favorites: state => state.favorites,
@@ -547,6 +554,7 @@ export default {
       'toggleFavorite',
       'setActiveProduct',
       'setSelectedOptions',
+      'setRevertConfiguration',
       'selectPanel',
       'setOption',
     ]),
@@ -669,7 +677,25 @@ export default {
 
     },
 
+    cancelAndClose(closeAll){
+      this.openModal();
+      if (this.openPanel && !closeAll) {
+        this.selectPanel('');
+        return;
+      }
+      this.populateSelected({
+        selectedOptions: this.revertConfiguration,
+        exists: true,
+      }).then(()=>{
+        this.createProduct();
+        this.$bus.$emit('customizer-close');
+        this.active = false;
+        this.showOnTopElements();
+      });
+    },
+
     showCustomizer() {
+      this.setRevertConfiguration(this.selectedOptions);
       this.selectPanel('');
       this.active = true;
       this.hideOnTopElements();
@@ -1144,6 +1170,24 @@ html.ProductCustomizer--Open {
     right: 18px;
     top: 18px;
     z-index: 999;
+    display: flex;
+    flex-direction: column;
+    max-width: 40px;
+    @include at-query($breakpoint-large) {
+      display:none;
+    }
+    z-index: 10;
+
+    span{
+      font-family: Avalon;
+      font-weight: 500;
+      font-size:8px;
+      letter-spacing: 0.1em;
+      line-height: 11px;
+      text-align: center;
+      color:#202020;
+      margin-top:12px;
+    }
 
     svg {
       @include at-query($breakpoint-small) {
@@ -1434,7 +1478,7 @@ html.ProductCustomizer--Open {
     letter-spacing: .12em;
     text-transform: uppercase;
     width: 100%;
-
+    z-index: 10;
     @include at-query($breakpoint-large) {
       bottom: 80px;
       height: 50px;
@@ -1442,13 +1486,29 @@ html.ProductCustomizer--Open {
       margin: auto;
       position: absolute;
       right: 0;
-      width: 324px;
+      width: 350px;
+      border-radius: 29px;
     }
   }
 
+  &__cancel-and-close{
+    position:absolute;
+    bottom:28px;
+    left:0;
+    right:0;
+    margin:0 auto;
+    text-align: center;
+    font-family: Avalon;
+    font-weight: 500;
+    text-decoration: underline;
+    font-size:14px;
+    letter-spacing: 0.1em;
+    color:#202020;
+    z-index: 10;
+  }
   &--Cylindo &__Close {
     @include at-query($breakpoint-large) {
-      bottom: 30px;
+      bottom: 73px;
     }
   }
 
