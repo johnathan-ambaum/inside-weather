@@ -375,7 +375,7 @@ $tile-size-desktop: 100%;
       z-index: 10;
 
       @include at-query($breakpoint-large) {
-        bottom: 25px;
+        bottom: 66px;
         justify-content: center;
       }
 
