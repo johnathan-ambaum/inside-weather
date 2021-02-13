@@ -850,7 +850,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#b1c8cd",
+          "background_color_1": "#e2c9bf",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -858,14 +858,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p><a title=\"Dining Chairs\" href=\"\/pages\/dining-chairs\">Introducing: New dining, counter &amp; bar stools!<\/a> Customize starting at $128<\/p>",
-          "mobile_text_1": "<p><a title=\"Dining Chairs\" href=\"\/pages\/dining-chairs\">Introducing: New dining, counter &amp; bar stools!<\/a><\/p>",
-          "text_2": "<p>NEW! Modular, Adjustable Storage | Shop the Atlas Shelving Collection<\/p>",
-          "mobile_text_2": "<p><a href=\"\/pages\/shelving\" title=\"Shelving\">Introducing: Atlas<\/a> | NEW modular, adjustable shelving<\/p>",
-          "text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
-          "mobile_text_3": "<p>FREE Shipping on Every Order | 365 Day Home Trial<\/p>",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "02\/01\/2021"
+          "text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Savings End Soon!<\/a> | Save up to <strong>21% OFF<\/strong> sitewide for a limited time<\/p>",
+          "mobile_text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Savings End Soon!<\/a> | Save up to <strong>21% OFF<\/strong><\/p>",
+          "text_2": "",
+          "mobile_text_2": "",
+          "text_3": "",
+          "mobile_text_3": "",
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "02\/16\/2021"
         }
       },
       "giftcard-header": {
