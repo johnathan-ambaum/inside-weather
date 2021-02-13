@@ -113,6 +113,11 @@ export function setSelectedOptions(state, selected) {
   this.dispatch('loadProductImages');
 }
 
+export function setRevertConfiguration(state, selected) {
+  Vue.set(state, 'revertConfiguration', { ...selected });
+  this.dispatch('loadProductImages');
+}
+
 /**
  * Add or remove a product from the user's favorites
  */
@@ -204,6 +209,7 @@ export default {
   updateCategory,
   selectPanel,
   setSelectedOptions,
+  setRevertConfiguration,
   applyQueryString,
   toggleFavorite,
   setReviews,
