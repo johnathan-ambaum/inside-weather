@@ -5652,6 +5652,86 @@ $z-index-page-overlay: 27;
     background-color: $colorModalBg;
   }
 }
+.bg-image-modal{
+  display: none;
+  left: 0;
+  opacity: 1;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: $zindexModal;
+  color: $colorModalText;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  a,
+  a:hover {
+    color: inherit;
+  }
+
+  .btn:not([disabled]),
+  .btn:not([disabled]):hover {
+    color: $colorBtnPrimaryText;
+  }
+  .modal-open & {
+    .modal__centered{
+      margin:0 auto;
+      width:100%;
+    }
+    .modal__inner {
+      margin:30px;
+      animation:none;
+      width:100%;
+      background-color:white;
+      @include media-query($medium-up) {
+        width:auto;
+      }
+
+    }
+    &:before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(32, 32, 32, 0.7);
+      background-image: url("http://cdn.insideweather.com/lp/gate/signup_full-page_bnr_m@2x.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      @include media-query($medium-up) {
+        background-image: url("http://cdn.insideweather.com/lp/gate/signup_full-page_bnr_d@2x.jpg");
+        bottom:0;
+      }
+    }
+  }
+  .modal-closing & {
+    .modal__inner {
+      -webkit-animation: modal-closing 0.5s forwards;
+              animation: modal-closing 0.5s forwards;
+    }
+    &:before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $colorModalBg;
+      -webkit-animation: overlay-off 0.5s forwards;
+              animation: overlay-off 0.5s forwards;
+    }
+  }
+  @include media-query($medium-up) {
+    bottom:0;
+  }
+}
 
 .modal--solid {
   .modal-open & {
@@ -12857,4 +12937,97 @@ input:checked + .slider:before {
 
 .cylindo-ar-button  {
   display:none!important;
+}
+
+// Full Page takeover modal
+.fullPageTakeOver__wrapper{
+  background-color: white;
+  color:#202020;
+  font-family: Avalon;
+  @include media-query($medium-up) {
+    margin:50px 42px;
+  }
+}
+.fullPageTakeOver__page:not(:first-child) {
+  display:none;
+}
+.fullPageTakeOver__page-logo{
+  width:120px;
+  height:auto;
+  margin:30px auto;
+  display:block;
+  @include media-query($medium-up) {
+    width:140px;
+    margin:50px auto 42px auto;
+  }
+}
+.fullPageTakeOver__page-main-heading{
+  font-weight: 600;
+  font-size:35px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  line-height: 30px;
+  @include media-query($medium-up) {
+    font-size:48px;
+    line-height: 40px;
+  }
+
+}
+.fullPageTakeOver__page-text{
+  width:180px;
+  font-weight: 500;
+  font-size:15px;
+  letter-spacing: 0.05em;
+  line-height: 24px;
+  text-align: center;
+  margin:18px auto 32px auto;
+  @include media-query($medium-up) {
+    width:auto;
+    font-size:18px;
+    margin:14px auto 48px auto;
+  }
+
+}
+.fullPageTakeOver__page-text-page2{
+  @include media-query($medium-up) {
+    display:flex;
+  }
+  div{
+    @include media-query($medium-up) {
+      margin: 0 2px;
+    }
+  }
+}
+.fullPageTakeOver__page-bold-text{
+  font-weight: 700;
+}
+.fullPageTakeOver__page-cta{
+  margin: 32px 27px 27px 30px
+}
+.fullPageTakeOver__page-cta-form{
+  @include media-query($medium-up) {
+    max-width:262px;
+    margin:0 auto;
+  }
+}
+.fullPageTakeOver__page-cta-input{
+  width:100%;
+  margin-bottom:24px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  font-weight: normal;
+  border:1px solid #d4d0ca;
+  @include media-query($medium-up) {
+    margin-bottom:25px;
+  }
+}
+.fullPageTakeOver__page-cta-submit{
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color:white;
+  background-color: black;
+  height:45px;
+  line-height: 45px;
+  width:100%;
 }
