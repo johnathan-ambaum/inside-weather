@@ -8,12 +8,12 @@
         </button>
     </li>
 
-    {%- for parentLink in linklists.redesigned-main-menu-left.links -%}
+    {%- for parentLink in linklists.sale-menu-temp.links -%}
         {%- if parentLink.links != blank -%}
             <li class="NavBlock__List__Item--Dropdown {% if forloop.index == 1 %}NavBlock__List__Item--First{% endif %}">
-                <a href="{{parentLink.link}}" class="js-no-transition">{{ parentLink.title }}</a>
+                <a href="{{parentLink.link}}" class="js-no-transition {% if parentLink.title  == 'Sale'%}NavBlock__sale{% endif %}">{{ parentLink.title }}</a>
 								<div class="Dropdown__Content" >
-									<div class="Dropdown__Content-Wrapper" {% if parentLink.links[0].links == blank %}style="justify-content:center; " {% else %} style="max-width: 1440px;"{% endif%}>
+									<div class="Dropdown__Content-Wrapper {% if parentLink.title  == 'Sale'%}Dropdown__Content-Wrapper--sale{% endif %}" {% if parentLink.links[0].links == blank %}style="justify-content:center; " {% else %} style="max-width: 1440px;"{% endif%}>
                     {% assign currentLink = parentLink.title | downcase | strip %}
 										<div class="NavBlocks__Container" {% if parentLink.links[0].links == blank %}style="width:auto;" {% endif%}>
 											<ul class="NavBlock__flex-list" {%- if parentLink.links[0].links == blank -%} style="padding-top: 34px; padding-right: 40px; margin-top: 0;" {% endif %} >
@@ -53,7 +53,7 @@
                         {%- endfor -%}
 											</ul>
 										</div>
-										<div style="width:50%"  >
+										<div style="width:50%; {% if parentLink.title  == 'Sale'%}width:50%;margin:0 auto;{% endif %} " >
 											<ul class="NavBlock__flex-list--collections" >
 												{%- for dropdownLink in parentLink.links-%}
 													{% if forloop.last %} <!-- For collections linklist-->
