@@ -850,7 +850,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#e2c9bf",
+          "background_color_1": "#b5bcb5",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -858,13 +858,13 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Savings End Soon!<\/a> | Save up to <strong>21% OFF<\/strong> sitewide for a limited time<\/p>",
-          "mobile_text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Savings End Soon!<\/a> | Save up to <strong>21% OFF<\/strong><\/p>",
+          "text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Sale EXTENDED<\/a>: Save up to<strong> 21% off <\/strong>sitewide<\/p>",
+          "mobile_text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Sale EXTENDED<\/a>: Save up to<strong> 21% off <\/strong>sitewide<\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
+          "promo_countdown_enabled": false,
           "promo_countdown_end_date": "02\/16\/2021"
         }
       },
