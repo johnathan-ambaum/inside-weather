@@ -11781,16 +11781,34 @@ html body.MobileNav--Active {
     border-bottom: 2px solid transparent;
   }
 
-  &.NavBlock__List__Item--Dropdown:hover a,
-  & > a:hover {
+  &.NavBlock__List__Item--Dropdown:hover a:not(.NavBlock__List__Item--sale:hover a),
+  & > a:hover:not(.NavBlock__List__Item--sale:hover a) {
     -webkit-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
     border-color: #202020;
     color: #202020;
   }
+  & > a.NavBlock__sale:hover{
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    border-color: #F57E61;
+  }
 }
-
+.NavBlock__List__Item--sale:hover a{
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  border-color: #F57E61;
+  color: #F57E61;
+}
+.Mobile__List__Item--DropDown-sale .MobileContent__Dropdown-grandchild{
+  display: block !important;
+}
+.Mobile__List__Item--DropDown-sale .MobileDropDown__Toggler-grandchild{
+  display:none;
+}
 .NavBlock__List__Item--Dropdown--Active {
   .Dropdown__Content {
     visibility: visible;

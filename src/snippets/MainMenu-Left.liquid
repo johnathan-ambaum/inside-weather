@@ -10,7 +10,7 @@
 
     {%- for parentLink in linklists.sale-menu-temp.links -%}
         {%- if parentLink.links != blank -%}
-            <li class="NavBlock__List__Item--Dropdown {% if forloop.index == 1 %}NavBlock__List__Item--First{% endif %}">
+            <li class="NavBlock__List__Item--Dropdown {% if forloop.index == 1 %}NavBlock__List__Item--First{% endif %} {% if parentLink.title  == 'Sale'%}NavBlock__List__Item--sale{% endif %}">
                 <a href="{{parentLink.link}}" class="js-no-transition {% if parentLink.title  == 'Sale'%}NavBlock__sale{% endif %}">{{ parentLink.title }}</a>
 								<div class="Dropdown__Content" >
 									<div class="Dropdown__Content-Wrapper {% if parentLink.title  == 'Sale'%}Dropdown__Content-Wrapper--sale{% endif %}" {% if parentLink.links[0].links == blank %}style="justify-content:center; " {% else %} style="max-width: 1440px;"{% endif%}>
