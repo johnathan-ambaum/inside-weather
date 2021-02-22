@@ -53,8 +53,6 @@ export default {
 
   props: {
     product: { type: Object, required: true },
-    filters: { type: Object, required: true },
-    isMobile: { type: Boolean, required: true },
     isFavorite: { type: Boolean, default: false },
     loadMobile: { type: Boolean, default: false },
   },
@@ -143,13 +141,16 @@ export default {
 @import '../scss/mixins';
 
 .ProductGridItem {
-  border-bottom: 1px solid #d4d0ca;
+  outline: 1px solid #d4d0ca;
+  margin:1px;
   flex: 0 0 50%;
   margin: 0;
   overflow: hidden;
   padding: 0 10px 10px;
   position: relative;
   text-align: center;
+  background-color:white;
+
 
   @include at-query($breakpoint-small) {
     @at-root {
@@ -157,62 +158,22 @@ export default {
       &:nth-child(2) {
         border-top: 1px solid #d4d0ca;
       }
+      &:nth-child(1){
+        border-left:1px solid #d4d0ca;
+      }
+      &:nth-child(2){
+        border-right:1px solid #d4d0ca;
+      }
     }
   }
 
   @include at-query($breakpoint-large) {
     flex: 0 0 25%;
     padding: 0;
-
-    @at-root {
-      &:nth-child(1),
-      &:nth-child(2),
-      &:nth-child(3),
-      &:nth-child(4) {
-        border-top: 1px solid #d4d0ca;
-      }
-    }
   }
 
-  & + & {
-    border-left: 1px solid #d4d0ca;
 
-    @include at-query($breakpoint-small) {
-      @at-root {
-        & + &:nth-child(2n+3) {
-          border-left: none;
-        }
-      }
-    }
 
-    @include at-query($breakpoint-large) {
-      @at-root {
-        & + &:nth-child(4n+5) {
-          border-left: none;
-        }
-      }
-    }
-  }
-
-  &:last-child {
-    &:nth-child(1) {
-      border-right: 1px solid #d4d0ca;
-    }
-
-    @include at-query($breakpoint-small) {
-      &:nth-child(2n+3) {
-        border-right: 1px solid #d4d0ca;
-      }
-    }
-
-    @include at-query($breakpoint-large) {
-      &:nth-child(4n+1),
-      &:nth-child(4n+2),
-      &:nth-child(4n+3) {
-        border-right: 1px solid #d4d0ca;
-      }
-    }
-  }
 
   & &__Image {
     margin: 0 auto;

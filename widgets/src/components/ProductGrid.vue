@@ -11,10 +11,8 @@
         v-for="(product, index) in favorites"
         :key="product.id"
         :product="product"
-        :filters="itemFilters(product.product_type)"
         :is-favorite="isFavoriteProduct(product.handle)"
         :load-mobile="loadItemMobile(index)"
-        :is-mobile="isMobile"
       />
     </div>
   </div>

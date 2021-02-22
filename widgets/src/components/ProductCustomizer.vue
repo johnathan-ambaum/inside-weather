@@ -1,68 +1,38 @@
 <template>
   <div>
-    <div
-      v-if="!disabled"
-      class="ProductCustomizer__DetailWrapper">
-      <div
-        v-for="flag in flags"
-        :key="flag.title"
-        class="ProductCustomizer__FlagRow"
-      >
-        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">{{ flag.title }}</div>
+    <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
+      <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__FlagRow">
+        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
+          {{ flag.title }}</div>
         <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
       </div>
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars
-            v-if="filters.review_count && filters.review_average"
-            :review_count="filters.review_count"
-            :review_average="filters.review_average"
-            review_link="#ReviewCarousel"
-          ></review-stars>
+          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
+            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
         </div>
         <div v-if="isCustomer">
-          <span
-            :class="{ isFavorite }"
-            role="button"
-            class="ProductCustomizer__Favorite"
-            @click.stop.prevent="favoriteCurrentProduct"
-          >
-            <font-awesome-icon :icon="favoriteIcon"/>
+          <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
+            @click.stop.prevent="favoriteCurrentProduct">
+            <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
         <div v-else>
-          <span
-            :class="{ isFavorite }"
-            role="button"
-            class="ProductCustomizer__Favorite"
-            data-ajax-customer-onboard="true"
-          >
-            <font-awesome-icon :icon="favoriteIcon"/>
+          <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
+            data-ajax-customer-onboard="true">
+            <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
       </div>
-      <product-detail-slider
-        v-if="isMobile"
-        :cylindo="useCylindo"
-        cylindo-id="cylindo-main"
-        :customizer-active="active"
-        :favoriteIcon="favoriteIcon"
-      />
+      <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
+        :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
-        <span
-          v-if="msrp"
-          class="ProductCustomizer__MSRP"
-        >{{ msrpDisplay }}</span>
-        <span
-          v-if="msrp"
-          class="ProductCustomizer__Savings"
-        >YOU SAVE ${{ savings }}</span>
-        <info-popup
-          v-if="!isDecor"
-          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$."
-        >
+        <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
+        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ savings }}</span>
+        <info-popup v-if="!isDecor"
+          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
       </div>
@@ -74,62 +44,32 @@
           FREE Shipping | Custom made in the USA<br>
           Estimated to ship in
         </template>
-        <info-popup
-          v-if="hasFulfillmentMarkup"
-          always-on-top
-          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!"
-        >
+        <info-popup v-if="hasFulfillmentMarkup" always-on-top
+          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
       <simple-customizer v-if="isDecor" />
-      <button
-        v-else
-        class="ProductCustomizer__Trigger"
-        @click.prevent="showCustomizer"
-      >Customize</button>
-      <add-to-cart
-        :processing="addToCartProcessing"
-        :out-of-stock="!inStock"
-        @addToCart="addToCart"
-      />
-      <p
-        :data-amount="productPrice * 100"
-        data-page-type="product"
-        class="affirm-as-low-as"
-      />
+      <button v-else class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
+      <add-to-cart :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
+      <p :data-amount="productPrice * 100" data-page-type="product" class="affirm-as-low-as" />
     </div>
-    <div
-    v-else
-    class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
+    <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
       <div class="ProductCustomizer__FlagRow">
-        <div class="ProductCustomizer__Flag ProductCustomizer__404-notice" >404 Error</div>
+        <div class="ProductCustomizer__Flag ProductCustomizer__404-notice">404 Error</div>
       </div>
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars
-            v-if="filters.review_count && filters.review_average"
-            :review_count="filters.review_count"
-            :review_average="filters.review_average"
-            review_link="#ReviewCarousel"
-          ></review-stars>
+          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
+            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
         </div>
-        <span
-          v-if="!disabled"
-          :class="{ isFavorite }"
-          role="button"
-          class="ProductCustomizer__Favorite"
-          @click.stop.prevent="favoriteCurrentProduct"
-        >
-          <font-awesome-icon :icon="favoriteIcon"/>
+        <span v-if="!disabled" :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
+          @click.stop.prevent="favoriteCurrentProduct">
+          <font-awesome-icon :icon="favoriteIcon" />
         </span>
-        <product-detail-slider
-        v-if="isMobile"
-        :cylindo="useCylindo"
-        cylindo-id="cylindo-main"
-      />
+        <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" />
       </div>
       <div class="ProductCustomizer__404-content">
         <h2>{{ disabledInfo.disabled_title }}</h2>
@@ -141,11 +81,8 @@
       <hr>
       <inspiration-options :products="filters.featured_products || []" />
     </div>
-    <div
-      v-if="!isDecor"
-      :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
-      class="ProductCustomizer"
-    >
+    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
+      class="ProductCustomizer">
       <div class="ProductCustomizer__NameOverlay">
         <div class="ProductCustomizer__Name">
           {{ productName }}
@@ -155,114 +92,57 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider
-        :cylindo="useCylindo"
-        :customizer-active="active"
-        :favoriteIcon="favoriteIcon"
-        />
-        <button
-          v-if="!isMobile"
-          class="ProductCustomizer__Close"
-          @click.prevent="close(true)"
-        >Save Customization</button>
-        <button
-          v-if="!isMobile"
-          class="ProductCustomizer__cancel-and-close"
-          @click.prevent="cancelAndClose(true)"
-        >CANCEL & CLOSE</button>
+        <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
+        <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">Save
+          Customization</button>
+        <button v-if="!isMobile" class="ProductCustomizer__cancel-and-close"
+          @click.prevent="cancelAndClose(true)">CANCEL & CLOSE</button>
       </div>
       <div class="ProductCustomizer__Sidebar">
         <div class="ProductCustomizer__SidebarBody">
-          <transition
-            enter-active-class="animated slideInRight"
-            leave-active-class="animated slideOutRight"
-          >
-            <nav
-              v-show="active && !openPanel"
-              class="ProductCustomizer__Nav"
-              ref="productCustomizerNav"
-            >
+          <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+            <nav v-show="active && !openPanel" class="ProductCustomizer__Nav" ref="productCustomizerNav">
               <div class="ProductCustomizer__NavHeading">Customize</div>
               <div class="ProductCustomizer__NavBody">
-                <div
-                  v-for="(attribute) in attributes"
-                  :key="attribute.parameter"
-                  class="ProductCustomizer__NavItem"
-                  @click="showPanel(attribute.parameter)"
-                  v-show="!attribute.hidden"
-                >
-                  <img
-                    v-if="attribute.cover_image_url"
-                    ref="coverImages"
-                    :src="attribute.cover_image_url"
-                    :alt="attribute.name"
-                  >
-                  <span class="ProductCustomizer__NavItemTitle">{{ getAttributeIndex(attribute, attributes) }}. {{ attribute.name }}</span>
+                <div v-for="(attribute) in attributes" :key="attribute.parameter" class="ProductCustomizer__NavItem"
+                  @click="showPanel(attribute.parameter)" v-show="!attribute.hidden">
+                  <img v-if="attribute.cover_image_url" ref="coverImages" :src="attribute.cover_image_url"
+                    :alt="attribute.name">
+                  <span class="ProductCustomizer__NavItemTitle">{{ getAttributeIndex(attribute, attributes) }}.
+                    {{ attribute.name }}</span>
                 </div>
               </div>
             </nav>
           </transition>
-          <div
-            v-for="(attribute) in attributes"
-            :key="attribute.parameter"
-            class="ProductCustomizer__Panel"
-            v-show="!attribute.hidden"
-          >
-            <transition
-              enter-active-class="animated slideInRight"
-              leave-active-class="animated slideOutRight"
-            >
-              <filter-panel
-                v-show="isOpen(attribute.parameter)"
-                v-bind="attribute"
-                :index="getAttributeIndex(attribute, attributes)"
-                :load="true"
-              />
+          <div v-for="(attribute) in attributes" :key="attribute.parameter" class="ProductCustomizer__Panel"
+            v-show="!attribute.hidden">
+            <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+              <filter-panel v-show="isOpen(attribute.parameter)" v-bind="attribute"
+                :index="getAttributeIndex(attribute, attributes)" :load="true" />
             </transition>
           </div>
         </div>
         <div class="ProductCustomizer__Footer" ref="productCustomizerFooter">
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="hasPrev"
-              class="ProductCustomizer__Skip"
-              @click.prevent="backToStart"
-            >Back</button>
+          <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <button v-if="hasPrev" class="ProductCustomizer__Skip" @click.prevent="backToStart">Back</button>
           </transition>
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="hasPrev"
-              :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
+          <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <button v-if="hasPrev" :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
               class="ProductCustomizer__Skip"
-              @click.prevent="nextPanel"
-            >{{ hasNext ? 'Next' : 'Save Customization' }}</button>
+              @click.prevent="nextPanel">{{ hasNext ? 'Next' : 'Save Customization' }}</button>
           </transition>
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="active && isMobile && !hasPrev"
-              class="ProductCustomizer__Close"
-              @click.prevent="close(false)"
-            >Save Customization</button>
+          <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <button v-if="active && isMobile && !hasPrev" class="ProductCustomizer__Close"
+              @click.prevent="close(false)">Save Customization</button>
           </transition>
         </div>
       </div>
       <div class="ProductCustomizer__Exit">
-      <close-button
-        v-if="isMobile"
-        @click.native.prevent="cancelAndClose(true)"
-      />
-      <span>CANCEL & CLOSE</span>
+        <close-button v-if="isMobile" @click.native.prevent="cancelAndClose(true)" />
+        <span>CANCEL & CLOSE</span>
+      </div>
+      <photoshoot-modal @photoshoot="photoShootHandler" ref="modal"></photoshoot-modal>
     </div>
-    <photoshoot-modal @photoshoot="photoShootHandler" ref="modal" ></photoshoot-modal>
   </div>
 </template>
 
@@ -500,6 +380,7 @@ export default {
     });
 
     this.$bus.$on('detailSlider:favorite', (payload) => {
+      this.createProduct();
       this.favoriteCurrentProduct();
     });
 
