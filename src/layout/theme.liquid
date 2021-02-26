@@ -186,10 +186,18 @@
       {%- else -%}
         {%- assign favorites = '' | split: ',' -%}
       {%- endif -%}
+
+      {%- if customer.metafields.global.v2-history -%}
+        {%- assign history = customer.metafields.global.v2-history -%}
+      {%- else -%}
+        {%- assign favorites = '' | split: ',' -%}
+      {%- endif -%}
+      
       <script>
         pnwCfg = {
           id: {{ customer.id }},
-          favoriteProducts: {{ favorites | json }}
+          favoriteProducts: {{ favorites | json }},
+          historyProducts: {{ history | json }}
         };
       </script>
     {%- endif -%}

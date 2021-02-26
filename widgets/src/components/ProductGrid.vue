@@ -1,20 +1,23 @@
 <template>
   <div>
     <div
-      v-if="!favorites.length"
+      v-if="!results.length"
       class="ProductGrid--Empty"
     >
-      <slot/>
+      <div class="ProductGrid--Empty-favorites" :class="{'ProductGrid--Empty-tabActive': activeTab === 'favorites'}">You don't have any favorites yet!</div>
+      <div class="ProductGrid--Empty-history" :class="{'ProductGrid--Empty-tabActive': activeTab === 'history'}">You don't have any browsing history yet!</div>
     </div>
-    <div class="ProductGrid">
+    <transition name="slide-fade" mode="out-in">
+    <div class="ProductGrid" :key="activeTab">
       <product-grid-item
-        v-for="(product, index) in favorites"
+        v-for="(product, index) in results"
         :key="product.id"
         :product="product"
         :is-favorite="isFavoriteProduct(product.handle)"
         :load-mobile="loadItemMobile(index)"
       />
     </div>
+    </transition>
   </div>
 </template>
 
@@ -38,12 +41,15 @@ export default {
       cachedFilters: {},
       mobileLoadCount: 0,
       filtersLoaded: false,
+      results: [],
+      activeTab: 'favorites'
     };
   },
 
   computed: {
     ...mapState({
       favorites: state => state.favorites,
+      history: state => state.history,
     }),
 
     itemFilters() {
@@ -72,9 +78,21 @@ export default {
     }
 
     this.loadFilters();
+
+    this.$bus.$on('Favorites:showFavorites', (payload) => {
+      this.show(this.favorites);
+      this.activeTab = 'favorites';
+    });
+
+    this.$bus.$on('Favorites:showBrowsingHistory', (payload) => {
+      this.show(this.history);
+      this.activeTab = 'history';
+    });
   },
 
   mounted() {
+    this.results = this.favorites;//initialize results to the favorites array on load.
+
     this.$bus.$on('favorite', (product) => {
       this.toggleFavorite({ product, customerId: this.customerId });
     });
@@ -112,6 +130,10 @@ export default {
         processed.push(category);
       });
     },
+
+    show(arr){
+      this.results = arr;
+    }
   },
 };
 </script>
@@ -136,11 +158,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   font-family: $font-stack-avalon;
-  margin: 40px 0;
-
-  @include at-query($breakpoint-large) {
-    margin-top: 50px;
-  }
 
   &--Empty {
     align-items: center;
@@ -153,5 +170,22 @@ export default {
     letter-spacing: .05em;
     text-transform: uppercase;
   }
+  &--Empty div{
+    display:none;
+  }
+  &--Empty-tabActive{
+    display:block !important;
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all .2s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

@@ -152,7 +152,7 @@ export function toggleFavorite(state, { customerId, sku, product }) {
     return;
   }
 
-  // sync all local favorites to server if first time
+  // sync all local favorites to server if first time -- EDIT 2/25/2021, NOT NEEDED ANYMORE SINCE FAVORITES ARE LOGIN GATED
   if (!customerFavorites.length && localFavorites.length) {
     apiClient
       .addFavorites(customerId, Array.from(state.favorites))
@@ -168,6 +168,34 @@ export function toggleFavorite(state, { customerId, sku, product }) {
   }
 
   apiClient.addFavorites(customerId, product);
+}
+
+export function addHistoryItem(state, { customerId, sku, product }){
+  if (!product.id || !product.handle) {
+    return;
+  }
+
+  const index = state.history.findIndex(historyItem => historyItem && historyItem.handle === product.handle);
+
+  if (index == -1) {//Don't add an item to history if it is already added.
+    window.dataLayer.push({
+      event: 'AddToHistory',
+      eventCategory: 'History',
+      eventAction: 'add',
+      eventLabel: product.name,
+      productIds: [sku],
+      productName: product.name,
+      totalValue: product.price,
+      productHandle: product.handle,
+    });
+    apiClient.addHistory(customerId, product);
+  }
+
+  if (!customerId) {
+    localStorage.setItem('historyProducts', JSON.stringify(state.history));
+    return;
+  }
+
 }
 
 export function setReviews(state, { reviews }) {
@@ -212,6 +240,7 @@ export default {
   setRevertConfiguration,
   applyQueryString,
   toggleFavorite,
+  addHistoryItem,
   setReviews,
   setTotalReviews,
   setProductReviews,

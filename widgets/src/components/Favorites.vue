@@ -2,59 +2,46 @@
   <div class="Favorites">
     <h1 class="Favorites__title">Your customizations</h1>
     <div class="Favorites__action-row">
-      <div class="Favorites__action">
+      <div class="Favorites__action" @click="showFavorites">
         <div class="Favorites__action-icon"><img src="https://cdn.insideweather.com/icons/acct_your-custom_favs.png" alt="Favorites"></div>
-        <div class="Favorites__action-title">Favorites</div>
+        <div class="Favorites__action-title" :class="{ 'Favorites__action-title--active': activeTab === 'favorites' }">Favorites</div>
       </div>
-      <div class="Favorites__action">
+      <div class="Favorites__action" @click="showBrowsingHistory">
         <div class="Favorites__action-icon"><img src="https://cdn.insideweather.com/icons/acct_your-custom_history.png" alt="Browsing History"></div>
-        <div class="Favorites__action-title">Browsing History</div>
+        <div class="Favorites__action-title" :class="{ 'Favorites__action-title--active': activeTab === 'history' }">Browsing History</div>
       </div>
     </div>
     <div class="Favorites__content">
       <div class="Favorites__grid">
-        <product-grid  v-cloak>
-            You don't have any favorites yet
-        </product-grid>
+        <product-grid  v-cloak></product-grid>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
 import ProductGrid from './ProductGrid';
 
 export default {
   components: {
     ProductGrid
-
   },
 
-  props: {
-
-  },
-
-  computed: {
-    ...mapState({
-      favorites: state => state.favorites,
-    }),
-  },
-
-  watch: {
-
-  },
-
-  created() {
-
-  },
-
-  mounted() {
-    // console.log(favorites)
+  data() {
+    return {
+      activeTab: 'favorites'
+    };
   },
 
   methods: {
-
+    showFavorites(){
+      this.$bus.$emit('Favorites:showFavorites');
+      this.activeTab = 'favorites';
+    },
+    showBrowsingHistory(){
+      this.$bus.$emit('Favorites:showBrowsingHistory');
+      this.activeTab = 'history';
+    }
   },
 };
 </script>
@@ -90,6 +77,9 @@ export default {
     align-items: center;
     margin-bottom:19px;
     text-align: center;
+    @include at-query($breakpoint-large) {
+      margin-bottom:12px;
+    }
   }
 
   &__action{
@@ -100,9 +90,11 @@ export default {
     }
   }
 
-  &__action:hover .Favorites__action-title{
+  .Favorites__action-title--active{
     border-bottom: 1px solid #202020;
+    font-weight: 600;
   }
+
 
   &__action-icon img{
     display:block;
@@ -136,6 +128,7 @@ export default {
       padding-top:80px;
       padding-bottom:110px;
       width:80%;
+      max-width: 1224px;//306px * 4 items per row
 
     }
   }

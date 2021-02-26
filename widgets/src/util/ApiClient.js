@@ -95,6 +95,41 @@ export default class ApiClient {
     return this.sendFavoriteRequest({ method: 'DELETE', customerId, favorites });
   }
 
+  /**
+   * Construct proper request to history endpoint, wrapping the request
+   * in a Promise which is returned to the caller for handling
+   */
+  sendHistoryRequest({ method, customerId, history }) {
+    const url = 'https://iw-favorites.herokuapp.com/api/v2/history';
+    const body = {
+      user_id: customerId,
+      history,
+    };
+    return new Promise((resolve, reject) => this.sendRequest({
+      method, url, body, resolve, reject,
+    }));
+  }
+
+  /**
+   * Add SKU(s) to customer's saved history
+   * @param {Number} customerId
+   * @param {Object} productData
+   */
+  addHistory(customerId, productData) {
+    const history = Array.isArray(productData) ? productData : [productData];
+    return this.sendHistoryRequest({ method: 'POST', customerId, history });
+  }
+
+  /**
+   * Remove SKU(s) from customer's saved history
+   * @param {Number} customerId
+   * @param {Object} productData
+   */
+  removeHistory(customerId, productData) {
+    const history = Array.isArray(productData) ? productData : [productData];
+    return this.sendHistoryRequest({ method: 'DELETE', customerId, history });
+  }
+
   getReviews(category, from, size) {
     this.options.primary_category = category;
     this.options.from = from;

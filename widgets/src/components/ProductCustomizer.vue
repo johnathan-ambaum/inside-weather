@@ -94,7 +94,7 @@
       <div class="ProductCustomizer__Slider">
         <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
         <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">Save
-          Customization</button>
+          Customization <span class="ProductCustomizer__loading"><loader></loader></span></button>
         <button v-if="!isMobile" class="ProductCustomizer__cancel-and-close"
           @click.prevent="cancelAndClose(true)">CANCEL & CLOSE</button>
       </div>
@@ -133,7 +133,7 @@
           </transition>
           <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
             <button v-if="active && isMobile && !hasPrev" class="ProductCustomizer__Close"
-              @click.prevent="close(false)">Save Customization</button>
+              @click.prevent="close(false)">Save Customization <span class="ProductCustomizer__loading"><loader></loader></span></button>
           </transition>
         </div>
       </div>
@@ -166,6 +166,7 @@ import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
 import ReviewStars from './ReviewStars.vue';
+import Loader from './Loader.vue';
 
 library.add(faHeart);
 
@@ -183,6 +184,7 @@ export default {
     SwatchBrowser,
     PhotoshootModal,
     ReviewStars,
+    Loader
   },
 
   mixins: [
@@ -377,11 +379,30 @@ export default {
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
+
+      let currentConfigurationIsFavorited = this.favorites.find((favorite) => {
+        return JSON.stringify(favorite.attributes) === JSON.stringify(this.selectedOptions);
+      });
+
+      if(currentConfigurationIsFavorited){
+        this.setActiveProduct(currentConfigurationIsFavorited);
+      }else{
+        this.setActiveProduct({});
+      }
     });
 
     this.$bus.$on('detailSlider:favorite', (payload) => {
-      this.createProduct();
-      this.favoriteCurrentProduct();
+      $('[data-icon="heart"]').addClass('favorites__loading');
+      this.getCylindoImage().then(() => {
+        this.createProductFromSelected({
+          name: this.productName,
+          model: this.modelNumber,
+          image: this.productImages[0].full,
+        }).then(() => {
+          this.favoriteCurrentProduct();
+           $('[data-icon="heart"]').removeClass('favorites__loading');
+        });
+      });
     });
 
     window.addEventListener('popstate', ({ state }) => {
@@ -433,6 +454,7 @@ export default {
     ...mapMutations([
       'updateCategory',
       'toggleFavorite',
+      'addHistoryItem',
       'setActiveProduct',
       'setSelectedOptions',
       'setRevertConfiguration',
@@ -550,12 +572,32 @@ export default {
         this.selectPanel('');
         return;
       }
-
+      document.getElementsByClassName('ProductCustomizer__loading')[0].style.display = 'block';
       this.createProduct();
       this.$bus.$emit('customizer-close');
-      this.active = false;
-      this.showOnTopElements();
-
+      this.getCylindoImage().then(() => {
+        this.createProductFromSelected({
+          name: this.productName,
+          model: this.modelNumber,
+          image: this.productImages[0].full,
+        }).then(() => {
+          this.addHistoryItem({
+            customerId: this.customerId,
+            sku: this.productSku,
+            product: {
+              ...this.activeProduct,
+              product_type: this.category,
+              name: this.productName,
+              price: this.productPrice,
+              cover_image_url: this.productImages[0].full,
+              attributes: {...this.selectedOptions},
+            },
+          });
+          this.active = false;
+          this.showOnTopElements();
+          document.getElementsByClassName('ProductCustomizer__loading')[0].style.display = 'none';
+        });
+      });
     },
 
     cancelAndClose(closeAll){
@@ -582,10 +624,7 @@ export default {
       this.hideOnTopElements();
     },
 
-    favoriteCurrentProduct() {
-      if (!this.attributes) {
-        return;
-      }
+    getCylindoImageForFavorite(){
       if (this.useCylindo) {
         this.getCylindoImage().then(() => {
           this.toggleFavorite({
@@ -597,7 +636,7 @@ export default {
               name: this.productName,
               price: this.productPrice,
               cover_image_url: this.productImages[0].full,
-              attributes: this.selectedOptions,
+              attributes: {...this.selectedOptions},
             },
           });
         });
@@ -611,10 +650,17 @@ export default {
             name: this.productName,
             price: this.productPrice,
             cover_image_url: this.productImages[0].full,
-            attributes: this.selectedOptions,
+            attributes: {...this.selectedOptions},
           },
         });
       }
+    },
+
+    favoriteCurrentProduct() {
+      if (!this.attributes) {
+        return;
+      }
+      this.getCylindoImageForFavorite();
     },
 
     async addToCart(quantity, warrantySelected = false) {
@@ -1355,6 +1401,9 @@ html.ProductCustomizer--Open {
   }
 
   &__Close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #202020;
     color: #fff;
     font-family: $font-stack-avalon;
@@ -1421,5 +1470,22 @@ html.ProductCustomizer--Open {
   a {
     text-decoration: underline;
   }
+}
+.favorites__loading{
+  animation-name: heartBeat;
+  animation-duration: 2s;
+  animation-iteration-count:infinite;
+}
+@keyframes heartBeat {
+  from {opacity: .2}
+  35%  {opacity: .8; transform:scale(1.2)}
+  40%  {opacity: .8; transform:scale(1)}
+  45%  {opacity: .8;transform:scale(1.2)}
+  50%  {opacity: .8; transform:scale(1.2)}
+  55%  {opacity: .8; transform:scale(1)}
+  to   {opacity: .2}
+}
+.ProductCustomizer__loading{
+  display:none;
 }
 </style>
