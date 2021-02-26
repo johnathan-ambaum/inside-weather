@@ -25,6 +25,7 @@ export default new Vuex.Store({
     productImages: [],
     swatches: [],
     cylindoViewers: [],
+    revertConfiguration:{},
   },
   mutations,
   actions,

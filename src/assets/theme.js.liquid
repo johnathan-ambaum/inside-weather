@@ -2948,6 +2948,94 @@ lazySizesConfig.expFactor = 4;
 
   };
 
+  theme.fullPageTakeOver = function() {
+
+  function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
+    var selectors = {
+      triggers: 'body'
+    };
+
+    if (!$(selectors.triggers).length) {
+      return;
+    }
+
+    var modal = new theme.Modals('fullPageTakeOver', 'full-page-takeover',{ closeOffContentClick: false});
+    window.addEventListener('popstate', function(event) {
+      showPage(event.state.page)
+    });
+    $("button[data-continue='true']").on('click', function(){
+      modal.close();
+    });
+    $('.fullPageTakeOver__page-cta-form').submit(function(event){
+      event.preventDefault();
+
+      const data = { email: $('.fullPageTakeOver__page-cta-input').val()};
+
+      fetch('http://iw-content.herokuapp.com/api/v1/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(data => {
+        setCookie('customerGaveEmail','true',31);
+        modal.close();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+
+    });
+
+    function urlHasOpenParam(){
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.has("fullPageTakeOver");
+    }
+    function modalShouldOpen(){
+      if(urlHasOpenParam() && !getCookie('customerGaveEmail')){
+        triggerFPT();
+      }
+    }
+    function triggerFPT() {
+      history.pushState({page:99}, null, '?fullPageTakeOver=true&close=true');
+      history.pushState({page:2}, null, '?fullPageTakeOver=true&page=2');
+      history.pushState({page:1}, null, '?fullPageTakeOver=true&page=1');
+      modal.open();
+    }
+
+    function showPage(page){
+      if(!urlHasOpenParam()){return;}
+      if(!page){page = 1}
+      if(page == 99){modal.close(); return;}
+      $('.fullPageTakeOver__page').hide();
+      $(`[data-page='${page}']`).show();
+    }
+    modalShouldOpen();
+  };
+
   theme.customerTemplates = (function() {
 
     function initEventListeners() {
@@ -5403,6 +5491,7 @@ lazySizesConfig.expFactor = 4;
     theme.videoModal();
     theme.productProtectionModal();
     theme.shippingProtectionModal();
+    theme.fullPageTakeOver();
     theme.ajaxCustomerOnboard();
     theme.articleImages.init();
     theme.backButton.init();
