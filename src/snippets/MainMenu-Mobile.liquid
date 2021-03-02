@@ -6,7 +6,7 @@
     {%- comment -%}===============================================================
         LOOP THROUGH LEFT MENU
     ==============================================================={% endcomment %}
-    {%- for leftParentLink in linklists.sale-menu-temp.links -%}
+    {%- for leftParentLink in linklists.redesigned-main-menu-left.links -%}
         {% assign parentLinkIndex = forloop.index%}
         {%- if leftParentLink.links != blank -%}
             <li class="Mobile__List__Item--DropDown {% if leftParentLink.title == 'Sale'%}Mobile__List__Item--DropDown-sale{% endif %}">

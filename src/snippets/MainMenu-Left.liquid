@@ -8,7 +8,7 @@
         </button>
     </li>
 
-    {%- for parentLink in linklists.sale-menu-temp.links -%}
+    {%- for parentLink in linklists.redesigned-main-menu-left.links -%}
         {%- if parentLink.links != blank -%}
             <li class="NavBlock__List__Item--Dropdown {% if forloop.index == 1 %}NavBlock__List__Item--First{% endif %} {% if parentLink.title  == 'Sale'%}NavBlock__List__Item--sale{% endif %}">
                 <a href="{{parentLink.link}}" class="js-no-transition {% if parentLink.title  == 'Sale'%}NavBlock__sale{% endif %}">{{ parentLink.title }}</a>
