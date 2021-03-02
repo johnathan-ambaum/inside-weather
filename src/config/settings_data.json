@@ -850,7 +850,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#b5bcb5",
+          "background_color_1": "#e9cf9a",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -858,8 +858,8 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Sale EXTENDED<\/a>: Save up to<strong> 21% off <\/strong>sitewide<\/p>",
-          "mobile_text_1": "<p><a title=\"2021 President&#x27;s Day Sale\" href=\"\/pages\/2021-presidents-day-sale\">President&#x27;s Day Sale EXTENDED<\/a>: Save up to<strong> 21% off <\/strong>sitewide<\/p>",
+          "text_1": "<p><a title=\"2021&#x27;s Colors of the Year\" href=\"\/pages\/2021-colors-of-the-year\">Customize with 2021&#x27;s Colors of the Year!<\/a><\/p>",
+          "mobile_text_1": "<p><a title=\"2021&#x27;s Colors of the Year\" href=\"\/pages\/2021-colors-of-the-year\">Customize with 2021&#x27;s Colors of the Year!<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
