@@ -396,17 +396,6 @@
           "social_sharing_blog": true
         }
       },
-      "1498163293234": {
-        "type": "featured-content",
-        "settings": {
-          "title": "",
-          "text": "<p>A sentence or two introducing your brand, what you sell, and what makes your brand compelling to customers.<\/p>",
-          "align_text": "left",
-          "narrow_column": false,
-          "enlarge_text": true,
-          "divider": false
-        }
-      },
       "1498501481980": {
         "type": "fading-images",
         "blocks": {
@@ -461,72 +450,6 @@
           "blog_show_date": true,
           "blog_show_comments": true,
           "blog_show_author": false
-        }
-      },
-      "1499789718857": {
-        "type": "featured-collections",
-        "blocks": {
-          "1499789718857-0": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "focal_point": "center center",
-              "size": "wide"
-            }
-          },
-          "1499789718857-1": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "focal_point": "center center",
-              "size": "square-small"
-            }
-          },
-          "1499789718857-2": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "focal_point": "center center",
-              "size": "square-small"
-            }
-          },
-          "1499789718857-3": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "focal_point": "center center",
-              "size": "square-small"
-            }
-          },
-          "1499789718857-4": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "focal_point": "center center",
-              "size": "square-small"
-            }
-          },
-          "1499789718857-5": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "focal_point": "center center",
-              "size": "wide"
-            }
-          }
-        },
-        "block_order": [
-          "1499789718857-0",
-          "1499789718857-1",
-          "1499789718857-2",
-          "1499789718857-3",
-          "1499789718857-4",
-          "1499789718857-5"
-        ],
-        "settings": {
-          "title": "",
-          "divider": false,
-          "enable_gutter": false
         }
       },
       "1499790529450": {
@@ -850,7 +773,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#e9cf9a",
+          "background_color_1": "#b1c8cd",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -858,8 +781,8 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p><a title=\"2021&#x27;s Colors of the Year\" href=\"\/pages\/2021-colors-of-the-year\">Customize with 2021&#x27;s Colors of the Year!<\/a><\/p>",
-          "mobile_text_1": "<p><a title=\"2021&#x27;s Colors of the Year\" href=\"\/pages\/2021-colors-of-the-year\">Customize with 2021&#x27;s Colors of the Year!<\/a><\/p>",
+          "text_1": "<p>Introducing: A NEW Sofa Collection. 4-Seater Sofas, Side Table Add-ons, Custom Seat Depth &amp; more. <a title=\"The Aero Collection\" href=\"\/pages\/aero-collection\"><strong>MEET AERO<\/strong><\/a><\/p>",
+          "mobile_text_1": "<p>Introducing: A NEW Sofa Collection. <a title=\"The Aero Collection\" href=\"\/pages\/aero-collection\"><strong>MEET AERO<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
@@ -879,8 +802,6 @@
     },
     "content_for_index": [
       "1499790529450",
-      "1498163293234",
-      "1499789718857",
       "1498501481980",
       "1499790731541",
       "1499790633921",
@@ -1029,12 +950,6 @@
             "social_sharing_blog": true
           }
         },
-        "1498163293234": {
-          "type": "featured-content",
-          "settings": {
-            "divider": false
-          }
-        },
         "1498501481980": {
           "type": "fading-images",
           "blocks": {
@@ -1087,65 +1002,6 @@
             "blog_show_date": true,
             "blog_show_comments": true,
             "blog_show_author": false
-          }
-        },
-        "1499789718857": {
-          "type": "featured-collections",
-          "blocks": {
-            "1499789718857-0": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "wide"
-              }
-            },
-            "1499789718857-1": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-2": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-3": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-4": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-5": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "wide"
-              }
-            }
-          },
-          "block_order": [
-            "1499789718857-0",
-            "1499789718857-1",
-            "1499789718857-2",
-            "1499789718857-3",
-            "1499789718857-4",
-            "1499789718857-5"
-          ],
-          "settings": {
-            "title": "",
-            "divider": false
           }
         },
         "1499790529450": {
@@ -1315,8 +1171,6 @@
       },
       "content_for_index": [
         "1499790529450",
-        "1498163293234",
-        "1499789718857",
         "1498501481980",
         "1499790731541",
         "1499790633921",
@@ -1465,12 +1319,6 @@
             "social_sharing_blog": true
           }
         },
-        "1498163293234": {
-          "type": "featured-content",
-          "settings": {
-            "divider": false
-          }
-        },
         "1498501481980": {
           "type": "fading-images",
           "blocks": {
@@ -1523,65 +1371,6 @@
             "blog_show_date": true,
             "blog_show_comments": true,
             "blog_show_author": false
-          }
-        },
-        "1499789718857": {
-          "type": "featured-collections",
-          "blocks": {
-            "1499789718857-0": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "wide"
-              }
-            },
-            "1499789718857-1": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-2": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-3": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-4": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-5": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "wide"
-              }
-            }
-          },
-          "block_order": [
-            "1499789718857-0",
-            "1499789718857-1",
-            "1499789718857-2",
-            "1499789718857-3",
-            "1499789718857-4",
-            "1499789718857-5"
-          ],
-          "settings": {
-            "title": "",
-            "divider": false
           }
         },
         "1499790529450": {
@@ -1677,8 +1466,6 @@
       },
       "content_for_index": [
         "1499790529450",
-        "1498163293234",
-        "1499789718857",
         "1498501481980",
         "1499790731541",
         "1499790633921",
@@ -1829,12 +1616,6 @@
             "social_sharing_blog": true
           }
         },
-        "1498163293234": {
-          "type": "featured-content",
-          "settings": {
-            "divider": false
-          }
-        },
         "1498501481980": {
           "type": "fading-images",
           "blocks": {
@@ -1887,65 +1668,6 @@
             "blog_show_date": true,
             "blog_show_comments": true,
             "blog_show_author": false
-          }
-        },
-        "1499789718857": {
-          "type": "featured-collections",
-          "blocks": {
-            "1499789718857-0": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "wide"
-              }
-            },
-            "1499789718857-1": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-2": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-3": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-4": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "square-small"
-              }
-            },
-            "1499789718857-5": {
-              "type": "collection",
-              "settings": {
-                "collection": "",
-                "size": "wide"
-              }
-            }
-          },
-          "block_order": [
-            "1499789718857-0",
-            "1499789718857-1",
-            "1499789718857-2",
-            "1499789718857-3",
-            "1499789718857-4",
-            "1499789718857-5"
-          ],
-          "settings": {
-            "title": "",
-            "divider": false
           }
         },
         "1499790529450": {
@@ -2041,8 +1763,6 @@
       },
       "content_for_index": [
         "1499790529450",
-        "1498163293234",
-        "1499789718857",
         "1498501481980",
         "1499790731541",
         "1499790633921",
