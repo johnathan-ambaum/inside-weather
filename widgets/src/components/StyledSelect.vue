@@ -89,7 +89,7 @@ $height: 38px;
 
   &__Value {
     background: {
-      image: url('https://cdn.shopify.com/s/files/1/2994/0144/t/21/assets/ico-select.svg?1678558');
+      image: url('https://cdn.insideweather.com/icons/dropdown-down-arrow@2x.png');
       repeat: no-repeat;
       position: right 10px center;
       color: transparent;
