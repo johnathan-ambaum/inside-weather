@@ -1,6 +1,6 @@
 <template>
   <div class="Favorites">
-    <h1 class="Favorites__title">Your customizations</h1>
+    <h1 class="Favorites__title">Your Customizations</h1>
     <div class="Favorites__action-row">
       <div class="Favorites__action" @click="showFavorites">
         <div class="Favorites__action-icon"><img src="https://cdn.insideweather.com/icons/acct_your-custom_favs.png" alt="Favorites"></div>

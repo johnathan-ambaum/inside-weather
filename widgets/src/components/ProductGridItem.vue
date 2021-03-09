@@ -207,7 +207,7 @@ export default {
     margin-bottom:7px;
 
     @include at-query($breakpoint-large) {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 22px;
     }
   }
