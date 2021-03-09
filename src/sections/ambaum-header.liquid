@@ -1,0 +1,654 @@
+{%- include 'cart-drawer' -%}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<header id="ambaum__header"  data-section-id="{{ section_id }}" data-section-type="header-section">
+  <div class="ambaum__header">
+    <div>
+      <a href="/" class="ambaum__header-logo">
+        {%- if section.settings.Logo -%}
+          {{ section.settings.Logo | img_url: 'master' | img_tag }}
+        {%- else -%}
+          <img src="//cdn.shopify.com/s/files/1/2994/0144/files/logo_0061561f-e478-495d-b96b-803216dd2749.png?v=1541598736" alt="LOGO">
+        {%- endif -%}
+      </a>
+    </div>
+    <div class="ambaum__header-menu">
+      {% assign rightSideMenu = false %}
+      {% assign specialMenu = false %}
+      {% assign narrowMenu = false %}
+      {%- for firstLevelItem in linklists.main-menu-1.links -%}
+        {% assign firstLevelItemDisplayName = firstLevelItem.title %}
+        {% if firstLevelItem.title contains '[Right]' %}
+          {% assign rightSideMenu = true %}
+          {% continue %}
+        {% endif %}
+        {% if firstLevelItem.title contains '[Hide]' %}
+          {% continue %}
+        {% endif %}
+        {% if firstLevelItem.title contains '[Narrow]' %}
+          {% assign narrowMenu = true %}
+          {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Narrow]' | strip %}
+        {% endif %}
+        {% if firstLevelItem.title contains '[Special]' %}
+          {% assign specialMenu = true %}
+          {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Special]' | strip %}
+        {% endif %}
+
+        <div class="ambaum__header-menu-item
+        {% if rightSideMenu %} ambaum__header-menu-item-right {% endif %}
+        {% if specialMenu %} ambaum__header-menu-item-special {% endif %}
+        ">
+          <span
+            {% if firstLevelItem.links != blank and narrowMenu == false %} data-toggle-header-dropdown {% endif %}
+            {% if narrowMenu %} data-toggle-narrow-menu {% endif %}
+          >
+            {% if firstLevelItem.links == blank %}
+              <a href="{{firstLevelItem.url}}">{{firstLevelItemDisplayName}}</a>
+            {% else %}
+              {{firstLevelItemDisplayName}}
+            {% endif%}
+
+            {% if narrowMenu %}
+            <div class="ambaum__header-dropdown-narrow">
+              <ul>
+                {% for column in firstLevelItem.links %}
+                  {% for narrowLink in column.links %}
+                    {% if narrowLink.title contains '[Login]' %}
+                      {% if customer %}
+                      {%else%}
+                        <li class="ambaum__header-dropdown-item"><a href="{{narrowLink.url}}">{{narrowLink.title | remove: '[Login]'}}</a></li>
+                      {% endif %}
+                    {% elsif  narrowLink.title contains '[Logout]' %}
+                      {% if customer %}
+                        <li class="ambaum__header-dropdown-item"><a href="{{narrowLink.url}}">{{narrowLink.title | remove: '[Logout]'}}</a></li>
+                      {% endif %}
+                    {% else %}
+                      <li class="ambaum__header-dropdown-item"><a href="{{narrowLink.url}}">{{narrowLink.title}}</a></li>
+                    {% endif %}
+                {% endfor %}
+              {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          </span>
+          {%- if firstLevelItem.links != blank -%}
+            <div class="ambaum__header-dropdown">
+              <div class="ambaum__header-link-group"></div>
+                {% for column in firstLevelItem.links %}
+                  {% if column.links == blank%}{% break %}{% endif %}
+                  {% if column.title contains '[Column]' %}
+                    <div class="ambaum__header-dropdown-column">
+                      {% for secondLevelLink in column.links %}
+                        <div class="ambaum__header-dropdown-item
+                        {% if secondLevelLink.title contains '[Heading]' %}
+                          ambaum__header-dropdown-item--header
+                        {% endif %}
+                        {% if forloop.first == true %}
+                          {% unless secondLevelLink.title contains '[Heading]' %}
+                          ambaum__header-dropdown-item--no-headers
+                          {% endunless%}
+                        {% endif %}
+
+                        ">
+                          {% assign secondLevelDisplayName = secondLevelLink.title | remove: '[Heading]' | split: '[' %}
+                          {% assign secondLevelDisplayName = secondLevelDisplayName[0] %}
+                          {% assign splitByCaption = secondLevelLink.title | split: '[caption]' %}
+                          {% assign splitByImage = splitByCaption[1] | split: '[image]'%}
+                          {% assign caption = splitByImage[0] | strip %}
+                          {% assign imageUrl = splitByImage[1] | strip %}
+
+                          <a class="ambaum__header-dropdown-link" href="{{secondLevelLink.url}}" data-header-image='{{imageUrl}}' data-header-caption='{{caption}}'>{{ secondLevelDisplayName }}</a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                  {% if column.title contains '[Collections]' %}
+                    <div class="ambaum__header-dropdown-collections-column">
+                      <div class="ambaum__header-dropdown-item ambaum__header-dropdown-item--header">
+                        {% assign collectionsDisplaytitle = column.title | remove: '[Collections]' | split: '[' %}
+                        {{ collectionsDisplaytitle[0] }}
+                      </div>
+                      {% for secondLevelLink in column.links %}
+                        <div class="ambaum__header-dropdown-item {% if secondLevelLink.title contains '[Heading]' %} ambaum__header-dropdown-item--header {% endif %}">
+                          {% assign secondLevelDisplayName = secondLevelLink.title | remove: '[Heading]' | split: '[' %}
+                          {% assign secondLevelDisplayName = secondLevelDisplayName[0] %}
+                          {% assign splitByCaption = secondLevelLink.title | split: '[caption]' %}
+                          {% assign splitByImage = splitByCaption[1] | split: '[image]'%}
+                          {% assign caption = splitByImage[0] | strip %}
+                          {% assign imageUrl = splitByImage[1] | strip %}
+
+                          <a class="ambaum__header-dropdown-link" href="{{secondLevelLink.url}}" data-header-image='{{imageUrl}}' data-header-caption='{{caption}}'>{{ secondLevelDisplayName }}</a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
+              <div class="ambaum__header-image-with-caption">
+                <div class="ambaum__header-image">
+                  <img class="ambaum__header-image-src" src="https://cdn.shopify.com/s/files/1/2994/0144/files/header_default.jpg?v=1588974152" alt="Create Your Climate">
+                </div>
+                <div class="ambaum__header-caption">
+                  Create your climate.
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        {% if rightSideMenu %}{% assign rightSideMenu = false %}{% endif %}
+        {% if specialMenu %}  {% assign specialMenu = false %}  {% endif %}
+        {% if narrowMenu %}   {% assign narrowMenu = false %}    {% endif %}
+      {% endfor %}
+      <div class="ambaum__header-menu-item">
+        <div class="Mobile-Item Mobile-Item__Favorites">
+          {% if customer %}
+            <a id="ajaxCustomerOnboard--trigger" href="/pages/favorites">
+              {% include 'icon-heart-filled' %}
+            </a>
+          {% else %}
+            <div data-ajax-customer-onboard="true" data-return-to='/pages/favorites'>
+              {% include 'icon-heart-filled' %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="ambaum__header-menu-item">
+        <div class="Mobile-Item Mobile-Item__Cart">
+          <div class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
+            {%- include 'icon-cart-black' -%}
+            <span class="MainNav__CartCount js-cart-count">
+              {% assign foundShippingInsurance = false %}
+              {% for item in cart.items %}
+                {% if item.product.type == 'Shipping Insurance'%}
+                  {% assign foundShippingInsurance = true %}
+                  {% break %}
+                {% endif%}
+              {% endfor %}
+              {% if foundShippingInsurance %}
+                {{ cart.item_count | minus: 1}}
+              {% else %}
+                {{ cart.item_count }}
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ambaum__header-overlay"></div>
+
+<div id="ambaum__header-mobile">
+  <div class="ambaum__header">
+    <div class="ambaum__header-mobile-toggler">
+      <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></span>
+    </div>
+    <div>
+      <a href="/" class="ambaum__header-logo">
+        {%- if section.settings.Logo -%}
+          {{ section.settings.Logo | img_url: 'master' | img_tag }}
+        {%- else -%}
+          <img src="//cdn.shopify.com/s/files/1/2994/0144/files/logo_0061561f-e478-495d-b96b-803216dd2749.png?v=1541598736" alt="LOGO">
+        {%- endif -%}
+      </a>
+    </div>
+    <div class="ambaum__header-mobile-ctas">
+      <div class="Mobile-Item Mobile-Item__Favorites">
+        {% if customer %}
+          <a id="ajaxCustomerOnboard--trigger" href="/pages/favorites">
+            {% include 'icon-heart-filled' %}
+          </a>
+        {% else %}
+          <div data-ajax-customer-onboard="true" data-return-to='/pages/favorites'>
+            {% include 'icon-heart-filled' %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="Mobile-Item Mobile-Item__Cart">
+        <div class="js-drawer-open-cart js-no-transition MainNav__CartLink" aria-controls="CartDrawer" aria-expanded="false">
+          {%- include 'icon-cart-black' -%}
+          <span class="MainNav__CartCount js-cart-count">
+            {% assign foundShippingInsurance = false %}
+            {% for item in cart.items %}
+              {% if item.product.type == 'Shipping Insurance'%}
+                {% assign foundShippingInsurance = true %}
+                {% break %}
+              {% endif%}
+            {% endfor %}
+            {% if foundShippingInsurance %}
+              {{ cart.item_count | minus: 1}}
+            {% else %}
+              {{ cart.item_count }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ambaum__header-mobile-list">
+    {% assign rightSideMenu = false %}
+    {% assign specialMenu = false %}
+    {% assign narrowMenu = false %}
+    {%- for firstLevelItem in linklists.main-menu-1.links -%}
+      {% assign firstLevelItemDisplayName = firstLevelItem.title %}
+      {% if firstLevelItem.title contains '[Hide]' %}
+        {% continue %}
+      {% endif %}
+      {% if firstLevelItem.title contains '[Right]' %}
+        {% continue %}
+      {% endif %}
+      {% if firstLevelItem.title contains '[Special]' %}
+        {% assign specialMenu = true %}
+        {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Special]' | strip %}
+      {% endif %}
+      {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Narrow]' | strip %}
+
+      <div class="ambaum__header-mobile-list-item-container">
+        {% if firstLevelItem.links == blank %}
+          <a href="{{firstLevelItem.url}}" class="ambaum__header-mobile-list-item {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}">
+            <span class="ambaum__header-mobile-list-item-title">
+              {{firstLevelItemDisplayName}}
+            </span>
+            <span class="ambaum__header-mobile-list-item-icon">
+              {% render 'icon-right-arrow' %}
+            </span>
+          </a>
+        {% else %}
+          <div class="ambaum__header-mobile-list-item {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}" {% if firstLevelItem.links != blank %} data-toggle-mobile-header-dropdown {% endif %}>
+            <span class="ambaum__header-mobile-list-item-title">
+              <a href="{{firstLevelItem.url}}">{{firstLevelItemDisplayName}}</a>
+            </span>
+            <span class="ambaum__header-mobile-list-item-icon">
+              {% render 'icon-right-arrow' %}
+            </span>
+          </div>
+          <div class="ambaum__header-mobile-list-item--dropdown-content" data-header-dropdown-container>
+            <div class="ambaum__header-mobile-list-item--close-dropdown" data-close-first-level-dropdown>
+              <span>{% render 'icon-left-arrow' %}</span> Back to main menu
+            </div>
+            <div class="ambaum__header-dropdown-content-inner">
+              <div class="ambaum__header-dropdown-title">{{firstLevelItemDisplayName}}</div>
+              {% assign collectionImages = '' %}
+              {% assign collectionCaptions = '' %}
+              {% assign collectionUrls = '' %}
+              {% for column in firstLevelItem.links %}
+                {% if column.title contains '[Collections]' %}
+                  {% for secondLevelItem in column.links %}
+                    {% assign secondLevelDisplayName = secondLevelItem.title | remove: '[Heading]' | split: '[' %}
+                    {% assign secondLevelDisplayName = secondLevelDisplayName[0] | strip %}
+                    {% assign splitByCaption = secondLevelItem.title | split: '[caption]' %}
+                    {% assign splitByImage = splitByCaption[1] | split: '[image]'%}
+                    {% assign caption = splitByImage[0] | strip %}
+                    {% assign imageUrl = splitByImage[1] | strip %}
+
+                    {% assign collectionImages = collectionImages | append: imageUrl | append: '----' %}
+                    {% assign collectionCaptions = collectionCaptions | append: caption  | append: '----' %}
+                    {% assign collectionUrls = collectionUrls | append: secondLevelItem.url | append: '----' %}
+
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+
+              {% for column in firstLevelItem.links %}
+                {% assign noSecondLevel = true %}
+                {% if column.links[0].title contains '[Heading]' %}
+                  {% assign noSecondLevel = false %}
+                {% endif %}
+                {% if column.title contains '[Collections]' %}{% continue %}{% endif %}
+
+
+                {% for secondLevelItem in column.links %}
+                  {% assign secondLevelDisplayName = secondLevelItem.title | remove: '[Heading]' | split: '[' %}
+                  {% assign secondLevelDisplayName = secondLevelDisplayName[0] | strip %}
+                  {% assign splitByCaption = secondLevelItem.title | split: '[caption]' %}
+                  {% assign splitByImage = splitByCaption[1] | split: '[image]'%}
+                  {% assign caption = splitByImage[0] | strip %}
+                  {% assign imageUrl = splitByImage[1] | strip %}
+                  {% assign dropdownIdentifier = firstLevelItemDisplayName | append:'-' | append: secondLevelDisplayName %}
+
+
+                  {% if secondLevelItem.title contains '[Login]'%}
+                    {% if customer %} {% continue %} {% endif %}
+                    {% assign secondLevelDisplayName = secondLevelItem.title | remove: '[Login]' | strip %}
+                  {% elsif secondLevelItem.title contains '[Logout]'%}
+                    {% unless customer %} {% continue %} {% endunless %}
+                    {% assign secondLevelDisplayName = secondLevelItem.title | remove: '[Logout]' | strip %}
+                  {% endif %}
+
+                  {% if noSecondLevel %}
+                    <div class="{% if secondLevelItem.title contains '[Heading]' %} ambaum__header-dropdown-title--second-level {% else%} ambaum__header-mobile-dropdown-third-level-item {% endif%}">
+                      <a class="ambaum__header-dropdown-link--third-level-item" href="{{secondLevelItem.url}}"
+                        data-header-image='{{imageUrl}}'
+                        data-header-caption='{{caption}}'
+                      >
+                      {% if secondLevelItemInner.title contains '[Heading]' %}
+                        {{ secondLevelDisplayName}}
+                      {% else %}
+                        <span>{{ secondLevelDisplayName }}</span>
+                        <span class="ambaum__header-mobile-list-item-icon">
+                          {% render 'icon-right-arrow' %}
+                        </span>
+                      {% endif %}
+                      </a>
+                    </div>
+                  {% else %}
+                    {% if secondLevelItem.title contains '[Heading]' %}
+                      <div class="ambaum__header-mobile-dropdown-second-level-item">
+                        <a class="ambaum__header-dropdown-link" href="{{secondLevelItem.url}}"
+                          data-header-image='{{imageUrl}}'
+                          data-header-caption='{{caption}}'
+                          data-open-second-level-dropdown = '{{dropdownIdentifier}}'
+                        >
+                          <span>{{ secondLevelDisplayName }}</span>
+                          <span class="ambaum__header-mobile-list-item-icon">
+                            {% render 'icon-right-arrow' %}
+                          </span>
+                        </a>
+                      </div>
+
+                      <div class="ambaum__header-mobile-list-item--dropdown-content" data-second-level-dropdown = '{{dropdownIdentifier}}'>
+                        <div class="ambaum__header-mobile-list-item--close-dropdown" data-close-second-level-dropdown>
+                          <span>{% render 'icon-left-arrow' %}</span> Back to {{firstLevelItemDisplayName}}
+                        </div>
+
+                        {% assign parentMenu = secondLevelDisplayName %}
+                        {% assign currentMenu = '' %}
+                        <div class="ambaum__header-dropdown-content-inner">
+                          {% for secondLevelItemInner in column.links %}
+                            {% assign secondLevelDisplayNameInner = secondLevelItemInner.title | remove: '[Heading]' | split: '[' %}
+                            {% assign secondLevelDisplayNameInner = secondLevelDisplayNameInner[0] | strip %}
+                            {% assign splitByCaption = secondLevelItemInner.title | split: '[caption]' %}
+                            {% assign splitByImage = splitByCaption[1] | split: '[image]'%}
+                            {% assign caption = splitByImage[0] | strip %}
+                            {% assign imageUrl = splitByImage[1] | strip %}
+
+                            {% if secondLevelItemInner.title contains '[Heading]'%}
+                              {% assign currentMenu = secondLevelDisplayNameInner %}
+                            {% endif %}
+
+                            {% if currentMenu == parentMenu %}
+                              <div class="{% if secondLevelItemInner.title contains '[Heading]' %} ambaum__header-dropdown-title--second-level {% else%} ambaum__header-mobile-dropdown-third-level-item {% endif%}">
+                                <a class="ambaum__header-dropdown-link--third-level-item" href="{{secondLevelItemInner.url}}"
+                                  data-header-image='{{imageUrl}}'
+                                  data-header-caption='{{caption}}'
+                                >
+                                {% if secondLevelItemInner.title contains '[Heading]' %}
+                                  {{ secondLevelDisplayNameInner }}
+                                {% else %}
+                                  <span>{{ secondLevelDisplayNameInner }}</span>
+                                  <span class="ambaum__header-mobile-list-item-icon">
+                                    {% render 'icon-right-arrow' %}
+                                  </span>
+                                {% endif %}
+                                </a>
+                              </div>
+                            {% endif %}
+                          {% endfor%}
+                          {% if collectionImages != '' %}
+                          <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                              {% assign collectionImagesArray = collectionImages | split: '----' %}
+                              {% assign collectionCaptionsArray = collectionCaptions | split: '----' %}
+                              {% assign collectionUrlsArray = collectionUrls | split: '----' %}
+                              {% for collectionImage in collectionImagesArray %}
+                                <div class="swiper-slide">
+                                  <a href="{{collectionUrlsArray[forloop.index0]}}">
+                                    <div>
+                                      <img src="{{collectionImage}}" alt="{{collectionCaptionsArray[forloop.index0]}}">
+                                    </div>
+                                    <div class="mobile-slider__caption">
+                                      {{collectionCaptionsArray[forloop.index0]}}
+                                    </div>
+                                  </a>
+                                </div>
+                              {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                          </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endif%}
+                {% endfor %}
+              {% endfor %}
+              {% if collectionImages != '' %}
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  {% assign collectionImagesArray = collectionImages | split: '----' %}
+                  {% assign collectionCaptionsArray = collectionCaptions | split: '----' %}
+                  {% assign collectionUrlsArray = collectionUrls | split: '----' %}
+                  {% for collectionImage in collectionImagesArray %}
+                    <div class="swiper-slide">
+                      <a href="{{collectionUrlsArray[forloop.index0]}}">
+                        <div>
+                          <img src="{{collectionImage}}" alt="{{collectionCaptionsArray[forloop.index0]}}">
+                        </div>
+                        <div class="mobile-slider__caption">
+                          {{collectionCaptionsArray[forloop.index0]}}
+                        </div>
+                      </a>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {% if rightSideMenu %}{% assign rightSideMenu = false %}{% endif %}
+      {% if specialMenu %}  {% assign specialMenu = false %}  {% endif %}
+      {% if narrowMenu %}   {% assign narrowMenu = false %}    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<style>
+  #ambaum__header-mobile .swiper-container{
+    margin-bottom:45px;
+    padding-bottom: 25px;
+  }
+  #ambaum__header-mobile .swiper-pagination-bullet{
+    background-color: #fff;
+    border: 2px solid black;
+    opacity: 1;
+    margin:0 2px;
+  }
+  #ambaum__header-mobile .swiper-pagination-bullet-active {
+    background-color: #000;
+  }
+
+</style>
+<!-- TODO: mobile sale menu, work something out with the sale images idk what she wants from me man -->
+
+<script>
+
+  const swiper = new Swiper('.swiper-container', {
+    speed: 400,
+    spaceBetween: 100,
+    threshold: 20,
+    preloadImages: true,
+    lazy: false,
+    pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    },
+  });
+
+  function closeAllMenus(){
+    document.querySelectorAll('.ambaum__header-dropdown').forEach(dropdown => {dropdown.style.visibility = 'hidden'; dropdown.style.opacity = 0;});
+    document.querySelectorAll('.ambaum__header-dropdown-narrow').forEach(narrowMenu => {narrowMenu.style.display = 'none';});
+    document.querySelector('.ambaum__header-overlay').style.display = 'none';
+    document.querySelectorAll('.ambaum__header-mobile-list-item--dropdown-content').forEach(dropdown => dropdown.classList.remove('ambaum__header-mobile-list-item--dropdown-content--active'));
+  }
+
+  document.querySelectorAll('[data-toggle-header-dropdown]').forEach(dropdownToggle => {
+    dropdownToggle.closest('.ambaum__header-menu-item').addEventListener('click', (e) => {
+      const targetDropdown = e.target.closest('.ambaum__header-menu-item').querySelector('.ambaum__header-dropdown');
+      if(targetDropdown.style.visibility === 'visible' ){
+        closeAllMenus();
+      }else{
+        closeAllMenus();
+        targetDropdown.style.visibility = 'visible';
+        targetDropdown.style.opacity = 1;
+        document.querySelector('.ambaum__header-overlay').style.display = 'block';
+      }
+    });
+  });
+
+  document.querySelector('.ambaum__header-overlay').addEventListener('click', (e) => {
+    closeAllMenus();
+  });
+
+  document.querySelectorAll('.ambaum__header-dropdown-link').forEach(dropdownLink => {
+    dropdownLink.addEventListener('mouseover', (e) => {
+      const image = e.target.getAttribute('data-header-image');
+      const caption = e.target.getAttribute('data-header-caption');
+      const targetImage = e.target.closest('.ambaum__header-dropdown');
+      if(image && caption){
+        targetImage.querySelector('.ambaum__header-image-src').src = image;
+        targetImage.querySelector('.ambaum__header-caption').textContent = caption;
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-toggle-narrow-menu]').forEach(narrowMenuToggle => {
+    narrowMenuToggle.closest('.ambaum__header-menu-item').addEventListener('click', (e) => {
+      const narrowMenu = e.target.querySelector('.ambaum__header-dropdown-narrow');
+      if(narrowMenu.style.display === 'block'){
+        closeAllMenus();
+      }else{
+        closeAllMenus();
+        narrowMenu.style.display = 'block';
+      }
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if(e.keyCode == 27){
+      closeAllMenus();
+    }
+  });
+
+  document.querySelector('.ambaum__header-mobile-toggler').addEventListener('click', (e) => {
+    const header = e.target.closest('#ambaum__header-mobile');
+    const mobileNav = header.querySelector('.ambaum__header-mobile-list');
+    const activeClass = 'ambaum__header-mobile-list--active';
+    const chatOrb = document.querySelector('.orb-chat-mount');
+    if(mobileNav.classList.contains(activeClass)){
+      mobileNav.classList.remove(activeClass);
+      document.querySelector('html').style.overflow = 'auto';
+      if(chatOrb){
+        chatOrb.style.display = 'block';
+      }
+      closeAllMenus();
+    }else{
+      mobileNav.classList.add(activeClass);
+      document.querySelector('html').style.overflow = 'hidden';
+      document.body.classList.remove('scroll-down');
+      document.body.classList.add('scroll-up');
+      if(chatOrb){
+        chatOrb.style.display = 'none';
+      }
+    }
+  });
+
+  document.querySelectorAll('[data-toggle-mobile-header-dropdown]').forEach( listItem => {
+    listItem.addEventListener('click', (e) => {
+      const listItemContainer = e.target.closest('.ambaum__header-mobile-list-item-container');
+      const targetDropdown = listItemContainer.querySelector('[data-header-dropdown-container]');
+      targetDropdown.classList.add('ambaum__header-mobile-list-item--dropdown-content--active');
+
+    });
+  });
+
+  document.querySelectorAll('[data-close-first-level-dropdown]').forEach( closeBtn => {
+    closeBtn.addEventListener('click', (e) => {
+      const targetDropdown = e.target.closest('[data-header-dropdown-container]');
+      targetDropdown.classList.remove('ambaum__header-mobile-list-item--dropdown-content--active');
+    })
+  });
+
+  document.querySelectorAll('[data-open-second-level-dropdown]').forEach(secondLevelDropdownOpenTrigger => {
+    secondLevelDropdownOpenTrigger.addEventListener('click', (e) => {
+      const dropdownID = e.target.closest('[data-open-second-level-dropdown]').getAttribute('data-open-second-level-dropdown');
+      const targetDropdown = e.target.closest('[data-header-dropdown-container]').querySelector(`[data-second-level-dropdown="${dropdownID}"]`);
+      targetDropdown.classList.add('ambaum__header-mobile-list-item--dropdown-content--active');
+    });
+  });
+
+  document.querySelectorAll('[data-close-second-level-dropdown]').forEach(secondLevelDropdownCloseTrigger => {
+    secondLevelDropdownCloseTrigger.addEventListener('click', (e) => {
+      const targetDropdowns = e.target.closest('[data-header-dropdown-container]').querySelectorAll('[data-second-level-dropdown]');
+      targetDropdowns.forEach(dropdown => dropdown.classList.remove('ambaum__header-mobile-list-item--dropdown-content--active'));
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {%- unless template == 'product' %}
+    (function () {
+        var scrollUp = 'scroll-up';
+        var scrollDown = 'scroll-down';
+        var lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (screenWidth > 1024) {
+                return;
+            }
+            var currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                document.body.classList.remove(scrollUp);
+                return;
+            }
+
+            if (currentScroll > lastScroll && !document.body.classList.contains(scrollDown)) {
+                // down
+                document.body.classList.remove(scrollUp);
+                document.body.classList.add(scrollDown);
+            } else if (currentScroll < lastScroll && document.body.classList.contains(scrollDown)) {
+                // up
+                document.body.classList.remove(scrollDown);
+                document.body.classList.add(scrollUp);
+            }
+            lastScroll = currentScroll;
+        });
+    })();
+    {% endunless %}
+
+
+</script>
