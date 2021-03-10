@@ -261,6 +261,7 @@
         @click.native.prevent="cancelAndClose(true)"
       />
       <span>CANCEL & CLOSE</span>
+      </div>
     </div>
     <photoshoot-modal @photoshoot="photoShootHandler" ref="modal" ></photoshoot-modal>
   </div>
