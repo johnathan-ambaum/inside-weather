@@ -129,7 +129,7 @@
           <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
             <button v-if="hasPrev" :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
               class="ProductCustomizer__Skip"
-              @click.prevent="nextPanel">{{ hasNext ? 'Next' : 'Save Customization' }}</button>
+              @click.prevent="nextPanel">{{ hasNext ? 'Next' : 'Save Customization' }}<span v-if="!hasNext" class="ProductCustomizer__loading"><loader></loader></span></button>
           </transition>
           <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
             <button v-if="active && isMobile && !hasPrev" class="ProductCustomizer__Close"
@@ -242,7 +242,8 @@ export default {
           disabled_button_content: state.filters.disabled_button_content,
           disabled_button_url: state.filters.disabled_button_url
         }
-      }
+      },
+      cylindoViewers: state => state.cylindoViewers || []
     }),
 
     useCylindo() {
@@ -441,6 +442,9 @@ export default {
       });
     };
     setupMulberry();
+
+    this.addCylindoItemToHistory();
+
   },
 
   methods: {
@@ -572,7 +576,7 @@ export default {
         this.selectPanel('');
         return;
       }
-      document.getElementsByClassName('ProductCustomizer__loading')[0].style.display = 'block';
+      document.querySelector('.ProductCustomizer__loading').style.display = 'block';
       this.createProduct();
       this.$bus.$emit('customizer-close');
       this.getCylindoImage().then(() => {
@@ -595,7 +599,7 @@ export default {
           });
           this.active = false;
           this.showOnTopElements();
-          document.getElementsByClassName('ProductCustomizer__loading')[0].style.display = 'none';
+          document.querySelector('.ProductCustomizer__loading').style.display = 'none';
         });
       });
     },
@@ -760,6 +764,38 @@ export default {
       $('.orb-chat-mount>div').css('margin-right', '0px');
       $('#attentive_overlay').css('display', 'initial');
     },
+
+    addCylindoItemToHistory(){
+      console.log('addCylindoItemToHistory')
+      if(!this.cylindoViewers.length){
+        console.log('no items found waiting 500ms and restarting')
+        setTimeout(() => {
+          this.addCylindoItemToHistory();
+        }, 100);
+        return
+      }
+      console.log('items found')
+      const viewer = this.cylindoViewers.find(viewer => viewer.containerID === "cylindo-main");
+      viewer.instance.on('instance:viewer:ready', () => {
+        console.log('boop')
+        this.getCylindoImage().then(() => {
+          this.addHistoryItem({
+            customerId: this.customerId,
+            sku: this.productSku,
+            product: {
+              ...this.activeProduct,
+              product_type: this.category,
+              name: this.productName,
+              price: this.productPrice,
+              cover_image_url: this.productImages[0].full,
+              attributes: {...this.selectedOptions},
+            },
+          });
+        });
+      });
+
+
+    }
   },
 };
 </script>
