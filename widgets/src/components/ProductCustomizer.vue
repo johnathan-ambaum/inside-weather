@@ -412,6 +412,8 @@ export default {
         this.setSelectedOptions(state.attributes);
       }
     });
+
+    this.addCylindoItemToHistory();
   },
 
   mounted() {
@@ -442,8 +444,6 @@ export default {
       });
     };
     setupMulberry();
-
-    this.addCylindoItemToHistory();
 
   },
 
@@ -576,32 +576,35 @@ export default {
         this.selectPanel('');
         return;
       }
-      document.querySelector('.ProductCustomizer__loading').style.display = 'block';
-      this.createProduct();
-      this.$bus.$emit('customizer-close');
-      this.getCylindoImage().then(() => {
-        this.createProductFromSelected({
-          name: this.productName,
-          model: this.modelNumber,
-          image: this.productImages[0].full,
-        }).then(() => {
-          this.addHistoryItem({
-            customerId: this.customerId,
-            sku: this.productSku,
-            product: {
-              ...this.activeProduct,
-              product_type: this.category,
-              name: this.productName,
-              price: this.productPrice,
-              cover_image_url: this.productImages[0].full,
-              attributes: {...this.selectedOptions},
-            },
+
+      if(this.customerId){
+        document.querySelector('.ProductCustomizer__loading').style.display = 'block';
+        this.createProduct();
+        this.$bus.$emit('customizer-close');
+        this.getCylindoImage().then(() => {
+          this.createProductFromSelected({
+            name: this.productName,
+            model: this.modelNumber,
+            image: this.productImages[0].full,
+          }).then(() => {
+            this.addHistoryItem({
+              customerId: this.customerId,
+              sku: this.productSku,
+              product: {
+                ...this.activeProduct,
+                product_type: this.category,
+                name: this.productName,
+                price: this.productPrice,
+                cover_image_url: this.productImages[0].full,
+                attributes: {...this.selectedOptions},
+              },
+            });
+            this.active = false;
+            this.showOnTopElements();
+            document.querySelector('.ProductCustomizer__loading').style.display = 'none';
           });
-          this.active = false;
-          this.showOnTopElements();
-          document.querySelector('.ProductCustomizer__loading').style.display = 'none';
         });
-      });
+      }
     },
 
     cancelAndClose(closeAll){
@@ -727,6 +730,7 @@ export default {
         });
     },
     checkActionBar() {
+      if(window.innerWidth > 600){return}
       const productCustomizerFooterBottom = this.$refs.productCustomizerFooter.getBoundingClientRect().bottom;
       const difference = Math.abs(window.innerHeight - productCustomizerFooterBottom);
       this.actionBarOffset = difference;
@@ -766,35 +770,78 @@ export default {
     },
 
     addCylindoItemToHistory(){
-      console.log('addCylindoItemToHistory')
-      if(!this.cylindoViewers.length){
-        console.log('no items found waiting 500ms and restarting')
+      if(!this.customerId){return}
+      if(!this.attributes.length || Object.keys(this.selectedOptions).length === 0){
         setTimeout(() => {
           this.addCylindoItemToHistory();
-        }, 100);
+        }, 250);
         return
       }
-      console.log('items found')
-      const viewer = this.cylindoViewers.find(viewer => viewer.containerID === "cylindo-main");
-      viewer.instance.on('instance:viewer:ready', () => {
-        console.log('boop')
-        this.getCylindoImage().then(() => {
-          this.addHistoryItem({
-            customerId: this.customerId,
-            sku: this.productSku,
-            product: {
-              ...this.activeProduct,
-              product_type: this.category,
-              name: this.productName,
-              price: this.productPrice,
-              cover_image_url: this.productImages[0].full,
-              attributes: {...this.selectedOptions},
-            },
-          });
+
+      let cylindoSku = this.filters.cylindo_sku;
+      if(!cylindoSku){
+        const productImagesLoaded = this.productImages[0] && this.productImages[0].full;
+        if(!productImagesLoaded){
+          setTimeout(() => {
+            this.addCylindoItemToHistory();
+          }, 250);
+          return
+        }
+
+        let productImage = this.productImages[0].full;
+        this.addHistoryItem({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: productImage,
+            attributes: {...this.selectedOptions},
+          },
         });
+        return;
+      }
+      
+      const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindoSku + "/frames/" + 1 +"/"+ cylindoSku + ".jpg";
+      let cylindoProductFeaturesArray = [];
+      let selectedOptions = {...this.selectedOptions};
+      for(let option in selectedOptions){
+        let foundAttribute = this.attributes.find((attribute) => attribute.parameter === option);
+        let foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
+        if(foundValue.cylindo_features){
+          cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
+        }
+      }
+
+      let cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
+        if(index % 2 !== 0 ){
+          return false;
+        }
+        return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
       });
 
+      cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
+      const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
+      const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
+      const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
+      let cylindoImage = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
 
+      if(this.activeProduct.id){
+        this.addHistoryItem({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: cylindoImage,
+            attributes: {...this.selectedOptions},
+          },
+        });
+      }
     }
   },
 };
