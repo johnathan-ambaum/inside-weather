@@ -18,7 +18,7 @@
         <div class="Viewer__360Icons">
           <div class="Viewer__RotateIcon">
             <img
-              src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/360-rotate-ico.png?v=3363465804650087788"
+              src="https://cdn.insideweather.com/icons/360-rotate-ico.png"
               alt="Drag to rotate"
             >
             <span>Rotate</span>
@@ -28,7 +28,7 @@
             @click.stop="triggerZoom"
           >
             <img
-              src="//cdn.insideweather.com/temp_icons/zoom-ico.png"
+              src="https://cdn.insideweather.com/icons/zoom-ico.png"
               alt="Click to zoom"
             >
             <span>Zoom</span>
