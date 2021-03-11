@@ -53,8 +53,6 @@ export default {
 
   props: {
     product: { type: Object, required: true },
-    filters: { type: Object, required: true },
-    isMobile: { type: Boolean, required: true },
     isFavorite: { type: Boolean, default: false },
     loadMobile: { type: Boolean, default: false },
   },
@@ -70,7 +68,7 @@ export default {
 
     imageScale() {
       if (this.isMobile) {
-        return 76;
+        return 100;
       }
 
       if (this.screenWidth < 1250) {
@@ -81,7 +79,7 @@ export default {
         return 65;
       }
 
-      return 76;
+      return 100;
     },
 
     featuredImage() {
@@ -143,80 +141,31 @@ export default {
 @import '../scss/mixins';
 
 .ProductGridItem {
-  border-bottom: 1px solid #d4d0ca;
+  outline: 1px solid #d4d0ca;
+  margin:1px;
   flex: 0 0 50%;
   margin: 0;
   overflow: hidden;
-  padding: 0 10px 10px;
+  padding: 0 10px 12px;
   position: relative;
   text-align: center;
-
-  @include at-query($breakpoint-small) {
-    @at-root {
-      &:nth-child(1),
-      &:nth-child(2) {
-        border-top: 1px solid #d4d0ca;
-      }
-    }
-  }
+  background-color:white;
 
   @include at-query($breakpoint-large) {
     flex: 0 0 25%;
     padding: 0;
-
-    @at-root {
-      &:nth-child(1),
-      &:nth-child(2),
-      &:nth-child(3),
-      &:nth-child(4) {
-        border-top: 1px solid #d4d0ca;
-      }
-    }
   }
 
-  & + & {
-    border-left: 1px solid #d4d0ca;
-
-    @include at-query($breakpoint-small) {
-      @at-root {
-        & + &:nth-child(2n+3) {
-          border-left: none;
-        }
-      }
-    }
-
-    @include at-query($breakpoint-large) {
-      @at-root {
-        & + &:nth-child(4n+5) {
-          border-left: none;
-        }
-      }
-    }
-  }
-
-  &:last-child {
-    &:nth-child(1) {
-      border-right: 1px solid #d4d0ca;
-    }
-
-    @include at-query($breakpoint-small) {
-      &:nth-child(2n+3) {
-        border-right: 1px solid #d4d0ca;
-      }
-    }
-
-    @include at-query($breakpoint-large) {
-      &:nth-child(4n+1),
-      &:nth-child(4n+2),
-      &:nth-child(4n+3) {
-        border-right: 1px solid #d4d0ca;
-      }
-    }
-  }
-
-  & &__Image {
+  &__Image {
     margin: 0 auto;
     width: 100%;
+    max-width: 124px;
+    @include at-query($breakpoint-mlarge) {
+      max-width: 100%;
+    }
+    @include at-query($breakpoint-large) {
+      max-width: 238px;
+    }
 
     img {
       bottom: auto;
@@ -235,12 +184,15 @@ export default {
     position: relative;
     width: 100%;
     z-index: 100;
+    margin-bottom:12px;
 
     @include at-query($breakpoint-large) {
-      bottom: 20px;
+      bottom: 15px;
       left: 0;
       margin-top: 0;
       position: absolute;
+      margin-bottom:0px;
+
     }
   }
 
@@ -249,12 +201,13 @@ export default {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .05em;
-    line-height: 16px;
+    line-height: 13px;
     margin: -10% auto 0;
     max-width: 26ch;
+    margin-bottom:7px;
 
     @include at-query($breakpoint-large) {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 22px;
     }
   }
@@ -282,7 +235,7 @@ export default {
     padding: 0;
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 5px;
     z-index: 100;
 
     @include at-query($breakpoint-large) {
@@ -297,9 +250,11 @@ export default {
     font-size: 12px;
     font-weight: 500;
     line-height: 1;
+    letter-spacing: 0.12em;
 
     @include at-query($breakpoint-large) {
       font-size: 14px;
+
     }
   }
 }

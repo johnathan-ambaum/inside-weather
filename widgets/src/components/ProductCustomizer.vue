@@ -1,68 +1,38 @@
 <template>
   <div>
-    <div
-      v-if="!disabled"
-      class="ProductCustomizer__DetailWrapper">
-      <div
-        v-for="flag in flags"
-        :key="flag.title"
-        class="ProductCustomizer__FlagRow"
-      >
-        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">{{ flag.title }}</div>
+    <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
+      <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__FlagRow">
+        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
+          {{ flag.title }}</div>
         <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
       </div>
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars
-            v-if="filters.review_count && filters.review_average"
-            :review_count="filters.review_count"
-            :review_average="filters.review_average"
-            review_link="#ReviewCarousel"
-          ></review-stars>
+          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
+            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
         </div>
         <div v-if="isCustomer">
-          <span
-            :class="{ isFavorite }"
-            role="button"
-            class="ProductCustomizer__Favorite"
-            @click.stop.prevent="favoriteCurrentProduct"
-          >
-            <font-awesome-icon :icon="favoriteIcon"/>
+          <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
+            @click.stop.prevent="favoriteCurrentProduct">
+            <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
         <div v-else>
-          <span
-            :class="{ isFavorite }"
-            role="button"
-            class="ProductCustomizer__Favorite"
-            data-ajax-customer-onboard="true"
-          >
-            <font-awesome-icon :icon="favoriteIcon"/>
+          <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
+            data-ajax-customer-onboard="true">
+            <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
       </div>
-      <product-detail-slider
-        v-if="isMobile"
-        :cylindo="useCylindo"
-        cylindo-id="cylindo-main"
-        :customizer-active="active"
-        :favoriteIcon="favoriteIcon"
-      />
+      <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
+        :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
-        <span
-          v-if="msrp"
-          class="ProductCustomizer__MSRP"
-        >{{ msrpDisplay }}</span>
-        <span
-          v-if="msrp"
-          class="ProductCustomizer__Savings"
-        >YOU SAVE ${{ savings }}</span>
-        <info-popup
-          v-if="!isDecor"
-          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$."
-        >
+        <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
+        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ savings }}</span>
+        <info-popup v-if="!isDecor"
+          text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
       </div>
@@ -74,62 +44,32 @@
           FREE Shipping | Custom made in the USA<br>
           Estimated to ship in
         </template>
-        <info-popup
-          v-if="hasFulfillmentMarkup"
-          always-on-top
-          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!"
-        >
+        <info-popup v-if="hasFulfillmentMarkup" always-on-top
+          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
       <simple-customizer v-if="isDecor" />
-      <button
-        v-else
-        class="ProductCustomizer__Trigger"
-        @click.prevent="showCustomizer"
-      >Customize</button>
-      <add-to-cart
-        :processing="addToCartProcessing"
-        :out-of-stock="!inStock"
-        @addToCart="addToCart"
-      />
-      <p
-        :data-amount="productPrice * 100"
-        data-page-type="product"
-        class="affirm-as-low-as"
-      />
+      <button v-else class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
+      <add-to-cart :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
+      <p :data-amount="productPrice * 100" data-page-type="product" class="affirm-as-low-as" />
     </div>
-    <div
-    v-else
-    class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
+    <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
       <div class="ProductCustomizer__FlagRow">
-        <div class="ProductCustomizer__Flag ProductCustomizer__404-notice" >404 Error</div>
+        <div class="ProductCustomizer__Flag ProductCustomizer__404-notice">404 Error</div>
       </div>
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars
-            v-if="filters.review_count && filters.review_average"
-            :review_count="filters.review_count"
-            :review_average="filters.review_average"
-            review_link="#ReviewCarousel"
-          ></review-stars>
+          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
+            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
         </div>
-        <span
-          v-if="!disabled"
-          :class="{ isFavorite }"
-          role="button"
-          class="ProductCustomizer__Favorite"
-          @click.stop.prevent="favoriteCurrentProduct"
-        >
-          <font-awesome-icon :icon="favoriteIcon"/>
+        <span v-if="!disabled" :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
+          @click.stop.prevent="favoriteCurrentProduct">
+          <font-awesome-icon :icon="favoriteIcon" />
         </span>
-        <product-detail-slider
-        v-if="isMobile"
-        :cylindo="useCylindo"
-        cylindo-id="cylindo-main"
-      />
+        <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" />
       </div>
       <div class="ProductCustomizer__404-content">
         <h2>{{ disabledInfo.disabled_title }}</h2>
@@ -141,11 +81,8 @@
       <hr>
       <inspiration-options :products="filters.featured_products || []" />
     </div>
-    <div
-      v-if="!isDecor"
-      :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
-      class="ProductCustomizer"
-    >
+    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
+      class="ProductCustomizer">
       <div class="ProductCustomizer__NameOverlay">
         <div class="ProductCustomizer__Name">
           {{ productName }}
@@ -155,114 +92,57 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider
-        :cylindo="useCylindo"
-        :customizer-active="active"
-        :favoriteIcon="favoriteIcon"
-        />
-        <button
-          v-if="!isMobile"
-          class="ProductCustomizer__Close"
-          @click.prevent="close(true)"
-        >Save Customization</button>
-        <button
-          v-if="!isMobile"
-          class="ProductCustomizer__cancel-and-close"
-          @click.prevent="cancelAndClose(true)"
-        >CANCEL & CLOSE</button>
+        <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
+        <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">Save
+          Customization <span class="ProductCustomizer__loading"><loader></loader></span></button>
+        <button v-if="!isMobile" class="ProductCustomizer__cancel-and-close"
+          @click.prevent="cancelAndClose(true)">CANCEL & CLOSE</button>
       </div>
       <div class="ProductCustomizer__Sidebar">
         <div class="ProductCustomizer__SidebarBody">
-          <transition
-            enter-active-class="animated slideInRight"
-            leave-active-class="animated slideOutRight"
-          >
-            <nav
-              v-show="active && !openPanel"
-              class="ProductCustomizer__Nav"
-              ref="productCustomizerNav"
-            >
+          <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+            <nav v-show="active && !openPanel" class="ProductCustomizer__Nav" ref="productCustomizerNav">
               <div class="ProductCustomizer__NavHeading">Customize</div>
               <div class="ProductCustomizer__NavBody">
-                <div
-                  v-for="(attribute) in attributes"
-                  :key="attribute.parameter"
-                  class="ProductCustomizer__NavItem"
-                  @click="showPanel(attribute.parameter)"
-                  v-show="!attribute.hidden"
-                >
-                  <img
-                    v-if="attribute.cover_image_url"
-                    ref="coverImages"
-                    :src="attribute.cover_image_url"
-                    :alt="attribute.name"
-                  >
-                  <span class="ProductCustomizer__NavItemTitle">{{ getAttributeIndex(attribute, attributes) }}. {{ attribute.name }}</span>
+                <div v-for="(attribute) in attributes" :key="attribute.parameter" class="ProductCustomizer__NavItem"
+                  @click="showPanel(attribute.parameter)" v-show="!attribute.hidden">
+                  <img v-if="attribute.cover_image_url" ref="coverImages" :src="attribute.cover_image_url"
+                    :alt="attribute.name">
+                  <span class="ProductCustomizer__NavItemTitle">{{ getAttributeIndex(attribute, attributes) }}.
+                    {{ attribute.name }}</span>
                 </div>
               </div>
             </nav>
           </transition>
-          <div
-            v-for="(attribute) in attributes"
-            :key="attribute.parameter"
-            class="ProductCustomizer__Panel"
-            v-show="!attribute.hidden"
-          >
-            <transition
-              enter-active-class="animated slideInRight"
-              leave-active-class="animated slideOutRight"
-            >
-              <filter-panel
-                v-show="isOpen(attribute.parameter)"
-                v-bind="attribute"
-                :index="getAttributeIndex(attribute, attributes)"
-                :load="true"
-              />
+          <div v-for="(attribute) in attributes" :key="attribute.parameter" class="ProductCustomizer__Panel"
+            v-show="!attribute.hidden">
+            <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+              <filter-panel v-show="isOpen(attribute.parameter)" v-bind="attribute"
+                :index="getAttributeIndex(attribute, attributes)" :load="true" />
             </transition>
           </div>
         </div>
         <div class="ProductCustomizer__Footer" ref="productCustomizerFooter">
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="hasPrev"
-              class="ProductCustomizer__Skip"
-              @click.prevent="backToStart"
-            >Back</button>
+          <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <button v-if="hasPrev" class="ProductCustomizer__Skip" @click.prevent="backToStart">Back</button>
           </transition>
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="hasPrev"
-              :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
+          <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <button v-if="hasPrev" :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
               class="ProductCustomizer__Skip"
-              @click.prevent="nextPanel"
-            >{{ hasNext ? 'Next' : 'Save Customization' }}</button>
+              @click.prevent="nextPanel">{{ hasNext ? 'Next' : 'Save Customization' }}<span v-if="!hasNext" class="ProductCustomizer__loading"><loader></loader></span></button>
           </transition>
-          <transition
-            enter-active-class="animated slideInUp"
-            leave-active-class="animated slideOutDown"
-          >
-            <button
-              v-if="active && isMobile && !hasPrev"
-              class="ProductCustomizer__Close"
-              @click.prevent="close(false)"
-            >Save Customization</button>
+          <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <button v-if="active && isMobile && !hasPrev" class="ProductCustomizer__Close"
+              @click.prevent="close(false)">Save Customization <span class="ProductCustomizer__loading"><loader></loader></span></button>
           </transition>
         </div>
       </div>
       <div class="ProductCustomizer__Exit">
-      <close-button
-        v-if="isMobile"
-        @click.native.prevent="cancelAndClose(true)"
-      />
-      <span>CANCEL & CLOSE</span>
+        <close-button v-if="isMobile" @click.native.prevent="cancelAndClose(true)" />
+        <span>CANCEL & CLOSE</span>
+      </div>
+      <photoshoot-modal @photoshoot="photoShootHandler" ref="modal"></photoshoot-modal>
     </div>
-    <photoshoot-modal @photoshoot="photoShootHandler" ref="modal" ></photoshoot-modal>
   </div>
 </template>
 
@@ -286,6 +166,7 @@ import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
 import ReviewStars from './ReviewStars.vue';
+import Loader from './Loader.vue';
 
 library.add(faHeart);
 
@@ -303,6 +184,7 @@ export default {
     SwatchBrowser,
     PhotoshootModal,
     ReviewStars,
+    Loader
   },
 
   mixins: [
@@ -360,7 +242,8 @@ export default {
           disabled_button_content: state.filters.disabled_button_content,
           disabled_button_url: state.filters.disabled_button_url
         }
-      }
+      },
+      cylindoViewers: state => state.cylindoViewers || []
     }),
 
     useCylindo() {
@@ -497,10 +380,30 @@ export default {
       this.$nextTick(() => {
         window.affirm.ui.refresh();
       });
+
+      let currentConfigurationIsFavorited = this.favorites.find((favorite) => {
+        return JSON.stringify(favorite.attributes) === JSON.stringify(this.selectedOptions);
+      });
+
+      if(currentConfigurationIsFavorited){
+        this.setActiveProduct(currentConfigurationIsFavorited);
+      }else{
+        this.setActiveProduct({});
+      }
     });
 
     this.$bus.$on('detailSlider:favorite', (payload) => {
-      this.favoriteCurrentProduct();
+      $('[data-icon="heart"]').addClass('favorites__loading');
+      this.getCylindoImage().then(() => {
+        this.createProductFromSelected({
+          name: this.productName,
+          model: this.modelNumber,
+          image: this.productImages[0].full,
+        }).then(() => {
+          this.favoriteCurrentProduct();
+           $('[data-icon="heart"]').removeClass('favorites__loading');
+        });
+      });
     });
 
     window.addEventListener('popstate', ({ state }) => {
@@ -509,6 +412,8 @@ export default {
         this.setSelectedOptions(state.attributes);
       }
     });
+
+    this.addCylindoItemToHistory();
   },
 
   mounted() {
@@ -539,6 +444,7 @@ export default {
       });
     };
     setupMulberry();
+
   },
 
   methods: {
@@ -552,6 +458,7 @@ export default {
     ...mapMutations([
       'updateCategory',
       'toggleFavorite',
+      'addHistoryItem',
       'setActiveProduct',
       'setSelectedOptions',
       'setRevertConfiguration',
@@ -670,11 +577,34 @@ export default {
         return;
       }
 
-      this.createProduct();
-      this.$bus.$emit('customizer-close');
-      this.active = false;
-      this.showOnTopElements();
-
+      if(this.customerId){
+        document.querySelector('.ProductCustomizer__loading').style.display = 'block';
+        this.createProduct();
+        this.$bus.$emit('customizer-close');
+        this.getCylindoImage().then(() => {
+          this.createProductFromSelected({
+            name: this.productName,
+            model: this.modelNumber,
+            image: this.productImages[0].full,
+          }).then(() => {
+            this.addHistoryItem({
+              customerId: this.customerId,
+              sku: this.productSku,
+              product: {
+                ...this.activeProduct,
+                product_type: this.category,
+                name: this.productName,
+                price: this.productPrice,
+                cover_image_url: this.productImages[0].full,
+                attributes: {...this.selectedOptions},
+              },
+            });
+            this.active = false;
+            this.showOnTopElements();
+            document.querySelector('.ProductCustomizer__loading').style.display = 'none';
+          });
+        });
+      }
     },
 
     cancelAndClose(closeAll){
@@ -701,10 +631,7 @@ export default {
       this.hideOnTopElements();
     },
 
-    favoriteCurrentProduct() {
-      if (!this.attributes) {
-        return;
-      }
+    getCylindoImageForFavorite(){
       if (this.useCylindo) {
         this.getCylindoImage().then(() => {
           this.toggleFavorite({
@@ -716,7 +643,7 @@ export default {
               name: this.productName,
               price: this.productPrice,
               cover_image_url: this.productImages[0].full,
-              attributes: this.selectedOptions,
+              attributes: {...this.selectedOptions},
             },
           });
         });
@@ -730,10 +657,17 @@ export default {
             name: this.productName,
             price: this.productPrice,
             cover_image_url: this.productImages[0].full,
-            attributes: this.selectedOptions,
+            attributes: {...this.selectedOptions},
           },
         });
       }
+    },
+
+    favoriteCurrentProduct() {
+      if (!this.attributes) {
+        return;
+      }
+      this.getCylindoImageForFavorite();
     },
 
     async addToCart(quantity, warrantySelected = false) {
@@ -796,6 +730,7 @@ export default {
         });
     },
     checkActionBar() {
+      if(window.innerWidth > 600){return}
       const productCustomizerFooterBottom = this.$refs.productCustomizerFooter.getBoundingClientRect().bottom;
       const difference = Math.abs(window.innerHeight - productCustomizerFooterBottom);
       this.actionBarOffset = difference;
@@ -833,6 +768,81 @@ export default {
       $('.orb-chat-mount>div').css('margin-right', '0px');
       $('#attentive_overlay').css('display', 'initial');
     },
+
+    addCylindoItemToHistory(){
+      if(!this.customerId){return}
+      if(!this.attributes.length || Object.keys(this.selectedOptions).length === 0){
+        setTimeout(() => {
+          this.addCylindoItemToHistory();
+        }, 250);
+        return
+      }
+
+      let cylindoSku = this.filters.cylindo_sku;
+      if(!cylindoSku){
+        const productImagesLoaded = this.productImages[0] && this.productImages[0].full;
+        if(!productImagesLoaded){
+          setTimeout(() => {
+            this.addCylindoItemToHistory();
+          }, 250);
+          return
+        }
+
+        let productImage = this.productImages[0].full;
+        this.addHistoryItem({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: productImage,
+            attributes: {...this.selectedOptions},
+          },
+        });
+        return;
+      }
+      
+      const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindoSku + "/frames/" + 1 +"/"+ cylindoSku + ".jpg";
+      let cylindoProductFeaturesArray = [];
+      let selectedOptions = {...this.selectedOptions};
+      for(let option in selectedOptions){
+        let foundAttribute = this.attributes.find((attribute) => attribute.parameter === option);
+        let foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
+        if(foundValue.cylindo_features){
+          cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
+        }
+      }
+
+      let cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
+        if(index % 2 !== 0 ){
+          return false;
+        }
+        return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
+      });
+
+      cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
+      const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
+      const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
+      const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
+      let cylindoImage = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
+
+      if(this.activeProduct.id){
+        this.addHistoryItem({
+          customerId: this.customerId,
+          sku: this.productSku,
+          product: {
+            ...this.activeProduct,
+            product_type: this.category,
+            name: this.productName,
+            price: this.productPrice,
+            cover_image_url: cylindoImage,
+            attributes: {...this.selectedOptions},
+          },
+        });
+      }
+    }
   },
 };
 </script>
@@ -1474,6 +1484,9 @@ html.ProductCustomizer--Open {
   }
 
   &__Close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #202020;
     color: #fff;
     font-family: $font-stack-avalon;
@@ -1540,5 +1553,22 @@ html.ProductCustomizer--Open {
   a {
     text-decoration: underline;
   }
+}
+.favorites__loading{
+  animation-name: heartBeat;
+  animation-duration: 2s;
+  animation-iteration-count:infinite;
+}
+@keyframes heartBeat {
+  from {opacity: .2}
+  35%  {opacity: .8; transform:scale(1.2)}
+  40%  {opacity: .8; transform:scale(1)}
+  45%  {opacity: .8;transform:scale(1.2)}
+  50%  {opacity: .8; transform:scale(1.2)}
+  55%  {opacity: .8; transform:scale(1)}
+  to   {opacity: .2}
+}
+.ProductCustomizer__loading{
+  display:none;
 }
 </style>
