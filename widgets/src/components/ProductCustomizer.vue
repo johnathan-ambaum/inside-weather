@@ -93,8 +93,12 @@
       </div>
       <div class="ProductCustomizer__Slider">
         <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
-        <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">Save
-          Customization <span class="ProductCustomizer__loading"><loader></loader></span></button>
+        <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">
+          Save Customization
+          <span :class="historyLoading ? 'ProductCustomizer__loading' : 'ProductCustomizer__loading--hide' ">
+            <loader></loader>
+            </span>
+          </button>
         <button v-if="!isMobile" class="ProductCustomizer__cancel-and-close"
           @click.prevent="cancelAndClose(true)">CANCEL & CLOSE</button>
       </div>
@@ -129,11 +133,21 @@
           <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
             <button v-if="hasPrev" :class="{ 'ProductCustomizer__Skip--Last': ! hasNext }"
               class="ProductCustomizer__Skip"
-              @click.prevent="nextPanel">{{ hasNext ? 'Next' : 'Save Customization' }}<span v-if="!hasNext" class="ProductCustomizer__loading"><loader></loader></span></button>
+              @click.prevent="nextPanel">
+                {{ hasNext ? 'Next' : 'Save Customization' }}
+                <span v-if="!hasNext" :class="historyLoading ? 'ProductCustomizer__loading' : 'ProductCustomizer__loading--hide' ">
+                  <loader></loader>
+                </span>
+            </button>
           </transition>
           <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
             <button v-if="active && isMobile && !hasPrev" class="ProductCustomizer__Close"
-              @click.prevent="close(false)">Save Customization <span class="ProductCustomizer__loading"><loader></loader></span></button>
+              @click.prevent="close(false)">
+              Save Customization
+              <span :class="historyLoading ? 'ProductCustomizer__loading' : 'ProductCustomizer__loading--hide' ">
+                <loader></loader>
+              </span>
+            </button>
           </transition>
         </div>
       </div>
@@ -208,7 +222,8 @@ export default {
       addToCartProcessing: false,
       closedNum: 0,
       actionBarOffset: 0,
-      isCustomer: !!window.customerId
+      isCustomer: !!window.customerId,
+      historyLoading: false
     };
   },
 
@@ -577,10 +592,10 @@ export default {
         return;
       }
 
+      this.$bus.$emit('customizer-close');
+
       if(this.customerId){
-        document.querySelector('.ProductCustomizer__loading').style.display = 'block';
-        this.createProduct();
-        this.$bus.$emit('customizer-close');
+        this.historyLoading = true;
         this.getCylindoImage().then(() => {
           this.createProductFromSelected({
             name: this.productName,
@@ -599,11 +614,15 @@ export default {
                 attributes: {...this.selectedOptions},
               },
             });
+            this.historyLoading = false;
             this.active = false;
             this.showOnTopElements();
-            document.querySelector('.ProductCustomizer__loading').style.display = 'none';
           });
         });
+      }else{
+        this.createProduct();
+        this.active = false;
+        this.showOnTopElements();
       }
     },
 
@@ -803,7 +822,7 @@ export default {
         });
         return;
       }
-      
+
       const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindoSku + "/frames/" + 1 +"/"+ cylindoSku + ".jpg";
       let cylindoProductFeaturesArray = [];
       let selectedOptions = {...this.selectedOptions};
@@ -1559,6 +1578,7 @@ html.ProductCustomizer--Open {
   animation-duration: 2s;
   animation-iteration-count:infinite;
 }
+
 @keyframes heartBeat {
   from {opacity: .2}
   35%  {opacity: .8; transform:scale(1.2)}
@@ -1568,7 +1588,12 @@ html.ProductCustomizer--Open {
   55%  {opacity: .8; transform:scale(1)}
   to   {opacity: .2}
 }
-.ProductCustomizer__loading{
+
+.ProductCustomizer__loading--hide{
   display:none;
+}
+
+.ProductCustomizer__loading{
+  display:block;
 }
 </style>
