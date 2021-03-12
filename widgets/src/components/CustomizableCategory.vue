@@ -9,24 +9,27 @@
           {{sectionDescription}}
         </p>
       </heading-with-description>
-			<div class="button-wrapper">
-				<a 
-					:href="destinationUrl" 
+			<div class="button-wrapper" v-if="btnText.length > 0">
+				<a
+					:href="destinationUrl"
 					class="--caps customize-button"
 				>
 					{{btnText}}
 				</a>
 			</div>
 			<div class="image-wrapper --show-in-desktop">
-				<a :href="destinationUrl">
+				<a :href="destinationUrl" v-if="destinationUrl.length > 0">
 					<figure>
 						<img :src="desktopImage"/>
 					</figure>
 				</a>
+        <figure v-if="destinationUrl.length == 0 && desktopImage">
+          <img :src="desktopImage"/>
+        </figure>
 			</div>
 			<div class="image-wrapper --show-in-mobile">
-				<slider 
-					class="_category-lists --clearfix" 
+				<slider
+					class="_category-lists --clearfix"
 					:items="sliderProps.items"
 					:margin="sliderProps.margin"
 					:loop="sliderProps.loop"
@@ -37,16 +40,19 @@
 					:navText="sliderProps.navText"
 					:responsive="sliderProps.responsive"
 					>
-					<div 
+					<div
 						class="category-list-item"
 						v-for="item in categoryListItems"
 						:key="item.id"
 					>
-						<a :href="destinationUrl">
+						<a :href="destinationUrl" v-if="destinationUrl.length > 0">
 							<figure>
 								<img :src="item.image "/>
 							</figure>
 						</a>
+            <figure v-if="destinationUrl.length == 0 && item.image">
+              <img :src="item.image "/>
+            </figure>
 					</div>
 				</slider>
 			</div>
@@ -106,7 +112,7 @@ export default {
 			justify-content: center;
 		}
 	}
-	
+
 	.--show-in-mobile {
 		display: none;
 		@include at-query('max-width: 768px') {
