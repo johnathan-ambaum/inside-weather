@@ -7,7 +7,7 @@
     </script>
   {% endif %}
   <script>
-    const forceRedirect = localStorage.getItem('forceRedirect');
+    let forceRedirect = localStorage.getItem('forceRedirect');
     if(forceRedirect === null){
       forceRedirect = false;
     }
