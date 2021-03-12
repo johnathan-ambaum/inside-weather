@@ -8,6 +8,9 @@
   {% endif %}
   <script>
     const forceRedirect = localStorage.getItem('forceRedirect');
+    if(forceRedirect === null){
+      forceRedirect = false;
+    }
     const forceRedirectExclusions = ['login', 'register', 'challenge'];
     const urlIsExcluded = new RegExp(forceRedirectExclusions.join("|")).test(window.location.href);
     if(forceRedirect && !urlIsExcluded){
