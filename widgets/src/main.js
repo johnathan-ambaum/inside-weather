@@ -44,6 +44,7 @@ import store from './store';
 import Help from './components/Help.vue';
 import PageNotFoundBanner from './components/PageNotFoundBanner.vue';
 import CategorySeoContent from './components/CategorySeoContent.vue';
+import Favorites from './components/Favorites.vue';
 
 (function init() {
   const rootEl = document.querySelector('#app');
@@ -100,6 +101,7 @@ import CategorySeoContent from './components/CategorySeoContent.vue';
       Help,
       PageNotFoundBanner,
       CategorySeoContent,
+      Favorites
     },
 
     mixins: [

@@ -11574,10 +11574,10 @@ html body.MobileNav--Active {
   display:-ms-flexbox;
   display:flex;
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
-  font-size:14px;
+  font-size:13px;
   font-weight: 600;
   height:90px;
-  letter-spacing: .1em;
+  letter-spacing:0.08em;
   padding: 0 $gutter;
   position:fixed;
   text-transform: uppercase;
@@ -11586,6 +11586,10 @@ html body.MobileNav--Active {
   -o-transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
   transition: height .3s ease-out .1s, background-color .3s ease-out .1s;
   width:100%;
+
+  .NavBlock__sale{
+    color:#F57E61 !important;//remove when nav is reworked
+  }
 
   body:not(.js-drawer-open):not(.js-drawer-closing) & {
     z-index: 999;
@@ -11796,7 +11800,7 @@ html body.MobileNav--Active {
   }
 
   li {
-    padding: 10px 20px 0 20px;
+    padding: 10px 16px 0 16px;
 
     @media only screen and (max-width: 1200px) {
       // padding: 15px 12px;
@@ -11836,6 +11840,19 @@ html body.MobileNav--Active {
   margin: 0 auto;
 
 }
+.Dropdown__Content-Wrapper--sale{
+  .NavBlocks__Container{
+    width:auto;
+  }
+  .NavBlock__collections-list{
+    margin-right:86px;
+  }
+  div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 .NavBlock__List__Item,
 .NavBlock__List__Item--Dropdown,
@@ -11844,16 +11861,34 @@ html body.MobileNav--Active {
     border-bottom: 2px solid transparent;
   }
 
-  &.NavBlock__List__Item--Dropdown:hover a,
-  & > a:hover {
+  &.NavBlock__List__Item--Dropdown:hover a:not(.NavBlock__List__Item--sale:hover a),
+  & > a:hover:not(.NavBlock__List__Item--sale:hover a) {
     -webkit-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
     border-color: #202020;
     color: #202020;
   }
+  & > a.NavBlock__sale:hover{
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    border-color: #F57E61;
+  }
 }
-
+.NavBlock__List__Item--sale:hover a{
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  border-color: #F57E61;
+  color: #F57E61;
+}
+.Mobile__List__Item--DropDown-sale .MobileContent__Dropdown-grandchild{
+  display: block !important;
+}
+.Mobile__List__Item--DropDown-sale .MobileDropDown__Toggler-grandchild{
+  display:none;
+}
 .NavBlock__List__Item--Dropdown--Active {
   .Dropdown__Content {
     visibility: visible;
@@ -12353,6 +12388,18 @@ a.Dropdown__Content__Link.has-hover span {
   text-transform: uppercase;
   margin-left:18px;
 }
+.Mobile__List__Item--DropDown-sale{
+  .MobileContent__Dropdown__Title{
+    color:#f57e61;
+  }
+  .MobileContent__Dropdown__Title-child{
+    display:none;
+  }
+  .MobileContent__Dropdown--MultiColumn{
+    margin-left:0;
+  }
+}
+
 .MobileContent__Dropdown__Title-child{
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight:600;

@@ -1,6 +1,3 @@
-<h1 class="text-center Favorites__Header">{{ page.title }}</h1>
 <div id="app">
-  <product-grid :products="{{ customer.metafields.global.v2-favorites | json | escape }}" v-cloak>
-    You don't have any favorites yet
-  </product-grid>
+  <favorites></favorites>
 </div>
