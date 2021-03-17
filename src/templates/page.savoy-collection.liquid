@@ -1,0 +1,302 @@
+<div id="app">
+  <div class="categorySofas">
+    {% assign hideDesktopSlider = true %}
+    {% assign hideMobileSlider = true %}
+    {% assign hasBannerContent = true %}
+    {% assign newButton = true %}
+    {% assign smallCase = true %}
+    {% assign enableMediumHeight = true %}
+    {% assign bannerContent = "{'items':[{'image':'http://cdn.insideweather.com/collections/savoy/tb/col_tb_savoy_d_v1.jpg', 'imageSm': 'http://cdn.insideweather.com/collections/savoy/tb/col_tb_savoy_m_v1.jpg','heading':'The Savoy Collection','description':'Our bed frame’s modern, low profile comes in multiple heights, configurations, styles, and finishes—all of which are defined by you.','linkText':'','url':''}]}"%}
+
+    <category-banner
+      :banner-content="{{bannerContent}}"
+      :hide-desktop-slider="{{hideDesktopSlider}}"
+      :hide-mobile-slider="{{hideMobileSlider}}"
+      :has-banner-content="{{hasBannerContent}}"
+      :new-button="{{newButton}}"
+      :small-case="{{smallCase}}"
+      :enable-medium-height="{{enableMediumHeight}}"
+      >
+    </category-banner>
+
+    {% assign valueProps = "[{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/usa-ico.png', 'title': 'MADE IN THE USA'},{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/home-trial-ico.png', 'title': '365 DAY HOME TRIAL'},{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/free-ship-ico.png', 'title': 'FREE SHIPPING'},{'icon':'http://cdn.insideweather.com/cat/sofa-line/vprop-small/sustainable-ico.png', 'title': 'SUSTAINABLE'}]"%}
+
+    <hiw-props
+      :value-props="{{valueProps}}"
+    ></hiw-props>
+
+    {% assign productCollections = "[{'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_01.jpg', 'title': 'Twin Upholstered Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/su1010bu111011-twin-savoy-upholstered-bed-frame-in-mist'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_02.jpg', 'title': 'Full Upholstered Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/su1111au101111-full-savoy-upholstered-bed-frame-in-dijon'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_03.jpg', 'title': 'Queen Upholstered Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/su1210bm101010-queen-savoy-upholstered-bed-frame-in-moss'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_04_fix.jpg', 'title': 'King & Cal King Upholstered Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/su1311da111110-king-savoy-upholstered-bed-frame-in-powder-pink'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_05.jpg', 'title': 'Twin Wood Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sw1010101111-twin-savoy-wood-bed-frame-in-latte'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_06.jpg', 'title': 'Full Wood Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sw1111111010-full-savoy-wood-bed-frame-in-espresso?attributes=size%3Afull%2Cframe_style%3Alow-headboard%2Cfinish%3Aespresso%2Cside_table%3Ano-side%2Cbed_height%3Alow-height'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_07.jpg', 'title': 'Queen Wood Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sw1212111011-queen-savoy-wood-bed-frame-in-espresso?attributes=size%3Aqueen%2Cframe_style%3Ahigh-headboard%2Cfinish%3Aespresso%2Cside_table%3A2-side%2Cbed_height%3Ahigh-height'},
+
+    {'image': 'https://cdn.insideweather.com/collections/savoy/grid/v1/col_savoy_grid_08.jpg', 'title': 'King & Cal King Wood Bed Frame', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sw1310101010-king-savoy-wood-bed-frame-in-latte?attributes=size%3Aking%2Cframe_style%3Alow-headboard%2Cfinish%3Alatte%2Cside_table%3Ano-side%2Cbed_height%3Alow-height'}]" %}
+
+    <div class="productCollection --pd-t-130">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
+          section-heading="Meet the Savoy Bed Frame"
+          section-description="Start with a size, choose upholstered or wood, and customize to make it your own."
+        >
+        </category-collections>
+      </div>
+    </div>
+
+    {% assign listItems = "[{'image':'http://cdn.insideweather.com/collections/savoy/customize/col_savoy_customize_m_01_v2.png'}]"%}
+
+    <div class="customizable-category --pd-t-110 --pd-m-b-0">
+      <div class="customizable-wrapper" style="background-color: #E9EBF2">
+        <customizable-category
+          :list-items="{{listItems}}"
+          desktop-image="http://cdn.insideweather.com/collections/savoy/customize/col_savoy_customize_d_01_v1-min.png"
+          btn-text=""
+          destination-url=""
+          section-heading="The Most Customizable Bed Frame on the Internet"
+          section-description="When we say custom, we mean it. Explore all the ways you can modify the Aero Collection to make it truly yours. Each one is made to order—per your specs—at our California Crafthouse and ships FREE to your doorstep faster than any other &ldquo;custom&rdquo; maker out there."
+        >
+        </customizable-category>
+      </div>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/collections/savoy/details/design/design_d.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/collections/savoy/details/design/design_m.jpg', 'title': 'Behind the Design','description': 'A sustainable custom bedroom collection that puts you in the designer’s seat, allowing you to control the look and feel of your snuggle scene. Designed and crafted here in California, the Savoy Bed Frame’s modern, low profile comes in multiple heights, configurations, styles, and finishes—all of which are defined by you. Our signature platform bed design is made to support all mattress types and promotes temperature regulation for optimal ZZZs.'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-t-130 --pd-m-t-0">
+      <category-detail
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'true','objectUrl': 'http://cdn.insideweather.com/collections/savoy/details/tailoredtoyou/tailoredtoyou_d.mp4', 'objectUrlMob': 'http://cdn.insideweather.com/collections/savoy/details/tailoredtoyou/tailoredtoyou_m.mp4', 'title': 'Tailor It to You','description': 'Define your sanctuary’s style by customizing your bedroom furniture from the ground up. Whether you crave a sleek, backless wood platform bed for your minimalist loft or you want a soft, tall headboard with luxe velvet fabric to support you and your glam snuggle style—this custom bed frame allows you to pull off the bedroom look of your dreams.'}]" %}
+    {% assign isReverse = true %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'true','objectUrl': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery_d.mp4', 'objectUrlMob': 'http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery_m.mp4', 'title': 'Upholsteries Galore','description': 'The mecca of fabric libraries if you will. Select from 100+ choices that span the rainbow, all of which are hand-stitched here in California. We’re talkin’ stain-resistant Performance Upholsteries, Pet-friendly possibilities, and even Commercial Grade selections so find one that’s truly tailored to comfort your needs (& potential mischief). Your match is here, you just have to find it!'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = true %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        desktop-image="http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_d_v3.png"
+        mobile-image="http://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_m_v3.png"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/collections/savoy/details/platform-bed/platform-bed_d.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/collections/savoy/details/platform-bed/platform-bed_m.jpg', 'title': 'Platform Bed Perks','description': 'This custom platform bed is designed to perform the function of both the bed and the foundation so that there is no need for you to invest or deal with a traditional box spring. Our signature, crosswise slatted construction is optimized to support all mattress types (foam, hybrid, innerspring, etc.) and allows maximum air circulation to support temperature regulation as well as minimize the breeding of mold & germs. After all, it’s your sanctuary—let’s keep it that way.'}]" %}
+    {% assign isReverse = true %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'true','objectUrl': 'http://cdn.insideweather.com/collections/savoy/details/custom-height/custom-height_d.mp4', 'objectUrlMob': 'http://cdn.insideweather.com/collections/savoy/details/custom-height/custom-height_m.mp4', 'title': 'Custom Height','description': 'This custom bed frame’s height is—you guessed it—customizable! Decide if a base height of 12” or 16” is best for you. Both afford under-bed storage space but the latter allows for a bit more flexibility. Both will catch you a little differently when you go in hard for that nap and present a slightly different style & vibe so given you’re the designer—what’s yours?'}]" %}
+    {% assign isReverse = false %}
+    {% assign isDescImg = true %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'http://cdn.insideweather.com/collections/savoy/details/sustainable/sustainable_d.jpg', 'objectUrlMob': 'http://cdn.insideweather.com/collections/savoy/details/sustainable/sustainable_m.jpg', 'title': 'Sustainable Style','description': 'The materials used to make this bed frame have been selected with intention. Our signature baltic birch is FSC certified & topped with an eco-solvent finish. We recycle any excess from each wood sheet we cut, in fact certain designs are even intended to absorb such “waste.” And as always, for every order placed with us one tree is planted via the National Forest Foundation.'}]" %}
+    {% assign isReverse = true %}
+    {% assign isDescImg = false %}
+
+    <div class="categoryDetails --pd-t-130">
+      <category-detail
+        :is-reverse="{{isReverse}}"
+        :is-desc-img="{{isDescImg}}"
+        :category-details="{{categoryDetails}}"></category-detail>
+    </div>
+
+    {% assign lifeStyleItems = "[{'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_01.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:LOW%20HEADBOARD%20-%20FABRIC&feature=UPHOLSTERY:URBAN%20PEARL&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:NO%20SIDE%20TABLE&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Upholstered Bed Frame in Parchment','price':'$878', 'productUrl':'https://insideweather.com/products/su1210di101010-queen-savoy-upholstered-bed-frame-in-parchment'} ]},
+
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_02.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20FABRIC&feature=UPHOLSTERY:URBAN%20PEARL&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Upholstered Bed Frame in Parchment','price':'$1,078', 'productUrl':'https://insideweather.com/products/su1211di101110-queen-savoy-upholstered-bed-frame-in-parchment'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1055&feature=BACK:ROYALE%20BLUSH&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15lvda-20-x-20-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/17/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1006B&feature=BACK:ROYALE%20BLUSH&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15fxda-20-x-20-accent-pillow-cover-only'}]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_03.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20FABRIC&feature=UPHOLSTERY:URBAN%20PEARL&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:HIGH&size=200','title':'Queen Savoy Upholstered Bed Frame in Parchment','price':'$1,128', 'productUrl':'https://insideweather.com/products/su1211di101111-queen-savoy-upholstered-bed-frame-in-parchment'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:MOD%20VELVET%20VANILLA&feature=BACK:MOD%20VELVET%20VANILLA&size=200','title':'22\&#34 X 22\&#34; Accent Pillow (Cover Only)','price':'$44', 'productUrl':'https://insideweather.com/products/pq17cici-22-x-22-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1059&feature=BACK:MERRIT%20HACIENDA&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15fxda-20-x-20-accent-pillow-cover-only'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_04.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20WOOD&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Wood Bed Frame in Latte','price':'$998', 'productUrl':'https://insideweather.com/products/sw1212101110-queen-savoy-wood-bed-frame-in-latte'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:MOD%20VELVET%20VANILLA&feature=BACK:MOD%20VELVET%20VANILLA&size=200','title':'22\&#34 X 22\&#34; Accent Pillow (Cover Only)','price':'$44', 'productUrl':'https://insideweather.com/products/pq17cici-22-x-22-accent-pillow-cover-only'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_05.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20WOOD&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Wood Bed Frame in Latte','price':'$998', 'productUrl':'https://insideweather.com/products/sw1212101110-queen-savoy-wood-bed-frame-in-latte'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1090&feature=BACK:ROYALE%20COBALT&size=200','title':'18\&#34 X 18\&#34; Accent Pillow (Cover Only)','price':'$41', 'productUrl':'https://insideweather.com/products/pq13nedc-18-x-18-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:MONACO%20ECLIPSE&feature=BACK:MONACO%20ECLIPSE&size=200','title':'18\&#34 X 18\&#34; Accent Pillow (Cover Only)','price':'$42', 'productUrl':'https://insideweather.com/products/pq13bgbg-18-x-18-accent-pillow-cover-only'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_06.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20WOOD&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Wood Bed Frame in Latte','price':'$998', 'productUrl':'https://insideweather.com/products/sw1212101110-queen-savoy-wood-bed-frame-in-latte'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:MOD%20VELVET%20VANILLA&feature=BACK:MOD%20VELVET%20VANILLA&size=200','title':'22\&#34 X 22\&#34; Accent Pillow (Cover Only)','price':'$44', 'productUrl':'https://insideweather.com/products/pq17cici-22-x-22-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:VISTA%20ONYX&feature=BACK:VISTA%20ONYX&size=200','title':'22\&#34 X 22\&#34; Accent Pillow (Cover Only)','price':'$44', 'productUrl':'https://insideweather.com/products/pq17dqdq-22-x-22-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_STLM/frames/7/CNV_STLM.JPG?background=FFFFFF&feature=SEAT%20CUSHION%20TYPES:ROUND&feature=BASE%20TYPES:4%20LEG&feature=UPHOLSTERY:MICRO%20SUEDE%20WHISKEY&feature=BASE%20FINISHES:LATTE&feature=EDGE%20FINISHES:LATTE&size=200','title':'Latte Burnham Stool in Whiskey','price':'$208', 'productUrl':'https://insideweather.com/products/br11br11-latte-burnham-stool-in-whiskey'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_07.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20FABRIC&feature=UPHOLSTERY:URBAN%20PEARL&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Upholstered Bed Frame in Parchment','price':'$1,078', 'productUrl':'https://insideweather.com/products/su1211di101110-queen-savoy-upholstered-bed-frame-in-parchment'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1055&feature=BACK:ROYALE%20BLUSH&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15lvda-20-x-20-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/17/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1006B&feature=BACK:ROYALE%20BLUSH&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15fxda-20-x-20-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:MOD%20VELVET%20VANILLA&feature=BACK:MOD%20VELVET%20VANILLA&size=200','title':'22\&#34 X 22\&#34; Accent Pillow (Cover Only)','price':'$44', 'productUrl':'https://insideweather.com/products/pq17cici-22-x-22-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1059&feature=BACK:MERRIT%20HACIENDA&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$44', 'productUrl':'https://insideweather.com/products/pq15lzbx-20-x-20-accent-pillow-cover-only'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_08.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20FABRIC&feature=UPHOLSTERY:URBAN%20PEARL&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:HIGH&size=200','title':'Queen Savoy Upholstered Bed Frame in Parchment','price':'$1,128', 'productUrl':'https://insideweather.com/products/su1211di101111-queen-savoy-upholstered-bed-frame-in-parchment'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/1/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1055&feature=BACK:ROYALE%20BLUSH&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15lvda-20-x-20-accent-pillow-cover-only'},
+    {'productImage':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_SQR/frames/17/CNV_AP_SQR.JPG?background=FFFFFF&feature=FRONT:DS1006B&feature=BACK:ROYALE%20BLUSH&size=200','title':'20\&#34 X 20\&#34; Accent Pillow (Cover Only)','price':'$45', 'productUrl':'https://insideweather.com/products/pq15fxda-20-x-20-accent-pillow-cover-only'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_10.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:HIGH%20HEADBOARD%20-%20WOOD&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:2%20SIDE%20TABLES&feature=LEG%20HEIGHT:HIGH&size=200','title':'Queen Savoy Wood Bed Frame in Latte','price':'$1,048', 'productUrl':'https://insideweather.com/products/sw1212101111-queen-savoy-wood-bed-frame-in-latte'} ]},
+
+    {'image': 'http://cdn.insideweather.com/collections/savoy/lifestyles/col_savoy_lg_v1_09.jpg','popUpList': [{'productImage':'https://content.cylindo.com/api/v2/4931/products/SAVOY%20BED%20FRAME%20-%20QUEEN/frames/1/SAVOY%20BED%20FRAME%20-%20QUEEN.JPG?background=FFFFFF&feature=HEADBOARD%20STYLE:NO%20HEADBOARD&feature=WOOD%20EDGE%20FINISH:LATTE&feature=WOOD%20FINISH:LATTE&feature=SIDE%20TABLE:NO%20SIDE%20TABLE&feature=LEG%20HEIGHT:LOW&size=200','title':'Queen Savoy Wood Bed Frame in Latte','price':'$698', 'productUrl':'https://insideweather.com/products/sw1210101010-queen-savoy-wood-bed-frame-in-latte'} ]}]"%}
+
+    <div class="section_lifeStylePhotos --pd-t-130 --pd-b-130">
+      <life-style-photos
+        :life-style-items="{{lifeStyleItems}}"
+        section-heading="Get Inspired"
+        pop-up-heading="Get Inspired"
+      >
+      </life-style-photos>
+    </div>
+  </div>
+</div>
+
+<script>
+const controller = new ScrollMagic.Controller();
+
+function fadeinup(a, t, y=20) {
+  var el=a;
+  var tar=t;
+  var set=TweenMax.staggerFromTo(el, 0.8, {
+    opacity: 0,
+    y: y
+  }
+  , {
+    y: 0, opacity: 1, force3D: true
+  }
+  , 0.2);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(set).addTo(controller);
+}
+
+function fadeIn(a, t) {
+  var el=a;
+  var tar=t;
+  var setFade=TweenMax.staggerFromTo(el, 0.8, {opacity: 0}, { opacity: 1, force3D: true
+  }, 1);
+  new ScrollMagic.Scene( {
+    triggerElement: tar, reverse: false, triggerHook: "onEnter", offset: 250
+  }
+  ).setTween(setFade).addTo(controller);
+}
+
+jQuery(function ($) {
+
+  $('.CategoryBanner--clasification .point').click(function (event){
+    if($(this).hasClass('show-details')) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(this).find('p').slideToggle();
+      $(this).removeClass('show-details');
+      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
+
+    } else {
+      $('.CategoryBanner--clasification .point p').slideUp();
+      $(this).find('p').slideDown();
+      $('.CategoryBanner--clasification .point').removeClass('show-details');
+      $(this).addClass('show-details');
+    }
+  });
+
+  fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
+  if($(window).width() < 992) {
+    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
+  } else {
+    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
+  }
+
+  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
+  const collectionTween = new TimelineLite()
+  collectionTween.call(function () {
+    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+      var row = $(this).find('.--animElement');
+      setTimeout(function() {
+        TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
+        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+          $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
+        }
+      }, 200 * i);
+    });
+  });
+
+  new ScrollMagic.Scene({
+    triggerElement: '.CtegoryCollections--itemWrapper',
+    reverse: false,
+    triggerHook: "onEnter",
+    offset: 250
+  }).setTween(collectionTween).addTo(controller);
+
+  $('.CategoryDetails .image-content-box').each(function (i) {
+    var figureElement = $(this).find('figure');
+    var contentElements = $(this).find('.HeadingWithDescription *');
+    var videoDetect = $(figureElement).find('video');
+    var categoryDetailsTween=TweenMax.staggerFromTo(figureElement, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.2);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsTween).addTo(controller);
+
+    var categoryDetailsContentTween=TweenMax.staggerFromTo(contentElements, 0.8, {opacity: 0,y: 20}, {y: 0, opacity: 1, force3D: true}, 0.4);
+    new ScrollMagic.Scene( {
+      triggerElement: '.CategoryDetails .image-content-box:nth-of-type('+ (i + 1) +')',
+      reverse: false, triggerHook: "onEnter", offset: 250
+    }).setTween(categoryDetailsContentTween).addTo(controller);
+
+  });
+
+  fadeinup('.CategoryVideo--videoFrame', '.section_categoryVideo', 100);
+  fadeinup('.section_categoryVideo .HeadingWithDescription *', '.section_categoryVideo .HeadingWithDescription');
+  $('.categoryValueProps').each(function (i) {
+    fadeinup('.categoryValueProps:nth-of-type('+ (i + 1) +') .--animElement', '.categoryValueProps:nth-of-type('+ (i + 1) +')')
+  });
+
+  fadeinup('.LifeStylePhotos .HeadingWithDescription *', '.section_lifeStylePhotos');
+
+  $('.LifeStylePhotos--gridContainer .LifeStylePhotos--column').each(function (i) {
+    fadeinup('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') figure', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')', 50)
+    fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
+  });
+});
+
+function toggleSlide(item) {
+  jQuery(item).slideToggle();
+}
+function downSlide(item) {
+  jQuery(item).slideDown();
+}
+</script>

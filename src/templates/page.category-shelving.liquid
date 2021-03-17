@@ -4,14 +4,18 @@
     {% assign hideMobileSlider = true %}
     {% assign hasBannerContent = true %}
     {% assign newButton = true %}
-    {% assign bannerContent = "{'items':[{'image':'https://cdn.insideweather.com/cat/shelving/tb/cat_shelving_tb_d_v2.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/shelving/tb/cat_shelving_tb_m_v1.jpg','heading':'BOOKCASES & SHELVING','description':'Made-to-order sustainably, custom-built here in the U.S., and ships free to you in a manageable box.','linkText':'Customize now','url':'https://insideweather.com/products/ataa141110-38-latte-atlas-shelf'}]}"%}
+    {% assign smallCase = true %}
+    {% assign enableMediumHeight = true %}
+    {% assign bannerContent = "{'items':[{'image':'https://cdn.insideweather.com/cat/shelving/tb/cat_shelving_tb_d_v2.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/shelving/tb/cat_shelving_tb_m_v1.jpg','heading':'Bookcases & Shelving','description':'Made-to-order sustainably, custom-built here in the U.S., and ships free to you in a manageable box.','linkText':'','url':''}]}"%}
 
     <category-banner
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
       :hide-mobile-slider="{{hideMobileSlider}}"
       :has-banner-content="{{hasBannerContent}}"
-      :new-button={{newButton}}
+      :new-button="{{newButton}}"
+      :small-case="{{smallCase}}"
+      :enable-medium-height="{{enableMediumHeight}}"
       >
     </category-banner>
 
@@ -69,8 +73,8 @@
         <customizable-category
           :list-items="{{listItems}}"
           desktop-image="https://cdn.insideweather.com/cat/shelving/customize/cat_shelving-bnr_d_01_v2-min.png"
-          btn-text="Customize Now"
-          destination-url="https://insideweather.com/products/asaa121010-78-latte-atlas-shelf"
+          btn-text=""
+          destination-url=""
           section-heading="The Most Customizable Shelving on the Internet"
           section-description="When we say custom, we mean it. Explore all the ways in which you can manipulate our modular, adjustable shelving collection to make it truly yours. Each one is made to order—per your specs—at our California Crafthouse and ships FREE to your doorstep months faster than any other &ldquo;custom&rdquo; maker out there."
         >
