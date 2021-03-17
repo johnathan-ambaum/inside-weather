@@ -459,6 +459,7 @@ export default {
       });
     };
     setupMulberry();
+    this.setProductOnLoad();
 
   },
 
@@ -861,6 +862,14 @@ export default {
           },
         });
       }
+    },
+    setProductOnLoad(){
+      if(!this.selectedOptions){
+        setTimeout(this.setProductOnLoad, 200);
+        return;
+      }
+      this.setSelectedOptions(this.selectedOptions);
+      return
     }
   },
 };
