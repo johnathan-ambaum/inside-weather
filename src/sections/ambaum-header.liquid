@@ -52,7 +52,7 @@
               {{firstLevelItemDisplayName}}
             {% endif%}
 
-            {% if narrowMenu %}
+          {% if narrowMenu %}
             <div class="ambaum__header-dropdown-narrow">
               <ul>
                 {% for column in firstLevelItem.links %}
@@ -67,7 +67,24 @@
                         <li class="ambaum__header-dropdown-item"><a href="{{narrowLink.url}}">{{narrowLink.title | remove: '[Logout]'}}</a></li>
                       {% endif %}
                     {% else %}
-                      <li class="ambaum__header-dropdown-item"><a href="{{narrowLink.url}}">{{narrowLink.title}}</a></li>
+                      {% if narrowLink.title contains '[Needs Login]' %}
+                        {% if customer %}
+                          <li class="ambaum__header-dropdown-item">
+                            <a href="{{narrowLink.url}}">
+                              {{narrowLink.title | remove: '[Needs Login]'}}
+                            </a>
+                          </li>
+                        {% else %}
+                          <li class="ambaum__header-dropdown-item"
+                            data-ajax-customer-onboard="true"
+                            data-return-to='{{narrowLink.url}}'
+                          >
+                            {{narrowLink.title | remove: '[Needs Login]'}}
+                          </li>
+                        {% endif %}
+                      {% else %}
+                        <li class="ambaum__header-dropdown-item"><a href="{{narrowLink.url}}">{{narrowLink.title}}</a></li>
+                      {% endif %}
                     {% endif %}
                 {% endfor %}
               {% endfor %}
