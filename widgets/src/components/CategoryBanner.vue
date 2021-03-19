@@ -45,8 +45,10 @@
           :class="[hasBannerAccoridon ? '' : 'large-content-frame']"
         >
           <h2
-            class="--caps"
-            :class="animationClass"
+            :class="[
+              (animationClass),
+              (smallCase ? '--small' : '--caps')
+            ]"
             v-if="isBigScreen"
           >
             {{bannerContentItems[0].heading}}
@@ -61,17 +63,20 @@
             {{bannerContentItems[0].description}}
           </p>
           <h2
-            class="--caps"
             :class="[
               (animationClass),
-              (newButton ? 'new-button' : '')
+              (newButton ? 'new-button' : ''),
+              (smallCase ? '--small' : '--caps')
             ]"
             v-if="!isBigScreen"
           >
             {{item.heading}}
           </h2>
           <p
-            :class="animationClass"
+            :class="[
+              (animationClass),
+              (smallCase ? '--small' : '')
+            ]"
             v-if="!isBigScreen"
           >
             {{item.description}}
@@ -130,6 +135,7 @@ export default {
     hasBannerAccoridon: {type: Boolean, default: true},
     enableMediumHeight: {type: Boolean, default: false},
     newButton: {type: Boolean, default: false },
+    smallCase: {type: Boolean, default: false },
   },
   data() {
     return {
@@ -488,6 +494,15 @@ export default {
       max-width: calc(100% - 30px);
       h2 {
         font-size: 22px;
+        &.--small {
+          font-size: 30px;
+          line-height: 40px;
+        }
+      }
+      p {
+        &.--small {
+          line-height: 18px;
+        }
       }
     }
   }

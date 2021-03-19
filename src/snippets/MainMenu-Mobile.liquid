@@ -9,7 +9,7 @@
     {%- for leftParentLink in linklists.redesigned-main-menu-left.links -%}
         {% assign parentLinkIndex = forloop.index%}
         {%- if leftParentLink.links != blank -%}
-            <li class="Mobile__List__Item--DropDown">
+            <li class="Mobile__List__Item--DropDown {% if leftParentLink.title == 'Sale'%}Mobile__List__Item--DropDown-sale{% endif %}">
                 <span class="MobileContent__Dropdown__Title">{{ leftParentLink.title }}<span class="MobileDropDown__Toggler"></span></span>
                 <div class="MobileContent__Dropdown">
                     {% assign currentLink = leftParentLink.title | downcase | strip %}
@@ -27,8 +27,8 @@
                         {%- else -%}
                             <ul class="MobileContent__Dropdown--MultiColumn">
                                 {%- for dropdownLink in leftParentLink.links-%}
-                                    {% unless forloop.last %}
-                                        {% if dropdownLink.links != blank %}                                       
+                                    {% if leftParentLink.title == 'Sale' %}
+                                        {% if dropdownLink.links != blank %}
                                             <li class="Mobile__List__Item--DropDown-grandchild">
                                                 <span class="MobileContent__Dropdown__Title-child">{{  dropdownLink.title }}<span class="MobileDropDown__Toggler-grandchild"></span></span>
                                                 <div class="MobileContent__Dropdown-grandchild">
@@ -38,31 +38,51 @@
                                                         </ul>
                                                     {% endfor %}
                                                 </div>
-                                            </li>                                    
+                                            </li>
+                                        {% else %}
+                                            <li class="Mobile__List__Item-no-children">
+                                                <a href="{{ dropdownLink.url }}">
+                                                    <span class="MobileContent__Dropdown__Title-grandchild">{{  dropdownLink.title }}</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% unless forloop.last %}
+                                        {% if dropdownLink.links != blank %}
+                                            <li class="Mobile__List__Item--DropDown-grandchild">
+                                                <span class="MobileContent__Dropdown__Title-child">{{  dropdownLink.title }}<span class="MobileDropDown__Toggler-grandchild"></span></span>
+                                                <div class="MobileContent__Dropdown-grandchild">
+                                                    {% for grandchildLink in dropdownLink.links %}
+                                                        <ul class="MobileContent__grandchild-Dropdown--MultiColumn">
+                                                            <li><a class="MobileContent__Dropdown__Title-grandchild" href="{{grandchildLink.url}}">{{grandchildLink.title}}</a></li>
+                                                        </ul>
+                                                    {% endfor %}
+                                                </div>
+                                            </li>
                                         {% else %}
                                         <li class="Mobile__List__Item-no-children">
-                                            <a href="{{ dropdownLink.url }}"> 
+                                            <a href="{{ dropdownLink.url }}">
                                                 <span class="MobileContent__Dropdown__Title-grandchild">{{  dropdownLink.title }}</span>
                                             </a>
                                         </li>
                                         {% endif %}
-                                    {% endunless %} 
+                                    {% endunless %}
                                 {%- endfor -%}
                             </ul>
                         {%- endif -%}
                         <div style="width:100%; padding:0 7px;">
                         <div class = "mobile-slider-slot--{{parentLinkIndex}} mobile-slider-slot owl-carousel owl-theme" >
                         </div>
-                        </div> 
+                        </div>
                         {%- for dropdownLink in leftParentLink.links-%}
                             {% if forloop.last and dropdownLink.links != blank  %}
                             {% for grandchildLink in dropdownLink.links %}
-                                <script> 
+                                <script>
                                     var image = "{{grandchildLink.url}}";
                                     if(headerImages[image]){
                                         var slide = $(`<div class="mobile-slider__slide"><a href = ${image}><img class="mobile-slider__image" src="${headerImages[image]['src']}" /></a> <a href = ${image}><div class="mobile-slider__caption">${headerImages[image]['caption']}</div></a></div>`);
                                         slide.appendTo($(".mobile-slider-slot--{{parentLinkIndex}}"));
-                                    }              
+                                    }
                                 </script>
                             {% endfor %}
                             {% endif %}

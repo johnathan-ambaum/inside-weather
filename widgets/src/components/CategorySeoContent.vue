@@ -11,7 +11,10 @@
       >
         <heading-with-description>
           <h2 v-if="content.isTitle === 'true'">{{content.title}}</h2>
-          <p>{{content.copy_one}}</p>
+          <p :class="linkTextClass">{{content.copy_one}}
+            <a :href="content.copy_one_linkto_one">{{content.copy_one_linktext_one}}</a>
+            <span>{{content.copy_one_sub_one}}</span>
+          </p>
           <p :class="linkTextClass">{{content.copy_two}}
             <a :href="content.copy_two_linkto_one">{{content.copy_two_linktext_one}}</a>
             <span>{{content.copy_two_sub_one}}</span>
@@ -19,6 +22,10 @@
             <span>{{content.copy_two_sub_two}}</span>
             <a :href="content.copy_two_linkto_three">{{content.copy_two_linktext_three}}</a>
             <span>{{content.copy_two_sub_three}}</span>
+            <a :href="content.copy_two_linkto_four">{{content.copy_two_linktext_four}}</a>
+            <span>{{content.copy_two_sub_four}}</span>
+            <a :href="content.copy_two_linkto_five">{{content.copy_two_linktext_five}}</a>
+            <span>{{content.copy_two_sub_five}}</span>
           </p>
           <p :class="linkTextClass">{{content.copy_three}}
             <a :href="content.copy_three_linkto_one">{{content.copy_three_linktext_one}}</a>

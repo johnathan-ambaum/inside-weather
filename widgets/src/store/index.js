@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import mutations from './mutations';
 import actions from './actions';
 import { favorites } from './favorites';
+import { history } from './history';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     productCreationInProgress: false,
     category: '',
     favorites,
+    history,
     filters: {},
     openPanel: '',
     selectedOptions: {},

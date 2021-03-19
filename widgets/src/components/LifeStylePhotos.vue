@@ -8,7 +8,10 @@
     >
       <heading-with-description>
         <h2>{{sectionHeading}}</h2>
-        <p>{{sectionDescription}}</p>
+        <p>{{sectionDescription}}
+          <a :href="sectionLink">{{sectionLinkText}}</a>
+          <span>{{sectionSubDescription}}</span>
+        </p>
       </heading-with-description>
       <div
         class="LifeStylePhotos--gridContainer grid--container"
@@ -66,6 +69,9 @@ export default {
     sectionHeading: String,
     lifeStyleItems: Array,
     sectionDescription: String,
+    sectionLinkText: String,
+    sectionLink: String,
+    sectionSubDescription: String,
     popUpHeading: String,
   } ,
   data() {
@@ -106,6 +112,11 @@ export default {
     }
     p {
       line-height: 1.6;
+    }
+
+    a {
+      display: inline;
+      text-decoration: underline;
     }
   }
   .more-info {
