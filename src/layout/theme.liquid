@@ -8,7 +8,7 @@
   {% endif %}
   <script>
     let forceRedirect = localStorage.getItem('forceRedirect');
-    if(forceRedirect === null){
+    if(forceRedirect === null || forceRedirect === 'null'){
       forceRedirect = false;
     }
     const forceRedirectExclusions = ['login', 'register', 'challenge'];
@@ -278,7 +278,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       {% comment %}
       {% section 'header' %}
       {% endcomment %}
-      
+
       {% section 'ambaum-header' %}
 
 
