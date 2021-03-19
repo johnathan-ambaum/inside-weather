@@ -327,7 +327,12 @@
                   {% assign caption = splitByImage[0] | strip %}
                   {% assign imageUrl = splitByImage[1] | strip %}
                   {% assign dropdownIdentifier = firstLevelItemDisplayName | append:'-' | append: secondLevelDisplayName %}
-
+                  {% assign needsLogin = false %}
+                  {% if secondLevelItem.title contains '[Needs Login]' %}
+                    {% unless customer %}
+                    {% assign needsLogin = true %}
+                    {% endunless %}
+                  {% endif %}
 
                   {% if secondLevelItem.title contains '[Login]'%}
                     {% if customer %} {% continue %} {% endif %}
@@ -335,23 +340,43 @@
                   {% elsif secondLevelItem.title contains '[Logout]'%}
                     {% unless customer %} {% continue %} {% endunless %}
                     {% assign secondLevelDisplayName = secondLevelItem.title | remove: '[Logout]' | strip %}
+                  {% elsif secondLevelItem.title contains '[Needs Login]' %}
+                    {% assign secondLevelDisplayName  = secondLevelItem.title | remove: '[Needs Login]' | strip %}
                   {% endif %}
 
                   {% if noSecondLevel %}
                     <div class="{% if secondLevelItem.title contains '[Heading]' %} ambaum__header-dropdown-title--second-level {% else%} ambaum__header-mobile-dropdown-third-level-item {% endif%}">
-                      <a class="ambaum__header-dropdown-link--third-level-item" href="{{secondLevelItem.url}}"
-                        data-header-image='{{imageUrl}}'
-                        data-header-caption='{{caption}}'
-                      >
-                      {% if secondLevelItemInner.title contains '[Heading]' %}
-                        {{ secondLevelDisplayName}}
-                      {% else %}
-                        <span>{{ secondLevelDisplayName }}</span>
-                        <span class="ambaum__header-mobile-list-item-icon">
-                          {% render 'icon-right-arrow' %}
+                      {% if needsLogin %}
+                        <span class="ambaum__header-dropdown-link--third-level-item"
+                          data-ajax-customer-onboard="true"
+                          data-return-to='{{secondLevelItem.url}}'
+                          data-header-image='{{imageUrl}}'
+                          data-header-caption='{{caption}}'
+                        >
+                          {% if secondLevelItemInner.title contains '[Heading]' %}
+                            {{ secondLevelDisplayName}}
+                          {% else %}
+                            <span>{{ secondLevelDisplayName }}</span>
+                            <span class="ambaum__header-mobile-list-item-icon">
+                              {% render 'icon-right-arrow' %}
+                            </span>
+                        {% endif %}
                         </span>
+                      {% else %}
+                        <a class="ambaum__header-dropdown-link--third-level-item" href="{{secondLevelItem.url}}"
+                          data-header-image='{{imageUrl}}'
+                          data-header-caption='{{caption}}'
+                        >
+                        {% if secondLevelItemInner.title contains '[Heading]' %}
+                          {{ secondLevelDisplayName}}
+                        {% else %}
+                          <span>{{ secondLevelDisplayName }}</span>
+                          <span class="ambaum__header-mobile-list-item-icon">
+                            {% render 'icon-right-arrow' %}
+                          </span>
+                        {% endif %}
+                        </a>
                       {% endif %}
-                      </a>
                     </div>
                   {% else %}
                     {% if secondLevelItem.title contains '[Heading]' %}
