@@ -14,6 +14,8 @@
           <p :class="linkTextClass">{{content.copy_one}}
             <a :href="content.copy_one_linkto_one">{{content.copy_one_linktext_one}}</a>
             <span>{{content.copy_one_sub_one}}</span>
+            <a :href="content.copy_one_linkto_two">{{content.copy_one_linktext_two}}</a>
+            <span>{{content.copy_one_sub_two}}</span>
           </p>
           <p :class="linkTextClass">{{content.copy_two}}
             <a :href="content.copy_two_linkto_one">{{content.copy_two_linktext_one}}</a>
