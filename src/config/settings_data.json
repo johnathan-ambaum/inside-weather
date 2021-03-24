@@ -782,13 +782,13 @@
           "text_range": 1,
           "text_range_speed": 6,
           "text_1": "<p>The Spring Sale is almost over! | Save up to <strong>20% OFF<\/strong> sitewide <a href=\"\/pages\/2021-spring-sale\" title=\"2021 Spring Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
-          "mobile_text_1": "<p><a title=\"2021 Spring Sale\" href=\"\/pages\/2021-spring-sale\">The Spring Sale is almost over! Save up to <strong>20% OFF<\/strong> sitewide <\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-spring-sale\" title=\"2021 Spring Sale\">The Spring Sale is almost over! Save up to <strong>20% OFF<\/strong> sitewide <\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
           "promo_countdown_enabled": true,
-          "promo_countdown_end_date": "03\/24\/2021"
+          "promo_countdown_end_date": "03\/27\/2021"
         }
       },
       "giftcard-header": {
