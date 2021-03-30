@@ -3,6 +3,12 @@
     class="CategoryDetails image-content-wrapper"
     ref="CategoryDetails"
   >
+    <div class="CategoryDetailsHeading">
+      <heading-with-description>
+        <h2 v-if="sectionHeading">{{sectionHeading}}</h2>
+        <p v-if="sectionDescription">{{sectionDescription}}</p>
+      </heading-with-description>
+    </div>
     <div class="--custom-container">
       <div
         v-for="(productDetail, index) in categoryDetails"
@@ -80,7 +86,9 @@ export default {
     desktopImage: String,
     mobileImage: String,
 		isReverse: {type: Boolean, default: false},
-		isDescImg: {type: Boolean, default: false}
+		isDescImg: {type: Boolean, default: false},
+    sectionHeading: String,
+    sectionDescription: String
   },
   data() {
     return {
@@ -102,6 +110,10 @@ export default {
 @import '../scss/variables';
 
 .image-content-wrapper {
+  .CategoryDetailsHeading {
+    padding-top: 110px;
+    padding-bottom: 65px;
+  }
   .image-content-box {
     align-items: center;
     display: flex;
@@ -207,6 +219,10 @@ export default {
     }
   }
   @include at-query('max-width: 767px') {
+    .CategoryDetailsHeading {
+      padding-top: 45px;
+      padding-bottom: 36px;
+    }
     .image-content-box {
       flex-wrap: wrap;
       &:not(:last-child) {
