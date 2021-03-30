@@ -773,7 +773,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#e0c7b9",
+          "background_color_1": "#b1c8cd",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -781,13 +781,13 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p>The Spring Sale is almost over! | Save up to <strong>20% OFF<\/strong> sitewide <a href=\"\/pages\/2021-spring-sale\" title=\"2021 Spring Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-spring-sale\" title=\"2021 Spring Sale\">The Spring Sale is almost over! Save up to <strong>20% OFF<\/strong> sitewide <\/a><\/p>",
+          "text_1": "<p>The first custom bed frame is here! <a title=\"The Savoy Collection\" href=\"\/pages\/savoy-collection\">Meet the Savoy Collection<\/a><\/p>",
+          "mobile_text_1": "<p>The 1st custom bed frame is here! <a title=\"The Savoy Collection\" href=\"\/pages\/savoy-collection\">Meet the Savoy Collection<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
+          "promo_countdown_enabled": false,
           "promo_countdown_end_date": "03\/27\/2021"
         }
       },
