@@ -308,12 +308,13 @@ export default {
       return ['fal', 'heart'];
     },
     formattedProductPrice(){
-      const floatPrice = parseFloat(this.productPrice);
-      const endsIn0 = Math.floor(floatPrice) % 1 == 0;
+      if(!this.productPrice){return}
+      const floatPrice = this.productPrice.toFixed(2);
+      const endsIn0 = floatPrice % 1 == 0;
       if(endsIn0){
         return this.productPrice;
       }
-      return this.productPrice.toFixed(2);
+      return parseFloat(this.productPrice.toFixed(2));
     }
   },
 
