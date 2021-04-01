@@ -374,7 +374,8 @@ lazySizesConfig.expFactor = 4;
 
         return dollarsAmount + centsAmount;
       }
-
+      console.log(formatString);
+      console.log(formatString.match(placeholderRegex))
       switch (formatString.match(placeholderRegex)[1]) {
         case 'amount':
           value = formatWithDelimiters(cents, 2);
@@ -390,6 +391,9 @@ lazySizesConfig.expFactor = 4;
           break;
         case 'amount_no_decimals_with_space_separator':
           value = formatWithDelimiters(cents, 0, ' ');
+          break;
+        case 'amount_no_decimals_only_comma':
+          value = formatWithDelimiters(cents, 0, ',', '');
           break;
       }
 
@@ -1348,6 +1352,11 @@ lazySizesConfig.expFactor = 4;
 
           animation_row+=2;
 
+          const SHIPPING_PRICE_COEFFICENT = 0.12; // Arbitrary (12%) percentage of total cart value which represents shipping price to display to user.
+          const shippingPrice = (cart.total_price*SHIPPING_PRICE_COEFFICENT);
+          const shippingPriceRoundedUp = Math.ceil(shippingPrice/100)*100; // to nearest dollar
+          const shippingPriceSaved = theme.Currency.formatMoney(shippingPriceRoundedUp, {% raw %}'${{amount_no_decimals_only_comma}}'{% endraw %});
+
           let currentShippingProtectionItem = JSON.parse(localStorage.getItem("currentShippingProtectionItem"));
           let currentShippingInsurancePrice = currentShippingProtectionItem ?  "+$" + JSON.parse(localStorage.getItem("currentShippingProtectionItem")).variant.price : null;
           let cartHasShippingInsurance = localStorage.getItem("cartHasShippingInsurance") ? JSON.parse(localStorage.getItem("cartHasShippingInsurance")) : true;
@@ -1359,6 +1368,7 @@ lazySizesConfig.expFactor = 4;
             totalCartDiscount: cart.total_discount === 0 ? 0 : theme.strings.cartSavings.replace('[savings]', theme.Currency.formatMoney(cart.total_discount, theme.settings.moneyFormat)),
             cartHasShippingInsurance: items.length > 0 && (cartHasShippingInsurance || cart.items.some(function(item){return item.product_type ===  'Shipping Insurance'})),
             currentShippingInsurancePrice: currentShippingInsurancePrice,
+            shippingPriceSaved: shippingPriceSaved,
             vwo:{
               shippingProtection:{
                 active: theme.settings.vwo.shippingProtection.active,
