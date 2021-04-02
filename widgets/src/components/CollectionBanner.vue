@@ -111,6 +111,9 @@ export default {
             background: #fff;
             border: 1px solid #202020;
             display: inline-block;
+            &:hover {
+              text-decoration: none;
+            }
           }
         }
       }
