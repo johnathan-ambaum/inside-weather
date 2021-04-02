@@ -5,6 +5,7 @@
   >
     <div
       class="CtegoryCollections--heading"
+      v-if="sectionHeading"
       >
       <heading-with-description>
         <h2>
@@ -168,12 +169,15 @@ export default {
     text-decoration: underline;
   }
 }
+.CtegoryCollections--heading {
+  padding: 0 0 75px;
+}
 .CtegoryCollections--itemWrapper {
   align-content: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  padding: 75px 0 50px;
+  padding: 0 0 50px;
   width: 100%;
 
   &.wall-art {
@@ -367,8 +371,11 @@ export default {
 }
 
 @include at-query('max-width: 640px') {
+  .CtegoryCollections--heading {
+    padding: 0 0 50px;
+  }
   .CtegoryCollections--itemWrapper{
-    padding: 50px 0 22px;
+    padding: 0 0 22px;
     li {
       h3 {
         font-size: 14px;
