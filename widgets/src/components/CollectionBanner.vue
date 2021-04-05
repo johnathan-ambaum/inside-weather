@@ -66,17 +66,7 @@ export default {
       figure {
         flex-basis: 50%;
         margin: 0;
-        height: 0;
-        position: relative;
-        overflow: hidden;
-        padding-bottom: 50%;
-
         img {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          top: 0;
           margin: auto;
           object-fit: cover;
           @include block(100%);
@@ -132,20 +122,17 @@ export default {
       }
     }
 
-
-
-    @include at-query('max-width: 767px') {
+    @include at-query('max-width: 768px') {
       .image-content-box {
         display: block;
         padding: 0;
 
         .content-wrapper {
           text-align: center;
-          padding: 0;
+          padding: 30px 14px 34px;
           .HeadingWithDescription {
             margin: 0 auto;
             position: relative;
-            padding: 30px 14px 0;
 
             h2 {
               font-size: 24px;
@@ -166,7 +153,7 @@ export default {
           .link-wrapper {
             a {
               padding: 12px 30px;
-              margin: 0 auto 34px;
+              margin: 0 auto;
               font-size: 12px;
               display: inline-block;
             }
