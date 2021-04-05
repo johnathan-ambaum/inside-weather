@@ -3,7 +3,7 @@
     class="CategoryDetails image-content-wrapper"
     ref="CategoryDetails"
   >
-    <div class="CategoryDetailsHeading">
+    <div class="CategoryDetailsHeading" v-if="sectionHeading">
       <heading-with-description>
         <h2 v-if="sectionHeading">{{sectionHeading}}</h2>
         <p v-if="sectionDescription">{{sectionDescription}}</p>

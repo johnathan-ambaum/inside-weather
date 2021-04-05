@@ -59,15 +59,16 @@ export default {
     max-width: unset;
 
     .image-content-box {
-      align-items: stretch;
       display: flex;
       flex-direction: row-reverse;
+      background: #f2f2f2;
 
       figure {
         flex-basis: 50%;
         margin: 0;
-
         img {
+          margin: auto;
+          object-fit: cover;
           @include block(100%);
         }
       }
@@ -75,8 +76,9 @@ export default {
       .content-wrapper {
         display: block;
         flex-basis: 50%;
-        padding: 50px;
+        padding: 75px 50px;
         background: #f2f2f2;
+        margin: auto;
 
         .HeadingWithDescription {
           margin: auto 0;
@@ -84,7 +86,7 @@ export default {
           h2 {
             margin: 0 0 22px;
             text-align: left;
-            font-size: 34px;
+            font-size: 28px;
             font-weight: 500;
             letter-spacing: 0.12em;
             line-height: 30px;
@@ -102,15 +104,16 @@ export default {
 
         .link-wrapper {
           a {
-            padding: 16px;
+            padding: 16px 38px;
             font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.12em;
             line-height: 30px;
-            border-radius: 24px;
+            border-radius: 60px;
             background: #fff;
             border: 1px solid #202020;
             display: inline-block;
+            font-family: $font-stack-avalon;
             &:hover {
               text-decoration: none;
             }
@@ -119,25 +122,22 @@ export default {
       }
     }
 
-
-
-    @include at-query('max-width: 767px') {
+    @include at-query('max-width: 768px') {
       .image-content-box {
         display: block;
         padding: 0;
 
         .content-wrapper {
           text-align: center;
-          padding: 0;
+          padding: 30px 14px 34px;
           .HeadingWithDescription {
             margin: 0 auto;
             position: relative;
-            padding: 30px 14px 0;
 
             h2 {
               font-size: 24px;
               margin: 0 0 16px;
-              letter-spacing: 0.02em;
+              letter-spacing: 0.2em;
               line-height: 30px;
               text-align: center;
             }
@@ -152,8 +152,8 @@ export default {
           }
           .link-wrapper {
             a {
-              padding: 12px;
-              margin: 0 auto 34px;
+              padding: 12px 30px;
+              margin: 0 auto;
               font-size: 12px;
               display: inline-block;
             }
