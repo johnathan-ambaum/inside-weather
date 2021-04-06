@@ -4,49 +4,76 @@
     {% assign hideMobileSlider = true %}
     {% assign hasBannerContent = true %}
     {% assign newButton = true %}
-    {% assign bannerContent = "{'items':[{'image':'https://cdn.insideweather.com/cat/sofa-line/tb/cat_sofa_tb_d_v2.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/sofa-line/tb/cat_sofa_tb_m_v2.jpg','heading':'CUSTOM SOFAS','description':'Made-to-order sustainably, quickly custom-built from scratch here in the U.S., and ships free to you in a manageable box.','linkText':'Customize now','url':'https://insideweather.com/products/sf17an101010171010-custom-issa-sofa-in-cloud'}]}"%}
+    {% assign smallCase = true %}
+    {% assign enableMediumHeight = true %}
+    {% assign bannerContent = "{'items':[{'altText': 'affordable custom sofas and couches','image':'https://cdn.insideweather.com/cat/sofa-line/sofas/tb/cat_sofa_tb_d_v3.jpg', 'imageSm': 'https://cdn.insideweather.com/cat/sofa-line/sofas/tb/cat_sofa_tb_m_v3.jpg','heading':'Custom Sofas','description':'Made-to-order sustainably, quickly custom-built from scratch here in the U.S., and ships free to you in a manageable box.','linkText':'','url':''}]}"%}
 
     <category-banner
       :banner-content="{{bannerContent}}"
       :hide-desktop-slider="{{hideDesktopSlider}}"
       :hide-mobile-slider="{{hideMobileSlider}}"
       :has-banner-content="{{hasBannerContent}}"
-      :new-button={{newButton}}
+      :new-button="{{newButton}}"
+      :small-case="{{smallCase}}"
+      :enable-medium-height="{{enableMediumHeight}}"
       >
     </category-banner>
 
     {% assign valueProps = "[{'icon':'https://cdn.insideweather.com/cat/sofa-line/vprop-small/usa-ico.png', 'title': 'MADE IN THE USA'},{'icon':'https://cdn.insideweather.com/cat/sofa-line/vprop-small/home-trial-ico.png', 'title': '365 DAY HOME TRIAL'},{'icon':'https://cdn.insideweather.com/cat/sofa-line/vprop-small/free-ship-ico.png', 'title': 'FREE SHIPPING'},{'icon':'https://cdn.insideweather.com/cat/sofa-line/vprop-small/sustainable-ico.png', 'title': 'SUSTAINABLE'}]"%}
+    {% assign backgroundLight = true %}
 
     <hiw-props
       :value-props="{{valueProps}}"
+      :background-light="{{backgroundLight}}"
     ></hiw-props>
 
-    {% assign productCollections = "[{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:ISSA%20(FABRIC)&feature=UPHOLSTERY:ELIOT%20DOVE&feature=CONFIGURATION:CLASSIC_CLASSIC&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:BEVELED&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:BOLSTER&size=400', 'title': 'Issa Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf17bu101110171610-custom-issa-sofa-in-mist'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:LEVI%20(FABRIC)&feature=UPHOLSTERY:ELIOT%20SUNFLOWER&feature=CONFIGURATION:CLASSIC_SPLIT&feature=PILLOW%20AND%20CUSHION%20SHAPE:WATERFALL&feature=PILLOW%20DETAIL:BUTTON%201&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20BRASS&feature=ADD%20ONS:NONE&size=400', 'title': 'Levi Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf14bt131011211010-custom-levi-sofa-in-butterscotch'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:ASHER%20(WOOD)&feature=ARM%20FINISH:LIGHT%20ESPRESSO&feature=UPHOLSTERY:ECLIPSE%20OLIVE&feature=CONFIGURATION:CLASSIC_CLASSIC&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:PILLOW%2020&size=400', 'title': 'Asher Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf22bm101110161310-custom-asher-sofa-in-moss'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:BROOKLYN%20(FABRIC)&feature=UPHOLSTERY:MONACO%20MONDO&feature=CONFIGURATION:SPLIT_SPLIT&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20SILVER&feature=ADD%20ONS:NONE&size=400', 'title': 'Brooklyn Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf18be111210111010-custom-brooklyn-sofa-in-oyster'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:JETT%20(WOOD)&feature=ARM%20FINISH:LATTE&feature=UPHOLSTERY:ROYALE%20COBALT&feature=CONFIGURATION:CLASSIC_SPLIT&feature=PILLOW%20AND%20CUSHION%20SHAPE:WATERFALL&feature=PILLOW%20DETAIL:BUTTON%202&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:SNUG%20PILLOW&size=400', 'title': 'Jett Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf15dc131012131510-custom-jett-sofa-in-sapphire'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:NOX%20(FABRIC)&feature=UPHOLSTERY:ROYALE%20BLUSH&feature=CONFIGURATION:SPLIT_CLASSIC&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:FLARE&feature=BASE%20FINISH:LATTE&feature=ADD%20ONS:PILLOW%2022&size=400', 'title': 'Nox Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf12da121110121410-custom-nox-sofa-in-powder-pink'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:MILO%20(FABRIC)&feature=UPHOLSTERY:MICRO%20SUEDE%20WHISKEY&feature=CONFIGURATION:CLASSIC_SPLIT&feature=PILLOW%20AND%20CUSHION%20SHAPE:PLUSH&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:DOWEL&feature=BASE%20FINISH:BLACK&feature=ADD%20ONS:NONE&size=400', 'title': 'Milo Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf13br131110231010-custom-milo-sofa-in-whiskey'},{'image': 'https://content.cylindo.com/api/v2/4931/products/ANA_SOF/frames/1/ANA_SOF.JPG?background=FFFFFF&feature=ARM%20STYLE:SOBA%20(WOOD)&feature=ARM%20FINISH:LIGHT%20ESPRESSO&feature=UPHOLSTERY:OXFORD%20WEAVE%20PEBBLE&feature=CONFIGURATION:CLASSIC_CLASSIC&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:BUTTON%203&feature=BASE%20STYLE:BEVELED&feature=BASE%20FINISH:LIGHT%20ESPRESSO&feature=ADD%20ONS:BOLSTER&size=400', 'title': 'Soba Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf11co101213171610-custom-soba-sofa-in-pebble'}]" %}
+    {% assign collectionBannerContent = "[{'altText': 'custom sofa', 'imageUrl': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_bnr_v2.png', 'title': 'THE ORIGINAL CUSTOM SOFA', 'description': 'Everything we do here at Inside Weather is custom and nothing embodies that better than our Original Custom Sofa Collection. Tailor every inch of your living room from base to seam to create a sofa that is actually suited to your needs and style. Each sofa is made-to-order and built here in the U.S. so it can arrive at your door soon after you’ve dreamt it up. For the first time in furniture, it’s you that’s behind the design.', 'linkText': 'SHOP THE ORIGINAL CUSTOM COLLECTION', 'url': 'https://insideweather.com/pages/original-custom-collection' }]" %}
 
-    <div class="productCollection --pd-t-130">
+    <div class="collectionBannerContent">
+      <collection-banner
+        :collection-details="{{collectionBannerContent}}"></collection-banner>
+    </div>
+
+    {% assign productCollections = "[{'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-01.jpg', 'title': 'Original Custom Issa Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf17bu101110171610-custom-issa-sofa-in-mist'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-02.jpg', 'title': 'Original Custom Levi Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf14bt131011211010-custom-levi-sofa-in-butterscotch'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-03.jpg', 'title': 'Original Custom Asher Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf22bm101110161310-custom-asher-sofa-in-moss'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-04.jpg', 'title': 'Original Custom Brooklyn Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf18be111210111010-custom-brooklyn-sofa-in-oyster'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-05.jpg', 'title': 'Original Custom Jett Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf15dc131012131510-custom-jett-sofa-in-sapphire'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-06.jpg', 'title': 'Original Custom Nox Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf12da121110121410-custom-nox-sofa-in-powder-pink'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-07.jpg', 'title': 'Original Custom Milo Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf13br131110231010-custom-milo-sofa-in-whiskey'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_01_grid-08.jpg', 'title': 'Original Custom Soba Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/sf11co101213171610-custom-soba-sofa-in-pebble'}]" %}
+
+    <div class="productCollection no-padding">
       <div class="category-collection-main-wrapper">
         <category-collections
           :product-collections="{{productCollections}}"
-          section-heading="Customize Our Best Sellers"
-          section-description="Start with a silhouette and make it your own."
         >
         </category-collections>
       </div>
     </div>
 
-    {% assign listItems = "[{'image':'https://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_m_01_v3-min.png'},{'image':'https://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_m_02_v4-min.png'}]"%}
+    {% assign collectionBannerContent = "[{'altText': 'modular custom sofa', 'imageUrl': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_bnr_v2.png', 'title': 'THE AERO SOFA', 'description': 'Aero’s low profile frame features a stunning architectural back design that looks good from evvvery angle. Smooth, organic curves blended with bold linear statements, this modular custom seating collection was designed with you and your future self in mind—every component being truly modular & adaptable.', 'linkText': 'SHOP THE AERO COLLECTION', 'url': 'https://insideweather.com/pages/aero-collection' }]" %}
 
-    <div class="customizable-category --pd-t-110 --pd-b-130 --pd-m-b-0">
-      <div class="customizable-wrapper" style="background-color: #BFD4D7">
-        <customizable-category
-          :list-items="{{listItems}}"
-          destination-url="https://insideweather.com/products/sf17an101010171010-custom-issa-sofa-in-cloud"
-          desktop-image="https://cdn.insideweather.com/cat/sofa-line/customize/cat_sofa_customize-bnr_d_01_v4-min.png"
-          btn-text="Customize Now"
-          section-heading="The Most Affordable Custom Couch on the Internet"
-          section-description="When we say custom couch, we mean it. Explore all the ways you can modify our sofa to make your custom piece. Each one is made to order—per your specs—at our California Crafthouse and ships free to your doorstep faster than any other &ldquo;custom&rdquo; maker out there—all at an affordable price."
+    <div class="collectionBannerContent">
+      <collection-banner
+        :collection-details="{{collectionBannerContent}}"></collection-banner>
+    </div>
+
+    {% assign productCollections = "[{'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-01_v2.jpg', 'title': 'Aero 4-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/au11ca1310111110-espresso-aero-4-seater-sofa-in-flax'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-02_v2.jpg', 'title': 'Aero 4-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/au10au1112101010-latte-aero-4-seater-sofa-in-dijon'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-03_v2.jpg', 'title': 'Aero 4-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/au11bk2810111110-espresso-aero-4-seater-sofa-in-harbor-blue'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-04_v2.jpg', 'title': 'Aero 4-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/au11dk1013101010-latte-aero-4-seater-sofa-in-ivory'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-05.jpg', 'title': 'Aero 3-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/ah10bg2011101010-latte-aero-3-seater-sofa-in-royal-blue'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-06.jpg', 'title': 'Aero 3-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/ah11ac1710101010-latte-aero-3-seater-sofa-in-rose-quartz'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-07.jpg', 'title': 'Aero 3-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/ah10az1013111110-espresso-aero-3-seater-sofa-in-cognac'},
+    {'image': 'https://cdn.insideweather.com/cat/sofa-line/sofas/grid/cat_sofa_col_02_grid-08.jpg', 'title': 'Aero 3-Seater Sofa', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/ah10bi2110111110-espresso-aero-3-seater-sofa-in-chimney-gray'}]" %}
+
+    <div class="productCollection no-padding">
+      <div class="category-collection-main-wrapper">
+        <category-collections
+          :product-collections="{{productCollections}}"
         >
-        </customizable-category>
+        </category-collections>
       </div>
     </div>
 
@@ -60,10 +87,14 @@
         :is-desc-img="{{isDescImg}}"
         desktop-image="https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_d_v3.png"
         mobile-image="https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_upholstery-icons_m_v3.png"
-        :category-details="{{categoryDetails}}"></category-detail>
+        :category-details="{{categoryDetails}}"
+        section-heading="Details"
+        section-description="Discover what makes an Inside Weather sofa so unique."
+      >
+      </category-detail>
     </div>
 
-    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_d_v2.jpg', 'objectUrlMob': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_m_v2.jpg', 'title': 'The Life-Proof Sofa','description': 'Our sofas are designed to withstand whatever life throws at them. Every upholstered element of each frame is enclosed in a water-resistant nylon casing for the ultimate protection against, well, you. This means even the back panel, the arms, and—of course—the pillows & cushions have this added layer of protection and comfort. Additionally, every cushion & pillow features a concealed zipper for easy, practical removal & cleaning. P.S. For fabric specific info on durability, check out Wyzenbeek Test Method Rub Count Scores on each product page!'}]" %}
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_d_v2.jpg', 'objectUrlMob': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_lifeproof_m_v2.jpg', 'title': 'The Life-Proof Sofas','description': 'Our sofas are designed to withstand whatever life throws at them. Every upholstered element of each sofa is enclosed in a water-resistant nylon casing for the ultimate protection against, well, you. This means even the back panel, the arms on our Original Custom Sofa, and—of course—the pillows & cushions on both sofa collections have this added layer of protection and comfort. Additionally, every cushion & pillow features a concealed zipper for easy, practical removal & cleaning. P.S. For fabric specific info on durability, check out Wyzenbeek Test Method Rub Count Scores on each product page!'}]" %}
     {% assign isReverse = true %}
     {% assign isDescImg = false %}
 
@@ -87,7 +118,7 @@
       </div>
     </div>
 
-    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_d.jpg', 'objectUrlMob': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_m.jpg', 'title': 'The Sofa of 200 Plastic Bottles', 'altText': 'custom couches and sofas', 'description': 'Every upholstered portion of our sofa (yes, even the back) is wrapped in a layer of our Signature Synthetic Down and the pillows are full of it. This cushy, cloud-like material is 100% recycled down alternative and one sofa = roughly 200 recycled plastic bottles. The disposable bottles that we upcycle are sterilized in hot water, ground into tiny flakes, re-melted and extruded to make a polyester fiber. This material helps keep plastics out of our landfills & oceans and helps fill your home with comfortable, sustainable products as we believe both Mother Earth and your comfort are uncompromisable. '}]" %}
+    {% assign categoryDetails = "[{'isVideo':'false','objectUrl': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_d.jpg', 'objectUrlMob': 'https://cdn.insideweather.com/cat/sofa-line/details/cat_sofa_sustainable_m.jpg', 'title': 'The Sofa of 200 Plastic Bottles', 'altText': 'custom couches and sofas', 'description': 'Every upholstered portion of our sofa (yes, even the back on our Original Custom Sofas) is wrapped in a layer of our Signature Synthetic Down and the pillows are full of it. This cushy, cloud-like material is 100% recycled down alternative and one sofa = roughly 200 recycled plastic bottles. The disposable bottles that we upcycle are sterilized in hot water, ground into tiny flakes, re-melted and extruded to make a polyester fiber. This material helps keep plastics out of our landfills & oceans and helps fill your home with comfortable, sustainable products as we believe both Mother Earth and your comfort are uncompromisable. Oh yeah, and did we mention that for every order placed with us one tree is planted via the National Forest Foundation?'}]" %}
     {% assign isReverse = false %}
     {% assign isDescImg = false %}
 

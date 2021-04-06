@@ -1,8 +1,10 @@
 <template>
 	<div>
-		<div class="hiw-section">
+		<div class="hiw-section"
+    :class="[(backgroundLight ? '--light' : '')]"
+    >
 			<ul class="props">
-				<li 
+				<li
 					v-for="valueProp in valueProps"
         	:key="valueProp.$id"
 					class="prop"
@@ -20,9 +22,10 @@
 <script>
 	export default {
 		props: {
-			valueProps: Array
+			valueProps: Array,
+      backgroundLight: {type: Boolean, default: false },
 		}
-	} 
+	}
 </script>
 
 <style lang="scss">
@@ -30,8 +33,11 @@
 	@import '../scss/variables';
 
 	.hiw-section {
-		background: #f2f2f2;	
+		background: #f2f2f2;
 		padding: 18px 0;
+    &.--light {
+      background: #ffffff;
+    }
 		ul {
 			display: flex;
 			flex-wrap: wrap;
@@ -45,7 +51,7 @@
 				&:not(:last-child) {
 					margin-right: 86px;
 				}
-				.hiw-icon {					
+				.hiw-icon {
 					img {
 						width: 34px;
 						height: 23px;
@@ -71,11 +77,11 @@
 						margin-right: 0;
 					}
 					width: 50%;
-					&:nth-child(3),					
+					&:nth-child(3),
 					&:nth-child(4) {
 						margin-top: 8px;
 					}
-					.hiw-icon {					
+					.hiw-icon {
 						img {
 							width: 33px;
 							height: 22px;

@@ -28,7 +28,7 @@
       <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
         :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
-        <span class="ProductCustomizer__Price">{{ productPrice ? `$${productPrice}` : '' }}</span>
+        <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
         <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
         <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ savings }}</span>
         <info-popup v-if="!isDecor"
@@ -53,7 +53,7 @@
       <simple-customizer v-if="isDecor" />
       <button v-else class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
       <add-to-cart :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
-      <p :data-amount="productPrice * 100" data-page-type="product" class="affirm-as-low-as" />
+      <p :data-amount="formattedProductPrice * 100" data-page-type="product" class="affirm-as-low-as" />
     </div>
     <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
       <div class="ProductCustomizer__FlagRow">
@@ -88,7 +88,7 @@
           {{ productName }}
         </div>
         <div class="ProductCustomizer__PriceRow">
-          <span class="ProductCustomizer__Price--mt">${{ productPrice }}</span>
+          <span class="ProductCustomizer__Price--mt">${{ formattedProductPrice }}</span>
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
@@ -307,6 +307,15 @@ export default {
 
       return ['fal', 'heart'];
     },
+    formattedProductPrice(){
+      if(!this.productPrice){return}
+      const floatPrice = this.productPrice.toFixed(2);
+      const endsIn0 = floatPrice % 1 == 0;
+      if(endsIn0){
+        return this.productPrice;
+      }
+      return parseFloat(this.productPrice.toFixed(2));
+    }
   },
 
   watch: {

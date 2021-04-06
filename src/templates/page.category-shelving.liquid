@@ -55,9 +55,11 @@
 
     {'image': 'https://content.cylindo.com/api/v2/4931/products/ATLAS%2078/frames/1/ATLAS%2078.JPG?background=FFFFFF&feature=FINISH:LATTE&feature=EDGE%20FINISH:LATTE&feature=WIDTH:47%20SPLIT%20COMBO&feature=DENSITY:7%20SHELVES&feature=METAL%20PIPE%20FINISH:CARBON%20METAL&size=400', 'title': '78&quot Tall x 47&quot Wide Hybrid', 'linkText': 'CUSTOMIZE NOW', hyperLink: 'https://insideweather.com/products/asaa141210-78-latte-atlas-shelf'}]" %}
 
+    {% assign removeAnimation = true %}
     <div class="productCollection --pd-t-130">
       <div class="category-collection-main-wrapper">
         <category-collections
+          :remove-animation="{{removeAnimation}}"
           :product-collections="{{productCollections}}"
           section-heading="Start with a Height"
           section-description="Then customize the width, shelf configuration, wood finish, and number of shelves to make it yours"
@@ -171,40 +173,18 @@ function fadeIn(a, t) {
 
 jQuery(function ($) {
 
-  $('.CategoryBanner--clasification .point').click(function (event){
-    if($(this).hasClass('show-details')) {
-      event.preventDefault();
-      event.stopPropagation();
-      $(this).find('p').slideToggle();
-      $(this).removeClass('show-details');
-      $('.CategoryBanner .owl-dots button:nth-of-type(1)').trigger('click');
-
-    } else {
-      $('.CategoryBanner--clasification .point p').slideUp();
-      $(this).find('p').slideDown();
-      $('.CategoryBanner--clasification .point').removeClass('show-details');
-      $(this).addClass('show-details');
-    }
-  });
-
   fadeinup('.CategoryBanner .--animElement', ".CategoryBanner");
-  if($(window).width() < 992) {
-    fadeinup('.CategoryBanner .owl-dots button', ".CategoryBanner");
-  } else {
-    fadeinup('.CategoryBanner--clasification .point', ".CategoryBanner");
-  }
 
-  fadeinup('.CtegoryCollections .HeadingWithDescription *', ".productCollection");
   const collectionTween = new TimelineLite()
   collectionTween.call(function () {
-    $('.CtegoryCollections--itemWrapper li').each(function (i) {
+    $('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').each(function (i) {
       var row = $(this).find('.--animElement');
       setTimeout(function() {
         TweenMax.staggerFromTo(row, 0.8, {opacity: 0, y: 20}, {opacity: 1, y: 0, force3D: true}, 0.2);
-        if($('.CtegoryCollections--itemWrapper li').length === (i + 1)) {
+        if($('.CtegoryCollections--itemWrapper li:not(.removeAnimation)').length === (i + 1)) {
           $('.CtegoryCollections--itemWrapper').addClass('--animLoaded');
         }
-      }, 200 * i);
+      }, 400 * i);
     });
   });
 
@@ -246,11 +226,4 @@ jQuery(function ($) {
     fadeIn('.LifeStylePhotos--column:nth-of-type('+ (i + 1) +') .more-info', '.LifeStylePhotos--column:nth-of-type('+ (i + 1) +')')
   });
 });
-
-function toggleSlide(item) {
-  jQuery(item).slideToggle();
-}
-function downSlide(item) {
-  jQuery(item).slideDown();
-}
 </script>
