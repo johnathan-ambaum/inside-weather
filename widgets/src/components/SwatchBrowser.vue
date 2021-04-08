@@ -144,7 +144,7 @@
                       @click="toggleInfo(swatch.variant_id)"
                     >
                       <img
-                        src="//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/icon-info.png"
+                        src="https://cdn.insideweather.com/icons/i-icon.png"
                         alt="info"
                       >
                     </button>
