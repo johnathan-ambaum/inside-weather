@@ -287,7 +287,7 @@ export default {
         return
       }
 
-      setCookie('customerOrderedSwatch', 'true', 7);
+      this.setCookie('customerOrderedSwatch', 'true', 7);
       this.$bus.$emit('swatch-browser:submission-in-progress', true);
       const { email, ...address } = this.address;
       // send order to API for creation
