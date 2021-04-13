@@ -32,7 +32,15 @@
           <p
             v-if="hasErrors"
             class="SwatchesOrderForm__Error"
-          >Please correct the errors below and resubmit.</p>
+          >
+            Please correct the errors below and resubmit.
+          </p>
+          <p
+            v-if="tooManySwatchOrders"
+            class="SwatchesOrderForm__Error"
+          >
+            You've already placed a swatch order.
+          </p>
           <div class="SwatchesOrderForm__Fields">
             <div
               v-for="field in fields"
@@ -134,6 +142,7 @@ export default {
         email: '',
       },
       errors: [],
+      tooManySwatchOrders: false,
       thankYouMessage: '',
     };
   },
@@ -242,6 +251,28 @@ export default {
       return this.errors.length < 1;
     },
 
+    setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      const expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    },
+
+    getCookie(cname) {
+      const name = cname + "=";
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+
     submit() {
       if (this.isSubmitting) {
         return;
@@ -251,6 +282,12 @@ export default {
         return;
       }
 
+      if(this.getCookie('customerOrderedSwatch') === 'true'){
+        this.tooManySwatchOrders = true;
+        return
+      }
+
+      setCookie('customerOrderedSwatch', 'true', 7);
       this.$bus.$emit('swatch-browser:submission-in-progress', true);
       const { email, ...address } = this.address;
       // send order to API for creation
