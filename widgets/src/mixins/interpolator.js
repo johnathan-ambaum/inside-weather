@@ -68,8 +68,10 @@ export default {
         return null;
       }
 
-      let min = [this.filters.min_fulfillment_days];
-      let max = [this.filters.max_fulfillment_days];
+      let min = this.filters.min_fulfillment_days;
+      let max = this.filters.max_fulfillment_days;
+      let selectedOptionsMin = [];
+      let selectedOptionsMax = [];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
@@ -80,12 +82,12 @@ export default {
         if (!selected) {
           return true;
         }
-        min.push(selected.min_fulfillment_days_markup || 0);
-        max.push(selected.max_fulfillment_days_markup || 0);
+        selectedOptionsMin.push(selected.min_fulfillment_days_markup || 0);
+        selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
       });
 
-      let finalMin = Math.max(...min);
-      let finalMax = Math.max(...max)
+      let finalMin = min + Math.max(...selectedOptionsMin);
+      let finalMax = max + Math.max(...selectedOptionsMax);
 
       return finalMin === finalMax ? `${finalMin} business days` :`${finalMin}-${finalMax} business days`;
     },
@@ -95,8 +97,10 @@ export default {
         return null;
       }
 
-      let min = [this.filters.email_min_fulfillment_days];
-      let max = [this.filters.email_max_fulfillment_days];
+      let min = this.filters.email_min_fulfillment_days;
+      let max = this.filters.email_max_fulfillment_days;
+      let selectedOptionsMin = [];
+      let selectedOptionsMax = [];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
@@ -107,12 +111,12 @@ export default {
         if (!selected) {
           return true;
         }
-        min.push(selected.min_fulfillment_days_markup || 0);
-        max.push(selected.max_fulfillment_days_markup || 0);
+        selectedOptionsMin.push(selected.min_fulfillment_days_markup || 0);
+        selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
       });
 
-      let finalMin = Math.max(...min);
-      let finalMax = Math.max(...max)
+      let finalMin = min + Math.max(...selectedOptionsMin);
+      let finalMax = max + Math.max(...selectedOptionsMax);
 
       return finalMin === finalMax ? `${finalMin} business days` :`${finalMin}-${finalMax} business days`;
     },
