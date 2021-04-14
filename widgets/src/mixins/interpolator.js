@@ -68,8 +68,8 @@ export default {
         return null;
       }
 
-      let min = this.filters.min_fulfillment_days;
-      let max = this.filters.max_fulfillment_days;
+      let min = [this.filters.min_fulfillment_days];
+      let max = [this.filters.max_fulfillment_days];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
@@ -80,11 +80,14 @@ export default {
         if (!selected) {
           return true;
         }
-        min += selected.min_fulfillment_days_markup || 0;
-        max += selected.max_fulfillment_days_markup || 0;
+        min.push(selected.min_fulfillment_days_markup || 0);
+        max.push(selected.max_fulfillment_days_markup || 0);
       });
 
-      return `${min}-${max} days`;
+      let finalMin = Math.max(...min);
+      let finalMax = Math.max(...max)
+
+      return finalMin === finalMax ? `${finalMin} business days` :`${finalMin}-${finalMax} business days`;
     },
 
     emailFulfillmentTime() {
@@ -92,8 +95,8 @@ export default {
         return null;
       }
 
-      let min = this.filters.email_min_fulfillment_days;
-      let max = this.filters.email_max_fulfillment_days;
+      let min = [this.filters.email_min_fulfillment_days];
+      let max = [this.filters.email_max_fulfillment_days];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
@@ -104,11 +107,14 @@ export default {
         if (!selected) {
           return true;
         }
-        min += selected.min_fulfillment_days_markup || 0;
-        max += selected.max_fulfillment_days_markup || 0;
+        min.push(selected.min_fulfillment_days_markup || 0);
+        max.push(selected.max_fulfillment_days_markup || 0);
       });
 
-      return `${min}-${max} business days`;
+      let finalMin = Math.max(...min);
+      let finalMax = Math.max(...max)
+
+      return finalMin === finalMax ? `${finalMin} business days` :`${finalMin}-${finalMax} business days`;
     },
 
     hasFulfillmentMarkup() {
