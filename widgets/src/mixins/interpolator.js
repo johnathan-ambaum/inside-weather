@@ -89,7 +89,7 @@ export default {
       let finalMin = min + Math.max(...selectedOptionsMin);
       let finalMax = max + Math.max(...selectedOptionsMax);
 
-      return finalMin === finalMax ? `${finalMin} business days` :`${finalMin}-${finalMax} business days`;
+      return `${finalMin}-${finalMax} business days`;
     },
 
     emailFulfillmentTime() {
@@ -118,7 +118,7 @@ export default {
       let finalMin = min + Math.max(...selectedOptionsMin);
       let finalMax = max + Math.max(...selectedOptionsMax);
 
-      return finalMin === finalMax ? `${finalMin} business days` :`${finalMin}-${finalMax} business days`;
+      return `${finalMin}-${finalMax} days`;
     },
 
     hasFulfillmentMarkup() {
