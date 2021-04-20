@@ -2990,7 +2990,7 @@ lazySizesConfig.expFactor = 4;
 
     var modal = new theme.Modals('fullPageTakeOver', 'full-page-takeover',{ closeOffContentClick: false});
     window.addEventListener('popstate', function(event) {
-      showPage(event.state.page)
+      showPage(event?.state?.page)
     });
     $("button[data-continue='true']").on('click', function(){
       modal.close();
