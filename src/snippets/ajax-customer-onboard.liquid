@@ -6,6 +6,7 @@
           <div class="ajaxCustomerOnboard__wrapper">
             <div class="ajaxCustomerOnboard__login ajaxCustomerOnboard__form">
               <h1 class="ajaxCustomerOnboard__form-header">Login</h1>
+              <p class="ajaxCustomerOnboard__form-description"></p>
               <form method="post" action="/account/login" id="customer_login--modal" accept-charset="UTF-8">
                 <input type="hidden" name="form_type" value="customer_login">
                 <input type="hidden" name="utf8" value="✓">
@@ -149,6 +150,14 @@
     text-align: center;
     font-size:28px;
   }
+  .ajaxCustomerOnboard__form-description{
+    font-family: Avalon;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color:#202020;
+  }
   .ajaxCustomerOnboard__form-input{
     margin-bottom:28px;
     border:1px solid #d4d0ca;
@@ -208,6 +217,9 @@
     }
     .ajaxCustomerOnboard__form-header{
       font-size: 30px;
+    }
+    .ajaxCustomerOnboard__form-description{
+      line-height: 24px;
     }
     .ajaxCustomerOnboard__form-input{
       margin-bottom: 20px;
