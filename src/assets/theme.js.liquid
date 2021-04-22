@@ -2948,7 +2948,9 @@ lazySizesConfig.expFactor = 4;
       if(window.customerId){
         return
       }else{
-        window.ajaxCustomerOnboardCurrentTrigger = evt
+        window.ajaxCustomerOnboardCurrentTrigger = evt;
+        $('.ajaxCustomerOnboard__login .ajaxCustomerOnboard__form-header').text('Login');
+        $('.ajaxCustomerOnboard__login .ajaxCustomerOnboard__form-description').text('');
         modal.open();
       }
       return false;
