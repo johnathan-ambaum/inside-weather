@@ -781,14 +781,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Savings Start NOW<\/a> | Shop Sustainably &amp; Save up to <strong>20% OFF<\/strong><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Sale! Shop Sustainably &amp; Save up to <strong>20% OFF<\/strong><\/a><\/p>",
+          "text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Savings End Soon!<\/a> | Shop Sustainably &amp; Save up to <strong>20% OFF<\/strong><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Savings End Soon! Save up to <strong>20% OFF<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
           "promo_countdown_enabled": true,
-          "promo_countdown_end_date": "04\/16\/2021"
+          "promo_countdown_end_date": "04\/30\/2021"
         }
       },
       "giftcard-header": {
@@ -798,6 +798,10 @@
           "desktop_logo_width": 200,
           "mobile_logo_width": 140
         }
+      },
+      "ambaum-header": {
+        "type": "ambaum-header",
+        "settings": {}
       }
     },
     "content_for_index": [
