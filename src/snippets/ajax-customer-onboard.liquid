@@ -90,7 +90,7 @@
       const event = window.ajaxCustomerOnboardCurrentTrigger;
       const returnToURL = event && event.currentTarget && event.currentTarget.dataset && event.currentTarget.dataset.returnTo ? event.currentTarget.dataset.returnTo : false;
       if(!urlIsExcluded){
-        const redirectPath = returnToURL ? returnToURL : "{{request.path}}" + window.location.search;
+        const redirectPath = returnToURL ? returnToURL : window.location.href + window.location.search;
         localStorage.setItem("forceRedirect", redirectPath);
       }
       $(this).unbind();
