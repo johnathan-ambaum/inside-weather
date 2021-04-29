@@ -88,7 +88,7 @@
     $('#create_customer--modal, #customer_login--modal').submit(function(e){
       e.preventDefault();
       const event = window.ajaxCustomerOnboardCurrentTrigger;
-      const returnToURL = event.currentTarget.attributes['data-return-to'] ? event.currentTarget.attributes['data-return-to'].nodeValue : false;
+      const returnToURL = event && event.currentTarget && event.currentTarget.dataset && event.currentTarget.dataset.returnTo ? event.currentTarget.dataset.returnTo : false;
       if(!urlIsExcluded){
         const redirectPath = returnToURL ? returnToURL : "{{request.path}}" + window.location.search;
         localStorage.setItem("forceRedirect", redirectPath);
