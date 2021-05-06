@@ -773,7 +773,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#aabcb9",
+          "background_color_1": "#b1c8cd",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -781,13 +781,13 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Savings End Soon!<\/a> | Shop Sustainably &amp; Save up to <strong>20% OFF<\/strong><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Savings End Soon! Save up to <strong>20% OFF<\/strong><\/a><\/p>",
+          "text_1": "<p>Meet Our Newest Lounge Chair! <a href=\"https:\/\/insideweather.com\/products\/ad1010ka12-latte-ada-lounge-chair-in-flax\" title=\"The Ada Collection\">Customize the Ada Collection<\/a><\/p>",
+          "mobile_text_1": "<p>Meet Our Newest Lounge Chair! <a href=\"https:\/\/insideweather.com\/products\/ad1010ka12-latte-ada-lounge-chair-in-flax\" title=\"The Ada Collection\">Customize the Ada Collection<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
+          "promo_countdown_enabled": false,
           "promo_countdown_end_date": "04\/30\/2021"
         }
       },
