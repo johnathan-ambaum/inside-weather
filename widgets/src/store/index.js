@@ -4,6 +4,7 @@ import mutations from './mutations';
 import actions from './actions';
 import { favorites } from './favorites';
 import { history } from './history';
+import userData from './userData'
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     swatches: [],
     cylindoViewers: [],
     revertConfiguration:{},
+    pt: userData.pt
   },
   mutations,
   actions,
