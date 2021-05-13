@@ -45,7 +45,12 @@
     if(urlParams.has('pt')){
       const currentPt = getCookie('pt');
       if(!currentPt){
-        setCookie('pt', urlParams.get('pt'), 30)
+        setCookie('pt', urlParams.get('pt'), 30);
+        for(item in localStorage){
+          if(item.includes('.expires')){
+            localStorage.setItem(item, '468806401');//Invalid time stamp to flush cache
+          }
+        }
       }
     }
   </script>
