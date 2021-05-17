@@ -3031,9 +3031,10 @@ lazySizesConfig.expFactor = 4;
       }
     }
     function triggerFPT() {
-      history.pushState({page:99}, null, '?close=true' + urlParams.toString());
-      history.pushState({page:2}, null, '?page=2' + urlParams.toString());
-      history.pushState({page:1}, null, '?page=1' + urlParams.toString());
+      const formattedParams = urlParams.toString() === '' ? '' : `&${urlParams.toString()}`;
+      history.pushState({page:99}, null, '?close=true' + formattedParams);
+      history.pushState({page:2}, null, '?page=2' + formattedParams);
+      history.pushState({page:1}, null, '?page=1' + formattedParams);
       modal.open();
     }
 
