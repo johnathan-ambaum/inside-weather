@@ -773,7 +773,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#b1c8cd",
+          "background_color_1": "#d09c78",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -781,14 +781,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p>Meet Our Newest Lounge Chair! <a href=\"https:\/\/insideweather.com\/products\/ad1010ka12-latte-ada-lounge-chair-in-flax\" title=\"The Ada Collection\">Customize the Ada Collection<\/a><\/p>",
-          "mobile_text_1": "<p>Meet Our Newest Lounge Chair! <a href=\"https:\/\/insideweather.com\/products\/ad1010ka12-latte-ada-lounge-chair-in-flax\" title=\"The Ada Collection\">Customize the Ada Collection<\/a><\/p>",
+          "text_1": "<p>Sitewide Sale! Save <strong>15% OFF<\/strong> everything. Use code <strong>MAY15 <\/strong>|<strong> <\/strong><a href=\"\/pages\/2021-may-sale\" title=\"2021 May Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-may-sale\" title=\"2021 May Sale\">Sitewide Sale! Save <strong>15% OFF<\/strong> everything. Use code <strong>MAY15<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "04\/30\/2021"
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "05\/20\/2021"
         }
       },
       "giftcard-header": {
