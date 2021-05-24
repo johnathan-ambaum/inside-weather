@@ -47,6 +47,18 @@ import CategorySeoContent from './components/CategorySeoContent.vue';
 import Favorites from './components/Favorites.vue';
 import CollectionBanner from './components/CollectionBanner.vue';
 
+// CMS Blocks
+import CategoryProductGrid from './components/CMSBlocks/CategoryProductGrid';
+import CustomSpacer from './components/CMSBlocks/CustomSpacer';
+import ImageText from './components/CMSBlocks/ImageText';
+import ImageTextCta from './components/CMSBlocks/ImageTextCta';
+import LifeStyleGrid from './components/CMSBlocks/LifeStyleGrid';
+import MultiColumnTextImage from './components/CMSBlocks/MultiColumnTextImage';
+import SupportBanner from './components/CMSBlocks/SupportBanner';
+import TopBanner from './components/CMSBlocks/TopBanner'
+import TwoColumnTextImage from './components/CMSBlocks/TwoColumnTextImage';
+import VpropIcons from './components/CMSBlocks/VpropIcons';
+
 (function init() {
   const rootEl = document.querySelector('#app');
   window.updateThemeSettings = function(){store.commit('updateThemeSettings', window.theme.settings)};
@@ -103,7 +115,17 @@ import CollectionBanner from './components/CollectionBanner.vue';
       PageNotFoundBanner,
       CategorySeoContent,
       Favorites,
-      CollectionBanner
+      CollectionBanner,
+      CategoryProductGrid,
+      CustomSpacer,
+      ImageText,
+      ImageTextCta,
+      LifeStyleGrid,
+      MultiColumnTextImage,
+      SupportBanner,
+      TopBanner,
+      TwoColumnTextImage,
+      VpropIcons
     },
 
     mixins: [
