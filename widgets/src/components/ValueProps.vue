@@ -2,9 +2,6 @@
   <div class="ValueProps">
     <div class="content">
       <div class="image_wrapper">
-        <figure class="default" data-src="default">
-          <img :src='defaultImage'>
-        </figure>
         <figure
           v-for="item in valuePropsContent"
           :key="item.id"
@@ -26,7 +23,10 @@
             type="video/mp4"
           />
           </video>
+        </figure>
 
+        <figure class="default" data-src="default">
+          <img :src='defaultImage'>
         </figure>
       </div>
       <div class="descriptions">
@@ -128,8 +128,9 @@ export default {
           bottom: 0;
           height: 100%;
           @include translate(0,0);
-          &.default {
+          ~ .default {
             @include translate(0,-100%);
+            display: none;
           }
         }
       }
