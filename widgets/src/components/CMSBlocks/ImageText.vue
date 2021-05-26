@@ -1,15 +1,198 @@
-<!--
+<template>
+  <div class="ImageText" :style="desktopStyleObject">
+    <div class="ImageText__mobile-image">
+      <figure>
+          <img
+            :src="mobileImage"
+            v-if="!mobileImage.includes('mp4')"
+            :alt="titleCopy"
+          />
+          <video
+            v-if="mobileImage.includes('mp4')"
+            loop autoplay muted playsinline
+          >
+            <source
+              :src="mobileImage"
+              type="video/mp4"
+            />
+          </video>
+      </figure>
+    </div>
+    <div :class="[largeImage ? 'ImageText__desktop-image' : 'ImageText__desktop-image--small']">
+      <figure>
+          <img
+            :src="desktopImage"
+            v-if="!desktopImage.includes('mp4')"
+            :alt="titleCopy"
+          />
+          <video
+            v-if="desktopImage.includes('mp4')"
+            loop autoplay muted playsinline
+          >
+            <source
+              :src="desktopImage"
+              type="video/mp4"
+            />
+          </video>
+      </figure>
+    </div>
+    <div :class="[largeImage ? 'ImageText__content' : 'ImageText__content--large']">
+      <div class="ImageText__title">{{titleCopy}}</div>
+      <div class="ImageText__body" v-html="sanitizedBody"></div>
+      <div v-if="mobileSupportImage" class="ImageText__mobile-support-image"><img :src="mobileSupportImage" :alt="titleCopy"></div>
+      <div v-if="desktopSupportImage" class="ImageText__desktop-support-image"><img :src="desktopSupportImage" :alt="titleCopy"></div>
+    </div>
+  </div>
+</template>
 
-https://trello-attachments.s3.amazonaws.com/5f5a57795db8b11e5bb936f2/606ce4966524c38df1f55303/8a7ca9a005c708d5d6de9ea87dc03c28/cat_block_left-image%2Btext.png
-https://trello-attachments.s3.amazonaws.com/5f5a57795db8b11e5bb936f2/606ce859c8104c37c2ee11b7/35658bb01a64046866d3fb58faf57f96/cat_block_right-text%2Bimage.png
+<script>
+import DOMPurify from 'dompurify';
 
-CONFIGURABLE ELEMENTS:
+export default {
+  props: {
+    titleCopy: String,
+    bodyCopy: String,
+    desktopImage: String,
+    mobileImage: String,
+    desktopSupportImage: String,
+    mobileSupportImage: String,
+    reverse: {type: Boolean, default: false},
+    largeImage: {type: Boolean, default: false}
+  },
 
-Title copy
-Body/Paragraph Copy: need to be able to add in links to this copy. link would be the same css just with text-decoration:underline;
-Main Desktop Image/gif/mp4 file url(display is the same no matter what file type. if mp4, autoplay, mute, and loop please), plus alt text
-Main mobile Image/gif/mp4 file url(display is the same no matter what file type. if mp4, autoplay, mute, and loop please), plus alt text
-Support desktop image (will only be jpg or png) + alt text
-Support mobile image + alt text
+  computed: {
+    mobileStyleObject(){
+      return {}
+    },
+    desktopStyleObject(){
+      return {
+        'flex-direction': this.reverse ? 'row-reverse' : ''
+      }
+    },
+    sanitizedBody(){
+      return DOMPurify.sanitize(this.bodyCopy)
+    }
+  }
+}
+</script>
 
--->
+<style lang='scss'>
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.ImageText{
+  font-family: Avalon;
+  color: #202020;
+  font-weight: 500;
+  @include at-query($breakpoint-large) {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 78px;
+    max-width: 90%;
+    margin:auto;
+  }
+
+  figure{
+    margin:0;
+    padding:0;
+    line-height: 0;
+  }
+
+  video{
+    width:100%;
+  }
+
+  img{
+    display:block;
+    margin: 0 auto;
+    @include at-query($breakpoint-large) {
+      margin: unset;
+    }
+  }
+
+  a{
+    text-decoration: underline;
+  }
+
+  &__desktop-image,
+  &__desktop-image--small,
+  &__desktop-support-image{
+    display:none;
+    @include at-query($breakpoint-large) {
+      display:block;
+    }
+  }
+
+  &__mobile-image,
+  &__mobile-support-image{
+    display:block;
+    @include at-query($breakpoint-large) {
+      display:none;
+    }
+
+    video{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content,
+  &__content--large{
+    backface-visibility: hidden;
+    background-color: white;
+    margin: -90px 28px 0px 28px;
+    padding:26px 22px 0px 22px;
+    @include at-query($breakpoint-large) {
+      margin:0;
+      padding:0;
+      max-width: 423px;
+    }
+  }
+
+  &__content--large{
+    @include at-query($breakpoint-large) {
+      max-width: 523px;
+    }
+  }
+
+  &__title{
+    font-weight: 600;
+    font-size:20px;
+    letter-spacing: 0.05em;
+    margin-bottom:17px;
+
+    @include at-query($breakpoint-large) {
+      font-size: 34px;
+      margin-bottom:30px;
+    }
+  }
+
+  &__body{
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    @include at-query($breakpoint-large) {
+      font-size:14px;
+    }
+  }
+
+  &__mobile-support-image{
+    margin-top:20px;
+  }
+
+
+  &__desktop-image{
+    max-width: 815px;
+  }
+  &__desktop-image--small{
+    max-width: 520px;
+  }
+
+  &__desktop-support-image{
+    margin-top:34px;
+  }
+}
+
+
+</style>
