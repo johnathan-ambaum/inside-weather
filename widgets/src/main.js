@@ -58,6 +58,7 @@ import SupportBanner from './components/CMSBlocks/SupportBanner';
 import TopBanner from './components/CMSBlocks/TopBanner'
 import TwoColumnTextImage from './components/CMSBlocks/TwoColumnTextImage';
 import VpropIcons from './components/CMSBlocks/VpropIcons';
+import TitleText from './components/CMSBlocks/TitleText';
 
 (function init() {
   const rootEl = document.querySelector('#app');
@@ -125,7 +126,8 @@ import VpropIcons from './components/CMSBlocks/VpropIcons';
       SupportBanner,
       TopBanner,
       TwoColumnTextImage,
-      VpropIcons
+      VpropIcons,
+      TitleText
     },
 
     mixins: [

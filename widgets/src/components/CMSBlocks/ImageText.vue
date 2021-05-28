@@ -84,6 +84,7 @@ export default {
   font-family: Avalon;
   color: #202020;
   font-weight: 500;
+
   @include at-query($breakpoint-large) {
     display:flex;
     justify-content: center;
@@ -106,6 +107,7 @@ export default {
   img{
     display:block;
     margin: 0 auto;
+
     @include at-query($breakpoint-large) {
       margin: unset;
     }
@@ -119,6 +121,7 @@ export default {
   &__desktop-image--small,
   &__desktop-support-image{
     display:none;
+
     @include at-query($breakpoint-large) {
       display:block;
     }
@@ -127,6 +130,7 @@ export default {
   &__mobile-image,
   &__mobile-support-image{
     display:block;
+
     @include at-query($breakpoint-large) {
       display:none;
     }
@@ -144,6 +148,7 @@ export default {
     background-color: white;
     margin: -90px 28px 0px 28px;
     padding:26px 22px 0px 22px;
+
     @include at-query($breakpoint-large) {
       margin:0;
       padding:0;
@@ -172,6 +177,7 @@ export default {
   &__body{
     font-size: 12px;
     letter-spacing: 0.04em;
+    
     @include at-query($breakpoint-large) {
       font-size:14px;
     }
