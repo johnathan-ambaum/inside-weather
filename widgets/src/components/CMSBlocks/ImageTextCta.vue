@@ -102,10 +102,16 @@ export default {
     border:1px solid black;
     font-size: 14px;
     letter-spacing: 0.12em;
+    
+    &:empty{
+      display:none;
+    }
+
     @include at-query($breakpoint-large) {
       margin: 0 auto 50px 0;
 
     }
+
   }
 
   &__image img{

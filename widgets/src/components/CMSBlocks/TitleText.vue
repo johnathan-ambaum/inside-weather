@@ -27,7 +27,6 @@ export default {
 @import '../../scss/variables';
 
 .TitleText {
-  font-family: $font-stack-avalon;
   max-width: 800px;
   color:#202020;
   text-align: center;
@@ -42,6 +41,7 @@ export default {
     font-size: 20px;
     letter-spacing: 0.05em;
     margin-bottom:15px;
+    font-family: $font-stack-avalon;
 
     @include at-query($breakpoint-large) {
       font-size: 34px;
@@ -53,6 +53,8 @@ export default {
     font-size: 13px;
     letter-spacing: 0.04em;
     line-height: 20px;
+    font-family: $font-stack-avalon;
+    font-weight: 500;
 
     @include at-query($breakpoint-large) {
       font-size: 14px;
