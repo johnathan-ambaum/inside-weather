@@ -781,14 +781,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p>Our Memorial Day Sale is here! | Save up to <strong>20% OFF<\/strong> Sitewide <a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\">Our Memorial Day Sale is here! | Save up to <strong>20% OFF<\/strong> Sitewide <\/a><\/p>",
+          "text_1": "<p>Last chance! Our Memorial Day Sale ends soon. <a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\">SAVE 20% OFF<\/a><\/p>",
+          "mobile_text_1": "<p>Our Memorial Day Sale ends soon! <a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\">SAVE 20% OFF<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
           "promo_countdown_enabled": true,
-          "promo_countdown_end_date": "05\/31\/2021"
+          "promo_countdown_end_date": "06\/02\/2021"
         }
       },
       "giftcard-header": {
