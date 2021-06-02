@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="ImageTextCta__image">
-      <img :src="imageUrl" :alt="imageAltText">
+      <img :src="image" :alt="altText">
     </div>
   </div>
 </template>
@@ -18,8 +18,8 @@ export default {
   props: {
     titleCopy: String,
     bodyCopy: String,
-    imageUrl: String,
-    imageAltText: String,
+    image: String,
+    altText: String,
     buttonText: String,
     buttonUrl: String,
   },
@@ -102,7 +102,7 @@ export default {
     border:1px solid black;
     font-size: 14px;
     letter-spacing: 0.12em;
-    
+
     &:empty{
       display:none;
     }

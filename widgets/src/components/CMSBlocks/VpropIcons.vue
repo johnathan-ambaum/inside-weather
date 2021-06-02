@@ -2,8 +2,8 @@
   <div class="VpropIcons" :style="styleObject">
     <div class="VpropIcons__inner">
       <div class="VpropIcons__icon" v-for="(icon, index) in icons" :key="index">
-        <img :src="icon.iconImage" :alt="icon.iconText">
-        <span>{{icon.iconText}}</span>
+        <img :src="icon.image" :alt="icon.text">
+        <span>{{icon.text}}</span>
       </div>
     </div>
   </div>

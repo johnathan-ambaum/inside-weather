@@ -3,7 +3,7 @@
     <div class="CategoryProductGrid__inner" :style="styleObject">
       <div class="CategoryProductGrid__item" v-for="(product, index) in products" :key="index">
         <a :href="product.destination">
-          <img class="CategoryProductGrid__image" :src="product.imageUrl" :alt="product.titleCopy">
+          <img class="CategoryProductGrid__image" :src="product.image" :alt="product.titleCopy">
           <div class="CategoryProductGrid__title">{{product.titleCopy}}</div>
           <div class="CategoryProductGrid__cta">CUSTOMIZE NOW</div>
         </a>

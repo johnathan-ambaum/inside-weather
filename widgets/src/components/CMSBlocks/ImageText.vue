@@ -21,16 +21,16 @@
     <div :class="[largeImage ? 'ImageText__desktop-image' : 'ImageText__desktop-image--small']">
       <figure>
           <img
-            :src="desktopImage"
-            v-if="!desktopImage.includes('mp4')"
+            :src="image"
+            v-if="!image.includes('mp4')"
             :alt="titleCopy"
           />
           <video
-            v-if="desktopImage.includes('mp4')"
+            v-if="image.includes('mp4')"
             loop autoplay muted playsinline
           >
             <source
-              :src="desktopImage"
+              :src="image"
               type="video/mp4"
             />
           </video>
@@ -52,7 +52,7 @@ export default {
   props: {
     titleCopy: String,
     bodyCopy: String,
-    desktopImage: String,
+    image: String,
     mobileImage: String,
     desktopSupportImage: String,
     mobileSupportImage: String,
@@ -177,7 +177,7 @@ export default {
   &__body{
     font-size: 12px;
     letter-spacing: 0.04em;
-    
+
     @include at-query($breakpoint-large) {
       font-size:14px;
     }

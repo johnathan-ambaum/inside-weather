@@ -1,7 +1,7 @@
 <template>
   <div class="TopBanner category">
-    <img class="TopBanner__mobile-image" :src="mobileImage" :alt="mobileAltText">
-    <img class="TopBanner__desktop-image" :src="desktopImage" :alt="desktopAltText">
+    <img class="TopBanner__mobile-image" :src="mobileImage" :alt="altText">
+    <img class="TopBanner__desktop-image" :src="image" :alt="altText">
     <transition enter-active-class="animated fadeInUp" appear>
       <div class="TopBanner__info">
         <div class="TopBanner__title" :style="titleStyleObject">{{titleCopy}}</div>
@@ -15,10 +15,9 @@
 
 export default {
   props: {
-    desktopImage: String,
-    desktopAltText: String,
+    image: String,
+    altText: String,
     mobileImage: String,
-    mobileAltText: String,
     titleCopy: String,
     titleCopyColor: String,
     bodyCopy: String,
