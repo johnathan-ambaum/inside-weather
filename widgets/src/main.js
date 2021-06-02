@@ -46,6 +46,8 @@ import PageNotFoundBanner from './components/PageNotFoundBanner.vue';
 import CategorySeoContent from './components/CategorySeoContent.vue';
 import Favorites from './components/Favorites.vue';
 import CollectionBanner from './components/CollectionBanner.vue';
+import GlideSlider from './components/GlideSlider.vue';
+import GlideSlide from './components/GlideSlide.vue'
 
 // CMS Blocks
 import CategoryProductGrid from './components/CMSBlocks/CategoryProductGrid';
@@ -117,6 +119,8 @@ import TitleText from './components/CMSBlocks/TitleText';
       CategorySeoContent,
       Favorites,
       CollectionBanner,
+      GlideSlider,
+      GlideSlide,
       CategoryProductGrid,
       CustomSpacer,
       ImageText,
