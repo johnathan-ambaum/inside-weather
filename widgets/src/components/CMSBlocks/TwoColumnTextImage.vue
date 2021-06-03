@@ -18,7 +18,7 @@
     </div>
     <div v-else>
       <div class="TwoColumnTextImage__columns">
-        <div class="TwoColumnTextImage__column" v-for='column in columns' :key="column.caption">
+        <div class="TwoColumnTextImage__column" v-for='(column, index) in columns' :key="index">
           <img class="TwoColumnTextImage__column-image" :src="column.image" :alt="column.altText">
           <div class="TwoColumnTextImage__column-caption">{{column.caption}}</div>
           <div class="TwoColumnTextImage__column-title">{{column.titleCopy}}</div>
