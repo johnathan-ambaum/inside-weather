@@ -54,7 +54,7 @@ import CategoryProductGrid from './components/CMSBlocks/CategoryProductGrid';
 import CustomSpacer from './components/CMSBlocks/CustomSpacer';
 import ImageText from './components/CMSBlocks/ImageText';
 import ImageTextCta from './components/CMSBlocks/ImageTextCta';
-import LifeStyleGrid from './components/CMSBlocks/LifeStyleGrid';
+import LifestyleGrid from './components/CMSBlocks/LifestyleGrid';
 import MultiColumnTextImage from './components/CMSBlocks/MultiColumnTextImage';
 import SupportBanner from './components/CMSBlocks/SupportBanner';
 import TopBanner from './components/CMSBlocks/TopBanner'
@@ -125,7 +125,7 @@ import TitleText from './components/CMSBlocks/TitleText';
       CustomSpacer,
       ImageText,
       ImageTextCta,
-      LifeStyleGrid,
+      LifestyleGrid,
       MultiColumnTextImage,
       SupportBanner,
       TopBanner,
