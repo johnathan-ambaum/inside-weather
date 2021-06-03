@@ -4,7 +4,7 @@
     <div class="TwoColumnTextImage__body">{{bodyCopy}}</div>
     <div v-if="isMobile">
       <glide-slider>
-        <glide-slide v-for='column in columns' :key="column.caption">
+        <glide-slide v-for='(column, index) in columns' :key="index">
           <div class="TwoColumnTextImage__column">
             <img class="TwoColumnTextImage__column-image" :src="column.mobileImage" :alt="column.altText">
             <div class="TwoColumnTextImage__column-caption">{{column.caption}}</div>

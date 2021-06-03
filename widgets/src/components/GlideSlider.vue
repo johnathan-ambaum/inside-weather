@@ -1,5 +1,5 @@
 <template>
-  <div class="glide">
+  <div class="glide" ref="glide">
     <div class="glide__track" data-glide-el="track">
       <div class="glide__slides">
         <slot></slot>
@@ -18,9 +18,10 @@ import Glide, { Swipe, Controls } from '@glidejs/glide/dist/glide.modular.esm';
 export default {
   mounted(){
     this.$nextTick(() => {
-      this.glide = new Glide('.glide',{
+      this.glide = new Glide(this.$refs.glide,{
         swipeThreshold: 30,
-        dragThreshold: 30
+        dragThreshold: 30,
+        gap:0
       });
 
       this.glide.mount({ Swipe, Controls });
