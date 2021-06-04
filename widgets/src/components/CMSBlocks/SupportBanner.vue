@@ -79,7 +79,7 @@ export default {
     font-size: 24px;
     letter-spacing: 0.05em;
     line-height: 30px;
-    margin: 36px auto 24px auto;
+    margin: 36px 24px 24px 24px;
 
     @include at-query($breakpoint-large) {
       font-size: 34px;

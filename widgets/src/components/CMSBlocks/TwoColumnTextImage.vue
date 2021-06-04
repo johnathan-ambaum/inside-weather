@@ -84,14 +84,14 @@ export default {
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: 1fr;
       grid-column-gap: 26px;
-      max-width: 750px;
+      max-width: 1310px;
       margin: 28px auto 68px auto;
     }
   }
 
   &__column{
     @include at-query($breakpoint-large) {
-      max-width: 375px;
+      max-width: 605px;
     }
   }
 
@@ -128,7 +128,7 @@ export default {
     width:100%;
 
     @include at-query($breakpoint-large) {
-      max-width: 375px;
+      max-width: 605px;
       max-height: auto;
     }
   }
@@ -158,7 +158,6 @@ export default {
     font-size:13px;
     letter-spacing: 0.05em;
     margin: 8px auto 20px auto;
-
     @include at-query($breakpoint-large) {
       font-size: 15px
     }
@@ -181,6 +180,7 @@ export default {
     letter-spacing: 0.04em;
     line-height: 20px;
     margin: 24px 24px 0px 24px;
+    max-width: 285px;
 
     @include at-query($breakpoint-large) {
       max-width: 285px;
