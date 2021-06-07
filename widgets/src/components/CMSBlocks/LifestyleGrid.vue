@@ -8,19 +8,21 @@
     <div class="LifeStyleGrid__modal" v-if="showModal">
       <div class="LifeStyleGrid__modal-inner">
         <div class="LifeStyleGrid__modal-content">
-          <div class="LifeStyleGrid__modal-close" @click="toggleModal()">&#xd7;</div>
+          <div class="LifeStyleGrid__modal-close" @click="toggleModal()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.121 32.121" > <g transform="translate(-1800.004 -54.004)"> <line y2="42.426" transform="translate(1801.065 55.065) rotate(-45)" fill="none" stroke="currentColor" stroke-width="3"/> <line y2="42.426" transform="translate(1831.065 55.065) rotate(45)" fill="none" stroke="currentColor" stroke-width="3"/></g></svg></div>
           <div class="LifeStyleGrid__modal-image">
             <img :src="modalImage" :alt="modalAlt">
           </div>
           <div class="LifeStyleGrid__modal-products">
             <div class="LifeStyleGrid__modal-products-heading">Get Inspired</div>
-            <a class="LifeStyleGrid__modal-product" v-for="(product, index) in modalProducts" :key="index" :href="product.destination">
-              <img :src="product.image" :alt="product.altText" width="65" height="65">
+            <div class="LifeStyleGrid__modal-product" v-for="(product, index) in modalProducts" :key="index" >
+              <a :href="product.destination"><img :src="product.image" :alt="product.altText" width="65" height="65"></a>
               <div>
-                <div class="LifeStyleGrid__modal-product-title">{{product.titleCopy}}</div>
+                <a :href="product.destination">
+                  <div class="LifeStyleGrid__modal-product-title">{{product.titleCopy}}</div>
+                </a>
                 <div class="LifeStyleGrid__modal-product-price">{{product.price}}</div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -33,6 +35,16 @@ export default {
   props: {
     images: Array
   },
+
+  created() {
+    document.addEventListener('keyup',  (evt) => {
+      if (evt.keyCode === 27) {
+        document.querySelector('html').classList.remove('lock');
+        this.showModal = false;
+      }
+    });
+  },
+
   data(){
     return {
       showModal: false,
@@ -126,7 +138,7 @@ html {
 
     &:after{
       content: '';
-      background:url('https://cdn.shopify.com/s/files/1/2994/0144/files/more-info.png?v=1622720343');
+      background:url('https://cdn.insideweather.com/icons/cat_lifestyle-grid-ico.png');
       width: 21px;
       height: 21px;
       display: block;
@@ -195,7 +207,7 @@ html {
       width:calc(100% - 48px);
       margin: 15% auto;
       @include at-query($breakpoint-large) {
-        height: 800px;
+        max-height: 714px;
         margin: 5% auto;
         width: 1000px;
       }
@@ -216,7 +228,7 @@ html {
 
       @include at-query($breakpoint-large) {
         flex-basis: 65%;
-        height: 800px;
+        height: 714px;
       }
 
 
@@ -229,7 +241,7 @@ html {
         height:345px;
         @include at-query($breakpoint-large) {
 
-          height: 800px;
+          height: 714px;
         }
       }
     }
@@ -246,7 +258,6 @@ html {
 
     &-product{
       display: flex;
-      justify-content: center;
       align-items: center;
       margin: 20px 0;
 
@@ -273,6 +284,7 @@ html {
       &-price{
         font-weight: 400;
         margin-top:5px;
+        text-decoration: none;
       }
     }
 
@@ -286,22 +298,36 @@ html {
 
       @include at-query($breakpoint-large) {
         text-align: left;
+        padding: 25px 20px 0px 0px;
       }
     }
   }
 
   &__modal-close{
     position: absolute;
-    top: -65px;
-    right: -5px;
-    padding: 15px;
-    font-size: 40px;
+    top: -27px;
+    right: 8px;
     cursor: pointer;
-    color:white;
+
+    *{
+      color: white;
+      @include at-query($breakpoint-large) {
+        color:#202020;
+      }
+    }
+
+    svg{
+      width:14px;
+      height:14px;
+      @include at-query($breakpoint-large) {
+        width:17px;
+        height:17px;
+      }
+    }
 
     @include at-query($breakpoint-large) {
-      color:black;
-      top: -25px;
+      top: 11px;
+      right: 16px;
     }
   }
 }
