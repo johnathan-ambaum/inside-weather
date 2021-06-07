@@ -8,7 +8,7 @@
     <div class="LifeStyleGrid__modal" v-if="showModal">
       <div class="LifeStyleGrid__modal-inner">
         <div class="LifeStyleGrid__modal-content">
-          <div class="LifeStyleGrid__modal-close" @click="toggleModal()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.121 32.121" > <g transform="translate(-1800.004 -54.004)"> <line y2="42.426" transform="translate(1801.065 55.065) rotate(-45)" fill="none" stroke="currentColor" stroke-width="3"/> <line y2="42.426" transform="translate(1831.065 55.065) rotate(45)" fill="none" stroke="currentColor" stroke-width="3"/></g></svg></div>
+          <div class="LifeStyleGrid__modal-close" @click="toggleModal()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.121 32.121" > <g transform="translate(-1800.004 -54.004)"> <line y2="42.426" transform="translate(1801.065 55.065) rotate(-45)" fill="none" stroke="currentColor" stroke-width="4"/> <line y2="42.426" transform="translate(1831.065 55.065) rotate(45)" fill="none" stroke="currentColor" stroke-width="4"/></g></svg></div>
           <div class="LifeStyleGrid__modal-image">
             <img :src="modalImage" :alt="modalAlt">
           </div>
@@ -320,8 +320,8 @@ html {
       width:14px;
       height:14px;
       @include at-query($breakpoint-large) {
-        width:17px;
-        height:17px;
+        width:18px;
+        height:18px;
       }
     }
 
