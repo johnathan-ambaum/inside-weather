@@ -773,22 +773,22 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#d6bdaf",
+          "background_color_1": "#312d28",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
-          "font_color_1": "#ffffff",
+          "font_color_1": "#d6bdaf",
           "font_color_2": "#ffffff",
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 6,
-          "text_1": "<p>Last chance! Our Memorial Day Sale ends soon. <a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\">SAVE 20% OFF<\/a><\/p>",
-          "mobile_text_1": "<p>Our Memorial Day Sale ends soon! <a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\">SAVE 20% OFF<\/a><\/p>",
+          "text_1": "<p>Final hours! Our Memorial Day Sale ends tonight. Save up to 20% OFF | <a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-memorial-day-sale\" title=\"2021 Memorial Day Sale\">Memorial Day savings end tonight! Save up to<strong> 20% OFF<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
           "promo_countdown_enabled": true,
-          "promo_countdown_end_date": "06\/02\/2021"
+          "promo_countdown_end_date": "06\/08\/2021"
         }
       },
       "giftcard-header": {
