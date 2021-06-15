@@ -779,16 +779,16 @@
           "font_color_1": "#ffffff",
           "font_color_2": "#ffffff",
           "font_color_3": "#202020",
-          "text_range": 1,
-          "text_range_speed": 6,
-          "text_1": "<p>Meet Our Newest Lounge Chair! <a href=\"https:\/\/insideweather.com\/products\/ad1010ka12-latte-ada-lounge-chair-in-flax\" title=\"The Ada Collection\">Customize the Ada Collection<\/a><\/p>",
-          "mobile_text_1": "<p>Meet Our Newest Lounge Chair! <a href=\"https:\/\/insideweather.com\/products\/ad1010ka12-latte-ada-lounge-chair-in-flax\" title=\"The Ada Collection\">Customize the Ada Collection<\/a><\/p>",
-          "text_2": "",
-          "mobile_text_2": "",
+          "text_range": 2,
+          "text_range_speed": 5,
+          "text_1": "<p>Fast & Free Shipping on ALL Orders<\/p>",
+          "mobile_text_1": "<p>Fast & Free Shipping on ALL Orders<\/p>",
+          "text_2": "<p>365 Day Home Trial<\/p>",
+          "mobile_text_2": "<p>365 Day Home Trial<\/p>",
           "text_3": "",
           "mobile_text_3": "",
           "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "04\/30\/2021"
+          "promo_countdown_end_date": "06\/08\/2021"
         }
       },
       "giftcard-header": {

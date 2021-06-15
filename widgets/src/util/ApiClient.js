@@ -1,5 +1,4 @@
-import { debounce } from './helpers';
-
+import { debounce, getCookie } from './helpers';
 export default class ApiClient {
   constructor(options) {
     this.options = Object.assign({}, {
@@ -186,6 +185,10 @@ export default class ApiClient {
       image_url: image,
       attributes,
     };
+
+    let userData = {};
+    userData.pt = getCookie('pt');
+    body.userData = userData;
 
     return new Promise((resolve, reject) => this.debouncedProductRequest({
       method: 'POST', url, body, resolve, reject,

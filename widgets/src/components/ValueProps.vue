@@ -2,31 +2,31 @@
   <div class="ValueProps">
     <div class="content">
       <div class="image_wrapper">
-        <figure class="default" data-src="default">
-          <img :src='defaultImage'>
-        </figure>
-        <figure 
+        <figure
           v-for="item in valuePropsContent"
           :key="item.id"
           v-bind:data-src="item.targetPoint"
         >
-          <img 
+          <img
             v-if="item.isVideo === 'false'"
             :src="item.url"
           >
 
-          <video 
+          <video
             v-if="item.isVideo === 'true'"
             id="valuePropsVideoPlayer"
             class="valuePropsVideo"
             autoplay loop muted playsinline
           >
-          <source 
+          <source
             :src="item.url"
-            type="video/mp4" 
-          /> 
+            type="video/mp4"
+          />
           </video>
-          
+        </figure>
+
+        <figure class="default" data-src="default">
+          <img :src='defaultImage'>
         </figure>
       </div>
       <div class="descriptions">
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      valuePropsContent: this.valuePropsItems  
+      valuePropsContent: this.valuePropsItems
     }
   }
 }
@@ -128,8 +128,9 @@ export default {
           bottom: 0;
           height: 100%;
           @include translate(0,0);
-          &.default {
+          ~ .default {
             @include translate(0,-100%);
+            display: none;
           }
         }
       }
@@ -144,7 +145,7 @@ export default {
         margin: 0;
         position: absolute;
         text-transform: capitalize;
-        top: 135px;
+        top: 80px;
         max-width: 330px;
         @include fonts(28px,#202020,1.2,0.04em);
       }
@@ -168,7 +169,7 @@ export default {
           font-size: 28px;
         }
       }
-      
+
     }
   }
   @include at-query('max-width: 1199px') {
@@ -183,14 +184,14 @@ export default {
       .descriptions {
         padding-left: 75px;
         h2 {
-          top: 110px;
+          top: 80px;
           max-width: 330px;
         }
       }
     }
   }
   @include at-query('max-width: 991px') {
-    padding: 0 0 53px;    
+    padding: 0 0 53px;
     &::before {
       height: calc(100% - 70px);
     }
