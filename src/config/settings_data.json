@@ -773,22 +773,22 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#b1c8cd",
+          "background_color_1": "#57a8ae",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
           "font_color_2": "#ffffff",
           "font_color_3": "#202020",
-          "text_range": 2,
+          "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p>Fast & Free Shipping on ALL Orders<\/p>",
-          "mobile_text_1": "<p>Fast & Free Shipping on ALL Orders<\/p>",
-          "text_2": "<p>365 Day Home Trial<\/p>",
-          "mobile_text_2": "<p>365 Day Home Trial<\/p>",
+          "text_1": "<p>The Summer Sale Starts Now ☀️  Up to 20% OFF Sitewide <a href=\"\/pages\/2021-summer-sale\" title=\"2021 SUMMER SALE\"><strong>SHOP NOW<\/strong><\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-summer-sale\" title=\"2021 SUMMER SALE\">The Summer Sale Starts Now ☀️   Up to <strong>20% OFF<\/strong> Sitewide<\/a><\/p>",
+          "text_2": "",
+          "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "06\/08\/2021"
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "06\/22\/2021"
         }
       },
       "giftcard-header": {
