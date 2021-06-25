@@ -53,7 +53,7 @@ export default {
 
 .InfoPopup {
   cursor: pointer;
-  display: inline;
+  display: flex;
   align-items: center;
   position: relative;
 
