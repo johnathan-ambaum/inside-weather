@@ -18,7 +18,7 @@
             <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
-        <div v-else>
+        <div v-else-if="!isClearance">
           <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
             data-ajax-customer-onboard="true">
             <font-awesome-icon :icon="favoriteIcon" />
@@ -30,11 +30,14 @@
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
         <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
-        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ savings }}</span>
+        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ isClearance ? clearanceData.savings : savings }}</span>
         <info-popup v-if="!isDecor"
           text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
+      </div>
+      <div v-if="isClearance" class="ProductCustomizer__clearance-condition">
+        Condition: <span>{{clearanceData.condition}}</span>
       </div>
       <div class="ProductCustomizer__ShippingDays">
         <template v-if="isDecor">
@@ -50,9 +53,10 @@
         </info-popup>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
-      <simple-customizer v-if="isDecor" />
-      <button v-else class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
-      <add-to-cart :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
+      <simple-customizer v-if="isDecor && !isClearance" />
+      <button v-else-if="!isClearance" class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
+      <add-to-cart v-if="!clearanceData.floorFound" :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
+      <a v-else :href="clearanceData.floorFoundUrl" rel="noreferrer" class="ProductCustomizer__floorfound-link">View Product on Floorfound</a>
       <p :data-amount="formattedProductPrice * 100" data-page-type="product" class="affirm-as-low-as" />
     </div>
     <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
@@ -213,6 +217,8 @@ export default {
     initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
     initialQuantity: { type: Number, default: 1 },
+    metafields: {type: Object, required: true },
+    shopifyProduct: {type: Object, required:true}
   },
 
   data() {
@@ -280,6 +286,7 @@ export default {
     isOpen() {
       return panel => this.openPanel === panel;
     },
+
     visibleAttributes(){
       return this.attributes.filter((attribute) => attribute.hidden === false);
     },
@@ -307,14 +314,37 @@ export default {
 
       return ['fal', 'heart'];
     },
+
     formattedProductPrice(){
       if(!this.productPrice){return}
-      const floatPrice = this.productPrice.toFixed(2);
+
+      let price =  this.productPrice;
+      if(this.isClearance){
+        price = this.shopifyProduct.price/100;
+      }
+
+      const floatPrice = price.toFixed(2);
       const endsIn0 = floatPrice % 1 == 0;
       if(endsIn0){
-        return this.productPrice;
+        return price;
       }
-      return parseFloat(this.productPrice.toFixed(2));
+
+      return parseFloat(price.toFixed(2));
+    },
+
+    isClearance(){
+      return this.category.toLowerCase().includes('clearance');
+    },
+
+    clearanceData(){
+      if(!this.metafields.floorfound_data){return false}
+
+      return {
+        condition: this.metafields.condition,
+        floorFound: this.metafields.floorfound_data.floor_found,
+        floorFoundUrl: this.metafields.floorfound_data.floor_found_url,
+        savings: Math.ceil(this.msrp - this.shopifyProduct.price/100)
+      }
     }
   },
 
@@ -1571,6 +1601,45 @@ html.ProductCustomizer--Open {
 
     &__Nav {
       bottom: 0;
+    }
+  }
+
+  &__floorfound-link{
+    font-family: $font-stack-avalon;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #202020;
+    border-radius:24px;
+    border:2px solid black;
+    width:100%;
+    display: block;
+    text-align: center;
+    padding: 10px;
+
+    &:hover{
+      background: #fff;
+      color: #202020;
+      text-decoration: none;
+    }
+  }
+
+  &__clearance-condition{
+    font-family: $font-stack-avalon;
+    font-size: 14px;
+    text-align: center;
+    margin-top:8px;
+    span{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    @include at-query($breakpoint-large) {
+      text-align: left;
+      margin-top: 15px;
+      margin-bottom: -15px;
     }
   }
 }
