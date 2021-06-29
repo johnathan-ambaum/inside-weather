@@ -1,7 +1,7 @@
 <template>
   <div class="SupportBanner" :style="styleObject">
     <div class="SupportBanner__title">{{titleCopy}}</div>
-    <div class="SupportBanner__body">{{bodyCopy}}</div>
+    <div class="SupportBanner__body" v-html="sanitizedBody"></div>
     <div v-if="isMobile">
       <glide-slider>
         <glide-slide v-for="(mobileSlide, index) in mobileImages" :key="index">
@@ -19,6 +19,7 @@
 import GlideSlider from '../GlideSlider';
 import GlideSlide from '../GlideSlide';
 import screenMonitor from '../../mixins/screenMonitor';
+import DOMPurify from 'dompurify';
 
 export default {
   components: {
@@ -42,6 +43,10 @@ export default {
   computed: {
     styleObject(){
       return {'background-color': this.backgroundColor};
+    },
+
+    sanitizedBody(){
+      return DOMPurify.sanitize(this.bodyCopy)
     }
   }
 
@@ -60,6 +65,10 @@ export default {
     text-align: center;
     color:#202020;
     font-weight: 500;
+  }
+
+  a{
+    text-decoration: underline;
   }
 
   img{

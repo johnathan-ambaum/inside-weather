@@ -1,7 +1,7 @@
 <template>
   <div class="TwoColumnTextImage" :style="styleObject">
     <div class="TwoColumnTextImage__title">{{titleCopy}}</div>
-    <div class="TwoColumnTextImage__body">{{bodyCopy}}</div>
+    <div class="TwoColumnTextImage__body" v-html="sanitize(bodyCopy)"></div>
     <div v-if="isMobile">
       <glide-slider>
         <glide-slide v-for='(column, index) in columns' :key="index">
@@ -11,7 +11,7 @@
             <div class="TwoColumnTextImage__column-title">{{column.titleCopy}}</div>
             <div class="TwoColumnTextImage__column-support-text">{{column.supportText}}</div>
             <img class="TwoColumnTextImage__column-support-image" :src="column.supportImage" :alt="column.supportAltText">
-            <div class="TwoColumnTextImage__column-body">{{column.bodyCopy}}</div>
+            <div class="TwoColumnTextImage__column-body" v-html="sanitize(column.bodyCopy)"></div>
           </div>
         </glide-slide>
       </glide-slider>
@@ -24,7 +24,7 @@
           <div class="TwoColumnTextImage__column-title">{{column.titleCopy}}</div>
           <div class="TwoColumnTextImage__column-support-text">{{column.supportText}}</div>
           <img class="TwoColumnTextImage__column-support-image" :src="column.supportImage" :alt="column.supportAltText">
-          <div class="TwoColumnTextImage__column-body">{{column.bodyCopy}}</div>
+          <div class="TwoColumnTextImage__column-body" v-html="sanitize(column.bodyCopy)"></div>
         </div>
       </div>
     </div>
@@ -35,6 +35,7 @@
 import GlideSlider from '../GlideSlider';
 import GlideSlide from '../GlideSlide';
 import screenMonitor from '../../mixins/screenMonitor';
+import DOMPurify from 'dompurify';
 
 export default {
   components: {
@@ -51,6 +52,12 @@ export default {
     bodyCopy: String,
     backgroundColor: String,
     columns: Array
+  },
+
+  methods: {
+    sanitize(item){
+      return DOMPurify.sanitize(item)
+    }
   },
 
   computed: {
@@ -75,6 +82,10 @@ export default {
     text-align: center;
     color:#202020;
     font-weight: 500;
+  }
+
+  a{
+    text-decoration: underline;
   }
 
   &__columns{

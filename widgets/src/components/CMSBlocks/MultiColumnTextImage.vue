@@ -5,7 +5,7 @@
         <img class="MultiColumnTextImage__column-image" :src="isMobile ? column.mobileImage : column.image" :alt="column.altText">
         <div class="MultiColumnTextImage__column-content">
            <div class="MultiColumnTextImage__column-title">{{column.titleCopy}}</div>
-          <div class="MultiColumnTextImage__column-body">{{column.bodyCopy}}</div>
+          <div class="MultiColumnTextImage__column-body" v-html="sanitize(column.bodyCopy)"></div>
         </div>
       </div>
     </div>
@@ -14,6 +14,7 @@
 
 <script>
 import screenMonitor from '../../mixins/screenMonitor';
+import DOMPurify from 'dompurify';
 
 export default {
   props: {
@@ -28,6 +29,12 @@ export default {
   computed: {
     styleObject(){
       return {'background-color': this.backgroundColor};
+    }
+  },
+
+  methods: {
+    sanitize(item){
+      return DOMPurify.sanitize(item)
     }
   }
 
@@ -49,6 +56,10 @@ export default {
     @include at-query($breakpoint-large) {
       text-align: center;
     }
+  }
+
+  a{
+    text-decoration: underline;
   }
 
   &__columns{

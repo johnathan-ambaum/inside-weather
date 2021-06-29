@@ -5,13 +5,14 @@
     <transition enter-active-class="animated fadeInUp" appear>
       <div class="TopBanner__info">
         <div class="TopBanner__title" :style="titleStyleObject">{{titleCopy}}</div>
-        <div class="TopBanner__body" :style="bodyStyleObject">{{bodyCopy}}</div>
+        <div class="TopBanner__body" :style="bodyStyleObject" v-html="sanitizedBody"></div>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+import DOMPurify from 'dompurify';
 
 export default {
   props: {
@@ -34,6 +35,10 @@ export default {
       return {
         'color': this.bodyCopyColor
       }
+    },
+
+    sanitizedBody(){
+      return DOMPurify.sanitize(this.bodyCopy)
     }
   }
 }
@@ -47,6 +52,10 @@ export default {
   position: relative;
   text-align: center;
   font-family: Avalon;
+
+  a{
+    text-decoration: underline;
+  }
 
   &__mobile-image{
     display:block;

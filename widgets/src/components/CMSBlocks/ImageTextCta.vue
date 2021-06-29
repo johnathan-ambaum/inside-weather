@@ -3,7 +3,7 @@
     <div class="ImageTextCta__content">
       <div class="ImageTextCta__content-inner">
         <div class="ImageTextCta__title">{{titleCopy}}</div>
-        <div class="ImageTextCta__body">{{bodyCopy}}</div>
+        <div class="ImageTextCta__body" v-html="sanitizedBody"></div>
         <a class="ImageTextCta__cta" :href="buttonUrl">{{buttonText}}</a>
       </div>
     </div>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import DOMPurify from 'dompurify';
+
 export default {
   props: {
     titleCopy: String,
@@ -23,6 +25,11 @@ export default {
     buttonText: String,
     buttonUrl: String,
   },
+  computed: {
+    sanitizedBody(){
+      return DOMPurify.sanitize(this.bodyCopy)
+    }
+  }
 }
 </script>
 
@@ -40,6 +47,10 @@ export default {
   @include at-query($breakpoint-large) {
     flex-direction: row;
     text-align: left;
+  }
+
+  a:not(.ImageTextCta__cta){
+    text-decoration: underline;
   }
 
   &__content,
@@ -102,6 +113,7 @@ export default {
     border:1px solid black;
     font-size: 14px;
     letter-spacing: 0.12em;
+    text-decoration: none;
 
     &:empty{
       display:none;
