@@ -1,10 +1,12 @@
 <template>
   <div>
     <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
-      <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__FlagRow">
-        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
-          {{ flag.title }}</div>
-        <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
+      <div class="ProductCustomizer__FlagRow">
+        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">CLEARANCE</div>
+        <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
+          <div>{{ flag.title }}</div>
+          <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
+        </div>
       </div>
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
