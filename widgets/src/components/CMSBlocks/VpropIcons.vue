@@ -49,22 +49,24 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     width:100%;
-    margin:0 auto;
+    margin:0 auto 0 5%;
 
     @include at-query($breakpoint-large) {
       max-width: 1000px;
+      margin:0 auto;
     }
   }
 
   &__icon{
     flex-basis: 45%;
     display:flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin:4px;
 
     @include at-query($breakpoint-large) {
       flex:1;
+      justify-content: center;
     }
   }
 
