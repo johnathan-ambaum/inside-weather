@@ -49,7 +49,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     width:100%;
-    margin:0 auto 0 5%;
+    margin:0 auto;
 
     @include at-query($breakpoint-large) {
       max-width: 1000px;
