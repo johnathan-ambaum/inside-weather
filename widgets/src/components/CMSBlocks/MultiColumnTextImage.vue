@@ -71,7 +71,6 @@ export default {
       margin: 94px auto 94px auto;
       flex-basis: 280px;
       justify-content: center;
-      align-items: center;
       gap:78px;
       flex-direction: row;
     }
