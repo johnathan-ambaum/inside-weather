@@ -20,6 +20,7 @@
       {% assign rightSideMenu = false %}
       {% assign specialMenu = false %}
       {% assign narrowMenu = false %}
+      {% assign noHighlight = false %}
       {%- for firstLevelItem in linklists.main-menu-1.links -%}
         {% assign firstLevelItemDisplayName = firstLevelItem.title %}
         {% if firstLevelItem.title contains '[Right]' %}
@@ -37,10 +38,15 @@
           {% assign specialMenu = true %}
           {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Special]' | strip %}
         {% endif %}
+        {% if firstLevelItem.title contains '[noHighlight]' %}
+          {% assign noHighlight = true %}
+          {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[noHighlight]' | strip %}
+        {% endif %}
 
         <div class="ambaum__header-menu-item
         {% if rightSideMenu %} ambaum__header-menu-item-right {% endif %}
         {% if specialMenu %} ambaum__header-menu-item-special {% endif %}
+        {% if noHighlight %} noHighlight {% endif %}
         ">
           <span
             {% if firstLevelItem.links != blank and narrowMenu == false %} data-toggle-header-dropdown {% endif %}
@@ -251,6 +257,7 @@
     {% assign rightSideMenu = false %}
     {% assign specialMenu = false %}
     {% assign narrowMenu = false %}
+    {% assign noHighlight = false %}
     {%- for firstLevelItem in linklists.main-menu-1.links -%}
       {% assign firstLevelItemDisplayName = firstLevelItem.title %}
       {% if firstLevelItem.title contains '[Hide]' %}
@@ -263,11 +270,17 @@
         {% assign specialMenu = true %}
         {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Special]' | strip %}
       {% endif %}
+      {% if firstLevelItem.title contains '[noHighlight]' %}
+        {% assign noHighlight = true %}
+        {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[noHighlight]' | strip %}
+      {% endif %}
       {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Narrow]' | strip %}
 
       <div class="ambaum__header-mobile-list-item-container">
         {% if firstLevelItem.links == blank %}
-          <a href="{{firstLevelItem.url}}" class="ambaum__header-mobile-list-item {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}">
+          <a href="{{firstLevelItem.url}}" class="ambaum__header-mobile-list-item
+           {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}
+           {% if noHighlight %} noHighlight {% endif %}">
             <span class="ambaum__header-mobile-list-item-title">
               {{firstLevelItemDisplayName}}
             </span>

@@ -14,7 +14,7 @@
       {% if block.settings.richtext != blank %}
         <p>{{ block.settings.richtext }}</p>
       {% endif %}
-
+      {% comment %}
       {% form 'customer', id: 'newsletter-footer' %}
         {% if form.posted_successfully? %}
           <div class="note note--success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
@@ -35,6 +35,8 @@
           </button>
         </div>
       {% endform %}
+      {% endcomment %}
+      <div class="klaviyo-form-UgBEZW"></div>
     </div>
   </div>
 </div>
