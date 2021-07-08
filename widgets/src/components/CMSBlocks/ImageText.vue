@@ -40,7 +40,7 @@
       <div class="ImageText__title">{{titleCopy}}</div>
       <div class="ImageText__body" v-html="sanitizedBody"></div>
       <div v-if="mobileSupportImage" class="ImageText__mobile-support-image"><img :src="mobileSupportImage" :alt="titleCopy"></div>
-      <div v-if="desktopSupportImage" class="ImageText__desktop-support-image"><img :src="desktopSupportImage" :alt="titleCopy"></div>
+      <div v-if="supportImage" class="ImageText__desktop-support-image"><img :src="supportImage" :alt="titleCopy"></div>
     </div>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
     bodyCopy: String,
     image: String,
     mobileImage: String,
-    desktopSupportImage: String,
+    supportImage: String,
     mobileSupportImage: String,
     reverse: {type: Boolean, default: false},
     largeImage: {type: Boolean, default: false}
