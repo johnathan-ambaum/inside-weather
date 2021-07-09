@@ -62,18 +62,19 @@ export default {
   }
 
   &__content{
+    display: flex;
+    align-items: center;
     padding: 0 14px;
     @include at-query($breakpoint-large) {
-      padding-right:100px;
+      padding: 0 50px;
     }
 
   }
 
   &__content-inner{
-    @include at-query($breakpoint-large) {
-      width: 70%;
-      margin-left: auto;
-    }
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
   &__title{
