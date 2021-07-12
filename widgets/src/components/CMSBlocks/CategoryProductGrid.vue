@@ -75,8 +75,8 @@ export default {
     font-weight: 600;
     font-size:12px;
     letter-spacing: 0.05em;
-    line-height: 6px;
-    margin-bottom:5px;
+    line-height: 16px;
+    margin:0 8px 5px 8px;
 
     @include at-query($breakpoint-large) {
       font-size:20px;
