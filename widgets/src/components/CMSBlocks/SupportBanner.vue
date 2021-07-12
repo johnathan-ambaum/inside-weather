@@ -3,11 +3,16 @@
     <div class="SupportBanner__title">{{titleCopy}}</div>
     <div class="SupportBanner__body" v-html="sanitizedBody"></div>
     <div v-if="isMobile">
-      <glide-slider>
-        <glide-slide v-for="(mobileSlide, index) in mobileImages" :key="index">
-          <img :src="mobileSlide.image" :alt="altText">
-        </glide-slide>
-      </glide-slider>
+      <div v-if="filteredMobileImages.length > 1">
+        <glide-slider>
+          <glide-slide v-for="(mobileSlide, index) in filteredMobileImages" :key="index">
+            <img v-if="mobileSlide.image" :src="mobileSlide.image" :alt="altText">
+          </glide-slide>
+        </glide-slider>
+      </div>
+      <div v-else>
+        <img :src="filteredMobileImages[0].image" :alt="altText">
+      </div>
     </div>
     <div v-else>
       <img :src="image" :alt="altText">
@@ -46,7 +51,11 @@ export default {
     },
 
     sanitizedBody(){
-      return DOMPurify.sanitize(this.bodyCopy)
+      return DOMPurify.sanitize(this.bodyCopy);
+    },
+
+    filteredMobileImages(){
+      return this.mobileImages.filter(item => !!item.image);
     }
   }
 

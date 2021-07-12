@@ -1,14 +1,14 @@
 <template>
   <div class="LifeStyleGrid">
     <div class="LifeStyleGrid__grid">
-      <div v-for="(lifeStyleImage, index) in images" :key="index" :class="getGridItemClasses(index)" @click="toggleModal(index)">
+      <div v-for="(lifeStyleImage, index) in images" :key="index" :class="getGridItemClasses(index)" @click.stop="toggleModal(index)">
         <img :src="lifeStyleImage.image" :alt="lifeStyleImage.altText">
       </div>
     </div>
     <div class="LifeStyleGrid__modal" v-if="showModal">
       <div class="LifeStyleGrid__modal-inner">
         <div class="LifeStyleGrid__modal-content">
-          <div class="LifeStyleGrid__modal-close" @click="toggleModal()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.121 32.121" > <g transform="translate(-1800.004 -54.004)"> <line y2="42.426" transform="translate(1801.065 55.065) rotate(-45)" fill="none" stroke="currentColor" stroke-width="4"/> <line y2="42.426" transform="translate(1831.065 55.065) rotate(45)" fill="none" stroke="currentColor" stroke-width="4"/></g></svg></div>
+          <div class="LifeStyleGrid__modal-close" @click.stop="toggleModal()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.121 32.121" > <g transform="translate(-1800.004 -54.004)"> <line y2="42.426" transform="translate(1801.065 55.065) rotate(-45)" fill="none" stroke="currentColor" stroke-width="4"/> <line y2="42.426" transform="translate(1831.065 55.065) rotate(45)" fill="none" stroke="currentColor" stroke-width="4"/></g></svg></div>
           <div class="LifeStyleGrid__modal-image">
             <img :src="modalImage" :alt="modalAlt">
           </div>
@@ -39,6 +39,13 @@ export default {
   created() {
     document.addEventListener('keyup',  (evt) => {
       if (evt.keyCode === 27) {
+        document.querySelector('html').classList.remove('lock');
+        this.showModal = false;
+      }
+    });
+
+    document.addEventListener('click', (evt) => {
+      if(!evt.target.closest('.LifeStyleGrid__modal-content') && this.showModal){
         document.querySelector('html').classList.remove('lock');
         this.showModal = false;
       }
@@ -279,6 +286,10 @@ html {
 
       &-title{
         font-weight: 500;
+        max-width: 200px;
+        @include at-query($breakpoint-large) {
+          max-width: 250px;
+        }
       }
 
       &-price{
