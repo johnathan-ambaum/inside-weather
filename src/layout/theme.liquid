@@ -291,7 +291,8 @@
 {% include 'pagefly-header' %}
 
 {% render 'pagefly-header' %}
-{% render 'GetEmails-script'%}
+{% render 'GetEmails-script' %}
+{% render 'GetEmails-suppress-klaviyo-popups' %}
 {% include 'hulkcode_common' %}{% if template contains 'product' or template contains 'cart' %}<script src='https://volumediscount.hulkapps.com/hulkcode.js' defer='defer'></script>{% endif %}
 </head>
 

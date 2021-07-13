@@ -49,7 +49,7 @@ export default {
         return
       }
 
-      this.relatedProducts = [];
+      this.relatedProductsTemp = [];
       const RELATED_PRODUCTS_NUM = 6;
       this.relatedProductsData.slice(0,RELATED_PRODUCTS_NUM).forEach(async element => {
         let relatedProduct = {
@@ -84,7 +84,7 @@ export default {
           const productURL = element.base_product_handle + '?attributes=' + attributeString;
           relatedProduct.url = productURL;
 
-          const cylindo_sku = response.cylindo_sku;
+          let cylindo_sku = response.cylindo_sku;
           if(!cylindo_sku){
             apiClient.getImages({
               type: element.product_type,
@@ -94,6 +94,19 @@ export default {
               relatedProduct.image = images;
             });
           }else{
+            let productCodePriority = Infinity;
+            Object.entries(selectedOptions).forEach(([parameter, value]) => {
+              const { values } = attributes.find(att => att.parameter === parameter);
+              const selected = values.find(item => item.value === value);
+              const { cylindo_override_priority } = attributes.find(att => att.parameter === parameter);
+              if(selected.cylindo_sku_override && cylindo_override_priority){
+                if(cylindo_override_priority < productCodePriority){
+                  cylindo_sku = selected.cylindo_sku_override;
+                  productCodePriority = cylindo_override_priority;
+                }
+              }
+            });
+
             const startFrame = response && response.cylindo_overrides && response.cylindo_overrides.startFrame ? response.cylindo_overrides.startFrame : 1;
             const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/" + startFrame +"/"+ cylindo_sku + ".jpg";
             var cylindoProductFeaturesArray = []
@@ -115,9 +128,20 @@ export default {
             const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
             const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
             relatedProduct.image = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
+            relatedProduct.product_type = element.product_type;
           }
-          this.relatedProducts.push(relatedProduct);
+          this.relatedProductsTemp.push(relatedProduct);
         });
+        this.relatedProductsSorted = this.relatedProductsTemp.sort((a,b) => {
+          const A = a['product_type'];
+          const B = b['product_type'];
+
+          if(this.relatedProductsData.indexOf(A) > this.relatedProductsData.indexOf(B)){
+            return 1;
+          }
+          return -1;
+        });
+        this.relatedProducts = this.relatedProductsSorted;
       });
     }
   },
