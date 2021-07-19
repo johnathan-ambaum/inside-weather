@@ -774,7 +774,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#c3dcde",
+          "background_color_1": "#b1c8cd",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -782,13 +782,13 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p>4th of July Sale is here! 🇺🇸   Save up to 20% OFF Sitewide <a href=\"\/pages\/2021-4th-of-july-sale\" title=\"2021 4th of July Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-4th-of-july-sale\" title=\"2021 4th of July Sale\">4th of July Sale is here! 🇺🇸   Save up to 20% OFF Sitewide<\/a><\/p>",
+          "text_1": "<p>Fast & Free Shipping on ALL Orders | <a href=\"\/pages\/home-trial\" title=\"Home Trial\">365 Day Home Trial<\/a><\/p>",
+          "mobile_text_1": "<p>Fast & Free Shipping on ALL Orders | <a href=\"\/pages\/home-trial\" title=\"Home Trial\">365 Day Home Trial<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
+          "promo_countdown_enabled": false,
           "promo_countdown_end_date": "07\/9\/2021"
         }
       },
