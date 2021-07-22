@@ -3049,11 +3049,9 @@ lazySizesConfig.expFactor = 4;
     function triggerFPT() {
       waitForElementToDisplay('.needsclick.klaviyo-form', () => {
         document.querySelector('.needsclick.klaviyo-form').remove();
-        console.log('removed')
       }, 200, 10000);
       waitForElementToDisplay('#privy-container', () => {
         document.querySelector('#privy-container').remove();
-        console.log('removed')
       }, 200, 10000);
 
       window.ga('set', 'page', window.location.pathname + window.location.search);
