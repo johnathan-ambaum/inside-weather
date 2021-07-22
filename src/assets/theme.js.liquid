@@ -3030,7 +3030,35 @@ lazySizesConfig.expFactor = 4;
         triggerFPT();
       }
     }
+    function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+      var startTimeInMs = Date.now();
+      (function loopSearch() {
+        if (document.querySelector(selector) != null) {
+          callback();
+          return;
+        }
+        else {
+          setTimeout(function () {
+            if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+              return;
+            loopSearch();
+          }, checkFrequencyInMs);
+        }
+      })();
+    }
     function triggerFPT() {
+      waitForElementToDisplay('.needsclick.klaviyo-form', () => {
+        document.querySelector('.needsclick.klaviyo-form').remove();
+        console.log('removed')
+      }, 200, 10000);
+      waitForElementToDisplay('#privy-container', () => {
+        document.querySelector('#privy-container').remove();
+        console.log('removed')
+      }, 200, 10000);
+
+      window.ga('set', 'page', window.location.pathname + window.location.search);
+      window.ga('send', 'pageview');
+
       const formattedParams = urlParams.toString() === '' ? '' : `&${urlParams.toString()}`;
       history.pushState({page:99}, null, '?close=true' + formattedParams);
       history.pushState({page:2}, null, '?page=2' + formattedParams);
