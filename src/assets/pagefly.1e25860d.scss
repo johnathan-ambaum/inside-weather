@@ -1,0 +1,1272 @@
+/* PageFly Element Styles */
+					.lgZhBD.pf-editor-section::before, .lgZhBD.pf-editor-section::after { content: ""; display: block; position: absolute; left: 0px; right: 0px; width: 100%; height: 10px; }
+.lgZhBD.pf-editor-section::before { top: -10px; }
+.lgZhBD.pf-editor-section::after { bottom: -10px; }
+.lgZhBD__parallax { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.lgZhBD { padding: 15px 0px; position: relative; }
+.lgZhBD .sc-dliRfk { position: relative; }
+.lgZhBD[data-container="true"] .sc-dliRfk { padding: 0px 15px; width: 100%; margin: auto; }
+.lgZhBD .pf-parallax__img { text-indent: -10000px; position: absolute; object-fit: cover; top: 0px; left: 0px; width: 100%; height: 100%; }
+.ciNxzc { margin: 0px -15px; }
+.ldclMV { margin: 0px; }
+.BcUQo { position: relative; }
+.BcUQo.pf-editor-col::before, .BcUQo.pf-editor-col::after { content: ""; display: block; position: absolute; top: 0px; bottom: 0px; width: 10px; }
+.BcUQo.pf-editor-col::before { left: -10px; }
+.BcUQo.pf-editor-col::after { right: -10px; }
+.lmgwgQ { margin: 0px 0px 15px; }
+.lmgwgQ > a { color: inherit !important; }
+.lmgwgQ > span { font-weight: inherit; text-decoration: inherit; }
+.lmgwgQ { word-break: break-word; }
+.lmgwgQ.pf-i--left i { margin-right: 0.3em; }
+.lmgwgQ.pf-i--right i { margin-left: 0.3em; }
+.lmgwgQ.pf-i--top i { margin-bottom: 0.5em; }
+.lmgwgQ.pf-i--top > span, .lmgwgQ.pf-i--top > a { display: block; }
+.lmgwgQ.pf-i--top > span[data-empty][contenteditable] { display: block !important; }
+.lmgwgQ [class*="--diamond"] { margin-right: 1em; }
+.uIbp { display: inline-block; }
+.uIbp { vertical-align: baseline; word-break: break-word; }
+.uIbp:focus { outline: none; }
+.bLbPLR > span:last-child { line-height: inherit; display: block; }
+.bLbPLR[class*="dropcap--"] > span:first-child { display: block; margin-right: 10px; float: left; width: 50px; height: 50px; line-height: 50px; }
+.bLbPLR[class*="dropcap--"]:not(.dropcap--none) > span:first-child { margin-right: 20px; text-align: center; }
+.bLbPLR.dropcap--none > span:first-child { text-align: inherit; border-radius: 0px; line-height: 1 !important; width: auto !important; height: auto !important; background: none !important; }
+.bLbPLR.dropcap--circle > span:first-child { border-radius: 100%; }
+.bLbPLR:not([class*="dropcap--"]) > span { margin-right: 0px !important; }
+.bLbPLR ol, .bLbPLR ul { list-style-position: inside; }
+.bLbPLR blockquote { font-size: inherit; }
+.gJXqlU { position: relative; }
+.htgaJh { min-height: 30px; }
+.hRRmvw { margin: 0px -15px; }
+.hRRmvw .pf__shopify-product { width: 100%; text-align: center; }
+.hRRmvw .pf-c { padding: 15px; display: flex; }
+.hRRmvw .product__thumbnail { display: -webkit-flex; -webkit-box-pack: center; justify-content: center; -webkit-box-align: center; align-items: center; overflow: hidden; max-width: 100%; position: relative; }
+.hRRmvw .product__thumbnail img { vertical-align: middle; max-width: 100%; height: auto; }
+.hRRmvw .product__thumbnail .pf-placeholder-svg { fill: rgb(166, 166, 166); background-color: rgb(245, 245, 245); width: 100%; max-width: 100%; max-height: 100%; border-radius: inherit; }
+.hRRmvw .product__button > a { display: block; padding: 0px 20px; line-height: 36px; height: 36px; background: rgb(85, 193, 72); margin-top: 10px; color: rgb(255, 255, 255); text-align: center; text-decoration: none; }
+.hRRmvw .product__button > a:hover { opacity: 0.7; color: rgb(255, 255, 255); }
+.hRRmvw .product__info-price { margin-top: 10px; font-size: 13px; color: rgb(208, 2, 27); }
+.hRRmvw .product__sale-price { margin-left: 10px; color: rgb(54, 54, 54); font-size: 0.8em; }
+.hRRmvw .product__info-title { margin: 10px 0px 0px; font-size: 16px; font-weight: 500; line-height: 1.5; text-transform: none; font-family: inherit; color: rgb(45, 45, 45); }
+.hRRmvw .product__info-title a { color: rgb(27, 28, 29); text-decoration: none; }
+.hRRmvw .shopify__product-vertical, .hRRmvw .shopify__product-vertical .product__info { display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-flow: column; }
+.hRRmvw .shopify__product-vertical .product__info, .hRRmvw .shopify__product-vertical .product__info-title { flex: 1 0 auto; }
+.hRRmvw .shopify__product-horizontal { display: -webkit-flex; }
+.hRRmvw .shopify__product-horizontal .product__thumbnail { flex: 1 1 0%; height: auto !important; }
+.hRRmvw .shopify__product-horizontal .product__info { text-align: left; flex: 3 1 0%; padding-left: 15px; }
+.hRRmvw .shopify__product-horizontal .product__info-title { margin-top: 0px; }
+.hRRmvw .shopify__product-horizontal .product__button > a { width: auto; display: inline-block; }
+					/* PageFly Styles */
+					
+@media all {
+	[data-pf-type="Heading"].pf-cb3bccd5 {
+		font-size: 48px;
+		 letter-spacing: 0.05em;
+		 color: white;
+		 margin-bottom: 48px;
+		 margin-top: 48px;
+	}
+	[data-pf-type="Section"].pf-72b300bb {
+		text-align: center;
+		 background-color: rgb(243, 234, 202);
+		 background-image: url("https://media.pagefly.io/file/get/fw_tb_1jpg-1542329204754.jpg");
+		 background-repeat: no-repeat;
+		 background-size: cover;
+	}
+	[data-pf-type="Paragraph"].pf-54ce6e17 {
+		text-align: center;
+		 font-family: Roboto;
+		 font-weight: 400;
+		 line-height: 20px;
+		 font-size: 14px;
+		 letter-spacing: 0.025em;
+		 color: rgb(32, 32, 32);
+	}
+	[data-pf-type="Section"].pf-a6b774de {
+		padding-bottom: 0px;
+	}
+	[data-pf-type="Block"].pf-7eda57cf {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_sofa-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 1;
+		 background-color: rgb(238, 196, 175);
+	}
+	[data-pf-type="Heading"].pf-ffb235f6 {
+		letter-spacing: 0.075em;
+		 color: rgb(32, 32, 32);
+		 margin-top: 0px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Block"].pf-bb991bc7 {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_sofette-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 0.4;
+	}
+	[data-pf-type="Heading"].pf-11b72526 {
+		letter-spacing: 0.075em;
+		 color: rgb(74, 74, 74);
+		 margin-top: 0px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Column"].pf-6c1eaa92 {
+		text-align: center;
+	}
+	[data-pf-type="Block"].pf-363f4085 {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_armchair-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 0.4;
+	}
+	[data-pf-type="Heading"].pf-60954309 {
+		letter-spacing: 0.075em;
+		 color: rgb(77, 77, 77);
+		 margin-top: 0px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Column"].pf-c901f12b {
+		text-align: center;
+	}
+	[data-pf-type="Block"].pf-7fb9cd59 {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_dining-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 0.4;
+	}
+	[data-pf-type="Heading"].pf-3a4acb1c {
+		letter-spacing: 0.075em;
+		 color: rgb(74, 74, 74);
+		 margin-top: 0px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Column"].pf-a529b167 {
+		text-align: center;
+	}
+	[data-pf-type="Block"].pf-bbe00caf {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_lounge-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 0.4;
+	}
+	[data-pf-type="Heading"].pf-b05c28e9 {
+		letter-spacing: 0.075em;
+		 color: rgb(74, 74, 74);
+		 margin-top: 0px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Block"].pf-c8674a0c {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_tables-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 0.4;
+	}
+	[data-pf-type="Heading"].pf-9b1c1655 {
+		letter-spacing: 0.075em;
+		 color: rgb(74, 74, 74);
+		 margin-top: 0px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Column"].pf-d0596c4d {
+		text-align: center;
+	}
+	[data-pf-type="Block"].pf-f58e4064 {
+		background-image: url("https://cdn.shopify.com/s/files/1/2994/0144/files/page_nav_storage-min.png?13384234565507019988");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 width: 120px;
+		 height: 120px;
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+		 opacity: 0.4;
+	}
+	[data-pf-type="Heading"].pf-848805d6 {
+		letter-spacing: 0.075em;
+		 color: rgb(74, 74, 74);
+		 margin-top: 0px;
+		 font-size: 14px;
+		 text-transform: uppercase;
+	}
+	[data-pf-type="Column"].pf-18dcee99 {
+		text-align: center;
+	}
+	[data-pf-type="Section"].pf-4489affe {
+		margin-top: 40px;
+		 padding-bottom: 0px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+		 text-align: center;
+		 padding-top: 0px;
+	}
+	[data-pf-type="Heading"].pf-a4a93fda {
+		letter-spacing: 0.05em;
+		 margin-top: 0px;
+		 margin-bottom: 20px;
+		 color: rgb(32, 32, 32);
+		 text-align: center;
+		 border-style: none;
+		 border-width: 0px 0px 1px;
+		 font-size: 44px;
+	}
+	[data-pf-type="Row"].pf-3673190c {
+		border-style: none;
+		 border-width: 0px 0px 1px;
+	}
+	[data-pf-type="Heading"].pf-da935873 {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-e5cdc575 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-f9c73500 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-8711a425 {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-67eea060 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-03875c88 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-0cff915d {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-1e0d7556 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-608baa83 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-7f416182 {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-86dd90f6 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-93a3c301 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-89b3d199 {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-fd0edcb6 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-24888c65 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-4c383905 {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-75795dbb {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-a2df4193 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-7ad6932b {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-9a3e0722 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-8b26760a {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-703cc0f9 {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-7c639fd9 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-df373f67 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Heading"].pf-5b4c2f4c {
+		font-size: 20px;
+		 letter-spacing: 0.025em;
+		 margin-top: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-62feed62 {
+		font-family: Roboto;
+		 font-weight: 400;
+		 color: rgb(32, 32, 32);
+		 line-height: 19px;
+		 letter-spacing: 0.025em;
+		 margin-right: 0px;
+		 font-size: 13px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 letter-spacing: 0.05em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 13px;
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+		 letter-spacing: 0.1em;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > div > .product__button > .grid__column > div {
+		pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 color: black;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > div > .product__button > .grid__column > div > div > h3 > a {
+		color: rgb(32, 32, 32);
+		 text-transform: uppercase;
+		 letter-spacing: 0.075em;
+		 pointer-events: none;
+		 cursor: default;
+		 text-decoration: none;
+		 margin-top: -50px;
+		 font-size: 14px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > div > .product__button > .grid__column > div > div > div > .product__button {
+		cursor: pointer;
+		 pointer-events: auto;
+		 color: rgb(32, 32, 32);
+		 border-style: solid;
+		 border-color: rgb(32, 32, 32);
+		 border-width: 1px;
+		 background-color: white;
+	}
+	[data-pf-type="Row"].pf-b5444591 {
+		margin: 0px -15px;
+		 padding: 30px;
+		 border-style: none;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+	[data-pf-type="Section"].pf-dfe598ca {
+		padding-bottom: 80px;
+		 margin-top: 15px;
+		 border-style: solid;
+		 border-width: 0px 0px 1px;
+		 border-color: rgb(232, 230, 226);
+	}
+}
+@media only screen and (max-width: 767px) {
+	[data-pf-type="Heading"].pf-cb3bccd5 {
+		line-height: 52px;
+	}
+	[data-pf-type="Section"].pf-72b300bb {
+		background-image: url("https://media.pagefly.io/file/get/fw_tb_1jpg-1542329204754.jpg");
+		 background-position: 100% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 padding-top: 0px;
+		 padding-bottom: 0px;
+	}
+	[data-pf-type="Heading"].pf-ffb235f6 {
+		font-size: 12px;
+	}
+	[data-pf-type="Heading"].pf-11b72526 {
+		font-size: 11px;
+	}
+	[data-pf-type="Heading"].pf-60954309 {
+		font-size: 11px;
+	}
+	[data-pf-type="Heading"].pf-3a4acb1c {
+		font-size: 11px;
+	}
+	[data-pf-type="Heading"].pf-b05c28e9 {
+		font-size: 12px;
+	}
+	[data-pf-type="Heading"].pf-9b1c1655 {
+		font-size: 12px;
+	}
+	[data-pf-type="Heading"].pf-848805d6 {
+		font-size: 12px;
+	}
+	[data-pf-type="Row"].pf-6d155196 {
+		margin-right: -25px;
+		 margin-top: -20px;
+	}
+	[data-pf-type="Section"].pf-bcb121d9 {
+		margin-left: -15px;
+		 margin-top: -30px;
+	}
+	[data-pf-type="Heading"].pf-a4a93fda {
+		text-align: center;
+		 margin-bottom: 20px;
+		 line-height: 35px;
+	}
+	[data-pf-type="Row"].pf-3673190c {
+		margin-top: -20px;
+	}
+	[data-pf-type="Heading"].pf-da935873 {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-e5cdc575 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5574598f > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-8711a425 {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-67eea060 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-8f1da4e9 > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-0cff915d {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-1e0d7556 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-28930cdb > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-7f416182 {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-86dd90f6 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-d0825698 > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-89b3d199 {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-fd0edcb6 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-7776ea87 > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-4c383905 {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-75795dbb {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5f349ffc > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-7ad6932b {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-9a3e0722 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-5e66c163 > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-703cc0f9 {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-7c639fd9 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-518894d4 > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Heading"].pf-5b4c2f4c {
+		margin: 0px;
+	}
+	[data-pf-type="Paragraph"].pf-62feed62 {
+		margin-right: 0px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > h3 > a {
+		font-size: 12px;
+		 color: rgb(32, 32, 32);
+		 line-height: 15px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div {
+		margin-top: -30px;
+	}
+	[data-pf-type="Shopify.Products"].pf-6abf73b5 > .pf-c > div > div > div > .product__button {
+		font-size: 10px;
+		 letter-spacing: 0.025em;
+		 padding-left: 8px;
+		 padding-right: 8px;
+	}
+	[data-pf-type="Section"].pf-dfe598ca {
+		padding-top: 0px;
+	}
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	[data-pf-type="Heading"].pf-cb3bccd5 {
+		text-align: center;
+		 font-size: 48px;
+		 color: rgb(255, 255, 255);
+		 letter-spacing: 0.05em;
+		 padding-top: 15px;
+		 margin-top: 10px;
+		 padding-bottom: 15px;
+		 margin-bottom: 10px;
+	}
+	[data-pf-type="Column"].pf-593b4fb1 {
+		color: white;
+		 letter-spacing: 0.05em;
+	}
+	[data-pf-type="Row"].pf-1c02bc67 {
+		text-align: center;
+		 letter-spacing: 0.05em;
+		 color: white;
+	}
+	[data-pf-type="Section"].pf-72b300bb {
+		font-size: 48px;
+		 letter-spacing: 0.05em;
+		 color: rgb(255, 255, 255);
+		 background-image: url("https://media.pagefly.io/file/get/fw_tb_1jpg-1542329204754.jpg");
+		 background-position: 50% 50%;
+		 background-repeat: no-repeat;
+		 background-size: cover;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	[data-pf-type="Section"].pf-72b300bb {
+		background-image: url("https://media.pagefly.io/file/get/fw_tb_1jpg-1542329204754.jpg");
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 background-position: 50% 50%;
+	}
+	[data-pf-type="Block"].pf-7eda57cf {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-ffb235f6 {
+		font-size: 14px;
+	}
+	[data-pf-type="Block"].pf-bb991bc7 {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-11b72526 {
+		font-size: 14px;
+	}
+	[data-pf-type="Block"].pf-363f4085 {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-60954309 {
+		font-size: 14px;
+	}
+	[data-pf-type="Block"].pf-7fb9cd59 {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-3a4acb1c {
+		font-size: 14px;
+		 line-height: 18px;
+	}
+	[data-pf-type="Block"].pf-bbe00caf {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-b05c28e9 {
+		font-size: 14px;
+		 line-height: 18px;
+	}
+	[data-pf-type="Block"].pf-c8674a0c {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-9b1c1655 {
+		font-size: 14px;
+	}
+	[data-pf-type="Block"].pf-f58e4064 {
+		width: 80px;
+		 height: 80px;
+	}
+	[data-pf-type="Heading"].pf-848805d6 {
+		font-size: 14px;
+	}
+	[data-pf-type="Paragraph"].pf-e5cdc575 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-67eea060 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-1e0d7556 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-86dd90f6 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-fd0edcb6 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-75795dbb {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-9a3e0722 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-7c639fd9 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Paragraph"].pf-62feed62 {
+		margin-right: 20px;
+	}
+	[data-pf-type="Section"].pf-dfe598ca {
+		padding-top: 0px;
+		 margin-left: 20px;
+		 margin-right: 20px;
+		 margin-top: 20px;
+	}
+}

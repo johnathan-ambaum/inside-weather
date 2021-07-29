@@ -46,6 +46,21 @@ import PageNotFoundBanner from './components/PageNotFoundBanner.vue';
 import CategorySeoContent from './components/CategorySeoContent.vue';
 import Favorites from './components/Favorites.vue';
 import CollectionBanner from './components/CollectionBanner.vue';
+import GlideSlider from './components/GlideSlider.vue';
+import GlideSlide from './components/GlideSlide.vue'
+
+// CMS Blocks
+import CategoryProductGrid from './components/CMSBlocks/CategoryProductGrid';
+import CustomSpacer from './components/CMSBlocks/CustomSpacer';
+import ImageText from './components/CMSBlocks/ImageText';
+import ImageTextCta from './components/CMSBlocks/ImageTextCta';
+import LifestyleGrid from './components/CMSBlocks/LifestyleGrid';
+import MultiColumnTextImage from './components/CMSBlocks/MultiColumnTextImage';
+import SupportBanner from './components/CMSBlocks/SupportBanner';
+import TopBanner from './components/CMSBlocks/TopBanner'
+import TwoColumnTextImage from './components/CMSBlocks/TwoColumnTextImage';
+import VpropIcons from './components/CMSBlocks/VpropIcons';
+import TitleText from './components/CMSBlocks/TitleText';
 
 (function init() {
   const rootEl = document.querySelector('#app');
@@ -103,7 +118,20 @@ import CollectionBanner from './components/CollectionBanner.vue';
       PageNotFoundBanner,
       CategorySeoContent,
       Favorites,
-      CollectionBanner
+      CollectionBanner,
+      GlideSlider,
+      GlideSlide,
+      CategoryProductGrid,
+      CustomSpacer,
+      ImageText,
+      ImageTextCta,
+      LifestyleGrid,
+      MultiColumnTextImage,
+      SupportBanner,
+      TopBanner,
+      TwoColumnTextImage,
+      VpropIcons,
+      TitleText
     },
 
     mixins: [

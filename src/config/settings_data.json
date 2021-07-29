@@ -746,6 +746,7 @@
           "close_text": "",
           "enable_newsletter": true,
           "button_label": "",
+          "button_link": "",
           "enable_button": false
         }
       },
@@ -773,7 +774,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#57a8ae",
+          "background_color_1": "#d49c78",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -781,14 +782,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p>The Summer Sale Starts Now ☀️  Up to 20% OFF Sitewide <a href=\"\/pages\/2021-summer-sale\" title=\"2021 SUMMER SALE\"><strong>SHOP NOW<\/strong><\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-summer-sale\" title=\"2021 SUMMER SALE\">The Summer Sale Starts Now ☀️   Up to <strong>20% OFF<\/strong> Sitewide<\/a><\/p>",
+          "text_1": "<p><strong>SEMI-ANNUAL SALE<\/strong> | 20% OFF + Free Shipping | <a href=\"\/pages\/2021-semi-annual-sale\" title=\"2021 Semi-Annual Sale\">SHOP NOW<\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-semi-annual-sale\" title=\"2021 Semi-Annual Sale\"><strong>SEMI-ANNUAL SALE<\/strong> | 20% OFF + Free Shipping<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
-          "promo_countdown_end_date": "06\/26\/2021"
+          "promo_countdown_enabled": false,
+          "promo_countdown_end_date": "07\/9\/2021"
         }
       },
       "giftcard-header": {

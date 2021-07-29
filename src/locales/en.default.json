@@ -352,6 +352,7 @@
       }
     },
     "password_page": {
+      "login_form_message": "Enter store using password:",
       "login_form_password_label": "Password",
       "login_form_password_placeholder": "Your password",
       "login_form_submit": "Enter",
