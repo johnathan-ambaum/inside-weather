@@ -774,7 +774,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#b1c8cd",
+          "background_color_1": "#d49c78",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -782,8 +782,8 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p>Fast & Free Shipping on ALL Orders | <a href=\"\/pages\/home-trial\" title=\"Home Trial\">365 Day Home Trial<\/a><\/p>",
-          "mobile_text_1": "<p>Fast & Free Shipping on ALL Orders | <a href=\"\/pages\/home-trial\" title=\"Home Trial\">365 Day Home Trial<\/a><\/p>",
+          "text_1": "<p><strong>SEMI-ANNUAL SALE<\/strong> | 20% OFF + Free Shipping | <a href=\"\/pages\/2021-semi-annual-sale\" title=\"2021 Semi-Annual Sale\">SHOP NOW<\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-semi-annual-sale\" title=\"2021 Semi-Annual Sale\"><strong>SEMI-ANNUAL SALE<\/strong> | 20% OFF + Free Shipping<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
