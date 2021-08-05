@@ -325,13 +325,12 @@ export default {
         price = this.shopifyProduct.price/100;
       }
 
-      const floatPrice = price.toFixed(2);
-      const endsIn0 = floatPrice % 1 == 0;
-      if(endsIn0){
+      const isWholeNumber = price.toFixed(2) % 1 == 0;
+      if(isWholeNumber){
         return price;
       }
 
-      return parseFloat(price.toFixed(2));
+      return price.toFixed(2);
     },
 
     isClearance(){
