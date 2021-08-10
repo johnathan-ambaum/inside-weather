@@ -263,8 +263,10 @@ export function pullSwatches({ state, dispatch, commit }) {
     return;
   }
 
+  const clearanceCategory = state.category.replace("Clearance ", "")
+
   apiClient
-    .getSwatches(state.category)
+    .getSwatches(clearanceCategory)
     .then((swatches) => {
       commit('setSwatches', swatches);
     });
