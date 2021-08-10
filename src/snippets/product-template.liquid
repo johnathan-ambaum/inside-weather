@@ -11,7 +11,6 @@
   {% endunless %}>
 
   {% include 'product-template-variables' %}
-
   <div id="app">
     <div class="ProductDetailGrid">
       <product-detail class="ProductDetailGrid__Main">
@@ -44,13 +43,30 @@
             :initial-variant="{{ product.selected_or_first_available_variant.id }}"
             :initial-attributes="{{ product.metafields.products.attributes | json | escape }} || {}"
             :initial-quantity="{{ product.selected_or_first_available_variant.inventory_quantity }}"
+            stamped-badge="{{product.metafields.stamped.badge}}"
+            initial-id="{{product.id}}"
           ></product-customizer>
+
         <!-- <product-family v-if="isMobile"></product-family> -->
       </div> <!-- .ProductDetailGrid__Sidebar -->
     </div> <!-- .ProductDetailGrid -->
     <product-information ></product-information>
 
-    <review-carousel category="{{ product.type | handle }}"></review-carousel>
+    <!--Stamped - Begin Main Widget -->
+    <div
+      id="stamped-main-widget"
+      data-product-id="{{ product.id }}"
+      data-name="{{ product.title | escape }}"
+      data-url="{{ shop.url }}{{ product.url }}"
+      data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"
+      data-description="{{ product.description | escape }}"
+      data-product-sku="{{product.handle}}"
+      data-product-title="{{product.title}}"
+      data-product-type="{{product.type}}"
+    >
+    {{product.metafields.stamped.reviews}}
+    </div>
+    <!-- Stamped - End Main Widget -->
     <div class="categoryValuePropsWrapper">
       <category-vprops
       :category-value-props='[
