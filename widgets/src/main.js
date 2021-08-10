@@ -22,7 +22,6 @@ import StaticBanner from './components/StaticBanner.vue';
 import CategoryList from './components/CategoryList.vue';
 import ValueProps from './components/ValueProps.vue';
 import Press from './components/Press.vue';
-import ReviewCarousel from './components/ReviewCarousel.vue';
 import Banner from './components/Banner.vue';
 import BannerReviewCarousel from './components/BannerReviewCarousel.vue';
 import CategoryBanner from './components/CategoryBanner.vue';
@@ -92,7 +91,6 @@ import TitleText from './components/CMSBlocks/TitleText';
       GlyphLoading,
       CategoryItem,
       FullReviews,
-      ReviewCarousel,
       FontAwesomeIcon,
       BannerCarousel,
       StaticBanner,
