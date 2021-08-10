@@ -9,8 +9,15 @@
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
-            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
+          <span
+          class="stamped-product-reviews-badge stamped-main-badge"
+          :data-id="initialId"
+          :data-product-sku="initialHandle"
+          :data-product-title="productName"
+          :data-product-type="category"
+          style="display: block;">
+          {{ stampedBadge }}
+          </span>
         </div>
         <div v-if="isCustomer">
           <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
@@ -62,8 +69,15 @@
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
-            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
+          <span
+          class="stamped-product-reviews-badge stamped-main-badge"
+          :data-id="initialId"
+          :data-product-sku="initialHandle"
+          :data-product-title="productName"
+          :data-product-type="category"
+          style="display: block;">
+          {{ stampedBadge }}
+          </span>
         </div>
         <span v-if="!disabled" :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
           @click.stop.prevent="favoriteCurrentProduct">
@@ -213,6 +227,8 @@ export default {
     initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
     initialQuantity: { type: Number, default: 1 },
+    stampedBadge: { type: String },
+    initialId: { type: String }
   },
 
   data() {
@@ -469,6 +485,7 @@ export default {
     };
     setupMulberry();
     this.setProductOnLoad();
+    StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
 
   },
 
@@ -1614,4 +1631,34 @@ html.ProductCustomizer--Open {
 .ProductCustomizer__loading{
   display:block;
 }
+
+.fa-star-half-o:before,
+.fa-star-o:before,
+.fa-star:before,
+.stamped-fa-star-half-o:before,
+.stamped-fa-star-o:before,
+.stamped-fa-star:before {
+  font-size: 15px;
+  margin-right: -1px;
+}
+
+.stamped-badge{
+  display: flex;
+  align-items: center;
+  margin-left: -2px;
+}
+
+.stamped-badge-caption{
+  margin-left: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  @include at-query($breakpoint-large) {
+    margin-top: 4px;
+  }
+
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
 </style>
