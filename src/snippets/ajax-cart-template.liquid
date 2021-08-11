@@ -114,16 +114,10 @@
           </div>
         </div>
         <div class="grid grid--full">
-          <div class="grid__item two-thirds">
-            <p class="ajaxcart__shipping-label">Shipping</p>
+          <div class="grid__item one-half">
+            <p class="ajaxcart__tax-label">Shipping & Tax</p>
           </div>
-          <div class="grid__item one-third text-right ajaxcart__shipping-price"><span class="ajaxcart__shipping-price-saved">{{shippingPriceSaved}}</span>FREE</div>
-        </div>
-        <div class="grid grid--full">
-          <div class="grid__item one-third">
-            <p class="ajaxcart__tax-label">Tax</p>
-          </div>
-          <div class="grid__item two-thirds text-right ajaxcart__tax-price">Calculated at checkout</div>
+          <div class="grid__item one-half text-right ajaxcart__tax-price">Calculated at checkout</div>
         </div>
         {{#if totalCartDiscount}}
           <p class="ajaxcart__savings text-center">{{{totalCartDiscount}}}</p>
