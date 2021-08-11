@@ -50,16 +50,18 @@
       </div>
       <div class="ProductCustomizer__ShippingDays">
         <template v-if="isDecor">
-          FREE Shipping | Ships in
+          Ships in
         </template>
         <template v-else>
-          FREE Shipping | Custom made in the USA<br>
+          Custom made in the USA<br>
           Estimated to ship in
         </template>
-        <info-popup v-if="hasFulfillmentMarkup" always-on-top
+
+        <info-popup v-if="hasFulfillmentMarkup && !isClearance" always-on-top
           text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
+        <span v-else-if="isClearance"> 2-3 Days </span>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
       <simple-customizer v-if="isDecor && !isClearance" />
@@ -201,6 +203,7 @@ import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
 import ReviewStars from './ReviewStars.vue';
 import Loader from './Loader.vue';
+import TemplateBlock from './TemplateBlock.vue';
 
 library.add(faHeart);
 
@@ -218,7 +221,8 @@ export default {
     SwatchBrowser,
     PhotoshootModal,
     ReviewStars,
-    Loader
+    Loader,
+    TemplateBlock
   },
 
   mixins: [
