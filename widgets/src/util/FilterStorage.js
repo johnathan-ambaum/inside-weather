@@ -65,6 +65,8 @@ export default class FilterStorage {
    * @param {String} category
    */
   static requestFilter(category) {
+    category = category.replace("Clearance ", "");
+
     const keyIncludesExpires = RegExp('^filters\.[^.]+\.expires$');
     const categoryTimestamps = [];
     Object.entries(localStorage).forEach(([key, value]) => {
