@@ -52,6 +52,10 @@
         <template v-if="isDecor">
           Ships in
         </template>
+        <template v-else-if="!isClearance">
+          Quick Custom, Made in the USA<br>
+          Estimated to ship in
+        </template>
         <template v-else>
           Custom made in the USA<br>
           Estimated to ship in
