@@ -370,6 +370,10 @@ export default {
         floorFoundUrl: this.metafields.floorfound_data.floor_found_url,
         savings: Math.ceil(this.msrp - this.shopifyProduct.price/100)
       }
+    },
+
+    hasUpsellProducts(){
+
     }
   },
 
@@ -756,6 +760,7 @@ export default {
     },
 
     async addToCart(quantity, warrantySelected = false) {
+      this.$bus.$emit('openUpsellModal');
       this.addToCartProcessing = true;
 
       if (this.productCreationInProgress) {

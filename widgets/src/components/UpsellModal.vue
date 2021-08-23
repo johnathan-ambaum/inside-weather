@@ -10,12 +10,12 @@
         <div class="UpsellModal__items">
           <!-- loop -->
           <div class="UpsellModal__item" v-for="upsellProduct in upsellProducts" :key="upsellProduct.title">
-            <div class="UpsellModal__item-image">
+            <a class="UpsellModal__item-image" :href="upsellProduct.url">
               <img :src="upsellProduct.image" alt="Product Image">
-            </div>
-            <div class="UpsellModal__item-title">{{ upsellProduct.title }}</div>
-            <div class="UpsellModal__item-price">{{ upsellProduct.price }}</div>
-            <div class="UpsellModal__item-customize UpsellModal__btn-clear">CUSTOMIZE</div>
+            </a>
+            <a class="UpsellModal__item-title" :href="upsellProduct.url">{{ upsellProduct.title }}</a>
+            <div class="UpsellModal__item-price">${{ formatProductPrice(upsellProduct.price) }}</div>
+            <a class="UpsellModal__item-customize UpsellModal__btn-clear" :href="upsellProduct.url">CUSTOMIZE</a>
             <div class="UpsellModal__item-atc UpsellModal__btn-black">ADD TO CART</div>
           </div>
         </div>
@@ -55,11 +55,11 @@ export default {
   data() {
     return {
       upsellProducts:[],
-      open: true,//change, true only for dev
+      open: false,
       upsell_products_data_v1:{//example object, get this from filters
         "title":"Add Throw Pillows?",
         "subtitle":"Add a throw pillow to your sofa! Match your sofa upholstry or choose from 100+ fabrics and leathers",
-        "footer_image":"https://i.picsum.photos/id/1071/500/300.jpg?hmac=xQJZVvzAmoi_RxNTel2Q9m28smnO5p__SJzN56_TRjk",
+        "footer_image":"https://i.picsum.photos/id/1009/300/150.jpg?hmac=7kERmOm8UKbcmu8CgqBmKHonq6Zua1OXI_PsQuLcbtc",
         "footer_alt_text":"car",
         "footer_title":"Want to customize your own?",
         "button_text":"SHOP ALL PILLOWS",
@@ -265,6 +265,20 @@ export default {
     close(){
       this.open = false;
     },
+
+    formatProductPrice(productPrice){
+      if(!productPrice){return}
+
+      let price =  productPrice;
+
+      const isWholeNumber = price.toFixed(2) % 1 == 0;
+      if(isWholeNumber){
+        return price;
+      }
+
+      return price.toFixed(2);
+    },
+
     buildSelectedOptions(relatedProductAttributes, filterStorageAttributes){
       const selectedOptions = {};
       Object.entries(relatedProductAttributes).forEach(([parameter, matchObj]) => {
@@ -354,7 +368,8 @@ export default {
           title: "",
           url: "",
           image: [],
-          product_type: ""
+          product_type: "",
+          price: 0
         };
 
         await FilterStorage.getItem(relatedProductData.product_type).then((response)=>{
@@ -369,6 +384,15 @@ export default {
           const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
           relatedProduct.title = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
           relatedProduct.url = relatedProductData.base_product_handle + '?attributes=' + attributeString;
+          relatedProduct.price = parseFloat(response.price);
+          Object.entries(selectedOptions).forEach(([parameter, value]) => {
+            const { values } = attributes.find(att => att.parameter === parameter);
+            const selected = values.find(item => item.value === value);
+            if(selected && selected.price_markup){
+              relatedProduct.price += parseFloat(selected.price_markup);
+            }
+
+          });
 
           let cylindo_sku = response.cylindo_sku;
           if(!cylindo_sku){
@@ -400,13 +424,14 @@ export default {
         });
 
         this.upsellProducts = this.relatedProductsTemp;
+        this.open = true;
 
       });
     }
   },
   mounted(){
-    // this.$bus.$on('some-event', this.populateCurrentRelatedProducts);
-    this.populateCurrentRelatedProducts();
+    this.$bus.$on('openUpsellModal', this.populateCurrentRelatedProducts);
+    // this.populateCurrentRelatedProducts();
   },
 }
 </script>
@@ -423,9 +448,13 @@ export default {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: hidden;
+  overflow: scroll;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+
+  @include at-query($breakpoint-large) {
+    overflow: hidden;
+  }
 
   *{
     font-family: $font-stack-avalon;
@@ -434,25 +463,42 @@ export default {
   &__inner{
     position:relative;
     background-color: white;
-    // margin: 12% auto;
     padding: 20px;
     border-radius: 20px;
     width: calc(100% - 30px);
-    margin: 70px 15px 0 15px;
-    // width: 700px;
-    // height: 700px;
+    margin: 70px 15px 30px 15px;
+    @include at-query($breakpoint-large) {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 750px;
+      max-height: 800px;
+    }
+
   }
 
   &__title{
     font-size: 26px;
     text-align: center;
     font-weight: 600;
+
+    @include at-query($breakpoint-large) {
+      font-size: 32px;
+      text-align: left;
+      padding:0 30px;
+    }
   }
 
   &__subtitle{
     font-size: 14px;
     font-weight: 500;
     margin-top:10px;
+
+    @include at-query($breakpoint-large) {
+      font-size: 14px;
+      text-align: left;
+      padding:0 30px;
+      width: 70%;
+    }
   }
 
   &__close,&__footer-close{
@@ -462,6 +508,7 @@ export default {
     font-size:13px;
     font-weight: 500;
     gap:10px;
+    cursor: pointer;
 
     svg{
       width:20px;
@@ -470,22 +517,127 @@ export default {
 
   &__close{
     justify-content: flex-end;
+    @include at-query($breakpoint-large) {
+      float:right;
+    }
   }
   &__footer-close{
     text-decoration: underline;
     justify-content: center;
   }
 
+  &__content{
+
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+    @include at-query($breakpoint-large) {
+      height: 450px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+  }
+
+  &__items{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    @include at-query($breakpoint-large) {
+      padding: 0 20px;
+    }
+
+  }
+
+  &__item{
+    flex-basis:50%;
+    @include at-query($breakpoint-large) {
+      flex-basis: 33%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+  }
+
+  &__item-title{
+    font-size:13px;
+    text-align: center;
+    font-weight: 600;
+    margin: 5px;
+    display:block;
+  }
+
+  &__item-price{
+    text-align: center;
+    font-size:14px;
+    font-weight: 500;
+    margin-bottom:10px;
+  }
+
   &__btn-clear,
   &__btn-black{
-
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #202020;
+    border-radius: 9999px;
+    padding: 5px 1px;
+    letter-spacing: 0.08em;
+    margin: 7px;
+    cursor:pointer;
+    user-select: none;
+    text-decoration: none;
+    display:block;
   }
 
   &__btn-clear{
+    color: #202020;
 
+    &:hover{
+      color:#202020;
+      text-decoration: none;
+    }
   }
 
   &__btn-black{
+    color:white;
+    background-color:#202020;
+
+    &:hover{
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  &__footer{
+    margin-top:20px;
+    @include at-query($breakpoint-large) {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+    }
+  }
+
+  &__footer-title{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    margin: 15px 0;
+
+    @include at-query($breakpoint-large) {
+      font-size: 24px;
+    }
+  }
+
+  &__footer-cta{
+    margin: 0 auto;
+    display: block;
+    max-width: 200px;
+    margin-bottom: 30px;
+    @include at-query($breakpoint-large) {
+      font-size: 14px;
+    }
 
   }
 
