@@ -461,6 +461,10 @@ export default {
     cursor:pointer;
     user-select: none;
     text-decoration: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 
   &__btn-clear{
