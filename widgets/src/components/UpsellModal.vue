@@ -1,32 +1,31 @@
 <template>
-  <div v-if="open" class="UpsellModal">
+  <div v-if="open" class="UpsellModal" ref="UpsellModal">
     <div class="UpsellModal__inner">
       <div class="UpsellModal__header">
-        <div class="UpsellModal__close" @click="close">No thanks <close-button></close-button></div>
-        <div class="UpsellModal__title">{{ upsell_products_data_v1.title }}</div>
-        <div class="UpsellModal__subtitle">{{ upsell_products_data_v1.subtitle }}</div>
+        <div class="UpsellModal__close" @click="close"><span>No thanks</span> <close-button></close-button></div>
+        <div class="UpsellModal__title">{{ upsellProductsData.title }}</div>
+        <div class="UpsellModal__subtitle">{{ upsellProductsData.subtitle }}</div>
       </div>
       <div class="UpsellModal__content">
         <div class="UpsellModal__items">
-          <!-- loop -->
-          <div class="UpsellModal__item" v-for="upsellProduct in upsellProducts" :key="upsellProduct.title">
+          <div class="UpsellModal__item" v-for="(upsellProduct, index) in upsellProducts" :key="upsellProduct.title" ref="upsellItems">
             <a class="UpsellModal__item-image" :href="upsellProduct.url">
               <img :src="upsellProduct.image" alt="Product Image">
             </a>
             <a class="UpsellModal__item-title" :href="upsellProduct.url">{{ upsellProduct.title }}</a>
             <div class="UpsellModal__item-price">${{ formatProductPrice(upsellProduct.price) }}</div>
             <a class="UpsellModal__item-customize UpsellModal__btn-clear" :href="upsellProduct.url">CUSTOMIZE</a>
-            <div class="UpsellModal__item-atc UpsellModal__btn-black">ADD TO CART</div>
+            <div class="UpsellModal__item-atc UpsellModal__btn-black" @click="addUpsellProductToCart(upsellProduct, index)"><span>ADD TO CART</span> <loader size="20"></loader></div>
           </div>
         </div>
       </div>
       <div class="UpsellModal__footer">
         <div class="UpsellModal__footer-image">
-          <img :src="upsell_products_data_v1.footer_image" :alt="upsell_products_data_v1.footer_alt_text">
+          <img :src="upsellProductsData.footer_image" :alt="upsellProductsData.footer_alt_text">
         </div>
         <div class="UpsellModal__footer-content">
-          <div class="UpsellModal__footer-title">{{ upsell_products_data_v1.footer_title }}</div>
-          <a class="UpsellModal__footer-cta UpsellModal__btn-black" :href="upsell_products_data_v1.button_url">{{ upsell_products_data_v1.button_text }}</a>
+          <div class="UpsellModal__footer-title">{{ upsellProductsData.footer_title }}</div>
+          <a class="UpsellModal__footer-cta UpsellModal__btn-black" :href="upsellProductsData.button_url">{{ upsellProductsData.button_text }}</a>
           <div v-if="isMobile" class="UpsellModal__footer-close" @click="close">No thanks</div>
         </div>
       </div>
@@ -35,20 +34,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import ApiClient from '../util/ApiClient';
 import FilterStorage from '../util/FilterStorage';
 import interpolator from '../mixins/interpolator';
+import Loader from './Loader.vue';
 
 const apiClient = new ApiClient();
 
 export default {
-  components: { CloseButton },
+  components: { CloseButton, Loader },
   computed: {
     ...mapState({
-      // upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
+      upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
       selectedOptions: state => state.selectedOptions
     })
   },
@@ -56,205 +56,8 @@ export default {
     return {
       upsellProducts:[],
       open: false,
-      upsell_products_data_v1:{//example object, get this from filters
-        "title":"Add Throw Pillows?",
-        "subtitle":"Add a throw pillow to your sofa! Match your sofa upholstry or choose from 100+ fabrics and leathers",
-        "footer_image":"https://i.picsum.photos/id/1009/300/150.jpg?hmac=7kERmOm8UKbcmu8CgqBmKHonq6Zua1OXI_PsQuLcbtc",
-        "footer_alt_text":"car",
-        "footer_title":"Want to customize your own?",
-        "button_text":"SHOP ALL PILLOWS",
-        "button_url":"https://insideweather.com/pages/sofas",
-        "upsell_products":[
-            {
-              "product_type":"Custom Sectional",
-              "base_product_handle":"custom-sectional-base",
-              "attributes":{
-                  "arm_style":{
-                    "matches":"arm_style",
-                    "value":null
-                  },
-                  "color_name":{
-                    "matches":"color_name",
-                    "value":null
-                  },
-                  "configuration":{
-                    "matches":"configuration",
-                    "value":"classic-classic"
-                  },
-                  "pillow_cushion_shape":{
-                    "matches":"pillow_cushion_shape",
-                    "value":null
-                  },
-                  "pillow_detail":{
-                    "matches":"pillow_detail",
-                    "value":null
-                  },
-                  "base_style":{
-                    "matches":"base_style",
-                    "value":null
-                  },
-                  "accent_pillow":{
-                    "matches":"accent_pillow",
-                    "value":null
-                  },
-                  "custom_comfort":{
-                    "matches":"custom_comfort",
-                    "value":null
-                  }
-              }
-            },
-            {
-              "product_type":"Custom Sofette",
-              "base_product_handle":"custom-sofette-base",
-              "attributes":{
-                  "arm_style":{
-                    "matches":"arm_style",
-                    "value":null
-                  },
-                  "color_name":{
-                    "matches":"color_name",
-                    "value":null
-                  },
-                  "configuration":{
-                    "matches":"configuration",
-                    "value":"classic-classic"
-                  },
-                  "pillow_cushion_shape":{
-                    "matches":"pillow_cushion_shape",
-                    "value":null
-                  },
-                  "pillow_detail":{
-                    "matches":"pillow_detail",
-                    "value":null
-                  },
-                  "base_style":{
-                    "matches":"base_style",
-                    "value":null
-                  },
-                  "accent_pillow":{
-                    "matches":"accent_pillow",
-                    "value":null
-                  },
-                  "custom_comfort":{
-                    "matches":"custom_comfort",
-                    "value":null
-                  }
-              }
-            },
-            {
-              "product_type":"Custom Sofette Sectional",
-              "base_product_handle":"custom-sofette-sectional-base",
-              "attributes":{
-                  "arm_style":{
-                    "matches":"arm_style",
-                    "value":null
-                  },
-                  "color_name":{
-                    "matches":"color_name",
-                    "value":null
-                  },
-                  "configuration":{
-                    "matches":"configuration",
-                    "value":"classic-classic"
-                  },
-                  "pillow_cushion_shape":{
-                    "matches":"pillow_cushion_shape",
-                    "value":null
-                  },
-                  "pillow_detail":{
-                    "matches":"pillow_detail",
-                    "value":null
-                  },
-                  "base_style":{
-                    "matches":"base_style",
-                    "value":null
-                  },
-                  "accent_pillow":{
-                    "matches":"accent_pillow",
-                    "value":null
-                  },
-                  "custom_comfort":{
-                    "matches":"custom_comfort",
-                    "value":null
-                  }
-              }
-            },
-            {
-              "product_type":"Custom Armchair",
-              "base_product_handle":"custom-armchair-base",
-              "attributes":{
-                  "arm_style":{
-                    "matches":"arm_style",
-                    "value":null
-                  },
-                  "color_name":{
-                    "matches":"color_name",
-                    "value":null
-                  },
-                  "pillow_cushion_shape":{
-                    "matches":"pillow_cushion_shape",
-                    "value":null
-                  },
-                  "pillow_detail":{
-                    "matches":"pillow_detail",
-                    "value":null
-                  },
-                  "base_style":{
-                    "matches":"base_style",
-                    "value":null
-                  },
-                  "accent_pillow":{
-                    "matches":"accent_pillow",
-                    "value":"no-pillows"
-                  },
-                  "custom_comfort":{
-                    "matches":"custom_comfort",
-                    "value":null
-                  }
-              }
-            },
-            {
-              "product_type":"Custom Ottoman",
-              "base_product_handle":"custom-ottoman-base",
-              "attributes":{
-                  "color_name":{
-                    "matches":"color_name",
-                    "value":null
-                  },
-                  "pillow_cushion_shape":{
-                    "matches":"pillow_cushion_shape",
-                    "value":null
-                  },
-                  "base_style":{
-                    "matches":"base_style",
-                    "value":null
-                  },
-                  "custom_comfort":{
-                    "matches":"custom_comfort",
-                    "value":null
-                  }
-              }
-            },
-            {
-              "product_type":"Classic Via Coffee Table (plywood)",
-              "base_product_handle":"classic-via-coffee-table-plywood-base",
-              "attributes":{
-                  "shape":{
-                    "matches":"shape",
-                    "value":"rectangle"
-                  },
-                  "finish":{
-                    "matches":"finish",
-                    "value":"latte-wood"
-                  },
-                  "base_style":{
-                    "matches":"base_style",
-                    "value":"latte-flare"
-                  }
-              }
-            }
-        ]
-      }
+      upsellProductsSelectedOptions: [],
+      upsellProductsTemplates: []
     };
   },
   mixins: [
@@ -262,7 +65,62 @@ export default {
     interpolator
   ],
   methods: {
+
+    resetTimer(delay){
+      setTimeout(() => {
+        this.$refs.upsellItems.forEach(upsellItem => upsellItem.querySelector('.UpsellModal__item-atc').textContent = 'ADD TO CART');
+      }, delay)
+    },
+
+    setItemAddedText(){
+      this.$refs.UpsellModal.querySelector('.UpsellModal__close span').textContent = 'DONE';
+      if(this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close')){
+        this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close').textContent = 'DONE';
+      }
+
+    },
+
+    resetItemAddedText(){
+      this.$refs.UpsellModal.querySelector('.UpsellModal__close span').textContent = 'No thanks';
+      if(this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close').textContent){
+        this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close').textContent = 'No thanks';
+      }
+    },
+
+    addUpsellProductToCart(upsellProduct, index){
+      this.$refs.upsellItems[index].querySelector('.Loader').style.display = 'block';
+
+      const templates = this.upsellProductsTemplates.find(product => product.hasOwnProperty(upsellProduct.title)) || {};
+      const templateObj = templates[upsellProduct.title].find(item => item.key === 'model_number') || {};
+      apiClient.createProduct({
+        name: upsellProduct.title,
+        model: this.interpolateString(templateObj.template),
+        type: upsellProduct.product_type,
+        image: upsellProduct.image,
+        attributes: this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title],
+      }).then(res => {
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: res.variant.id,
+            quantity: 1,
+          }),
+        }).then(() => {
+          this.setItemAddedText();
+          this.$refs.upsellItems[index].querySelector('.Loader').style.display = 'none';
+          this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc').textContent = 'ADDED';
+          this.resetTimer(8000);
+        })
+      });
+    },
+
     close(){
+      let addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
+      $('body').trigger(addedAjaxProuct);
       this.open = false;
     },
 
@@ -279,9 +137,9 @@ export default {
       return price.toFixed(2);
     },
 
-    buildSelectedOptions(relatedProductAttributes, filterStorageAttributes){
+    buildSelectedOptions(upsellProductAttributes, filterStorageAttributes){
       const selectedOptions = {};
-      Object.entries(relatedProductAttributes).forEach(([parameter, matchObj]) => {
+      Object.entries(upsellProductAttributes).forEach(([parameter, matchObj]) => {
         if(matchObj.value){
           selectedOptions[parameter] = matchObj.value;
           return
@@ -313,17 +171,16 @@ export default {
           selectedOptions[parameter] = foundValue.value;
         }
       });
-
       return selectedOptions;
     },
 
-    createCylindoImageUrl(selectedOptions, relatedProductFilterDefs){
+    createCylindoImageUrl(selectedOptions, upsellProductFilterDefs){
       let productCodePriority = Infinity;
-      let cylindo_sku = relatedProductFilterDefs.cylindo_sku;
+      let cylindo_sku = upsellProductFilterDefs.cylindo_sku;
       Object.entries(selectedOptions).forEach(([parameter, value]) => {// choose the cylindo_sku of the prodcut with the highest priority
-        const { values } = relatedProductFilterDefs.attributes.find(att => att.parameter === parameter);
+        const { values } = upsellProductFilterDefs.attributes.find(att => att.parameter === parameter);
         const selected = values.find(item => item.value === value);
-        const { cylindo_override_priority } = relatedProductFilterDefs.attributes.find(att => att.parameter === parameter);
+        const { cylindo_override_priority } = upsellProductFilterDefs.attributes.find(att => att.parameter === parameter);
         if((selected.cylindo_sku_override && cylindo_override_priority) && cylindo_override_priority < productCodePriority){// if an override and a priority exist, AND the priority is higher
           cylindo_sku = selected.cylindo_sku_override;
           productCodePriority = cylindo_override_priority;
@@ -331,11 +188,11 @@ export default {
       });
 
       // if the startFrame exists, use it, otherwise default to first frame, 1.
-      const startFrame = relatedProductFilterDefs && relatedProductFilterDefs.cylindo_overrides && relatedProductFilterDefs.cylindo_overrides.startFrame ? relatedProductFilterDefs.cylindo_overrides.startFrame : 1;
+      const startFrame = upsellProductFilterDefs && upsellProductFilterDefs.cylindo_overrides && upsellProductFilterDefs.cylindo_overrides.startFrame ? upsellProductFilterDefs.cylindo_overrides.startFrame : 1;
       const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/" + startFrame +"/"+ cylindo_sku + ".jpg";
       let cylindoProductFeaturesArray = []
       for(let option in selectedOptions){
-        let foundAttribute = relatedProductFilterDefs.attributes.find((attribute) => attribute.parameter === option);
+        let foundAttribute = upsellProductFilterDefs.attributes.find((attribute) => attribute.parameter === option);
         let foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
         if(foundValue.cylindo_features){
           cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
@@ -355,16 +212,18 @@ export default {
       return baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
     },
 
-    populateCurrentRelatedProducts(){
-      // if(!this.relatedProductsData){
-      //   setTimeout(handler, 200);
-      //   return
-      // }
+    populateCurrentUpsellProducts(){
+      if(!this.upsellProductsData){
+        setTimeout(this.populateCurrentUpsellProducts, 200);
+        return
+      }
 
-      this.relatedProductsTemp = [];
-      this.upsell_products_data_v1.upsell_products.forEach(async relatedProductData => {
+      this.upsellProductsTemp = [];
+      this.upsellProductsSelectedOptions = [];
+      this.upsellProductsTemplates = [];
+      this.upsellProductsData.upsell_products.forEach(async upsellProductData => {
 
-        let relatedProduct = {
+        let upsellProduct = {
           title: "",
           url: "",
           image: [],
@@ -372,24 +231,28 @@ export default {
           price: 0
         };
 
-        await FilterStorage.getItem(relatedProductData.product_type).then((response)=>{
+        await FilterStorage.getItem(upsellProductData.product_type).then((response)=>{
           if (!response.templates) {
             return '';
           }
 
           const attributes = response.attributes;
-          const selectedOptions = this.buildSelectedOptions(relatedProductData.attributes, attributes);
+          const selectedOptions = this.buildSelectedOptions(upsellProductData.attributes, attributes);
+
 
           const { template = '' } = response.templates.find(item => item.key === 'name') || {};
           const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
-          relatedProduct.title = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
-          relatedProduct.url = relatedProductData.base_product_handle + '?attributes=' + attributeString;
-          relatedProduct.price = parseFloat(response.price);
+          upsellProduct.title = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
+          upsellProduct.url = upsellProductData.base_product_handle + '?attributes=' + attributeString;
+          upsellProduct.price = parseFloat(response.price);
+
+          this.upsellProductsTemplates.push({[upsellProduct.title]: response.templates});
+          this.upsellProductsSelectedOptions.push({[upsellProduct.title]: selectedOptions});
           Object.entries(selectedOptions).forEach(([parameter, value]) => {
             const { values } = attributes.find(att => att.parameter === parameter);
             const selected = values.find(item => item.value === value);
             if(selected && selected.price_markup){
-              relatedProduct.price += parseFloat(selected.price_markup);
+              upsellProduct.price += parseFloat(selected.price_markup);
             }
 
           });
@@ -397,40 +260,40 @@ export default {
           let cylindo_sku = response.cylindo_sku;
           if(!cylindo_sku){
             apiClient.getImages({
-              type: relatedProductData.product_type,
+              type: upsellProductData.product_type,
               attributes: selectedOptions,
               debounce: false
             }).then((images) => {
-              relatedProduct.image = images;
-              relatedProduct.product_type = relatedProductData.product_type;
+              upsellProduct.image = images;
+              upsellProduct.product_type = upsellProductData.product_type;
             });
 
           }else{
-            relatedProduct.image = this.createCylindoImageUrl(selectedOptions, response);
-            relatedProduct.product_type = relatedProductData.product_type;
+            upsellProduct.image = this.createCylindoImageUrl(selectedOptions, response);
+            upsellProduct.product_type = upsellProductData.product_type;
           }
 
-          this.relatedProductsTemp.push(relatedProduct);
+          this.upsellProductsTemp.push(upsellProduct);
         });
 
-        this.relatedProductsTemp.sort((a,b) => {
+        this.upsellProductsTemp.sort((a,b) => {
           const A = a['product_type'];
           const B = b['product_type'];
 
-          if(this.upsell_products_data_v1.upsell_products.indexOf(A) > this.upsell_products_data_v1.upsell_products.indexOf(B)){
+          if(this.upsellProductsData.upsell_products.indexOf(A) > this.upsellProductsData.upsell_products.indexOf(B)){
             return 1;
           }
           return -1;
         });
 
-        this.upsellProducts = this.relatedProductsTemp;
+        this.upsellProducts = this.upsellProductsTemp;
         this.open = true;
 
       });
     }
   },
   mounted(){
-    this.$bus.$on('openUpsellModal', this.populateCurrentRelatedProducts);
+    this.$bus.$on('openUpsellModal', this.populateCurrentUpsellProducts);
     // this.populateCurrentRelatedProducts();
   },
 }
@@ -471,7 +334,7 @@ export default {
       margin-left: auto;
       margin-right: auto;
       max-width: 750px;
-      max-height: 800px;
+      max-height: 850px;
     }
 
   }
@@ -560,6 +423,17 @@ export default {
     }
   }
 
+  &__item-atc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .Loader{
+      display:none;
+    }
+  }
+
   &__item-title{
     font-size:13px;
     text-align: center;
@@ -587,7 +461,6 @@ export default {
     cursor:pointer;
     user-select: none;
     text-decoration: none;
-    display:block;
   }
 
   &__btn-clear{
@@ -616,6 +489,10 @@ export default {
       justify-content: space-around;
       align-items: center;
       padding: 20px;
+    }
+
+    img{
+      max-width: 300px;
     }
   }
 
