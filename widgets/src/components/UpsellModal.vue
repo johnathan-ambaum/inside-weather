@@ -163,12 +163,10 @@ export default {
           return
         }
 
-        let foundAttribute = filterStorageAttributes.find((attribute) => attribute.parameter === matchObj.matches);
-        let foundValue = foundAttribute.values.find((value) => value.value === matchObj.value);
-        if(!foundValue){
-          selectedOptions[parameter] = foundAttribute.values[0].value;
-        }else{
-          selectedOptions[parameter] = foundValue.value;
+        // if the match object and the parameter are not the same, match the specified parameters
+        if(this.selectedOptions[matchObj.matches]){
+          selectedOptions[parameter] = this.selectedOptions[matchObj.matches];
+          return
         }
       });
       return selectedOptions;
@@ -326,7 +324,6 @@ export default {
   &__inner{
     position:relative;
     background-color: white;
-    padding: 20px;
     border-radius: 20px;
     width: calc(100% - 30px);
     margin: 70px 15px 30px 15px;
@@ -339,15 +336,21 @@ export default {
 
   }
 
+  &__header{
+    padding: 0 20px;
+  }
+
   &__title{
     font-size: 26px;
     text-align: center;
     font-weight: 600;
+    line-height: 32px;
 
     @include at-query($breakpoint-large) {
+      line-height: 38px;
       font-size: 32px;
       text-align: left;
-      padding:0 30px;
+      padding: 30px 30px 0px 30px;
     }
   }
 
@@ -368,10 +371,11 @@ export default {
     display:flex;
     align-items: center;
     text-transform: uppercase;
-    font-size:13px;
+    font-size:12px;
     font-weight: 500;
     gap:10px;
     cursor: pointer;
+    letter-spacing: 0.12em;
 
     svg{
       width:20px;
@@ -380,17 +384,22 @@ export default {
 
   &__close{
     justify-content: flex-end;
+    margin-bottom: 15px;
+    padding-top:20px;
+
     @include at-query($breakpoint-large) {
       float:right;
     }
   }
+
   &__footer-close{
     text-decoration: underline;
     justify-content: center;
+    padding-bottom:20px;
   }
 
   &__content{
-
+    padding: 0 13px;
     overflow-y: scroll;
     @include at-query($breakpoint-large) {
       height: 450px;
@@ -414,6 +423,8 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      max-width: 186px;
+      margin: 0 17px;
     }
   }
 
@@ -447,12 +458,13 @@ export default {
 
   &__btn-clear,
   &__btn-black{
+    font-weight: 500;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     border: 1px solid #202020;
     border-radius: 9999px;
     padding: 5px 1px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     margin: 7px;
     cursor:pointer;
     user-select: none;
@@ -461,6 +473,12 @@ export default {
     text-align: center;
     justify-content: center;
     align-items: center;
+
+    @include at-query($breakpoint-large) {
+      font-size:14px;
+      margin: 7px 0;
+    }
+
   }
 
   &__btn-clear{
@@ -484,7 +502,9 @@ export default {
 
   &__footer{
     margin-top:20px;
+
     @include at-query($breakpoint-large) {
+      border-top:1px solid #d4d0ca;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -493,6 +513,8 @@ export default {
 
     img{
       max-width: 300px;
+      display:block;
+      margin: 0 auto;
     }
   }
 
@@ -501,9 +523,11 @@ export default {
     text-align: center;
     font-weight: 600;
     margin: 15px 0;
+    line-height: 25px;
 
     @include at-query($breakpoint-large) {
       font-size: 24px;
+      line-height: 30px;
     }
   }
 
