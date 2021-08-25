@@ -68,6 +68,7 @@
       if (checkoutStep !== null) {
         dataLayer.push({
           event: 'checkout',
+          eventId: Math.random().toString(16).slice(2),
           ecommerce: {
             checkout: {
               actionField: { step: checkoutStep },
@@ -92,6 +93,7 @@
           dataLayer.push({
             customerId: {{ customer.id | json }},
             orderId: {{ checkout.order_number | json }},
+            eventId: Math.random().toString(16).slice(2),
             ecommerce: {
               purchase: {
                 actionField: {
