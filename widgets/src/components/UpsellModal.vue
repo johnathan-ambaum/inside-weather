@@ -391,15 +391,9 @@ export default {
 
   &__content{
 
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
     overflow-y: scroll;
     @include at-query($breakpoint-large) {
       height: 450px;
-    }
-
-    &::-webkit-scrollbar {
-      display: none; /* for Chrome, Safari, and Opera */
     }
   }
 
@@ -419,7 +413,7 @@ export default {
       flex-basis: 33%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: space-between;
     }
   }
 
@@ -440,7 +434,9 @@ export default {
     font-weight: 600;
     margin: 5px;
     display:block;
+    flex-grow: 1;
   }
+
 
   &__item-price{
     text-align: center;
