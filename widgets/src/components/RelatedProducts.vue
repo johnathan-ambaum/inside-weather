@@ -46,12 +46,12 @@ export default {
     buildSelectedOptions(relatedProductAttributes, filterStorageAttributes){
       const selectedOptions = {};
       Object.entries(relatedProductAttributes).forEach(([parameter, matchObj]) => {
-        if(matchObj.value){
+        if(matchObj.value){//having a defined value overrules everything
           selectedOptions[parameter] = matchObj.value;
           return
         }
 
-        if(matchObj.matches === parameter){
+        if(matchObj.matches === parameter){// if the match object and the parameter are the same, respond normally by matching like parameters
           if(this.selectedOptions[parameter]){
             let foundAttribute = filterStorageAttributes.find((attribute) => attribute.parameter === parameter);
             let foundValue = matchObj.value ? matchObj : foundAttribute.values.find((value) => value.value === this.selectedOptions[parameter]);
@@ -69,13 +69,17 @@ export default {
           return
         }
 
-        let foundAttribute = filterStorageAttributes.find((attribute) => attribute.parameter === matchObj.matches);
-        let foundValue = foundAttribute.values.find((value) => value.value === matchObj.value);
-        if(!foundValue){
-          selectedOptions[parameter] = foundAttribute.values[0].value;
-        }else{
-          selectedOptions[parameter] = foundValue.value;
+        // if the match object and the parameter are not the same, match the specified parameters
+        if(this.selectedOptions[matchObj.matches]){
+          selectedOptions[parameter] = this.selectedOptions[matchObj.matches];
+          return
         }
+
+        // if this.selectedOptions[matchObj.matches] is not true, this indicates that the current product does not
+        // have a matching attribute compared to the one defined in the cms. ie admin user error.
+        // example: matches: "blueberry_sprinkles" on sofas
+        // if this happens we will return nothing
+
       });
 
       return selectedOptions;
