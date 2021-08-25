@@ -37,6 +37,7 @@ export default {
         productName: name,
         totalValue: productPrice,
         productHandle: handle,
+        eventId: Math.random().toString(16).slice(2)
       });
       window.dataLayer.push({
         event: 'PDPView',
@@ -85,6 +86,7 @@ export default {
       const formattedPrice = Number(price).toFixed(2);
       window.dataLayer.push({
         event: 'addToCart',
+        eventId: Math.random().toString(16).slice(2),
         totalValue: formattedPrice,
         productSKU: sku,
         productCategory: category,

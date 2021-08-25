@@ -46,7 +46,7 @@
   jQuery(function ($) {
     $('body').on('click', 'button.add-to-cart', function () {
       _learnq.push(['track', 'Added to Cart', klaviyoItem]);
-      window.dataLayer.push({'event': 'AddToCart'});
+      window.dataLayer.push({'event': 'AddToCart', eventId: Math.random().toString(16).slice(2)});
     });
   });
 </script>
