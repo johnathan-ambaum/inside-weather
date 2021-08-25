@@ -78,10 +78,27 @@ export function loadProductImages({ dispatch, commit, state }) {
 
   window.cylindo.on('ready', () => {
     const containerIds = ['cylindo-main', 'cylindo-secondary'].filter(id => document.getElementById(id) !== null);
+
+    let features = [];
+    let productCode = state.filters.cylindo_sku;
+    let productCodePriority = Infinity;
+    Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
+      const { values } = state.filters.attributes.find(att => att.parameter === parameter);
+      const selected = values.find(item => item.value === value);
+      const { cylindo_override_priority } = state.filters.attributes.find(att => att.parameter === parameter);
+      if(selected.cylindo_sku_override && cylindo_override_priority){
+        if(cylindo_override_priority < productCodePriority){
+          productCode = selected.cylindo_sku_override;
+          productCodePriority = cylindo_override_priority;
+        }
+      }
+      features = features.concat(selected.cylindo_features || []);
+    });
+
     const globalDefaults = {
       debug: false,
       accountID: 4931,
-      SKU: state.filters.cylindo_sku,
+      SKU: productCode,
       productCode,
       features,
       country: 'us',
