@@ -65,6 +65,37 @@ export default {
     interpolator
   ],
   methods: {
+    waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+      var startTimeInMs = Date.now();
+      (function loopSearch() {
+        if (document.querySelector(selector) != null) {
+          callback();
+          return;
+        }
+        else {
+          setTimeout(function () {
+            if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+              return;
+            loopSearch();
+          }, checkFrequencyInMs);
+        }
+      })();
+    },
+    
+    hideOnTopElements() {
+      this.waitForElementToDisplay('.orb-chat-mount>div',function(){
+        $('.orb-chat-mount>div').css('margin-right', '10000px');
+      },100,9000);
+      this.waitForElementToDisplay('#attentive_overlay',function(){
+        $('#attentive_overlay').css('display', 'none');
+      },100,9000);
+
+    },
+
+    showOnTopElements(){
+      $('.orb-chat-mount>div').css('margin-right', '0px');
+      $('#attentive_overlay').css('display', 'initial');
+    },
 
     resetTimer(delay){
       setTimeout(() => {
@@ -121,6 +152,7 @@ export default {
     close(){
       let addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
       $('body').trigger(addedAjaxProuct);
+      this.showOnTopElements();
       this.open = false;
     },
 
@@ -285,6 +317,7 @@ export default {
         });
 
         this.upsellProducts = this.upsellProductsTemp;
+        this.hideOnTopElements();
         this.open = true;
 
       });
