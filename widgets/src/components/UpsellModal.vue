@@ -81,7 +81,7 @@ export default {
         }
       })();
     },
-    
+
     hideOnTopElements() {
       this.waitForElementToDisplay('.orb-chat-mount>div',function(){
         $('.orb-chat-mount>div').css('margin-right', '10000px');
@@ -123,12 +123,14 @@ export default {
 
       const templates = this.upsellProductsTemplates.find(product => product.hasOwnProperty(upsellProduct.title)) || {};
       const templateObj = templates[upsellProduct.title].find(item => item.key === 'model_number') || {};
+      const upsellProductsSelectedOptions = this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title];
+
       apiClient.createProduct({
         name: upsellProduct.title,
-        model: this.interpolateString(templateObj.template),
+        model: this.interpolateWithValues({ template: templateObj.template, attributes: upsellProduct.attributes, selectedOptions: upsellProductsSelectedOptions }),
         type: upsellProduct.product_type,
         image: upsellProduct.image,
-        attributes: this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title],
+        attributes: upsellProductsSelectedOptions,
       }).then(res => {
         fetch('/cart/add.js', {
           method: 'POST',
@@ -258,7 +260,8 @@ export default {
           url: "",
           image: [],
           product_type: "",
-          price: 0
+          price: 0,
+          attributes: ''
         };
 
         await FilterStorage.getItem(upsellProductData.product_type).then((response)=>{
@@ -275,6 +278,7 @@ export default {
           upsellProduct.title = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
           upsellProduct.url = upsellProductData.base_product_handle + '?attributes=' + attributeString;
           upsellProduct.price = parseFloat(response.price);
+          upsellProduct.attributes = attributes;
 
           this.upsellProductsTemplates.push({[upsellProduct.title]: response.templates});
           this.upsellProductsSelectedOptions.push({[upsellProduct.title]: selectedOptions});
@@ -359,7 +363,8 @@ export default {
     background-color: white;
     border-radius: 20px;
     width: calc(100% - 30px);
-    margin: 70px 15px 30px 15px;
+    top: 50%;
+    transform: translateY(-50%);
     @include at-query($breakpoint-large) {
       margin-left: auto;
       margin-right: auto;
@@ -370,7 +375,7 @@ export default {
   }
 
   &__header{
-    padding: 0 20px;
+    padding: 0 20px 20px 16px;
   }
 
   &__title{
@@ -435,7 +440,7 @@ export default {
     padding: 0 13px;
     overflow-y: scroll;
     @include at-query($breakpoint-large) {
-      height: 450px;
+      height: 400px;
     }
   }
 
