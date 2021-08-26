@@ -364,6 +364,7 @@ export default {
     border-radius: 20px;
     width: calc(100% - 30px);
     top:7%;
+    margin: 0 auto;
     @include at-query($breakpoint-large) {
       margin-left: auto;
       margin-right: auto;
