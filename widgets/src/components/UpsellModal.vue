@@ -363,8 +363,7 @@ export default {
     background-color: white;
     border-radius: 20px;
     width: calc(100% - 30px);
-    top: 50%;
-    transform: translateY(-50%);
+    top:7%;
     @include at-query($breakpoint-large) {
       margin-left: auto;
       margin-right: auto;
@@ -441,6 +440,10 @@ export default {
     overflow-y: scroll;
     @include at-query($breakpoint-large) {
       height: 400px;
+    }
+
+    @media(max-height: 800px){
+      padding-bottom:20px;
     }
   }
 
@@ -547,6 +550,11 @@ export default {
       justify-content: space-around;
       align-items: center;
       padding: 20px;
+    }
+
+    @media(max-height: 800px){
+      display:none;
+      padding-bottom:20px;
     }
 
     img{
