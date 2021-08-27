@@ -325,10 +325,7 @@ export default {
         });
 
         this.upsellProductsTemp.sort((a,b) => {
-          const A = a['product_type'];
-          const B = b['product_type'];
-
-          if(this.upsellProductsData.upsell_products.indexOf(A) > this.upsellProductsData.upsell_products.indexOf(B)){
+          if(a.priority > b.priority){
             return 1;
           }
           return -1;
