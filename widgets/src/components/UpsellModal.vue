@@ -15,7 +15,10 @@
             <a class="UpsellModal__item-title" :href="upsellProduct.url">{{ upsellProduct.title }}</a>
             <div class="UpsellModal__item-price">${{ formatProductPrice(upsellProduct.price) }}</div>
             <a class="UpsellModal__item-customize UpsellModal__btn-clear" :href="upsellProduct.url">CUSTOMIZE</a>
-            <div class="UpsellModal__item-atc UpsellModal__btn-black" @click="addUpsellProductToCart(upsellProduct, index)"><span>ADD TO CART</span> <loader size="20"></loader></div>
+            <div class="UpsellModal__item-atc UpsellModal__btn-black" @click="addUpsellProductToCart(upsellProduct, index)">
+              <span class="UpsellModal__item-atc-text">ADD TO CART</span>
+              <loader size="20"></loader>
+            </div>
           </div>
         </div>
       </div>
@@ -97,9 +100,9 @@ export default {
       $('#attentive_overlay').css('display', 'initial');
     },
 
-    resetTimer(delay){
+    resetTimer(delay, index){
       setTimeout(() => {
-        this.$refs.upsellItems.forEach(upsellItem => upsellItem.querySelector('.UpsellModal__item-atc').textContent = 'ADD TO CART');
+        this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc-text').textContent = 'ADD TO CART'
       }, delay)
     },
 
@@ -123,14 +126,14 @@ export default {
 
       const templates = this.upsellProductsTemplates.find(product => product.hasOwnProperty(upsellProduct.title)) || {};
       const templateObj = templates[upsellProduct.title].find(item => item.key === 'model_number') || {};
-      const upsellProductsSelectedOptions = this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title];
+      const upsellProductSelectedOptions = this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title];
 
       apiClient.createProduct({
         name: upsellProduct.title,
-        model: this.interpolateWithValues({ template: templateObj.template, attributes: upsellProduct.attributes, selectedOptions: upsellProductsSelectedOptions }),
+        model: this.interpolateWithValues({ template: templateObj.template, attributes: upsellProduct.attributes, selectedOptions: upsellProductSelectedOptions }),
         type: upsellProduct.product_type,
         image: upsellProduct.image,
-        attributes: upsellProductsSelectedOptions,
+        attributes: upsellProductSelectedOptions,
       }).then(res => {
         fetch('/cart/add.js', {
           method: 'POST',
@@ -141,12 +144,16 @@ export default {
           body: JSON.stringify({
             id: res.variant.id,
             quantity: 1,
+            properties: {
+              'Estimated time to ship': this.getEmailFulfillmentTime(upsellProduct.filters, upsellProductSelectedOptions, upsellProduct.attributes),
+              'User Fulfillment Display': this.getFulfillmentTime(upsellProduct.filters, upsellProductSelectedOptions, upsellProduct.attributes),
+            }
           }),
         }).then(() => {
           this.setItemAddedText();
           this.$refs.upsellItems[index].querySelector('.Loader').style.display = 'none';
-          this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc').textContent = 'ADDED';
-          this.resetTimer(8000);
+          this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc-text').textContent = 'ADDED';
+          this.resetTimer(8000, index);
         })
       });
     },
@@ -261,13 +268,16 @@ export default {
           image: [],
           product_type: "",
           price: 0,
-          attributes: ''
+          attributes: '',
+          filters: {}
         };
 
         await FilterStorage.getItem(upsellProductData.product_type).then((response)=>{
           if (!response.templates) {
             return '';
           }
+
+          upsellProduct.filters = response
 
           const attributes = response.attributes;
           const selectedOptions = this.buildSelectedOptions(upsellProductData.attributes, attributes);
