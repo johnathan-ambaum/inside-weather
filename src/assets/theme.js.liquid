@@ -1291,6 +1291,12 @@ lazySizesConfig.expFactor = 4;
             }
           }.bind(this));
         }.bind(this));
+
+        $('body').on('buildCart', function(event) {
+          theme.cart.getCart().then(function(cart) {
+            this.buildCart(cart, event.openCartDrawer);
+          }.bind(this));
+        }.bind(this));
       },
 
       buildCart: function(cart, openDrawer) {

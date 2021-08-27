@@ -154,6 +154,10 @@ export default {
           this.$refs.upsellItems[index].querySelector('.Loader').style.display = 'none';
           this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc-text').textContent = 'ADDED';
           this.resetTimer(8000, index);
+
+          let buildCart = jQuery.Event( "buildCart" );
+          buildCart.openCartDrawer = false;
+          $('body').trigger(buildCart);
         })
       });
     },
