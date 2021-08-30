@@ -2,21 +2,25 @@
   <div v-if="open" class="UpsellModal" ref="UpsellModal">
     <div class="UpsellModal__inner">
       <div class="UpsellModal__header">
-        <div class="UpsellModal__close" @click="close"><span>No thanks</span> <close-button></close-button></div>
+        <div class="UpsellModal__close" @click="close"><span>{{ closeText }}</span> <close-button></close-button></div>
         <div class="UpsellModal__title">{{ upsellProductsData.title }}</div>
         <div class="UpsellModal__subtitle">{{ upsellProductsData.subtitle }}</div>
       </div>
       <div class="UpsellModal__content">
         <div class="UpsellModal__items">
-          <div class="UpsellModal__item" v-for="(upsellProduct, index) in upsellProducts" :key="upsellProduct.title" ref="upsellItems">
+          <div class="UpsellModal__item" v-for="upsellProduct in upsellProducts" :key="upsellProduct.priority">
             <a class="UpsellModal__item-image" :href="upsellProduct.url">
               <img :src="upsellProduct.image" alt="Product Image">
             </a>
             <a class="UpsellModal__item-title" :href="upsellProduct.url">{{ upsellProduct.title }}</a>
             <div class="UpsellModal__item-price">${{ formatProductPrice(upsellProduct.price) }}</div>
             <a class="UpsellModal__item-customize UpsellModal__btn-clear" :href="upsellProduct.url">CUSTOMIZE</a>
-            <div class="UpsellModal__item-atc UpsellModal__btn-black" @click="addUpsellProductToCart(upsellProduct, index)">
-              <span class="UpsellModal__item-atc-text">ADD TO CART</span>
+            <div 
+              :class="addToCartClasses(upsellProduct.priority)"
+              class="UpsellModal__item-atc UpsellModal__btn-black" 
+              @click="addUpsellProductToCart(upsellProduct)"
+            >
+              <span class="UpsellModal__item-atc-text">{{ addToCartText(upsellProduct.priority) }}</span>
               <loader size="20"></loader>
             </div>
           </div>
@@ -29,7 +33,7 @@
         <div class="UpsellModal__footer-content">
           <div class="UpsellModal__footer-title">{{ upsellProductsData.footer_title }}</div>
           <a class="UpsellModal__footer-cta UpsellModal__btn-black" :href="upsellProductsData.button_url">{{ upsellProductsData.button_text }}</a>
-          <div v-if="isMobile" class="UpsellModal__footer-close" @click="close">No thanks</div>
+          <div v-if="isMobile" class="UpsellModal__footer-close" @click="close">{{ closeText }}</div>
         </div>
       </div>
     </div>
@@ -49,24 +53,46 @@ const apiClient = new ApiClient();
 
 export default {
   components: { CloseButton, Loader },
+
   computed: {
     ...mapState({
       upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
-      selectedOptions: state => state.selectedOptions
-    })
+      selectedOptions: state => state.selectedOptions,
+    }),
+
+    addToCartClasses() {
+      return (priority) => ({
+        'is-adding': priority === this.currentlyAdding,
+      });
+    },
+
+    addToCartText() {
+      return (priority) => {
+        if (this.lastAdded === priority) {
+          return 'ADDED';
+        }
+        return 'ADD TO CART';
+      }
+    },
   },
+
   data() {
     return {
       upsellProducts:[],
       open: false,
       upsellProductsSelectedOptions: [],
-      upsellProductsTemplates: []
+      upsellProductsTemplates: [],
+      closeText: 'No thanks',
+      currentlyAdding: null,
+      lastAdded: null,
     };
   },
+
   mixins: [
     screenMonitor,
-    interpolator
+    interpolator,
   ],
+
   methods: {
     waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
       var startTimeInMs = Date.now();
@@ -100,29 +126,14 @@ export default {
       $('#attentive_overlay').css('display', 'initial');
     },
 
-    resetTimer(delay, index){
+    resetTimer(delay){
       setTimeout(() => {
-        this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc-text').textContent = 'ADD TO CART'
-      }, delay)
+        this.lastAdded = null;
+      }, delay);
     },
 
-    setItemAddedText(){
-      this.$refs.UpsellModal.querySelector('.UpsellModal__close span').textContent = 'DONE';
-      if(this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close')){
-        this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close').textContent = 'DONE';
-      }
-
-    },
-
-    resetItemAddedText(){
-      this.$refs.UpsellModal.querySelector('.UpsellModal__close span').textContent = 'No thanks';
-      if(this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close').textContent){
-        this.$refs.UpsellModal.querySelector('.UpsellModal__footer-close').textContent = 'No thanks';
-      }
-    },
-
-    addUpsellProductToCart(upsellProduct, index){
-      this.$refs.upsellItems[index].querySelector('.Loader').style.display = 'block';
+    addUpsellProductToCart(upsellProduct){
+      this.currentlyAdding = upsellProduct.priority;
 
       const templates = this.upsellProductsTemplates.find(product => product.hasOwnProperty(upsellProduct.title)) || {};
       const templateObj = templates[upsellProduct.title].find(item => item.key === 'model_number') || {};
@@ -150,10 +161,10 @@ export default {
             }
           }),
         }).then(() => {
-          this.setItemAddedText();
-          this.$refs.upsellItems[index].querySelector('.Loader').style.display = 'none';
-          this.$refs.upsellItems[index].querySelector('.UpsellModal__item-atc-text').textContent = 'ADDED';
-          this.resetTimer(8000, index);
+          this.closeText = 'DONE';
+          this.currentlyAdding = null;
+          this.lastAdded = upsellProduct.priority;
+          this.resetTimer(8000);
 
           let buildCart = jQuery.Event( "buildCart" );
           buildCart.openCartDrawer = false;
@@ -273,7 +284,8 @@ export default {
           product_type: "",
           price: 0,
           attributes: '',
-          filters: {}
+          filters: {},
+          priority: upsellProductData.priority,
         };
 
         await FilterStorage.getItem(upsellProductData.product_type).then((response)=>{
@@ -488,7 +500,11 @@ export default {
     gap: 10px;
 
     .Loader{
-      display:none;
+      display: none;
+    }
+
+    &.is-adding .Loader {
+      display: block;
     }
   }
 
