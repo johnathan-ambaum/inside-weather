@@ -118,6 +118,9 @@ export function loadProductImages({ dispatch, commit, state }) {
       }),
     }));
     Vue.set(state, 'cylindoViewers', cylindoViewers);
+    cylindoViewers[0].instance.on('instance:viewer:ready', () => {
+      dispatch('getCylindoImage');
+    });
   });
 }
 
