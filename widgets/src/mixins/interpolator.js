@@ -136,6 +136,10 @@ export default {
     },
 
     fullProduct() {
+      let image = null;
+      if (this.productImages.length) {
+        image = this.productImages[0].large || this.productImages[0].full;
+      }
       return {
         name: this.productName,
         handle: this.activeProduct.handle,
@@ -144,7 +148,7 @@ export default {
         price: this.productPrice,
         msrp: this.msrp,
         category: this.productType,
-        image: this.productImages.length ? this.productImages[0].large : null,
+        image,
       };
     },
   },
