@@ -1281,8 +1281,20 @@ lazySizesConfig.expFactor = 4;
               localStorage.setItem('currentCart', JSON.stringify(cart));
               $('body').trigger(openProductProtectionModal);
             }else{
+              if(event.openCartDrawer !== undefined){
+                this.buildCart(cart, event.openCartDrawer);
+                return
+              }
+
               this.buildCart(cart, true);
+
             }
+          }.bind(this));
+        }.bind(this));
+
+        $('body').on('buildCart', function(event) {
+          theme.cart.getCart().then(function(cart) {
+            this.buildCart(cart, event.openCartDrawer);
           }.bind(this));
         }.bind(this));
       },
@@ -1760,7 +1772,8 @@ lazySizesConfig.expFactor = 4;
       addonItemHandler: function(cart){
         if(!cart){return}
         let currentCart = JSON.parse(localStorage.getItem("currentCart"));
-        let itemInCartHasProtectionPlans = cart.items.filter(function(item){return item.protection_plans !== null}).length;
+        let itemInCartHasProtectionPlans = !!cart.items.filter(function(item){return item.protection_plans !== null && item.protection_plans !== undefined}).length;
+
         if(cart.item_count === 0 || (currentCart && currentCart.item_count === 0) || !currentCart){
           localStorage.setItem('currentCart', JSON.stringify(cart));
           return

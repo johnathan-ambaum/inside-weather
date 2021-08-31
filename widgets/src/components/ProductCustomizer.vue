@@ -290,7 +290,8 @@ export default {
           disabled_button_url: state.filters.disabled_button_url
         }
       },
-      cylindoViewers: state => state.cylindoViewers || []
+      cylindoViewers: state => state.cylindoViewers || [],
+      upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
     }),
 
     useCylindo() {
@@ -370,6 +371,10 @@ export default {
         floorFoundUrl: this.metafields.floorfound_data.floor_found_url,
         savings: Math.ceil(this.msrp - this.shopifyProduct.price/100)
       }
+    },
+
+    hasUpsellProducts(){
+      return !!this.upsellProductsData.enable_upsell;
     }
   },
 
@@ -756,6 +761,10 @@ export default {
     },
 
     async addToCart(quantity, warrantySelected = false) {
+      if(this.hasUpsellProducts){
+        this.$bus.$emit('openUpsellModal');
+      }
+
       this.addToCartProcessing = true;
 
       if (this.productCreationInProgress) {
@@ -810,6 +819,8 @@ export default {
             // image: this.productImages[0].full,
             attributes: this.selectedOptions,
           }
+          addedAjaxProuct.openCartDrawer = !this.hasUpsellProducts;
+
           $('body').trigger(addedAjaxProuct);
           this.trackAddToCart(this.fullProduct);
         });
@@ -1615,6 +1626,7 @@ html.ProductCustomizer--Open {
     letter-spacing: 0.1em;
     color:#202020;
     z-index: 10;
+    width:100%;
   }
   &--Cylindo &__Close {
     @include at-query($breakpoint-large) {
