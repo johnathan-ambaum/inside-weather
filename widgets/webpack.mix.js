@@ -6,7 +6,6 @@ mix
   .js('src/main.js', 'widgets.js')
   .extract([
     '@glidejs/glide',
-    'scrollmonitor',
     'vue',
     'vuex',
   ], 'widgets.vendor.js')
