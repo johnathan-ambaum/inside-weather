@@ -1,14 +1,8 @@
 import './util/polyfills';
 import Vue from 'vue';
 import { mapState } from 'vuex';
-import BootstrapVue from 'bootstrap-vue';
-// this import moved into ReviewModal to fix not being included in CSS output
-// import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
-// this import moved into ReviewCarousel to fix not being included in CSS output
-// import '../node_modules/swiper/dist/css/swiper.css';
 
 import ProductGrid from './components/ProductGrid.vue';
 import ProductCustomizer from './components/ProductCustomizer.vue';
@@ -37,7 +31,6 @@ import CategoryVideo from './components/CategoryVideo.vue';
 import CategoryVprops from './components/CategoryVprops.vue';
 import LifeStylePhotos from './components/LifeStylePhotos.vue';
 import CategoryItem from './components/CategoryItem.vue';
-import FullReviews from './containers/FullReviews.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 import Help from './components/Help.vue';
@@ -91,7 +84,6 @@ import TitleText from './components/CMSBlocks/TitleText';
       ProductDetailSlider,
       GlyphLoading,
       CategoryItem,
-      FullReviews,
       FontAwesomeIcon,
       BannerCarousel,
       StaticBanner,
@@ -112,7 +104,6 @@ import TitleText from './components/CMSBlocks/TitleText';
       CategoryVideo,
       CategoryVprops,
       LifeStylePhotos,
-      BootstrapVue,
       Help,
       PageNotFoundBanner,
       CategorySeoContent,
