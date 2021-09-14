@@ -114,7 +114,7 @@
           {{ productName }}
         </div>
         <div class="ProductCustomizer__PriceRow">
-          <span class="ProductCustomizer__Price--mt">${{ formattedProductPrice }}</span>
+          <span class="ProductCustomizer__Price--mt">{{ formattedProductPrice | money}}</span>
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
@@ -355,12 +355,7 @@ export default {
         price = this.shopifyProduct.price/100;
       }
 
-      const isWholeNumber = price.toFixed(2) % 1 == 0;
-      if(isWholeNumber){
-        return price;
-      }
-
-      return price.toFixed(2);
+      return price;
     },
 
     isClearance(){
