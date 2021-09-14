@@ -37,9 +37,9 @@
       <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
         :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
-        <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
-        <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
-        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ isClearance ? clearanceData.savings : savings }}</span>
+        <span class="ProductCustomizer__Price">{{ formattedProductPrice | money }}</span>
+        <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay | money }}</span>
+        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE {{ isClearance ? clearanceData.savings : savings | money }}</span>
         <info-popup v-if="!isDecor"
           text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
@@ -190,7 +190,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 import DOMPurify from 'dompurify';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart } from '@fortawesome/pro-light-svg-icons';
+import { faHeart, faMoneyBill } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ProductDetailSlider from './ProductDetailSlider.vue';
 import ProductGallery from './ProductGallery.vue';
@@ -208,6 +208,7 @@ import PhotoshootModal from './PhotoshootModal.vue';
 import ReviewStars from './ReviewStars.vue';
 import Loader from './Loader.vue';
 import TemplateBlock from './TemplateBlock.vue';
+import money from '../filters/money';
 
 library.add(faHeart);
 
@@ -227,6 +228,10 @@ export default {
     ReviewStars,
     Loader,
     TemplateBlock
+  },
+
+  filters: {
+    money
   },
 
   mixins: [
