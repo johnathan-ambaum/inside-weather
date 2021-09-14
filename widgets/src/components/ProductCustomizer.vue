@@ -190,7 +190,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 import DOMPurify from 'dompurify';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart, faMoneyBill } from '@fortawesome/pro-light-svg-icons';
+import { faHeart } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ProductDetailSlider from './ProductDetailSlider.vue';
 import ProductGallery from './ProductGallery.vue';
