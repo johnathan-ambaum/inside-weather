@@ -11,7 +11,7 @@
       <div class="Banner__content">
         <h2>{{bannerHeading}}</h2>
         <p>{{bannerDescription}}</p>
-        <link-button :btnText="buttonText" :linkTo="buttonLink" :fill="true" :border="false" />
+        <link-button :btnText="buttonText" :linkTo="buttonLink" bgColor="white" strokeColor="#202020" :border="false" />
       </div>
     </div>
   </div>
