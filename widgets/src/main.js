@@ -54,6 +54,13 @@ import TopBanner from './components/CMSBlocks/TopBanner'
 import TwoColumnTextImage from './components/CMSBlocks/TwoColumnTextImage';
 import VpropIcons from './components/CMSBlocks/VpropIcons';
 import TitleText from './components/CMSBlocks/TitleText';
+import ReviewCarousel from './components/CMSBlocks/ReviewCarousel';
+import BannerSlider from './components/CMSBlocks/BannerSlider';
+import RecentlySold from './components/CMSBlocks/RecentlySold';
+import TextBanner from './components/CMSBlocks/TextBanner';
+import PressList from './components/CMSBlocks/PressList';
+import FeaturedCategories from './components/CMSBlocks/FeaturedCategories';
+import VProps from './components/CMSBlocks/VProps';
 
 (function init() {
   const rootEl = document.querySelector('#app');
@@ -122,7 +129,14 @@ import TitleText from './components/CMSBlocks/TitleText';
       TopBanner,
       TwoColumnTextImage,
       VpropIcons,
-      TitleText
+      TitleText,
+      ReviewCarousel,
+      BannerSlider,
+      RecentlySold,
+      TextBanner,
+      PressList,
+      FeaturedCategories,
+      VProps,
     },
 
     mixins: [
