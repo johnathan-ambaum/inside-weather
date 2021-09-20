@@ -774,21 +774,21 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#36322f",
+          "background_color_1": "#b1c8cd",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
-          "font_color_1": "#f4e8d2",
+          "font_color_1": "#ffffff",
           "font_color_2": "#ffffff",
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p>Last Chance to save <strong>20% OFF<\/strong>! Our Labor Day Sale ends soon. <a href=\"\/pages\/2021-labor-day-sale\" title=\"2021 Labor Day Sale\"><strong>SHOP NOW<\/strong><\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-labor-day-sale\" title=\"2021 Labor Day Sale\">Last Chance to save <strong>20% OFF <\/strong>during our Labor Day Sale!<\/a><\/p>",
+          "text_1": "<p>FREE Shipping on orders over $1500 | 365 Day Home Trial<\/p>",
+          "mobile_text_1": "<p>FREE Shipping on $1500+ | 365 Day Home Trial<\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
+          "promo_countdown_enabled": false,
           "promo_countdown_end_date": "09\/10\/2021"
         }
       },
