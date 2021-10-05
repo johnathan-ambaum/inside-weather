@@ -205,7 +205,6 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
-import ReviewStars from './ReviewStars.vue';
 import Loader from './Loader.vue';
 import TemplateBlock from './TemplateBlock.vue';
 
@@ -224,7 +223,6 @@ export default {
     InspirationOptions,
     SwatchBrowser,
     PhotoshootModal,
-    ReviewStars,
     Loader,
     TemplateBlock
   },
