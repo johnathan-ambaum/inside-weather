@@ -2,45 +2,20 @@ import './util/polyfills';
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import VueAwesomeSwiper from 'vue-awesome-swiper';
 
 import ProductGrid from './components/ProductGrid.vue';
-import ProductCustomizer from './components/ProductCustomizer.vue';
-import ProductDetail from './components/ProductDetail.vue';
-import ProductInformation from './components/ProductInformation.vue';
-import ProductFamily from './components/ProductFamily.vue';
-import ProductDetailSlider from './components/ProductDetailSlider.vue';
-import GlyphLoading from './components/GlyphLoading.vue';
-import BannerCarousel from './components/BannerCarousel.vue';
 import StaticBanner from './components/StaticBanner.vue';
 import CategoryList from './components/CategoryList.vue';
-import ValueProps from './components/ValueProps.vue';
-import Press from './components/Press.vue';
-import Banner from './components/Banner.vue';
-import BannerReviewCarousel from './components/BannerReviewCarousel.vue';
 import CategoryBanner from './components/CategoryBanner.vue';
-import HiwProps from './components/HiwProps.vue';
-import CustomizableCategory from './components/CustomizableCategory.vue';
-import CustomComfort from './components/CustomComfort.vue';
-import RecentlySoldProducts from './components/RecentlySoldProducts.vue';
 import CategoryCollections from './components/CategoryCollections.vue';
-import WallArtCategoryCollections from './components/WallArtCategoryCollections.vue';
 import CategoryDetails from './components/CategoryDetails.vue';
-import CategoryDetail from './components/CategoryDetail.vue';
-import CategoryVideo from './components/CategoryVideo.vue';
 import CategoryVprops from './components/CategoryVprops.vue';
 import LifeStylePhotos from './components/LifeStylePhotos.vue';
-import CategoryItem from './components/CategoryItem.vue';
 import screenMonitor from './mixins/screenMonitor';
 import store from './store';
 import Help from './components/Help.vue';
 import PageNotFoundBanner from './components/PageNotFoundBanner.vue';
 import CategorySeoContent from './components/CategorySeoContent.vue';
-import Favorites from './components/Favorites.vue';
-import CollectionBanner from './components/CollectionBanner.vue';
-import GlideSlider from './components/GlideSlider.vue';
-import GlideSlide from './components/GlideSlide.vue';
-import UpsellModal from './components/UpsellModal.vue'
 
 // CMS Blocks
 import CategoryProductGrid from './components/CMSBlocks/CategoryProductGrid';
@@ -77,48 +52,22 @@ import VProps from './components/CMSBlocks/VProps';
 
   Object.defineProperty(Vue.prototype, '$bus', { get() { return bus; } });
 
-  Vue.use(VueAwesomeSwiper);
-
   const app = new Vue({
     el: rootEl,
 
     components: {
       ProductGrid,
-      ProductCustomizer,
-      ProductDetail,
-      ProductInformation,
-      ProductFamily,
-      ProductDetailSlider,
-      GlyphLoading,
-      CategoryItem,
       FontAwesomeIcon,
-      BannerCarousel,
       StaticBanner,
       CategoryList,
-      ValueProps,
-      Press,
-      Banner,
-      BannerReviewCarousel,
-      RecentlySoldProducts,
       CategoryBanner,
-      HiwProps,
-      CustomizableCategory,
-      CustomComfort,
       CategoryCollections,
-      WallArtCategoryCollections,
       CategoryDetails,
-      CategoryDetail,
-      CategoryVideo,
       CategoryVprops,
       LifeStylePhotos,
       Help,
       PageNotFoundBanner,
       CategorySeoContent,
-      Favorites,
-      CollectionBanner,
-      GlideSlider,
-      GlideSlide,
-      UpsellModal,
       CategoryProductGrid,
       CustomSpacer,
       ImageText,

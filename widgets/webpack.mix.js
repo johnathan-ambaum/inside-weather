@@ -1,15 +1,19 @@
 const mix = require('laravel-mix');
-const autoprefixer = require('autoprefixer');
 
 mix
-  .setPublicPath('../src/assets')
   .js('src/main.js', 'widgets.js')
+  .js('src/product.js', 'product.js')
+  .js('src/favorites.js', 'favorites.js')
+  .vue({
+    extractStyles: 'widgets.css',
+    version: 2,
+  })
   .extract([
-    '@glidejs/glide',
     'vue',
     'vuex',
+    'dompurify',
+    '@glidejs/glide',
+    '@fortawesome/vue-fontawesome',
+    '@fortawesome/fontawesome-svg-core',
   ], 'widgets.vendor.js')
-  .options({
-    extractVueStyles: 'widgets.css',
-    postCss: [autoprefixer],
-  });
+  .setPublicPath('../src/assets');

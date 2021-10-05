@@ -1,6 +1,8 @@
 {
-    "/manifest.js": "/manifest.js",
     "/widgets.js": "/widgets.js",
-    "/widgets.css": "/widgets.css",
-    "/widgets.vendor.js": "/widgets.vendor.js"
+    "/product.js": "/product.js",
+    "/favorites.js": "/favorites.js",
+    "/manifest.js": "/manifest.js",
+    "/widgets.vendor.js": "/widgets.vendor.js",
+    "/widgets.css": "/widgets.css"
 }
