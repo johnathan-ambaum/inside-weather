@@ -89,11 +89,6 @@
         :is-mobile="isMobile"
       />
     </div>
-    <!-- <product-family
-      v-if="'related_items' in product && product.related_items.length"
-      id="families"
-      class="ProductDetail__Family"
-    /> -->
   </div>
 </template>
 
@@ -102,7 +97,6 @@ import { mapState } from 'vuex';
 import ProductGallery from './ProductGallery.vue';
 import ZoomGallery from './ZoomGallery.vue';
 import TemplateBlock from './TemplateBlock.vue';
-import ProductFamily from './ProductFamily.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import SwatchBrowser from './SwatchBrowser.vue';
@@ -110,7 +104,6 @@ import RelatedProducts from './RelatedProducts.vue';
 export default {
   components: {
     TemplateBlock,
-    ProductFamily,
     ProductGallery,
     ZoomGallery,
     SwatchBrowser,
