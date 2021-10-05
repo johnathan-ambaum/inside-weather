@@ -527,8 +527,16 @@ export default {
     };
     setupMulberry();
     this.setProductOnLoad();
-    StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
-
+    const reloadStamped = (tries = 0) => {
+      if (typeof StampedFn === 'undefined' && tries < 10) {
+        setTimeout(() => {
+          reloadStamped(tries + 1);
+        }, 500);
+        return;
+      }
+      StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
+    };
+    reloadStamped();
   },
 
   methods: {
