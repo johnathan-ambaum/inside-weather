@@ -782,14 +782,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p><a href=\"\/pages\/2021-fall-sale\" title=\"2021 Fall Sale\">Shop the Fall Sale: <strong>20% OFF<\/strong> Sitewide | <strong>Free<\/strong> Shipping on orders over $1500<\/a><\/p>",
+          "text_1": "<p><a href=\"\/pages\/2021-fall-sale\" title=\"2021 Fall Sale\">FALL SALE: <strong>20% OFF<\/strong> Sitewide | <strong>Free<\/strong> Shipping on orders over $1500<\/a><\/p>",
           "mobile_text_1": "<p><a href=\"\/pages\/2021-fall-sale\" title=\"2021 Fall Sale\"><strong>FALL SALE: 20% OFF<\/strong> Sitewide | Free Shipping on $1500+<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "09\/10\/2021"
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "10\/06\/2021"
         }
       },
       "giftcard-header": {
