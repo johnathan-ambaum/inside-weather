@@ -100,6 +100,7 @@ export default {
         backgroundColor,
         color,
         borderBottomColor: backgroundColor === 'transparent' ? color : 'transparent',
+        '--border-radius': '60px',
       };
     },
   },
