@@ -13236,11 +13236,11 @@ input:checked + .slider:before {
   color: #202020;
   margin-top: 30px;
   text-transform: capitalize;
-  padding:10px 20px 0 20px;
-
 }
 
 .ambaum__header-dropdown-item--header a{
+  display: block;
+  padding: 5px 20px;
   text-decoration:none;
 }
 
@@ -13255,7 +13255,11 @@ input:checked + .slider:before {
   letter-spacing: 0.08em;
   color: #202020;
   text-transform: capitalize;
-  padding:10px 20px 0 20px;
+}
+
+.ambaum__header-dropdown-item:not(.ambaum__header-dropdown-item--header) .ambaum__header-dropdown-link {
+  display: block;
+  padding: 5px 20px;
 }
 
 .ambaum__header-dropdown-column{
@@ -13374,7 +13378,6 @@ input:checked + .slider:before {
   width: 100%;
   text-align: left;
   border-bottom: 1px solid #d2d3d2;
-  padding: 18px 0 18px 0;
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight: 600;
   letter-spacing: .08em;
@@ -13389,12 +13392,17 @@ input:checked + .slider:before {
   padding-top:0;
 }
 
-.ambaum__header-mobile-list-item span{
-  margin-left: 18px;
+.ambaum__header-mobile-list-item-title {
+  width: 100%;
 }
 
-.ambaum__header-mobile-list-item-icon{
-  margin-right:18px;
+.ambaum__header-mobile-list-item-title a {
+  display: block;
+  padding: 18px 0 18px 18px;
+}
+
+.ambaum__header-mobile-list-item-title + .ambaum__header-mobile-list-item-icon{
+  margin: 18px 18px 18px 0;
 }
 
 .ambaum__header-mobile-list--active{
@@ -13439,6 +13447,10 @@ input:checked + .slider:before {
   padding: 26px 40px 28px 40px;
 }
 
+.ambaum__header-dropdown-content-inner .swiper-container {
+  margin-top: 14px;
+}
+
 .ambaum__header-dropdown-title{
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight: 600;
@@ -13468,7 +13480,11 @@ a[href='#'].ambaum__header-dropdown-link{
   text-align: left;
   color: #202020;
   text-transform: none;
-  margin:32px 0 32px 46px;
+  margin-left:46px;
+}
+
+.ambaum__header-mobile-dropdown-second-level-item .ambaum__header-dropdown-link {
+  padding: 16px 0;
 }
 
 .ambaum__header-dropdown-link--third-level-item,
@@ -13485,7 +13501,16 @@ a[href='#'].ambaum__header-dropdown-link{
   letter-spacing: .08em;
   font-size: 14px;
   color: #202020;
-  margin: 28px 0 28px 46px;
+  margin-left: 46px;
+}
+
+.ambaum__header-mobile-dropdown-third-level-item .ambaum__header-dropdown-link--third-level-item {
+  padding: 14px 0;
+}
+
+.ambaum__header-mobile-dropdown-second-level-item + .swiper-container,
+.ambaum__header-mobile-dropdown-third-level-item + .swiper-container {
+  margin-top: 14px;
 }
 
 .summary-rating-bar-content{
