@@ -348,7 +348,7 @@ export default {
     }
   }
   @include at-query('max-width: 767px') {
-    padding: 0 0 58px;
+    padding: 0;
   }
 }
 .ReviewCarouselWrapper {
