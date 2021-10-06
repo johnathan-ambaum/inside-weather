@@ -302,7 +302,7 @@ export default {
         padding: 25px 35px 0 15px;
         width: 100%;
         a {
-          display: none;
+          font-size: 13px;
         }
       }
     }
@@ -329,7 +329,6 @@ export default {
         font-size: 13px;
       }
       .Review__author {
-        margin: 0;
         span {
           font-size: 13px;
           font-weight: 400;
