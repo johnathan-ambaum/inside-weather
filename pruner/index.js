@@ -92,7 +92,7 @@ function processUnused(unused) {
 
   for (const entry of entries) {
     const { sections } = JSON.parse(fs.readFileSync(entry));
-    used = unused.concat(Object.keys(sections));
+    used = used.concat(Object.keys(sections));
   }
 
   entries = await fg([themeDirectory + '/templates/(page|article).pf*.liquid']);
