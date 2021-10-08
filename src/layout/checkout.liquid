@@ -117,6 +117,9 @@
               }
             }
           });
+          {% if first_time_accessed %}
+            dataLayer.push({'event': 'CheckoutFirstTimeAccessed'});
+          {% endif %}
         }
       {% endif %}
     </script>
