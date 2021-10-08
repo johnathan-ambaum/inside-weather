@@ -156,8 +156,8 @@ export default {
             id: res.variant.id,
             quantity: 1,
             properties: {
-              'Estimated time to ship': this.getEmailFulfillmentTime(upsellProduct.filters, upsellProductSelectedOptions, upsellProduct.attributes),
-              'User Fulfillment Display': this.getFulfillmentTime(upsellProduct.filters, upsellProductSelectedOptions, upsellProduct.attributes),
+              'Estimated time to ship': this.emailFulfillmentTime,
+              'User Fulfillment Display': this.fulfillmentTime,
             }
           }),
         }).then(() => {
