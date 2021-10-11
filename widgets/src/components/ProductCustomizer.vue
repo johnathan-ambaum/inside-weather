@@ -2,7 +2,7 @@
   <div>
     <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
       <div class="ProductCustomizer__FlagRow">
-        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">CLEARANCE</div>
+        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">{{ clearanceFlag }}</div>
         <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
           <div>{{ flag.title }}</div>
           <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
@@ -242,6 +242,7 @@ export default {
     initialAttributes: { type: Object, required: true },
     initialQuantity: { type: Number, default: 1 },
     metafields: {type: Object, required: true },
+    tags: { type: Array, default: () => ([]) },
     shopifyProduct: {type: Object, required:true},
     stampedBadge: { type: String },
     initialId: { type: String }
@@ -360,6 +361,14 @@ export default {
 
     isClearance(){
       return this.category.toLowerCase().includes('clearance');
+    },
+
+    clearanceFlag() {
+      if (this.tags.includes('quickship')) {
+        return 'QUICK SHIP';
+      }
+
+      return 'CLEARANCE';
     },
 
     clearanceData(){

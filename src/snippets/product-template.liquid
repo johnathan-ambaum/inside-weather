@@ -43,6 +43,7 @@
             :initial-variant="{{ product.selected_or_first_available_variant.id }}"
             :initial-attributes="{{ product.metafields.products.attributes | json | escape }} || {}"
             :initial-quantity="{{ product.selected_or_first_available_variant.inventory_quantity }}"
+            :tags="{{ product.tags | json | escape }}"
             :metafields="{{ product.metafields.products | json | escape }}"
             :shopify-product="{{ product | json | escape }}"
             stamped-badge="{{product.metafields.stamped.badge}}"
