@@ -2,7 +2,7 @@
   <div>
     <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
       <div class="ProductCustomizer__FlagRow">
-        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">CLEARANCE</div>
+        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">{{ clearanceFlag }}</div>
         <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
           <div>{{ flag.title }}</div>
           <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
@@ -65,7 +65,7 @@
           text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
-        <span v-else-if="isClearance"> 2-3 Days </span>
+        <span v-else-if="isClearance"> {{ clearanceFulfillmentTime }} </span>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
       <simple-customizer v-if="isDecor && !isClearance" />
@@ -242,6 +242,7 @@ export default {
     initialAttributes: { type: Object, required: true },
     initialQuantity: { type: Number, default: 1 },
     metafields: {type: Object, required: true },
+    tags: { type: Array, default: () => ([]) },
     shopifyProduct: {type: Object, required:true},
     stampedBadge: { type: String },
     initialId: { type: String }
@@ -360,6 +361,22 @@ export default {
 
     isClearance(){
       return this.category.toLowerCase().includes('clearance');
+    },
+
+    clearanceFlag() {
+      if (this.tags.includes('quickship')) {
+        return 'QUICK SHIP';
+      }
+
+      return 'CLEARANCE';
+    },
+
+    clearanceFulfillmentTime() {
+      if (!this.metafields.lead_times) {
+        return '2-3 Days';
+      }
+
+      return `${this.metafields.lead_times.low || 2}-${this.metafields.lead_times.high || 3} Days`;
     },
 
     clearanceData(){
@@ -803,8 +820,8 @@ export default {
           id: this.activeProduct.id,
           quantity,
           properties: {
-            'Estimated time to ship': this.emailFulfillmentTime,
-            'User Fulfillment Display': this.fulfillmentTime,
+            'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
+            'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
           },
         }),
       })
