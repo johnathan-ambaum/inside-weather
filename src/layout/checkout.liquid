@@ -117,9 +117,6 @@
               }
             }
           });
-          {% if first_time_accessed %}
-            dataLayer.push({'event': 'CheckoutFirstTimeAccessed'});
-          {% endif %}
         }
       {% endif %}
     </script>
@@ -547,6 +544,14 @@
     {{ tracking_code }}
     <script>
       $('.order-summary__sections').append($('.checkout__custom-content'));
+    </script>
+    <script>
+      if (window.location.href.indexOf('/thank_you') !== -1) {
+        if(Shopify.Checkout.step && Shopify.Checkout.page){
+          console.log('checkout first time activated');
+          dataLayer.push({'event': 'CheckoutFirstTimeAccessed'});
+        }
+      }
     </script>
     <script>
       if(document.title.includes("Inventory issues")){
