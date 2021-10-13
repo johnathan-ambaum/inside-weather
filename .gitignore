@@ -4,3 +4,4 @@ config.yml
 theme.lock
 *.log
 .env
+*.js.LICENSE.txt
