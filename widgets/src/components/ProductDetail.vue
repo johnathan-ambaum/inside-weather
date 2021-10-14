@@ -3,7 +3,7 @@
     <product-gallery
       v-if="!isMobile"
       :images="productImages"
-      :cylindo="useCylindo"
+      :cylindo="use360Viewer"
     />
     <!-- <product-family
       v-if="'related_items' in product && product.related_items.length"
@@ -41,12 +41,12 @@ export default {
       productImages: state => state.productImages,
     }),
 
-    useCylindo() {
+    use360Viewer() {
       if (!this.filters) {
         return false;
       }
       // double ! to cast truthy/falsy values to boolean
-      return !!this.filters.cylindo_sku;
+      return this.filters.configurator_type !== 'static_image' && !!this.filters.cylindo_sku;
     },
 
     isDecor() {

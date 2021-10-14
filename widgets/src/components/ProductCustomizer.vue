@@ -34,7 +34,7 @@
           </span>
         </div>
       </div>
-      <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
+      <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" :customizer-active="active"
         :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
@@ -95,7 +95,7 @@
           @click.stop.prevent="favoriteCurrentProduct">
           <font-awesome-icon :icon="favoriteIcon" />
         </span>
-        <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" />
+        <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" />
       </div>
       <div class="ProductCustomizer__404-content">
         <h2>{{ disabledInfo.disabled_title }}</h2>
@@ -107,7 +107,7 @@
       <hr>
       <inspiration-options :products="filters.featured_products || []" />
     </div>
-    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
+    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': use360Viewer }"
       class="ProductCustomizer">
       <div class="ProductCustomizer__NameOverlay">
         <div class="ProductCustomizer__Name">
@@ -118,7 +118,7 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
+        <product-detail-slider :cylindo="use360Viewer" :customizer-active="active" :favoriteIcon="favoriteIcon" />
         <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">
           Save Customization
           <span :class="historyLoading ? 'ProductCustomizer__loading' : 'ProductCustomizer__loading--hide' ">
@@ -295,9 +295,9 @@ export default {
       upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
     }),
 
-    useCylindo() {
+    use360Viewer() {
       // double ! to cast truthy/falsy values to boolean
-      return !!this.filters.cylindo_sku;
+      return this.filters.configurator_type !== 'static_image' && !!this.filters.cylindo_sku;
     },
 
     inStock() {
@@ -591,7 +591,7 @@ export default {
     },
 
     createProduct(refreshImages = true) {
-      if (this.useCylindo && refreshImages) {
+      if (this.use360Viewer && refreshImages) {
         this.getCylindoImage().then(() => {
           this.createProduct(false);
         });
@@ -739,7 +739,7 @@ export default {
     },
 
     getCylindoImageForFavorite(){
-      if (this.useCylindo) {
+      if (this.use360Viewer) {
         this.getCylindoImage().then(() => {
           this.toggleFavorite({
             customerId: this.customerId,
