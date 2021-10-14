@@ -242,11 +242,12 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
 
   if (window.history.pushState) {
     const { protocol, host, pathname } = window.location;
-    let urlParams = new URLSearchParams(window.location.search);
-    const version = urlParams.get('version');
-    urlParams = new URLSearchParams();
-    if (version) {
-      urlParams.set('version', version);
+    const urlParams = new URLSearchParams();
+    // maintain any existing query string parameters not related to customizer choices
+    for (const [key, value] of new URLSearchParams(window.location.search).entries()) {
+      if (key !== 'attributes') {
+        urlParams.set(key, value);
+      }
     }
     if (!handle) {
       const attributeString = Object.entries(state.selectedOptions)
