@@ -22,6 +22,7 @@ import { mapState } from 'vuex';
 import ApiClient from '../util/ApiClient';
 import FilterStorage from '../util/FilterStorage';
 import interpolator from '../mixins/interpolator';
+import { getStaticImageUrl, getViewerParameters } from '../util/cylindo';
 
 const apiClient = new ApiClient();
 
@@ -86,41 +87,18 @@ export default {
     },
 
     createCylindoImageUrl(selectedOptions, relatedProductFilterDefs){
-      let productCodePriority = Infinity;
-      let cylindo_sku = relatedProductFilterDefs.cylindo_sku;
-      Object.entries(selectedOptions).forEach(([parameter, value]) => {// choose the cylindo_sku of the prodcut with the highest priority
-        const { values } = relatedProductFilterDefs.attributes.find(att => att.parameter === parameter);
-        const selected = values.find(item => item.value === value);
-        const { cylindo_override_priority } = relatedProductFilterDefs.attributes.find(att => att.parameter === parameter);
-        if((selected.cylindo_sku_override && cylindo_override_priority) && cylindo_override_priority < productCodePriority){// if an override and a priority exist, AND the priority is higher
-          cylindo_sku = selected.cylindo_sku_override;
-          productCodePriority = cylindo_override_priority;
-        }
+      const { productCode, features } = getViewerParameters({ 
+        baseSku: relatedProductFilterDefs.cylindo_sku, 
+        attributes: relatedProductFilterDefs.attributes, 
+        selectedOptions,
       });
 
-      // if the startFrame exists, use it, otherwise default to first frame, 1.
-      const startFrame = relatedProductFilterDefs && relatedProductFilterDefs.cylindo_overrides && relatedProductFilterDefs.cylindo_overrides.startFrame ? relatedProductFilterDefs.cylindo_overrides.startFrame : 1;
-      const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/" + startFrame +"/"+ cylindo_sku + ".jpg";
-      let cylindoProductFeaturesArray = []
-      for(let option in selectedOptions){
-        let foundAttribute = relatedProductFilterDefs.attributes.find((attribute) => attribute.parameter === option);
-        let foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
-        if(foundValue.cylindo_features){
-          cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
-        }
+      let frame = 1;
+      if (relatedProductFilterDefs && relatedProductFilterDefs.cylindo_overrides && relatedProductFilterDefs.cylindo_overrides.startFrame) {
+        frame = relatedProductFilterDefs.cylindo_overrides.startFrame;
       }
-      let cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
-        if(index % 2 !== 0 ){
-          return false;
-        }
-        return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
-      });
-      cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
-      const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
-      const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
-      const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
-
-      return baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
+      
+      return getStaticImageUrl({ productCode, features, frame });
     },
 
     populateCurrentRelatedProducts(){
