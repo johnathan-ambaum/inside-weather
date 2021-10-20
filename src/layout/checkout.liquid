@@ -546,6 +546,14 @@
       $('.order-summary__sections').append($('.checkout__custom-content'));
     </script>
     <script>
+      if (window.location.href.indexOf('/thank_you') !== -1) {
+        if(Shopify.Checkout.step && Shopify.Checkout.page){
+          console.log('checkout first time activated');
+          dataLayer.push({'event': 'CheckoutFirstTimeAccessed'});
+        }
+      }
+    </script>
+    <script>
       if(document.title.includes("Inventory issues")){
         document.getElementsByClassName('sidebar__content')[0].style.visibility = 'hidden';
       }

@@ -2,7 +2,7 @@
   <div>
     <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
       <div class="ProductCustomizer__FlagRow">
-        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">CLEARANCE</div>
+        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">{{ clearanceFlag }}</div>
         <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
           <div>{{ flag.title }}</div>
           <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
@@ -34,7 +34,7 @@
           </span>
         </div>
       </div>
-      <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
+      <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" :customizer-active="active"
         :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
@@ -65,7 +65,7 @@
           text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
         </info-popup>
-        <span v-else-if="isClearance"> 2-3 Days </span>
+        <span v-else-if="isClearance"> {{ clearanceFulfillmentTime }} </span>
         <span v-else>{{ fulfillmentTime }}</span>
       </div>
       <simple-customizer v-if="isDecor && !isClearance" />
@@ -95,7 +95,7 @@
           @click.stop.prevent="favoriteCurrentProduct">
           <font-awesome-icon :icon="favoriteIcon" />
         </span>
-        <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" />
+        <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" />
       </div>
       <div class="ProductCustomizer__404-content">
         <h2>{{ disabledInfo.disabled_title }}</h2>
@@ -107,7 +107,7 @@
       <hr>
       <inspiration-options :products="filters.featured_products || []" />
     </div>
-    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
+    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': use360Viewer }"
       class="ProductCustomizer">
       <div class="ProductCustomizer__NameOverlay">
         <div class="ProductCustomizer__Name">
@@ -118,7 +118,7 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
+        <product-detail-slider :cylindo="use360Viewer" :customizer-active="active" :favoriteIcon="favoriteIcon" />
         <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">
           Save Customization
           <span :class="historyLoading ? 'ProductCustomizer__loading' : 'ProductCustomizer__loading--hide' ">
@@ -240,6 +240,7 @@ export default {
     initialAttributes: { type: Object, required: true },
     initialQuantity: { type: Number, default: 1 },
     metafields: {type: Object, required: true },
+    tags: { type: Array, default: () => ([]) },
     shopifyProduct: {type: Object, required:true},
     stampedBadge: { type: String },
     initialId: { type: String }
@@ -292,9 +293,9 @@ export default {
       upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
     }),
 
-    useCylindo() {
+    use360Viewer() {
       // double ! to cast truthy/falsy values to boolean
-      return !!this.filters.cylindo_sku;
+      return this.filters.configurator_type !== 'static_image' && !!this.filters.cylindo_sku;
     },
 
     inStock() {
@@ -358,6 +359,22 @@ export default {
 
     isClearance(){
       return this.category.toLowerCase().includes('clearance');
+    },
+
+    clearanceFlag() {
+      if (this.tags.includes('quickship')) {
+        return 'QUICK SHIP';
+      }
+
+      return 'CLEARANCE';
+    },
+
+    clearanceFulfillmentTime() {
+      if (!this.metafields.lead_times) {
+        return '2-3 Days';
+      }
+
+      return `${this.metafields.lead_times.low || 2}-${this.metafields.lead_times.high || 3} Days`;
     },
 
     clearanceData(){
@@ -580,7 +597,7 @@ export default {
     },
 
     createProduct(refreshImages = true) {
-      if (this.useCylindo && refreshImages) {
+      if (this.use360Viewer && refreshImages) {
         this.getCylindoImage().then(() => {
           this.createProduct(false);
         });
@@ -728,7 +745,7 @@ export default {
     },
 
     getCylindoImageForFavorite(){
-      if (this.useCylindo) {
+      if (this.use360Viewer) {
         this.getCylindoImage().then(() => {
           this.toggleFavorite({
             customerId: this.customerId,
@@ -809,8 +826,8 @@ export default {
           id: this.activeProduct.id,
           quantity,
           properties: {
-            'Estimated time to ship': this.emailFulfillmentTime,
-            'User Fulfillment Display': this.fulfillmentTime,
+            'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
+            'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
           },
         }),
       })
