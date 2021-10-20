@@ -1,13 +1,13 @@
 <template>
-  <div 
+  <div
     class="PressContainer"
     :style="containerStyles"
   >
     <div class="press--container">
       <div class="Press">
         <ul>
-          <li 
-            v-for="(item, index) in sortedItems" 
+          <li
+            v-for="(item, index) in sortedItems"
             ref="items"
             :key="item.$id"
             v-bind:class="['press-list-' + (index + 1)]"
@@ -48,7 +48,7 @@ export default {
         backgroundColor: this.backgroundColor,
       };
     },
-    
+
     image() {
       return ({ imageMobile, imageDesktop }) => {
         if (this.isMobile && imageMobile) {
@@ -59,9 +59,10 @@ export default {
     },
 
     textStyles() {
-      return ({ descriptionColor = '#202020' }) => {
+      return ({ descriptionColor = '#202020', descriptionItalic = false }) => {
         return {
           color: descriptionColor,
+          fontStyle: descriptionItalic ? 'italic' : 'normal',
         };
       };
     },
@@ -71,7 +72,7 @@ export default {
     if (!this.items.length) {
       return;
     }
-    
+
     const controller = new ScrollMagic.Controller();
     const pressTimeline = new TimelineLite()
     pressTimeline.fromTo(this.$refs.items, 1,{opacity: 0, y: 100}, {opacity: 1, y: 0, ease: Circ.easeOut});

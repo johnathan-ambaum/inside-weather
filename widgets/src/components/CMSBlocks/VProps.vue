@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     class="ValuePropsWrapper"
     :style="wrapperStyles"
   >
@@ -67,7 +67,7 @@ export default {
     mainHeading: String,
     backgroundColor: { type: String, default: '#f2f2f2' },
   },
-  
+
   components: {
     Accordion,
   },
@@ -149,7 +149,6 @@ export default {
 
 .ValuePropsWrapper {
   background: transparent;
-  margin: 45px 0 0;
   padding: 0 0 70px;
   position: relative;
   &::before {
