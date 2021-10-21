@@ -15,9 +15,9 @@
             <a class="UpsellModal__item-title" :href="upsellProduct.url">{{ upsellProduct.title }}</a>
             <div class="UpsellModal__item-price">${{ formatProductPrice(upsellProduct.price) }}</div>
             <a class="UpsellModal__item-customize UpsellModal__btn-clear" :href="upsellProduct.url">CUSTOMIZE</a>
-            <div 
+            <div
               :class="addToCartClasses(upsellProduct.priority)"
-              class="UpsellModal__item-atc UpsellModal__btn-black" 
+              class="UpsellModal__item-atc UpsellModal__btn-black"
               @click="addUpsellProductToCart(upsellProduct)"
             >
               <span class="UpsellModal__item-atc-text">{{ addToCartText(upsellProduct.priority) }}</span>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import ApiClient from '../util/ApiClient';
@@ -85,6 +85,7 @@ export default {
       closeText: 'No thanks',
       currentlyAdding: null,
       lastAdded: null,
+      customMadeTarget: '',
     };
   },
 
@@ -158,6 +159,7 @@ export default {
             properties: {
               'Estimated time to ship': this.emailFulfillmentTime,
               'User Fulfillment Display': this.fulfillmentTime,
+              'Custom Made': this.customMadeTarget,
             }
           }),
         }).then(() => {
@@ -351,7 +353,10 @@ export default {
     }
   },
   mounted(){
-    this.$bus.$on('openUpsellModal', this.populateCurrentUpsellProducts);
+    this.$bus.$on('openUpsellModal', (customMadeTarget) => {
+      this.customMadeTarget = customMadeTarget;
+      this.populateCurrentUpsellProducts();
+    });
     // this.populateCurrentRelatedProducts();
   },
 }

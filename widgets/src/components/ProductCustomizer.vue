@@ -804,7 +804,7 @@ export default {
 
     async addToCart(quantity, warrantySelected = false) {
       if(this.hasUpsellProducts){
-        this.$bus.$emit('openUpsellModal');
+        this.$bus.$emit('openUpsellModal', this.customMadeTarget);
       }
 
       this.addToCartProcessing = true;
