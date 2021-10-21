@@ -6,15 +6,15 @@
       :style="backgroundStyles"
     >
       <div class="Banner__content">
-        <h2 
+        <h2
           ref="heading"
           :style="titleStyles"
         >{{ titleCopy }}</h2>
-        <p 
+        <p
           ref="body"
           :style="bodyStyles"
         >{{ bodyCopy }}</p>
-        <div 
+        <div
           ref="button"
           class="_button-wrapper"
         >
@@ -92,7 +92,7 @@ export default {
 
       const defaultTextColor = this.isMobile ? 'white' : '#202020';
       const defaultBackgroundColor = this.isMobile ? 'transparent' : 'white';
-      
+
       const backgroundColor = buttonProps.backgroundColor || defaultBackgroundColor;
       const color = buttonProps.textColor || defaultTextColor;
 
@@ -100,7 +100,7 @@ export default {
         backgroundColor,
         color,
         borderBottomColor: backgroundColor === 'transparent' ? color : 'transparent',
-        '--border-radius': '60px',
+        '--border-radius': this.isMobile ? 0 : '60px',
       };
     },
   },
