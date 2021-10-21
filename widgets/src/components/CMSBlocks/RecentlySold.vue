@@ -3,12 +3,12 @@
     <div class="RecentlySoldProducts">
       <div class="RecentlySoldProducts--container grid--container">
         <div
-          v-for="(item, index) in items" 
-          :key="item.$id" 
+          v-for="(item, index) in items"
+          :key="item.$id"
           ref="products"
           v-bind:class="['RecentlySoldProducts--column column RecentlySoldProducts--column-'+ (index + 1)]"
         >
-          <div 
+          <div
             class="--lg-hidden more-info"
             @click="toggleInfo"
           >
@@ -41,7 +41,7 @@
             <figure>
               <img :src="item.image">
             </figure>
-            <div 
+            <div
               class="RecentlySoldProducts--overlayWrapper"
               >
               <div>
@@ -121,7 +121,7 @@ export default {
   flex-direction: column;
   width: 100%;
   margin: auto;
-  
+
   .column {
     display: initial;
     position: initial;
@@ -133,7 +133,6 @@ export default {
   }
 }
 .RecentlySoldProducts {
-  padding: 100px 0 0;
   overflow: hidden;
   .RecentlySoldProducts--column {
     position: relative;
@@ -388,7 +387,7 @@ export default {
       grid-row: 8/span 1;
       grid-column-end: -1;
     }
-    
+
     .RecentlySoldProducts--column-7 {
       grid-column-start: 21;
       grid-column-end: -1;

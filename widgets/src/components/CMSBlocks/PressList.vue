@@ -89,7 +89,6 @@ export default {
 @import '../../scss/variables';
 
 .PressContainer {
-  padding: 165px 0;
   @include block();
   .press--container {
     max-width: calc(100% - (136px * 2));
