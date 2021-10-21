@@ -188,6 +188,8 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import dayjs from 'dayjs';
+import dayjsBusinessDays from 'dayjs-business-days';
 import DOMPurify from 'dompurify';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
@@ -209,6 +211,7 @@ import ReviewStars from './ReviewStars.vue';
 import Loader from './Loader.vue';
 import TemplateBlock from './TemplateBlock.vue';
 
+dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
 
 export default {
@@ -388,6 +391,28 @@ export default {
         floorFoundUrl: this.metafields.floorfound_data.floor_found_url,
         savings: Math.ceil(this.msrp - this.shopifyProduct.price/100)
       }
+    },
+
+    customMadeTarget() {
+      let { maxDays } = this.fulfillmentDays;
+      if (this.isClearance) {
+        maxDays = this.metafields.lead_times ? this.metafields.lead_times.high : 3;
+      }
+
+      const targetDate = dayjs().businessDaysAdd(maxDays);
+      const targetMonth = targetDate.format('MMMM');
+      const targetDay = targetDate.date();
+
+      let targetRange;
+      if (targetDay <= 10) {
+        targetRange = 'Early';
+      } else if (targetDay <= 20) {
+        targetRange = 'Mid';
+      } else {
+        targetRange = 'End of';
+      }
+
+      return `${targetRange} ${targetMonth}`;
     },
 
     hasUpsellProducts(){
@@ -822,6 +847,7 @@ export default {
           properties: {
             'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
             'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
+            'Custom Made': this.customMadeTarget,
           },
         }),
       })

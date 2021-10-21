@@ -605,9 +605,7 @@
         function hideEmailProperties() {
           var lineItemProperties = document.querySelectorAll('.order-summary__section__content .product__description__property');
           lineItemProperties.forEach(function (item) {
-            if (item.innerHTML.includes('User Fulfillment Display')) {
-              item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
-            } else {
+            if (!item.innerHTML.includes('Custom Made')) {
               item.remove();
             }
           });
