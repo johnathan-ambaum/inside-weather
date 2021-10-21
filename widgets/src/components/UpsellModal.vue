@@ -139,6 +139,14 @@ export default {
       const templates = this.upsellProductsTemplates.find(product => product.hasOwnProperty(upsellProduct.title)) || {};
       const templateObj = templates[upsellProduct.title].find(item => item.key === 'model_number') || {};
       const upsellProductSelectedOptions = this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title];
+      const properties = {
+        'Estimated time to ship': this.emailFulfillmentTime,
+        'User Fulfillment Display': this.fulfillmentTime,
+      };
+
+      if (this.customMadeTarget) {
+        properties['Custom Made'] = this.customMadeTarget;
+      }
 
       apiClient.createProduct({
         name: upsellProduct.title,
@@ -156,11 +164,7 @@ export default {
           body: JSON.stringify({
             id: res.variant.id,
             quantity: 1,
-            properties: {
-              'Estimated time to ship': this.emailFulfillmentTime,
-              'User Fulfillment Display': this.fulfillmentTime,
-              'Custom Made': this.customMadeTarget,
-            }
+            properties,
           }),
         }).then(() => {
           this.closeText = 'DONE';

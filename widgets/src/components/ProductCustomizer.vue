@@ -804,7 +804,7 @@ export default {
 
     async addToCart(quantity, warrantySelected = false) {
       if(this.hasUpsellProducts){
-        this.$bus.$emit('openUpsellModal', this.customMadeTarget);
+        this.$bus.$emit('openUpsellModal', this.isClearance ? null : this.customMadeTarget);
       }
 
       this.addToCartProcessing = true;
@@ -835,6 +835,15 @@ export default {
         return;
       }
 
+      const properties = {
+        'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
+        'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
+      };
+
+      if (!this.isClearance) {
+        properties['Custom Made'] = this.customMadeTarget;
+      }
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -844,11 +853,7 @@ export default {
         body: JSON.stringify({
           id: this.activeProduct.id,
           quantity,
-          properties: {
-            'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
-            'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
-            'Custom Made': this.customMadeTarget,
-          },
+          properties,
         }),
       })
         .then((cart) => {
