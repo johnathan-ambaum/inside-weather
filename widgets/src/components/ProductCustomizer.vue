@@ -62,7 +62,7 @@
         </template>
 
         <info-popup v-if="hasFulfillmentMarkup && !isClearance" always-on-top
-          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
+          text="Heads up! We’re a bit backed up due to raw material shortages and safety mandates in place in light of the pandemic. This date is the current best estimate and we’re workin’ around the clock to produce each custom piece!">
           <span class="ProductCustomizer__ShippingDays--Delayed">{{ customMadeTarget }}</span>
         </info-popup>
         <span v-else-if="isClearance"> {{ clearanceFulfillmentTime }} </span>
