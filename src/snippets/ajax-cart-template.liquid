@@ -17,19 +17,22 @@
                   {{#if variation}}
                     <span class="ajaxcart__product-meta">{{variation}}</span>
                   {{/if}}
-                  {{#properties}}
-                    {{#each this}}
-                      {{#if this}}
-                        {{#unlessEquals @key 'PARENT_SKU'}}
-                          {{#unlessEquals @key 'User Fulfillment Display'}}
-                            {{#unlessEquals @key 'Estimated time to ship'}}
-                              <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
-                            {{/unlessEquals}}
+                  {{#each properties}}
+                    {{#if this}}
+                      {{#unless ../hasCustomMade}}
+                        {{#ifEquals @key 'User Fulfillment Display'}}
+                          <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
+                        {{/ifEquals}}
+                      {{/unless}}
+                      {{#unlessEquals @key 'PARENT_SKU'}}
+                        {{#unlessEquals @key 'User Fulfillment Display'}}
+                          {{#unlessEquals @key 'Estimated time to ship'}}
+                            <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
                           {{/unlessEquals}}
                         {{/unlessEquals}}
-                      {{/if}}
-                    {{/each}}
-                  {{/properties}}
+                      {{/unlessEquals}}
+                    {{/if}}
+                  {{/each}}
                 </div>
                 <div class="grid grid--full display-table">
                   {{#unless isPhotoshoot }}

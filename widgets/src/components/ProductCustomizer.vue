@@ -63,10 +63,10 @@
 
         <info-popup v-if="hasFulfillmentMarkup && !isClearance" always-on-top
           text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
-          <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
+          <span class="ProductCustomizer__ShippingDays--Delayed">{{ customMadeTarget }}</span>
         </info-popup>
         <span v-else-if="isClearance"> {{ clearanceFulfillmentTime }} </span>
-        <span v-else>{{ fulfillmentTime }}</span>
+        <span v-else>{{ customMadeTarget }}</span>
       </div>
       <simple-customizer v-if="isDecor && !isClearance" />
       <button v-else-if="!isClearance" class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
@@ -394,11 +394,7 @@ export default {
     },
 
     customMadeTarget() {
-      let { maxDays } = this.fulfillmentDays;
-      if (this.isClearance) {
-        maxDays = this.metafields.lead_times ? this.metafields.lead_times.high : 3;
-      }
-
+      const { maxDays } = this.fulfillmentDays;
       const targetDate = dayjs().businessDaysAdd(maxDays);
       const targetMonth = targetDate.format('MMMM');
       const targetDay = targetDate.date();
