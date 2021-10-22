@@ -207,7 +207,6 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
-import ReviewStars from './ReviewStars.vue';
 import Loader from './Loader.vue';
 import TemplateBlock from './TemplateBlock.vue';
 
@@ -227,7 +226,6 @@ export default {
     InspirationOptions,
     SwatchBrowser,
     PhotoshootModal,
-    ReviewStars,
     Loader,
     TemplateBlock
   },
@@ -567,8 +565,16 @@ export default {
     };
     setupMulberry();
     this.setProductOnLoad();
-    StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
-
+    const reloadStamped = (tries = 0) => {
+      if (typeof StampedFn === 'undefined' && tries < 10) {
+        setTimeout(() => {
+          reloadStamped(tries + 1);
+        }, 500);
+        return;
+      }
+      StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
+    };
+    reloadStamped();
   },
 
   methods: {

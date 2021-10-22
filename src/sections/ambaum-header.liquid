@@ -278,16 +278,18 @@
 
       <div class="ambaum__header-mobile-list-item-container">
         {% if firstLevelItem.links == blank %}
-          <a href="{{firstLevelItem.url}}" class="ambaum__header-mobile-list-item
-           {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}
-           {% if noHighlight %} noHighlight {% endif %}">
+          <div class="ambaum__header-mobile-list-item
+            {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}
+            {% if noHighlight %} noHighlight {% endif %}">
             <span class="ambaum__header-mobile-list-item-title">
-              {{firstLevelItemDisplayName}}
+              <a href="{{firstLevelItem.url}}">
+                {{firstLevelItemDisplayName}}
+              </a>
             </span>
             <span class="ambaum__header-mobile-list-item-icon">
               {% render 'icon-right-arrow' %}
             </span>
-          </a>
+          </div>
         {% else %}
           <div class="ambaum__header-mobile-list-item
           {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}

@@ -3,6 +3,7 @@
     <a
       :href="linkTo"
       :class="buttonClass"
+      :style="buttonStyles"
       class="--btn"
     >
     {{btnText}}
@@ -16,25 +17,30 @@ export default {
     btnText: String,
     linkTo: String,
     categoryListItem: {type: Boolean, default: false},
-    stroke: {type: String, default: 'normal'},
-    fill: {type: Boolean, default: false},
-    bgBlack: {type: Boolean, default: false},
     border: {type: Boolean, default: true},
-    hoverAction: {type: Boolean, default: true}
+    radius: { type: String, default: '0' },
+    strokeColor: { type: String, default: '#202020' },
+    bgColor: { type: String, default: 'transparent' },
   },
+
   computed: {
     buttonClass() {
       return {
         'linkButton--fill': this.fill,
-        'linkButton--fillBlack': this.bgBlack,
-        'linkButton--white': this.stroke === 'white',
         'linkButton--noBorder': !this.border,
-        'linkButton--noHover': !this.hoverAction,
         'category-list-item-btn': this.categoryListItem
-      }
-    }
-  }
-}
+      };
+    },
+
+    buttonStyles() {
+      return {
+        '--border-radius': this.radius,
+        '--stroke-color': this.strokeColor,
+        '--bg-color': this.bgColor,
+      };
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -42,10 +48,10 @@ export default {
 @import '../scss/variables';
 
 .--btn {
-  background: transparent;
-  border: 1px solid #202020;
-  border-radius: 0;
-  color: #202020;
+  background: var(--bg-color);
+  border: 1px solid var(--stroke-color);
+  border-radius: var(--border-radius);
+  color: var(--stroke-color);
   display: inline-block;
   font-family: $font-stack-avalon;
   font-size: 14px;
@@ -60,39 +66,17 @@ export default {
   text-transform: uppercase;
   width: 240px;
   @include transition(all,.3s,cubic-bezier(.55, .085, .68, .53));
+
   &:hover {
-    background: #202020;
-    color: #ffffff;
+    background: var(--stroke-color);
+    color: var(--bg-color);
     text-decoration: none;
-  }
-
-  &.linkButton--white {
-    color: #ffffff;
-    border-color: #ffffff;
-    &:hover {
-      background: #ffffff;
-      color: #202020;
-    }
-  }
-
-  &.linkButton--fill {
-    background: #ffffff;
-    color: #202020;
-  }
-  &.linkButton--fillBlack {
-    background: #202020;
-    color: #ffffff;
   }
 
   &.linkButton--noBorder {
     border: none;
   }
 
-  &.linkButton--noHover {
-    &::after {
-      display: none;
-    }
-  }
   @include at-query('max-width: 992px') {
     &.linkButton--fill {
       background: transparent;
@@ -112,13 +96,7 @@ export default {
   @include at-query('max-width: 1024px') {
     &:hover {
       background: transparent;
-      color: #202020;
-    }
-    &.linkButton--white {
-      &:hover {
-        background: transparent;
-        color: #ffffff;
-      }
+      color: var(--stroke-color);
     }
   }
 }
