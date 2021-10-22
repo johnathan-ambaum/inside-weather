@@ -54,7 +54,7 @@
         </template>
         <template v-else-if="!isClearance">
           Quick Custom, Made in the USA<br>
-          Estimated to ship in
+          Custom made:
         </template>
         <template v-else>
           Custom made in the USA<br>
