@@ -25,6 +25,9 @@
             :btnText="item.buttonText"
             :linkTo="item.link"
             :categoryListItem="true"
+            radius="60px"
+            strokeColor="#202020"
+            bgColor="white"
           />
           <p v-if="item.desc">
             {{item.desc}}

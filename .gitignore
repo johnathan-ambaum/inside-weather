@@ -2,4 +2,6 @@ dist/
 node_modules/
 config.yml
 theme.lock
-deploy.log
+*.log
+.env
+*.js.LICENSE.txt
