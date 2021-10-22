@@ -66,8 +66,8 @@ export default {
     fulfillmentDays() {
       const min = this.filters.min_fulfillment_days;
       const max = this.filters.max_fulfillment_days;
-      const selectedOptionsMin = [];
-      const selectedOptionsMax = [];
+      const selectedOptionsMin = [0];
+      const selectedOptionsMax = [0];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);

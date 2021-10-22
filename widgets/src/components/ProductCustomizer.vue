@@ -392,7 +392,16 @@ export default {
     },
 
     customMadeTarget() {
+      if (!this.filters || !Object.keys(this.selectedOptions).length) {
+        return null;
+      }
+
       const { maxDays } = this.fulfillmentDays;
+
+      if (isNaN(maxDays)) {
+        return null;
+      }
+
       const targetDate = dayjs().businessDaysAdd(maxDays);
       const targetMonth = targetDate.format('MMMM');
       const targetDay = targetDate.date();
