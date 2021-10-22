@@ -146,6 +146,7 @@ export default {
 
       if (this.customMadeTarget) {
         properties['Custom Made'] = this.customMadeTarget;
+        properties['Custom Made Business Days'] = this.customMadeTargetBusiness;
       }
 
       apiClient.createProduct({
@@ -357,8 +358,9 @@ export default {
     }
   },
   mounted(){
-    this.$bus.$on('openUpsellModal', (customMadeTarget) => {
+    this.$bus.$on('openUpsellModal', ({ customMadeTarget, customMadeTargetBusiness }) => {
       this.customMadeTarget = customMadeTarget;
+      this.customMadeTargetBusiness = customMadeTargetBusiness;
       this.populateCurrentUpsellProducts();
     });
     // this.populateCurrentRelatedProducts();

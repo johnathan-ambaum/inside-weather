@@ -610,7 +610,7 @@
             properties.forEach((item) => {
               if (!hasCustomMade && item.innerHTML.includes('User Fulfillment Display')) {
                 item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
-              } else if (!item.innerHTML.includes('Custom Made')) {
+              } else if (!item.innerHTML.includes('Custom Made') || item.innerHTML.includes('Business Days')) {
                 item.remove();
               }
             });

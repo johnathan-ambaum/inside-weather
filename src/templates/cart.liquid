@@ -69,8 +69,10 @@
                           {% if p.first == 'Estimated time to ship' or p.last == blank %}
                             {% continue %}
                           {% endif %}
-                          {%- if p.first == 'User Fulfillment Display' and has_custom_made -%}
-                            {%- continue -%}
+                          {%- if has_custom_made -%}
+                            {%- if p.first == 'User Fulfillment Display' or p.first == 'Custom Made Business Days' -%}
+                              {%- continue -%}
+                            {%- endif -%}
                           {%- endif -%}
                           <li class="product-details__item product-details__item--property{%if property_size == 0%} hide{% endif %}" data-cart-item-property>
                             <span class="product-details__item-label" data-cart-item-property-name>

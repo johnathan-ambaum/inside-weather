@@ -402,6 +402,33 @@ export default {
         return null;
       }
 
+      const targetDate = dayjs().add(maxDays, 'day');
+      const targetMonth = targetDate.format('MMMM');
+      const targetDay = targetDate.date();
+
+      let targetRange;
+      if (targetDay <= 10) {
+        targetRange = 'Early';
+      } else if (targetDay <= 20) {
+        targetRange = 'Mid';
+      } else {
+        targetRange = 'End of';
+      }
+
+      return `${targetRange} ${targetMonth}`;
+    },
+
+    customMadeTargetBusiness() {
+      if (!this.filters || !Object.keys(this.selectedOptions).length) {
+        return null;
+      }
+
+      const { maxDays } = this.fulfillmentDays;
+
+      if (isNaN(maxDays)) {
+        return null;
+      }
+
       const targetDate = dayjs().businessDaysAdd(maxDays);
       const targetMonth = targetDate.format('MMMM');
       const targetDay = targetDate.date();
@@ -815,7 +842,10 @@ export default {
 
     async addToCart(quantity, warrantySelected = false) {
       if(this.hasUpsellProducts){
-        this.$bus.$emit('openUpsellModal', this.isClearance ? null : this.customMadeTarget);
+        this.$bus.$emit('openUpsellModal', this.isClearance ? null : {
+          customMadeTarget: this.customMadeTarget,
+          customMadeTargetBusiness: this.customMadeTargetBusiness,
+        });
       }
 
       this.addToCartProcessing = true;
@@ -853,6 +883,7 @@ export default {
 
       if (!this.isClearance) {
         properties['Custom Made'] = this.customMadeTarget;
+        properties['Custom Made Business Days'] = this.customMadeTargetBusiness;
       }
 
       fetch('/cart/add.js', {
