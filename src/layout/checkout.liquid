@@ -603,16 +603,20 @@
         }
 
         function hideEmailProperties() {
-          var lineItemProperties = document.querySelectorAll('.order-summary__section__content .product__description__property');
-          const hasCustomMade = lineItemProperties.some(el => el.innerHTML.includes('Custom Made'));
-          lineItemProperties.forEach(function (item) {
-            if (!hasCustomMade && item.innerHTML.includes('User Fulfillment Display')) {
-              item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
-            } else if (!item.innerHTML.includes('Custom Made')) {
-              item.remove();
-            }
+          const lineItems = document.querySelectorAll('.order-summary__section__content .product__description');
+          lineItems.forEach((line) => {
+            const properties = Array.prototype.slice.call(line.querySelectorAll('.product__description__property'));
+            const hasCustomMade = properties.some(el => el.innerHTML.includes('Custom Made'));
+            properties.forEach((item) => {
+              if (!hasCustomMade && item.innerHTML.includes('User Fulfillment Display')) {
+                item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
+              } else if (!item.innerHTML.includes('Custom Made')) {
+                item.remove();
+              }
+            });
           });
         }
+
         document.addEventListener('page:load', function () {
           hideShippingStep()
           hideEmailProperties();
