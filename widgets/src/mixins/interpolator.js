@@ -63,15 +63,11 @@ export default {
       return Math.round(savings);
     },
 
-    fulfillmentTime() {
-      if (!this.filters || !this.filters.min_fulfillment_days) {
-        return null;
-      }
-
-      let min = this.filters.min_fulfillment_days;
-      let max = this.filters.max_fulfillment_days;
-      let selectedOptionsMin = [];
-      let selectedOptionsMax = [];
+    fulfillmentDays() {
+      const min = this.filters.min_fulfillment_days;
+      const max = this.filters.max_fulfillment_days;
+      const selectedOptionsMin = [0];
+      const selectedOptionsMax = [0];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
@@ -86,10 +82,23 @@ export default {
         selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
       });
 
-      let finalMin = min + Math.max(...selectedOptionsMin);
-      let finalMax = max + Math.max(...selectedOptionsMax);
+      const finalMin = min + Math.max(...selectedOptionsMin);
+      const finalMax = max + Math.max(...selectedOptionsMax);
 
-      return `${finalMin}-${finalMax} days`;
+      return {
+        minDays: finalMin,
+        maxDays: finalMax,
+      };
+    },
+
+    fulfillmentTime() {
+      if (!this.filters || !this.filters.min_fulfillment_days) {
+        return null;
+      }
+
+      const { minDays, maxDays } = this.fulfillmentDays;
+
+      return `${minDays}-${maxDays} days`;
     },
 
     emailFulfillmentTime() {

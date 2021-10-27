@@ -1355,7 +1355,8 @@ lazySizesConfig.expFactor = 4;
               discountedPrice: theme.Currency.formatMoney((product.price - (product.total_discount/product.quantity)), theme.settings.moneyFormat),
               discounts: product.discounts,
               discountsApplied: product.price === (product.price - product.total_discount) ? false : true,
-              vendor: product.vendor
+              vendor: product.vendor,
+              hasCustomMade: product.properties && typeof product.properties['Custom Made'] !== 'undefined',
             };
 
             items.push(item);

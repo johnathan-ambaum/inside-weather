@@ -54,7 +54,7 @@
         </template>
         <template v-else-if="!isClearance">
           Quick Custom, Made in the USA<br>
-          Estimated to ship in
+          Custom Made:
         </template>
         <template v-else>
           Custom made in the USA<br>
@@ -62,11 +62,11 @@
         </template>
 
         <info-popup v-if="hasFulfillmentMarkup && !isClearance" always-on-top
-          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
-          <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
+          text="Heads up! We’re a bit backed up due to raw material shortages and safety mandates in place in light of the pandemic. This date is the current best estimate and we’re workin’ around the clock to produce each custom piece!">
+          <span class="ProductCustomizer__ShippingDays--Delayed">{{ customMadeTarget }}</span>
         </info-popup>
         <span v-else-if="isClearance"> {{ clearanceFulfillmentTime }} </span>
-        <span v-else>{{ fulfillmentTime }}</span>
+        <span v-else>{{ customMadeTarget }}</span>
       </div>
       <simple-customizer v-if="isDecor && !isClearance" />
       <button v-else-if="!isClearance" class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
@@ -188,6 +188,8 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import dayjs from 'dayjs';
+import dayjsBusinessDays from 'dayjs-business-days';
 import DOMPurify from 'dompurify';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
@@ -208,6 +210,7 @@ import PhotoshootModal from './PhotoshootModal.vue';
 import Loader from './Loader.vue';
 import TemplateBlock from './TemplateBlock.vue';
 
+dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
 
 export default {
@@ -386,6 +389,60 @@ export default {
         floorFoundUrl: this.metafields.floorfound_data.floor_found_url,
         savings: Math.ceil(this.msrp - this.shopifyProduct.price/100)
       }
+    },
+
+    customMadeTarget() {
+      if (!this.filters || !Object.keys(this.selectedOptions).length) {
+        return null;
+      }
+
+      const { maxDays } = this.fulfillmentDays;
+
+      if (isNaN(maxDays)) {
+        return null;
+      }
+
+      const targetDate = dayjs().add(maxDays, 'day');
+      const targetMonth = targetDate.format('MMMM');
+      const targetDay = targetDate.date();
+
+      let targetRange;
+      if (targetDay <= 10) {
+        targetRange = 'Early';
+      } else if (targetDay <= 20) {
+        targetRange = 'Mid';
+      } else {
+        targetRange = 'End of';
+      }
+
+      return `${targetRange} ${targetMonth}`;
+    },
+
+    customMadeTargetBusiness() {
+      if (!this.filters || !Object.keys(this.selectedOptions).length) {
+        return null;
+      }
+
+      const { maxDays } = this.fulfillmentDays;
+
+      if (isNaN(maxDays)) {
+        return null;
+      }
+
+      const targetDate = dayjs().businessDaysAdd(maxDays);
+      const targetMonth = targetDate.format('MMMM');
+      const targetDay = targetDate.date();
+
+      let targetRange;
+      if (targetDay <= 10) {
+        targetRange = 'Early';
+      } else if (targetDay <= 20) {
+        targetRange = 'Mid';
+      } else {
+        targetRange = 'End of';
+      }
+
+      return `${targetRange} ${targetMonth}`;
     },
 
     hasUpsellProducts(){
@@ -785,7 +842,10 @@ export default {
 
     async addToCart(quantity, warrantySelected = false) {
       if(this.hasUpsellProducts){
-        this.$bus.$emit('openUpsellModal');
+        this.$bus.$emit('openUpsellModal', this.isClearance ? null : {
+          customMadeTarget: this.customMadeTarget,
+          customMadeTargetBusiness: this.customMadeTargetBusiness,
+        });
       }
 
       this.addToCartProcessing = true;
@@ -816,6 +876,16 @@ export default {
         return;
       }
 
+      const properties = {
+        'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
+        'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
+      };
+
+      if (!this.isClearance) {
+        properties['Custom Made'] = this.customMadeTarget;
+        properties['Custom Made Business Days'] = this.customMadeTargetBusiness;
+      }
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -825,10 +895,7 @@ export default {
         body: JSON.stringify({
           id: this.activeProduct.id,
           quantity,
-          properties: {
-            'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
-            'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
-          },
+          properties,
         }),
       })
         .then((cart) => {
