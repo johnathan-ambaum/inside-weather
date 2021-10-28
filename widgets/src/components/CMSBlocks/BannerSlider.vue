@@ -1,10 +1,9 @@
 <template>
-  <div 
-    class="CarouselBanner"
+  <div
     ref="CarouselBanner"
-    :class="[hasBannerImage ? 'imageContain' : ' ']"
+    class="CarouselBanner"
   >
-    <slider 
+    <slider
       :items="sliderProps.items"
       :margin="sliderProps.margin"
       :loop="sliderProps.loop"
@@ -14,46 +13,46 @@
       :navText="sliderProps.navText"
       :responsive="sliderProps.responsive"
     >
-      <div 
-        class="CarouselBanner__items" 
-        v-for="slide in sortedSlides" 
+      <div
+        v-for="slide in sortedSlides"
         :key="slide.$id"
+        class="CarouselBanner__items"
       >
-        <div 
-          class="CarouselBanner__image"
-          :style="[(hasBannerImage && (slide.imageDesktop !== ' ' && slide.imageDesktop !== '')) ? {'background': 'transparent'} : {'background': '#E5C78A'}]"
+        <div
           v-if="slide.headingCopy"
+          class="CarouselBanner__image"
+          :style="[{ 'background': hasBannerImage(slide) ? 'transparent' : '#E5C78A' }]"
         >
           <!-- Dekstop Banner -->
-          <figure 
-            v-if="(hasBannerImage && (slide.imageDesktop !== ' ' && slide.imageDesktop !== '') && isBigScreen && !disableSlideContent)"
-            v-bind:style="{ backgroundImage: 'url('+ slide.imageDesktop +')' }"
-          ></figure>
+          <figure
+            v-if="hasBannerImage(slide) && isBigScreen"
+            :style="{ backgroundImage: 'url('+ slide.imageDesktop +')' }"
+          />
 
           <!-- mobile Banner -->
-          <figure 
-            v-if="(hasBannerImage && (slide.imageMobile !== ' ' && slide.imageMobile !== '') && !isBigScreen && !disableSlideContent)"
-            v-bind:style="{ backgroundImage: 'url('+ slide.imageMobile +')' }"
-          ></figure>
+          <figure
+            v-if="hasBannerImage(slide, true) && !isBigScreen"
+            :style="{ backgroundImage: 'url('+ slide.imageMobile +')' }"
+          />
         </div>
-        <div 
-          class="static_image_wrapper"
+        <div
           v-if="!slide.headingCopy"
+          class="static_image_wrapper"
         >
-          <a 
+          <a
+            v-if="slide.linkUrl.length > 0"
             :href="slide.linkUrl"
             class="common-link"
-            v-if="slide.linkUrl.length > 0"
-          ></a>
+          />
           <static-banner
             :desktop-banner="slide.imageDesktop"
             :mobile-banner="slide.imageMobile"
             :responsive-point="991 + 'px'"
-          ></static-banner>
+          />
         </div>
-        <div 
-          class="CarouselBanner__content"
+        <div
           v-if="slide.headingCopy"
+          class="CarouselBanner__content"
         >
           <h2 class="--caps">
             {{ slide.headingCopy }}
@@ -64,8 +63,8 @@
           <div
             class="CarouselBannerAction"
           >
-            <a 
-              :href="slide.linkUrl" 
+            <a
+              :href="slide.linkUrl"
               class="--caps"
             >
               {{ slide.linkCopy }}
@@ -74,37 +73,41 @@
         </div>
       </div>
     </slider>
-    <span class="down-arrow-xs"></span>
+    <span class="down-arrow-xs"/>
   </div>
 </template>
 
 <script>
-import slider from '../Slider.vue'
-import StaticBanner from '../StaticBanner.vue'
+import slider from '../Slider.vue';
+import StaticBanner from '../StaticBanner.vue';
 
 export default {
   components: {
     slider,
-    StaticBanner
+    StaticBanner,
   },
 
   props: {
     slides: { type: Array, default: () => ([]) },
-    disableSlideContent: { type: Boolean, default: true },
     autoplay: { type: Boolean, default: false },
     playSpeed: { type: Number, default: 3000 },
   },
 
   computed: {
     hasBannerImage() {
-      return this.slides.some(slide => slide.imageDesktop);
+      return (slide, mobile = false) => {
+        if (mobile) {
+          return slide.imageMobile && slide.imageMobile.trim() !== '';
+        }
+        return slide.imageDesktop && slide.imageDesktop.trim() !== '';
+      };
     },
 
     sortedSlides() {
-      return [...this.slides].sort((a, b) => a.priority < b.priority ? -1 : 1);
+      return [...this.slides].sort((a, b) => (a.priority < b.priority ? -1 : 1));
     },
   },
-  
+
   data() {
     return {
       isBigScreen: true,
@@ -122,7 +125,7 @@ export default {
     }
   },
 
-  created: function () {
+  created() {
     if (this.slides.length > 1) {
       this.sliderProps.loop = true;
     } else {
@@ -139,12 +142,12 @@ export default {
   mounted() {
     const changeTheBanner = () => {
       if (window.innerWidth > 991) {
-       this.isBigScreen = true;
+        this.isBigScreen = true;
       } else {
         this.isBigScreen = false;
       }
     };
-    
+
     window.addEventListener('resize', changeTheBanner);
 
     const controller = new ScrollMagic.Controller();
@@ -279,7 +282,7 @@ export default {
           opacity: 1;
           pointer-events: all;
           visibility: visible;
-  
+
           &.owl-prev, &.owl-next {
             @include translate(0, -50%);
           }
@@ -440,7 +443,7 @@ export default {
       visibility: hidden;
       width: 70px;
       @include transition(all,.3s,cubic-bezier(.55, .085, .68, .53));
-  
+
       span {
         background-position: center;
         background-repeat: no-repeat;
@@ -450,26 +453,26 @@ export default {
         height: 21px;
         position: absolute;
         width: 21px;
-  
+
         &.next-hidden {
           opacity: 0;
           @include translate(-100%,0);
         }
-        
+
         &.prev-hidden {
           opacity: 0;
           @include translate(100%,0);
         }
       }
-  
+
       &.owl-prev {
         float: left;
         @include translate(-32px,0);
-  
+
         span {
           background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/left-arrow.png?738766');
         }
-  
+
         &:hover {
           background: rgba($color: #ffffff, $alpha: 0.8);
           span {
@@ -493,11 +496,11 @@ export default {
       &.owl-next {
         float: right;
         @include translate(32px,0);
-  
+
         span {
           background-image: url('https://cdn.shopify.com/s/files/1/2994/0144/files/right-arrow.png?738361');
         }
-  
+
         &:hover {
           background: rgba($color: #ffffff, $alpha: 0.8);
           span {
@@ -506,7 +509,7 @@ export default {
               @include transition(all,.3s,cubic-bezier(.55, .085, .68, .53));
               @include translate(100%,0);
             }
-  
+
             &.next-hidden {
               opacity: 1;
               transition: all .6s cubic-bezier(.165, .84, .44, 1) .2s;
