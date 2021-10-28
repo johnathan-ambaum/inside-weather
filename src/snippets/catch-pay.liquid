@@ -1,0 +1,82 @@
+<style>
+[data-gateway-name="manual"] {
+  display: none !important;
+}
+</style>
+
+<script type="application/javascript">
+
+  var catchLoaded = false;
+  var loaderScript = document.createElement('script');
+  loaderScript.setAttribute("useParent", true);
+  loaderScript.setAttribute("merchantPublicKey", "MQsTtSUWqBE3YgpK9YMlY53w");
+
+  loaderScript.setAttribute("checkoutId", '{{ checkout.id }}');
+  loaderScript.setAttribute("checkoutShippingPrice", '{{ checkout.shipping_price }}');
+  loaderScript.setAttribute("checkoutTaxPrice", '{{ checkout.tax_price }}');
+  loaderScript.setAttribute("checkoutSubtotalPrice", '{{ checkout.line_items_subtotal_price }}');
+  loaderScript.setAttribute("checkoutTotalPrice", '{{ checkout.total_price }}');
+  loaderScript.setAttribute("checkoutCurrency", '{{ checkout.currency }}');
+  loaderScript.setAttribute("customerEmail", '{{ checkout.email }}');
+
+  loaderScript.setAttribute("billingName", '{{ checkout.billing_address.name }}');
+  loaderScript.setAttribute("billingPhone", '{{ checkout.billing_address.phone }}');
+  loaderScript.setAttribute("billingStreet", '{{ checkout.billing_address.street }}');
+  loaderScript.setAttribute("billingCity", '{{ checkout.billing_address.city }}');
+  loaderScript.setAttribute("billingState", '{{ checkout.billing_address.province }}');
+  loaderScript.setAttribute("billingZip", '{{ checkout.billing_address.zip }}');
+  loaderScript.setAttribute("billingCountry", '{{ checkout.billing_address.country }}');
+
+  loaderScript.setAttribute("shippingName", '{{ checkout.shipping_address.name }}');
+  loaderScript.setAttribute("shippingPhone", '{{ checkout.shipping_address.phone }}');
+  loaderScript.setAttribute("shippingStreet", '{{ checkout.shipping_address.street }}');
+  loaderScript.setAttribute("shippingCity", '{{ checkout.shipping_address.city }}');
+  loaderScript.setAttribute("shippingState", '{{ checkout.shipping_address.province }}');
+  loaderScript.setAttribute("shippingZip", '{{ checkout.shipping_address.zip }}');
+  loaderScript.setAttribute("shippingCountry", '{{ checkout.shipping_address.country }}');
+
+  loaderScript.setAttribute("appliedRewardsAmount", '{{ checkout.attributes.catch_applied_rewards }}');
+  loaderScript.setAttribute("earnedRewardsAmount", '{{ checkout.attributes.catch_earned_rewards }}');
+  loaderScript.setAttribute("totalAfterRewards", '{{ checkout.attributes.catch_total_after_rewards }}');
+
+  loaderScript.src="https://js.getcatch.com/shopify.min.js";
+
+  window.document.addEventListener('page:load', (event) => {
+    var frame = document.querySelector('[src*="digital_wallets/dialog"]')
+    if (frame) {
+      frame.addEventListener("load", function() {
+          frame.contentWindow.document.head.appendChild(loaderScript);
+          catchLoaded = true;
+      });
+    } else {
+      loaderScript.setAttribute("useParent", false);
+      document.body.appendChild(loaderScript);
+      catchLoaded = true;
+    }
+
+    // Preserve all cart attributes
+    // https://shopify.dev/docs/themes/theme-templates/checkout-liquid
+    var paymentForm = document.querySelector("form[data-payment-form]");
+    if (paymentForm) {
+    	{% for attribute in checkout.attributes %}
+    	var inputHtml = '<input type=hidden name="checkout[attributes][{{ attribute.first }}]" value="{{ attribute.last  }}" />';
+ 		paymentForm.insertAdjacentHTML('beforeend', inputHtml);
+    	{% endfor %}
+    }
+  });
+  window.addEventListener('load', (event) => {
+    if (!catchLoaded) {
+    	var frame = document.querySelector('[src*="digital_wallets/dialog"]')
+    	if (frame) {
+          frame.addEventListener("load", function() {
+              frame.contentWindow.document.head.appendChild(loaderScript);
+              catchLoaded = true;
+          });
+        } else {
+          loaderScript.setAttribute("useParent", false);
+          document.body.appendChild(loaderScript);
+          catchLoaded = true;
+        }
+    }
+  });
+</script>
