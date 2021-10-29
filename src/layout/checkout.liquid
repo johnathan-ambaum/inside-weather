@@ -648,7 +648,7 @@
           });
 
           if (totalDiscount > 0) {
-            options = Math.floor(totalDiscount) === totalDiscount ? {} : { minimumFractionDigits: 2 };
+            const options = Math.floor(totalDiscount) === totalDiscount ? {} : { minimumFractionDigits: 2 };
             totalCell.innerHTML = `<em>You Saved</em> $${totalDiscount.toLocaleString(undefined, options)}`;
           } else {
             totalCell.style.display = 'none';
