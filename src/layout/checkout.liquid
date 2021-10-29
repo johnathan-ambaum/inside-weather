@@ -648,7 +648,8 @@
           });
 
           if (totalDiscount > 0) {
-            totalCell.innerText = `$${totalDiscount.toLocaleString()}`;
+            options = Math.floor(totalDiscount) === totalDiscount ? {} : { minimmumFractionDigits: 2 };
+            totalCell.innerHTML = `<em>You Saved</em> $${totalDiscount.toLocaleString(undefined, options)}`;
           } else {
             totalCell.style.display = 'none';
           }
