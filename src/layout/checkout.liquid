@@ -621,6 +621,11 @@
 
         function hideZeroDiscount() {
           const discountLine = document.querySelector('.total-line--reduction');
+
+          if (!discountLine) {
+            return;
+          }
+
           const code = discountLine.querySelector('.reduction-code__text');
 
           if (!code) {
