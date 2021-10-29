@@ -73,7 +73,6 @@
         </div>
       </div>
     </slider>
-    <span class="down-arrow-xs"/>
   </div>
 </template>
 
@@ -320,30 +319,6 @@ export default {
       }
     }
   }
-  .down-arrow-xs {
-    border-bottom: 1.5px solid #ffffff;
-    border-left: 1.5px solid #ffffff;
-    display: block;
-    height: 20px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 25px;
-    margin: 0 auto;
-    opacity: 0;
-    transform: rotate(-45deg);
-    width: 20px;
-    z-index: 8;
-
-    @include at-query('min-width: 768px') {
-      display: none;
-    }
-  }
-  &.imageContain {
-    .down-arrow-xs {
-      display: none;
-    }
-  }
 
   @include at-query('max-width: 1280px') {
     .CarouselBanner__items {
@@ -393,34 +368,12 @@ export default {
         }
       }
     }
-    &:not(.imageContain) {
-      .CarouselBanner__items {
-        .CarouselBanner__content {
-          .CarouselBannerAction {
-            position: absolute;
-            bottom: 180px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            text-align: center;
-          }
-        }
-      }
-      .owl-theme .owl-dots {
-        bottom: 95px;
-      }
-    }
   }
   .owl-theme.owl-carousel {
     .owl-dots {
       &::after {
         opacity: 0;
       }
-    }
-  }
-  &.--animLoaded {
-    .down-arrow-xs {
-      opacity: 1;
     }
   }
 }
