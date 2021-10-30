@@ -621,6 +621,11 @@
 
         function hideZeroDiscount() {
           const discountLine = document.querySelector('.total-line--reduction');
+
+          if (!discountLine) {
+            return;
+          }
+
           const code = discountLine.querySelector('.reduction-code__text');
 
           if (!code) {
@@ -655,15 +660,48 @@
           }
         }
 
+        function updateLeadTimes() {
+          const label = 'Estimated to Ship';
+          const propertyClass = 'product__description__property';
+
+          fetch('http://iw-orders-api.herokuapp.com/api/v1/shopify/fulfillment_update/{{ order.id }}')
+            .then(response => response.json())
+            .then(({ line_items: items }) => {
+              if (!items) {
+                return;
+              }
+
+              items.forEach((item) => {
+                const displayText = `${label}: ${item.commitment_date}`;
+                let lineItemElement = document.querySelector(`[data-order-summary-section="line-items"] [data-variant-id="${item.variant_id}"]`);
+                if (!lineItemElement) {
+                  return;
+                }
+                let propertyElement = lineItemElement.querySelector(`.${propertyClass}`);
+                if (propertyElement) {
+                  propertyElement.innerHTML = displayText;
+                } else {
+                  propertyElement = document.createElement('span');
+                  propertyElement.innerHTML = displayText;
+                  propertyElement.classList.add(propertyClass, 'order-summary__small-text');
+                  const parentNode = lineItemElement.querySelector('.product__description');
+                  parentNode.insertBefore(propertyElement, parentNode.lastChild);
+                }
+              });
+            });
+        }
+
         document.addEventListener('page:load', function () {
           hideShippingStep()
           hideEmailProperties();
           hideZeroDiscount();
+          updateLeadTimes();
         });
         document.addEventListener('page:change', function () {
           hideShippingStep();
           hideEmailProperties();
           hideZeroDiscount();
+          updateLeadTimes();
         });
       })();
     </script>
