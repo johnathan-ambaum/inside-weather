@@ -141,3 +141,29 @@
 
   </div>
 </div>
+
+<script>
+  (function () {
+    const label = 'Estimated to Ship';
+
+    fetch('http://iw-orders-api.herokuapp.com/api/v1/shopify/fulfillment_update/{{ order.id }}')
+      .then(response => response.json())
+      .then(({ line_items: items }) => {
+        if (!items) {
+          return;
+        }
+
+        items.forEach((item) => {
+          const displayText = `${label}: ${item.commitment_date}`;
+          const lineItemElement = document.getElementById(item.id);
+          if (!lineItemElement) {
+            return;
+          }
+          const propertyElement = document.createElement('p');
+          propertyElement.innerHTML = displayText;
+          propertyElement.classList.add('text-accent');
+          lineItemElement.firstElementChild.appendChild(propertyElement);
+        });
+      });
+  })();
+</script>

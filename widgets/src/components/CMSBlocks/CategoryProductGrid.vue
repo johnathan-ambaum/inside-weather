@@ -1,10 +1,24 @@
 <template>
   <div class="CategoryProductGrid">
-    <div class="CategoryProductGrid__inner" :style="styleObject">
-      <div class="CategoryProductGrid__item" v-for="(product, index) in products" :key="index">
-        <a :href="product.destination">
-          <img class="CategoryProductGrid__image" :src="product.image" :alt="product.titleCopy">
-          <div class="CategoryProductGrid__title">{{product.titleCopy}}</div>
+    <div
+      :style="styleObject"
+      class="CategoryProductGrid__inner"
+    >
+      <div
+        v-for="(product, index) in products"
+        :key="index"
+        class="CategoryProductGrid__item"
+      >
+        <a
+          :href="product.destination"
+          class="CategoryProductGrid__link"
+        >
+          <img
+            :src="product.image"
+            :alt="product.titleCopy"
+            class="CategoryProductGrid__image"
+          >
+          <div class="CategoryProductGrid__title">{{ product.titleCopy }}</div>
           <div class="CategoryProductGrid__cta">CUSTOMIZE NOW</div>
         </a>
       </div>
@@ -15,16 +29,16 @@
 <script>
 export default {
   props: {
-    products: Array
+    products: { type: Array, default: () => ([]) },
   },
 
   computed: {
-    styleObject(){
+    styleObject() {
       const productsPerRow = 4;
-      return this.products.length < productsPerRow ? {'justify-content': 'center'} : '';
-    }
-  }
-}
+      return this.products.length < productsPerRow ? { 'justify-content': 'center' } : '';
+    },
+  },
+};
 </script>
 
 <style lang='scss'>
@@ -61,6 +75,12 @@ export default {
     @include at-query($breakpoint-large) {
       flex-basis: calc(25% - 1px);
     }
+  }
+
+  &__link {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   &__image{

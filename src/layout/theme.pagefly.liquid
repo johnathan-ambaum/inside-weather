@@ -257,7 +257,9 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
   {% endif %}
   <script src="{{ 'manifest.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
-  <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+  {% if template.name != 'product' and template.suffix != 'favorites' -%}
+    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+  {%- endif %}
   <script src="//viewer.cylindo.com/v4/viewer.min.js" defer></script>
   <!-- end browse and product customizer widgets -->
 
