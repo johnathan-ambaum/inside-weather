@@ -52,7 +52,7 @@
         cartCount: {{ checkout.line_items.size }},
         productIds: {{ checkout.line_items | map: 'sku' | json }},
         customerEmail: {{ customer.email | json }},
-        SHA256_email: {{ customer.email | sha256 }}
+        SHA256_email: "{{ customer.email | sha256 }}"
       }];
 
       var checkoutStep = null;
