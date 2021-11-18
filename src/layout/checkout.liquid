@@ -696,17 +696,26 @@
             });
         }
 
+        function genericizeTrackingLabel() {
+          const label = document.querySelector('.tracking-info__number > strong');
+          if (label) {
+            label.innerHTML = 'Tracking Number';
+          }
+        }
+
         document.addEventListener('page:load', function () {
           hideShippingStep()
           hideEmailProperties();
           hideZeroDiscount();
           updateLeadTimes();
+          genericizeTrackingLabel();
         });
         document.addEventListener('page:change', function () {
           hideShippingStep();
           hideEmailProperties();
           hideZeroDiscount();
           updateLeadTimes();
+          genericizeTrackingLabel();
         });
       })();
     </script>
