@@ -459,6 +459,9 @@
       *{
         font-family: Avalon !important;
       }
+      .product__description__property:not(.loaded) {
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -688,6 +691,7 @@
                   const parentNode = lineItemElement.querySelector('.product__description');
                   parentNode.insertBefore(propertyElement, parentNode.lastChild);
                 }
+                propertyElement.classList.add('loaded');
               });
             });
         }
