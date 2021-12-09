@@ -253,7 +253,7 @@
   {% endif %}
   <script src="{{ 'manifest.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
-  {% if template.name != 'product' and template.suffix != 'favorites' -%}
+  {% if template.name != 'product' and template.suffix != 'favorites' and template.suffix != 'swatches' -%}
     <script src="{{ 'widgets.js' | asset_url }}" defer></script>
   {%- endif %}
   <script src="//viewer.cylindo.com/v4/viewer.min.js" defer></script>
@@ -298,7 +298,7 @@
 {% include 'hulkcode_common' %}{% if template contains 'product' or template contains 'cart' %}<script src='https://volumediscount.hulkapps.com/hulkcode.js' defer='defer'></script>{% endif %}
 </head>
 
-<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} template-{{ template.name }}-{{ template.suffix }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
 
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6SBKJC"

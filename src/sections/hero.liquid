@@ -1,0 +1,184 @@
+<style>
+  .background-media-text--{{ section.id }} {
+    align-items: center;
+    background-position: {{ section.settings.alignment }};
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: {{ section.settings.height }}px;
+    position: static;
+  }
+  .background-media-text__wrapper {
+    color: {{ section.settings.text_color }};
+  }
+  .background-media-text--{{ section.id }} .subtitle,
+  .background-media-text--{{ section.id }} .h3,
+  .background-media-text--{{ section.id }} .rte {
+    font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+    font-weight: 600;
+  }
+  .background-media-text--{{ section.id }} .subtitle {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+  .background-media-text--{{ section.id }} .h3 {
+    font-size: 50px;
+  }
+  .background-media-text--{{ section.id }} .rte {
+    font-size: 18px;
+    font-weight: 500;
+  }
+</style>
+
+<div
+  class="background-media-text background-media-text--{{ section.id }} background-media-text--{{ section.settings.height }}"
+  data-aos="background-media-text__animation"
+  {% if section.settings.image != blank %}style="background-image: url({{ section.settings.image | img_url: '1400x' }});"{% endif %}
+>
+  {% if section.settings.image == blank %}
+    <div class="background-media-text__image" >
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {% endif %}
+  {% if section.settings.subtitle != blank or section.settings.title != blank or section.settings.text != blank %}
+    <div class="background-media-text__inner">
+      <div class="page-width">
+        <div class="background-media-text__aligner text-{{ section.settings.layout }}">
+            <div class="background-media-text__wrapper">
+            {% if section.settings.subtitle %}
+                <p class="subtitle">{{ section.settings.subtitle }}</p>
+            {% endif %}
+            {% if section.settings.title != blank %}
+                <h2 class="h3">{{ section.settings.title | escape }}</h2>
+            {% endif %}
+            {% if section.settings.text != blank %}
+                <div class="rte background-media-text__subtext">{{ section.settings.text }}</div>
+            {% endif %}
+            </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<div class="background-media-text__spacer background-media-text--"></div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "class": "index-section--flush",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subheading",
+        "default": "Impressive"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Large image with text box"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with a full-width image to draw attention to an important detail of your brand or product line.</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Image focal point",
+        "info": "Used to keep the subject of your photo in view.",
+        "default": "center",
+        "options": [
+          {
+            "value": "top left",
+            "label": "Top left"
+          },
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "top right",
+            "label": "Top right"
+          },
+          {
+            "value": "center left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Middle"
+          },
+          {
+            "value": "center right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom left",
+            "label": "Bottom left"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "bottom right",
+            "label": "Bottom right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Text alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "height",
+        "label": "Section height",
+        "default": 550,
+        "min": 450,
+        "max": 750,
+        "step": 100,
+        "unit": "px"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

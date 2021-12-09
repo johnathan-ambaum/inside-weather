@@ -1,4 +1,9 @@
 import { mapState } from 'vuex';
+import ApiClient from '../util/ApiClient';
+import { getStaticImageUrl, getViewerParameters } from '../util/cylindo';
+import FilterStorage from '../util/FilterStorage';
+
+const apiClient = new ApiClient();
 
 export default {
   computed: {
@@ -272,6 +277,108 @@ export default {
       let finalMax = max + Math.max(...selectedOptionsMax);
 
       return `${finalMin}-${finalMax} business days`;
+    },
+
+    buildSelectedOptions(attributeMatches, attributes, existingSelections) {
+      const selectedOptions = {};
+      Object.entries(attributeMatches).forEach(([parameter, { matches, value }]) => {
+        if (value) { // having a defined value overrules everything
+          selectedOptions[parameter] = value;
+          return;
+        }
+
+        if (matches === parameter) { // if the match object and the parameter are the same, respond normally by matching like parameters
+          if (existingSelections[parameter]) {
+            const foundAttribute = attributes.find(attribute => attribute.parameter === parameter);
+            const foundValue = value || foundAttribute.values.find((item) => item.value === existingSelections[parameter]);
+            if (foundValue) {
+              selectedOptions[parameter] = existingSelections[parameter];
+              return;
+            }
+
+            selectedOptions[parameter] = foundAttribute.values[0].value;
+            return;
+          }
+
+          const foundAttribute = attributes.find(attribute => attribute.parameter === parameter);
+          selectedOptions[parameter] = foundAttribute.values[0].value;
+          return;
+        }
+
+        // if the match object and the parameter are not the same, match the specified parameters
+        if (existingSelections[matches]) {
+          selectedOptions[parameter] = existingSelections[matches];
+        }
+
+        // if this.selectedOptions[matchObj.matches] is not true, this indicates that the current product does not
+        // have a matching attribute compared to the one defined in the cms. ie admin user error.
+        // example: matches: "blueberry_sprinkles" on sofas
+        // if this happens we will return nothing
+      });
+
+      return selectedOptions;
+    },
+
+    createCylindoImageUrl(selectedOptions, relatedProductFilterDefs) {
+      const { productCode, features } = getViewerParameters({
+        baseSku: relatedProductFilterDefs.cylindo_sku,
+        attributes: relatedProductFilterDefs.attributes,
+        selectedOptions,
+      });
+
+      let frame = 1;
+      if (relatedProductFilterDefs && relatedProductFilterDefs.cylindo_overrides && relatedProductFilterDefs.cylindo_overrides.startFrame) {
+        frame = relatedProductFilterDefs.cylindo_overrides.startFrame;
+      }
+
+      return getStaticImageUrl({ productCode, features, frame });
+    },
+
+    async buildRelatedProducts(products, selections) {
+      const relatedProducts = [];
+
+      products.forEach(async (relatedProductData) => {
+        const relatedProduct = {
+          title: '',
+          url: '',
+          image: [],
+          product_type: '',
+        };
+
+        await FilterStorage.getItem(relatedProductData.product_type).then((response) => {
+          if (!response.templates) {
+            return;
+          }
+
+          const { attributes } = response;
+          const selectedOptions = this.buildSelectedOptions(relatedProductData.attributes, attributes, selections);
+
+          const { template = '' } = response.templates.find(item => item.key === 'name') || {};
+          const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
+          relatedProduct.title = this.interpolateWithValues({ template, attributes, selectedOptions, debug: false });
+          relatedProduct.url = `/products/${relatedProductData.base_product_handle}?attributes=${attributeString}`;
+
+          if (!response.cylindo_sku) {
+            apiClient.getImages({
+              type: relatedProductData.product_type,
+              attributes: selectedOptions,
+              debounce: false
+            }).then((images) => {
+              relatedProduct.image = images;
+              relatedProduct.product_type = relatedProductData.product_type;
+            });
+          } else {
+            relatedProduct.image = this.createCylindoImageUrl(selectedOptions, response);
+            relatedProduct.product_type = relatedProductData.product_type;
+          }
+
+          relatedProducts.push(relatedProduct);
+        });
+      });
+
+      relatedProducts.sort((a, b) => (a.priority < b.priority ? -1 : 1));
+
+      return relatedProducts;
     },
   },
 };
