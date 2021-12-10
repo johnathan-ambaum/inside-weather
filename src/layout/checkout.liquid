@@ -459,6 +459,9 @@
       *{
         font-family: Avalon !important;
       }
+      .product__description__property:not(.loaded) {
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -688,8 +691,16 @@
                   const parentNode = lineItemElement.querySelector('.product__description');
                   parentNode.insertBefore(propertyElement, parentNode.lastChild);
                 }
+                propertyElement.classList.add('loaded');
               });
             });
+        }
+
+        function genericizeTrackingLabel() {
+          const label = document.querySelector('.tracking-info__number > strong');
+          if (label) {
+            label.innerHTML = 'Tracking Number';
+          }
         }
 
         document.addEventListener('page:load', function () {
@@ -697,12 +708,14 @@
           hideEmailProperties();
           hideZeroDiscount();
           updateLeadTimes();
+          genericizeTrackingLabel();
         });
         document.addEventListener('page:change', function () {
           hideShippingStep();
           hideEmailProperties();
           hideZeroDiscount();
           updateLeadTimes();
+          genericizeTrackingLabel();
         });
       })();
     </script>
