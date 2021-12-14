@@ -339,7 +339,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         {{ content_for_layout }}
       </main>
 
-      {%- unless template == 'collection' -%}
+      {%- unless template == 'collection' or template.suffix == 'new-chat' -%}
         {% section 'footer' %}
       {%- endunless -%}
 
