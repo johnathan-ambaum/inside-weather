@@ -29,11 +29,11 @@
     </div>
 
     <div class="chat-now-section">
-      <button
-        v-on:click.stop="openChatbotMode"
-      >
-        Chat now
-      </button>
+      <a href="/pages/concierge" target="_blank">
+        <button>
+          Chat now
+        </button>
+      </a>
     </div>
   </div>
 </template>
