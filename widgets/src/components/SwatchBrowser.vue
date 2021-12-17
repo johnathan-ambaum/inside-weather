@@ -125,6 +125,7 @@
     >
       <div
         ref="mainContainer"
+        :class="mainClasses"
         class="SwatchBrowser__Main"
       >
         <transition
@@ -159,7 +160,8 @@
                 >CLEAR FILTERS</button>
               </div>
               <div
-                v-for="swatch in filteredSwatches"
+                v-for="(swatch, index) in filteredSwatches"
+                ref="swatches"
                 :key="swatch.variant_id"
                 :class="{ 'is-selected': inCart(swatch.variant_id), 'info-active': infoActive(swatch.variant_id) }"
                 class="SwatchBrowser__Swatch"
@@ -167,7 +169,7 @@
                 <button
                   v-if="!infoActive(swatch.variant_id)"
                   class="SwatchBrowser__SwatchInfoToggle"
-                  @click="toggleInfo(swatch.variant_id)"
+                  @click="toggleInfo(swatch.variant_id, index)"
                 >
                   <img
                     src="https://cdn.insideweather.com/icons/i-circle-gray_ico@2x.png"
@@ -178,14 +180,14 @@
                   v-else
                   :size="24"
                   class="SwatchBrowser__SwatchInfoToggle"
-                  @click.native="toggleInfo(swatch.variant_id)"
+                  @click.native="toggleInfo(swatch.variant_id, index)"
                 />
                 <div class="SwatchBrowser__SwatchDetail">
                   <img
                     :src="swatch.image_url"
                     :alt="`${swatch.name} sample`"
                     class="SwatchBrowser__SwatchImage"
-                    @click="toggleInfo(swatch.variant_id)"
+                    @click="toggleInfo(swatch.variant_id, index)"
                   >
                   <div
                     class="SwatchBrowser__SwatchBackground"
@@ -201,7 +203,6 @@
                       v-if="swatch.commercial"
                       src="https://cdn.insideweather.com/icons/commercial_ico@2x.png"
                       alt="Commercial icon"
-                      style="width: 20px;"
                     >
                     <img
                       v-if="swatch.pet_friendly"
@@ -217,7 +218,6 @@
                       v-if="swatch.water_resistant"
                       src="https://cdn.insideweather.com/icons/water-resistant_ico@2x.png"
                       alt="Water resistant icon"
-                      style="width: 12px;"
                     >
                   </div>
                   <button
@@ -240,174 +240,39 @@
                 </div>
                 <transition
                   enter-active-class="animated fadeInRight"
-                  leave-active-class="animated fadeOutRight"
                 >
-                  <div
+                  <swatch-info
                     v-if="infoActive(swatch.variant_id)"
-                    class="SwatchBrowser__SwatchInfo"
-                  >
-                    <div class="SwatchBrowser__Tabs">
-                      <button
-                        class="SwatchBrowser__Tab"
-                        :class="{ 'is-active': activeTab === 'details' }"
-                        @click="activeTab = 'details'"
-                      >DETAILS</button>
-                      <button
-                        v-if="hasPhotos"
-                        class="SwatchBrowser__Tab"
-                        :class="{ 'is-active': activeTab === 'photos' }"
-                        @click="activeTab = 'photos'"
-                      >PHOTOS</button>
-                      <button
-                        v-if="hasRelated"
-                        class="SwatchBrowser__Tab"
-                        :class="{ 'is-active': activeTab === 'shop' }"
-                        @click="activeTab = 'shop'"
-                      >SHOP</button>
-                    </div>
-                    <div
-                      v-show="activeTab === 'details'"
-                      class="SwatchBrowser__Details"
-                    >
-                      <div
-                        v-if="activeSwatch.commercial || activeSwatch.performance || activeSwatch.pet_friendly || activeSwatch.water_resistant"
-                        class="SwatchBrowser__Badges"
-                      >
-                        <span v-if="swatch.commercial">
-                          <img
-                            src="https://cdn.insideweather.com/icons/commercial_ico@2x.png"
-                            alt="Commercial icon"
-                            style="width: 20px;"
-                          >
-                          Commercial
-                        </span>
-                        <span v-if="swatch.pet_friendly">
-                          <img
-                            src="https://cdn.insideweather.com/icons/pet-friendly_ico@2x.png"
-                            alt="Pet friendly icon"
-                          >
-                          Pet-Friendly
-                        </span>
-                        <span v-if="swatch.performance">
-                          <img
-                            src="https://cdn.insideweather.com/icons/performance_ico@2x.png"
-                            alt="Performance icon"
-                          >
-                          Performance
-                        </span>
-                        <span v-if="swatch.water_resistant">
-                          <img
-                            src="https://cdn.insideweather.com/icons/water-resistant_ico@2x.png"
-                            alt="Water resistant icon"
-                            style="width: 12px;"
-                          >
-                          Water Resistant
-                        </span>
-                      </div>
-                      <p>{{ activeSwatch.description }}</p>
-                      <div class="SwatchBrowser__Specs">
-                        <div
-                          v-if="activeSwatch.composition"
-                          style="float: left;"
-                        >
-                          <span>COMPOSITION</span>
-                          {{ activeSwatch.composition }}
-                        </div>
-                        <div v-if="activeSwatch.durability_description">
-                          <span>DURABILITY</span>
-                          {{ activeSwatch.durability_description }}
-                        </div>
-                        <div v-if="activeSwatch.cleaning_description">
-                          <span>CLEANING</span>
-                          {{ activeSwatch.cleaning_description }}
-                        </div>
-                        <div v-if="activeSwatch.enable_stain_chart">
-                          <span>STAIN RESISTANT TEST RESULTS</span>
-                          <table>
-                            <thead>
-                              <tr>
-                                <th>Mustard</th>
-                                <th>Wine</th>
-                                <th>Soda</th>
-                                <th>Water</th>
-                                <th>Oil</th>
-                                <th>Ketchup</th>
-                                <th>Soil</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_mustard }}</td>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_wine }}</td>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_soda }}</td>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_water }}</td>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_oil }}</td>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_ketchup }}</td>
-                                <td>{{ activeSwatch.stain_chart_data.stain_resistant_soil }}</td>
-                              </tr>
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                <td colspan="2">1 = Partial stain release</td>
-                                <td colspan="3">3.5+ = Commercial passing score</td>
-                                <td colspan="2">5 = Complete stain release</td>
-                              </tr>
-                            </tfoot>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <lifestyle-grid
-                      v-if="hasPhotos"
-                      v-show="activeTab === 'photos'"
-                      class="SwatchBrowser__Photos"
-                      :images="activeSwatch.lifestyle_grid.images"
-                    />
-                    <div
-                      v-if="hasRelated"
-                      v-show="activeTab === 'shop'"
-                      class="SwatchBrowser__Shop"
-                    >
-                      <div class="SwatchBrowser__RelatedProducts related-products__cards">
-                        <div
-                          v-for="relatedProduct in relatedProducts"
-                          :key="relatedProduct.title"
-                          class="related-products__card"
-                        >
-                          <template v-if="relatedProduct.image.medium">
-                            <a :href="relatedProduct.url"><img class="related-products__image" :src="relatedProduct.image.medium[0]"></a>
-                          </template>
-                          <template v-else>
-                            <a :href="relatedProduct.url"><img class="related-products__image" :src="relatedProduct.image"></a>
-                          </template>
-                          <a :href="relatedProduct.url"><p class="related-products__title">{{ relatedProduct.title }}</p></a>
-                          <a :href="relatedProduct.url">SHOP</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    :swatch="activeSwatch"
+                    :related-products="relatedProducts"
+                  />
                 </transition>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="SwatchBrowser__Cart">
+      <div
+        :class="{ full: showOrderForm && showCart }"
+        class="SwatchBrowser__Cart"
+      >
         <transition
           enter-active-class="animated slideInUp"
           leave-active-class="animated slideOutDown"
         >
           <div
-            v-show="showCart"
+            v-show="!showOrderForm || showCart"
+            :class="{ 'is-open': isMobile && showOrderForm && showCart }"
             class="SwatchBrowser__CartBody"
           >
             <div class="SwatchBrowser__CartHeader">
               <h2>
-                Your Swatch Cart
+                Your Swatch {{ showOrderForm ? 'Order' : 'Cart' }}
                 <span>(Choose up to 10)</span>
               </h2>
               <close-button
                 :size="isMobile ? 20 : 24"
+                label="BACK TO SWATCHES"
                 @click.native="closeFromCart"
               />
             </div>
@@ -418,25 +283,13 @@
               </div>
             </div>
             <div class="SwatchBrowser__CartItems">
-              <div
+              <cart-swatch
                 v-for="item in cart"
                 :key="item.variant_id"
-                class="SwatchBrowser__CartItem"
-              >
-                <img
-                  :src="item.image_url"
-                  :alt="`${item.name} sample`"
-                  class="SwatchBrowser__LineImage"
-                >
-                <div class="SwatchBrowser__SwatchName">{{ item.name }}</div>
-                <div class="SwatchBrowser__SwatchSubName">{{ item.swatch_type }}</div>
-                <button
-                  v-if="!completed"
-                  @click="toggleLineItem(item)"
-                >
-                  <img src="https://cdn.insideweather.com/icons/x-circle-black_ico@2x.png" alt="Remove from cart">
-                </button>
-              </div>
+                :swatch="item"
+                :static="completed"
+                @toggle="toggleLineItem(item)"
+              />
             </div>
           </div>
         </transition>
@@ -453,12 +306,7 @@
               v-if="isMobile && !showCart && showOrderForm"
               class="SwatchBrowser__FooterLink"
               @click.prevent="openCart"
-            >VIEW YOUR CART</button>
-            <button
-              v-if="isMobile && showCart"
-              class="SwatchBrowser__FooterLink"
-              @click.prevent="backToSwatches"
-            >BACK TO SWATCHES</button>
+            >VIEW YOUR ORDER</button>
           </div>
           <button
             v-show="!showCart && !showOrderForm"
@@ -466,12 +314,17 @@
             @click.prevent="openCart"
           >ORDER NOW</button>
           <button
-            v-show="(showCart && !showOrderForm) || (isMobile && showOrderForm)"
+            v-show="(showCart && !showOrderForm) || (isMobile && showOrderForm && !showCart)"
             :disabled="isSubmitting"
             :class="{ 'btn--loading': isSubmitting }"
             class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
             @click.prevent="submitFromCart"
           >{{ showOrderForm && !showCart ? 'SUBMIT SWATCH ORDER' : 'ORDER NOW' }}</button>
+          <button
+            v-if="isMobile && showOrderForm && showCart"
+            class="SwatchBrowser__Button SwatchBrowser__Button--Black"
+            @click.prevent="closeFromCart"
+          >BACK TO INFORMATION</button>
           <p>Swatches are FREE and arrive in 2-4 business days</p>
         </div>
         <p>
@@ -488,11 +341,12 @@
 import { mapState, mapActions } from 'vuex';
 import DOMPurify from 'dompurify';
 import SwatchesOrderForm from './SwatchesOrderForm.vue';
+import SwatchInfo from './SwatchInfo.vue';
+import CartSwatch from './CartSwatch.vue';
 import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import { filters, sortOptions } from '../static/swatchFilters';
 import ApiClient from '../util/ApiClient';
-import LifestyleGrid from './CMSBlocks/LifestyleGrid.vue';
 import interpolator from '../mixins/interpolator';
 
 const apiClient = new ApiClient();
@@ -501,7 +355,8 @@ export default {
   components: {
     SwatchesOrderForm,
     CloseButton,
-    LifestyleGrid,
+    SwatchInfo,
+    CartSwatch,
   },
 
   mixins: [
@@ -516,7 +371,6 @@ export default {
       openFilter: '',
       cart: [],
       activeSwatch: null,
-      activeTab: 'details',
       relatedProducts: [],
       errorOn: null,
       maxSwatches: 15,
@@ -548,6 +402,12 @@ export default {
       return display;
     },
 
+    mainClasses() {
+      return {
+        'order-form-active': this.showOrderForm,
+      };
+    },
+
     isChecked() {
       return (filter, value) => this.appliedFilters[filter].includes(value);
     },
@@ -576,17 +436,6 @@ export default {
 
     infoActive() {
       return variantId => this.activeSwatch && this.activeSwatch.variant_id === variantId;
-    },
-
-    hasPhotos() {
-      if (!this.activeSwatch || !this.activeSwatch.lifestyle_grid) {
-        return false;
-      }
-      return this.activeSwatch.lifestyle_grid.images && this.activeSwatch.lifestyle_grid.images.length;
-    },
-
-    hasRelated() {
-      return this.activeSwatch && this.activeSwatch.related_products && this.relatedProducts.length;
     },
 
     hasError() {
@@ -658,15 +507,30 @@ export default {
       };
     },
 
-    toggleInfo(variantId) {
-      this.activeTab = 'details';
-      if (this.infoActive(variantId)) {
-        this.activeSwatch = null;
+    toggleInfo(variantId, index) {
+      const bookends = document.querySelectorAll('.bookend');
+      if (bookends.length) {
+        bookends.forEach(el => el.classList.remove('bookend'));
+      }
+
+      const isCloseAction = this.infoActive(variantId);
+      this.activeSwatch = null;
+
+      if (isCloseAction) {
         return;
       }
 
-      this.activeSwatch = { variant_id: variantId };
+      this.$nextTick(() => {
+        for (let i = index; i >= 0; i--) {
+          if (this.$refs.swatches[i].getBoundingClientRect().left < 100) {
+            const bookendIndex = i === index ? i + 1 : i;
+            this.$refs.swatches[bookendIndex].classList.add('bookend');
+            break;
+          }
+        }
+      });
 
+      this.activeSwatch = { variant_id: variantId };
       const selected = this.swatches.find(swatch => swatch.variant_id === variantId);
       apiClient.getSwatchDetail(selected.name).then((swatch) => {
         this.activeSwatch = swatch;
@@ -712,13 +576,14 @@ export default {
     },
 
     backToSwatches() {
-      this.showCart = false;
+      this.showCart = true;
       this.showOrderForm = false;
     },
 
     closeFromCart() {
       if (this.isMobile) {
         this.showCart = false;
+        this.showOrderForm = true;
       }
     },
 
@@ -753,10 +618,16 @@ export default {
 
 $filter-height: 120px;
 
-.template-page-swatches .main-content {
+.template-page-swatches {
   @include at-query($breakpoint-small) {
-    position: relative;
-    z-index: 1001;
+    .main-content {
+      position: relative;
+      z-index: 1001;
+    }
+
+    .orb-chat-mount {
+      display: none !important;
+    }
   }
 }
 
@@ -930,6 +801,28 @@ $filter-height: 120px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     position: relative;
+
+    &.order-form-active + .SwatchBrowser__Cart {
+
+      @include at-query($breakpoint-small) {
+        width: 100vw;
+        z-index: 1010;
+
+        // &:not(.full) {
+        //   height: 56px;
+        // }
+
+        .SwatchBrowser__CartFooter {
+          align-items: flex-end;
+          flex: 1;
+
+          button {
+            border-radius: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 
   &__Browse {
@@ -971,8 +864,16 @@ $filter-height: 120px;
     }
 
     @include at-query($breakpoint-small) {
-      flex: 1 1 50%;
+      flex: 1 1 auto;
       min-width: 0;
+
+      &:first-child {
+        margin-right: 8px;
+
+        .SwatchBrowser__Pill {
+          font-weight: 600;
+        }
+      }
 
       &:last-child > .SwatchBrowser__Label {
         display: none;
@@ -1211,7 +1112,8 @@ $filter-height: 120px;
 
     @include at-query($breakpoint-large) {
       gap: 20px;
-      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      grid-auto-flow: dense;
+      grid-template-columns: repeat(auto-fill,245px);
       margin-bottom: 40px;
       padding-bottom: 0;
     }
@@ -1231,6 +1133,7 @@ $filter-height: 120px;
 
     h3 {
       font-size: 22px;
+      text-align: center;
     }
 
     p {
@@ -1250,7 +1153,7 @@ $filter-height: 120px;
     border-radius: 30px;
     display: flex;
     flex: 0 0 50%;
-    padding: 15px 15px 10px 15px;
+    padding: 15px 15px 5px 15px;
     position: relative;
     // flex-direction: column;
     justify-content: center;
@@ -1265,11 +1168,17 @@ $filter-height: 120px;
       border-color: #202020;
     }
 
+    &.bookend,
+    &.bookend ~ & {
+      order: 2;
+    }
+
     &.info-active {
       align-items: flex-start;
       grid-column-start: 1;
       grid-column-end: -1;
       justify-content: flex-start;
+      order: 1 !important;
 
       @include at-query($breakpoint-small) {
         background: white;
@@ -1290,13 +1199,13 @@ $filter-height: 120px;
       top: 10px;
 
       @include at-query($breakpoint-large) {
-        right: 20px;
-        top: 20px;
+        right: 15px;
+        top: 10px;
       }
 
       img {
         display: block;
-        width: 20px;
+        width: 24px;
       }
     }
 
@@ -1392,27 +1301,28 @@ $filter-height: 120px;
 
     @at-root {
       #{&}Name {
-        font-size: 12px;
-        font-weight: 500;
+        font-size: 11px;
+        font-weight: 600;
         letter-spacing: .05em;
-        line-height: 1;
+        line-height: 1.1;
+        margin-bottom: 5px;
         margin-top: 15px;
 
         @include at-query($breakpoint-large) {
-          font-size: 14px;
+          font-size: 16px;
           line-height: 18px;
         }
       }
 
       #{&}SubName {
-        font-family: $font-stack-roboto;
+        font-family: $font-stack-avalon;
         font-size: 8px;
         letter-spacing: .1em;
         text-transform: uppercase;
         white-space: nowrap;
 
         @include at-query($breakpoint-large) {
-          font-size: 10px;
+          font-size: 12px;
         }
       }
     }
@@ -1448,26 +1358,6 @@ $filter-height: 120px;
     }
   }
 
-  &__Tabs {
-    display: flex;
-    max-width: 100%;
-    width: 660px;
-  }
-
-  &__Tab {
-    border-bottom: 2px solid #D4D0CA;
-    flex: 1;
-    font-family: $font-stack-avalon;
-    font-size: 17px;
-    letter-spacing: 0.125em;
-    padding: 10px 0 15px 0;
-
-    &.is-active {
-      border-bottom-color: #202020;
-      font-weight: 500;
-    }
-  }
-
   &__Details {
     padding-left: 20px;
     text-align: left;
@@ -1485,83 +1375,6 @@ $filter-height: 120px;
     }
   }
 
-  &__Specs {
-    font-size: 15px;
-
-    & > div {
-      margin-bottom: 10px;
-
-      &:first-child {
-        margin-right: 50px;
-
-        @include at-query($breakpoint-small) {
-          float: none !important;
-        }
-      }
-    }
-
-    span {
-      margin-right: 8px;
-    }
-
-    span, th {
-      font-weight: 500;
-    }
-
-    table {
-      background: white;
-      border-collapse: collapse;
-      width: auto;
-    }
-
-    th {
-      font-size: 13px;
-      padding: 4px 0;
-    }
-
-    tbody {
-      border-top: 1px solid #D4D0CA;
-    }
-
-    th, td {
-      padding-bottom: 4px;
-      padding-top: 4px;
-      text-align: center;
-
-      @include at-query($breakpoint-small) {
-        font-size: 10px;
-      }
-    }
-
-    td {
-      padding: 4px 10px;
-
-      @include at-query($breakpoint-large) {
-        padding: 4px 25px;
-      }
-    }
-
-    th + th,
-    td + td {
-      border-left: 1px solid #D4D0CA;
-    }
-
-    tfoot {
-      margin-top: 10px;
-
-      td {
-        border: none;
-        font-size: 12px;
-        font-weight: 400;
-
-        @include at-query($breakpoint-small) {
-          display: block;
-          text-align: left;
-        }
-      }
-    }
-  }
-
   &__Badges {
     align-items: center;
     display: flex;
@@ -1569,9 +1382,9 @@ $filter-height: 120px;
     margin-top: 25px;
 
     img {
-      height: auto;
+      height: 20px;
       margin: 0 5px;
-      width: 15px;
+      width: auto;
     }
 
     & > span {
@@ -1580,29 +1393,6 @@ $filter-height: 120px;
       flex: 1;
       margin: 5px 40px 5px 0;
       white-space: nowrap;
-    }
-  }
-
-  &__Photos {
-    max-height: 500px;
-    margin: 30px 0;
-    padding: 0 5px;
-  }
-
-  &__RelatedProducts {
-    justify-content: flex-start;
-    margin-top: 30px;
-    max-height: 500px;
-    overflow-y: auto;
-
-    .related-products__title {
-      margin-bottom: 5px;
-    }
-
-    a:last-child {
-      border-bottom: 1px solid #202020;
-      font-family: $font-stack-avalon;
-      font-size: 14px;
     }
   }
 
@@ -1658,6 +1448,13 @@ $filter-height: 120px;
     }
   }
 
+  .full &__LineImage {
+    @include at-query($breakpoint-small) {
+      flex-basis: 70px;
+      width: 70px;
+    }
+  }
+
   &__LineDescription {
     color: #202020;
     flex: 1;
@@ -1665,12 +1462,11 @@ $filter-height: 120px;
   }
 
   &__Cart {
-    border: 1px solid #e1deda;
     border-radius: 50px;
     display: flex;
     flex: 0 0 445px;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
 
     p {
       font-family: $font-stack-avalon;
@@ -1682,6 +1478,14 @@ $filter-height: 120px;
       a {
         font-weight: 700;
         text-decoration: underline;
+      }
+    }
+
+    @at-root {
+      .order-form-active + & {
+        p {
+          display: none;
+        }
       }
     }
 
@@ -1702,7 +1506,7 @@ $filter-height: 120px;
         display: none;
       }
 
-      button {
+      #{&}Footer button {
         padding-left: 15px;
         padding-right: 15px;
         width: auto;
@@ -1711,9 +1515,81 @@ $filter-height: 120px;
 
     @include at-query($breakpoint-large) {
       max-height: calc(100vh - #{$header-height + $filter-height + 20px});
-      overflow: auto;
       position: sticky;
       top: $header-height + $filter-height + 20px;
+
+      & > p {
+        margin: 0 70px;
+        transform: translateY(50%);
+      }
+
+      @at-root {
+        .order-form-active + & {
+          background: #fff;
+          border: none;
+          border-left: 1px solid #D4D0CA;
+          border-radius: 0;
+          height: 100%;
+          max-height: 100vh;
+          padding: 0 40px;
+          position: fixed;
+          right: 0;
+          top: 0;
+          width: 480px;
+          z-index: 9999;
+
+          .SwatchBrowser__CartHeader {
+            flex-wrap: wrap;
+            justify-content: flex-end;
+
+            h2 {
+              flex: 1 1 100%;
+
+              span {
+                display: none;
+              }
+            }
+
+            .CloseButton {
+              align-items: center;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              order: -1;
+
+              span {
+                margin: 10px 0 0;
+                max-width: 60px;
+                text-align: center;
+              }
+            }
+          }
+
+          .SwatchBrowser__CartBody {
+            border: none;
+            border-radius: 0;
+            flex: 0 1 auto;
+          }
+
+          .SwatchBrowser__CartItems {
+            align-content: flex-start;
+            align-items: flex-start;
+            margin: 20px 0;
+            overflow-y: auto;
+            flex-wrap: wrap;
+            align-content: flex-start;
+          }
+
+          .SwatchBrowser__LineImage {
+            flex: 0 0 70px;
+            width: 70px;
+          }
+
+          .SwatchBrowser__CartFooter {
+            border: none;
+          }
+        }
+      }
     }
 
     #{&}Header {
@@ -1757,12 +1633,18 @@ $filter-height: 120px;
         flex: 0 1 40%;
         justify-content: center;
 
-        .SwatchBrowser__CartCounter {
-          display: none;
+        @at-root {
+          .SwatchBrowser__Main:not(.order-form-active) + .SwatchBrowser__Cart .SwatchBrowser__CartFooter .SwatchBrowser__CartCounter {
+            display: none;
+          }
         }
       }
 
       @include at-query($breakpoint-large) {
+        border: 1px solid #e1deda;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-top: none;
         padding: 0 30px;
       }
     }
@@ -1796,15 +1678,14 @@ $filter-height: 120px;
 
   &__FooterLink {
     flex: 1;
+    font-family: $font-stack-avalon;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: .12em;
+    line-height: 1;
     padding: 0;
     text-align: right;
     text-decoration: underline;
-
-    @include at-query($breakpoint-small) {
-      display: none;
-    }
   }
 
   &__CartBody {
@@ -1824,9 +1705,54 @@ $filter-height: 120px;
       & > .SwatchBrowser__CartCounter {
         padding: 5px 0 5px 15px;
       }
+
+      &.is-open {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: white;
+        height: calc(100% - 90px);
+        width: 100%;
+
+        & > .SwatchBrowser__CartCounter {
+          display: none;
+        }
+
+        .SwatchBrowser__CartHeader {
+          display: flex;
+
+          span {
+            display: none;
+          }
+
+          h3 {
+            flex: 1;
+          }
+
+          button {
+            flex: 0;
+          }
+        }
+      }
+
+      @at-root {
+        .order-form-active + .SwatchBrowser__Cart .SwatchBrowser__CartFooter {
+          flex-wrap: wrap;
+
+          .SwatchBrowser__CartCounter {
+            flex: 1 1 100%;
+          }
+        }
+      }
     }
 
     @include at-query($breakpoint-large) {
+      border: 1px solid #e1deda;
+      border-bottom: none;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+      overflow: auto;
+
       & > .SwatchBrowser__CartCounter {
         display: none;
       }
@@ -1844,59 +1770,6 @@ $filter-height: 120px;
       min-height: 155px;
       overflow-y: auto;
       overflow-x: hidden;
-    }
-  }
-
-  &__CartItem {
-    align-items: center;
-    display: flex;
-    flex: 0 0 33.333%;
-    flex-direction: column;
-    font-size: 12px;
-    letter-spacing: .05em;
-    line-height: 18px;
-    min-width: 0;
-    padding: 10px 5px;
-    position: relative;
-    text-align: center;
-
-    @include at-query($breakpoint-small) {
-      @at-root {
-        .SwatchBrowser__Cart:not(.full) & {
-          flex: 0 0 45px;
-
-          .SwatchBrowser__SwatchName,
-          .SwatchBrowser__SwatchSubName {
-            display: none;
-          }
-
-          button {
-            right: 2px;
-          }
-        }
-      }
-    }
-
-    @include at-query($breakpoint-large) {
-      flex: 0 0 25%;
-      font-size: 14px;
-    }
-
-    button {
-      background: none;
-      border: none;
-      color: #202020;
-      flex: 0;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .05em;
-      margin-left: 22px;
-      padding: 0;
-      position: absolute;
-      right: 15px;
-      text-decoration: underline;
-      top: 5px;
-      width: 20px;
     }
   }
 }

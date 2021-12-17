@@ -14,20 +14,33 @@
   }
   .background-media-text--{{ section.id }} .subtitle,
   .background-media-text--{{ section.id }} .h3,
-  .background-media-text--{{ section.id }} .rte {
+  .background-media-text--{{ section.id }} .rte,
+  .background-media-text--{{ section.id }} .rte p {
     font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
     font-weight: 600;
   }
   .background-media-text--{{ section.id }} .subtitle {
     font-size: 13px;
     margin-bottom: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   .background-media-text--{{ section.id }} .h3 {
-    font-size: 50px;
+    font-size: 32px;
+    margin-bottom: 30px;
   }
-  .background-media-text--{{ section.id }} .rte {
-    font-size: 18px;
-    font-weight: 500;
+
+  @media only screen and (min-width: 1025px) {
+    .background-media-text--{{ section.id }} .h3 {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .background-media-text--{{ section.id }} .rte,
+    .background-media-text--{{ section.id }} .rte p {
+      font-size: 18px;
+      font-weight: 500;
+    }
   }
 </style>
 

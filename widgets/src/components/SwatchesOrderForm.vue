@@ -25,6 +25,7 @@
             Your Information
             <close-button
               v-if="isMobile"
+              label="BACK TO SWATCHES"
               :size="20"
               @click.native.prevent.stop="$emit('close')"
             />
@@ -86,6 +87,7 @@
               class="SwatchesOrderForm__Submit SwatchBrowser__Button SwatchBrowser__Button--Black"
               type="submit"
             >SUBMIT SWATCH ORDER</button>
+            <p v-if="!isMobile">Swatches are FREE and arrive in 2-4 business days.</p>
           </div>
         </div>
       </form>
@@ -375,6 +377,16 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
+
+    @include at-query($breakpoint-large) {
+      padding-right: 440px;
+    }
+  }
+
+  &__Form {
+    @include at-query($breakpoint-small) {
+      background: #fff;
+    }
   }
 
   &__Heading {
@@ -420,9 +432,6 @@ export default {
 
     label {
       display: block;
-      font-family: $font-stack-avalon;
-      font-size: 14px;
-      font-weight: 500;
       letter-spacing: .12em;
       line-height: 1;
 
@@ -435,6 +444,14 @@ export default {
       background: #fff;
       border: 1px solid #D4D0CA;
       border-radius: 50px;
+      letter-spacing: .04em;
+      line-height: 30px;
+    }
+
+    label, input, select {
+      font-family: $font-stack-avalon;
+      font-size: 14px;
+      font-weight: 500;
     }
 
     input[type="number"] {
@@ -460,6 +477,14 @@ export default {
   &__Submit {
     margin: 20px 0;
     width: 100%;
+
+    & + p {
+      font-family: $font-stack-avalon;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+    }
   }
 
   &__ThankYou {

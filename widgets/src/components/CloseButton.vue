@@ -23,7 +23,8 @@
         />
       </g>
     </svg>
-    <span class="visually-hidden">Close</span>
+    <span v-if="label">{{ label }}</span>
+    <span v-else class="visually-hidden">Close</span>
   </button>
 </template>
 
@@ -31,15 +32,25 @@
 export default {
   props: {
     size: { type: Number, default: 32.121 },
+    label: { type: String, default: '' },
   },
 };
 </script>
 
 <style lang="scss">
+@import '../scss/variables';
+@import '../scss/mixins';
+
 .CloseButton {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+
+  span {
+    font-family: $font-stack-avalon;
+    font-size: 9px;
+    font-weight: 400;
+  }
 }
 </style>
