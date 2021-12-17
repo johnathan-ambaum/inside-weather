@@ -169,21 +169,20 @@
                 class="SwatchBrowser__Swatch"
               >
                 <button
-                  v-if="!infoActive(swatch.variant_id)"
                   class="SwatchBrowser__SwatchInfoToggle"
                   @click="toggleInfo(swatch.variant_id, index)"
                 >
                   <img
+                    v-if="!infoActive(swatch.variant_id)"
                     src="https://cdn.insideweather.com/icons/i-circle-gray_ico@2x.png"
                     alt="info"
                   >
+                  <img
+                    v-else
+                    src="https://cdn.insideweather.com/icons/x-circle-white_ico@2x.png"
+                    alt="close"
+                  >
                 </button>
-                <close-button
-                  v-else
-                  :size="24"
-                  class="SwatchBrowser__SwatchInfoToggle"
-                  @click.native="toggleInfo(swatch.variant_id, index)"
-                />
                 <div class="SwatchBrowser__SwatchDetail">
                   <img
                     :src="swatch.image_url"
@@ -247,6 +246,7 @@
                     v-if="infoActive(swatch.variant_id)"
                     :swatch="activeSwatch"
                     :related-products="relatedProducts"
+                    @close="toggleInfo(swatch.variant_id, index)"
                   />
                 </transition>
               </div>
@@ -1230,7 +1230,11 @@ $filter-height: 120px;
         position: fixed;
         top: 0;
         width: 100vw;
-        z-index: 1000;
+        z-index: 1020;
+      }
+
+      @include at-query($breakpoint-large) {
+        padding-right: 46px;
       }
     }
 
@@ -1289,12 +1293,14 @@ $filter-height: 120px;
         .SwatchBrowser__SwatchName {
           flex: 0 0 51%;
           font-size: 20px;
+          line-height: 18px;
           text-align: left;
         }
 
         .SwatchBrowser__SwatchSubName {
           flex: 0 0 51%;
           font-size: 14px;
+          letter-spacing: .05em;
           text-align: left;
         }
 
@@ -1321,6 +1327,7 @@ $filter-height: 120px;
 
       @include at-query($breakpoint-small) {
         margin-top: 20px;
+        overflow-y: auto;
         padding: 0;
         width: 100%;
       }
@@ -1408,11 +1415,11 @@ $filter-height: 120px;
     }
 
     & > p {
-      margin: 20px 0 40px;
+      margin: 10px 0 15px;
     }
 
     @include at-query($breakpoint-small) {
-      padding: 0 15px;
+      padding: 0 15px 50px;
     }
   }
 
@@ -1420,7 +1427,8 @@ $filter-height: 120px;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 25px;
+    margin-top: 20px;
+    justify-content: flex-start;
 
     img {
       height: 20px;
@@ -1431,8 +1439,8 @@ $filter-height: 120px;
     & > span {
       align-items: center;
       display: flex;
-      flex: 1;
-      margin: 5px 40px 5px 0;
+      flex: 0 1 auto;
+      margin: 5px 43px 5px 0;
       white-space: nowrap;
     }
   }

@@ -100,7 +100,7 @@
                 <td>{{ swatch.stain_chart_data.stain_resistant_soil }}</td>
               </tr>
             </tbody>
-            <tfoot>
+            <tfoot v-if="!isMobile">
               <tr>
                 <td colspan="2">1 = Partial stain release</td>
                 <td colspan="3">3.5+ = Commercial passing score</td>
@@ -108,6 +108,11 @@
               </tr>
             </tfoot>
           </table>
+          <div v-if="isMobile">
+            <p>1 = Partial stain release</p>
+            <p>3.5+ = Commercial passing score</p>
+            <p>5 = Complete stain release</p>
+          </div>
         </div>
       </div>
     </div>
@@ -139,16 +144,26 @@
         </div>
       </div>
     </div>
+    <button
+      v-if="isMobile"
+      class="SwatchBrowser__Button SwatchBrowser__Button--Black"
+      @click.prevent="$emit('close')"
+    >BACK TO SWATCHES</button>
   </div>
 </template>
 
 <script>
 import LifestyleGrid from './CMSBlocks/LifestyleGrid.vue';
+import screenMonitor from '../mixins/screenMonitor';
 
 export default {
   components: {
     LifestyleGrid,
   },
+
+  mixins: [
+    screenMonitor,
+  ],
 
   props: {
     swatch: { type: Object, default: () => null },
@@ -197,9 +212,13 @@ export default {
     border-bottom: 2px solid #D4D0CA;
     flex: 1;
     font-family: $font-stack-avalon;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 0.125em;
     padding: 10px 0 15px 0;
+
+    @include at-query($breakpoint-large) {
+      font-size: 17px;
+    }
 
     &.is-active {
       border-bottom-color: #202020;
@@ -207,11 +226,31 @@ export default {
     }
   }
 
+  &__SwatchInfo .SwatchBrowser__Button {
+    border-radius: 0;
+    bottom: 0;
+    left: 0;
+    padding: 12px;
+    position: absolute;
+  }
+
+  .LifeStyleGrid__grid {
+    grid-auto-rows: initial;
+  }
+
+  .LifeStyleGrid__modal {
+    z-index: 1020;
+  }
+
+  .LifeStyleGrid__modal-product-title {
+    text-align: left;
+  }
+
   &__Specs {
     font-size: 15px;
 
     & > div {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
 
       &:first-child {
         margin-right: 50px;
@@ -224,10 +263,7 @@ export default {
 
     span {
       margin-right: 8px;
-    }
-
-    span, th {
-      font-weight: 500;
+      font-weight: 600;
     }
 
     table {
@@ -238,7 +274,8 @@ export default {
 
     th {
       font-size: 13px;
-      padding: 4px 0;
+      font-weight: 500;
+      padding: 4px 10px;
     }
 
     tbody {
@@ -281,6 +318,11 @@ export default {
           text-align: left;
         }
       }
+    }
+
+    p {
+      font-size: 12px;
+      margin: 5px 0;
     }
   }
 
