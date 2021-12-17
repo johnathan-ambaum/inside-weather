@@ -812,7 +812,7 @@ $filter-height: 120px;
 
       @include at-query($breakpoint-small) {
         width: 100vw;
-        z-index: 1010;
+        z-index: 1020;
 
         .SwatchBrowser__CartFooter {
           align-items: flex-end;
@@ -838,7 +838,7 @@ $filter-height: 120px;
     position: fixed;
     top: 0;
     width: 100vw;
-    z-index: 1000;
+    z-index: 1020;
   }
 
   &__Filters {
@@ -848,7 +848,7 @@ $filter-height: 120px;
     padding: 20px 20px 30px;
     position: sticky;
     top: $header-height;
-    z-index: 9999;
+    z-index: 1010;
 
     @include at-query($breakpoint-small) {
       top: 0;
@@ -1019,7 +1019,7 @@ $filter-height: 120px;
     margin-top: 15px;
     left: 0;
     min-width: 100%;
-    padding: 20px 30px;
+    padding: 20px 34px;
     position: absolute;
     top: 100%;
     width: max-content;
@@ -1451,8 +1451,12 @@ $filter-height: 120px;
     position: absolute;
     right: 10%;
     text-align: left;
-    width: 225px;
+    width: 150px;
     z-index: 10;
+
+    @include at-query($breakpoint-large) {
+      width: 225px;
+    }
 
     &::before {
       border: solid transparent;
@@ -1577,7 +1581,7 @@ $filter-height: 120px;
           right: 0;
           top: 0;
           width: 480px;
-          z-index: 9999;
+          z-index: 1020;
 
           .SwatchBrowser__CartHeader {
             flex-wrap: wrap;
