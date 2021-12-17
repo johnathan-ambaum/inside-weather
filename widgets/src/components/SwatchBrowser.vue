@@ -581,10 +581,8 @@ export default {
     },
 
     closeFromCart() {
-      if (this.isMobile) {
-        this.showCart = false;
-        this.showOrderForm = true;
-      }
+      this.showOrderForm = this.isMobile;
+      this.showCart = !this.isMobile;
     },
 
     submitFromCart() {
@@ -807,10 +805,6 @@ $filter-height: 120px;
       @include at-query($breakpoint-small) {
         width: 100vw;
         z-index: 1010;
-
-        // &:not(.full) {
-        //   height: 56px;
-        // }
 
         .SwatchBrowser__CartFooter {
           align-items: flex-end;
@@ -1551,17 +1545,8 @@ $filter-height: 120px;
             }
 
             .CloseButton {
-              align-items: center;
               display: flex;
-              flex-direction: column;
-              justify-content: center;
               order: -1;
-
-              span {
-                margin: 10px 0 0;
-                max-width: 60px;
-                text-align: center;
-              }
             }
           }
 
@@ -1605,16 +1590,18 @@ $filter-height: 120px;
       }
 
       h2 {
+        align-items: center;
+        display: flex;
         font-size: 20px;
         font-weight: 600;
         margin: 0;
-      }
 
-      span {
-        font-family: $font-stack-roboto;
-        font-size: .7em;
-        font-weight: 400;
-        margin-left: 15px;
+        span {
+          font-family: $font-stack-avalon;
+          font-size: 14px;
+          font-weight: 400;
+          margin-left: 15px;
+        }
       }
 
       .CloseButton {
