@@ -40,6 +40,7 @@
             <div
               v-for="option in filter.options"
               :key="option.value"
+              :class="filterRowClasses(option)"
               class="SwatchBrowser__DialogRow"
             >
               <input
@@ -48,6 +49,7 @@
                 type="checkbox"
                 :value="option.value"
                 :checked="isChecked(filter.key, option.value)"
+                :class="{ checked: isChecked(filter.key, option.value) }"
               >
               <label
                 :for="`filter-${filter.key}-${option.value}`"
@@ -395,6 +397,12 @@ export default {
 
     purify() {
       return html => DOMPurify.sanitize(html);
+    },
+
+    filterRowClasses() {
+      return option => ({
+        top: option.description,
+      });
     },
 
     sortDisplay() {
@@ -840,7 +848,7 @@ $filter-height: 120px;
     padding: 20px 20px 30px;
     position: sticky;
     top: $header-height;
-    z-index: 10;
+    z-index: 9999;
 
     @include at-query($breakpoint-small) {
       top: 0;
@@ -866,6 +874,8 @@ $filter-height: 120px;
 
         .SwatchBrowser__Pill {
           font-weight: 600;
+          max-width: 110px;
+          text-align: center;
         }
       }
 
@@ -1032,19 +1042,55 @@ $filter-height: 120px;
     align-items: center;
     display: flex;
     padding: 10px 0;
+    position: relative;
+
+    input[type="checkbox"] {
+      background: #fff;
+      border: 1px solid #202020;
+      border-radius: 8px;
+      color: #202020;
+
+      &:checked,
+      &.checked {
+        background: #202020;
+        color: #fff;
+      }
+
+      &:checked + label::before,
+      &.checked + label::before {
+        color: white;
+        content: "✓";
+        display: block;
+        font-size: 30px;
+        left: 3px;
+        line-height: 1;
+        position: absolute;
+        top: 10px;
+      }
+    }
+
+    &.top {
+      align-items: flex-start;
+      margin-top: 10px;
+
+      input {
+        margin-top: 2px;
+      }
+    }
 
     label {
       align-items: center;
       display: flex;
+      font-size: 15px;
+      font-weight: 500;
       margin: 0 0 0 15px;
-      font-weight: 600;
 
       &.has-description {
         flex-wrap: wrap;
       }
 
       &.active {
-        font-weight: 700;
+        font-weight: 600;
       }
 
       p {
@@ -1053,6 +1099,7 @@ $filter-height: 120px;
         font-size: 1em;
         font-weight: 500;
         margin: 5px 0 0;
+        white-space: normal;
       }
     }
 

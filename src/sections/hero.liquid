@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: {{ section.settings.height }}px;
+    min-height: 320px;
     position: static;
   }
   .background-media-text__wrapper {
@@ -18,19 +18,23 @@
   .background-media-text--{{ section.id }} .rte p {
     font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
     font-weight: 600;
+    margin-left: 15px;
+    margin-right: 15px;
   }
   .background-media-text--{{ section.id }} .subtitle {
     font-size: 13px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin: 0 40px 15px;
   }
   .background-media-text--{{ section.id }} .h3 {
     font-size: 32px;
-    margin-bottom: 30px;
+    margin: 0 15px 30px;
   }
 
   @media only screen and (min-width: 1025px) {
+    .background-media-text--{{ section.id }} {
+      min-height: {{ section.settings.height }}px;
+    }
+
     .background-media-text--{{ section.id }} .h3 {
       font-size: 50px;
       margin-bottom: 20px;
@@ -40,6 +44,7 @@
     .background-media-text--{{ section.id }} .rte p {
       font-size: 18px;
       font-weight: 500;
+      letter-spacing: .04em;
     }
   }
 </style>
