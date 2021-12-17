@@ -1415,7 +1415,8 @@ $filter-height: 120px;
     }
 
     & > p {
-      margin: 10px 0 15px;
+      font-size: 15px;
+      margin: 15px 0;
     }
 
     @include at-query($breakpoint-small) {
