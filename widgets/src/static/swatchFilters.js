@@ -2,6 +2,7 @@ export const filters = [
   {
     key: 'upholstery_family',
     label: 'UPHOLSTERY FAMILY',
+    isArray: true,
     options: [
       { value: 'Velvet & Chenille', display: 'Velvet & Chenille' },
       { value: 'Vegan Leather & Suede', display: 'Vegan Leather & Suede' },
@@ -13,6 +14,7 @@ export const filters = [
   {
     key: 'features',
     label: 'MATERIAL FEATURES',
+    isArray: false,
     options: [
       {
         value: 'pet_friendly',
@@ -43,6 +45,7 @@ export const filters = [
   {
     key: 'color_family',
     label: 'COLOR',
+    isArray: true,
     options: [
       { value: 'Beiges | Creams | Whites', display: 'Beiges, Creams, Whites', color: '#D9CFC2' },
       { value: 'Browns | Tans', display: 'Browns, Tans', color: '#A87A4A' },
@@ -60,6 +63,7 @@ export const filters = [
   {
     key: 'design_style',
     label: 'DESIGN STYLE',
+    isArray: true,
     options: [
       {
         value: 'botanical',

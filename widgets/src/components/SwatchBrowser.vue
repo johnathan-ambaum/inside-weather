@@ -434,6 +434,10 @@ export default {
               if (typeof swatch[value] !== 'undefined' && !!swatch[value] === swatch[value]) {
                 return swatch[value];
               }
+              const { isArray } = this.swatchFilters.find(item => item.key === key);
+              if (isArray && swatch[key] && swatch[key].length) {
+                return swatch[key].includes(value);
+              }
               return swatch[key] === value;
             })
           ))
