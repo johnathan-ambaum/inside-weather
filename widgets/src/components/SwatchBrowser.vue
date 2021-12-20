@@ -1069,6 +1069,10 @@ $filter-height: 120px;
         left: 3px;
         line-height: 1;
         position: absolute;
+        top: auto;
+      }
+
+      &.checked + label.has-description::before {
         top: 10px;
       }
     }
