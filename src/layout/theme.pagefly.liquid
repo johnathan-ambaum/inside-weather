@@ -96,6 +96,18 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
     }];
     const pt = getCookie('pt');
     if(pt){dataLayer.push({'pt': pt})}
+
+    dataLayer.push({client_ip_address: null});//need to get this somehow
+    dataLayer.push({current_url: "{{request.path}}" });
+    dataLayer.push({user_agent: navigator.userAgent });
+
+    {% if customer %}
+      dataLayer.push({SHA256_email: "{{ customer.email | sha256 }}" })
+    {% else %}
+      dataLayer.push({SHA256_email: null})
+    {% endif %}
+
+
   </script>
   {%- if template.name == 'product' -%}
     <script>
