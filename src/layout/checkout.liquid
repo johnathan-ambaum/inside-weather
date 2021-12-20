@@ -51,7 +51,8 @@
         totalPrice: {{ checkout.total_price | divided_by: 100 | json }},
         cartCount: {{ checkout.line_items.size }},
         productIds: {{ checkout.line_items | map: 'sku' | json }},
-        customerEmail: {{ customer.email | json }}
+        customerEmail: {{ customer.email | json }},
+        SHA256_email: "{{ customer.email | sha256 }}"
       }];
 
       var checkoutStep = null;
@@ -201,7 +202,7 @@
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
 
-    {% include 'hide-catch-pay' %}
+    {% include 'catch-pay' %}
 
     <style>
 
@@ -458,6 +459,9 @@
       *{
         font-family: Avalon !important;
       }
+      .product__description__property:not(.loaded) {
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -687,8 +691,16 @@
                   const parentNode = lineItemElement.querySelector('.product__description');
                   parentNode.insertBefore(propertyElement, parentNode.lastChild);
                 }
+                propertyElement.classList.add('loaded');
               });
             });
+        }
+
+        function genericizeTrackingLabel() {
+          const label = document.querySelector('.tracking-info__number > strong');
+          if (label) {
+            label.innerHTML = 'Tracking Number';
+          }
         }
 
         document.addEventListener('page:load', function () {
@@ -696,12 +708,14 @@
           hideEmailProperties();
           hideZeroDiscount();
           updateLeadTimes();
+          genericizeTrackingLabel();
         });
         document.addEventListener('page:change', function () {
           hideShippingStep();
           hideEmailProperties();
           hideZeroDiscount();
           updateLeadTimes();
+          genericizeTrackingLabel();
         });
       })();
     </script>
