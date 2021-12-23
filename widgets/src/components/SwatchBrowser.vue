@@ -1,6 +1,9 @@
 <template>
   <div class="SwatchBrowser">
-    <div class="SwatchBrowser__Filters">
+    <div
+      ref="filters"
+      class="SwatchBrowser__Filters"
+    >
       <div
         v-if="isLargeMobile"
         class="SwatchBrowser__FilterGroup"
@@ -555,6 +558,13 @@ export default {
           if (this.$refs.swatches[i].getBoundingClientRect().left < 100) {
             const bookendIndex = i === index ? i + 1 : i;
             this.$refs.swatches[bookendIndex].classList.add('bookend');
+            const { top } = this.$refs.swatches[i].getBoundingClientRect();
+            const headerHeight = document.querySelector('.ambaum__header').getBoundingClientRect().height;
+            const filterHeight = this.$refs.filters.getBoundingClientRect().height;
+            window.scrollTo({
+              top: window.pageYOffset + top - headerHeight - filterHeight - 80,
+              behavior: 'smooth',
+            });
             break;
           }
         }
