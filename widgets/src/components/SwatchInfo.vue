@@ -29,31 +29,29 @@
       >
         <span v-if="swatch.commercial">
           <img
-            src="https://cdn.insideweather.com/icons/commercial_ico@2x.png"
+            src="https://cdn.insideweather.com/icons/commercial-ico_v2.png"
             alt="Commercial icon"
-            style="width: 20px;"
           >
           Commercial
         </span>
         <span v-if="swatch.pet_friendly">
           <img
-            src="https://cdn.insideweather.com/icons/pet-friendly_ico@2x.png"
+            src="https://cdn.insideweather.com/icons/pet-friendly-ico_v2.png"
             alt="Pet friendly icon"
           >
           Pet-Friendly
         </span>
         <span v-if="swatch.performance">
           <img
-            src="https://cdn.insideweather.com/icons/performance_ico@2x.png"
+            src="https://cdn.insideweather.com/icons/performance-ico_v2.png"
             alt="Performance icon"
           >
           Performance
         </span>
         <span v-if="swatch.water_resistant">
           <img
-            src="https://cdn.insideweather.com/icons/water-resistant_ico@2x.png"
+            src="https://cdn.insideweather.com/icons/liquid-ico_v2.png"
             alt="Water resistant icon"
-            style="width: 12px;"
           >
           Water Resistant
         </span>
@@ -247,7 +245,7 @@ export default {
   }
 
   &__Specs {
-    font-size: 15px;
+    font-size: 14px;
 
     & > div {
       margin-bottom: 15px;

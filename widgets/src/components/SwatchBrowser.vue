@@ -202,22 +202,22 @@
                   >
                     <img
                       v-if="swatch.commercial"
-                      src="https://cdn.insideweather.com/icons/commercial_ico@2x.png"
+                      src="https://cdn.insideweather.com/icons/commercial-ico_v2.png"
                       alt="Commercial icon"
                     >
                     <img
                       v-if="swatch.pet_friendly"
-                      src="https://cdn.insideweather.com/icons/pet-friendly_ico@2x.png"
+                      src="https://cdn.insideweather.com/icons/pet-friendly-ico_v2.png"
                       alt="Pet friendly icon"
                     >
                     <img
                       v-if="swatch.performance"
-                      src="https://cdn.insideweather.com/icons/performance_ico@2x.png"
+                      src="https://cdn.insideweather.com/icons/performance-ico_v2.png"
                       alt="Performance icon"
                     >
                     <img
                       v-if="swatch.water_resistant"
-                      src="https://cdn.insideweather.com/icons/water-resistant_ico@2x.png"
+                      src="https://cdn.insideweather.com/icons/liquid-ico_v2.png"
                       alt="Water resistant icon"
                     >
                   </div>
@@ -1087,17 +1087,17 @@ $breakpoint-desktop: 'min-width: 1146px';
       &:checked + label::before,
       &.checked + label::before {
         color: white;
-        content: "✓";
+        content: url(https://cdn.insideweather.com/icons/checkmark-wht_ico.png);
         display: block;
-        font-size: 30px;
-        left: 3px;
+        left: -1px;
         line-height: 1;
         position: absolute;
         top: auto;
+        transform: scale(50%);
       }
 
       &.checked + label.has-description::before {
-        top: 10px;
+        top: 12px;
       }
     }
 
