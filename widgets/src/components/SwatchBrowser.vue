@@ -513,7 +513,7 @@ export default {
     toggleFilter(key) {
       // allow multiple expanded filters on mobile, but only one at a time on desktop
       if (!this.isLargeMobile) {
-        this.openFilters = [key];
+        this.openFilters = this.isFilterOpen(key) ? [] : [key];
         return;
       }
 
@@ -885,6 +885,7 @@ $breakpoint-desktop: 'min-width: 1146px';
   }
 
   &__FilterGroup {
+    align-content: flex-start;
     display: flex;
     flex: 0 1 auto;
     flex-wrap: wrap;
@@ -1007,6 +1008,10 @@ $breakpoint-desktop: 'min-width: 1146px';
     text-transform: uppercase;
     width: 215px;
 
+    @include at-query($breakpoint-desktop) {
+      margin-bottom: 10px;
+    }
+
     .active & {
       font-weight: 600;
     }
@@ -1064,6 +1069,10 @@ $breakpoint-desktop: 'min-width: 1146px';
         }
       }
     }
+
+    @include at-query($breakpoint-desktop) {
+      max-width: 430px;
+    }
   }
 
   &__DialogRow {
@@ -1114,7 +1123,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       align-items: center;
       display: flex;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       margin: 0 0 0 15px;
 
       &.has-description {
@@ -1384,6 +1393,7 @@ $breakpoint-desktop: 'min-width: 1146px';
 
     @at-root {
       #{&}Name {
+        font-family: $font-stack-avalon;
         font-size: 11px;
         font-weight: 600;
         letter-spacing: .05em;
@@ -1450,7 +1460,7 @@ $breakpoint-desktop: 'min-width: 1146px';
     }
 
     & > p {
-      font-size: 15px;
+      font-size: 14px;
       margin: 15px 0;
     }
 
@@ -1463,6 +1473,7 @@ $breakpoint-desktop: 'min-width: 1146px';
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    font-size: 14px;
     margin-top: 20px;
     justify-content: flex-start;
 
@@ -1584,7 +1595,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       border-radius: 0;
       bottom: 0;
       flex-direction: row;
-      height: 90px;
+      height: 85px;
       justify-content: flex-end;
       left: 0;
       pointer-events: none;
@@ -1620,7 +1631,7 @@ $breakpoint-desktop: 'min-width: 1146px';
           border-radius: 0;
           height: 100%;
           max-height: 100vh;
-          padding: 0 40px;
+          padding: 0 20px 0 40px;
           position: fixed;
           right: 0;
           top: 0;
@@ -1655,6 +1666,7 @@ $breakpoint-desktop: 'min-width: 1146px';
             align-content: flex-start;
             align-items: flex-start;
             margin: 20px 0;
+            padding-right: 28px;
             overflow-y: auto;
             flex-wrap: wrap;
             align-content: flex-start;
@@ -1681,7 +1693,7 @@ $breakpoint-desktop: 'min-width: 1146px';
 
       @include at-query($breakpoint-desktop) {
         display: flex;
-        padding: 30px 30px 10px;
+        padding: 28px 0 10px 28px;
       }
 
       h2 {
@@ -1733,6 +1745,7 @@ $breakpoint-desktop: 'min-width: 1146px';
 
     #{&}Counter {
       display: flex;
+      font-family: $font-stack-avalon;
       font-size: 13px;
       font-weight: 500;
       justify-content: space-between;
@@ -1785,7 +1798,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       overflow-x: auto;
 
       & > .SwatchBrowser__CartCounter {
-        padding: 5px 0 5px 15px;
+        padding: 8px 0 5px 15px;
       }
 
       &.is-open {
@@ -1793,7 +1806,7 @@ $breakpoint-desktop: 'min-width: 1146px';
         top: 0;
         left: 0;
         background: white;
-        height: calc(100% - 90px);
+        height: calc(100% - 85px);
         width: 100%;
 
         & > .SwatchBrowser__CartCounter {
