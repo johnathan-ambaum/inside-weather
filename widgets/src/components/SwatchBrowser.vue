@@ -7,11 +7,11 @@
       >
         <button
           class="SwatchBrowser__Pill"
-          @click="openFilter = swatchFilters[0].key"
+          @click="toggleFilter(swatchFilters[0].key)"
         >FILTERS</button>
       </div>
       <div
-        :class="{ 'is-active': openFilter && openFilter !== 'sort' }"
+        :class="{ 'is-active': openFilters.filter(filter => filter !== 'sort').length > 0 }"
         class="SwatchBrowser__FilterGroup SwatchBrowser__FilterPanel"
       >
         <h3 class="SwatchBrowser__Label">FILTERS</h3>
@@ -23,18 +23,18 @@
         <div
           v-for="filter in swatchFilters"
           :key="filter.key"
-          :class="{ active: openFilter === filter.key }"
+          :class="{ active: isFilterOpen(filter.key) }"
           class="SwatchBrowser__Filter"
         >
           <button
             class="SwatchBrowser__Pill"
-            @click="openFilter = openFilter === filter.key ? '' : filter.key"
+            @click="toggleFilter(filter.key)"
           >
             {{ filter.label }}
             <img src="https://cdn.insideweather.com/icons/dropdown-down-arrow@2x.png" alt="Dropdown arrow">
           </button>
           <div
-            v-show="openFilter === filter.key"
+            v-show="isFilterOpen(filter.key)"
             class="SwatchBrowser__Dialog"
           >
             <div
@@ -84,18 +84,18 @@
       <div class="SwatchBrowser__FilterGroup">
         <h3 class="SwatchBrowser__Label">SORT</h3>
         <div
-          :class="{ active: openFilter === 'sort' }"
+          :class="{ active: isFilterOpen('sort') }"
           class="SwatchBrowser__Filter SwatchBrowser__Sort"
         >
           <button
             class="SwatchBrowser__Pill"
-            @click="openFilter = openFilter === 'sort' ? '' : 'sort'"
+            @click="toggleFilter('sort')"
           >
             {{ sortDisplay }}
             <img src="https://cdn.insideweather.com/icons/dropdown-down-arrow@2x.png" alt="Dropdown arrow">
           </button>
           <div
-            v-show="openFilter === 'sort'"
+            v-show="isFilterOpen('sort')"
             class="SwatchBrowser__Dialog"
           >
             <div
@@ -109,7 +109,7 @@
                 type="radio"
                 class="visually-hidden"
                 :value="option.value"
-                @change="openFilter = ''"
+                @change="closeFilters"
               >
               <label
                 :for="`sortBy-${option.value}`"
@@ -122,7 +122,7 @@
       </div>
     </div>
     <div
-      :style="{ opacity: openFilter === '' ? 1 : 0.6 }"
+      :style="{ opacity: !openFilters.length ? 1 : 0.6 }"
       class="SwatchBrowser__Body"
     >
       <div
@@ -370,7 +370,7 @@ export default {
     return {
       swatchFilters: filters,
       sortOptions,
-      openFilter: '',
+      openFilters: [],
       cart: [],
       activeSwatch: null,
       relatedProducts: [],
@@ -397,6 +397,10 @@ export default {
 
     purify() {
       return html => DOMPurify.sanitize(html);
+    },
+
+    isFilterOpen() {
+      return key => this.openFilters.includes(key);
     },
 
     filterRowClasses() {
@@ -460,16 +464,16 @@ export default {
   },
 
   watch: {
-    openFilter(newValue) {
+    openFilters(newValue) {
       const bindCloseEvents = (e) => {
         const clickedOutside = e.type === 'click' && !e.target.closest('.SwatchBrowser__Dialog') && !e.target.closest('.SwatchBrowser__Pill');
         const pressedEscape = e.type === 'keydown' && e.keyCode === 27;
         if (clickedOutside || pressedEscape) {
-          this.openFilter = '';
+          this.openFilters = [];
         }
       };
 
-      if (newValue) {
+      if (newValue.length) {
         document.body.addEventListener('click', bindCloseEvents);
         window.addEventListener('keydown', bindCloseEvents);
       } else {
@@ -509,6 +513,29 @@ export default {
     ...mapActions([
       'pullSwatches',
     ]),
+
+    toggleFilter(key) {
+      // allow multiple expanded filters on mobile, but only one at a time on desktop
+      if (!this.isLargeMobile) {
+        this.openFilters = [key];
+        return;
+      }
+
+      const index = this.openFilters.findIndex(item => item === key);
+      if (index === -1) {
+        this.openFilters.push(key);
+        return;
+      }
+      this.openFilters.splice(index, 1);
+      // if all filters closed on mobile, keep a dummy open filter to prevent filter overlay from closing
+      if (!this.openFilters.length) {
+        this.openFilters = [''];
+      }
+    },
+
+    closeFilters() {
+      this.openFilters = [];
+    },
 
     clearFilters() {
       this.appliedFilters = {
