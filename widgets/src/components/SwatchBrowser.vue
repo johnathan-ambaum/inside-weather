@@ -130,20 +130,15 @@
         :class="mainClasses"
         class="SwatchBrowser__Main"
       >
-        <transition
-          enter-active-class="animated fadeInRight"
-          leave-active-class="animated fadeOutRight"
-        >
-          <swatches-order-form
-            v-show="showOrderForm"
-            :cart="cart"
-            :is-mobile="isLargeMobile"
-            :is-submitting="isSubmitting"
-            :completed="completed"
-            class="SwatchBrowser__Form"
-            @close="showOrderForm = false"
-          />
-        </transition>
+        <swatches-order-form
+          v-show="showOrderForm"
+          :cart="cart"
+          :is-mobile="isLargeMobile"
+          :is-submitting="isSubmitting"
+          :completed="completed"
+          class="SwatchBrowser__Form"
+          @close="showOrderForm = false"
+        />
         <div class="SwatchBrowser__Browse">
           <div
             ref="swatchContainer"
