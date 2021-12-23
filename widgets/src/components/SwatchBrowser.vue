@@ -2,7 +2,7 @@
   <div class="SwatchBrowser">
     <div class="SwatchBrowser__Filters">
       <div
-        v-if="isMobile"
+        v-if="isLargeMobile"
         class="SwatchBrowser__FilterGroup"
       >
         <button
@@ -16,7 +16,7 @@
       >
         <h3 class="SwatchBrowser__Label">FILTERS</h3>
         <close-button
-          v-if="isMobile"
+          v-if="isLargeMobile"
           :size="20"
           @click.native.prevent=""
         />
@@ -137,7 +137,7 @@
           <swatches-order-form
             v-show="showOrderForm"
             :cart="cart"
-            :is-mobile="isMobile"
+            :is-mobile="isLargeMobile"
             :is-submitting="isSubmitting"
             :completed="completed"
             class="SwatchBrowser__Form"
@@ -239,16 +239,12 @@
                     Oops! You already have {{ maxSwatches }} swatches in your cart!
                   </div>
                 </div>
-                <transition
-                  enter-active-class="animated fadeInRight"
-                >
-                  <swatch-info
-                    v-if="infoActive(swatch.variant_id)"
-                    :swatch="activeSwatch"
-                    :related-products="relatedProducts"
-                    @close="toggleInfo(swatch.variant_id, index)"
-                  />
-                </transition>
+                <swatch-info
+                  v-if="infoActive(swatch.variant_id)"
+                  :swatch="activeSwatch"
+                  :related-products="relatedProducts"
+                  @close="toggleInfo(swatch.variant_id, index)"
+                />
               </div>
             </div>
           </div>
@@ -264,7 +260,7 @@
         >
           <div
             v-show="!showOrderForm || showCart"
-            :class="{ 'is-open': isMobile && showOrderForm && showCart }"
+            :class="{ 'is-open': isLargeMobile && showOrderForm && showCart }"
             class="SwatchBrowser__CartBody"
           >
             <div class="SwatchBrowser__CartHeader">
@@ -273,7 +269,7 @@
                 <span>(Choose up to 10)</span>
               </h2>
               <close-button
-                :size="isMobile ? 20 : 24"
+                :size="isLargeMobile ? 20 : 24"
                 label="BACK TO SWATCHES"
                 @click.native="closeFromCart"
               />
@@ -305,7 +301,7 @@
               {{ cart.length }}/{{ maxSwatches }}
             </div>
             <button
-              v-if="isMobile && !showCart && showOrderForm"
+              v-if="isLargeMobile && !showCart && showOrderForm"
               class="SwatchBrowser__FooterLink"
               @click.prevent="openCart"
             >VIEW YOUR ORDER</button>
@@ -316,14 +312,14 @@
             @click.prevent="openCart"
           >ORDER NOW</button>
           <button
-            v-show="(showCart && !showOrderForm) || (isMobile && showOrderForm && !showCart)"
+            v-show="(showCart && !showOrderForm) || (isLargeMobile && showOrderForm && !showCart)"
             :disabled="isSubmitting"
             :class="{ 'btn--loading': isSubmitting }"
             class="SwatchBrowser__OrderButton SwatchBrowser__Button SwatchBrowser__Button--Black"
             @click.prevent="submitFromCart"
           >{{ showOrderForm && !showCart ? 'SUBMIT SWATCH ORDER' : 'ORDER NOW' }}</button>
           <button
-            v-if="isMobile && showOrderForm && showCart"
+            v-if="isLargeMobile && showOrderForm && showCart"
             class="SwatchBrowser__Button SwatchBrowser__Button--Black"
             @click.prevent="closeFromCart"
           >BACK TO INFORMATION</button>
@@ -379,7 +375,7 @@ export default {
       showOrderForm: false,
       isSubmitting: false,
       completed: false,
-      showCart: !this.isMobile,
+      showCart: !this.isLargeMobile,
       appliedFilters: {
         upholstery_family: [],
         features: [],
@@ -499,7 +495,7 @@ export default {
 
   mounted() {
     this.$bus.$on('swatch-browser:focus-field', (e) => {
-      if (!this.isMobile) {
+      if (!this.isLargeMobile) {
         return;
       }
       setTimeout(() => {
@@ -620,8 +616,8 @@ export default {
     },
 
     closeFromCart() {
-      this.showOrderForm = this.isMobile;
-      this.showCart = !this.isMobile;
+      this.showOrderForm = this.isLargeMobile;
+      this.showCart = !this.isLargeMobile;
     },
 
     submitFromCart() {
@@ -629,7 +625,7 @@ export default {
         this.startOrder();
         return;
       }
-      if (this.isMobile && this.showCart) {
+      if (this.isLargeMobile && this.showCart) {
         this.showCart = false;
         return;
       }
@@ -641,7 +637,7 @@ export default {
         return;
       }
       this.showOrderForm = true;
-      if (this.isMobile) {
+      if (this.isLargeMobile) {
         this.showCart = false;
       }
     },
@@ -654,9 +650,11 @@ export default {
 @import '../scss/mixins';
 
 $filter-height: 120px;
+$breakpoint-mobile: 'max-width: 1145px';
+$breakpoint-desktop: 'min-width: 1146px';
 
 .template-page-swatches {
-  @include at-query($breakpoint-small) {
+  @include at-query($breakpoint-mobile) {
     .main-content {
       position: relative;
       z-index: 1001;
@@ -678,7 +676,7 @@ $filter-height: 120px;
     padding: 0 10px;
     transition: opacity .2s linear;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       margin: 70px 0;
       padding: 0 40px;
     }
@@ -724,7 +722,7 @@ $filter-height: 120px;
       padding: 36px;
     }
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       display: flex;
       margin: 0;
       padding: 48px 20px 50px;
@@ -748,7 +746,7 @@ $filter-height: 120px;
         line-height: 34px;
       }
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         font-size: 28px;
       }
     }
@@ -841,7 +839,7 @@ $filter-height: 120px;
 
     &.order-form-active + .SwatchBrowser__Cart {
 
-      @include at-query($breakpoint-small) {
+      @include at-query($breakpoint-mobile) {
         width: 100vw;
         z-index: 1020;
 
@@ -881,7 +879,7 @@ $filter-height: 120px;
     top: $header-height;
     z-index: 1010;
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       top: 0;
     }
   }
@@ -896,8 +894,7 @@ $filter-height: 120px;
       margin-bottom: 8px;
     }
 
-    @include at-query($breakpoint-small) {
-      flex: 1 1 auto;
+    @include at-query($breakpoint-mobile) {
       min-width: 0;
 
       &:first-child {
@@ -917,7 +914,7 @@ $filter-height: 120px;
   }
 
   &__FilterPanel {
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       align-content: flex-start;
       align-items: center;
       background: white;
@@ -960,7 +957,7 @@ $filter-height: 120px;
       width: 28px;
     }
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       margin-right: 0;
       width: 100%;
 
@@ -993,7 +990,7 @@ $filter-height: 120px;
       color: #202020;
     }
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       @at-root {
         .SwatchBrowser__FilterPanel & {
           padding-left: 10px;
@@ -1034,7 +1031,7 @@ $filter-height: 120px;
       }
     }
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       @at-root {
         .SwatchBrowser__FilterPanel & {
           border: none;
@@ -1056,7 +1053,7 @@ $filter-height: 120px;
     width: max-content;
     z-index: 10;
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       @at-root {
         .SwatchBrowser__FilterPanel & {
           border: none;
@@ -1173,7 +1170,7 @@ $filter-height: 120px;
     height: 100%;
     overflow-y: auto;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       margin-right: 40px;
     }
   }
@@ -1186,10 +1183,13 @@ $filter-height: 120px;
     grid-template-columns: 1fr 1fr;
     padding-bottom: 92px;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-mlarge) {
+      grid-template-columns: repeat(auto-fill, 245px);
+    }
+
+    @include at-query($breakpoint-desktop) {
       gap: 20px;
       grid-auto-flow: dense;
-      grid-template-columns: repeat(auto-fill,245px);
       margin-bottom: 40px;
       padding-bottom: 0;
     }
@@ -1235,7 +1235,7 @@ $filter-height: 120px;
     justify-content: center;
     text-align: center;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       flex: 0 0 225px;
     }
 
@@ -1256,7 +1256,7 @@ $filter-height: 120px;
       justify-content: flex-start;
       order: 1 !important;
 
-      @include at-query($breakpoint-small) {
+      @include at-query($breakpoint-mobile) {
         background: white;
         flex-direction: column;
         height: 100%;
@@ -1268,7 +1268,7 @@ $filter-height: 120px;
         z-index: 1020;
       }
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         padding-right: 46px;
       }
     }
@@ -1278,7 +1278,7 @@ $filter-height: 120px;
       right: 10px;
       top: 10px;
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         right: 15px;
         top: 10px;
       }
@@ -1304,7 +1304,7 @@ $filter-height: 120px;
       margin-top: 20px;
       padding: 0 15px;
 
-      @include at-query($breakpoint-small) {
+      @include at-query($breakpoint-mobile) {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -1360,14 +1360,14 @@ $filter-height: 120px;
       min-width: 0;
       padding: 0 15px;
 
-      @include at-query($breakpoint-small) {
+      @include at-query($breakpoint-mobile) {
         margin-top: 20px;
         overflow-y: auto;
         padding: 0;
         width: 100%;
       }
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         padding: 0 30px;
       }
     }
@@ -1377,7 +1377,7 @@ $filter-height: 120px;
       height: auto;
       width: 134px;
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         width: 200px;
       }
     }
@@ -1391,7 +1391,7 @@ $filter-height: 120px;
         margin-bottom: 5px;
         margin-top: 15px;
 
-        @include at-query($breakpoint-large) {
+        @include at-query($breakpoint-desktop) {
           font-size: 16px;
           line-height: 18px;
         }
@@ -1404,7 +1404,7 @@ $filter-height: 120px;
         text-transform: uppercase;
         white-space: nowrap;
 
-        @include at-query($breakpoint-large) {
+        @include at-query($breakpoint-desktop) {
           font-size: 12px;
         }
       }
@@ -1418,7 +1418,7 @@ $filter-height: 120px;
       line-height: 13px;
       margin: 15px 0;
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         font-size: 12px;
         letter-spacing: .025em;
         line-height: 16px;
@@ -1454,7 +1454,7 @@ $filter-height: 120px;
       margin: 15px 0;
     }
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       padding: 0 15px 50px;
     }
   }
@@ -1498,7 +1498,7 @@ $filter-height: 120px;
     width: 150px;
     z-index: 10;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       width: 225px;
     }
 
@@ -1531,14 +1531,14 @@ $filter-height: 120px;
     flex: 0 0 35px;
     width: 35px;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       flex-basis: 64px;
       width: 64px;
     }
   }
 
   .full &__LineImage {
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       flex-basis: 70px;
       width: 70px;
     }
@@ -1578,7 +1578,7 @@ $filter-height: 120px;
       }
     }
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       background: #F2F0ED;
       border: none;
       border-radius: 0;
@@ -1602,7 +1602,7 @@ $filter-height: 120px;
       }
     }
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       max-height: calc(100vh - #{$header-height + $filter-height + 20px});
       position: sticky;
       top: $header-height + $filter-height + 20px;
@@ -1679,7 +1679,7 @@ $filter-height: 120px;
       padding: 20px;
       pointer-events: all;
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         display: flex;
         padding: 30px 30px 10px;
       }
@@ -1700,7 +1700,7 @@ $filter-height: 120px;
       }
 
       .CloseButton {
-        @include at-query($breakpoint-large) {
+        @include at-query($breakpoint-desktop) {
           display: none;
         }
       }
@@ -1709,7 +1709,7 @@ $filter-height: 120px;
     #{&}Footer {
       pointer-events: all;
 
-      @include at-query($breakpoint-small) {
+      @include at-query($breakpoint-mobile) {
         align-items: center;
         display: flex;
         flex: 0 1 40%;
@@ -1722,7 +1722,7 @@ $filter-height: 120px;
         }
       }
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         border: 1px solid #e1deda;
         border-bottom-left-radius: 50px;
         border-bottom-right-radius: 50px;
@@ -1740,13 +1740,13 @@ $filter-height: 120px;
       line-height: 14px;
       padding: 15px;
 
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         font-size: 16px;
         padding: 10px 0 20px 0;
       }
 
       #{&}Label {
-        @include at-query($breakpoint-small) {
+        @include at-query($breakpoint-mobile) {
           display: none;
         }
       }
@@ -1779,7 +1779,7 @@ $filter-height: 120px;
     overflow: hidden;
     pointer-events: all;
 
-    @include at-query($breakpoint-small) {
+    @include at-query($breakpoint-mobile) {
       background: #F2F0ED;
       flex: 1 1 60%;
       overflow-x: auto;
@@ -1828,7 +1828,7 @@ $filter-height: 120px;
       }
     }
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       border: 1px solid #e1deda;
       border-bottom: none;
       border-top-left-radius: 50px;
@@ -1847,7 +1847,7 @@ $filter-height: 120px;
     padding: 0 15px;
     overflow-x: auto;
 
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       flex-wrap: wrap;
       min-height: 155px;
       overflow-y: auto;
@@ -1867,7 +1867,7 @@ $filter-height: 120px;
     @include at-query($breakpoint-mlarge) {
       padding: 36px;
     }
-    @include at-query($breakpoint-large) {
+    @include at-query($breakpoint-desktop) {
       display: block;
       margin: 0;
       padding: 48px 20px 50px;
@@ -1883,7 +1883,7 @@ $filter-height: 120px;
         font-size: 32px;
         line-height: 32px;
       }
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         font-size: 28px;
       }
     }
@@ -1900,7 +1900,7 @@ $filter-height: 120px;
     }
     img {
       display: block;
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         margin: 35px 0;
       }
     }
@@ -1937,7 +1937,7 @@ $filter-height: 120px;
         display: inline-block;
         padding: 12px 30px;
       }
-      @include at-query($breakpoint-large) {
+      @include at-query($breakpoint-desktop) {
         display: block;
         margin-top: 0;
         width: 100%;
@@ -1945,10 +1945,10 @@ $filter-height: 120px;
     }
     & > div {
       &:first-child {
-        @include at-query($breakpoint-small) {
+        @include at-query($breakpoint-mobile) {
           padding-right: 22px;
         }
-        @include at-query($breakpoint-large) {
+        @include at-query($breakpoint-desktop) {
           margin: 0 auto;
           max-width: 282px;
         }
@@ -1960,7 +1960,7 @@ $filter-height: 120px;
           flex: 0 0 45%;
           justify-content: flex-end;
         }
-        @include at-query($breakpoint-large) {
+        @include at-query($breakpoint-desktop) {
           display: inline-block;
         }
       }
