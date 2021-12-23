@@ -2,7 +2,6 @@ export const filters = [
   {
     key: 'upholstery_family',
     label: 'UPHOLSTERY FAMILY',
-    isArray: true,
     options: [
       { value: 'Velvet & Chenille', display: 'Velvet & Chenille' },
       { value: 'Vegan Leather & Suede', display: 'Vegan Leather & Suede' },
@@ -14,7 +13,6 @@ export const filters = [
   {
     key: 'features',
     label: 'MATERIAL FEATURES',
-    isArray: false,
     options: [
       {
         value: 'pet_friendly',
@@ -45,7 +43,6 @@ export const filters = [
   {
     key: 'color_family',
     label: 'COLOR',
-    isArray: true,
     options: [
       { value: 'Beiges | Creams | Whites', display: 'Beiges, Creams, Whites', color: '#D9CFC2' },
       { value: 'Browns | Tans', display: 'Browns, Tans', color: '#A87A4A' },
@@ -63,30 +60,29 @@ export const filters = [
   {
     key: 'design_style',
     label: 'DESIGN STYLE',
-    isArray: true,
     options: [
       {
-        value: 'botanical',
+        value: 'Botanical',
         display: 'Botanical',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/sweet-palm.png',
       },
       {
-        value: 'gemoetric',
+        value: 'Gemoetric',
         display: 'Geometric',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/glamorous-geometry.png',
       },
       {
-        value: 'southwest',
+        value: 'Southwest',
         display: 'Southwest',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/southwest-sunset.png',
       },
       {
-        value: 'watercolor',
-        display: 'Watercolor',
+        value: 'Watercolor&Ink',
+        display: 'Watercolor & Ink',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/pacific-waters.png',
       },
       {
-        value: 'abstract',
+        value: 'Abstract',
         display: 'Abstract',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/evening-abstraction.png',
       },
