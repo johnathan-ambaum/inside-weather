@@ -287,33 +287,11 @@ export default {
           return;
         }
 
-        if (matches === parameter) { // if the match object and the parameter are the same, respond normally by matching like parameters
-          if (existingSelections[parameter]) {
-            const foundAttribute = attributes.find(attribute => attribute.parameter === parameter);
-            const foundValue = value || foundAttribute.values.find((item) => item.value === existingSelections[parameter]);
-            if (foundValue) {
-              selectedOptions[parameter] = existingSelections[parameter];
-              return;
-            }
-
-            selectedOptions[parameter] = foundAttribute.values[0].value;
-            return;
-          }
-
-          const foundAttribute = attributes.find(attribute => attribute.parameter === parameter);
-          selectedOptions[parameter] = foundAttribute.values[0].value;
-          return;
+        const foundAttribute = attributes.find(attribute => attribute.parameter === matches);
+        const foundValue = foundAttribute.values.find((item) => item.value === existingSelections[matches]) || foundAttribute.values[0];
+        if (foundValue) {
+          selectedOptions[parameter] = foundValue.value;
         }
-
-        // if the match object and the parameter are not the same, match the specified parameters
-        if (existingSelections[matches]) {
-          selectedOptions[parameter] = existingSelections[matches];
-        }
-
-        // if this.selectedOptions[matchObj.matches] is not true, this indicates that the current product does not
-        // have a matching attribute compared to the one defined in the cms. ie admin user error.
-        // example: matches: "blueberry_sprinkles" on sofas
-        // if this happens we will return nothing
       });
 
       return selectedOptions;

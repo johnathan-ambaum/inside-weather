@@ -574,7 +574,7 @@ export default {
       const selected = this.swatches.find(swatch => swatch.variant_id === variantId);
       apiClient.getSwatchDetail(selected.name).then((swatch) => {
         this.activeSwatch = swatch;
-        this.buildRelatedProducts(swatch.related_products, { color_name: swatch.name }).then((products) => {
+        this.buildRelatedProducts(swatch.related_products, { color_name: swatch.parameter }).then((products) => {
           this.relatedProducts = products;
         });
       });
