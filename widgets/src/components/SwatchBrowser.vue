@@ -522,7 +522,7 @@ export default {
       }
       this.openFilters.splice(index, 1);
       // if all filters closed on mobile, keep a dummy open filter to prevent filter overlay from closing
-      if (!this.openFilters.length) {
+      if (!this.openFilters.length && key !== 'sort') {
         this.openFilters = [''];
       }
     },
