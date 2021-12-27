@@ -13,7 +13,7 @@
           <span>{{bannerText}}</span>
           <h2>{{bannerHeading}}</h2>
           <p>{{bannerDescription}}</p>
-          <link-button :btnText="buttonText" :linkTo="buttonLink" :bgBlack="true" :border="false" />
+          <link-button :btnText="buttonText" :linkTo="buttonLink" stroke-color="#202020" bg-color="white" :border="false" />
         </div>
       </div>
     </a>

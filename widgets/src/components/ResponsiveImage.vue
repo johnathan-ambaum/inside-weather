@@ -70,7 +70,7 @@ export default {
     imageClasses() {
       return {
         'ResponsiveImage--Loaded': this.loaded,
-        'ResponsiveImage--Loading': this.loading,
+        'ResponsiveImage--Loading': !!this.placeholderSrc && this.loading,
       };
     },
   },

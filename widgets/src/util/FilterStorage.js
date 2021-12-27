@@ -1,3 +1,5 @@
+import { getCookie } from './helpers';
+
 export default class FilterStorage {
   /**
    * Filters will be cached to localStorage, but if not yet cached must be pulled from the API.
@@ -63,6 +65,8 @@ export default class FilterStorage {
    * @param {String} category
    */
   static requestFilter(category) {
+    category = category.replace("Clearance ", "");
+
     const keyIncludesExpires = RegExp('^filters\.[^.]+\.expires$');
     const categoryTimestamps = [];
     Object.entries(localStorage).forEach(([key, value]) => {
@@ -80,11 +84,21 @@ export default class FilterStorage {
     const urlParams = new URLSearchParams(window.location.search);
     const version = urlParams.get('version');
     let filterEndpoint = `https://iw-content.herokuapp.com/api/v1/product/${category}`;
-    if (version) {
-      filterEndpoint += `?version=${version}`;
+
+    let queryParams = new URLSearchParams();
+    const pt = getCookie('pt');
+
+    if(pt){
+      queryParams.append('pt', pt);
     }
 
-    return fetch(filterEndpoint)
+    if (version) {
+      queryParams.append('version', version);
+    }
+
+    const hasQuery = Array.from(queryParams).length > 0;
+    const endpoint = hasQuery ? `${filterEndpoint}?${queryParams.toString()}` : filterEndpoint;
+    return fetch(endpoint)
       .then(response => response.json())
       .then((filters) => {
         FilterStorage.setItem(category, filters);

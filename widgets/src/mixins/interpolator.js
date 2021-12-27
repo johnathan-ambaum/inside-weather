@@ -63,15 +63,11 @@ export default {
       return Math.round(savings);
     },
 
-    fulfillmentTime() {
-      if (!this.filters || !this.filters.min_fulfillment_days) {
-        return null;
-      }
-
-      let min = this.filters.min_fulfillment_days;
-      let max = this.filters.max_fulfillment_days;
-      let selectedOptionsMin = [];
-      let selectedOptionsMax = [];
+    fulfillmentDays() {
+      const min = this.filters.min_fulfillment_days;
+      const max = this.filters.max_fulfillment_days;
+      const selectedOptionsMin = [0];
+      const selectedOptionsMax = [0];
 
       Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
         const attribute = this.attributes.find(item => item.parameter === parameter);
@@ -86,10 +82,23 @@ export default {
         selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
       });
 
-      let finalMin = min + Math.max(...selectedOptionsMin);
-      let finalMax = max + Math.max(...selectedOptionsMax);
+      const finalMin = min + Math.max(...selectedOptionsMin);
+      const finalMax = max + Math.max(...selectedOptionsMax);
 
-      return `${finalMin}-${finalMax} days`;
+      return {
+        minDays: finalMin,
+        maxDays: finalMax,
+      };
+    },
+
+    fulfillmentTime() {
+      if (!this.filters || !this.filters.min_fulfillment_days) {
+        return null;
+      }
+
+      const { minDays, maxDays } = this.fulfillmentDays;
+
+      return `${minDays}-${maxDays} days`;
     },
 
     emailFulfillmentTime() {
@@ -136,6 +145,10 @@ export default {
     },
 
     fullProduct() {
+      let image = null;
+      if (this.productImages.length) {
+        image = this.productImages[0].large || this.productImages[0].full;
+      }
       return {
         name: this.productName,
         handle: this.activeProduct.handle,
@@ -144,7 +157,7 @@ export default {
         price: this.productPrice,
         msrp: this.msrp,
         category: this.productType,
-        image: this.productImages.length ? this.productImages[0].large : null,
+        image,
       };
     },
   },
@@ -201,6 +214,64 @@ export default {
       });
 
       return content;
+    },
+
+    getFulfillmentTime(filters, selectedOptions, attributes) {
+      if (!filters || !filters.min_fulfillment_days) {
+        return null;
+      }
+
+      let min = filters.min_fulfillment_days;
+      let max = filters.max_fulfillment_days;
+      let selectedOptionsMin = [];
+      let selectedOptionsMax = [];
+
+      Object.entries(selectedOptions).forEach(([parameter, value]) => {
+        const attribute = attributes.find(item => item.parameter === parameter);
+        if (!attribute) {
+          return true;
+        }
+        const selected = attribute.values.find(item => item.value === value);
+        if (!selected) {
+          return true;
+        }
+        selectedOptionsMin.push(selected.min_fulfillment_days_markup || 0);
+        selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
+      });
+
+      let finalMin = min + Math.max(...selectedOptionsMin);
+      let finalMax = max + Math.max(...selectedOptionsMax);
+
+      return `${finalMin}-${finalMax} days`;
+    },
+
+    getEmailFulfillmentTime(filters, selectedOptions, attributes) {
+      if (!filters || !filters.email_min_fulfillment_days) {
+        return null;
+      }
+
+      let min = filters.email_min_fulfillment_days;
+      let max = filters.email_max_fulfillment_days;
+      let selectedOptionsMin = [];
+      let selectedOptionsMax = [];
+
+      Object.entries(selectedOptions).forEach(([parameter, value]) => {
+        const attribute = attributes.find(item => item.parameter === parameter);
+        if (!attribute) {
+          return true;
+        }
+        const selected = attribute.values.find(item => item.value === value);
+        if (!selected) {
+          return true;
+        }
+        selectedOptionsMin.push(selected.min_fulfillment_days_markup || 0);
+        selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
+      });
+
+      let finalMin = min + Math.max(...selectedOptionsMin);
+      let finalMax = max + Math.max(...selectedOptionsMax);
+
+      return `${finalMin}-${finalMax} business days`;
     },
   },
 };

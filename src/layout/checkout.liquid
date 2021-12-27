@@ -51,7 +51,8 @@
         totalPrice: {{ checkout.total_price | divided_by: 100 | json }},
         cartCount: {{ checkout.line_items.size }},
         productIds: {{ checkout.line_items | map: 'sku' | json }},
-        customerEmail: {{ customer.email | json }}
+        customerEmail: {{ customer.email | json }},
+        SHA256_email: "{{ customer.email | sha256 }}"
       }];
 
       var checkoutStep = null;
@@ -68,6 +69,7 @@
       if (checkoutStep !== null) {
         dataLayer.push({
           event: 'checkout',
+          eventId: Math.random().toString(16).slice(2),
           ecommerce: {
             checkout: {
               actionField: { step: checkoutStep },
@@ -92,6 +94,7 @@
           dataLayer.push({
             customerId: {{ customer.id | json }},
             orderId: {{ checkout.order_number | json }},
+            eventId: Math.random().toString(16).slice(2),
             ecommerce: {
               purchase: {
                 actionField: {
@@ -192,11 +195,14 @@
       }());
     </script>
     <!-- End VWO Async Smartcode -->
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NTaKMV&module=CONSENT_AT_CHECKOUT"></script>
 
     {{ content_for_header }}
 
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
+
+    {% include 'catch-pay' %}
 
     <style>
 
@@ -453,6 +459,9 @@
       *{
         font-family: Avalon !important;
       }
+      .product__description__property:not(.loaded) {
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -492,7 +501,7 @@
             {{ content_for_logo }}
           </div>
           <div class="sidebar__content">
-            {{ content_for_order_summary | replace: 'Calculated at next step', 'Free' | remove: 'Shipping costs' }}
+            {{ content_for_order_summary }}
           </div>
         </div>
       </div>
@@ -520,7 +529,7 @@
             <img alt="Free Shipping" src="https://cdn.insideweather.com/cart-checkout/free-ship-ico.png">
           </div>
           <div class="checkout__custom-content-icon-text">
-            FREE SHIPPING
+            QUICK SHIP CUSTOM
           </div>
         </div>
         <div class="checkout__custom-content-icon-row flex-end">
@@ -541,6 +550,14 @@
     {{ tracking_code }}
     <script>
       $('.order-summary__sections').append($('.checkout__custom-content'));
+    </script>
+    <script>
+      if (window.location.href.indexOf('/thank_you') !== -1) {
+        if(Shopify.Checkout.step && Shopify.Checkout.page){
+          console.log('checkout first time activated');
+          dataLayer.push({'event': 'CheckoutFirstTimeAccessed'});
+        }
+      }
     </script>
     <script>
       if(document.title.includes("Inventory issues")){
@@ -592,22 +609,113 @@
         }
 
         function hideEmailProperties() {
-          var lineItemProperties = document.querySelectorAll('.order-summary__section__content .product__description__property');
-          lineItemProperties.forEach(function (item) {
-            if (item.innerHTML.includes('User Fulfillment Display')) {
-              item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
-            } else {
-              item.remove();
-            }
+          const lineItems = document.querySelectorAll('.order-summary__section__content .product__description');
+          lineItems.forEach((line) => {
+            const properties = Array.prototype.slice.call(line.querySelectorAll('.product__description__property'));
+            const hasCustomMade = properties.some(el => el.innerHTML.includes('Custom Made'));
+            properties.forEach((item) => {
+              if (!hasCustomMade && item.innerHTML.includes('User Fulfillment Display')) {
+                item.innerHTML = item.innerHTML.replace('User Fulfillment Display', 'Estimated time to ship');
+              } else if (!item.innerHTML.includes('Custom Made') || item.innerHTML.includes('Business Days')) {
+                item.remove();
+              }
+            });
           });
         }
+
+        function hideZeroDiscount() {
+          const discountLine = document.querySelector('.total-line--reduction');
+
+          if (!discountLine) {
+            return;
+          }
+
+          const code = discountLine.querySelector('.reduction-code__text');
+
+          if (!code) {
+            return;
+          }
+
+          const totalCell = discountLine.querySelector('[data-checkout-discount-amount-target]');
+          let totalDiscount = parseInt(totalCell.dataset.checkoutDiscountAmountTarget);
+
+          if (totalDiscount > 0) {
+            return;
+          }
+
+          totalDiscount = 0;
+          const linePrices = document.querySelectorAll('[data-order-summary-section="line-items"] .product__price');
+          linePrices.forEach(function (el) {
+            let oldPrice = el.querySelector('del');
+            if (!oldPrice) {
+              return;
+            }
+            let newPrice = el.querySelector('span');
+            oldPrice = parseFloat(oldPrice.innerText.replace(/[^0-9\.]/g, ''));
+            newPrice = parseFloat(newPrice.innerText.replace(/[^0-9\.]/g, ''));
+            totalDiscount += oldPrice - newPrice;
+          });
+
+          if (totalDiscount > 0) {
+            const options = Math.floor(totalDiscount) === totalDiscount ? {} : { minimumFractionDigits: 2 };
+            totalCell.innerHTML = `<em>You Saved</em> $${totalDiscount.toLocaleString(undefined, options)}`;
+          } else {
+            totalCell.style.display = 'none';
+          }
+        }
+
+        function updateLeadTimes() {
+          const label = 'Estimated to Ship';
+          const propertyClass = 'product__description__property';
+
+          fetch('http://iw-orders-api.herokuapp.com/api/v1/shopify/fulfillment_update/{{ order.id }}')
+            .then(response => response.json())
+            .then(({ line_items: items }) => {
+              if (!items) {
+                return;
+              }
+
+              items.forEach((item) => {
+                const displayText = `${label}: ${item.commitment_date}`;
+                let lineItemElement = document.querySelector(`[data-order-summary-section="line-items"] [data-variant-id="${item.variant_id}"]`);
+                if (!lineItemElement) {
+                  return;
+                }
+                let propertyElement = lineItemElement.querySelector(`.${propertyClass}`);
+                if (propertyElement) {
+                  propertyElement.innerHTML = displayText;
+                } else {
+                  propertyElement = document.createElement('span');
+                  propertyElement.innerHTML = displayText;
+                  propertyElement.classList.add(propertyClass, 'order-summary__small-text');
+                  const parentNode = lineItemElement.querySelector('.product__description');
+                  parentNode.insertBefore(propertyElement, parentNode.lastChild);
+                }
+                propertyElement.classList.add('loaded');
+              });
+            });
+        }
+
+        function genericizeTrackingLabel() {
+          const label = document.querySelector('.tracking-info__number > strong');
+          if (label) {
+            label.innerHTML = 'Tracking Number';
+          }
+        }
+
         document.addEventListener('page:load', function () {
           hideShippingStep()
           hideEmailProperties();
+          hideZeroDiscount();
+          updateLeadTimes();
+          genericizeTrackingLabel();
         });
         document.addEventListener('page:change', function () {
           hideShippingStep();
           hideEmailProperties();
+          hideZeroDiscount();
+          updateLeadTimes();
+          genericizeTrackingLabel();
         });
       })();
     </script>

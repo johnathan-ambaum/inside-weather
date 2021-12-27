@@ -746,6 +746,7 @@
           "close_text": "",
           "enable_newsletter": true,
           "button_label": "",
+          "button_link": "",
           "enable_button": false
         }
       },
@@ -773,22 +774,22 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#aabcb9",
+          "background_color_1": "#10100f",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
           "font_color_2": "#ffffff",
           "font_color_3": "#202020",
           "text_range": 1,
-          "text_range_speed": 6,
-          "text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Savings Start NOW<\/a> | Shop Sustainably &amp; Save up to <strong>20% OFF<\/strong><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-earth-month-sale\" title=\"2021 Earth Month Sale\">Earth Month Sale! Shop Sustainably &amp; Save up to <strong>20% OFF<\/strong><\/a><\/p>",
+          "text_range_speed": 5,
+          "text_1": "<p><strong>The Winter Sale<\/strong> |  Up to 20% OFF sitewide with code <strong>WINTER<\/strong> | <a href=\"\/pages\/2021-winter-sale\" title=\"The Winter Sale\">SHOP NOW<\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2021-winter-sale\" title=\"The Winter Sale\"><strong>The Winter Sale<\/strong> |  Up to 20% OFF sitewide with code <strong>WINTER<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": true,
-          "promo_countdown_end_date": "04\/16\/2021"
+          "promo_countdown_enabled": false,
+          "promo_countdown_end_date": "12\/20\/2021"
         }
       },
       "giftcard-header": {
@@ -798,6 +799,14 @@
           "desktop_logo_width": 200,
           "mobile_logo_width": 140
         }
+      },
+      "ambaum-header": {
+        "type": "ambaum-header",
+        "settings": {}
+      },
+      "chat-launcher": {
+        "type": "chat-launcher",
+        "settings": {}
       }
     },
     "content_for_index": [

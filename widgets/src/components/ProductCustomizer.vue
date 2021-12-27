@@ -1,16 +1,25 @@
 <template>
   <div>
     <div v-if="!disabled" class="ProductCustomizer__DetailWrapper">
-      <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__FlagRow">
-        <div class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
-          {{ flag.title }}</div>
-        <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
+      <div class="ProductCustomizer__FlagRow">
+        <div v-if="isClearance" class="ProductCustomizer__Flag" :style="{ color: '#fff', background: '#202020' }">{{ clearanceFlag }}</div>
+        <div v-for="flag in flags" :key="flag.title" class="ProductCustomizer__Flag" :style="{ color: flag.titleColor, background: flag.titleBackground }">
+          <div>{{ flag.title }}</div>
+          <div class="ProductCustomizer__FlagBody" v-html="flag.body" />
+        </div>
       </div>
       <div class="ProductCustomizer__HeaderRow">
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
-            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
+          <span
+          class="stamped-product-reviews-badge stamped-main-badge"
+          :data-id="initialId"
+          :data-product-sku="initialHandle"
+          :data-product-title="productName"
+          :data-product-type="category"
+          style="display: block;">
+          {{ stampedBadge }}
+          </span>
         </div>
         <div v-if="isCustomer">
           <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
@@ -18,41 +27,51 @@
             <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
-        <div v-else>
+        <div v-else-if="!isClearance">
           <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
             data-ajax-customer-onboard="true">
             <font-awesome-icon :icon="favoriteIcon" />
           </span>
         </div>
       </div>
-      <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" :customizer-active="active"
+      <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" :customizer-active="active"
         :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
         <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
         <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
-        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ savings }}</span>
+        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ isClearance ? clearanceData.savings : savings }}</span>
         <info-popup v-if="!isDecor"
           text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
         </info-popup>
       </div>
+      <div v-if="isClearance" class="ProductCustomizer__clearance-condition">
+        Condition: <span>{{clearanceData.condition}}</span>
+      </div>
       <div class="ProductCustomizer__ShippingDays">
         <template v-if="isDecor">
-          FREE Shipping | Ships in
+          Ships in
+        </template>
+        <template v-else-if="!isClearance">
+          Quick Custom, Made in the USA<br>
+          Custom Made:
         </template>
         <template v-else>
-          FREE Shipping | Custom made in the USA<br>
+          Custom made in the USA<br>
           Estimated to ship in
         </template>
-        <info-popup v-if="hasFulfillmentMarkup" always-on-top
-          text="Heads up! We’re a bit backed up due to safety mandates in place in light of COVID-19. Please note this is an estimate but we’re workin’ around the clock (literally) to produce each custom piece!">
-          <span class="ProductCustomizer__ShippingDays--Delayed">{{ fulfillmentTime }}</span>
+
+        <info-popup v-if="hasFulfillmentMarkup && !isClearance" always-on-top
+          text="Heads up! We’re a bit backed up due to raw material shortages and safety mandates in place in light of the pandemic. This date is the current best estimate and we’re workin’ around the clock to produce each custom piece!">
+          <span class="ProductCustomizer__ShippingDays--Delayed">{{ customMadeTarget }}</span>
         </info-popup>
-        <span v-else>{{ fulfillmentTime }}</span>
+        <span v-else-if="isClearance"> {{ clearanceFulfillmentTime }} </span>
+        <span v-else>{{ customMadeTarget }}</span>
       </div>
-      <simple-customizer v-if="isDecor" />
-      <button v-else class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
-      <add-to-cart :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
+      <simple-customizer v-if="isDecor && !isClearance" />
+      <button v-else-if="!isClearance" class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
+      <add-to-cart v-if="!clearanceData.floorFound" :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
+      <a v-else :href="clearanceData.floorFoundUrl" rel="noreferrer" class="ProductCustomizer__floorfound-link">View Product on Floorfound</a>
       <p :data-amount="formattedProductPrice * 100" data-page-type="product" class="affirm-as-low-as" />
     </div>
     <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
@@ -62,14 +81,21 @@
       <div>
         <div class="ProductCustomizer__Name">
           {{ productName }}
-          <review-stars v-if="filters.review_count && filters.review_average" :review_count="filters.review_count"
-            :review_average="filters.review_average" review_link="#ReviewCarousel"></review-stars>
+          <span
+          class="stamped-product-reviews-badge stamped-main-badge"
+          :data-id="initialId"
+          :data-product-sku="initialHandle"
+          :data-product-title="productName"
+          :data-product-type="category"
+          style="display: block;">
+          {{ stampedBadge }}
+          </span>
         </div>
         <span v-if="!disabled" :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
           @click.stop.prevent="favoriteCurrentProduct">
           <font-awesome-icon :icon="favoriteIcon" />
         </span>
-        <product-detail-slider v-if="isMobile" :cylindo="useCylindo" cylindo-id="cylindo-main" />
+        <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" />
       </div>
       <div class="ProductCustomizer__404-content">
         <h2>{{ disabledInfo.disabled_title }}</h2>
@@ -81,7 +107,7 @@
       <hr>
       <inspiration-options :products="filters.featured_products || []" />
     </div>
-    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': useCylindo }"
+    <div v-if="!isDecor" :class="{ 'ProductCustomizer--Active': active, 'ProductCustomizer--Cylindo': use360Viewer }"
       class="ProductCustomizer">
       <div class="ProductCustomizer__NameOverlay">
         <div class="ProductCustomizer__Name">
@@ -92,7 +118,7 @@
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
-        <product-detail-slider :cylindo="useCylindo" :customizer-active="active" :favoriteIcon="favoriteIcon" />
+        <product-detail-slider :cylindo="use360Viewer" :customizer-active="active" :favoriteIcon="favoriteIcon" />
         <button v-if="!isMobile" class="ProductCustomizer__Close" @click.prevent="close(true)">
           Save Customization
           <span :class="historyLoading ? 'ProductCustomizer__loading' : 'ProductCustomizer__loading--hide' ">
@@ -162,6 +188,8 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import dayjs from 'dayjs';
+import dayjsBusinessDays from 'dayjs-business-days';
 import DOMPurify from 'dompurify';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
@@ -179,9 +207,10 @@ import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
-import ReviewStars from './ReviewStars.vue';
 import Loader from './Loader.vue';
+import TemplateBlock from './TemplateBlock.vue';
 
+dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
 
 export default {
@@ -197,8 +226,8 @@ export default {
     InspirationOptions,
     SwatchBrowser,
     PhotoshootModal,
-    ReviewStars,
-    Loader
+    Loader,
+    TemplateBlock
   },
 
   mixins: [
@@ -213,6 +242,11 @@ export default {
     initialHandle: { type: String, required: true },
     initialAttributes: { type: Object, required: true },
     initialQuantity: { type: Number, default: 1 },
+    metafields: {type: Object, required: true },
+    tags: { type: Array, default: () => ([]) },
+    shopifyProduct: {type: Object, required:true},
+    stampedBadge: { type: String },
+    initialId: { type: String }
   },
 
   data() {
@@ -258,12 +292,13 @@ export default {
           disabled_button_url: state.filters.disabled_button_url
         }
       },
-      cylindoViewers: state => state.cylindoViewers || []
+      cylindoViewers: state => state.cylindoViewers || [],
+      upsellProductsData: state => state.filters.upsell_products_data_v1 || [],
     }),
 
-    useCylindo() {
+    use360Viewer() {
       // double ! to cast truthy/falsy values to boolean
-      return !!this.filters.cylindo_sku;
+      return this.filters.configurator_type !== 'static_image' && !!this.filters.cylindo_sku;
     },
 
     inStock() {
@@ -280,6 +315,7 @@ export default {
     isOpen() {
       return panel => this.openPanel === panel;
     },
+
     visibleAttributes(){
       return this.attributes.filter((attribute) => attribute.hidden === false);
     },
@@ -307,14 +343,110 @@ export default {
 
       return ['fal', 'heart'];
     },
+
     formattedProductPrice(){
       if(!this.productPrice){return}
-      const floatPrice = this.productPrice.toFixed(2);
-      const endsIn0 = floatPrice % 1 == 0;
-      if(endsIn0){
-        return this.productPrice;
+
+      let price =  this.productPrice;
+      if(this.isClearance){
+        price = this.shopifyProduct.price/100;
       }
-      return parseFloat(this.productPrice.toFixed(2));
+
+      const isWholeNumber = price.toFixed(2) % 1 == 0;
+      if(isWholeNumber){
+        return price;
+      }
+
+      return price.toFixed(2);
+    },
+
+    isClearance(){
+      return this.category.toLowerCase().includes('clearance');
+    },
+
+    clearanceFlag() {
+      if (this.tags.includes('quickship')) {
+        return 'QUICK SHIP';
+      }
+
+      return 'CLEARANCE';
+    },
+
+    clearanceFulfillmentTime() {
+      if (!this.metafields.lead_times) {
+        return '2-3 Days';
+      }
+
+      return `${this.metafields.lead_times.low || 2}-${this.metafields.lead_times.high || 3} Days`;
+    },
+
+    clearanceData(){
+      if(!this.metafields.floorfound_data){return false}
+
+      return {
+        condition: this.metafields.condition,
+        floorFound: this.metafields.floorfound_data.floor_found,
+        floorFoundUrl: this.metafields.floorfound_data.floor_found_url,
+        savings: Math.ceil(this.msrp - this.shopifyProduct.price/100)
+      }
+    },
+
+    customMadeTarget() {
+      if (!this.filters || !Object.keys(this.selectedOptions).length) {
+        return null;
+      }
+
+      const { maxDays } = this.fulfillmentDays;
+
+      if (isNaN(maxDays)) {
+        return null;
+      }
+
+      const targetDate = dayjs().add(maxDays, 'day');
+      const targetMonth = targetDate.format('MMMM');
+      const targetDay = targetDate.date();
+
+      let targetRange;
+      if (targetDay <= 10) {
+        targetRange = 'Early';
+      } else if (targetDay <= 20) {
+        targetRange = 'Mid';
+      } else {
+        targetRange = 'End of';
+      }
+
+      return `${targetRange} ${targetMonth}`;
+    },
+
+    customMadeTargetBusiness() {
+      if (!this.filters || !Object.keys(this.selectedOptions).length) {
+        return null;
+      }
+
+      const { maxDays } = this.fulfillmentDays;
+
+      if (isNaN(maxDays)) {
+        return null;
+      }
+
+      const targetDate = dayjs().businessDaysAdd(maxDays);
+      const targetMonth = targetDate.format('MMMM');
+      const targetDay = targetDate.date();
+
+      let targetRange;
+      if (targetDay <= 10) {
+        targetRange = 'Early';
+      } else if (targetDay <= 20) {
+        targetRange = 'Mid';
+      } else {
+        targetRange = 'End of';
+      }
+
+      return `${targetRange} ${targetMonth}`;
+    },
+
+    hasUpsellProducts(){
+      return !!this.upsellProductsData.enable_upsell;
     }
   },
 
@@ -469,7 +601,16 @@ export default {
     };
     setupMulberry();
     this.setProductOnLoad();
-
+    const reloadStamped = (tries = 0) => {
+      if (typeof StampedFn === 'undefined' && tries < 10) {
+        setTimeout(() => {
+          reloadStamped(tries + 1);
+        }, 500);
+        return;
+      }
+      StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
+    };
+    reloadStamped();
   },
 
   methods: {
@@ -513,7 +654,7 @@ export default {
     },
 
     createProduct(refreshImages = true) {
-      if (this.useCylindo && refreshImages) {
+      if (this.use360Viewer && refreshImages) {
         this.getCylindoImage().then(() => {
           this.createProduct(false);
         });
@@ -662,7 +803,7 @@ export default {
     },
 
     getCylindoImageForFavorite(){
-      if (this.useCylindo) {
+      if (this.use360Viewer) {
         this.getCylindoImage().then(() => {
           this.toggleFavorite({
             customerId: this.customerId,
@@ -701,6 +842,13 @@ export default {
     },
 
     async addToCart(quantity, warrantySelected = false) {
+      if(this.hasUpsellProducts){
+        this.$bus.$emit('openUpsellModal', this.isClearance ? null : {
+          customMadeTarget: this.customMadeTarget,
+          customMadeTargetBusiness: this.customMadeTargetBusiness,
+        });
+      }
+
       this.addToCartProcessing = true;
 
       if (this.productCreationInProgress) {
@@ -729,6 +877,16 @@ export default {
         return;
       }
 
+      const properties = {
+        'Estimated time to ship': this.isClearance ? this.clearanceFulfillmentTime : this.emailFulfillmentTime,
+        'User Fulfillment Display': this.isClearance ? this.clearanceFulfillmentTime : this.fulfillmentTime,
+      };
+
+      if (!this.isClearance) {
+        properties['Custom Made'] = this.customMadeTarget;
+        properties['Custom Made Business Days'] = this.customMadeTargetBusiness;
+      }
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -738,10 +896,7 @@ export default {
         body: JSON.stringify({
           id: this.activeProduct.id,
           quantity,
-          properties: {
-            'Estimated time to ship': this.emailFulfillmentTime,
-            'User Fulfillment Display': this.fulfillmentTime,
-          },
+          properties,
         }),
       })
         .then((cart) => {
@@ -755,6 +910,8 @@ export default {
             // image: this.productImages[0].full,
             attributes: this.selectedOptions,
           }
+          addedAjaxProuct.openCartDrawer = !this.hasUpsellProducts;
+
           $('body').trigger(addedAjaxProuct);
           this.trackAddToCart(this.fullProduct);
         });
@@ -1582,6 +1739,7 @@ html.ProductCustomizer--Open {
     letter-spacing: 0.1em;
     color:#202020;
     z-index: 10;
+    width:100%;
   }
   &--Cylindo &__Close {
     @include at-query($breakpoint-large) {
@@ -1594,6 +1752,45 @@ html.ProductCustomizer--Open {
 
     &__Nav {
       bottom: 0;
+    }
+  }
+
+  &__floorfound-link{
+    font-family: $font-stack-avalon;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #202020;
+    border-radius:24px;
+    border:2px solid black;
+    width:100%;
+    display: block;
+    text-align: center;
+    padding: 10px;
+
+    &:hover{
+      background: #fff;
+      color: #202020;
+      text-decoration: none;
+    }
+  }
+
+  &__clearance-condition{
+    font-family: $font-stack-avalon;
+    font-size: 14px;
+    text-align: center;
+    margin-top:8px;
+    span{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    @include at-query($breakpoint-large) {
+      text-align: left;
+      margin-top: 15px;
+      margin-bottom: -15px;
     }
   }
 }
@@ -1637,4 +1834,34 @@ html.ProductCustomizer--Open {
 .ProductCustomizer__loading{
   display:block;
 }
+
+.fa-star-half-o:before,
+.fa-star-o:before,
+.fa-star:before,
+.stamped-fa-star-half-o:before,
+.stamped-fa-star-o:before,
+.stamped-fa-star:before {
+  font-size: 15px;
+  margin-right: -1px;
+}
+
+.stamped-badge{
+  display: flex;
+  align-items: center;
+  margin-left: -2px;
+}
+
+.stamped-badge-caption{
+  margin-left: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  @include at-query($breakpoint-large) {
+    margin-top: 4px;
+  }
+
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
 </style>

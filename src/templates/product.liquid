@@ -1,5 +1,6 @@
 {% section 'product-template' %}
 
+<script src="{{ 'product.js' | asset_url }}" defer></script>
 <script>
   // Override default values of shop.strings for each template.
   // Alternate product templates can change values of
@@ -46,7 +47,7 @@
   jQuery(function ($) {
     $('body').on('click', 'button.add-to-cart', function () {
       _learnq.push(['track', 'Added to Cart', klaviyoItem]);
-      window.dataLayer.push({'event': 'AddToCart'});
+      window.dataLayer.push({'event': 'AddToCart', eventId: Math.random().toString(16).slice(2)});
     });
   });
 </script>

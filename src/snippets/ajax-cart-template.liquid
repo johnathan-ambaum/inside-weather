@@ -17,22 +17,24 @@
                   {{#if variation}}
                     <span class="ajaxcart__product-meta">{{variation}}</span>
                   {{/if}}
-                  {{#properties}}
-                    {{#each this}}
-                      {{#if this}}
-                        {{#unlessEquals @key 'PARENT_SKU'}}
-                          {{#ifEquals @key 'User Fulfillment Display'}}
-                            <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
-                          {{/ifEquals}}
-                          {{#unlessEquals @key 'User Fulfillment Display'}}
-                            {{#unlessEquals @key 'Estimated time to ship'}}
+                  {{#each properties}}
+                    {{#if this}}
+                      {{#unless ../hasCustomMade}}
+                        {{#ifEquals @key 'User Fulfillment Display'}}
+                          <span class="ajaxcart__product-meta">Estimated time to ship: {{this}}</span>
+                        {{/ifEquals}}
+                      {{/unless}}
+                      {{#unlessEquals @key 'PARENT_SKU'}}
+                        {{#unlessEquals @key 'User Fulfillment Display'}}
+                          {{#unlessEquals @key 'Estimated time to ship'}}
+                            {{#unlessEquals @key 'Custom Made Business Days'}}
                               <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
                             {{/unlessEquals}}
                           {{/unlessEquals}}
                         {{/unlessEquals}}
-                      {{/if}}
-                    {{/each}}
-                  {{/properties}}
+                      {{/unlessEquals}}
+                    {{/if}}
+                  {{/each}}
                 </div>
                 <div class="grid grid--full display-table">
                   {{#unless isPhotoshoot }}
@@ -114,16 +116,10 @@
           </div>
         </div>
         <div class="grid grid--full">
-          <div class="grid__item two-thirds">
-            <p class="ajaxcart__shipping-label">Shipping</p>
+          <div class="grid__item one-half">
+            <p class="ajaxcart__tax-label">Shipping & Tax</p>
           </div>
-          <div class="grid__item one-third text-right ajaxcart__shipping-price"><span class="ajaxcart__shipping-price-saved">{{shippingPriceSaved}}</span>FREE</div>
-        </div>
-        <div class="grid grid--full">
-          <div class="grid__item one-third">
-            <p class="ajaxcart__tax-label">Tax</p>
-          </div>
-          <div class="grid__item two-thirds text-right ajaxcart__tax-price">Calculated at checkout</div>
+          <div class="grid__item one-half text-right ajaxcart__tax-price">Calculated at checkout</div>
         </div>
         {{#if totalCartDiscount}}
           <p class="ajaxcart__savings text-center">{{{totalCartDiscount}}}</p>

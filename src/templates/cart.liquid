@@ -58,10 +58,22 @@
                       {% assign property_size = item.properties | size %}
                       <div class='hulkapps-reminder' data-key='{{item.key}}'></div>
                       {% if property_size > 0 %}
+                        {%- assign has_custom_made = false -%}
+                        {%- for p in item.properties -%}
+                          {%- if p.first == 'Custom Made' -%}
+                            {%- assign has_custom_made = true -%}
+                            {%- break -%}
+                          {%- endif -%}
+                        {%- endfor -%}
                         {%- for p in item.properties -%}
                           {% if p.first == 'Estimated time to ship' or p.last == blank %}
                             {% continue %}
                           {% endif %}
+                          {%- if has_custom_made -%}
+                            {%- if p.first == 'User Fulfillment Display' or p.first == 'Custom Made Business Days' -%}
+                              {%- continue -%}
+                            {%- endif -%}
+                          {%- endif -%}
                           <li class="product-details__item product-details__item--property{%if property_size == 0%} hide{% endif %}" data-cart-item-property>
                             <span class="product-details__item-label" data-cart-item-property-name>
                               {% if p.first == 'User Fulfillment Display' %}

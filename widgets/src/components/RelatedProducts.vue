@@ -18,10 +18,11 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 import ApiClient from '../util/ApiClient';
 import FilterStorage from '../util/FilterStorage';
 import interpolator from '../mixins/interpolator';
+import { getStaticImageUrl, getViewerParameters } from '../util/cylindo';
 
 const apiClient = new ApiClient();
 
@@ -30,7 +31,7 @@ export default {
     ...mapState({
       filters: state => state.filters,
       activeProduct: state => state.activeProduct,
-      relatedProductsData: state => state.filters.new_related_products_data || [], //REMOVE new_ FOR PRODUCTION
+      relatedProductsData: state => state.filters.related_products_data_v3 || [],
       selectedOptions: state => state.selectedOptions
     })
   },
@@ -43,81 +44,123 @@ export default {
     interpolator
   ],
   methods:{
+    buildSelectedOptions(relatedProductAttributes, filterStorageAttributes){
+      const selectedOptions = {};
+      Object.entries(relatedProductAttributes).forEach(([parameter, matchObj]) => {
+        if(matchObj.value){//having a defined value overrules everything
+          selectedOptions[parameter] = matchObj.value;
+          return
+        }
+
+        if(matchObj.matches === parameter){// if the match object and the parameter are the same, respond normally by matching like parameters
+          if(this.selectedOptions[parameter]){
+            let foundAttribute = filterStorageAttributes.find((attribute) => attribute.parameter === parameter);
+            let foundValue = matchObj.value ? matchObj : foundAttribute.values.find((value) => value.value === this.selectedOptions[parameter]);
+            if(foundValue){
+              selectedOptions[parameter] = this.selectedOptions[parameter];
+              return
+            }
+
+            selectedOptions[parameter] = foundAttribute.values[0].value;
+            return
+          }
+
+          let foundAttribute = filterStorageAttributes.find((attribute) => attribute.parameter === parameter);
+          selectedOptions[parameter] = foundAttribute.values[0].value;
+          return
+        }
+
+        // if the match object and the parameter are not the same, match the specified parameters
+        if(this.selectedOptions[matchObj.matches]){
+          selectedOptions[parameter] = this.selectedOptions[matchObj.matches];
+          return
+        }
+
+        // if this.selectedOptions[matchObj.matches] is not true, this indicates that the current product does not
+        // have a matching attribute compared to the one defined in the cms. ie admin user error.
+        // example: matches: "blueberry_sprinkles" on sofas
+        // if this happens we will return nothing
+
+      });
+
+      return selectedOptions;
+    },
+
+    createCylindoImageUrl(selectedOptions, relatedProductFilterDefs){
+      const { productCode, features } = getViewerParameters({ 
+        baseSku: relatedProductFilterDefs.cylindo_sku, 
+        attributes: relatedProductFilterDefs.attributes, 
+        selectedOptions,
+      });
+
+      let frame = 1;
+      if (relatedProductFilterDefs && relatedProductFilterDefs.cylindo_overrides && relatedProductFilterDefs.cylindo_overrides.startFrame) {
+        frame = relatedProductFilterDefs.cylindo_overrides.startFrame;
+      }
+      
+      return getStaticImageUrl({ productCode, features, frame });
+    },
+
     populateCurrentRelatedProducts(){
       if(!this.relatedProductsData){
         setTimeout(handler, 200);
         return
       }
 
-      this.relatedProducts = [];
-      const RELATED_PRODUCTS_NUM = 6;
-      this.relatedProductsData.slice(0,RELATED_PRODUCTS_NUM).forEach(async element => {
+      this.relatedProductsTemp = [];
+      this.relatedProductsData.forEach(async relatedProductData => {
+
         let relatedProduct = {
           title: "",
           url: "",
-          image: []
+          image: [],
+          product_type: ""
         };
-        await FilterStorage.getItem(element.product_type).then((response)=>{
+
+        await FilterStorage.getItem(relatedProductData.product_type).then((response)=>{
           if (!response.templates) {
             return '';
           }
-          const { template = '' } = response.templates.find(item => item.key === 'name') || {};
-          const attributes = response.attributes;
-          const selectedOptions = {};
-          Object.entries(element.attributes).forEach(([parameter, value]) => {
-            if (value !== null) {
-              selectedOptions[parameter] = value;
-            } else {
-              selectedOptions[parameter] = this.selectedOptions[parameter];
-            }
-          });
-          for(var option in selectedOptions){
-            var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
-            var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
-            if(!foundValue){
-              selectedOptions[option] = foundAttribute.values[0].value;
-            }
-          }
-          const productTitle = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
-          relatedProduct.title = productTitle;
-          const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
-          const productURL = element.base_product_handle + '?attributes=' + attributeString;
-          relatedProduct.url = productURL;
 
-          const cylindo_sku = response.cylindo_sku;
+          const attributes = response.attributes;
+          const selectedOptions = this.buildSelectedOptions(relatedProductData.attributes, attributes);
+
+          const { template = '' } = response.templates.find(item => item.key === 'name') || {};
+          const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
+          relatedProduct.title = this.interpolateWithValues({template, attributes, selectedOptions, debug:false});
+          relatedProduct.url = relatedProductData.base_product_handle + '?attributes=' + attributeString;
+
+          let cylindo_sku = response.cylindo_sku;
           if(!cylindo_sku){
             apiClient.getImages({
-              type: element.product_type,
+              type: relatedProductData.product_type,
               attributes: selectedOptions,
               debounce: false
             }).then((images) => {
               relatedProduct.image = images;
+              relatedProduct.product_type = relatedProductData.product_type;
             });
+
           }else{
-            const startFrame = response && response.cylindo_overrides && response.cylindo_overrides.startFrame ? response.cylindo_overrides.startFrame : 1;
-            const baseCylindoImageUrl = "https://content-v2.cylindo.com/api/v2/4931/products/" + cylindo_sku + "/frames/" + startFrame +"/"+ cylindo_sku + ".jpg";
-            var cylindoProductFeaturesArray = []
-            for(var option in selectedOptions){
-              var foundAttribute = attributes.find((attribute) => attribute.parameter === option);
-              var foundValue = foundAttribute.values.find((value) => value.value === selectedOptions[option]);
-              if(foundValue.cylindo_features){
-                cylindoProductFeaturesArray = [...cylindoProductFeaturesArray, ...foundValue.cylindo_features];
-              }
-            }
-            var cylindoFeatureKeyValues = cylindoProductFeaturesArray.map((feature, index) => {
-              if(index % 2 !== 0 ){
-                return false;
-              }
-              return cylindoProductFeaturesArray[index] + ':' + cylindoProductFeaturesArray[index +1 ];
-            });
-            cylindoFeatureKeyValues = cylindoFeatureKeyValues.filter(Boolean);
-            const cylindoFeatureQueryString ="?feature=" + cylindoFeatureKeyValues.join("&feature=");
-            const cylindoFeatureQueryStringURI = encodeURI(cylindoFeatureQueryString);
-            const cylindoImageOptions = '&background=FFFFFF&encoding=jpg&smartCrop=false';
-            relatedProduct.image = baseCylindoImageUrl + cylindoFeatureQueryStringURI + cylindoImageOptions;
+            relatedProduct.image = this.createCylindoImageUrl(selectedOptions, response);
+            relatedProduct.product_type = relatedProductData.product_type;
           }
-          this.relatedProducts.push(relatedProduct);
+
+          this.relatedProductsTemp.push(relatedProduct);
         });
+
+        this.relatedProductsTemp.sort((a,b) => {
+          const A = a['product_type'];
+          const B = b['product_type'];
+
+          if(this.relatedProductsData.indexOf(A) > this.relatedProductsData.indexOf(B)){
+            return 1;
+          }
+          return -1;
+        });
+
+        this.relatedProducts = this.relatedProductsTemp;
+
       });
     }
   },

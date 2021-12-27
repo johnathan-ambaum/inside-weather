@@ -1,0 +1,367 @@
+<div id="app">
+  <div class="--clip-header">
+    <banner-slider v-bind='{
+      "autoplay": false,
+      "playSpeed": 3000,
+      "slides": [
+        {
+          "imageDesktop": "https://cdn.insideweather.com/hp/tb/081421_hp-bnr_labor-day-sale_d.jpg",
+          "imageDesktopAlt": "",
+          "imageMobile": "https://cdn.insideweather.com/hp/tb/081421_hp-bnr_labor-day-sale_m.jpg",
+          "imageMobileAlt": "",
+          "linkUrl": "https://insideweather.com/pages/2021-labor-day-sale",
+          "priority": 1,
+        },
+        {
+          "imageDesktop": "https://cdn.insideweather.com/hp/tb/082021_hp-bnr_bondi_d.jpg",
+          "imageDesktopAlt": "",
+          "imageMobile": "https://cdn.insideweather.com/hp/tb/082021_hp-bnr_bondi_m.jpg",
+          "imageMobileAlt": "",
+          "linkUrl": "https://insideweather.com/pages/bondi-collection",
+          "priority": 2,
+        },
+        {
+          "imageDesktop": "https://cdn.insideweather.com/hp/tb/043021_hp-bnr_savoy_d.jpg",
+          "imageDesktopAlt": "",
+          "imageMobile": "https://cdn.insideweather.com/hp/tb/043021_hp-bnr_savoy_m.jpg",
+          "imageMobileAlt": "",
+          "linkUrl": "https://insideweather.com/pages/savoy-collection",
+          "priority": 3,
+        },
+        {
+          "imageDesktop": "https://cdn.insideweather.com/hp/tb/080521_hp-bnr_4seater_d.jpg",
+          "imageDesktopAlt": "",
+          "imageMobile": "https://cdn.insideweather.com/hp/tb/080521_hp-bnr_4seater_m.jpg",
+          "imageMobileAlt": "",
+          "linkUrl": "https://insideweather.com/pages/original-custom-collection",
+          "priority": 4,
+        },
+        {
+          "imageDesktop": "",
+          "imageDesktopAlt": "",
+          "imageMobile": "",
+          "imageMobileAlt": "",
+          "linkUrl": "https://insideweather.com/pages/original-custom-collection",
+          "priority": 4,
+          "headingCopy": "Labor Day Sale",
+          "descriptionCopy": "Lorem ipsum dolor sit amet.",
+          "linkCopy": "Shop now",
+        }
+      ]
+    }'></banner-slider>
+  </div>
+
+  <custom-spacer v-bind='{
+    "backgroundColor":"#FFF",
+    "desktopSpacing":"140px",
+    "mobileSpacing":"45px"}'
+  ></custom-spacer>
+
+  <featured-categories v-bind='{
+    "autoplay": false,
+    "playSpeed": 2000,
+    "backgroundColor": "white",
+    "categories": [
+      {
+        "imageDesktop":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_living.jpg",
+        "imageDesktopAlt": "desktop alt 1",
+        "imageMobile":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_living.jpg",
+        "imageMobileAlt": "mobile alt 1",
+        "buttonText":"SHOP LIVING",
+        "buttonTextColor": "#202020",
+        "buttonBackgroundColor": "white",
+        "linkUrl":"https://insideweather.com/pages/living-room",
+        "priority": 1
+      },
+      {
+        "imageDesktop":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_dining.jpg",
+        "imageDesktopAlt": "desktop alt 2",
+        "imageMobile":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_dining.jpg",
+        "imageMobileAlt": "mobile alt 2",
+        "buttonText":"SHOP DINING",
+        "buttonTextColor": "red",
+        "buttonBackgroundColor": "white",
+        "linkUrl":"https://insideweather.com/pages/dining-room",
+        "priority": 4
+      },
+      {
+        "imageDesktop":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_office.jpg",
+        "imageDesktopAlt": "desktop alt 3",
+        "imageMobile":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_office.jpg",
+        "imageMobileAlt": "mobile alt 3",
+        "buttonText":"SHOP OFFICE",
+        "buttonTextColor": "#202020",
+        "buttonBackgroundColor": "white",
+        "linkUrl":"https://insideweather.com/pages/office",
+        "priority": 3
+      },
+      {
+        "imageDesktop":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_bed.jpg",
+        "imageDesktopAlt": "desktop alt 4",
+        "imageMobile":"https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_bed.jpg",
+        "imageMobileAlt": "mobile alt 4",
+        "buttonText":"SHOP BEDROOM",
+        "buttonTextColor": "#202020",
+        "buttonBackgroundColor": "white",
+        "linkUrl":"https://insideweather.com/pages/bedroom",
+        "priority": 2
+      }
+    ]
+  }'></featured-categories>
+
+  <v-props v-bind='{
+    "defaultImage": "https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_01-default-min.jpg?1657939",
+    "mainHeading": "Online custom furniture shopping that puts you in charge.",
+    "backgroundColor": "#f2f2f2",
+    "items": [
+      {
+        "isVideo": false, 
+        "url": "https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_01.jpg", 
+        "targetPoint": "designed-in-house", 
+        "titleCopy": "Designed In-house", 
+        "titleColor": "#202020",
+        "bodyCopy": "We consider it mission-critical that every product we sell be sustainable, adaptable, and—above all—beautiful, which is why we don’t trust anyone else to do the job. Our team both dreams it and sees it through, all under the same roof.",
+        "bodyColor": "#202020"
+      },
+      {
+        "isVideo": false, 
+        "url": "https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_02-v2.jpg", 
+        "targetPoint": "crafted", 
+        "titleCopy": "Made in the USA", 
+        "titleColor": "blue",
+        "bodyCopy": "Every one of our pieces is made-to-order by our expert furniture makers in our workshop in California. Sawing, sewing, packaging, and shipping-we see every custom piece through from start to finish!",
+        "bodyColor": "red"
+      },
+      {
+        "isVideo": true, 
+        "url": "https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_03.mp4", 
+        "targetPoint": "quick-ship-custom", 
+        "titleCopy": "Quick Ship Custom", 
+        "titleColor": "#202020",
+        "bodyCopy": "Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days.",
+        "bodyColor": "#202020"
+      },
+      {
+        "isVideo": false, 
+        "url": "https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_04.jpg", 
+        "targetPoint": "365-day-home-trial", 
+        "titleCopy": "365 Day Home Trial", 
+        "titleColor": "#202020",
+        "bodyCopy": "Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.",
+        "bodyColor": "#202020"
+      },
+      {
+        "isVideo": false, 
+        "url": "https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_05-v2.jpg", 
+        "targetPoint": "carbon-negative", 
+        "titleCopy": "Carbon Negative", 
+        "titleColor": "#202020",
+        "bodyCopy": "All of our materials are selected with intention—from our sofas that upcycle over 200 plastic water bottles to our packaging which is among the first ever made of renewable sugar-based contents in the industry. To achieve carbon negativity, two trees are planted via the National Forest Foundation for every order placed with us. Sleep easier knowing you have the most sustainable furniture on the market.",
+        "bodyColor": "#202020"
+      }
+    ]
+  }'></v-props>
+
+  <press-list v-bind='{
+    "items": [
+      {
+        "imageDesktop": "https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_nytimes.png?v=1586276562",
+        "imageMobile": "https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_nytimes.png?v=1586276562",
+        "description":"A substantial savings over traditional custom furniture, which can run into five figures.", 
+        "linkTo": "https://www.nytimes.com/2020/03/11/style/furniture-customization.html",
+        "priority": 1
+      },
+      {
+        "imageDesktop": "https://cdn.insideweather.com/hp/press/hp_press_apartment-therapy.png",
+        "imageMobile": "https://cdn.insideweather.com/hp/press/hp_press_apartment-therapy.png",
+        "description":"You Can Bring Frank Lloyd Wright Design Into Your Home with the “Usonia” Furniture Line.", 
+        "linkTo": "https://www.apartmenttherapy.com/frank-lloyd-wright-furniture-collection-36743976",
+        "priority": 3
+      },
+      { 
+        "imageDesktop": "https://cdn.insideweather.com/hp/press/hp_press_domino.png",
+        "imageMobile": "https://cdn.insideweather.com/hp/press/hp_press_domino.png",
+        "description":"There’s even an ethical component to the company that eco-conscious shoppers will love.", 
+        "descriptionColor": "blue",
+        "linkTo": "https://www.domino.com/content/inside-weather-affordable-furniture-company/",
+        "priority": 4
+      },
+      {
+        "imageDesktop": "https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_britco.png?v=1565744852",
+        "imageMobile": "https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_britco.png?v=1565744852",
+        "description":"No more MALM monotony here!", 
+        "linkTo": "https://www.brit.co/inside-weather-furniture-brand/",
+        "priority": 5
+      },
+      {
+        "imageDesktop":"https://cdn.insideweather.com/hp/press/hp_press_house-beautiful.png",
+        "imageMobile":"https://cdn.insideweather.com/hp/press/hp_press_house-beautiful.png",
+        "description":"Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.", 
+        "descriptionColor": "red",
+        "linkTo": "https://www.housebeautiful.com/lifestyle/a25417610/inside-weather-custom-furniture-easy-assembly/",
+        "priority": 2
+      }
+    ]
+  }'></press-list>
+
+  <custom-spacer v-bind='{
+    "backgroundColor":"#FFF",
+    "desktopSpacing":"80px",
+    "mobileSpacing":"45px"}'
+  ></custom-spacer>
+
+  <review-carousel v-bind='{
+    "autoplay": true,
+    "playSpeed": 3000,
+    "backgroundColor": "#e8e6e2",
+    "slides": [
+      {
+        "image": "https://cdn.insideweather.com/hp/social/021721_hp_social_01.jpg",
+        "titleCopy": "Fits our lifestyle perfectly!",
+        "titleColor": "#202020",
+        "starCount": 5,
+        "bodyCopy": "We love our new sofa and that it’s custom made to fit our family without having to pay a premium price. We have 2 pets and have always worried about our furniture and how to keep it clean/not look like we have pets, so being able to choose ’pet-friendly’ fabrics that didn’t compromise style/comfort was a big plus! The process was so easy, from ordering samples, to ’building’ our sofa on the website before ordering, I had no anxiety over what our sofa would look like.",
+        "bodyCopyColor": "#202020",
+        "reviewer": "Heather S.",
+        "reviewerAddress": "Atlanta, GA",
+        "linkCopy": "Read All Reviews",
+        "linkColor": "#202020",
+        "linkUrl": "/pages/reviews",
+        "priority": 1,
+      },
+      {
+        "image": "https://cdn.insideweather.com/hp/social/021721_hp_social_02.jpg",
+        "titleCopy": "Beautiful Furniture We Absolutely Love",
+        "titleColor": "#202020",
+        "starCount": 5,
+        "bodyCopy": "I have 3 Inside Weather products, a coffee table, side table and the Voss sideboard, all in the same finish. They are amazing, so aesthetically pleasing and fit perfectly in my house. Such good quality products and I highly recommend!",
+        "bodyCopyColor": "#202020",
+        "reviewer": "Hope D.",
+        "reviewerAddress": "Ray City, GA",
+        "linkCopy": "Read All Reviews",
+        "linkColor": "#202020",
+        "linkUrl": "/pages/reviews",
+        "priority": 2,
+      },
+      {
+        "image": "https://cdn.insideweather.com/hp/social/021721_hp_social_03.jpg",
+        "titleCopy": "Great tables that set the bar high.",
+        "titleColor": "#202020",
+        "starCount": 5,
+        "bodyCopy": "This project was a partnership between PHASE Studio Architecture and VERDE Interior Design. The client tasked us with designing a cool, minimal boba tea house. We instantly thought of using customized rectangular dining tables from Inside Weather. These tables are great and set the bar for the rest of the design. We paired each table with some of our favorite seating and voila!",
+        "bodyCopyColor": "#202020",
+        "reviewer": "VERDE Interior Design",
+        "reviewerAddress": "Houston, TX",
+        "linkCopy": "Read All Reviews",
+        "linkColor": "#202020",
+        "linkUrl": "/pages/reviews",
+        "priority": 3,
+      },
+    ],
+  }'></review-carousel>
+
+  <text-banner v-bind='{
+    "imageDesktop": "https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_design-services_d-min.jpg?1657951", 
+    "iamgeMobile": "https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_design-services_m-min.jpg?1658615",
+    "titleCopy": "Free Furniture Design Services",
+    "bodyCopy": "Our design experts are here to talk you through any dilemma. From custom furnishings that fit your tiny New York City living room and your personal style to that custom dining room table you&#39;ve drawn up in your head.",
+    "buttonMobile": {
+      "text": "SEND AN SOS",
+      "textColor": "white"
+    },
+    "buttonDesktop": {
+      "text": "SEND AN SOS",
+      "backgroundColor": "white",
+      "textColor": "#202020"
+    },
+    "linkUrl": "https://insideweather.com/pages/work-with-a-designer"
+  }'></text-banner>
+
+  <custom-spacer v-bind='{
+    "backgroundColor":"#FFF",
+    "desktopSpacing":"140px",
+    "mobileSpacing":"45px"}'
+  ></custom-spacer>
+
+  <title-text v-bind='{
+    "titleCopy": "Recently Sold",
+    "bodyCopy": "Take a look at what our craftsmen and designers are working on right now!"
+  }'></title-text>
+
+  <recently-sold v-bind='{
+    "items": [
+      {
+        "image":"https://content.cylindo.com/api/v2/4931/products/HAYES%20STORAGE%20TABLE/frames/3/HAYES%20STORAGE%20TABLE.JPG?background=FFFFFF&feature=TABLE%20TOP%20SHAPE:42%20ALMOND&feature=PLYWOOD%20FINISH:LATTE&feature=LID:LATTE&feature=STORAGE:CORDOVA%20MINERAL-NW&feature=LEG%20FINISH:CARBON&size=400",
+        "firstName":"Charlie",
+        "lastName":"P.",
+        "productName":"Almond Hayes Coffee Table in Latte",
+        "price":"$399", 
+        "linkUrl":"https://insideweather.com/products/ha1410bwdn10-almond-hayes-coffee-table-in-latte?attributes=table_shape%3Aalmond-42%2Cfinish%3Alatte%2Ccolor_name_lid%3Alatte%2Ccolor_name%3Amineral%2Cbase_style%3Acarbon"
+      },
+      {
+        "image":"https://content.cylindo.com/api/v2/4931/products/CNV_VITA/frames/4/CNV_VITA.JPG?background=FFFFFF&feature=BASE%20FINISHES:WHITE&feature=EDGE%20FINISHES:WHITE&feature=UPHOLSTERY:DS1057&size=400",
+        "firstName":"Katherine",
+        "lastName":"B.",
+        "productName":"White Vita Lounge Chair in Terrazzo Speckle", 
+        "price":"$673", 
+        "linkUrl":"https://insideweather.com/products/vl10lx-white-vita-lounge-chair-in-terrazzo-speckle"
+      },
+      {
+        "image":"https://content.cylindo.com/api/v2/4931/products/ELM%20STORAGE/frames/1/ELM%20STORAGE.JPG?background=FFFFFF&feature=HEIGHT:31%22&feature=WIDTH:3&feature=STYLE:FLAT%20TOP&feature=WOOD%20FINISH:LIGHT%20ESPRESSO&feature=DOOR%20FINISH:FROSTED%20GLASS&feature=HINGE%20FINISH:CARBON&size=400",
+        "firstName":"Layla",
+        "lastName":"G.",
+        "productName":"31\&#34; Tall 3-Door Elm Storage Cabinet in Espresso", 
+        "price":"$1,200", 
+        "linkUrl":"https://insideweather.com/products/em14111110101010-31-tall-3-door-elm-storage-cabinet-in-espresso"
+      },
+      {
+        "image":"https://cdn.insideweather.com/hp/recentlysold/090121_hp_recentlysold_04.jpg",
+        "firstName":"Jacob",
+        "lastName":"L.",
+        "productName":"Rectangle Vienna Dining Table in Latte", 
+        "price":"$1,000", 
+        "linkUrl":"https://insideweather.com/products/fvi2112101010-rectangle-vienna-dining-table-in-latte"
+      },
+      {
+        "image":"https://content.cylindo.com/api/v2/4931/products/CUSTOM%204-SEATER%20SECTIONAL%20SNUG/frames/1/CUSTOM%204-SEATER%20SECTIONAL%20SNUG.JPG?background=FFFFFF&feature=ARM%20STYLE:LEVI%20(FABRIC)&feature=UPHOLSTERY:ROYALE%20RUST&feature=CONFIGURATION:CLASSIC_CLASSIC&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20BRASS",
+        "firstName":"Katie",
+        "lastName":"A.",
+        "productName":"Custom Levi 4-Seater Sofa Sectional in Rust", 
+        "price":"$2,924", 
+        "linkUrl":"https://insideweather.com/products/fc14db1012102110-custom-levi-4-seater-sofa-sectional-in-rust"
+      },
+      {
+        "image":"https://content.cylindo.com/api/v2/4931/products/ADA%20DINING%20CHAIR/frames/1/ADA%20DINING%20CHAIR.JPG?background=FFFFFF&feature=WOODEN%20FRAME:BLACK&feature=UPHOLSTERY:CORDOVA%20MINERAL-NW&feature=METAL%20FRAME:CARBON&size=400",
+        "firstName":"Joseph",
+        "lastName":"T.",
+        "productName":"Black Ada Dining Chair in Mineral", 
+        "price":"$314", 
+        "linkUrl":"https://insideweather.com/products/ai12cb10-black-ada-dining-chair-in-mineral"
+      },
+      {
+        "image":"https://content.cylindo.com/api/v2/4931/products/CNV_AP_PYR/frames/3/CNV_AP_PYR.JPG?background=FFFFFF&feature=UPHOLTERY:ROYALE%20CLOUD&size=400",
+        "firstName":"Patty",
+        "lastName":"M.",
+        "productName":"Large Pyramid Pillow in Glacier Blue", 
+        "price":"$42", 
+        "linkUrl":"https://insideweather.com/products/py13cy-large-pyramid-pillow-in-glacier-blue-cover-only"
+      },
+      {
+        "image":"https://cdn.insideweather.com/hp/recentlysold/090121_hp_recentlysold_08.jpg",
+        "firstName":"Mark",
+        "lastName":"O.",
+        "productName":"Queen Savoy Upholstered Bed Frame in Honey", 
+        "price":"$1,294", 
+        "linkUrl":"https://insideweather.com/products/su1210bb111110-queen-savoy-upholstered-bed-frame-in-honey"
+      },
+      {
+        "image":"https://banksy-images.s3.amazonaws.com/items/WA1113BH/WA1113BH-0_small.jpg",
+        "firstName":"Greg",
+        "lastName":"K.",
+        "productName":"Cool Botanical Art Print with Whitewash Frame",
+        "price":"$63", 
+        "linkUrl":"https://insideweather.com/products/wa1113bh-cool-botanical-art-print-with-whitewash-frame-16-x-20"
+      }
+    ]
+  }'></recently-sold>
+</div>

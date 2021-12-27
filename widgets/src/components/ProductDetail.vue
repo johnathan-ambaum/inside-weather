@@ -3,13 +3,8 @@
     <product-gallery
       v-if="!isMobile"
       :images="productImages"
-      :cylindo="useCylindo"
+      :cylindo="use360Viewer"
     />
-    <!-- <product-family
-      v-if="'related_items' in product && product.related_items.length"
-      id="families"
-      class="ProductDetail__Family"
-    /> -->
   </div>
 </template>
 
@@ -18,14 +13,12 @@ import { mapState } from 'vuex';
 import ProductGallery from './ProductGallery.vue';
 import ZoomGallery from './ZoomGallery.vue';
 import TemplateBlock from './TemplateBlock.vue';
-import ProductFamily from './ProductFamily.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 
 export default {
   components: {
     TemplateBlock,
-    ProductFamily,
     ProductGallery,
     ZoomGallery,
   },
@@ -41,12 +34,12 @@ export default {
       productImages: state => state.productImages,
     }),
 
-    useCylindo() {
+    use360Viewer() {
       if (!this.filters) {
         return false;
       }
       // double ! to cast truthy/falsy values to boolean
-      return !!this.filters.cylindo_sku;
+      return this.filters.configurator_type !== 'static_image' && !!this.filters.cylindo_sku;
     },
 
     isDecor() {

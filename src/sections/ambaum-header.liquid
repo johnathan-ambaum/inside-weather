@@ -1,9 +1,6 @@
 {%- include 'cart-drawer' -%}
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper@6/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper@6/swiper-bundle.min.js"></script>
 
 <header id="ambaum__header"  data-section-id="{{ section_id }}" data-section-type="header-section">
   <div class="ambaum__header">
@@ -18,9 +15,10 @@
     </div>
     <div class="ambaum__header-menu">
       {% assign rightSideMenu = false %}
-      {% assign specialMenu = false %}
-      {% assign narrowMenu = false %}
       {%- for firstLevelItem in linklists.main-menu-1.links -%}
+        {% assign specialMenu = false %}
+        {% assign narrowMenu = false %}
+        {% assign noHighlight = false %}
         {% assign firstLevelItemDisplayName = firstLevelItem.title %}
         {% if firstLevelItem.title contains '[Right]' %}
           {% assign rightSideMenu = true %}
@@ -37,10 +35,15 @@
           {% assign specialMenu = true %}
           {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Special]' | strip %}
         {% endif %}
+        {% if firstLevelItem.title contains '[noHighlight]' %}
+          {% assign noHighlight = true %}
+          {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[noHighlight]' | strip %}
+        {% endif %}
 
         <div class="ambaum__header-menu-item
         {% if rightSideMenu %} ambaum__header-menu-item-right {% endif %}
         {% if specialMenu %} ambaum__header-menu-item-special {% endif %}
+        {% if noHighlight %} noHighlight {% endif %}
         ">
           <span
             {% if firstLevelItem.links != blank and narrowMenu == false %} data-toggle-header-dropdown {% endif %}
@@ -249,9 +252,10 @@
   </div>
   <div class="ambaum__header-mobile-list">
     {% assign rightSideMenu = false %}
-    {% assign specialMenu = false %}
-    {% assign narrowMenu = false %}
     {%- for firstLevelItem in linklists.main-menu-1.links -%}
+      {% assign specialMenu = false %}
+      {% assign narrowMenu = false %}
+      {% assign noHighlight = false %}
       {% assign firstLevelItemDisplayName = firstLevelItem.title %}
       {% if firstLevelItem.title contains '[Hide]' %}
         {% continue %}
@@ -263,20 +267,31 @@
         {% assign specialMenu = true %}
         {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Special]' | strip %}
       {% endif %}
+      {% if firstLevelItem.title contains '[noHighlight]' %}
+        {% assign noHighlight = true %}
+        {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[noHighlight]' | strip %}
+      {% endif %}
       {% assign firstLevelItemDisplayName = firstLevelItemDisplayName | remove:'[Narrow]' | strip %}
 
       <div class="ambaum__header-mobile-list-item-container">
         {% if firstLevelItem.links == blank %}
-          <a href="{{firstLevelItem.url}}" class="ambaum__header-mobile-list-item {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}">
+          <div class="ambaum__header-mobile-list-item
+            {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}
+            {% if noHighlight %} noHighlight {% endif %}">
             <span class="ambaum__header-mobile-list-item-title">
-              {{firstLevelItemDisplayName}}
+              <a href="{{firstLevelItem.url}}">
+                {{firstLevelItemDisplayName}}
+              </a>
             </span>
             <span class="ambaum__header-mobile-list-item-icon">
               {% render 'icon-right-arrow' %}
             </span>
-          </a>
+          </div>
         {% else %}
-          <div class="ambaum__header-mobile-list-item {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}" {% if firstLevelItem.links != blank %} data-toggle-mobile-header-dropdown {% endif %}>
+          <div class="ambaum__header-mobile-list-item
+          {% if specialMenu %} ambaum__header-mobile-list-item-special {% endif %}
+          {% if noHighlight %} noHighlight {% endif %}"
+          {% if firstLevelItem.links != blank %} data-toggle-mobile-header-dropdown {% endif %}>
             <span class="ambaum__header-mobile-list-item-title">
               <a href="{{firstLevelItem.url}}">{{firstLevelItemDisplayName}}</a>
             </span>

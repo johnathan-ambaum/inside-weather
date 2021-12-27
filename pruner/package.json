@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "prune": "node get-used-templates.js && node prune.js"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "fast-glob": "^3.2.7",
+    "shopify-api-node": "^3.8.0"
+  }
+}

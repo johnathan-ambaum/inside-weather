@@ -1281,8 +1281,20 @@ lazySizesConfig.expFactor = 4;
               localStorage.setItem('currentCart', JSON.stringify(cart));
               $('body').trigger(openProductProtectionModal);
             }else{
+              if(event.openCartDrawer !== undefined){
+                this.buildCart(cart, event.openCartDrawer);
+                return
+              }
+
               this.buildCart(cart, true);
+
             }
+          }.bind(this));
+        }.bind(this));
+
+        $('body').on('buildCart', function(event) {
+          theme.cart.getCart().then(function(cart) {
+            this.buildCart(cart, event.openCartDrawer);
           }.bind(this));
         }.bind(this));
       },
@@ -1343,7 +1355,8 @@ lazySizesConfig.expFactor = 4;
               discountedPrice: theme.Currency.formatMoney((product.price - (product.total_discount/product.quantity)), theme.settings.moneyFormat),
               discounts: product.discounts,
               discountsApplied: product.price === (product.price - product.total_discount) ? false : true,
-              vendor: product.vendor
+              vendor: product.vendor,
+              hasCustomMade: product.properties && typeof product.properties['Custom Made'] !== 'undefined',
             };
 
             items.push(item);
@@ -1351,10 +1364,6 @@ lazySizesConfig.expFactor = 4;
 
           animation_row+=2;
 
-          const SHIPPING_PRICE_COEFFICENT = 0.12; // Arbitrary (12%) percentage of total cart value which represents shipping price to display to user.
-          const shippingPrice = (cart.total_price*SHIPPING_PRICE_COEFFICENT);
-          const shippingPriceRoundedUp = Math.ceil(shippingPrice/100)*100; // to nearest dollar
-          const shippingPriceSaved = theme.Currency.formatMoney(shippingPriceRoundedUp, {% raw %}'${{amount_no_decimals_only_comma}}'{% endraw %});
 
           let currentShippingProtectionItem = JSON.parse(localStorage.getItem("currentShippingProtectionItem"));
           let currentShippingInsurancePrice = currentShippingProtectionItem ?  "+$" + JSON.parse(localStorage.getItem("currentShippingProtectionItem")).variant.price : null;
@@ -1367,7 +1376,6 @@ lazySizesConfig.expFactor = 4;
             totalCartDiscount: cart.total_discount === 0 ? 0 : theme.strings.cartSavings.replace('[savings]', theme.Currency.formatMoney(cart.total_discount, theme.settings.moneyFormat)),
             cartHasShippingInsurance: items.length > 0 && (cartHasShippingInsurance || cart.items.some(function(item){return item.product_type ===  'Shipping Insurance'})),
             currentShippingInsurancePrice: currentShippingInsurancePrice,
-            shippingPriceSaved: shippingPriceSaved,
             vwo:{
               shippingProtection:{
                 active: theme.settings.vwo.shippingProtection.active,
@@ -1765,7 +1773,8 @@ lazySizesConfig.expFactor = 4;
       addonItemHandler: function(cart){
         if(!cart){return}
         let currentCart = JSON.parse(localStorage.getItem("currentCart"));
-        let itemInCartHasProtectionPlans = cart.items.filter(function(item){return item.protection_plans !== null}).length;
+        let itemInCartHasProtectionPlans = !!cart.items.filter(function(item){return item.protection_plans !== null && item.protection_plans !== undefined}).length;
+
         if(cart.item_count === 0 || (currentCart && currentCart.item_count === 0) || !currentCart){
           localStorage.setItem('currentCart', JSON.stringify(cart));
           return
@@ -2975,26 +2984,27 @@ lazySizesConfig.expFactor = 4;
 
   theme.fullPageTakeOver = function() {
 
-  function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
+    let urlParams = '';
+    function setCookie(name,value,days) {
+      var expires = "";
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days*24*60*60*1000));
+          expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-  }
 
-  function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
     }
-    return null;
-  }
 
     var selectors = {
       triggers: 'body'
@@ -3040,14 +3050,42 @@ lazySizesConfig.expFactor = 4;
       return urlParams.has("fullPageTakeOver");
     }
     function modalShouldOpen(){
+      urlParams = new URLSearchParams(window.location.search);
       if(urlHasOpenParam() && !getCookie('customerGaveEmail')){
         triggerFPT();
       }
     }
+    function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+      var startTimeInMs = Date.now();
+      (function loopSearch() {
+        if (document.querySelector(selector) != null) {
+          callback();
+          return;
+        }
+        else {
+          setTimeout(function () {
+            if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+              return;
+            loopSearch();
+          }, checkFrequencyInMs);
+        }
+      })();
+    }
     function triggerFPT() {
-      history.pushState({page:99}, null, '?fullPageTakeOver=true&close=true');
-      history.pushState({page:2}, null, '?fullPageTakeOver=true&page=2');
-      history.pushState({page:1}, null, '?fullPageTakeOver=true&page=1');
+      waitForElementToDisplay('.needsclick.klaviyo-form', () => {
+        document.querySelector('.needsclick.klaviyo-form').remove();
+      }, 200, 10000);
+      waitForElementToDisplay('#privy-container', () => {
+        document.querySelector('#privy-container').remove();
+      }, 200, 10000);
+
+      window.ga('set', 'page', window.location.pathname + window.location.search);
+      window.ga('send', 'pageview');
+
+      const formattedParams = urlParams.toString() === '' ? '' : `&${urlParams.toString()}`;
+      history.pushState({page:99}, null, '?close=true' + formattedParams);
+      history.pushState({page:2}, null, '?page=2' + formattedParams);
+      history.pushState({page:1}, null, '?page=1' + formattedParams);
       modal.open();
     }
 

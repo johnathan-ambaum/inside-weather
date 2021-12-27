@@ -1,7 +1,17 @@
 <template>
-  <div class="point">
-    <h3 :data-target="accordionTriggerElement">{{accordionHead}}</h3>
-    <p>{{accordionDescription}}</p>
+  <div 
+    class="point"
+    :class="itemClasses"
+  >
+    <h3 
+      :data-target="accordionTriggerElement"
+      :style="titleStyles"
+      @click="$emit('toggle')"
+    >{{ accordionHead }}</h3>
+    <p 
+      ref="description"
+      :style="bodyStyles"
+    >{{ accordionDescription }}</p>
     <a :href="'#' + accordionTriggerElement" :data-target="accordionTriggerElement" v-if="anchorTageRequire"></a>
   </div>  
 </template>
@@ -12,9 +22,38 @@ export default {
     accordionHead: String,
     accordionDescription: String,
     accordionTriggerElement: String,
-    anchorTageRequire: {type: Boolean, default: false}
-  }
-}
+    anchorTageRequire: { type: Boolean, default: false },
+    isOpen: { type: Boolean, default: false },
+    titleColor: { type: String, default: '#202020' },
+    bodyColor: { type: String, default: '#202020' },
+  },
+
+  watch: {
+    isOpen() {
+      $(this.$refs.description).slideToggle();
+    },
+  },
+
+  computed: {
+    itemClasses() {
+      return {
+        'show-details': this.isOpen,
+      };
+    },
+
+    titleStyles() {
+      return {
+        color: this.titleColor,
+      };
+    },
+
+    bodyStyles() {
+      return {
+        color: this.bodyColor,
+      };
+    },
+  },
+};
 </script>
 
 <style lang="scss">
