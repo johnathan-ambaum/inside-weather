@@ -230,6 +230,7 @@ export default {
     left: 0;
     padding: 12px;
     position: absolute;
+    z-index: 100;
   }
 
   .LifeStyleGrid__grid {
