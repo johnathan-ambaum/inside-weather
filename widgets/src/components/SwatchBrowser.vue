@@ -419,10 +419,13 @@ export default {
     },
 
     filteredSwatches() {
+      const sorter = (a, b) => (
+        a[`${this.sortBy}_sort_order`] < b[`${this.sortBy}_sort_order`] ? -1 : 1
+      );
       const selections = Object.entries(this.appliedFilters);
 
       if (!selections.some(([, values]) => !!values.length)) {
-        return this.swatches;
+        return [...this.swatches].sort(sorter);
       }
 
       return this.swatches.filter(swatch => (
@@ -439,9 +442,7 @@ export default {
               return swatch[key] === value;
             })
           ))
-      )).sort((a, b) => (
-        a[`${this.sortBy}_sort_order`] < b[`${this.sortBy}_sort_order`] ? -1 : 1
-      ));
+      )).sort(sorter);
     },
 
     infoActive() {
