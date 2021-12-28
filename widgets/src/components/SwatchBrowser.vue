@@ -380,7 +380,7 @@ export default {
         color_family: [],
         design_style: [],
       },
-      sortBy: 'color',
+      sortBy: 'upholstery',
     };
   },
 

@@ -95,8 +95,8 @@ export const filters = [
 ];
 
 export const sortOptions = [
-  { value: 'color', display: 'Color' },
   { value: 'upholstery', display: 'Upholstery Type' },
+  { value: 'color', display: 'Color' },
   { value: 'best_selling', display: 'Best Selling' },
 ];
 
