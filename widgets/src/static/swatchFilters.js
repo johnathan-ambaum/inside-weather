@@ -66,19 +66,34 @@ export const filters = [
     isArray: true,
     options: [
       {
+        value: 'Solid Only',
+        display: 'Solid Colors Only',
+        iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/solids.png',
+      },
+      {
+        value: 'Graphic Only',
+        display: 'Graphic Only',
+        iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/graphics.png',
+      },
+      {
+        value: 'Terrazzo & Marble',
+        display: 'Terrazo & Marble',
+        iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/terrazzo-marble.png',
+      },
+      {
+        value: 'Nordic & Mid-Century',
+        display: 'Nordic & Mid-Century',
+        iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/nordic-mid-century.png',
+      },
+      {
+        value: 'Art Deco & Glam',
+        display: 'Art Deco & Glam',
+        iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/art-deco-glam.png',
+      },
+      {
         value: 'Botanical',
         display: 'Botanical',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/sweet-palm.png',
-      },
-      {
-        value: 'Gemoetric',
-        display: 'Geometric',
-        iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/glamorous-geometry.png',
-      },
-      {
-        value: 'Southwest',
-        display: 'Southwest',
-        iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/southwest-sunset.png',
       },
       {
         value: 'Watercolor&Ink',
@@ -86,9 +101,19 @@ export const filters = [
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/pacific-waters.png',
       },
       {
+        value: 'Southwest',
+        display: 'Southwest',
+        iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/southwest-sunset.png',
+      },
+      {
         value: 'Abstract',
         display: 'Abstract',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/evening-abstraction.png',
+      },
+      {
+        value: 'Frank Lloyd Wright Usonia™',
+        display: 'Frank Lloyd Wright Usonia™',
+        iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/usonia.png',
       },
     ],
   },
