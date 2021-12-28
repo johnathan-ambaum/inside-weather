@@ -87,6 +87,7 @@
         <a
           :class="triggerClasses"
           href="/pages/free-swatches"
+          target="_blank"
           @click="active = true"
         >Get Free Swatches</a>
       </div>
@@ -100,11 +101,13 @@
         <a
           :class="triggerClassesMobile"
           href="/pages/free-swatches"
+          target="_blank"
         >Get Free Swatches</a>
       </div>
       <div>
-        <a href="/pages/free-swatches">
+        <a href="/pages/free-swatches" target="_blank">
           <img
+            v-if="triggerImage"
             :src="triggerImage"
           >
         </a>
