@@ -898,7 +898,7 @@ $breakpoint-desktop: 'min-width: 1146px';
 
     & > .SwatchBrowser__Label {
       flex: 1 0 100%;
-      margin-bottom: 8px;
+      margin-bottom: 20px;
     }
 
     @include at-query($breakpoint-mobile) {
@@ -923,7 +923,7 @@ $breakpoint-desktop: 'min-width: 1146px';
   &__FilterPanel {
     @include at-query($breakpoint-mobile) {
       align-content: flex-start;
-      align-items: center;
+      align-items: flex-start;
       background: white;
       height: 100%;
       left: 0;
@@ -1601,7 +1601,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       border-radius: 0;
       bottom: 0;
       flex-direction: row;
-      height: 85px;
+      height: 92px;
       justify-content: flex-end;
       left: 0;
       pointer-events: none;
