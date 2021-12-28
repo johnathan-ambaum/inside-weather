@@ -83,6 +83,10 @@
             </div>
           </div>
         </div>
+        <button
+          v-if="isLargeMobile"
+          class="SwatchBrowser__Button SwatchBrowser__Button--Black"
+        >BACK TO SWATCHES</button>
       </div>
       <div class="SwatchBrowser__FilterGroup">
         <h3 class="SwatchBrowser__Label">SORT</h3>
@@ -937,8 +941,16 @@ $breakpoint-desktop: 'min-width: 1146px';
       z-index: 10;
 
       &.is-active {
-        padding: 15px;
+        padding: 15px 15px 60px;
         transform: translateY(0);
+      }
+
+      & > .SwatchBrowser__Button {
+        border-radius: 0;
+        bottom: -61px;
+        margin: 0 -15px -15px;
+        position: sticky;
+        width: 100vw;
       }
 
       .SwatchBrowser__Label {
@@ -971,6 +983,10 @@ $breakpoint-desktop: 'min-width: 1146px';
       @at-root {
         .SwatchBrowser__FilterPanel & {
           border-top: 1px solid #D4D0CA;
+        }
+
+        .SwatchBrowser__FilterPanel.is-active &:last-of-type {
+          padding-bottom: 60px;
         }
       }
     }
