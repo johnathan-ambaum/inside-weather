@@ -66,7 +66,7 @@ export const filters = [
     isArray: true,
     options: [
       {
-        value: 'Solid Only',
+        value: 'Solid Colors Only',
         display: 'Solid Colors Only',
         iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/solids.png',
       },
@@ -77,7 +77,7 @@ export const filters = [
       },
       {
         value: 'Terrazzo & Marble',
-        display: 'Terrazo & Marble',
+        display: 'Terrazzo & Marble',
         iconLeft: 'https://cdn.insideweather.com/free-swatches/design-style/terrazzo-marble.png',
       },
       {
@@ -96,7 +96,7 @@ export const filters = [
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/sweet-palm.png',
       },
       {
-        value: 'Watercolor&Ink',
+        value: 'Watercolor & Ink',
         display: 'Watercolor & Ink',
         iconLeft: 'https://inside-weather-assets.s3.amazonaws.com/pdp/customizer/upholstery-surface-design/pacific-waters.png',
       },
