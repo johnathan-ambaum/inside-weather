@@ -475,9 +475,26 @@ export default {
       if (newValue.length) {
         document.body.addEventListener('click', bindCloseEvents);
         window.addEventListener('keydown', bindCloseEvents);
+        document.querySelector('html').classList.add('ProductCustomizer--Open');
       } else {
         document.body.removeEventListener('click', bindCloseEvents);
         window.removeEventListener('keydown', bindCloseEvents);
+        document.querySelector('html').classList.remove('ProductCustomizer--Open');
+      }
+      if (this.isLargeMobile) {
+        document.querySelector('html').classList.toggle('ProductCustomizer--Open', !!newValue.length);
+      }
+    },
+
+    showOrderForm(newValue) {
+      if (this.isLargeMobile) {
+        document.querySelector('html').classList.toggle('ProductCustomizer--Open', newValue);
+      }
+    },
+
+    activeSwatch(swatch) {
+      if (this.isLargeMobile) {
+        document.querySelector('html').classList.toggle('ProductCustomizer--Open', swatch !== null);
       }
     },
   },
