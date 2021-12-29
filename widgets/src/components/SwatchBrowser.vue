@@ -929,6 +929,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       align-content: flex-start;
       align-items: flex-start;
       background: white;
+      flex-direction: column;
       height: 100%;
       left: 0;
       overflow-y: auto;
@@ -941,20 +942,28 @@ $breakpoint-desktop: 'min-width: 1146px';
       z-index: 10;
 
       &.is-active {
-        padding: 15px 15px 60px;
+        flex-wrap: nowrap;
+        padding: 15px 15px 0;
         transform: translateY(0);
+
+        .CloseButton {
+          position: absolute;
+          right: 22px;
+          top: 15px;
+        }
       }
 
       & > .SwatchBrowser__Button {
         border-radius: 0;
-        bottom: -61px;
+        bottom: -1px;
+        flex: 0 0 45px;
         margin: 0 -15px -15px;
         position: sticky;
         width: 100vw;
       }
 
       .SwatchBrowser__Label {
-        flex: 1;
+        flex: 0;
         font-weight: 600;
       }
 
@@ -983,9 +992,11 @@ $breakpoint-desktop: 'min-width: 1146px';
       @at-root {
         .SwatchBrowser__FilterPanel & {
           border-top: 1px solid #D4D0CA;
+          flex: 0;
         }
 
         .SwatchBrowser__FilterPanel.is-active &:last-of-type {
+          flex: 1;
           padding-bottom: 60px;
         }
       }
@@ -1149,6 +1160,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       margin: 0 0 0 15px;
 
       &.has-description {
+        flex: 1;
         flex-wrap: wrap;
       }
 
