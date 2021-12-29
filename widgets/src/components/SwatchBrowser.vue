@@ -1853,11 +1853,13 @@ $breakpoint-desktop: 'min-width: 1146px';
       }
 
       &.is-open {
+        background: #fff;
+        height: calc(100% - 85px);
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
         position: fixed;
         top: 0;
-        left: 0;
-        background: white;
-        height: calc(100% - 85px);
         width: 100%;
 
         & > .SwatchBrowser__CartCounter {
@@ -1910,6 +1912,21 @@ $breakpoint-desktop: 'min-width: 1146px';
     flex: 1;
     padding: 0 15px;
     overflow-x: auto;
+
+    @include at-query($breakpoint-mobile) {
+      @at-root {
+        .SwatchBrowser__CartBody.is-open & {
+          align-content: flex-start;
+          flex-wrap: wrap;
+          overflow-x: hidden;
+          overflow-y: auto;
+
+          .SwatchBrowser__CartItem {
+            flex: 0 0 110px;
+          }
+        }
+      }
+    }
 
     @include at-query($breakpoint-desktop) {
       flex-wrap: wrap;
