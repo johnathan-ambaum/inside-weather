@@ -63,9 +63,9 @@ export default {
       return Math.round(savings);
     },
 
-    fulfillmentDays() {
-      const min = this.filters.min_fulfillment_days;
-      const max = this.filters.max_fulfillment_days;
+    fulfillmentDays(emailDays = false) {
+      const min = (emailDays ? this.filters.email_min_fulfillment_days : this.filters.min_fulfillment_days);
+      const max = (emailDays ? this.filters.email_max_fulfillment_days : this.filters.max_fulfillment_days);
       const selectedOptionsMin = [0];
       const selectedOptionsMax = [0];
 

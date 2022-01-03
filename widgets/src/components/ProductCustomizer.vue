@@ -423,7 +423,7 @@ export default {
         return null;
       }
 
-      const { maxDays } = this.fulfillmentDays;
+      const { maxDays } = this.fulfillmentDays(true); // use email_min/max_fulfillment_days
 
       if (isNaN(maxDays)) {
         return null;
