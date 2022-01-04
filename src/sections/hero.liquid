@@ -9,6 +9,9 @@
     min-height: 320px;
     position: static;
   }
+  .ProductCustomizer--Open .background-media-text--{{ section.id }} {
+    display: none;
+  }
   .background-media-text__wrapper {
     color: {{ section.settings.text_color }};
   }
@@ -79,8 +82,6 @@
     </div>
   {% endif %}
 </div>
-
-<div class="background-media-text__spacer background-media-text--"></div>
 
 {% schema %}
   {

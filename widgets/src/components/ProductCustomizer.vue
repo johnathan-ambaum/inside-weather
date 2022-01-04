@@ -1050,7 +1050,10 @@ export default {
 }
 
 html.ProductCustomizer--Open {
-  overflow: hidden;
+  &, body {
+    overflow: hidden;
+    position: relative;
+  }
 
   .orb-chat-mount {
     display: none !important;

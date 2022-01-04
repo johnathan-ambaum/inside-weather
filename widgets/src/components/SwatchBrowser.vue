@@ -1,6 +1,7 @@
 <template>
   <div class="SwatchBrowser">
     <div
+      v-if="!isLargeMobile || !activeSwatch"
       ref="filters"
       class="SwatchBrowser__Filters"
     >
@@ -253,6 +254,7 @@
         </div>
       </div>
       <div
+        v-show="!isLargeMobile || !activeSwatch"
         :class="{ full: showOrderForm && showCart }"
         class="SwatchBrowser__Cart"
       >
@@ -575,6 +577,7 @@ export default {
         return;
       }
 
+      if (!this.isLargeMobile) {
       this.$nextTick(() => {
         for (let i = index; i >= 0; i--) {
           if (this.$refs.swatches[i].getBoundingClientRect().left < 100) {
@@ -591,6 +594,7 @@ export default {
           }
         }
       });
+      }
 
       this.activeSwatch = { variant_id: variantId };
       const selected = this.swatches.find(swatch => swatch.variant_id === variantId);
@@ -690,6 +694,12 @@ $breakpoint-desktop: 'min-width: 1146px';
     .orb-chat-mount {
       display: none !important;
     }
+  }
+}
+
+.ProductCustomizer--Open {
+  .TopBar, .ambaum__header {
+    display: none;
   }
 }
 
@@ -862,7 +872,7 @@ $breakpoint-desktop: 'min-width: 1146px';
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    position: relative;
+    // position: relative;
 
     &.order-form-active + .SwatchBrowser__Cart {
 
@@ -1325,7 +1335,7 @@ $breakpoint-desktop: 'min-width: 1146px';
         position: fixed;
         top: 0;
         width: 100vw;
-        z-index: 1020;
+        z-index: 1030;
       }
 
       @include at-query($breakpoint-desktop) {
