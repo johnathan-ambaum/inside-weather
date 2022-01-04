@@ -396,7 +396,7 @@ export default {
         return null;
       }
 
-      const { maxDays } = this.fulfillmentDays;
+      const { maxDays } = this.fulfillmentDays();
 
       if (isNaN(maxDays)) {
         return null;
