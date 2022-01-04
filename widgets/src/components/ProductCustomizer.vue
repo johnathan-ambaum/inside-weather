@@ -73,7 +73,7 @@
       <add-to-cart v-if="!clearanceData.floorFound" :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
       <a v-else :href="clearanceData.floorFoundUrl" rel="noreferrer" class="ProductCustomizer__floorfound-link">View Product on Floorfound</a>
       <p :data-amount="formattedProductPrice * 100" data-page-type="product" class="affirm-as-low-as" />
-      <catch-callout :price="formattedProductPrice" border-style="pill" or-prefix page-type="product" theme="light-mono" />
+      <catch-callout :price="formattedProductPrice * 100" border-style="pill" or-prefix page-type="product" theme="light-mono" />
     </div>
     <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
       <div class="ProductCustomizer__FlagRow">
