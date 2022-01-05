@@ -337,8 +337,10 @@ export default {
     max-height: 500px;
     overflow-y: auto;
 
-    .related-products__card {
-      flex-basis: 50%;
+    @include at-query('max-width: 1600px') {
+      .related-products__card {
+        flex-basis: 50%;
+      }
     }
 
     .related-products__title {
