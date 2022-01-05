@@ -1131,7 +1131,9 @@ $breakpoint-desktop: 'min-width: 1146px';
     }
 
     @include at-query($breakpoint-desktop) {
+      max-height: calc(100vh - #{$header-height + $filter-height + 20px});
       max-width: 430px;
+      overflow-y: auto;
     }
   }
 
@@ -1338,7 +1340,7 @@ $breakpoint-desktop: 'min-width: 1146px';
         z-index: 1030;
       }
 
-      @include at-query($breakpoint-desktop) {
+      @include at-query('min-width: 1340px') {
         padding-right: 46px;
       }
     }

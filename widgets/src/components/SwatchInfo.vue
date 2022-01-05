@@ -340,6 +340,7 @@ export default {
     @include at-query('max-width: 1600px') {
       .related-products__card {
         flex-basis: 50%;
+        padding: 0 5px;
       }
     }
 
