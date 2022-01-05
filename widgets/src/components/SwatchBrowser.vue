@@ -578,22 +578,22 @@ export default {
       }
 
       if (!this.isLargeMobile) {
-      this.$nextTick(() => {
-        for (let i = index; i >= 0; i--) {
-          if (this.$refs.swatches[i].getBoundingClientRect().left < 100) {
-            const bookendIndex = i === index ? i + 1 : i;
-            this.$refs.swatches[bookendIndex].classList.add('bookend');
-            const { top } = this.$refs.swatches[i].getBoundingClientRect();
-            const headerHeight = document.querySelector('.ambaum__header').getBoundingClientRect().height;
-            const filterHeight = this.$refs.filters.getBoundingClientRect().height;
-            window.scrollTo({
-              top: window.pageYOffset + top - headerHeight - filterHeight - 80,
-              behavior: 'smooth',
-            });
-            break;
+        this.$nextTick(() => {
+          for (let i = index; i >= 0; i--) {
+            if (this.$refs.swatches[i].getBoundingClientRect().left < 100) {
+              const bookendIndex = i === index ? i + 1 : i;
+              this.$refs.swatches[bookendIndex].classList.add('bookend');
+              const { top } = this.$refs.swatches[i].getBoundingClientRect();
+              const headerHeight = document.querySelector('.ambaum__header').getBoundingClientRect().height;
+              const filterHeight = this.$refs.filters.getBoundingClientRect().height;
+              window.scrollTo({
+                top: window.pageYOffset + top - headerHeight - filterHeight - 80,
+                behavior: 'smooth',
+              });
+              break;
+            }
           }
-        }
-      });
+        });
       }
 
       this.activeSwatch = { variant_id: variantId };
