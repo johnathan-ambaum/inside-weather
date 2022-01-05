@@ -337,6 +337,10 @@ export default {
     max-height: 500px;
     overflow-y: auto;
 
+    .related-products__card {
+      flex-basis: 50%;
+    }
+
     .related-products__title {
       margin-bottom: 5px;
     }
