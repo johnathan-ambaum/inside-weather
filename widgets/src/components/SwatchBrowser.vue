@@ -477,11 +477,9 @@ export default {
       if (newValue.length) {
         document.body.addEventListener('click', bindCloseEvents);
         window.addEventListener('keydown', bindCloseEvents);
-        document.querySelector('html').classList.add('ProductCustomizer--Open');
       } else {
         document.body.removeEventListener('click', bindCloseEvents);
         window.removeEventListener('keydown', bindCloseEvents);
-        document.querySelector('html').classList.remove('ProductCustomizer--Open');
       }
       if (this.isLargeMobile) {
         document.querySelector('html').classList.toggle('ProductCustomizer--Open', !!newValue.length);
@@ -697,9 +695,11 @@ $breakpoint-desktop: 'min-width: 1146px';
   }
 }
 
-.ProductCustomizer--Open {
-  .TopBar, .ambaum__header {
-    display: none;
+@include at-query($breakpoint-mobile) {
+  .ProductCustomizer--Open {
+    .TopBar, .ambaum__header {
+      display: none;
+    }
   }
 }
 
