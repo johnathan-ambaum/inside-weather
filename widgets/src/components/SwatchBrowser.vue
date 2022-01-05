@@ -1226,7 +1226,7 @@ $breakpoint-desktop: 'min-width: 1146px';
       border-radius: 50%;
       height: auto;
       margin-right: 15px;
-      width: 50px;
+      width: 34px;
     }
 
     &--Right {
