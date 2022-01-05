@@ -683,6 +683,8 @@ $breakpoint-mobile: 'max-width: 1145px';
 $breakpoint-desktop: 'min-width: 1146px';
 
 .template-page-swatches {
+  overflow: initial;
+
   @include at-query($breakpoint-mobile) {
     .main-content {
       position: relative;
