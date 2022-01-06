@@ -265,7 +265,7 @@
   {% endif %}
   <script src="{{ 'manifest.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
-  {% if template.name != 'product' and template.suffix != 'favorites' -%}
+  {% if template.name != 'product' and template.suffix != 'favorites' and template.suffix != 'swatches' -%}
     <script src="{{ 'widgets.js' | asset_url }}" defer></script>
   {%- endif %}
   <script src="//viewer.cylindo.com/v4/viewer.min.js" defer></script>
@@ -310,7 +310,7 @@
 {% include 'hulkcode_common' %}{% if template contains 'product' or template contains 'cart' %}<script src='https://volumediscount.hulkapps.com/hulkcode.js' defer='defer'></script>{% endif %}
 </head>
 
-<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} template-{{ template.name }}-{{ template.suffix }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}">
 
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6SBKJC"
@@ -500,9 +500,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   	additional="term=value",
   	t,r,i;try{t=top.document.referer!==""?encodeURIComponent(top.document.referrer.substring(0,2048)):""}catch(o){t=document.referrer!==null?document.referrer.toString().substring(0,2048):""}try{r=window&&window.top&&document.location&&window.top.location===document.location?document.location:window&&window.top&&window.top.location&&""!==window.top.location?window.top.location:document.location}catch(u){r=document.location}try{i=parent.location.href!==""?encodeURIComponent(parent.location.href.toString().substring(0,2048)):""}catch(a){try{i=r!==null?encodeURIComponent(r.toString().substring(0,2048)):""}catch(f){i=""}}var l,c=document.createElement("script"),h=null,p=document.getElementsByTagName("script"),d=Number(p.length)-1,v=document.getElementsByTagName("script")[d];if(typeof l==="undefined"){l=Math.floor(Math.random()*1e17)}h="dx.steelhousemedia.com/spx?"+"dxver="+b+"&shaid="+n+"&tdr="+t+"&plh="+i+"&cb="+l+additional;c.type="text/javascript";c.src=("https:"===document.location.protocol?"https://":"http://")+h;v.parentNode.insertBefore(c,v)})()
   </script>
-
-  <!--BING UET TAG-->
-  <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"134600489"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
 
 </body>
 </html>

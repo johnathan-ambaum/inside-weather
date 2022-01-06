@@ -1,0 +1,26 @@
+{
+    "sections": {
+      "1639067553d51eba8d": {
+        "type": "hero",
+        "settings": {
+          "subtitle": "WITH 400+ FABRIC OPTIONS, CUSTOM FURNITURE STARTS NOW",
+          "title": "Custom Upholsteries",
+          "text": "<p>Discover the possibilities & then order 10 FREE swatches to see them in person!<\/p>",
+          "image": "shopify:\/\/shop_images\/Mask_Group_6.jpg",
+          "alignment": "center",
+          "layout": "center",
+          "text_color": "#fff",
+          "height": 450
+        }
+      },
+      "main": {
+        "type": "main-swatches",
+        "settings": {
+        }
+      }
+    },
+    "order": [
+      "1639067553d51eba8d",
+      "main"
+    ]
+  }

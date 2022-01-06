@@ -4,6 +4,7 @@ mix
   .js('src/main.js', 'widgets.js')
   .js('src/product.js', 'product.js')
   .js('src/favorites.js', 'favorites.js')
+  .js('src/swatches.js', 'swatches.js')
   .vue({
     extractStyles: 'widgets.css',
     version: 2,

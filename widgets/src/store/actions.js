@@ -278,18 +278,9 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
   }
 }
 
-export function pullSwatches({ state, dispatch, commit }) {
-  if (!state.category) {
-    setTimeout(() => {
-      dispatch('pullSwatches');
-    }, 200);
-    return;
-  }
-
-  const clearanceCategory = state.category.replace("Clearance ", "")
-
+export function pullSwatches({ commit }) {
   apiClient
-    .getSwatches(clearanceCategory)
+    .getSwatches()
     .then((swatches) => {
       commit('setSwatches', swatches);
     });
