@@ -287,7 +287,7 @@ export default {
           return;
         }
 
-        const foundAttribute = attributes.find(attribute => attribute.parameter === matches);
+        const foundAttribute = attributes.find(attribute => attribute.parameter === parameter);
         const foundValue = foundAttribute.values.find((item) => item.value === existingSelections[matches]) || foundAttribute.values[0];
         if (foundValue) {
           selectedOptions[parameter] = foundValue.value;
