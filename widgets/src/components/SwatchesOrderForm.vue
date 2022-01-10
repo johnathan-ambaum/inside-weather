@@ -25,6 +25,7 @@
             Your Information
             <close-button
               v-if="isMobile"
+              label="BACK TO SWATCHES"
               :size="20"
               @click.native.prevent.stop="$emit('close')"
             />
@@ -59,6 +60,7 @@
                 :class="{ 'has-error': hasError(field.name) }"
                 @focus="e => $bus.$emit('swatch-browser:focus-field', e)"
               >
+                <option value="">Select</option>
                 <option
                   v-for="state in states"
                   :key="state.abbreviation"
@@ -85,6 +87,7 @@
               class="SwatchesOrderForm__Submit SwatchBrowser__Button SwatchBrowser__Button--Black"
               type="submit"
             >SUBMIT SWATCH ORDER</button>
+            <p v-if="!isMobile">Swatches are FREE and arrive in 2-4 business days.</p>
           </div>
         </div>
       </form>
@@ -220,7 +223,7 @@ export default {
         },
         {
           name: 'phone',
-          label: 'PHONE',
+          label: 'PHONE NUMBER',
           type: 'number',
           required: true,
           fullWidth: true,
@@ -346,10 +349,17 @@ export default {
       svg.ArrowButton__Icon {
         transform: translate(-18px, -11px) rotate(180deg);
       }
+
+      circle {
+        fill: none;
+      }
     }
 
     .SwatchBrowser__Button {
+      border-bottom: 1px solid #202020;
+      border-radius: 0;
       font-size: 13px;
+      height: auto;
       width: auto;
 
       @include at-query($breakpoint-large) {
@@ -360,11 +370,23 @@ export default {
 
   &__Form,
   &__ThankYou {
+    background: #F2F2F2;
     bottom: 0;
     left: 0;
+    overflow-y: auto;
     position: absolute;
     right: 0;
     top: 0;
+
+    @include at-query($breakpoint-large) {
+      padding-right: 440px;
+    }
+  }
+
+  &__Form {
+    @include at-query($breakpoint-small) {
+      background: #fff;
+    }
   }
 
   &__Heading {
@@ -376,7 +398,6 @@ export default {
     @include at-query($breakpoint-large) {
       font-size: 28px;
       margin-top: 30px;
-      text-align: center;
     }
 
     .CloseButton {
@@ -411,11 +432,26 @@ export default {
 
     label {
       display: block;
+      letter-spacing: .12em;
+      line-height: 1;
+
+      span {
+        color: #959595;
+      }
+    }
+
+    input, select {
+      background: #fff;
+      border: 1px solid #D4D0CA;
+      border-radius: 50px;
+      letter-spacing: .04em;
+      line-height: 30px;
+    }
+
+    label, input, select {
       font-family: $font-stack-avalon;
       font-size: 14px;
       font-weight: 500;
-      letter-spacing: .12em;
-      line-height: 30px;
     }
 
     input[type="number"] {
@@ -441,6 +477,14 @@ export default {
   &__Submit {
     margin: 20px 0;
     width: 100%;
+
+    & + p {
+      font-family: $font-stack-avalon;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+    }
   }
 
   &__ThankYou {

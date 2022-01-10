@@ -397,7 +397,7 @@ export default {
         return null;
       }
 
-      const { maxDays } = this.fulfillmentDays;
+      const { maxDays } = this.fulfillmentDays();
 
       if (isNaN(maxDays)) {
         return null;
@@ -424,7 +424,7 @@ export default {
         return null;
       }
 
-      const { maxDays } = this.fulfillmentDays;
+      const { maxDays } = this.fulfillmentDays(true); // use email_min/max_fulfillment_days
 
       if (isNaN(maxDays)) {
         return null;
@@ -582,9 +582,7 @@ export default {
       window.affirm.ui.refresh();
     };
 
-    this.$nextTick(() => {
-      updateAffirm();
-    });
+    updateAffirm();
 
     const setupMulberry = () => {
       if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
@@ -1051,7 +1049,10 @@ export default {
 }
 
 html.ProductCustomizer--Open {
-  overflow: hidden;
+  &, body {
+    overflow: hidden;
+    position: relative;
+  }
 
   .orb-chat-mount {
     display: none !important;

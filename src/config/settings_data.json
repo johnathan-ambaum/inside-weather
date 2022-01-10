@@ -782,14 +782,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p><strong>The Winter Sale<\/strong> |  Up to 20% OFF sitewide with code <strong>WINTER<\/strong> | <a href=\"\/pages\/2021-winter-sale\" title=\"The Winter Sale\">SHOP NOW<\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2021-winter-sale\" title=\"The Winter Sale\"><strong>The Winter Sale<\/strong> |  Up to 20% OFF sitewide with code <strong>WINTER<\/strong><\/a><\/p>",
+          "text_1": "<p>Kick off 2022 with a home refresh! | Save up to <strong>20% OFF<\/strong> with code <strong>NEW YEAR<\/strong> | <a href=\"\/pages\/2022-new-year-sale\" title=\"New Year Sale 2022\">SHOP NOW<\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/2022-new-year-sale\" title=\"New Year Sale 2022\">New Year, New Savings | Up to <strong>20% OFF<\/strong> with code <strong>NEW YEAR<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
           "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "12\/20\/2021"
+          "promo_countdown_end_date": "01\/04\/2022"
         }
       },
       "giftcard-header": {
