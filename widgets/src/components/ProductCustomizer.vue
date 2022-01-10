@@ -581,9 +581,7 @@ export default {
       window.affirm.ui.refresh();
     };
 
-    this.$nextTick(() => {
-      updateAffirm();
-    });
+    updateAffirm();
 
     const setupMulberry = () => {
       if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
