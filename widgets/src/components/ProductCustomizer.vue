@@ -195,39 +195,41 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ProductDetailSlider from './ProductDetailSlider.vue';
-import ProductGallery from './ProductGallery.vue';
 import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
 import CloseButton from './CloseButton.vue';
 import InfoPopup from './InfoPopup.vue';
 import SimpleCustomizer from './SimpleCustomizer.vue';
 import InspirationOptions from './InspirationOptions.vue';
-import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
 import Loader from './Loader.vue';
-import TemplateBlock from './TemplateBlock.vue';
 
 dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
+
+function updateAffirm() {
+  if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
+    setTimeout(updateAffirm, 200);
+    return;
+  }
+  window.affirm.ui.refresh();
+}
 
 export default {
   components: {
     ProductDetailSlider,
     FontAwesomeIcon,
-    ProductGallery,
     FilterPanel,
     AddToCart,
     CloseButton,
     InfoPopup,
     SimpleCustomizer,
     InspirationOptions,
-    SwatchBrowser,
     PhotoshootModal,
     Loader,
-    TemplateBlock
   },
 
   mixins: [
@@ -533,9 +535,6 @@ export default {
       if (this.filters.track_inventory) {
         this.createProduct();
       }
-      this.$nextTick(() => {
-        window.affirm.ui.refresh();
-      });
 
       let currentConfigurationIsFavorited = this.favorites.find((favorite) => {
         return JSON.stringify(favorite.attributes) === JSON.stringify(this.selectedOptions);
@@ -573,15 +572,7 @@ export default {
   },
 
   mounted() {
-    const updateAffirm = () => {
-      if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
-        setTimeout(updateAffirm, 200);
-        return;
-      }
-      window.affirm.ui.refresh();
-    };
-
-    updateAffirm();
+    this.nextTick(updateAffirm);
 
     const setupMulberry = () => {
       if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
@@ -609,6 +600,10 @@ export default {
       StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
     };
     reloadStamped();
+  },
+
+  updated() {
+    this.$nextTick(updateAffirm);
   },
 
   methods: {
