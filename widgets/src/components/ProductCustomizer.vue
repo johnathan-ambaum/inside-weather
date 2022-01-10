@@ -1794,6 +1794,7 @@ html.ProductCustomizer--Open {
 catch-callout {
   display: flex;
   justify-content: center;
+  margin-bottom: 25px;
 }
 
 .favorites__loading{
