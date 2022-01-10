@@ -195,20 +195,17 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ProductDetailSlider from './ProductDetailSlider.vue';
-import ProductGallery from './ProductGallery.vue';
 import FilterPanel from './FilterPanel.vue';
 import AddToCart from './AddToCart.vue';
 import CloseButton from './CloseButton.vue';
 import InfoPopup from './InfoPopup.vue';
 import SimpleCustomizer from './SimpleCustomizer.vue';
 import InspirationOptions from './InspirationOptions.vue';
-import SwatchBrowser from './SwatchBrowser.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
 import Loader from './Loader.vue';
-import TemplateBlock from './TemplateBlock.vue';
 
 dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
@@ -225,17 +222,14 @@ export default {
   components: {
     ProductDetailSlider,
     FontAwesomeIcon,
-    ProductGallery,
     FilterPanel,
     AddToCart,
     CloseButton,
     InfoPopup,
     SimpleCustomizer,
     InspirationOptions,
-    SwatchBrowser,
     PhotoshootModal,
     Loader,
-    TemplateBlock
   },
 
   mixins: [
