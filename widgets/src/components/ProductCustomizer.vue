@@ -213,6 +213,14 @@ import TemplateBlock from './TemplateBlock.vue';
 dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
 
+function updateAffirm() {
+  if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
+    setTimeout(updateAffirm, 200);
+    return;
+  }
+  window.affirm.ui.refresh();
+}
+
 export default {
   components: {
     ProductDetailSlider,
@@ -533,9 +541,6 @@ export default {
       if (this.filters.track_inventory) {
         this.createProduct();
       }
-      this.$nextTick(() => {
-        window.affirm.ui.refresh();
-      });
 
       let currentConfigurationIsFavorited = this.favorites.find((favorite) => {
         return JSON.stringify(favorite.attributes) === JSON.stringify(this.selectedOptions);
@@ -573,15 +578,7 @@ export default {
   },
 
   mounted() {
-    const updateAffirm = () => {
-      if (!window.affirm || !window.affirm.ui || !window.affirm.ui.refresh) {
-        setTimeout(updateAffirm, 200);
-        return;
-      }
-      window.affirm.ui.refresh();
-    };
-
-    updateAffirm();
+    this.nextTick(updateAffirm);
 
     const setupMulberry = () => {
       if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
@@ -609,6 +606,10 @@ export default {
       StampedFn.reloadUGC();//reloads stamped.io widget so it can mount within a vue
     };
     reloadStamped();
+  },
+
+  updated() {
+    this.$nextTick(updateAffirm);
   },
 
   methods: {
