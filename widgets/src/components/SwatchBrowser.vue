@@ -199,10 +199,7 @@
                   />
                   <div class="SwatchBrowser__SwatchName">{{ swatch.name }}</div>
                   <div class="SwatchBrowser__SwatchSubName">{{ swatch.swatch_type }}</div>
-                  <div
-                    v-if="swatch.commercial || swatch.performance || swatch.pet_friendly || swatch.water_resistant"
-                    class="SwatchBrowser__Badges"
-                  >
+                  <div class="SwatchBrowser__Badges">
                     <img
                       v-if="swatch.commercial"
                       src="https://cdn.insideweather.com/icons/commercial-ico_v2.png"
@@ -1372,9 +1369,11 @@ $breakpoint-desktop: 'min-width: 1146px';
       display: flex;
       flex-direction: column;
       flex: 0 1 auto;
+      height: 100%;
     }
 
     &.info-active #{&}Detail {
+      height: auto;
       margin-top: 20px;
       padding: 0 15px;
 
@@ -1537,6 +1536,7 @@ $breakpoint-desktop: 'min-width: 1146px';
   &__Badges {
     align-items: center;
     display: flex;
+    flex: 1;
     flex-wrap: wrap;
     font-size: 14px;
     margin-top: 20px;
