@@ -1681,7 +1681,7 @@ $breakpoint-desktop: 'min-width: 1146px';
     @include at-query($breakpoint-desktop) {
       max-height: calc(100vh - #{$header-height + $filter-height + 20px});
       position: sticky;
-      top: $header-height + $filter-height + 20px;
+      top: $header-height + $filter-height + 40px;
 
       & > p {
         margin: 0 70px;
