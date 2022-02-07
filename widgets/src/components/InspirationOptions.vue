@@ -32,6 +32,7 @@ export default {
 
 .InspirationOptions {
   margin-bottom: 40px;
+  margin-top: 20px;
 
   &__Heading {
     font-family: $font-stack-avalon;
