@@ -46,7 +46,7 @@
             :tags="{{ product.tags | json | escape }}"
             :metafields="{{ product.metafields.products | json | escape }}"
             :shopify-product="{{ product | json | escape }}"
-            stamped-badge="{{product.metafields.stamped.badge}}"
+            stamped-badge="{{ product.metafields.stamped.badge | escape }}"
             initial-id="{{product.id}}"
           ></product-customizer>
 

@@ -12,14 +12,14 @@
         <div class="ProductCustomizer__Name">
           {{ productName }}
           <span
-          class="stamped-product-reviews-badge stamped-main-badge"
-          :data-id="initialId"
-          :data-product-sku="initialHandle"
-          :data-product-title="productName"
-          :data-product-type="category"
-          style="display: block;">
-          {{ stampedBadge }}
-          </span>
+            class="stamped-product-reviews-badge stamped-main-badge"
+            :data-id="initialId"
+            :data-product-sku="initialHandle"
+            :data-product-title="productName"
+            :data-product-type="category"
+            style="display: block;"
+            v-html="stampedBadge"
+          />
         </div>
         <div v-if="isCustomer">
           <span :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
@@ -82,14 +82,14 @@
         <div class="ProductCustomizer__Name">
           {{ productName }}
           <span
-          class="stamped-product-reviews-badge stamped-main-badge"
-          :data-id="initialId"
-          :data-product-sku="initialHandle"
-          :data-product-title="productName"
-          :data-product-type="category"
-          style="display: block;">
-          {{ stampedBadge }}
-          </span>
+            class="stamped-product-reviews-badge stamped-main-badge"
+            :data-id="initialId"
+            :data-product-sku="initialHandle"
+            :data-product-title="productName"
+            :data-product-type="category"
+            style="display: block;"
+            v-html="stampedBadge"
+          />
         </div>
         <span v-if="!disabled" :class="{ isFavorite }" role="button" class="ProductCustomizer__Favorite"
           @click.stop.prevent="favoriteCurrentProduct">
@@ -572,7 +572,7 @@ export default {
   },
 
   mounted() {
-    this.nextTick(updateAffirm);
+    this.$nextTick(updateAffirm);
 
     const setupMulberry = () => {
       if (!window.theme.settings.mulberry || !window.theme.settings.mulberry.active) {
