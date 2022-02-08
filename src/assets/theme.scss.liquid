@@ -2703,6 +2703,7 @@ symbol {
 .drawer__header {
   display: table;
   // height: $drawerHeaderHeight;
+  table-layout: fixed;
   width: 100%;
   margin-bottom: 0;
   border-bottom: 1px solid $colorDrawerBorder;
@@ -2749,7 +2750,7 @@ symbol {
 }
 
 .drawer__close {
-  width: 1%;
+  width: 20px;
   text-align: center;
 }
 
@@ -2757,7 +2758,7 @@ symbol {
 
 .drawer__close-button {
   position: relative;
-  right: -20px;
+  left: -40px;
   height: 100%;
   padding: 0 15px;
   color: inherit;
@@ -2778,6 +2779,10 @@ symbol {
   @include media-query($large-up) {
     right: -20px;
   }
+}
+
+.drawer--has-clock .drawer__close-button {
+  top: 30px;
 }
 
 // Rare use case left close button
@@ -2837,16 +2842,16 @@ symbol {
 #drawer__countdown-timer{
   font-family: Avalon;
   font-weight: 600;
-  font-size:13px;
-  letter-spacing: 0.04em;
+  font-size:18px;
+  letter-spacing: 0.1em;
   line-height:20px;
   text-align:left;
-  color: red;
+  color: #e64848;
 }
 .drawer-clock__header{
   font-family: Avalon;
-  font-weight: 600;
-  font-size:13px;
+  font-weight: 500;
+  font-size:14px;
   letter-spacing: 0.04em;
   line-height:20px;
   text-align:left;
@@ -2857,10 +2862,40 @@ symbol {
   font-weight: 500;
   font-size:11px;
   letter-spacing: 0.04em;
-  line-height:19px;
+  line-height:17px;
   text-align:left;
   color: #202020;
   margin-bottom: 0;
+}
+.drawer-clock__form {
+  display: flex;
+  flex-wrap: wrap;
+}
+body .drawer-clock__input {
+  border-radius: 50px;
+  flex: 1;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  margin-top: 6px;
+}
+body .drawer-clock__input::placeholder {
+  color: #d4d0ca;
+}
+body .drawer-clock__button {
+  border-radius: 50px;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.drawer-clock__errors {
+  color: red;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 14px;
 }
 .drawer__body {
   position: absolute;
@@ -2884,29 +2919,26 @@ symbol {
     // }
   }
 }
-.drawer__body--has-clock{
-  margin-top:6rem;
+.drawer__body.drawer__body--has-clock {
+  margin-top: 9rem;
 }
 @include media-query($medium-up) {
   .drawer__body{
     margin-top: 30px;
   }
-  .drawer__body--has-clock{
-    margin-top:6rem;
-  }
   #drawer__countdown-timer{
     font-family: Avalon;
     font-weight: 600;
-    font-size:15px;
-    letter-spacing: 0.04em;
+    font-size:18px;
+    letter-spacing: 0.1em;
     line-height:20px;
     text-align:left;
-    color: red;
+    color: #e64848;
   }
   .drawer-clock__header{
     font-family: Avalon;
-    font-weight: 600;
-    font-size:15px;
+    font-weight: 500;
+    font-size:14px;
     letter-spacing: 0.04em;
     line-height:20px;
     text-align:left;
@@ -2915,9 +2947,9 @@ symbol {
   .drawer-clock__text{
     font-family: Avalon;
     font-weight: 500;
-    font-size:12px;
+    font-size:11px;
     letter-spacing: 0.04em;
-    line-height:19px;
+    line-height:17px;
     text-align:left;
     color: #202020;
   }
