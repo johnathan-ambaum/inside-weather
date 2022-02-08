@@ -737,6 +737,7 @@ export default {
       }
 
       this.$bus.$emit('customizer-close');
+      this.onboardModalHandler();
 
       if(this.customerId){
         this.historyLoading = true;
@@ -1022,6 +1023,7 @@ export default {
         });
       }
     },
+
     setProductOnLoad(){
       if(!this.selectedOptions){
         setTimeout(this.setProductOnLoad, 200);
@@ -1029,6 +1031,27 @@ export default {
       }
       this.setSelectedOptions(this.selectedOptions);
       return
+    },
+
+    onboardModalHandler(){
+      const firstOnboardModalTriggerNum = 2;
+      const secondOnboardModalTriggerNum = 10;
+      let numberOfTimesCustomized = localStorage.getItem("numberOfTimesCustomized");
+
+      if(!numberOfTimesCustomized){
+        numberOfTimesCustomized = 0;
+        localStorage.setItem("numberOfTimesCustomized", "0");
+      }
+      const newNumberOfTimesCustomized = parseInt(numberOfTimesCustomized) + 1;
+      localStorage.setItem("numberOfTimesCustomized", JSON.stringify(newNumberOfTimesCustomized));
+
+      if(newNumberOfTimesCustomized === firstOnboardModalTriggerNum){
+        const onboard = new CustomEvent('ProuctCustomizer:onboard', {detail: {show: 1}});
+        document.dispatchEvent(onboard);
+      }else if(newNumberOfTimesCustomized === secondOnboardModalTriggerNum){
+        const onboard = new CustomEvent('ProuctCustomizer:onboard', {detail: {show: 2}});
+        document.dispatchEvent(onboard);
+      }
     }
   },
 };
