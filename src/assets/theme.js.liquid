@@ -1220,6 +1220,7 @@ lazySizesConfig.expFactor = 4;
       fixedFooter: '.drawer__footer--fixed',
       fixedInnerContent: '.drawer__inner--has-fixed-footer',
       cartBubble: '.cart-link__bubble',
+      countdownTimer: '#drawer__countdown-timer',
       countdownInput: '[data-drawer-timer-email]',
       countdownErrors: '[data-drawer-timer-errors]',
       countdownButton: '[data-drawer-timer-submit]',
@@ -1347,6 +1348,8 @@ lazySizesConfig.expFactor = 4;
             el.style.display = 'none';
           });
           setCookie('discount-timer-accepted', 1, 365);
+          setCookie('discount-timer-show-discount', 1, 2);
+          $(selectors.countdownTimer).hide();
           clearTimeout(window.discountTimer);
           localStorage.removeItem('pdp-countdown-timer');
         });
@@ -1707,27 +1710,34 @@ lazySizesConfig.expFactor = 4;
           return "";
         }
 
+        const showDiscount = !!getCookie('discount-timer-show-discount');
+
+        if (!showDiscount && !cart.items.length) {
+          CartDrawer.prototype.countdownComplete(selectors.countdownTimer);
+          return;
+        }
+
         const endtime = JSON.parse(localStorage.getItem('pdp-countdown-timer'));
         const { total } = CartDrawer.prototype.time_remaining(endtime);
-        if(endtime && total < 1){
-          localStorage.removeItem('pdp-countdown-timer');
-          $(".drawer-clock__container").hide();
+        if(!showDiscount && endtime && total < 1){
+          CartDrawer.prototype.countdownComplete(selectors.countdownTimer);
           return;
         }
 
-        if (!endtime && !added) {
+        if (!endtime && !added && !showDiscount) {
           return;
         }
 
-        if (!theme.settings.vwo.countdown.countdownActive || !!getCookie('discount-timer-accepted')) {
+        if (!theme.settings.vwo.countdown.countdownActive || (!!getCookie('discount-timer-accepted') && !showDiscount)) {
           return;
         }
 
         const active = CartDrawer.prototype.run_clock({
-          id: 'drawer__countdown-timer',
+          selector: selectors.countdownTimer,
           duration: theme.settings.vwo.countdown.timerDurationInMinutes,
           endtime,
           extend: added,
+          completed: showDiscount,
         });
 
         if (active) {
@@ -1737,12 +1747,17 @@ lazySizesConfig.expFactor = 4;
           $('.drawer__body').addClass('drawer__body--has-clock');
           $(".drawer-clock__header").text(theme.settings.vwo.countdown.initialTextHeader);
           $(".drawer-clock__text").text(theme.settings.vwo.countdown.initialTextContent);
+          if (showDiscount) {
+            $(`${selectors.countdownTimer}, ${selectors.countdownInput}, ${selectors.countdownButton}`).hide();
+            $('.drawer-clock__text:not([data-drawer-timer-success])').hide();
+            $('[data-drawer-timer-success]').html(theme.settings.vwo.countdown.successTextContent).show();
+          }
           $(".drawer-clock__container").show();
         }
       },
-      countdownComplete: function(id){
+      countdownComplete: function(selector){
         localStorage.removeItem('pdp-countdown-timer');
-        $('#'+ id).text('0:00').parent().hide();
+        $(selector).text('0:00').parent().hide();
         $('.drawer__close').css('vertical-align', '' );
         $('.drawer__close-button').css('height', '');
         $('.drawer').removeClass('drawer--has-clock');
@@ -1757,19 +1772,23 @@ lazySizesConfig.expFactor = 4;
         var minutes = Math.floor( (t/1000/60) % 60 );
         return {'total':t, 'minutes':minutes, 'seconds':seconds};
       },
-      run_clock({ id, duration, endtime, extend = false }){
-        const clock = document.getElementById(id);
+      run_clock({ selector, duration, endtime, extend = false, completed = false }){
+        const clock = document.querySelector(selector);
 
-        if (!endtime || extend) {
+        if (!completed && (!endtime || extend)) {
           endtime = new Date(Date.parse(new Date()) + duration*60*1000);
           localStorage.setItem('pdp-countdown-timer', JSON.stringify(endtime));
           clearTimeout(discountTimer);
           delete discountTimer;
         }
 
+        if (completed) {
+          return true;
+        }
+
         const { total } = CartDrawer.prototype.time_remaining(endtime);
         if (total < 1){
-          CartDrawer.prototype.countdownComplete(id);
+          CartDrawer.prototype.countdownComplete(selectors.countdownTimer);
           return false;
         }
 

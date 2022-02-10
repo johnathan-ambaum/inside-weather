@@ -751,5 +751,23 @@
       //   });
       // }
     </script>
+
+    <script>
+      (function () {
+        function setCookie(name,value,days) {
+          var expires = "";
+          if (days) {
+              var date = new Date();
+              date.setTime(date.getTime() + (days*24*60*60*1000));
+              expires = "; expires=" + date.toUTCString();
+          }
+          document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+        if (Shopify.Checkout.page === 'thank_you') {
+          localStorage.removeItem('pdp-countdown-timer');
+          setCookie('discount-timer-show-discount', 1, 0);
+        }
+      })();
+    </script>
   </body>
 </html>
