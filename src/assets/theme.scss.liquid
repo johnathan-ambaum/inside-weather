@@ -2744,13 +2744,13 @@ symbol {
   width: 100%;
   padding: 24px 0;
   @include media-query($medium-up) {
-    padding:30px 0;
+    padding:30px 0 25px;
     font-size:28px;
   }
 }
 
 .drawer__close {
-  width: 20px;
+  width: 0;
   text-align: center;
 }
 
@@ -2758,7 +2758,7 @@ symbol {
 
 .drawer__close-button {
   position: relative;
-  left: -40px;
+  left: -50px;
   height: 100%;
   padding: 0 15px;
   color: inherit;
@@ -2782,7 +2782,13 @@ symbol {
 }
 
 .drawer--has-clock .drawer__close-button {
-  top: 30px;
+  top: 22px;
+}
+
+@media only screen and (min-width: 768px) {
+  .drawer--has-clock .drawer__close-button {
+    top: 32px;
+  }
 }
 
 // Rare use case left close button
@@ -2836,9 +2842,6 @@ symbol {
     padding: 30px 24px 0;
   }
 }
-.drawer-clock__container{
-  margin-top:0.5rem;
-}
 #drawer__countdown-timer{
   font-family: Avalon;
   font-weight: 600;
@@ -2850,8 +2853,8 @@ symbol {
 }
 .drawer-clock__header{
   font-family: Avalon;
-  font-weight: 500;
-  font-size:14px;
+  font-weight: 600;
+  font-size:16px;
   letter-spacing: 0.04em;
   line-height:20px;
   text-align:left;
@@ -2860,7 +2863,7 @@ symbol {
 .drawer-clock__text{
   font-family: Avalon;
   font-weight: 500;
-  font-size:11px;
+  font-size:14px;
   letter-spacing: 0.04em;
   line-height:17px;
   text-align:left;
@@ -2878,7 +2881,7 @@ body .drawer-clock__input {
   font-size: 12px;
   font-weight: 500;
   letter-spacing: .04em;
-  margin-top: 6px;
+  margin-top: 12px;
 }
 body .drawer-clock__input::placeholder {
   color: #d4d0ca;
@@ -2886,7 +2889,7 @@ body .drawer-clock__input::placeholder {
 body .drawer-clock__button {
   border-radius: 50px;
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: .1em;
   margin-left: 10px;
@@ -2937,8 +2940,8 @@ body .drawer-clock__button {
   }
   .drawer-clock__header{
     font-family: Avalon;
-    font-weight: 500;
-    font-size:14px;
+    font-weight: 600;
+    font-size:16px;
     letter-spacing: 0.04em;
     line-height:20px;
     text-align:left;
@@ -2947,7 +2950,7 @@ body .drawer-clock__button {
   .drawer-clock__text{
     font-family: Avalon;
     font-weight: 500;
-    font-size:11px;
+    font-size:14px;
     letter-spacing: 0.04em;
     line-height:17px;
     text-align:left;
