@@ -181,8 +181,9 @@ export default {
     },
 
     close(){
-      let addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
-      $('body').trigger(addedAjaxProuct);
+      let addedAjaxProduct = jQuery.Event( "added.ajaxProduct" );
+      addedAjaxProduct.openCartDrawer = true;
+      $('body').trigger(addedAjaxProduct);
       this.showOnTopElements();
       this.open = false;
     },
