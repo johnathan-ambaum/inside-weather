@@ -72,7 +72,8 @@
       <button v-else-if="!isClearance" class="ProductCustomizer__Trigger" @click.prevent="showCustomizer">Customize</button>
       <add-to-cart v-if="!clearanceData.floorFound" :processing="addToCartProcessing" :out-of-stock="!inStock" @addToCart="addToCart" />
       <a v-else :href="clearanceData.floorFoundUrl" rel="noreferrer" class="ProductCustomizer__floorfound-link">View Product on Floorfound</a>
-      <p :data-amount="formattedProductPrice * 100" data-page-type="product" class="affirm-as-low-as" />
+      <p :data-amount="formattedProductPrice * 100" data-page-type="product" class="affirm-as-low-as text-center" />
+      <catch-callout :price="formattedProductPrice * 100" border-style="pill" or-prefix page-type="product" theme="light-mono" />
     </div>
     <div v-else class="ProductCustomizer__DetailWrapper ProductCustomizer__404">
       <div class="ProductCustomizer__FlagRow">
@@ -737,6 +738,7 @@ export default {
       }
 
       this.$bus.$emit('customizer-close');
+      this.onboardModalHandler();
 
       if(this.customerId){
         this.historyLoading = true;
@@ -1022,6 +1024,7 @@ export default {
         });
       }
     },
+
     setProductOnLoad(){
       if(!this.selectedOptions){
         setTimeout(this.setProductOnLoad, 200);
@@ -1029,6 +1032,27 @@ export default {
       }
       this.setSelectedOptions(this.selectedOptions);
       return
+    },
+
+    onboardModalHandler(){
+      const firstOnboardModalTriggerNum = 2;
+      const secondOnboardModalTriggerNum = 10;
+      let numberOfTimesCustomized = localStorage.getItem("numberOfTimesCustomized");
+
+      if(!numberOfTimesCustomized){
+        numberOfTimesCustomized = 0;
+        localStorage.setItem("numberOfTimesCustomized", "0");
+      }
+      const newNumberOfTimesCustomized = parseInt(numberOfTimesCustomized) + 1;
+      localStorage.setItem("numberOfTimesCustomized", JSON.stringify(newNumberOfTimesCustomized));
+
+      if(newNumberOfTimesCustomized === firstOnboardModalTriggerNum){
+        const onboard = new CustomEvent('ProuctCustomizer:onboard', {detail: {show: 1}});
+        document.dispatchEvent(onboard);
+      }else if(newNumberOfTimesCustomized === secondOnboardModalTriggerNum){
+        const onboard = new CustomEvent('ProuctCustomizer:onboard', {detail: {show: 2}});
+        document.dispatchEvent(onboard);
+      }
     }
   },
 };
@@ -1784,6 +1808,13 @@ html.ProductCustomizer--Open {
     text-decoration: underline;
   }
 }
+
+catch-callout {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
 .favorites__loading{
   animation-name: heartBeat;
   animation-duration: 2s;

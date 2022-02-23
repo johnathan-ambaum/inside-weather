@@ -98,7 +98,11 @@
     dataLayer.push({user_agent: navigator.userAgent });
 
     {% if customer %}
-      dataLayer.push({SHA256_email: "{{ customer.email | sha256 }}" })
+      dataLayer.push({SHA256_email: "{{ customer.email | sha256 }}" });
+      window._learnq = window._learnq || [];
+      window._learnq.push(['identify', {
+        '$email': '{{ customer.email }}'
+      }]);
     {% else %}
       dataLayer.push({SHA256_email: null})
     {% endif %}

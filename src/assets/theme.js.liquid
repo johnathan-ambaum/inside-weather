@@ -3033,17 +3033,33 @@ lazySizesConfig.expFactor = 4;
     var modal = new theme.Modals('ajaxCustomerOnboard', 'ajax-customer-onboard');
 
     $(selectors.triggers).on('click','*[data-ajax-customer-onboard="true"]', triggerOnboard);
+    $(document).on('ProuctCustomizer:onboard', productCustomizerOnboard)
 
     function triggerOnboard(evt){
       evt.stopImmediatePropagation();
       if(window.customerId){
         return
       }else{
-        window.ajaxCustomerOnboardCurrentTrigger = evt
+        window.ajaxCustomerOnboardCurrentTrigger = evt;
+        $('.ajaxCustomerOnboard__login .ajaxCustomerOnboard__form-header').text('Login');
+        $('.ajaxCustomerOnboard__login .ajaxCustomerOnboard__form-description').text('');
         modal.open();
       }
+      return false;
+    }
 
-
+    function productCustomizerOnboard(evt){
+      evt.stopImmediatePropagation();
+      const heading = evt.detail.show === 1 ? 'Save your creation': 'You’re Missing Out!';
+      const description = evt.detail.show === 1 ? 'Login to view your design history & save your favorites!' : 'Looks like you are a design pro! Login to view your browsing history & save your favorites.';
+      if(window.customerId){
+        return
+      }else{
+        window.ajaxCustomerOnboardCurrentTrigger = evt
+        $('.ajaxCustomerOnboard__login .ajaxCustomerOnboard__form-header').text(heading);
+        $('.ajaxCustomerOnboard__login .ajaxCustomerOnboard__form-description').text(description);
+        modal.open();
+      }
       return false;
     }
 
