@@ -1433,7 +1433,7 @@ lazySizesConfig.expFactor = 4;
         $('body').on('qty.cart-drawer', this.updateItem.bind(this));
       },
 
-      updateItem: function(evt, key, qty) {
+      updateItem: async function(evt, key, qty) {
         if (this.status.loading) {
           return;
         }
@@ -1450,6 +1450,74 @@ lazySizesConfig.expFactor = 4;
           .always(function() {
             this.loading(false);
           }.bind(this));
+
+        if (qty > 0) {
+          return;
+        }
+
+        function getLatestShipDays(timeToShip) {
+          return Number(timeToShip.split(' ').shift().split('-').pop());
+        }
+
+        try {
+          const oldShipTimes = JSON.parse(localStorage.getItem('old-ship-times'));
+
+          if (oldShipTimes?.length) {
+            const { items } = await fetch('/cart.js').then(response => response.json());
+            const latestProperties = items.reduce((carry, item) => {
+              if (!carry) {
+                return item.properties;
+              }
+              const latest = getLatestShipDays(item.properties['Estimated time to ship']);
+              const oldMax = getLatestShipDays(carry['Estimated time to ship']);
+              if (latest > oldMax) {
+                return item.properties;
+              }
+              return carry;
+            }, null);
+
+            const updatedItems = items.filter(item => {
+              return getLatestShipDays(item.properties['Estimated time to ship']) < getLatestShipDays(latestProperties['Estimated time to ship']);
+            }).map((item) => {
+              const properties = item.properties;
+              properties['Estimated time to ship'] = latestProperties['Estimated time to ship'];
+              properties['User Fulfillment Display'] = latestProperties['User Fulfillment Display'];
+              properties['Custom Made'] = latestProperties['Custom Made'];
+              properties['Custom Made Business Days'] = latestProperties['Custom Made Business Days'];
+              return {
+                id: item.key,
+                properties,
+              };
+            });
+
+            items
+              .filter(item => !updatedItems.some(({ id }) => id === item.id))
+              .forEach(item => {
+                const { properties } = oldShipTimes.find(old => old.id === item.id) || {};
+                if (properties) {
+                  updatedItems.push({
+                    id: item.key,
+                    properties: { ...item.properties, ...properties }
+                  });
+                }
+              });
+
+            for (let i = 0; i < updatedItems.length; i++) {
+              await fetch('/cart/change.js', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedItems[i]),
+              });
+            }
+
+            const cart = await fetch('/cart.js').then(response => response.json());
+            this.buildCart(cart).bind(this);
+          }
+        } catch (err) {
+          console.warn('Unable to load lead times');
+        }
       },
 
       loading: function(state) {

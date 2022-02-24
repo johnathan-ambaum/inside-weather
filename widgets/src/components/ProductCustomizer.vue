@@ -881,19 +881,82 @@ export default {
         properties['Custom Made Business Days'] = this.customMadeTargetBusiness;
       }
 
+      const itemToAdd = {
+        id: this.activeProduct.id,
+        quantity,
+        properties,
+      };
+
+      function getLatestShipDays(timeToShip) {
+        return Number(timeToShip.split(' ').shift().split('-').pop());
+      }
+
+      const { items } = await fetch('/cart.js').then(response => response.json());
+      let itemsToAdd = [itemToAdd];
+
+      if (items.length > 0) {
+        items.push(itemToAdd);
+        const latestProperties = items.reduce((carry, item) => {
+          if (!carry) {
+            return item.properties;
+          }
+          const latest = getLatestShipDays(item.properties['Estimated time to ship']);
+          const oldMax = getLatestShipDays(carry['Estimated time to ship']);
+          if (latest > oldMax) {
+            return item.properties;
+          }
+          return carry;
+        }, null);
+
+        let originalProperties = [];
+        const updatedItems = items.filter(item => {
+          return getLatestShipDays(item.properties['Estimated time to ship']) < getLatestShipDays(latestProperties['Estimated time to ship']);
+        }).map((item) => {
+          const properties = item.properties;
+          originalProperties.push({
+            id: item.variant_id,
+            properties: { ...properties },
+          });
+          properties['Estimated time to ship'] = latestProperties['Estimated time to ship'];
+          properties['User Fulfillment Display'] = latestProperties['User Fulfillment Display'];
+          properties['Custom Made'] = latestProperties['Custom Made'];
+          properties['Custom Made Business Days'] = latestProperties['Custom Made Business Days'];
+          return {
+            id: item.variant_id || item.id,
+            quantity: item.quantity,
+            properties,
+          }
+        });
+
+        if (originalProperties.length) {
+          localStorage.setItem('old-ship-times', JSON.stringify(originalProperties));
+        }
+
+        itemsToAdd = [...updatedItems, itemToAdd];
+
+        const updates = updatedItems.reduce((carry, item) => {
+          carry[item.id] = 0;
+          return carry;
+        }, {});
+
+        await fetch('/cart/update.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ updates }),
+        });
+      }
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          id: this.activeProduct.id,
-          quantity,
-          properties,
-        }),
+        body: JSON.stringify({ items: itemsToAdd }),
       })
-        .then((cart) => {
+        .then(() => {
           this.addToCartProcessing = false;
           var addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
           addedAjaxProuct.modelNumber = this.modelNumber;
