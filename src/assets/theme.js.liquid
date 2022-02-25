@@ -1279,7 +1279,7 @@ lazySizesConfig.expFactor = 4;
           theme.cart.getCart().then(function(cart) {
             window.VWO = window.VWO || [];
             window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
-            if(theme.settings.vwo.productProtection.active){
+            if (theme.settings.vwo.productProtection.active) {
               var openProductProtectionModal = jQuery.Event( "openProductProtectionModal" );
               openProductProtectionModal.currentProduct = event.currentProduct;
               openProductProtectionModal.modelNumber = event.modelNumber;
@@ -1287,14 +1287,13 @@ lazySizesConfig.expFactor = 4;
               openProductProtectionModal.drawerContext = this;
               localStorage.setItem('currentCart', JSON.stringify(cart));
               $('body').trigger(openProductProtectionModal);
-            }else{
-              if(event.openCartDrawer !== undefined){
-                this.buildCart(cart, event.openCartDrawer, true);
-                return
-              }
-
-              this.buildCart(cart, true, true);
+              return;
+            } else if (event.openCartDrawer !== undefined) {
+              this.buildCart(cart, event.openCartDrawer, true);
+              return;
             }
+
+            this.buildCart(cart, true, true);
           }.bind(this));
         }.bind(this));
 
@@ -1360,7 +1359,7 @@ lazySizesConfig.expFactor = 4;
         let foundShippingInsurance = cart.items.find(function(item){
           return item.product_type === 'Shipping Insurance'
         });
-        foundShippingInsurance ? $('.js-cart-count').text(cart.item_count -1) : $('.js-cart-count').text(cart.item_count);
+        foundShippingInsurance ? $('.js-cart-count').text(cart.items.length -1) : $('.js-cart-count').text(cart.items.length);
         if(theme.settings.vwo.countdown.countdownActive){
           CartDrawer.prototype.cartDrawerClockHandler(cart, added !== false);
         }
@@ -1370,7 +1369,7 @@ lazySizesConfig.expFactor = 4;
         this.emptyCart();
         this.updateWarrantyHandler(cart);
 
-        if (cart.item_count === 0) {
+        if (!cart.items?.length) {
           $(selectors.container).append('<p class="appear-animation appear-delay-3">' + theme.strings.cartEmpty +'</p>');
         } else {
           var items = [];
@@ -1449,7 +1448,6 @@ lazySizesConfig.expFactor = 4;
               }
             }
           };
-
           $(selectors.container).append(this.template(data));
         }
 
@@ -1842,13 +1840,13 @@ lazySizesConfig.expFactor = 4;
         return {'total':t, 'minutes':minutes, 'seconds':seconds};
       },
       run_clock({ selector, duration, endtime, extend = false, completed = false }){
-        const clock = document.querySelector(selector);
-
         if (!completed && (!endtime || extend)) {
           endtime = new Date(Date.parse(new Date()) + duration*60*1000);
           localStorage.setItem('pdp-countdown-timer', JSON.stringify(endtime));
-          clearTimeout(discountTimer);
-          delete discountTimer;
+          if (typeof window.pdpDiscountTimer !== undefined) {
+            clearTimeout(window.pdpDiscountTimer);
+            delete window.pdpDiscountTimer;
+          }
         }
 
         if (completed) {
@@ -1857,9 +1855,11 @@ lazySizesConfig.expFactor = 4;
 
         const { total } = CartDrawer.prototype.time_remaining(endtime);
         if (total < 1){
-          CartDrawer.prototype.countdownComplete(selectors.countdownTimer);
+          CartDrawer.prototype.countdownComplete(selector);
           return false;
         }
+
+        const clock = document.querySelector(selector);
 
         function updateClock(){
           const { total, minutes, seconds } =  CartDrawer.prototype.time_remaining(endtime);
@@ -1873,12 +1873,12 @@ lazySizesConfig.expFactor = 4;
             clock.innerHTML = minutes+':'+seconds;
           }
           if (total < 1) {
-            CartDrawer.prototype.countdownComplete(id);
+            CartDrawer.prototype.countdownComplete(selector);
             return;
           }
-          discountTimer = setTimeout(updateClock, 1000);
+          window.pdpDiscountTimer = setTimeout(updateClock, 1000);
         }
-        if (typeof discountTimer === 'undefined') {
+        if (typeof window.pdpDiscountTimer === 'undefined') {
           updateClock();
         }
         return true;
