@@ -925,27 +925,31 @@ export default {
             id: item.variant_id || item.id,
             quantity: item.quantity,
             properties,
-          }
+          };
         });
 
         if (originalProperties.length) {
           localStorage.setItem('old-ship-times', JSON.stringify(originalProperties));
         }
 
-        itemsToAdd = [...updatedItems, itemToAdd];
+        itemsToAdd = [...updatedItems.filter(item => item.id !== itemToAdd.id), itemToAdd];
 
         const updates = updatedItems.reduce((carry, item) => {
-          carry[item.id] = 0;
+          if (item.id !== itemToAdd.id) {
+            carry[item.id] = 0;
+          }
           return carry;
         }, {});
 
-        await fetch('/cart/update.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ updates }),
-        });
+        if (Object.entries(updates).length) {
+          await fetch('/cart/update.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ updates }),
+          });
+        }
       }
 
       fetch('/cart/add.js', {
