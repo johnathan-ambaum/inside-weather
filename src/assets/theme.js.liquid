@@ -1016,7 +1016,7 @@ lazySizesConfig.expFactor = 4;
       return $.getJSON('/cart.js');
     },
 
-    changeItem: function(key, qty) {
+    changeItem: async function(key, qty) {
       return this._updateCart({
         type: 'POST',
         url: '/cart/change.js',
@@ -1034,7 +1034,7 @@ lazySizesConfig.expFactor = 4;
       });
     },
 
-    _updateCart: function(params) {
+    _updateCart: async function(params) {
       return $.ajax(params)
         .then(function(cart) {
           return cart;
@@ -1440,14 +1440,14 @@ lazySizesConfig.expFactor = 4;
 
         this.loading(true);
 
-        theme.cart.changeItem(key, qty)
+        await theme.cart.changeItem(key, qty)
           .then(function(cart) {
             this.updateSuccess(cart);
           }.bind(this))
           .catch(function(XMLHttpRequest) {
             this.updateError(XMLHttpRequest)
           }.bind(this))
-          .always(function() {
+          .finally(function() {
             this.loading(false);
           }.bind(this));
 
