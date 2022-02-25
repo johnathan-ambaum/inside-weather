@@ -895,18 +895,18 @@ export default {
       })
         .then((cart) => {
           this.addToCartProcessing = false;
-          var addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
-          addedAjaxProuct.modelNumber = this.modelNumber;
-          addedAjaxProuct.currentProduct = {
+          var addedAjaxProduct = jQuery.Event( "added.ajaxProduct" );
+          addedAjaxProduct.modelNumber = this.modelNumber;
+          addedAjaxProduct.currentProduct = {
             name: this.productName,
             model_number: this.modelNumber,
             product_type: this.category,
             // image: this.productImages[0].full,
             attributes: this.selectedOptions,
           }
-          addedAjaxProuct.openCartDrawer = !this.hasUpsellProducts;
+          addedAjaxProduct.openCartDrawer = !this.hasUpsellProducts;
 
-          $('body').trigger(addedAjaxProuct);
+          $('body').trigger(addedAjaxProduct);
           this.trackAddToCart(this.fullProduct);
         });
     },
