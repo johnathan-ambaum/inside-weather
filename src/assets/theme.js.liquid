@@ -1016,7 +1016,7 @@ lazySizesConfig.expFactor = 4;
       return $.getJSON('/cart.js');
     },
 
-    changeItem: function(key, qty) {
+    changeItem: async function(key, qty) {
       return this._updateCart({
         type: 'POST',
         url: '/cart/change.js',
@@ -1034,7 +1034,7 @@ lazySizesConfig.expFactor = 4;
       });
     },
 
-    _updateCart: function(params) {
+    _updateCart: async function(params) {
       return $.ajax(params)
         .then(function(cart) {
           return cart;
@@ -1279,7 +1279,7 @@ lazySizesConfig.expFactor = 4;
           theme.cart.getCart().then(function(cart) {
             window.VWO = window.VWO || [];
             window.VWO.push(['tag', 'UserCartValue', cart.original_total_price.toString(), 'user']);
-            if(theme.settings.vwo.productProtection.active){
+            if (theme.settings.vwo.productProtection.active) {
               var openProductProtectionModal = jQuery.Event( "openProductProtectionModal" );
               openProductProtectionModal.currentProduct = event.currentProduct;
               openProductProtectionModal.modelNumber = event.modelNumber;
@@ -1287,14 +1287,13 @@ lazySizesConfig.expFactor = 4;
               openProductProtectionModal.drawerContext = this;
               localStorage.setItem('currentCart', JSON.stringify(cart));
               $('body').trigger(openProductProtectionModal);
-            }else{
-              if(event.openCartDrawer !== undefined){
-                this.buildCart(cart, event.openCartDrawer, true);
-                return
-              }
-
-              this.buildCart(cart, true, true);
+              return;
+            } else if (event.openCartDrawer !== undefined) {
+              this.buildCart(cart, event.openCartDrawer, true);
+              return;
             }
+
+            this.buildCart(cart, true, true);
           }.bind(this));
         }.bind(this));
 
@@ -1360,7 +1359,7 @@ lazySizesConfig.expFactor = 4;
         let foundShippingInsurance = cart.items.find(function(item){
           return item.product_type === 'Shipping Insurance'
         });
-        foundShippingInsurance ? $('.js-cart-count').text(cart.item_count -1) : $('.js-cart-count').text(cart.item_count);
+        foundShippingInsurance ? $('.js-cart-count').text(cart.items.length -1) : $('.js-cart-count').text(cart.items.length);
         if(theme.settings.vwo.countdown.countdownActive){
           CartDrawer.prototype.cartDrawerClockHandler(cart, added !== false);
         }
@@ -1370,7 +1369,7 @@ lazySizesConfig.expFactor = 4;
         this.emptyCart();
         this.updateWarrantyHandler(cart);
 
-        if (cart.item_count === 0) {
+        if (!cart.items?.length) {
           $(selectors.container).append('<p class="appear-animation appear-delay-3">' + theme.strings.cartEmpty +'</p>');
         } else {
           var items = [];
@@ -1449,7 +1448,6 @@ lazySizesConfig.expFactor = 4;
               }
             }
           };
-
           $(selectors.container).append(this.template(data));
         }
 
@@ -1490,23 +1488,91 @@ lazySizesConfig.expFactor = 4;
         $('body').on('qty.cart-drawer', this.updateItem.bind(this));
       },
 
-      updateItem: function(evt, key, qty) {
+      updateItem: async function(evt, key, qty) {
         if (this.status.loading) {
           return;
         }
 
         this.loading(true);
 
-        theme.cart.changeItem(key, qty)
+        await theme.cart.changeItem(key, qty)
           .then(function(cart) {
             this.updateSuccess(cart);
           }.bind(this))
           .catch(function(XMLHttpRequest) {
             this.updateError(XMLHttpRequest)
           }.bind(this))
-          .always(function() {
+          .finally(function() {
             this.loading(false);
           }.bind(this));
+
+        if (qty > 0) {
+          return;
+        }
+
+        function getLatestShipDays(timeToShip) {
+          return Number(timeToShip.split(' ').shift().split('-').pop());
+        }
+
+        try {
+          const oldShipTimes = JSON.parse(localStorage.getItem('old-ship-times'));
+
+          if (oldShipTimes?.length) {
+            const { items } = await fetch('/cart.js').then(response => response.json());
+            const latestProperties = items.reduce((carry, item) => {
+              if (!carry) {
+                return item.properties;
+              }
+              const latest = getLatestShipDays(item.properties['Estimated time to ship']);
+              const oldMax = getLatestShipDays(carry['Estimated time to ship']);
+              if (latest > oldMax) {
+                return item.properties;
+              }
+              return carry;
+            }, null);
+
+            const updatedItems = items.filter(item => {
+              return getLatestShipDays(item.properties['Estimated time to ship']) < getLatestShipDays(latestProperties['Estimated time to ship']);
+            }).map((item) => {
+              const properties = item.properties;
+              properties['Estimated time to ship'] = latestProperties['Estimated time to ship'];
+              properties['User Fulfillment Display'] = latestProperties['User Fulfillment Display'];
+              properties['Custom Made'] = latestProperties['Custom Made'];
+              properties['Custom Made Business Days'] = latestProperties['Custom Made Business Days'];
+              return {
+                id: item.key,
+                properties,
+              };
+            });
+
+            items
+              .filter(item => !updatedItems.some(({ id }) => id === item.id))
+              .forEach(item => {
+                const { properties } = oldShipTimes.find(old => old.id === item.id) || {};
+                if (properties) {
+                  updatedItems.push({
+                    id: item.key,
+                    properties: { ...item.properties, ...properties }
+                  });
+                }
+              });
+
+            for (let i = 0; i < updatedItems.length; i++) {
+              await fetch('/cart/change.js', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedItems[i]),
+              });
+            }
+
+            const cart = await fetch('/cart.js').then(response => response.json());
+            this.buildCart(cart).bind(this);
+          }
+        } catch (err) {
+          console.warn('Unable to load lead times');
+        }
       },
 
       loading: function(state) {
@@ -1774,13 +1840,13 @@ lazySizesConfig.expFactor = 4;
         return {'total':t, 'minutes':minutes, 'seconds':seconds};
       },
       run_clock({ selector, duration, endtime, extend = false, completed = false }){
-        const clock = document.querySelector(selector);
-
         if (!completed && (!endtime || extend)) {
           endtime = new Date(Date.parse(new Date()) + duration*60*1000);
           localStorage.setItem('pdp-countdown-timer', JSON.stringify(endtime));
-          clearTimeout(discountTimer);
-          delete discountTimer;
+          if (typeof window.pdpDiscountTimer !== undefined) {
+            clearTimeout(window.pdpDiscountTimer);
+            delete window.pdpDiscountTimer;
+          }
         }
 
         if (completed) {
@@ -1789,9 +1855,11 @@ lazySizesConfig.expFactor = 4;
 
         const { total } = CartDrawer.prototype.time_remaining(endtime);
         if (total < 1){
-          CartDrawer.prototype.countdownComplete(selectors.countdownTimer);
+          CartDrawer.prototype.countdownComplete(selector);
           return false;
         }
+
+        const clock = document.querySelector(selector);
 
         function updateClock(){
           const { total, minutes, seconds } =  CartDrawer.prototype.time_remaining(endtime);
@@ -1805,12 +1873,12 @@ lazySizesConfig.expFactor = 4;
             clock.innerHTML = minutes+':'+seconds;
           }
           if (total < 1) {
-            CartDrawer.prototype.countdownComplete(id);
+            CartDrawer.prototype.countdownComplete(selector);
             return;
           }
-          discountTimer = setTimeout(updateClock, 1000);
+          window.pdpDiscountTimer = setTimeout(updateClock, 1000);
         }
-        if (typeof discountTimer === 'undefined') {
+        if (typeof window.pdpDiscountTimer === 'undefined') {
           updateClock();
         }
         return true;
