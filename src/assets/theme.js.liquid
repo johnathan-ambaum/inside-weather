@@ -1733,27 +1733,31 @@ lazySizesConfig.expFactor = 4;
           return;
         }
 
-        const active = CartDrawer.prototype.run_clock({
-          selector: selectors.countdownTimer,
-          duration: theme.settings.vwo.countdown.timerDurationInMinutes,
-          endtime,
-          extend: added,
-          completed: showDiscount,
-        });
+        try {
+          const active = CartDrawer.prototype.run_clock({
+            selector: selectors.countdownTimer,
+            duration: theme.settings.vwo.countdown.timerDurationInMinutes,
+            endtime,
+            extend: added,
+            completed: showDiscount,
+          });
 
-        if (active) {
-          $('.drawer__close').css('vertical-align', 'top' );
-          $('.drawer__close-button').css('height', 'auto');
-          $('.drawer').addClass('drawer--has-clock');
-          $('.drawer__body').addClass('drawer__body--has-clock');
-          $(".drawer-clock__header").text(theme.settings.vwo.countdown.initialTextHeader);
-          $(".drawer-clock__text").text(theme.settings.vwo.countdown.initialTextContent);
-          if (showDiscount) {
-            $(`${selectors.countdownTimer}, ${selectors.countdownInput}, ${selectors.countdownButton}`).hide();
-            $('.drawer-clock__text:not([data-drawer-timer-success])').hide();
-            $('[data-drawer-timer-success]').html(theme.settings.vwo.countdown.successTextContent).show();
+          if (active) {
+            $('.drawer__close').css('vertical-align', 'top' );
+            $('.drawer__close-button').css('height', 'auto');
+            $('.drawer').addClass('drawer--has-clock');
+            $('.drawer__body').addClass('drawer__body--has-clock');
+            $(".drawer-clock__header").text(theme.settings.vwo.countdown.initialTextHeader);
+            $(".drawer-clock__text").text(theme.settings.vwo.countdown.initialTextContent);
+            if (showDiscount) {
+              $(`${selectors.countdownTimer}, ${selectors.countdownInput}, ${selectors.countdownButton}`).hide();
+              $('.drawer-clock__text:not([data-drawer-timer-success])').hide();
+              $('[data-drawer-timer-success]').html(theme.settings.vwo.countdown.successTextContent).show();
+            }
+            $(".drawer-clock__container").show();
           }
-          $(".drawer-clock__container").show();
+        } catch (err) {
+          console.error(err);
         }
       },
       countdownComplete: function(selector){
@@ -1779,8 +1783,10 @@ lazySizesConfig.expFactor = 4;
         if (!completed && (!endtime || extend)) {
           endtime = new Date(Date.parse(new Date()) + duration*60*1000);
           localStorage.setItem('pdp-countdown-timer', JSON.stringify(endtime));
-          clearTimeout(discountTimer);
-          delete discountTimer;
+          if (typeof discountTimer !== 'undefined') {
+            clearTimeout(discountTimer);
+            delete discountTimer;
+          }
         }
 
         if (completed) {
