@@ -538,8 +538,8 @@
   });
 
   function closeAllMenus(){
+    document.body.classList.remove('ambaum__header--active');
     document.querySelectorAll('.ambaum__header-dropdown').forEach(dropdown => {
-      document.body.classList.remove('ambaum__header--active');
       dropdown.style.visibility = 'hidden';
       dropdown.style.opacity = 0;
     });
@@ -587,6 +587,7 @@
       }else{
         closeAllMenus();
         narrowMenu.style.display = 'block';
+        document.body.classList.add('ambaum__header--active');
       }
     });
   });
