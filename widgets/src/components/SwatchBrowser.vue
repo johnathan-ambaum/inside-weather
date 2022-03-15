@@ -1482,7 +1482,6 @@ $breakpoint-desktop: 'min-width: 1146px';
         font-size: 8px;
         letter-spacing: .1em;
         text-transform: uppercase;
-        white-space: nowrap;
 
         @include at-query($breakpoint-desktop) {
           font-size: 12px;
