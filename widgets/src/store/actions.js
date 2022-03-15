@@ -278,9 +278,9 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
   }
 }
 
-export function pullSwatches({ commit }) {
+export function pullSwatches({ commit }, isTrade) {
   apiClient
-    .getSwatches()
+    .getSwatches(isTrade)
     .then((swatches) => {
       commit('setSwatches', swatches);
     });

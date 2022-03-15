@@ -47,40 +47,42 @@
               :class="filterRowClasses(option)"
               class="SwatchBrowser__DialogRow"
             >
-              <input
-                :id="`filter-${filter.key}-${option.value}`"
-                v-model="appliedFilters[filter.key]"
-                type="checkbox"
-                :value="option.value"
-                :checked="isChecked(filter.key, option.value)"
-                :class="{ checked: isChecked(filter.key, option.value) }"
-              >
-              <label
-                :for="`filter-${filter.key}-${option.value}`"
-                :class="{ 'has-description': option.description }"
-                class="SwatchBrowser__Label"
-              >
-                <div
-                  v-if="option.color"
-                  class="SwatchBrowser__Color"
-                  :style="{ background: option.color }"
-                />
-                <img
-                  v-if="option.iconLeft"
-                  :src="option.iconLeft"
-                  class="SwatchBrowser__Icon--Left"
+              <template v-if="option.value !== 'trade' || isTrade">
+                <input
+                  :id="`filter-${filter.key}-${option.value}`"
+                  v-model="appliedFilters[filter.key]"
+                  type="checkbox"
+                  :value="option.value"
+                  :checked="isChecked(filter.key, option.value)"
+                  :class="{ checked: isChecked(filter.key, option.value) }"
                 >
-                {{ option.display }}
-                <img
-                  v-if="option.iconRight"
-                  :src="option.iconRight"
-                  class="SwatchBrowser__Icon--Right"
+                <label
+                  :for="`filter-${filter.key}-${option.value}`"
+                  :class="{ 'has-description': option.description }"
+                  class="SwatchBrowser__Label"
                 >
-                <p
-                  v-if="option.description"
-                  v-html="purify(option.description)"
-                />
-              </label>
+                  <div
+                    v-if="option.color"
+                    class="SwatchBrowser__Color"
+                    :style="{ background: option.color }"
+                  />
+                  <img
+                    v-if="option.iconLeft"
+                    :src="option.iconLeft"
+                    class="SwatchBrowser__Icon--Left"
+                  >
+                  {{ option.display }}
+                  <img
+                    v-if="option.iconRight"
+                    :src="option.iconRight"
+                    class="SwatchBrowser__Icon--Right"
+                  >
+                  <p
+                    v-if="option.description"
+                    v-html="purify(option.description)"
+                  />
+                </label>
+              </template>
             </div>
           </div>
         </div>
@@ -363,6 +365,10 @@ export default {
     screenMonitor,
   ],
 
+  props: {
+    isTrade: { type: Boolean, default: false },
+  },
+
   data() {
     return {
       swatchFilters: filters,
@@ -497,7 +503,7 @@ export default {
   },
 
   created() {
-    this.pullSwatches();
+    this.pullSwatches(this.isTrade);
     this.loadCart();
     this.maxSwatches = window.theme.settings.swatchBrowser.maxSwatches || 15;
     this.$bus.$on('swatch-browser:submission-in-progress', (isSubmitting) => {
