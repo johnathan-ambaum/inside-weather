@@ -269,7 +269,7 @@
             <div class="SwatchBrowser__CartHeader">
               <h2>
                 Your Swatch {{ showOrderForm ? 'Order' : 'Cart' }}
-                <span>(Choose up to 10)</span>
+                <span>(Choose up to {{ maxSwatches }})</span>
               </h2>
               <close-button
                 :size="isLargeMobile ? 20 : 24"
