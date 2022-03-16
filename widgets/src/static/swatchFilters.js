@@ -42,8 +42,8 @@ export const filters = [
       },
       {
         value: 'trade',
-        display: 'Trade',
-        description: 'Trade swatches',
+        display: 'Hard Material Samples',
+        description: 'We offer mini samples of our FSC-Certified woods and powder coated metals made available exclusively for our trade members.',
       },
     ],
   },
