@@ -195,8 +195,11 @@ export default class ApiClient {
     }));
   }
 
-  getSwatches() {
-    const url = 'https://iw-content.herokuapp.com/api/v1/swatch';
+  getSwatches(isTrade) {
+    let url = 'https://iw-content.herokuapp.com/api/v1/swatch';
+    if (isTrade) {
+      url += '?trade=true';
+    }
     return new Promise((resolve, reject) => this.sendRequest({ url, resolve, reject }));
   }
 
