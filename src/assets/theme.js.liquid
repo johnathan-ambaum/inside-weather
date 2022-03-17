@@ -1254,7 +1254,7 @@ lazySizesConfig.expFactor = 4;
 
       this.initEventListeners();
     };
-    var PDPCountdownTimeInterval;
+
     CartDrawer.prototype = $.extend({}, CartDrawer.prototype, {
       initEventListeners: function() {
         $('body').on('updateCart' + config.namespace, this.initQtySelectors.bind(this));
@@ -1263,6 +1263,13 @@ lazySizesConfig.expFactor = 4;
         $('body').on('drawerOpen.CartDrawer', this.sizeFooter.bind(this));
         $('body').on('drawerOpen.CartDrawer', this.disableChatWidget.bind(this));
         $('body').on('drawerClose.CartDrawer', this.enableChatWidget.bind(this));
+        $(selectors.drawer).on('mouseenter mouseleave', '[data-hover-target]', (e) => {
+          e.currentTarget.closest('.InfoPopup').classList.toggle('InfoPopup--Active', e.type === 'mouseenter');
+        });
+        $(selectors.drawer).on('click', '[data-hover-target],.InfoPopup__Close', (e) => {
+          e.preventDefault();
+          e.currentTarget.closest('.InfoPopup').classList.toggle('InfoPopup--Active');
+        });
         $(".js-cart-count").on("click", function(){
           if(theme.settings.vwo.countdown.countdownActive){
             theme.cart.getCart().then(function(cart){

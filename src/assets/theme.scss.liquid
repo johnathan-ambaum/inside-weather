@@ -2833,13 +2833,41 @@ symbol {
 .drawer__inner--wrapper {
   bottom: 0;
   left: 0;
-  padding: 21px 15px 0;
+  padding: 44px 15px 0;
   position: absolute;
   right: 0;
   top: 0;
 
   @include media-query($medium-up) {
-    padding: 30px 24px 0;
+    padding: 44px 24px 0;
+  }
+
+  .InfoPopup__Dialog {
+    left: -75px;
+
+    &::before,
+    &::after {
+      left: 185px;
+    }
+
+    @media only screen and (max-width: 589px) {
+      bottom: -10px;
+
+      &::before,
+      &::after {
+        content: none;
+      }
+    }
+
+    @media only screen and (min-width: 590px) {
+      width: 280px;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      .InfoPopup__Close {
+        display: none;
+      }
+    }
   }
 }
 #drawer__countdown-timer{

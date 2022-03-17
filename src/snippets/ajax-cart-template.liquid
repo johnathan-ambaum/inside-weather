@@ -28,7 +28,23 @@
                         {{#unlessEquals @key 'User Fulfillment Display'}}
                           {{#unlessEquals @key 'Estimated time to ship'}}
                             {{#unlessEquals @key 'Custom Made Business Days'}}
-                              <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                              <span class="ajaxcart__product-meta">
+                                {{#ifEquals @key 'Custom Made'}}
+                                  <div class="InfoPopup">
+                                    {{@key}}: <span class="ProductCustomizer__ShippingDays--Delayed" data-hover-target>{{this}}</span>
+                                    <div class="InfoPopup__Dialog InfoPopup__Dialog--AlwaysOnTop" data-message>
+                                      <p>For a more seamless and sustainable delivery, we plan to ship all of your items at once. A bundle shipment reduces the carbon footprint of an order by 75%!</p>
+                                      <button class="CloseButton InfoPopup__Close">
+                                        <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.121 32.121"><g transform="translate(-1800.004 -54.004)"><line y2="42.426" transform="translate(1801.065 55.065) rotate(-45)" fill="none" stroke="#202020" stroke-width="3"></line> <line y2="42.426" transform="translate(1831.065 55.065) rotate(45)" fill="none" stroke="#202020" stroke-width="3"></line></g></svg>
+                                        <span class="visually-hidden">Close</span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                {{/ifEquals}}
+                                {{#unlessEquals @key 'Custom Made'}}
+                                  {{@key}}: {{this}}
+                                {{/unlessEquals}}
+                              </span>
                             {{/unlessEquals}}
                           {{/unlessEquals}}
                         {{/unlessEquals}}
