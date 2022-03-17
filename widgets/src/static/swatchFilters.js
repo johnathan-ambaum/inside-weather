@@ -40,6 +40,11 @@ export const filters = [
         iconRight: '//cdn.insideweather.com/pdp/customizer/ico/commercial.png',
         description: 'Designed for high traffic environments, these high-abrasion fabrics meet or exceed 50,000 double rubs.',
       },
+      {
+        value: 'trade',
+        display: 'Hard Material Samples',
+        description: 'We offer mini samples of our FSC-Certified woods and powder coated metals made available exclusively for our trade members.',
+      },
     ],
   },
   {
