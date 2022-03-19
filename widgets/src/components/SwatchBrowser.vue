@@ -484,8 +484,11 @@ export default {
         document.body.removeEventListener('click', bindCloseEvents);
         window.removeEventListener('keydown', bindCloseEvents);
       }
-      if (this.isLargeMobile) {
-        document.querySelector('html').classList.toggle('ProductCustomizer--Open', !!newValue.length);
+    },
+
+    filteredSwatches(newSwatches, oldSwatches) {
+      if (oldSwatches.length) {
+        this.returnToTop();
       }
     },
 
@@ -533,7 +536,22 @@ export default {
       'pullSwatches',
     ]),
 
+    returnToTop() {
+      window.requestAnimationFrame(() => {
+        const offsetTop = this.$refs.swatchContainer.getBoundingClientRect().top;
+        const headerHeight = document.querySelector('.ambaum__header').getBoundingClientRect().height;
+        const filterHeight = this.$refs.filters.getBoundingClientRect().height;
+        const extraPadding = 80;
+        window.scrollTo({
+          top: window.pageYOffset + offsetTop - headerHeight - filterHeight - extraPadding,
+          behavior: 'smooth',
+        });
+      });
+    },
+
     toggleFilter(key) {
+      this.activeSwatch = null;
+
       // allow multiple expanded filters on mobile, but only one at a time on desktop
       if (!this.isLargeMobile) {
         this.openFilters = this.isFilterOpen(key) ? [] : [key];
