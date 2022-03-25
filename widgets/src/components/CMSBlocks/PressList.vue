@@ -10,14 +10,17 @@
             v-for="(item, index) in sortedItems"
             ref="items"
             :key="item.$id"
-            v-bind:class="['press-list-' + (index + 1)]"
+            :class="['press-list-' + (index + 1)]"
+          >
+            <component
+              :is="item.linkTo ? 'a' : 'div'"
+              :href="item.linkTo"
             >
-            <a :href="item.linkTo">
               <figure>
                 <img :src="image(item)">
               </figure>
               <span :style="textStyles(item)">{{ item.description }}</span>
-            </a>
+            </component>
           </li>
         </ul>
       </div>
