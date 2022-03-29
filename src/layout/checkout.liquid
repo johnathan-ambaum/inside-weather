@@ -647,16 +647,12 @@
           }
 
           totalDiscount = 0;
-          const linePrices = document.querySelectorAll('[data-order-summary-section="line-items"] .product__price');
-          linePrices.forEach(function (el) {
-            let oldPrice = el.querySelector('del');
-            if (!oldPrice) {
-              return;
+          const lineDiscounts = document.querySelectorAll('[data-order-summary-section="line-items"] .reduction-code__text');
+          lineDiscounts.forEach(function (el) {
+            const lineSaved = parseFloat(el.textContent.trim().replace(/.+?(\(-\$(\d+(\.\d{2})?)\))/g, '$2'));
+            if (! isNaN(lineSaved)) {
+              totalDiscount += lineSaved;
             }
-            let newPrice = el.querySelector('span');
-            oldPrice = parseFloat(oldPrice.innerText.replace(/[^0-9\.]/g, ''));
-            newPrice = parseFloat(newPrice.innerText.replace(/[^0-9\.]/g, ''));
-            totalDiscount += oldPrice - newPrice;
           });
 
           if (totalDiscount > 0) {
