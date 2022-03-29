@@ -774,7 +774,7 @@
       "top-bar": {
         "type": "top-bar",
         "settings": {
-          "background_color_1": "#10100f",
+          "background_color_1": "#11161c",
           "background_color_2": "#b1c8cd",
           "background_color_3": "#384b49",
           "font_color_1": "#ffffff",
@@ -782,14 +782,14 @@
           "font_color_3": "#202020",
           "text_range": 1,
           "text_range_speed": 5,
-          "text_1": "<p>Kick off 2022 with a home refresh! | Save up to <strong>20% OFF<\/strong> with code <strong>NEW YEAR<\/strong> | <a href=\"\/pages\/2022-new-year-sale\" title=\"New Year Sale 2022\">SHOP NOW<\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/2022-new-year-sale\" title=\"New Year Sale 2022\">New Year, New Savings | Up to <strong>20% OFF<\/strong> with code <strong>NEW YEAR<\/strong><\/a><\/p>",
+          "text_1": "<p>The Annual Spring Sale is in full bloom! | 20% OFF sitewide with code <strong>SPRING<\/strong> | <a href=\"\/pages\/sale\" title=\"The Annual Spring Sale\">SHOP NOW<\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/sale\" title=\"The Annual Spring Sale\">The Annual Spring Sale is blooming! 20% OFF w\/ code <strong>SPRING<\/strong><\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "01\/04\/2022"
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "03\/30\/2022"
         }
       },
       "giftcard-header": {
