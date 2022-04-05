@@ -15,9 +15,9 @@
             <a class="UpsellModal__item-title" :href="upsellProduct.url">{{ upsellProduct.title }}</a>
             <div class="UpsellModal__item-price">${{ formatProductPrice(upsellProduct.price) }}</div>
             <a class="UpsellModal__item-customize UpsellModal__btn-clear" :href="upsellProduct.url">CUSTOMIZE</a>
-            <div 
+            <div
               :class="addToCartClasses(upsellProduct.priority)"
-              class="UpsellModal__item-atc UpsellModal__btn-black" 
+              class="UpsellModal__item-atc UpsellModal__btn-black"
               @click="addUpsellProductToCart(upsellProduct)"
             >
               <span class="UpsellModal__item-atc-text">{{ addToCartText(upsellProduct.priority) }}</span>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import CloseButton from './CloseButton.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import ApiClient from '../util/ApiClient';
@@ -85,6 +85,7 @@ export default {
       closeText: 'No thanks',
       currentlyAdding: null,
       lastAdded: null,
+      customMadeTarget: '',
     };
   },
 
@@ -138,6 +139,15 @@ export default {
       const templates = this.upsellProductsTemplates.find(product => product.hasOwnProperty(upsellProduct.title)) || {};
       const templateObj = templates[upsellProduct.title].find(item => item.key === 'model_number') || {};
       const upsellProductSelectedOptions = this.upsellProductsSelectedOptions.find(product => product.hasOwnProperty(upsellProduct.title))[upsellProduct.title];
+      const properties = {
+        'Estimated time to ship': this.emailFulfillmentTime,
+        'User Fulfillment Display': this.fulfillmentTime,
+      };
+
+      if (this.customMadeTarget) {
+        properties['Custom Made'] = this.customMadeTarget;
+        properties['Custom Made Business Days'] = this.customMadeTargetBusiness;
+      }
 
       apiClient.createProduct({
         name: upsellProduct.title,
@@ -155,10 +165,7 @@ export default {
           body: JSON.stringify({
             id: res.variant.id,
             quantity: 1,
-            properties: {
-              'Estimated time to ship': this.getEmailFulfillmentTime(upsellProduct.filters, upsellProductSelectedOptions, upsellProduct.attributes),
-              'User Fulfillment Display': this.getFulfillmentTime(upsellProduct.filters, upsellProductSelectedOptions, upsellProduct.attributes),
-            }
+            properties,
           }),
         }).then(() => {
           this.closeText = 'DONE';
@@ -174,8 +181,9 @@ export default {
     },
 
     close(){
-      let addedAjaxProuct = jQuery.Event( "added.ajaxProduct" );
-      $('body').trigger(addedAjaxProuct);
+      let addedAjaxProduct = jQuery.Event( "added.ajaxProduct" );
+      addedAjaxProduct.openCartDrawer = true;
+      $('body').trigger(addedAjaxProduct);
       this.showOnTopElements();
       this.open = false;
     },
@@ -351,7 +359,11 @@ export default {
     }
   },
   mounted(){
-    this.$bus.$on('openUpsellModal', this.populateCurrentUpsellProducts);
+    this.$bus.$on('openUpsellModal', ({ customMadeTarget, customMadeTargetBusiness }) => {
+      this.customMadeTarget = customMadeTarget;
+      this.customMadeTargetBusiness = customMadeTargetBusiness;
+      this.populateCurrentUpsellProducts();
+    });
     // this.populateCurrentRelatedProducts();
   },
 }

@@ -43,9 +43,10 @@
             :initial-variant="{{ product.selected_or_first_available_variant.id }}"
             :initial-attributes="{{ product.metafields.products.attributes | json | escape }} || {}"
             :initial-quantity="{{ product.selected_or_first_available_variant.inventory_quantity }}"
+            :tags="{{ product.tags | json | escape }}"
             :metafields="{{ product.metafields.products | json | escape }}"
             :shopify-product="{{ product | json | escape }}"
-            stamped-badge="{{product.metafields.stamped.badge}}"
+            stamped-badge="{{ product.metafields.stamped.badge | escape }}"
             initial-id="{{product.id}}"
           ></product-customizer>
 
@@ -56,7 +57,7 @@
     <product-information ></product-information>
 
     <!-- Stamped - Begin main-widget -->
-    <div id="stamped-main-widget" class="stamped-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: " ? ", " % 3F" | replace: "& "," % 26"}}" data-description="{{ product.description | escape }}" data-product-sku="{{product.handle}}" data-product-type="{{product.type}}"> {{ product.metafields.stamped.reviews }} </div>
+    <div id="stamped-main-widget" class="stamped-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: " ? ", " % 3F" | replace: "& "," % 26"}}" data-description="{{ product.description | escape }}" data-product-sku="{{product.handle}}" data-product-type="{{product.type}}"></div>
     <!-- Stamped - End main-widget -->
 
 

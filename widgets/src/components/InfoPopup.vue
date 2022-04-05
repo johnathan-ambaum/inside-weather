@@ -1,12 +1,14 @@
 <template>
   <div
+    :class="{ 'InfoPopup--Active': show }"
     class="InfoPopup"
     @mouseenter="show = true"
     @mouseleave="show = false"
   >
-    <slot @click="show = !show" />
+    <span @click="show = !show">
+      <slot />
+    </span>
     <div
-      v-show="show"
       :class="{ 'InfoPopup__Dialog--AlwaysOnTop': alwaysOnTop }"
       class="InfoPopup__Dialog"
     >
@@ -61,12 +63,19 @@ export default {
     background: #fff;
     border: 1px solid #959595;
     color: #a9a9a9;
+    display: none;
     padding: 10px 15px;
     position: absolute;
     right: -60px;
     text-align: left;
     width: 240px;
     z-index: 100;
+
+    @at-root {
+      .InfoPopup--Active & {
+        display: block;
+      }
+    }
 
     @include at-query($breakpoint-small) {
       padding-right: 20px;

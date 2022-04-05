@@ -1,0 +1,4 @@
+<div id="app">
+    <swatch-browser :is-trade="{% if customer and customer.tags contains 'trade' %}true{% else %}false{% endif %}"></swatch-browser>
+</div>
+{{ 'swatches.js' | asset_url | script_tag }}

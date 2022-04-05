@@ -1,344 +1,77 @@
-<div id="app">
-  {% assign hasImage = true %}
-  {% assign disableSlideContent = true %}
-  {% assign bannerContent = "{'items':[{'image':'https://cdn.insideweather.com/hp/tb/090921_hp-bnr_bondi_d.jpg', 'imageSm':'https://cdn.insideweather.com/hp/tb/090921_hp-bnr_bondi_m.jpg', 'url':'https://insideweather.com/pages/bondi-collection'},{'image':'https://cdn.insideweather.com/hp/tb/080521_hp-bnr_4seater_d.jpg', 'imageSm':'https://cdn.insideweather.com/hp/tb/080521_hp-bnr_4seater_m.jpg', 'url':'https://insideweather.com/pages/original-custom-collection'},{'image':'https://cdn.insideweather.com/hp/tb/043021_hp-bnr_savoy_d.jpg', 'imageSm':'https://cdn.insideweather.com/hp/tb/043021_hp-bnr_savoy_m.jpg', 'url':'https://insideweather.com/pages/savoy-collection'},{'image':'https://cdn.insideweather.com/hp/tb/072221_hp-bnr_elm_d.jpg', 'imageSm':'https://cdn.insideweather.com/hp/tb/072221_hp-bnr_elm_m.jpg', 'url':'https://insideweather.com/pages/elm-collection'}]}"%}
-
-  <div class="--clip-header">
-    <banner-carousel
-    :has-image="{{hasImage}}"
-    :banner-content="{{bannerContent}}"
-    :disable-slide-content="{{disableSlideContent}}"
-    >
-    </banner-carousel>
-  </div>
-
-  {% comment %}
-  <div class="staticBannerWrapper --clip-header">
-    <static-banner
-      desktop-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_d_v1.jpg?v=1581653966"
-      mobile-banner="https://cdn.shopify.com/s/files/1/2994/0144/files/021720_hp-tb_m_v1.jpg?v=1581653966"
-      responsive-point="840px"
-      banner-link="https://insideweather.com/pages/feb-2020-sale"
-    >
-    </static-banner>
-  </div>
-  {% endcomment %}
+      <div id="app">
+            <banner-slider v-bind='{"autoplay":true,"playSpeed":3000,"slides":[{"imageDesktop":"https://cdn.insideweather.com/hp/tb/092121_hp-bnr_fall-sale_d.jpg","imageDesktopAlt":"Fall Sale","imageMobile":"https://cdn.insideweather.com/hp/tb/092121_hp-bnr_fall-sale_m.jpg","imageMobileAlt":"Fall Sale","linkUrl":"https://insideweather.com/pages/2021-fall-sale","priority":1,"headingCopy":null,"descriptionCopy":null,"linkCopy":null},{"imageDesktop":"https://cdn.insideweather.com/hp/tb/090921_hp-bnr_bondi_d.jpg","imageDesktopAlt":"bondi seating collection","imageMobile":"https://cdn.insideweather.com/hp/tb/090921_hp-bnr_bondi_m.jpg","imageMobileAlt":"bondi seating collection","linkUrl":"https://insideweather.com/pages/bondi-collection","priority":2,"headingCopy":null,"descriptionCopy":null,"linkCopy":null},{"imageDesktop":"https://cdn.insideweather.com/hp/tb/092121_hp-bnr_savoy_d.jpg","imageDesktopAlt":"savoy bed frame","imageMobile":"https://cdn.insideweather.com/hp/tb/092121_hp-bnr_savoy_m.jpg","imageMobileAlt":"savoy bed frame","linkUrl":"https://insideweather.com/pages/savoy-collection","priority":3,"headingCopy":null,"descriptionCopy":null,"linkCopy":null},{"imageDesktop":"https://cdn.insideweather.com/hp/tb/080521_hp-bnr_4seater_d.jpg","imageDesktopAlt":"custom sofas","imageMobile":"https://cdn.insideweather.com/hp/tb/080521_hp-bnr_4seater_m.jpg","imageMobileAlt":"custom sofas","linkUrl":"https://insideweather.com/pages/original-custom-collection","priority":4,"headingCopy":null,"descriptionCopy":null,"linkCopy":null}]}'>
+    </banner-slider>
 
 
-  {% assign listItems= "[{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_living.jpg','buttonText':'SHOP LIVING','link':'https://insideweather.com/pages/living-room'},{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_dining.jpg','buttonText':'SHOP DINING','link':'https://insideweather.com/pages/dining-room'},{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_office.jpg','buttonText':'SHOP OFFICE','link':'https://insideweather.com/pages/office'},{'image':'https://inside-weather-assets.s3.amazonaws.com/hp/cat-rooms/hp_cat-room_bed.jpg','buttonText':'SHOP BEDROOM','link':'https://insideweather.com/pages/bedroom'},]"%}
-
-  <div class="category-list-container">
-    <category-list
-      class="--pd-t-90 --pd-b-130"
-      :list-items="{{listItems}}"
-    >
-    </category-list>
-  </div>
-
-  {% assign valuePropsItems = "[{'isVideo':'false', 'url': 'https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_01.jpg', 'targetPoint': 'designed-in-house', 'accordionHead': 'Designed In-house', accordionDescription: 'We consider it mission-critical that every product we sell be sustainable, adaptable, and—above all—beautiful, which is why we don’t trust anyone else to do the job. Our team both dreams it and sees it through, all under the same roof.'},
-
-  {'isVideo':'false', 'url': 'https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_02-v2.jpg', 'targetPoint': 'crafted', 'accordionHead': 'Made in the USA', accordionDescription: 'Every one of our pieces is made-to-order by our expert furniture makers in our workshop in California. Sawing, sewing, packaging, and shipping-we see every custom piece through from start to finish!'},
-
-  {'isVideo':'true', 'url': 'https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_03.mp4', 'targetPoint': 'quick-ship-custom', 'accordionHead': 'Quick Ship Custom', accordionDescription: 'Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days.'},
-
-  {'isVideo':'false', 'url': 'https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_04.jpg', 'targetPoint': '365-day-home-trial', 'accordionHead': '365 Day Home Trial', accordionDescription: 'Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.'},
-
-  {'isVideo':'false', 'url': 'https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_05-v2.jpg', 'targetPoint': 'carbon-negative', 'accordionHead': 'Carbon Negative', accordionDescription: 'All of our materials are selected with intention—from our sofas that upcycle over 200 plastic water bottles to our packaging which is among the first ever made of renewable sugar-based contents in the industry. To achieve carbon negativity, two trees are planted via the National Forest Foundation for every order placed with us. Sleep easier knowing you have the most sustainable furniture on the market.'}]" %}
-
-  <div class="ValuePropsWrapper">
-    <div class="--custom-container">
-      <value-props
-      :value-props-items="{{valuePropsItems}}"
-      default-image="https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_vprop_01-default-min.jpg?1657939"
-      main-heading="Online custom furniture shopping that puts you in charge."
-      >
-      </value-props>
-    </div>
-  </div>
-
-  {% assign pressList = "[{'image': 'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_nytimes.png?v=1586276562','description':'A substantial savings over traditional custom furniture, which can run into five figures.', 'linkTo': 'https://www.nytimes.com/2020/03/11/style/furniture-customization.html'},{'image': 'https://cdn.insideweather.com/hp/press/hp_press_apartment-therapy.png','description':'You Can Bring Frank Lloyd Wright Design Into Your Home with the “Usonia” Furniture Line.', 'linkTo': 'https://www.apartmenttherapy.com/frank-lloyd-wright-furniture-collection-36743976'},{ 'image': 'https://cdn.insideweather.com/hp/press/hp_press_domino.png','description':'There’s even an ethical component to the company that eco-conscious shoppers will love.', 'linkTo': 'https://www.domino.com/content/inside-weather-affordable-furniture-company/'},{'image':'https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_britco.png?v=1565744852','description':'No more MALM monotony here!', 'linkTo': 'https://www.brit.co/inside-weather-furniture-brand/'},{'image':'https://cdn.insideweather.com/hp/press/hp_press_house-beautiful.png','description':'Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.', 'linkTo': 'https://www.housebeautiful.com/lifestyle/a25417610/inside-weather-custom-furniture-easy-assembly/'}]"%}
-
-  <div class="PressContainer">
-    <div class="press--container">
-      <press :press-list="{{pressList}}"></press>
-    </div>
-  </div>
-
-  {% assign reviewContent = "[{'headContent':'Fits our lifestyle perfectly!','starCount':5,'reviewDetail':'We love our new sofa and that it’s custom made to fit our family without having to pay a premium price. We have 2 pets and have always worried about our furniture and how to keep it clean/not look like we have pets, so being able to choose ’pet-friendly’ fabrics that didn’t compromise style/comfort was a big plus! The process was so easy, from ordering samples, to ’building’ our sofa on the website before ordering, I had no anxiety over what our sofa would look like.','image':'https://cdn.insideweather.com/hp/social/021721_hp_social_01.jpg','reviewer':'Heather S.','reviewerAddress':'Atlanta, GA'},
-
-  {'headContent':'Beautiful Furniture We Absolutely Love','starCount':5,'reviewDetail':'I have 3 Inside Weather products, a coffee table, side table and the Voss sideboard, all in the same finish. They are amazing, so aesthetically pleasing and fit perfectly in my house. Such good quality products and I highly recommend!','image':'https://cdn.insideweather.com/hp/social/021721_hp_social_02.jpg','reviewer':'Hope D.','reviewerAddress':'Ray City, GA'},
-
-  {'headContent':'Great tables that set the bar high.','starCount':5,'reviewDetail':'This project was a partnership between PHASE Studio Architecture and VERDE Interior Design. The client tasked us with designing a cool, minimal boba tea house. We instantly thought of using customized rectangular dining tables from Inside Weather. These tables are great and set the bar for the rest of the design. We paired each table with some of our favorite seating and voila!','image':'https://cdn.insideweather.com/hp/social/021721_hp_social_03.jpg','reviewer':'VERDE Interior Design','reviewerAddress':'Houston, TX'}]"%}
-
-  <div class="ReviewCarouselWrapper">
-    <div class="--custom-container">
-      <banner-review-carousel
-        :review-content="{{reviewContent}}"
-        link-text="Read All Reviews"
-        link-to="/pages/reviews"
-      >
-      </banner-review-carousel>
-    </div>
-  </div>
-
-  {% assign bannerSectionAssets = "[{'bgLarge':'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_design-services_d-min.jpg?1657951', 'bgSmall': 'https://cdn.shopify.com/s/files/1/2994/0144/files/3.0_hp_design-services_m-min.jpg?1658615'}]"%}
-
-  <banner
-    :banner-image="{{bannerSectionAssets}}"
-    banner-heading="Free Furniture Design Services"
-    banner-description="Our design experts are here to talk you through any dilemma. From custom furnishings that fit your tiny New York City living room and your personal style to that custom dining room table you've drawn up in your head."
-    button-text="SEND AN SOS"
-    button-link="https://insideweather.com/pages/work-with-a-designer"
-  >
-  </banner>
-
-  <!-- {% assign recentlySoldProducts = "[{'picture':'https://banksy-images.s3.amazonaws.com/items/48S8C3BF601/48S8C3BF601-0_small.jpg','userFirstName':'Adam','userSecondName':'R.','productName':'Latte Round Dining Table in Latte Wood','price':'$408', 'targetLink': 'https://insideweather.com/products/dt12fi13-latte-round-dining-table-in-latte-wood'},{'picture':'https://banksy-images.s3.amazonaws.com/items/141S205E0AF4/141S205E0AF4-0_small.jpg','userFirstName':'Eric','userSecondName':'V.','productName':'Cross Weave Asher Sofette in Yale Blue','price':'$1,023', 'targetLink': 'https://insideweather.com/products/se22aa1013101012-cross-weave-asher-sofette-in-yale-blue'},{'picture':'https://content.cylindo.com/api/image/resize?account=4931&id=14745&scene=sku&features=4055092,4054658,4054800,4055093,4055086,4055094,4055091,4055095&frame=1&size=400&name=Hanna%20Side%20Table1&color=FFFFFF&format=JPG','userFirstName':'Mia','userSecondName':'B.','productName':'Latte Hanna Side Table','price':'$233', 'targetLink': 'https://insideweather.com/products/hs10fikd-latte-hanna-side-table'},{'picture':'https://banksy-images.s3.amazonaws.com/items/250SED4C3B56/250SED4C3B56-0_large.jpg','userFirstName':'Bailey','userSecondName':'A.','productName':'Micro Suede Powell Sectional in Whiskey','price':'$1,598', 'targetLink': 'https://insideweather.com/products/sc12ab10111416-micro-suede-powell-sectional-in-whiskey'},{'picture':'https://banksy-images.s3.amazonaws.com/items/195SED4B5489/195SED4B5489-1_large.jpg','userFirstName':'Blair','userSecondName':'W.','productName':'Latte Sloan Credenza in White Marble','price':'$568', 'targetLink': 'https://insideweather.com/products/cr10cf1114-latte-sloan-credenza-in-white-marble'},{'picture':'https://content.cylindo.com/api/image/resize?account=4931&id=12081&scene=sku&features=4082068,4081673,4100678,4082069,4081700,4082070&frame=4&size=400&name=Lounge%20Chair%2001%20-%20Nels4&color=FFFFFF&format=JPG','userFirstName':'Thomas','userSecondName':'G.','productName':'Espresso Edgar Lounge Chair in Butterscotch','price':'$948', 'targetLink': 'https://insideweather.com/products/el10bt-espresso-edgar-lounge-chair-in-butterscotch'},{'picture':'https://content.cylindo.com/api/image/resize?account=4931&id=14740&scene=sku&features=4049235,4048777,4049177,4049236&frame=1&size=400&name=Throw%20Pillow1&color=FFFFFF&format=JPG','userFirstName':'Jayme','userSecondName':'S.','productName':'Terrazzo Summer 16&quot; Pillow','price':'$32', 'targetLink': 'https://insideweather.com/products/hd125-nordic-coat-rack'},{'picture':'https://banksy-images.s3.amazonaws.com/items/253SDB1CA72A/253SDB1CA72A-0_small.jpg','userFirstName':'David','userSecondName':'G.','productName':'Latte Polk Armchair in Evening Abstraction','price':'$213', 'targetLink': 'https://insideweather.com/products/cd111112gz10-latte-polk-armchair-in-evening-abstraction'},{'picture':'https://banksy-images.s3.amazonaws.com/items/47S86099021/47S86099021-0_small.jpg','userFirstName':'Lily','userSecondName':'B.','productName':'Espresso Rectangle Coffee Table in Espresso Wood','price':'$218', 'targetLink': 'https://insideweather.com/products/ct15fy13-espresso-rectangle-coffee-table-in-espresso-wood'}]"%} -->
-
-  {% assign recentlySoldProducts = "[{'picture':'https://content.cylindo.com/api/v2/4931/products/HAYES%20STORAGE%20TABLE/frames/3/HAYES%20STORAGE%20TABLE.JPG?background=FFFFFF&feature=TABLE%20TOP%20SHAPE:42%20ALMOND&feature=PLYWOOD%20FINISH:LATTE&feature=LID:LATTE&feature=STORAGE:CORDOVA%20MINERAL-NW&feature=LEG%20FINISH:CARBON&size=400','userFirstName':'Charlie','userSecondName':'P.','productName':'Almond Hayes Coffee Table in Latte','price':'$399', 'targetLink':'https://insideweather.com/products/ha1410bwdn10-almond-hayes-coffee-table-in-latte?attributes=table_shape%3Aalmond-42%2Cfinish%3Alatte%2Ccolor_name_lid%3Alatte%2Ccolor_name%3Amineral%2Cbase_style%3Acarbon'},
-
-  {'picture':'https://content.cylindo.com/api/v2/4931/products/CNV_VITA/frames/4/CNV_VITA.JPG?background=FFFFFF&feature=BASE%20FINISHES:WHITE&feature=EDGE%20FINISHES:WHITE&feature=UPHOLSTERY:DS1057&size=400','userFirstName':'Katherine','userSecondName':'B.','productName':'White Vita Lounge Chair in Terrazzo Speckle', 'price':'$673', 'targetLink':'https://insideweather.com/products/vl10lx-white-vita-lounge-chair-in-terrazzo-speckle'},
-
-  {'picture':'https://content.cylindo.com/api/v2/4931/products/ELM%20STORAGE/frames/1/ELM%20STORAGE.JPG?background=FFFFFF&feature=HEIGHT:31%22&feature=WIDTH:3&feature=STYLE:FLAT%20TOP&feature=WOOD%20FINISH:LIGHT%20ESPRESSO&feature=DOOR%20FINISH:FROSTED%20GLASS&feature=HINGE%20FINISH:CARBON&size=400','userFirstName':'Layla','userSecondName':'G.','productName':'31\&#34; Tall 3-Door Elm Storage Cabinet in Espresso', 'price':'$1,200', 'targetLink':'https://insideweather.com/products/em14111110101010-31-tall-3-door-elm-storage-cabinet-in-espresso'},
-
-  {'picture':'https://cdn.insideweather.com/hp/recentlysold/090121_hp_recentlysold_04.jpg','userFirstName':'Jacob','userSecondName':'L.','productName':'Rectangle Vienna Dining Table in Latte', 'price':'$1,000', 'targetLink':'https://insideweather.com/products/fvi2112101010-rectangle-vienna-dining-table-in-latte'},
-
-  {'picture':'https://content.cylindo.com/api/v2/4931/products/CUSTOM%204-SEATER%20SECTIONAL%20SNUG/frames/1/CUSTOM%204-SEATER%20SECTIONAL%20SNUG.JPG?background=FFFFFF&feature=ARM%20STYLE:LEVI%20(FABRIC)&feature=UPHOLSTERY:ROYALE%20RUST&feature=CONFIGURATION:CLASSIC_CLASSIC&feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG&feature=PILLOW%20DETAIL:NO%20BUTTON&feature=BASE%20STYLE:ARC&feature=BASE%20FINISH:METAL%20LEGS%20BRASS','userFirstName':'Katie','userSecondName':'A.','productName':'Custom Levi 4-Seater Sofa Sectional in Rust', 'price':'$2,924', 'targetLink':'https://insideweather.com/products/fc14db1012102110-custom-levi-4-seater-sofa-sectional-in-rust'},
-
-  {'picture':'https://content.cylindo.com/api/v2/4931/products/ADA%20DINING%20CHAIR/frames/1/ADA%20DINING%20CHAIR.JPG?background=FFFFFF&feature=WOODEN%20FRAME:BLACK&feature=UPHOLSTERY:CORDOVA%20MINERAL-NW&feature=METAL%20FRAME:CARBON&size=400','userFirstName':'Joseph','userSecondName':'T.','productName':'Black Ada Dining Chair in Mineral', 'price':'$314', 'targetLink':'https://insideweather.com/products/ai12cb10-black-ada-dining-chair-in-mineral'},
-
-  {'picture':'https://content.cylindo.com/api/v2/4931/products/CNV_AP_PYR/frames/3/CNV_AP_PYR.JPG?background=FFFFFF&feature=UPHOLTERY:ROYALE%20CLOUD&size=400','userFirstName':'Patty','userSecondName':'M.','productName':'Large Pyramid Pillow in Glacier Blue', 'price':'$42', 'targetLink':'https://insideweather.com/products/py13cy-large-pyramid-pillow-in-glacier-blue-cover-only'},
-
-  {'picture':'https://cdn.insideweather.com/hp/recentlysold/090121_hp_recentlysold_08.jpg','userFirstName':'Mark','userSecondName':'O.','productName':'Queen Savoy Upholstered Bed Frame in Honey', 'price':'$1,294', 'targetLink':'https://insideweather.com/products/su1210bb111110-queen-savoy-upholstered-bed-frame-in-honey'},
-
-  {'picture':'https://banksy-images.s3.amazonaws.com/items/WA1113BH/WA1113BH-0_small.jpg','userFirstName':'Greg','userSecondName':'K.','productName':'Cool Botanical Art Print with Whitewash Frame','price':'$63', 'targetLink':'https://insideweather.com/products/wa1113bh-cool-botanical-art-print-with-whitewash-frame-16-x-20'}]"%}
-
-  <recently-sold-products
-    :recently-sold-products="{{recentlySoldProducts}}"
-    section-heading="Recently Sold"
-    section-description="Take a look at what our craftsmen and designers are working on right now!"
-  >
-  </recently-sold-products>
-</div>
-
-<script>
-
-  jQuery(function ($) {
-    var count = 0;
-    var playerId = '';
-    jQuery('.point h3').on('click', (e) => {
-      e.stopPropagation();
-      const $ = jQuery;
-      const targetParent = $('.descriptions .point');
-      const allDescription = $('.descriptions .point p');
-      var targetAttribute = e.target.attributes[0].value;
-      if (e.target.parentElement.classList.contains('show-details')) {
-        count ++;
-        $('.descriptions h2').slideToggle();
-        toggleSlide(e.target.parentElement.children[1]);
-        e.target.parentElement.classList.remove('show-details');
-      }else {
-        $(allDescription).slideUp();
-        $('.descriptions h2').slideUp();
-        downSlide(e.target.parentElement.children[1]);
-        $(targetParent).removeClass('show-details');
-        e.target.parentElement.classList.add('show-details');
-      }
-      $('.image_wrapper figure').each(function(){
-        var recieverAttribute = this.getAttribute('data-src');
-        if(recieverAttribute === targetAttribute) {
-          $('.image_wrapper figure').removeClass('slide_up');
-          if(count === 0) {
-            $(this).addClass('slide_up');
-          }else {
-            $('.image_wrapper figure').removeClass('slide_up');
-          }
-          if($(this).find('video').length > 0) {
-            var player = $(this).find('video');
-            playerId = $(this).find('video')[0].id;
-            player[0].play()
-          } else {
-            if (playerId !== '') {
-              $('#' + playerId)[0].pause();
-            }
-          }
-
-        }
-      });
-      if(count === 1) {
-        count = 0;
-      }
-    });
-
-    const controller = new ScrollMagic.Controller();
-
-    const bannerCarouselTimeline = new TimelineLite();
-    bannerCarouselTimeline.fromTo($('.CarouselBanner__image'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: ExpoScaleEase.config(1.05, 1, Power0.easeIn)})
-      .fromTo($('.CarouselBanner__content h2'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-      .fromTo($('.CarouselBanner__content p'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-      .fromTo($('.CarouselBanner__content a'), 1,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.75)
-      .call(function(){
-        $('.CarouselBanner .owl-dots button').each(function(i){
-          var row = $(this);
-          setTimeout(function() {
-            TweenMax.fromTo(row, 0.5,{opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.8)
-            if($('.CarouselBanner .owl-dots button').length === (i + 1)) {
-              $('.CarouselBanner').addClass('--animLoaded');
-            }
-          }, 200 * i);
-        });
-      });
-    const bannerCarouselTimelineSet = new ScrollMagic.Scene({
-      triggerElement: '.CarouselBanner',
-      reverse: false
-    }).setTween(bannerCarouselTimeline).addTo(controller);
-
-    $(window).on('load', function () {
-      if($(window).width() < 768) {
-        ValuePropsMobAnim();
-        reviewCarouselMobAnim();
-      }
-      if($(window).width() >= 768) {
-        ValuePropsDesktopAnim();
-        reviewCarouselDekstopAnim();
-      }
-    });
-
-    $(document).find('.more-info').on('click', function (e) {
-      const targetElement = e.target.parentElement
-      $(e.target).toggleClass('close')
-      $(targetElement).find('.RecentlySoldProducts--overlayWrapper').toggleClass('show')
-    })
-
-    function ValuePropsDesktopAnim() {
-      const valuePropsPointsTimeline = new TimelineLite()
-      valuePropsPointsTimeline.call(function () {
-        $('.ValueProps .descriptions .details .point').each(function (i) {
-          var row = $(this);
-          setTimeout(function() {
-            TweenMax.fromTo(row, 1.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1);
-          }, 200 * i);
-        });
-      })
-      const valuePropsPointsScene = new ScrollMagic.Scene({
-        triggerElement: '.ValueProps .descriptions h2',
-        reverse: false
-      }).setTween(valuePropsPointsTimeline).addTo(controller);
-    }
-    function ValuePropsMobAnim() {
-      const valuePropsPointsMobTimeline = new TimelineLite()
-      valuePropsPointsMobTimeline.call(function () {
-        $('.ValueProps .descriptions .details .point').each(function (i){
-          var row = $(this);
-          setTimeout(function() {
-            TweenMax.fromTo(row, 1.5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1);
-          }, 200 * i);
-        });
-      })
-      const valuePropsPointsMobScene = new ScrollMagic.Scene({
-        triggerElement: '.ValueProps',
-        reverse: false
-      }).setTween(valuePropsPointsMobTimeline).addTo(controller);
-    }
-
-    const pressTimeline = new TimelineLite()
-    pressTimeline.fromTo($('.Press ul li'), 1,{opacity: 0, y: 100}, {opacity: 1, y: 0, ease: Circ.easeOut})
-    const pressTimelineScene = new ScrollMagic.Scene({
-      triggerElement: '.ValueProps .descriptions .details .point',
-      reverse: false
-    }).setTween(pressTimeline).addTo(controller);
-
-    function reviewCarouselDekstopAnim() {
-      const element = '.ReviewCarouselWrapper .owl-item .Review__image';
-      var reviewSetTarget = '.ReviewCarouselWrapper'
-      const reviewSet = TweenMax.staggerFromTo(element, 0.9,
-        {
-          opacity: 0,
-          y: 50
-        },{
-          opacity: 1,
-          y: 0,
-          force3D: true,
-        }, 0.2);
-      new ScrollMagic.Scene( {
-        triggerElement: reviewSetTarget,
-        reverse: false,
-        triggerHook: "onEnter",
-        offset: 250
-      }).setTween(reviewSet).addTo(controller);
-
-      const ReviewContentElement = '.ReviewCarouselWrapper .owl-item .Review__content';
-      const reviewContentSet = TweenMax.staggerFromTo(ReviewContentElement, 0.9,
-        {
-          opacity: 0,
-          y: 50
-        },{
-          opacity: 1,
-          y: 0,
-          force3D: true,
-        }, 0.2);
-      new ScrollMagic.Scene( {
-        triggerElement: reviewSetTarget,
-        reverse: false,
-        triggerHook: "onEnter",
-        offset: 250
-      }).setTween(reviewContentSet).addTo(controller);
-
-    }
-
-    function reviewCarouselMobAnim() {
-      const ReviewCarouselMobTimeline = new TimelineLite()
-      ReviewCarouselMobTimeline.fromTo($('.ReviewCarouselWrapper .owl-item .Review__image'), 0.9,{opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut})
-        .fromTo($('.ReviewCarouselWrapper .owl-item .Review__content'), 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-      const ReviewCarouselMobTimelineScene = new ScrollMagic.Scene({
-        triggerElement: '.Press ul li.press-list-2',
-        reverse: false
-      }).setTween(ReviewCarouselMobTimeline).addTo(controller);
-    }
-
-    const bannerTimeline = new TimelineLite();
-    bannerTimeline.fromTo($('.Banner .Banner__wrapper'), 0.8, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: ExpoScaleEase.config(1.05, 1)})
-      .fromTo($('.Banner .Banner__wrapper .Banner__content h2'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 0.75)
-      .fromTo($('.Banner .Banner__wrapper .Banner__content p'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0}, 1)
-      .fromTo($('.Banner .Banner__wrapper .Banner__content ._button-wrapper'), 1, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 1.5)
-    const bannerScene = new ScrollMagic.Scene({
-      triggerElement: '.ReviewCarouselWrapper .owl-item.active .Review__author',
-      reverse: false
-    }).setTween(bannerTimeline).addTo(controller);
-
-    const productTimeline = new TimelineLite()
-    productTimeline.fromTo($('.SoldProducts .heading h2'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut})
-      .fromTo($('.SoldProducts .heading  p'), 0.7, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: Circ.easeOut}, 0.5)
-    const productScene = new ScrollMagic.Scene({
-      triggerElement: '.SoldProducts',
-      reverse: false
-    }).setTween(productTimeline).addTo(controller);
-
-    const soldProductTimeline = new TimelineLite()
-    soldProductTimeline.call(function () {
-      $('.RecentlySoldProducts .RecentlySoldProducts--column').each(function (i) {
-        var SecondRow = $(this).find('img');
-        setTimeout(function () {
-          TweenMax.fromTo(SecondRow, 0.9, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Circ.easeOut});
-          if($('.RecentlySoldProducts .RecentlySoldProducts--column').length === (i + 1)) {
-            $('.RecentlySoldProducts .RecentlySoldProducts--column').addClass('--animLoaded');
-          }
-        }, 200 * i)
-      });
-    })
-    const soldProductSecondScene = new ScrollMagic.Scene({
-      triggerElement: '.SoldProducts .heading  p',
-      reverse: false
-    }).setTween(soldProductTimeline).addTo(controller);
+    <script>
+      const spacer1 = {"backgroundColor":"#FFF","desktopSpacing":"100px","mobileSpacing":"36px"};
+    </script>
+    <custom-spacer v-bind='spacer1'>
+      </custom-spacer>
 
 
+    <featured-categories v-bind='{"autoplay":false,"playSpeed":0,"backgroundColor":"#FFF","categories":[{"imageDesktop":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_living.jpg","imageDesktopAlt":"living room furniture","imageMobile":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_living.jpg","imageMobileAlt":"living room furniture","linkUrl":"https://insideweather.com/pages/living-room","priority":1,"buttonText":"SHOP LIVING","buttonTextColor":"#202020","buttonBackgroundColor":"#ffffff"},{"imageDesktop":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_dining.jpg","imageDesktopAlt":"dining room furniture","imageMobile":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_dining.jpg","imageMobileAlt":"dining room furniture","linkUrl":"https://insideweather.com/pages/dining-room","priority":2,"buttonText":"SHOP DINING","buttonTextColor":"#202020","buttonBackgroundColor":"#ffffff"},{"imageDesktop":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_office.jpg","imageDesktopAlt":"office furniture","imageMobile":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_office.jpg","imageMobileAlt":"office furniture","linkUrl":"https://insideweather.com/pages/office","priority":3,"buttonText":"SHOP OFFICE","buttonTextColor":"#202020","buttonBackgroundColor":"#ffffff"},{"imageDesktop":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_bedroom.jpg","imageDesktopAlt":"bedroom furniture","imageMobile":"https://cdn.insideweather.com/hp/cat-rooms/080221_hp_cat-room_bedroom.jpg","imageMobileAlt":"bedroom furniture","linkUrl":"https://insideweather.com/pages/bedroom","priority":4,"buttonText":"SHOP BEDROOM","buttonTextColor":"#202020","buttonBackgroundColor":"#ffffff"}]}'>
+    </featured-categories>
 
 
+    <script>
+      const spacer3 = {"backgroundColor":"#FFF","desktopSpacing":"130px","mobileSpacing":"65px"};
+    </script>
+    <custom-spacer v-bind='spacer3'>
+      </custom-spacer>
 
-  });
-  function toggleSlide(item) {
-    jQuery(item).slideToggle();
-  }
-  function downSlide(item) {
-    jQuery(item).slideDown();
-  }
-</script>
+
+    <v-props v-bind='{"defaultImage":"https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_00.jpg","mainHeading":"Online custom furniture shopping that puts you in charge.","backgroundColor":"#f2f2f2","items":[{"isVideo":false,"url":"https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_01.jpg","titleCopy":"Designed In-house","titleColor":"#202020","bodyCopy":"We consider it mission-critical that every product we sell be sustainable, adaptable, and—above all—beautiful, which is why we don’t trust anyone else to do the job. Our team both dreams it and sees it through, all under the same roof.","bodyColor":"#202020","targetPoint":"designed-in-house"},{"isVideo":false,"url":"https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_02-v2.jpg","titleCopy":"Made in the USA","titleColor":"#202020","bodyCopy":"Every one of our pieces is made-to-order by our expert furniture makers in our workshop in California. Sawing, sewing, packaging, and shipping-we see every custom piece through from start to finish!","bodyColor":"#202020","targetPoint":"made-in-the-usa"},{"isVideo":true,"url":"https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_03.mp4","titleCopy":"Quick Ship Custom","titleColor":"#202020","bodyCopy":"Custom furniture no longer means months of waiting. Our business model allows for each product to be highly customized to you, and sent off to your doorstep within a matter of days.","bodyColor":"#202020","targetPoint":"quick-ship-custom"},{"isVideo":false,"url":"https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_04.jpg","titleCopy":"365 Day Home Trial","titleColor":"#202020","bodyCopy":"Take some time to get acclimated to your new furniture. In fact, take all four seasons if you have to! You’ve got 365 days to try it out. Still not satisfied? We’ll take it back.","bodyColor":"#202020","targetPoint":"365-day-home-trial"},{"isVideo":false,"url":"https://cdn.insideweather.com/hp/vprop/052121_hp_vprop_05-v2.jpg","titleCopy":"Carbon Negative","titleColor":"#202020","bodyCopy":"All of our materials are selected with intention—from our sofas that upcycle over 200 plastic water bottles to our packaging which is among the first ever made of renewable sugar-based contents in the industry. To achieve carbon negativity, two trees are planted via the National Forest Foundation for every order placed with us. Sleep easier knowing you have the most sustainable furniture on the market.","bodyColor":"#202020","targetPoint":"carbon-negative"}]}'>
+    </v-props>
+
+
+    <script>
+      const spacer5 = {"backgroundColor":"#FFF","desktopSpacing":"160px","mobileSpacing":"45px"};
+    </script>
+    <custom-spacer v-bind='spacer5'>
+      </custom-spacer>
+
+
+    <press-list v-bind='{"items":[{"imageDesktop":"https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_nytimes.png?v=1586276562","imageMobile":"https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_nytimes.png?v=1586276562","description":"A substantial savings over traditional custom furniture, which can run into five figures.","descriptionColor":"#98958f","descriptionItalic":true,"linkTo":null,"priority":1},{"imageDesktop":"https://cdn.insideweather.com/hp/press/hp_press_apartment-therapy.png","imageMobile":"https://cdn.insideweather.com/hp/press/hp_press_apartment-therapy.png","description":"You Can Bring Frank Lloyd Wright Design Into Your Home with the “Usonia” Furniture Line.","descriptionColor":"#98958f","descriptionItalic":true,"linkTo":null,"priority":2},{"imageDesktop":"https://cdn.insideweather.com/hp/press/hp_press_domino.png","imageMobile":"https://cdn.insideweather.com/hp/press/hp_press_domino.png","description":"There’s even an ethical component to the company that eco-conscious shoppers will love.","descriptionColor":"#98958f","descriptionItalic":true,"linkTo":null,"priority":3},{"imageDesktop":"https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_britco.png?v=1565744852","imageMobile":"https://cdn.shopify.com/s/files/1/2994/0144/files/press_logo_britco.png?v=1565744852","description":"No more MALM monotony here!","descriptionColor":"#98958f","descriptionItalic":true,"linkTo":null,"priority":4},{"imageDesktop":"https://cdn.insideweather.com/hp/press/hp_press_house-beautiful.png","imageMobile":"https://cdn.insideweather.com/hp/press/hp_press_house-beautiful.png","description":"Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.","descriptionColor":"#98958f","descriptionItalic":true,"linkTo":null,"priority":5}]}'>
+    </press-list>
+
+
+    <script>
+      const spacer7 = {"backgroundColor":"#FFF","desktopSpacing":"140px","mobileSpacing":"35px"};
+    </script>
+    <custom-spacer v-bind='spacer7'>
+      </custom-spacer>
+
+
+    <review-carousel v-bind='{"autoplay":true,"playSpeed":"3000","backgroundColor":"#e8e6e2","slides":[{"image":"https://cdn.insideweather.com/hp/social/021721_hp_social_01.jpg","titleCopy":"Fits our lifestyle perfectly!","titleColor":"#202020","starCount":5,"bodyCopy":"We love our new sofa and that it’s custom made to fit our family without having to pay a premium price. We have 2 pets and have always worried about our furniture and how to keep it clean/not look like we have pets, so being able to choose ’pet-friendly’ fabrics that didn’t compromise style/comfort was a big plus! The process was so easy, from ordering samples, to ’building’ our sofa on the website before ordering, I had no anxiety over what our sofa would look like.","bodyColor":"#202020","reviewer":"Heather S.","reviewerAddress":"Atlanta, GA","linkCopy":"Read All Reviews","linkColor":"#202020","linkUrl":"https://insideweather.com/pages/reviews","priority":1},{"image":"https://cdn.insideweather.com/hp/social/021721_hp_social_02.jpg","titleCopy":"Beautiful Furniture We Absolutely Love","titleColor":"#202020","starCount":5,"bodyCopy":"I have 3 Inside Weather products, a coffee table, side table and the Voss sideboard, all in the same finish. They are amazing, so aesthetically pleasing and fit perfectly in my house. Such good quality products and I highly recommend!","bodyColor":"#202020","reviewer":"Hope D.","reviewerAddress":"Ray City, GA","linkCopy":"Read All Reviews","linkColor":"#202020","linkUrl":"https://insideweather.com/pages/reviews","priority":2},{"image":"https://cdn.insideweather.com/hp/social/021721_hp_social_03.jpg","titleCopy":"Great tables that set the bar high.","titleColor":"#202020","starCount":5,"bodyCopy":"This project was a partnership between PHASE Studio Architecture and VERDE Interior Design. The client tasked us with designing a cool, minimal boba tea house. We instantly thought of using customized rectangular dining tables from Inside Weather. These tables are great and set the bar for the rest of the design. We paired each table with some of our favorite seating and voila!","bodyColor":"#202020","reviewer":"VERDE Interior Design","reviewerAddress":"Houston, TX","linkCopy":"Read All Reviews","linkColor":"#202020","linkUrl":"https://insideweather.com/pages/reviews","priority":3}]}'>
+    </review-carousel>
+
+
+    <text-banner v-bind='{"imageDesktop":"https://cdn.insideweather.com/hp/bottom-banner/102021_hp_bottom-bnr_d.jpg","imageMobile":"https://cdn.insideweather.com/hp/bottom-banner/102021_hp_bottom-bnr_m.jpg","titleCopy":"Free Furniture Design Services","bodyCopy":"Our design experts are here to talk you through any dilemma. From custom furnishings that fit your tiny New York City living room and your personal style to that custom dining room table you&apos;ve drawn up in your head.","buttonMobile":{"text":"SEND AN SOS","textColor":"#ffffff"},"buttonDesktop":{"text":"SEND AN SOS","backgroundColor":"#ffffff","textColor":"#202020"},"linkUrl":"https://insideweather.com/pages/work-with-a-designer"}'>
+    </text-banner>
+
+
+    <script>
+      const spacer10 = {"backgroundColor":"#FFF","desktopSpacing":"136px","mobileSpacing":"55px"};
+    </script>
+    <custom-spacer v-bind='spacer10'>
+      </custom-spacer>
+
+
+    <script>
+      const titleContent11 = {"titleCopy":"Recently Sold","bodyCopy":"Take a look at what our craftsmen and designers are working on right now!"};
+    </script>
+    <title-text v-bind='titleContent11'></title-text>
+
+
+    <script>
+      const spacer12 = {"backgroundColor":"#FFF","desktopSpacing":"80px","mobileSpacing":"15px"};
+    </script>
+    <custom-spacer v-bind='spacer12'>
+      </custom-spacer>
+
+
+    <recently-sold v-bind='{"items":[{"image":"https://content.cylindo.com/api/v2/4931/products/HAYES%20STORAGE%20TABLE/frames/3/HAYES%20STORAGE%20TABLE.JPG?background=FFFFFF\u0026feature=TABLE%20TOP%20SHAPE:42%20ALMOND\u0026feature=PLYWOOD%20FINISH:LATTE\u0026feature=LID:LATTE\u0026feature=STORAGE:CORDOVA%20MINERAL-NW\u0026feature=LEG%20FINISH:CARBON\u0026size=400","firstName":"Charlie","lastName":"P.","productName":"Almond Hayes Coffee Table in Latte","price":"$399.00","linkUrl":"https://insideweather.com/products/ha1410bwdn10-almond-hayes-coffee-table-in-latte?attributes=table_shape%3Aalmond-42%2Cfinish%3Alatte%2Ccolor_name_lid%3Alatte%2Ccolor_name%3Amineral%2Cbase_style%3Acarbon","priority":1},{"image":"https://content.cylindo.com/api/v2/4931/products/CNV_VITA/frames/4/CNV_VITA.JPG?background=FFFFFF\u0026feature=BASE%20FINISHES:WHITE\u0026feature=EDGE%20FINISHES:WHITE\u0026feature=UPHOLSTERY:DS1057\u0026size=400","firstName":"Katherine","lastName":"B.","productName":"White Vita Lounge Chair in Terrazzo Speckle","price":"$673","linkUrl":"https://insideweather.com/products/vl10lx-white-vita-lounge-chair-in-terrazzo-speckle","priority":2},{"image":"https://content.cylindo.com/api/v2/4931/products/ELM%20STORAGE/frames/1/ELM%20STORAGE.JPG?background=FFFFFF\u0026feature=HEIGHT:31%22\u0026feature=WIDTH:3\u0026feature=STYLE:FLAT%20TOP\u0026feature=WOOD%20FINISH:LIGHT%20ESPRESSO\u0026feature=DOOR%20FINISH:FROSTED%20GLASS\u0026feature=HINGE%20FINISH:CARBON\u0026size=400","firstName":"Layla","lastName":"G.","productName":"31\" Tall 3-Door Elm Storage Cabinet in Espresso","price":"$1,200","linkUrl":"https://insideweather.com/products/em14111110101010-31-tall-3-door-elm-storage-cabinet-in-espresso","priority":3},{"image":"https://cdn.insideweather.com/hp/recentlysold/090121_hp_recentlysold_04.jpg","firstName":"Jacob","lastName":"L.","productName":"Rectangle Vienna Dining Table in Latte","price":"$1,000","linkUrl":"https://insideweather.com/products/fvi2112101010-rectangle-vienna-dining-table-in-latte","priority":4},{"image":"https://content.cylindo.com/api/v2/4931/products/CUSTOM%204-SEATER%20SECTIONAL%20SNUG/frames/1/CUSTOM%204-SEATER%20SECTIONAL%20SNUG.JPG?background=FFFFFF\u0026feature=ARM%20STYLE:LEVI%20(FABRIC)\u0026feature=UPHOLSTERY:ROYALE%20RUST\u0026feature=CONFIGURATION:CLASSIC_CLASSIC\u0026feature=PILLOW%20AND%20CUSHION%20SHAPE:SNUG\u0026feature=PILLOW%20DETAIL:NO%20BUTTON\u0026feature=BASE%20STYLE:ARC\u0026feature=BASE%20FINISH:METAL%20LEGS%20BRASS","firstName":"Katie","lastName":"A.","productName":"Custom Levi 4-Seater Sofa Sectional in Rust","price":"$2,924","linkUrl":"https://insideweather.com/products/fc14db1012102110-custom-levi-4-seater-sofa-sectional-in-rust","priority":5},{"image":"https://content.cylindo.com/api/v2/4931/products/ADA%20DINING%20CHAIR/frames/1/ADA%20DINING%20CHAIR.JPG?background=FFFFFF\u0026feature=WOODEN%20FRAME:BLACK\u0026feature=UPHOLSTERY:CORDOVA%20MINERAL-NW\u0026feature=METAL%20FRAME:CARBON\u0026size=400","firstName":"Joseph","lastName":"T.","productName":"Black Ada Dining Chair in Mineral","price":"$314","linkUrl":"https://insideweather.com/products/ai12cb10-black-ada-dining-chair-in-mineral","priority":6},{"image":"https://content.cylindo.com/api/v2/4931/products/CNV_AP_PYR/frames/3/CNV_AP_PYR.JPG?background=FFFFFF\u0026feature=UPHOLTERY:ROYALE%20CLOUD\u0026size=400","firstName":"Patty","lastName":"M.","productName":"Large Pyramid Pillow in Glacier Blue","price":"$42","linkUrl":"https://insideweather.com/products/py13cy-large-pyramid-pillow-in-glacier-blue-cover-only","priority":7},{"image":"https://cdn.insideweather.com/hp/recentlysold/090121_hp_recentlysold_08.jpg","firstName":"Mark","lastName":"O.","productName":"Queen Savoy Upholstered Bed Frame in Honey","price":"$1,294","linkUrl":"https://insideweather.com/products/su1210bb111110-queen-savoy-upholstered-bed-frame-in-honey","priority":8},{"image":"https://banksy-images.s3.amazonaws.com/items/WA1113BH/WA1113BH-0_small.jpg","firstName":"Greg","lastName":"K.","productName":"Cool Botanical Art Print with Whitewash Frame","price":"$63","linkUrl":"https://insideweather.com/products/wa1113bh-cool-botanical-art-print-with-whitewash-frame-16-x-20","priority":9}]}'>
+    </recently-sold>
+
+      </div>

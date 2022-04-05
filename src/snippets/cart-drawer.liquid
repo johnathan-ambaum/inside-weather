@@ -5,9 +5,15 @@
         <div class="drawer__title">
           {{ 'cart.general.title' | t }}
             <div class="drawer-clock__container" style="display:none;">
-              <span id="drawer__countdown-timer"></span> 
+              <span id="drawer__countdown-timer"></span>
               <span class="drawer-clock__header"></span>
               <p class="drawer-clock__text"></p>
+              <div class="drawer-clock__form">
+                <input class="drawer-clock__input" type="email" placeholder="Email address" data-drawer-timer-email>
+                <button class="btn drawer-clock__button" data-drawer-timer-submit>SUBMIT</button>
+                <span class="drawer-clock__errors" data-drawer-timer-errors></span>
+                <p class="drawer-clock__text" data-drawer-timer-success style="display: none;"></p>
+              </div>
             </div>
         </div>
         <div class="drawer__close">
@@ -23,6 +29,3 @@
     </div>
   </div>
 {% endif %}
-
-
-  

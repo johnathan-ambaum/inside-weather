@@ -4,7 +4,7 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 {% endcomment %}
 <!doctype html>
 <html class="no-js" lang="{{ shop.locale }}">
-<head>
+<head>{% render 'pagefly-head' %}
   {% if template == 'collection' %}
     <script>
       window.location.href = '/';
@@ -96,6 +96,22 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
     }];
     const pt = getCookie('pt');
     if(pt){dataLayer.push({'pt': pt})}
+
+    dataLayer.push({client_ip_address: null});//need to get this somehow
+    dataLayer.push({current_url: "{{request.path}}" });
+    dataLayer.push({user_agent: navigator.userAgent });
+
+    {% if customer %}
+      dataLayer.push({SHA256_email: "{{ customer.email | sha256 }}" });
+      window._learnq = window._learnq || [];
+      window._learnq.push(['identify', {
+        '$email': '{{ customer.email }}'
+      }]);
+    {% else %}
+      dataLayer.push({SHA256_email: null})
+    {% endif %}
+
+
   </script>
   {%- if template.name == 'product' -%}
     <script>
@@ -175,13 +191,13 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
           declineBtnText: "NO THANKS"
         },
         countdown:{
-          countdownActive: false,
-          initialTextHeader: "Maker's Promise",
-          initialTextContent: "Your items are in the queue! You have a limited time to reserve your spot.",
+          countdownActive: true,
+          initialTextHeader: "Order now & get $100 OFF!",
+          initialTextContent: "Enter your email to get your code for $100 off.",
+          successTextContent: "Thank you! Just use code: <strong>GIFT-100</strong> at checkout to get $100 OFF your order over $1000. Code expires in 48hrs.",
           expirationTextHeader: "Last chance!",
           expirationTextContent: "Checkout now to confirm your reservation.",
-          timerDurationInMinutes: 10,
-          minimumCartTotalUSD: 100
+          timerDurationInMinutes: 5
         },
         shippingProtection:{
           active: false,
@@ -210,7 +226,7 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
       },
       swatchBrowser: {
         thankYouMessage: 'Your swatches will arrive at your door within 3-5 days. If you need help deciding, our team of design specialists is here for you.',
-        maxSwatches: 10
+        maxSwatches: {% if customer and customer.tags contains 'trade' %}20{% else %}10{% endif %}
       }
     };
   </script>
@@ -257,7 +273,9 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
   {% endif %}
   <script src="{{ 'manifest.js' | asset_url }}" defer></script>
   <script src="{{ 'widgets.vendor.js' | asset_url }}" defer></script>
-  <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+  {% if template.name != 'product' and template.suffix != 'favorites' and template.suffix != 'swatches' -%}
+    <script src="{{ 'widgets.js' | asset_url }}" defer></script>
+  {%- endif %}
   <script src="//viewer.cylindo.com/v4/viewer.min.js" defer></script>
   <!-- end browse and product customizer widgets -->
 
@@ -300,5 +318,5 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 {% include 'hulkcode_common' %}{% if template contains 'product' or template contains 'cart' %}<script src='https://volumediscount.hulkapps.com/hulkcode.js' defer='defer'></script>{% endif %}
 </head>
 
-<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}"><div class="pagefly-container">{{ content_for_layout }}</div></body>
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} template-{{ template.name }}-{{ template.suffix }}{% if settings.enable_currencies %} currencies-enabled{% endif %}{% if small_header %} MainNav--Small{% endif %}" data-transitions="{{ settings.animate_page_transitions }}"><div class="pagefly-container">{{ content_for_layout }}</div></body>
 </html>

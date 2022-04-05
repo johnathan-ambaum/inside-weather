@@ -1,4 +1,9 @@
 import { mapState } from 'vuex';
+import ApiClient from '../util/ApiClient';
+import { getStaticImageUrl, getViewerParameters } from '../util/cylindo';
+import FilterStorage from '../util/FilterStorage';
+
+const apiClient = new ApiClient();
 
 export default {
   computed: {
@@ -68,28 +73,9 @@ export default {
         return null;
       }
 
-      let min = this.filters.min_fulfillment_days;
-      let max = this.filters.max_fulfillment_days;
-      let selectedOptionsMin = [];
-      let selectedOptionsMax = [];
+      const { minDays, maxDays } = this.fulfillmentDays;
 
-      Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
-        const attribute = this.attributes.find(item => item.parameter === parameter);
-        if (!attribute) {
-          return true;
-        }
-        const selected = attribute.values.find(item => item.value === value);
-        if (!selected) {
-          return true;
-        }
-        selectedOptionsMin.push(selected.min_fulfillment_days_markup || 0);
-        selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
-      });
-
-      let finalMin = min + Math.max(...selectedOptionsMin);
-      let finalMax = max + Math.max(...selectedOptionsMax);
-
-      return `${finalMin}-${finalMax} days`;
+      return `${minDays}-${maxDays} days`;
     },
 
     emailFulfillmentTime() {
@@ -207,6 +193,34 @@ export default {
       return content;
     },
 
+    fulfillmentDays(emailDays = false) {
+      const min = (emailDays ? this.filters.email_min_fulfillment_days : this.filters.min_fulfillment_days);
+      const max = (emailDays ? this.filters.email_max_fulfillment_days : this.filters.max_fulfillment_days);
+      const selectedOptionsMin = [0];
+      const selectedOptionsMax = [0];
+
+      Object.entries(this.selectedOptions).forEach(([parameter, value]) => {
+        const attribute = this.attributes.find(item => item.parameter === parameter);
+        if (!attribute) {
+          return true;
+        }
+        const selected = attribute.values.find(item => item.value === value);
+        if (!selected) {
+          return true;
+        }
+        selectedOptionsMin.push(selected.min_fulfillment_days_markup || 0);
+        selectedOptionsMax.push(selected.max_fulfillment_days_markup || 0);
+      });
+
+      const finalMin = min + Math.max(...selectedOptionsMin);
+      const finalMax = max + Math.max(...selectedOptionsMax);
+
+      return {
+        minDays: finalMin,
+        maxDays: finalMax,
+      };
+    },
+
     getFulfillmentTime(filters, selectedOptions, attributes) {
       if (!filters || !filters.min_fulfillment_days) {
         return null;
@@ -263,6 +277,86 @@ export default {
       let finalMax = max + Math.max(...selectedOptionsMax);
 
       return `${finalMin}-${finalMax} business days`;
+    },
+
+    buildSelectedOptions(attributeMatches, attributes, existingSelections) {
+      const selectedOptions = {};
+      Object.entries(attributeMatches).forEach(([parameter, { matches, value }]) => {
+        if (value) { // having a defined value overrules everything
+          selectedOptions[parameter] = value;
+          return;
+        }
+
+        const foundAttribute = attributes.find(attribute => attribute.parameter === parameter);
+        const foundValue = foundAttribute.values.find((item) => item.value === existingSelections[matches]) || foundAttribute.values[0];
+        if (foundValue) {
+          selectedOptions[parameter] = foundValue.value;
+        }
+      });
+
+      return selectedOptions;
+    },
+
+    createCylindoImageUrl(selectedOptions, relatedProductFilterDefs) {
+      const { productCode, features } = getViewerParameters({
+        baseSku: relatedProductFilterDefs.cylindo_sku,
+        attributes: relatedProductFilterDefs.attributes,
+        selectedOptions,
+      });
+
+      let frame = 1;
+      if (relatedProductFilterDefs && relatedProductFilterDefs.cylindo_overrides && relatedProductFilterDefs.cylindo_overrides.startFrame) {
+        frame = relatedProductFilterDefs.cylindo_overrides.startFrame;
+      }
+
+      return getStaticImageUrl({ productCode, features, frame });
+    },
+
+    async buildRelatedProducts(products, selections) {
+      const relatedProducts = [];
+
+      products.forEach(async (relatedProductData) => {
+        const relatedProduct = {
+          title: '',
+          url: '',
+          image: [],
+          product_type: '',
+        };
+
+        await FilterStorage.getItem(relatedProductData.product_type).then((response) => {
+          if (!response.templates) {
+            return;
+          }
+
+          const { attributes } = response;
+          const selectedOptions = this.buildSelectedOptions(relatedProductData.attributes, attributes, selections);
+
+          const { template = '' } = response.templates.find(item => item.key === 'name') || {};
+          const attributeString = Object.entries(selectedOptions).map(([param, value]) => `${param}:${value}`).join(',');
+          relatedProduct.title = this.interpolateWithValues({ template, attributes, selectedOptions, debug: false });
+          relatedProduct.url = `/products/${relatedProductData.base_product_handle}?attributes=${attributeString}`;
+
+          if (!response.cylindo_sku) {
+            apiClient.getImages({
+              type: relatedProductData.product_type,
+              attributes: selectedOptions,
+              debounce: false
+            }).then((images) => {
+              relatedProduct.image = images;
+              relatedProduct.product_type = relatedProductData.product_type;
+            });
+          } else {
+            relatedProduct.image = this.createCylindoImageUrl(selectedOptions, response);
+            relatedProduct.product_type = relatedProductData.product_type;
+          }
+
+          relatedProducts.push(relatedProduct);
+        });
+      });
+
+      relatedProducts.sort((a, b) => (a.priority < b.priority ? -1 : 1));
+
+      return relatedProducts;
     },
   },
 };

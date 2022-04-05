@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import ApiClient from '../util/ApiClient';
+import { applyFeatureOverrides, getStaticImageUrl, getViewerParameters } from '../util/cylindo';
 import FilterStorage from '../util/FilterStorage';
 
 const apiClient = new ApiClient();
@@ -50,23 +51,40 @@ export function loadProductImages({ dispatch, commit, state }) {
     return;
   }
 
-  let features = [];
-  let productCode = state.filters.cylindo_sku;
-  let productCodePriority = Infinity;
-  Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
-    const { values } = state.filters.attributes.find(att => att.parameter === parameter);
-    const selected = values.find(item => item.value === value);
-    const { cylindo_override_priority } = state.filters.attributes.find(att => att.parameter === parameter);
-    if(selected.cylindo_sku_override && cylindo_override_priority){
-      if(cylindo_override_priority < productCodePriority){
-        productCode = selected.cylindo_sku_override;
-        productCodePriority = cylindo_override_priority;
-      }
-    }
-    features = features.concat(selected.cylindo_features || []);
-  });
+  // static cylindo images for non-360 products
+  if (state.filters.configurator_type === 'static_image' && state.filters.static_images) {
+    const images = state.filters.static_images
+      .sort((a, b) => (a.priority < b.priority ? -1 : 1))
+      .map((image) => {
+        const { productCode, features } = getViewerParameters({
+          baseSku: image.cylindo_sku || state.filters.cylindo_sku,
+          attributes: state.filters.attributes,
+          selectedOptions: state.selectedOptions,
+        });
+        const src = getStaticImageUrl({
+          productCode,
+          features: applyFeatureOverrides({
+            features,
+            overwrites: image.cylindo_overwrite_features || [],
+            removals: image.cylindo_remove_features || [],
+          }),
+          frame: image.cylindo_frame,
+        });
+        return {
+          medium: src,
+          large: src,
+          full: src,
+        };
+      });
+    commit('setProductImages', images);
+    return;
+  }
 
-  // console.log({ SKU: state.filters.cylindo_sku, features });
+  const { productCode, features } = getViewerParameters({
+    baseSku: state.filters.cylindo_sku,
+    attributes: state.filters.attributes,
+    selectedOptions: state.selectedOptions,
+  });
 
   if (state.cylindoViewers.length > 0) {
     state.cylindoViewers.forEach(({ instance }) => {
@@ -78,22 +96,6 @@ export function loadProductImages({ dispatch, commit, state }) {
 
   window.cylindo.on('ready', () => {
     const containerIds = ['cylindo-main', 'cylindo-secondary'].filter(id => document.getElementById(id) !== null);
-
-    let features = [];
-    let productCode = state.filters.cylindo_sku;
-    let productCodePriority = Infinity;
-    Object.entries(state.selectedOptions).forEach(([parameter, value]) => {
-      const { values } = state.filters.attributes.find(att => att.parameter === parameter);
-      const selected = values.find(item => item.value === value);
-      const { cylindo_override_priority } = state.filters.attributes.find(att => att.parameter === parameter);
-      if(selected.cylindo_sku_override && cylindo_override_priority){
-        if(cylindo_override_priority < productCodePriority){
-          productCode = selected.cylindo_sku_override;
-          productCodePriority = cylindo_override_priority;
-        }
-      }
-      features = features.concat(selected.cylindo_features || []);
-    });
 
     const globalDefaults = {
       debug: false,
@@ -240,11 +242,12 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
 
   if (window.history.pushState) {
     const { protocol, host, pathname } = window.location;
-    let urlParams = new URLSearchParams(window.location.search);
-    const version = urlParams.get('version');
-    urlParams = new URLSearchParams();
-    if (version) {
-      urlParams.set('version', version);
+    const urlParams = new URLSearchParams();
+    // maintain any existing query string parameters not related to customizer choices
+    for (const [key, value] of new URLSearchParams(window.location.search).entries()) {
+      if (key !== 'attributes') {
+        urlParams.set(key, value);
+      }
     }
     if (!handle) {
       const attributeString = Object.entries(state.selectedOptions)
@@ -275,18 +278,9 @@ export function updateUrl({ state, dispatch }, { replace = false, handle = null 
   }
 }
 
-export function pullSwatches({ state, dispatch, commit }) {
-  if (!state.category) {
-    setTimeout(() => {
-      dispatch('pullSwatches');
-    }, 200);
-    return;
-  }
-
-  const clearanceCategory = state.category.replace("Clearance ", "")
-
+export function pullSwatches({ commit }, isTrade) {
   apiClient
-    .getSwatches(clearanceCategory)
+    .getSwatches(isTrade)
     .then((swatches) => {
       commit('setSwatches', swatches);
     });

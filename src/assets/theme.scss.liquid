@@ -570,6 +570,7 @@ $btnBackgroundPosition: 150% 35%;
 html, body {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 
   a {
     color: #202020;
@@ -1340,6 +1341,13 @@ h6 {
 
 .text-spacing {
   margin-bottom: $gutter / 2;
+}
+
+.text-accent {
+  font-size: .8em;
+  font-style: italic;
+  font-weight: 700;
+  margin-top: 10px;
 }
 
 /*================ Rich Text Editor Styles ================*/
@@ -2294,10 +2302,10 @@ input[type="radio"] {
   width: auto;
 }
 
-input[type="checkbox"] {
-  -webkit-appearance: checkbox;
-  -moz-appearance: checkbox;
-}
+// input[type="checkbox"] {
+//   -webkit-appearance: checkbox;
+//   -moz-appearance: checkbox;
+// }
 
 input[type="radio"] {
   -webkit-appearance: radio;
@@ -2695,6 +2703,7 @@ symbol {
 .drawer__header {
   display: table;
   // height: $drawerHeaderHeight;
+  table-layout: fixed;
   width: 100%;
   margin-bottom: 0;
   border-bottom: 1px solid $colorDrawerBorder;
@@ -2735,13 +2744,13 @@ symbol {
   width: 100%;
   padding: 24px 0;
   @include media-query($medium-up) {
-    padding:30px 0;
+    padding:30px 0 25px;
     font-size:28px;
   }
 }
 
 .drawer__close {
-  width: 1%;
+  width: 0;
   text-align: center;
 }
 
@@ -2749,7 +2758,7 @@ symbol {
 
 .drawer__close-button {
   position: relative;
-  right: -20px;
+  left: -50px;
   height: 100%;
   padding: 0 15px;
   color: inherit;
@@ -2769,6 +2778,16 @@ symbol {
 
   @include media-query($large-up) {
     right: -20px;
+  }
+}
+
+.drawer--has-clock .drawer__close-button {
+  top: 22px;
+}
+
+@media only screen and (min-width: 768px) {
+  .drawer--has-clock .drawer__close-button {
+    top: 32px;
   }
 }
 
@@ -2814,31 +2833,61 @@ symbol {
 .drawer__inner--wrapper {
   bottom: 0;
   left: 0;
-  padding: 21px 15px 0;
+  padding: 44px 15px 0;
   position: absolute;
   right: 0;
   top: 0;
 
   @include media-query($medium-up) {
-    padding: 30px 24px 0;
+    padding: 44px 24px 0;
+  }
+
+  .InfoPopup__Dialog {
+    left: -75px;
+
+    &::before,
+    &::after {
+      left: 185px;
+    }
+
+    @media only screen and (max-width: 589px) {
+      bottom: -10px;
+
+      &::before,
+      &::after {
+        content: none;
+      }
+    }
+
+    @media only screen and (min-width: 590px) {
+      width: 280px;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      .InfoPopup__Close {
+        display: none;
+      }
+    }
   }
 }
-.drawer-clock__container{
-  margin-top:0.5rem;
+.drawer__body--has-clock .drawer__inner--wrapper {
+  @media only screen and (min-width: 1025px) {
+    padding-top: 50px;
+  }
 }
 #drawer__countdown-timer{
   font-family: Avalon;
   font-weight: 600;
-  font-size:13px;
-  letter-spacing: 0.04em;
+  font-size:18px;
+  letter-spacing: 0.1em;
   line-height:20px;
   text-align:left;
-  color: red;
+  color: #e64848;
 }
 .drawer-clock__header{
   font-family: Avalon;
   font-weight: 600;
-  font-size:13px;
+  font-size:16px;
   letter-spacing: 0.04em;
   line-height:20px;
   text-align:left;
@@ -2847,12 +2896,42 @@ symbol {
 .drawer-clock__text{
   font-family: Avalon;
   font-weight: 500;
-  font-size:11px;
+  font-size:14px;
   letter-spacing: 0.04em;
-  line-height:19px;
+  line-height:17px;
   text-align:left;
   color: #202020;
   margin-bottom: 0;
+}
+.drawer-clock__form {
+  display: flex;
+  flex-wrap: wrap;
+}
+body .drawer-clock__input {
+  border-radius: 50px;
+  flex: 1;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  margin-top: 12px;
+}
+body .drawer-clock__input::placeholder {
+  color: #d4d0ca;
+}
+body .drawer-clock__button {
+  border-radius: 50px;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.drawer-clock__errors {
+  color: red;
+  font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
+  font-size: 14px;
 }
 .drawer__body {
   position: absolute;
@@ -2876,29 +2955,26 @@ symbol {
     // }
   }
 }
-.drawer__body--has-clock{
-  margin-top:6rem;
+.drawer__body.drawer__body--has-clock {
+  margin-top: 9rem;
 }
 @include media-query($medium-up) {
   .drawer__body{
     margin-top: 30px;
   }
-  .drawer__body--has-clock{
-    margin-top:6rem;
-  }
   #drawer__countdown-timer{
     font-family: Avalon;
     font-weight: 600;
-    font-size:15px;
-    letter-spacing: 0.04em;
+    font-size:18px;
+    letter-spacing: 0.1em;
     line-height:20px;
     text-align:left;
-    color: red;
+    color: #e64848;
   }
   .drawer-clock__header{
     font-family: Avalon;
     font-weight: 600;
-    font-size:15px;
+    font-size:16px;
     letter-spacing: 0.04em;
     line-height:20px;
     text-align:left;
@@ -2907,9 +2983,9 @@ symbol {
   .drawer-clock__text{
     font-family: Avalon;
     font-weight: 500;
-    font-size:12px;
+    font-size:14px;
     letter-spacing: 0.04em;
-    line-height:19px;
+    line-height:17px;
     text-align:left;
     color: #202020;
   }
@@ -11567,14 +11643,8 @@ html body.MobileNav--Active {
 }
 
 @media only screen and (min-width: $main-breakpoint) {
-  body:not(.template-index) main {
-    margin-top: 122px;
-  }
-  body.MainNav--Small:not(.template-index) main {
+  main {
     margin-top: 102px;
-  }
-  .category{
-    margin-top:-20px;
   }
 }
 
@@ -11605,7 +11675,7 @@ html body.MobileNav--Active {
   }
 
   body:not(.js-drawer-open):not(.js-drawer-closing) & {
-    z-index: 999;
+    z-index: 1999;
   }
 
   &:hover,
@@ -13114,9 +13184,10 @@ input:checked + .slider:before {
   width:100%;
   -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 
-  body:not(.js-drawer-open):not(.js-drawer-closing) & {
-    z-index: 999;
+  .ambaum__header--active & {
+    z-index: 1030;
   }
 
   .scroll-down & {
@@ -13236,11 +13307,11 @@ input:checked + .slider:before {
   color: #202020;
   margin-top: 30px;
   text-transform: capitalize;
-  padding:10px 20px 0 20px;
-
 }
 
 .ambaum__header-dropdown-item--header a{
+  display: block;
+  padding: 5px 20px;
   text-decoration:none;
 }
 
@@ -13255,7 +13326,11 @@ input:checked + .slider:before {
   letter-spacing: 0.08em;
   color: #202020;
   text-transform: capitalize;
-  padding:10px 20px 0 20px;
+}
+
+.ambaum__header-dropdown-item:not(.ambaum__header-dropdown-item--header) .ambaum__header-dropdown-link {
+  display: block;
+  padding: 5px 20px;
 }
 
 .ambaum__header-dropdown-column{
@@ -13265,6 +13340,10 @@ input:checked + .slider:before {
 .ambaum__header-dropdown-collections-column{
   border-left:1px solid #ebebeb;
   padding-left:45px;
+}
+
+.ambaum__header-dropdown-collections-column .ambaum__header-dropdown-item--header {
+  padding: 5px 20px;
 }
 
 .ambaum__header-image-with-caption{
@@ -13364,7 +13443,7 @@ input:checked + .slider:before {
   z-index: -1;
   width: 100vw;
   height: calc(100vh - 100px);
-  z-index: 998;
+  z-index: 1002;
   transition: top .3s linear;
   padding: 40px 28px;
   overflow:scroll;
@@ -13374,7 +13453,6 @@ input:checked + .slider:before {
   width: 100%;
   text-align: left;
   border-bottom: 1px solid #d2d3d2;
-  padding: 18px 0 18px 0;
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight: 600;
   letter-spacing: .08em;
@@ -13389,12 +13467,17 @@ input:checked + .slider:before {
   padding-top:0;
 }
 
-.ambaum__header-mobile-list-item span{
-  margin-left: 18px;
+.ambaum__header-mobile-list-item-title {
+  width: 100%;
 }
 
-.ambaum__header-mobile-list-item-icon{
-  margin-right:18px;
+.ambaum__header-mobile-list-item-title a {
+  display: block;
+  padding: 18px 0 18px 18px;
+}
+
+.ambaum__header-mobile-list-item-title + .ambaum__header-mobile-list-item-icon{
+  margin: 18px 18px 18px 0;
 }
 
 .ambaum__header-mobile-list--active{
@@ -13439,6 +13522,10 @@ input:checked + .slider:before {
   padding: 26px 40px 28px 40px;
 }
 
+.ambaum__header-dropdown-content-inner .swiper-container {
+  margin-top: 14px;
+}
+
 .ambaum__header-dropdown-title{
   font-family: Avalon, Poppins, "HelveticaNeue", "Helvetica Neue", sans-serif;
   font-weight: 600;
@@ -13468,7 +13555,11 @@ a[href='#'].ambaum__header-dropdown-link{
   text-align: left;
   color: #202020;
   text-transform: none;
-  margin:32px 0 32px 46px;
+  margin-left:46px;
+}
+
+.ambaum__header-mobile-dropdown-second-level-item .ambaum__header-dropdown-link {
+  padding: 16px 0;
 }
 
 .ambaum__header-dropdown-link--third-level-item,
@@ -13485,7 +13576,16 @@ a[href='#'].ambaum__header-dropdown-link{
   letter-spacing: .08em;
   font-size: 14px;
   color: #202020;
-  margin: 28px 0 28px 46px;
+  margin-left: 46px;
+}
+
+.ambaum__header-mobile-dropdown-third-level-item .ambaum__header-dropdown-link--third-level-item {
+  padding: 14px 0;
+}
+
+.ambaum__header-mobile-dropdown-second-level-item + .swiper-container,
+.ambaum__header-mobile-dropdown-third-level-item + .swiper-container {
+  margin-top: 14px;
 }
 
 .summary-rating-bar-content{

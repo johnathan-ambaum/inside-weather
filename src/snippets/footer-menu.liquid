@@ -16,9 +16,13 @@
       <div class="footer__collapsible{% unless block.settings.show_footer_title %} footer_collapsible--disabled{% endunless %}">
         <ul class="no-bullets site-footer__linklist">
           {% for link in linklists[block.settings.menu].links %}
-            {%- unless customer and link.title contains 'Sign Up' -%}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {%- endunless -%}
+            {% if link.title == 'Accessibility' %}
+              <li><a href="#shopify-section-footer" data-acsb-custom-trigger="true">{{ link.title }}</a></li>
+            {% else %}
+              {%- unless customer and link.title contains 'Sign Up' -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endunless -%}
+            {% endif %}
           {% endfor %}
         </ul>
       </div>

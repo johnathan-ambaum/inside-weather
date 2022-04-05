@@ -1,6 +1,5 @@
 <template>
   <div class="ProductDetail">
-    <swatch-browser v-if="!isDecor && isMobile && !disabled" />
     <div
       v-if="!isMobile && detailTabs.length"
       class="ProductDetail-information-tabs__wrapper"
@@ -76,7 +75,44 @@
       <p>{{ interpolatedDescription }}</p>
     </div>
     <related-products v-if="!disabled"></related-products>
-    <swatch-browser v-if="!isDecor && !isMobile  && !disabled" />
+    <div
+      v-if="!isMobile"
+      class="SwatchBrowser__Trigger">
+      <div>
+        <img :src="triggerImage">
+      </div>
+      <div>
+        <h3>Stop drooling over your keyboard.</h3>
+        <p>Have your favorites delivered to you in less than 3 days, for free.</p>
+        <a
+          :class="triggerClasses"
+          href="/pages/free-swatches"
+          target="_blank"
+          @click="active = true"
+        >Get Free Swatches</a>
+      </div>
+    </div>
+    <div
+      v-if="isMobile"
+      class="SwatchMobile__Trigger">
+      <div>
+        <h3>Stop drooling over your keyboard.</h3>
+        <p>Have your favorites delivered to you in less than 3 days, for free.</p>
+        <a
+          :class="triggerClassesMobile"
+          href="/pages/free-swatches"
+          target="_blank"
+        >Get Free Swatches</a>
+      </div>
+      <div>
+        <a href="/pages/free-swatches" target="_blank">
+          <img
+            v-if="triggerImage"
+            :src="triggerImage"
+          >
+        </a>
+      </div>
+    </div>
     <div class="--custom-container desktop-spacing">
       <template-block
         v-for="(block, index) in filters.contents"
@@ -89,32 +125,20 @@
         :is-mobile="isMobile"
       />
     </div>
-    <!-- <product-family
-      v-if="'related_items' in product && product.related_items.length"
-      id="families"
-      class="ProductDetail__Family"
-    /> -->
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import ProductGallery from './ProductGallery.vue';
-import ZoomGallery from './ZoomGallery.vue';
 import TemplateBlock from './TemplateBlock.vue';
-import ProductFamily from './ProductFamily.vue';
 import screenMonitor from '../mixins/screenMonitor';
 import interpolator from '../mixins/interpolator';
-import SwatchBrowser from './SwatchBrowser.vue';
 import RelatedProducts from './RelatedProducts.vue';
+
 export default {
   components: {
     TemplateBlock,
-    ProductFamily,
-    ProductGallery,
-    ZoomGallery,
-    SwatchBrowser,
-    RelatedProducts
+    RelatedProducts,
   },
   mixins: [
     screenMonitor,
@@ -132,9 +156,32 @@ export default {
       detailTabs: state => state.filters.details || [],
       disabled: state => state.filters.disabled,
     }),
+
+    triggerClasses() {
+      return {
+        SwatchBrowser__TriggerLink: this.screenWidth < 768,
+        SwatchBrowser__TriggerButton: this.isTablet || this.screenWidth > 768,
+      };
+    },
+
+    triggerClassesMobile() {
+      return {
+        SwatchMobile__TriggerLink: this.screenWidth < 768,
+        SwatchMobile__TriggerButton: this.isTablet,
+      };
+    },
+
+    triggerImage() {
+      if (this.isTablet) {
+        return '//cdn.shopify.com/s/files/1/2994/0144/t/21/assets/free-swatches-tablet.jpg?1668478';
+      }
+      return 'https://cdn.shopify.com/s/files/1/2994/0144/files/free-swatch_bnr_m_x2_d5eb0690-b50a-4554-81d8-e8f46257701c.png?v=1588099414';
+    },
+
     isDecor() {
       return this.filters.configurator_type === 'small';
     },
+
     dimensionImages() {
       const images = [];
       if (!this.filters.templates) {
