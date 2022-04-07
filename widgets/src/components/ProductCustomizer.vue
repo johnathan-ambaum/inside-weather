@@ -37,9 +37,9 @@
       <product-detail-slider v-if="isMobile" :cylindo="use360Viewer" cylindo-id="cylindo-main" :customizer-active="active"
         :favoriteIcon="favoriteIcon" />
       <div class="ProductCustomizer__PriceRow">
-        <span class="ProductCustomizer__Price">{{ formattedProductPrice ? `$${formattedProductPrice}` : '' }}</span>
-        <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay }}</span>
-        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE ${{ isClearance ? clearanceData.savings : savings }}</span>
+        <span class="ProductCustomizer__Price">{{ formattedProductPrice | money }}</span>
+        <span v-if="msrp" class="ProductCustomizer__MSRP">{{ msrpDisplay | money }}</span>
+        <span v-if="msrp" class="ProductCustomizer__Savings">YOU SAVE {{ isClearance ? clearanceData.savings : savings | money }}</span>
         <info-popup v-if="!isDecor"
           text="In-house design &amp; manufacturing means no inventory and no wasted material. The result? You save $$$.">
           <img src="https://cdn.shopify.com/s/files/1/2994/0144/files/i.svg?1672261">
@@ -115,7 +115,7 @@
           {{ productName }}
         </div>
         <div class="ProductCustomizer__PriceRow">
-          <span class="ProductCustomizer__Price--mt">${{ formattedProductPrice }}</span>
+          <span class="ProductCustomizer__Price--mt">{{ formattedProductPrice | money}}</span>
         </div>
       </div>
       <div class="ProductCustomizer__Slider">
@@ -207,6 +207,7 @@ import interpolator from '../mixins/interpolator';
 import tracker from '../mixins/tracker';
 import PhotoshootModal from './PhotoshootModal.vue';
 import Loader from './Loader.vue';
+import money from '../filters/money';
 
 dayjs.extend(dayjsBusinessDays);
 library.add(faHeart);
@@ -231,6 +232,10 @@ export default {
     InspirationOptions,
     PhotoshootModal,
     Loader,
+  },
+
+  filters: {
+    money
   },
 
   mixins: [
@@ -355,12 +360,7 @@ export default {
         price = this.shopifyProduct.price/100;
       }
 
-      const isWholeNumber = price.toFixed(2) % 1 == 0;
-      if(isWholeNumber){
-        return price;
-      }
-
-      return price.toFixed(2);
+      return price;
     },
 
     isClearance(){

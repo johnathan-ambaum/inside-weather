@@ -60,7 +60,7 @@ export default {
     },
 
     msrpDisplay() {
-      return `$${Math.round(this.msrp)}`;
+      return Math.round(this.msrp);
     },
 
     savings() {
