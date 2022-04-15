@@ -101,7 +101,7 @@
           <p class="SwatchesOrderForm__Body">{{ thankYouMessage }}</p>
           <button
             class="SwatchBrowser__Button SwatchBrowser__Button--Black"
-            @click="$emit('exit')"
+            @click="$emit('close')"
           >CONTINUE SHOPPING</button>
         </div>
       </div>
