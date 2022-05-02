@@ -20,6 +20,9 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
     if(forceRedirect && !urlIsExcluded){
       localStorage.removeItem('forceRedirect');
       localStorage.removeItem('forceRedirectTemp');
+      if (forceRedirect.includes('products/') || forceRedirect.includes('favorites')) {
+        localStorage.setItem('$source', forceRedirect.includes('products') ? 'save-customization' : 'favorites');
+      }
       window.location.href = forceRedirect;
     }
 
@@ -103,10 +106,16 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 
     {% if customer %}
       dataLayer.push({SHA256_email: "{{ customer.email | sha256 }}" });
-      window._learnq = window._learnq || [];
-      window._learnq.push(['identify', {
+      const $source = localStorage.getItem('$source');
+      const data = {
         '$email': '{{ customer.email }}'
-      }]);
+      };
+      if ($source) {
+        data.$source = $source;
+      }
+      window._learnq = window._learnq || [];
+      window._learnq.push(['identify', data]);
+      console.log({ data });
     {% else %}
       dataLayer.push({SHA256_email: null})
     {% endif %}
