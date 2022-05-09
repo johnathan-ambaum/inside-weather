@@ -68,10 +68,10 @@ export default {
     margin:45px 24px;
     gap:30px;
     @include at-query($breakpoint-large) {
-      margin: 94px auto 94px auto;
-      flex-basis: 280px;
+      margin: 94px 20px;
+      flex-basis: 300px;
       justify-content: center;
-      gap:78px;
+      gap:70px;
       flex-direction: row;
     }
   }
@@ -87,6 +87,7 @@ export default {
 
     @include at-query($breakpoint-large) {
       max-width: 280px;
+      width:280px;
       flex-direction: column;
       &:nth-child(2n){
         flex-direction: column;

@@ -7,9 +7,9 @@
 	timezoneOffset: {{ shop.metafields.pagefly.timezoneOffset | default: 0 }}
 };
   // load pagefly analytics new verion
-  const src = "https://cdn.pagefly.io/pagefly/core/analytics.js"
+  const analyticsSrc = "https://cdn.pagefly.io/pagefly/core/analytics.js"
   const script = document.createElement('script')
-  script.src = src
+  script.src = analyticsSrc
   script.async = true
   script.defer = false
   script.onload = () => {

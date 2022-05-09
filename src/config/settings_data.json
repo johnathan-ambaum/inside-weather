@@ -783,13 +783,13 @@
           "text_range": 1,
           "text_range_speed": 5,
           "text_1": "<p>Our Memorial Day Sale is here! | Save up to <strong>20% OFF<\/strong> | Use code <strong>MEMORIALDAY<\/strong> | <a href=\"\/pages\/sale\" title=\"The Earth Month Sale\">SHOP NOW<\/a><\/p>",
-          "mobile_text_1": "<p><a href=\"\/pages\/sale\" title=\"The Earth Month Sale\">Our Memorial Day Sale is here! | Code <strong>MEMORIALDAY<\/strong> for 2<strong>0% OFF<\/strong><\/a><\/p>",
+          "mobile_text_1": "<p><a href=\"\/pages\/sale\" title=\"Memorial Day Sale\">Our Memorial Day Sale is here! | Use code <strong>MEMORIALDAY<\/strong> for up to <strong>20% OFF <\/strong>sitewide.<\/a><\/p>",
           "text_2": "",
           "mobile_text_2": "",
           "text_3": "",
           "mobile_text_3": "",
-          "promo_countdown_enabled": false,
-          "promo_countdown_end_date": "05\/02\/2022"
+          "promo_countdown_enabled": true,
+          "promo_countdown_end_date": "05\/16\/2022"
         }
       },
       "giftcard-header": {
